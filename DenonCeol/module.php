@@ -1,8 +1,10 @@
 <?
-    require_once(__DIR__ . "/DenonCeol_Interface.php");
+//zugehoerige Unter-Klassen    
+require_once(__DIR__ . "/DenonCeol_Interface.php");
 
     // Klassendefinition
     class DenonCeol extends IPSModule {
+        //externe Klasse einbinden - ueberlagern
         use CEOLupnp;
         
         // Der Konstruktor des Moduls
