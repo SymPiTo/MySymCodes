@@ -14,7 +14,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             parent::__construct($InstanceID);
             
             // Selbsterstellter Code
-            public $ip = $this->ReadPropertyString('IPAddress');
+            $ip = $this->ReadPropertyString('IPAddress');
         }
  
         // Überschreibt die interne IPS_Create($id) Funktion
