@@ -38,7 +38,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         *
         */
        // public $ip = '192.168.178.29';
-        public $ip = $this->ReadPropertyString('IPAddress');
+        public $ip = ReadPropertyString('IPAddress');
         
         public function MeineErsteEigeneFunktion() {
             // Selbsterstellter Code
