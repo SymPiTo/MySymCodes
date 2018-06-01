@@ -1,1 +1,14 @@
-
+{
+	"id": "{AA5F7BDD-D4B4-4C50-81CF-5DC7E7049B3D}",
+	"name": "DenonCeol",
+	"type": 3,
+	"vendor": "",
+	"aliases": 
+	[
+		"Denon_Ceol"
+	],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "SNS"
+}
