@@ -1,12 +1,12 @@
 {
 	"elements":
 	[
-		{ "name": "IPAddress",                 "type": "ValidationTextBox", "caption": "IP-Address/Host" },
+		{ "name": "IPAddress",                 "type": "ValidationTextBox", "caption": "IP-Address/Host" }
 
 	],
 	"actions":
 	[
-		{ "type": "Button", "label": "Update Radio Stations",  "onClick": "SNS_UpdateRadioStations($id);" },
+		{ "type": "Button", "label": "Update Radio Stations",  "onClick": "SNS_UpdateRadioStations($id);" }
 
         ]
 }
