@@ -20,7 +20,8 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         public function Create() {
             // Diese Zeile nicht löschen.
             parent::Create();
- 
+            
+            $this->RegisterPropertyString("IPAddress", "");
         }
  
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
