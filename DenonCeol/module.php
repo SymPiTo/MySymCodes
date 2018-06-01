@@ -1,9 +1,10 @@
 <?
-    require_once(__DIR__ . "/NetworkTraits.php");
+    require_once(__DIR__ . "/DenonCeol_Interface.php");
 
     // Klassendefinition
     class DenonCeol extends IPSModule {
-        use BufferHelper;
+        use Denonupnp;
+        
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
         public function __construct($InstanceID) {
