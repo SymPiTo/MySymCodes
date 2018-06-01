@@ -1,6 +1,6 @@
 <?
     // Klassendefinition
-    class ModulnameXYZ extends IPSModule {
+    class DenonCeol extends IPSModule {
  
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
