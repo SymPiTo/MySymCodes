@@ -12,8 +12,9 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         public function __construct($InstanceID) {
             // Diese Zeile nicht löschen
             parent::__construct($InstanceID);
- 
+            
             // Selbsterstellter Code
+            public $ip = $this->ReadPropertyString('IPAddress');
         }
  
         // Überschreibt die interne IPS_Create($id) Funktion
@@ -38,7 +39,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         *
         */
        // public $ip = '192.168.178.29';
-        public $ip = $this->ReadPropertyString('IPAddress');
+        
         
         public function MeineErsteEigeneFunktion() {
             // Selbsterstellter Code
