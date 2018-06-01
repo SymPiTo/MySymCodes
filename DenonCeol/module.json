@@ -1,1 +1,15 @@
-
+{
+    "id": "{078D1093-E904-4E1E-88FD-0CB9C61AE836}",
+    "name": "Denon Ceol",
+    "type": 3,
+    "vendor": "",
+    "aliases":
+    [
+        "Denon Ceol",
+        
+    ],  
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "CEOL"
+}
