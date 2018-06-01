@@ -4,7 +4,7 @@ trait CEOLupnp
 {
 
 
-  
+  public $ip = $this->ReadPropertyString('IPAddress');
 
 
   public function AddToQueue($file, $meta='')
