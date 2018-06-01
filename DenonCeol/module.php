@@ -3,7 +3,7 @@
 
     // Klassendefinition
     class DenonCeol extends IPSModule {
-        use Denonupnp;
+        use CEOLupnp;
         
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
