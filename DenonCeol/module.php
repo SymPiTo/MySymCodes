@@ -28,7 +28,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
-        // bei Änderungen der Formular Parameter (nach Übernahme Bestätigung)
+        // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
             // Diese Zeile nicht löschen
@@ -37,9 +37,9 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
  
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
-        * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wiefolgt zur Verfügung gestellt:
+        * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
         *
-        * ABC_MeineErsteEigeneFunktion($id);
+        * CEOL_XYFunktion($id);
         *
         */
        // public $ip = '192.168.178.29';
