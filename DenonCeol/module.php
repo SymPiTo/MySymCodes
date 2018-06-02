@@ -24,6 +24,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             parent::Create();
             
             // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
+            $this->RegisterPropertyBoolean("active", false);
             $this->RegisterPropertyString("IPAddress", "");
         }
         
