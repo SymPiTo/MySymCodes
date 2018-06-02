@@ -32,7 +32,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             $this->RegisterVariableInteger("Wert", "Wert vom", "");
             
             // Timer erstellen
-
+            $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -42,7 +42,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             
-            $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
+
             
             $this->init();
         }
