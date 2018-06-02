@@ -58,13 +58,14 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         
         private function init(){
            SetValueInteger($this->GetIDForIdent("Wert"), 30);
-           $this->SetTimerInterval("Update", 2000);
+           //$this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
         }
         
         public function update() {
             //$alive = Sys_Ping($this->$ip, 1000);
             //if ($alive){
-               $i = $i + 1;
+            $i = getvalue($this->GetIDForIdent("Wert"));   
+            $i = $i + 1;
                SetValueInteger($this->GetIDForIdent("Wert"), $i);
             //}
         }
