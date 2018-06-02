@@ -58,6 +58,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         
         private function init(){
            SetValueInteger($this->GetIDForIdent("Wert"), 30);
+           $this->SetTimerInterval("Update", 2000);
         }
         
         public function update() {
