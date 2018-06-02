@@ -67,7 +67,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         
         public function update() {
             $ip = $this->ReadPropertyString('IPAddress');
-            $alive = Sys_Ping($this->$ip, 1000);
+            $alive = Sys_Ping($ip, 1000);
             if ($alive){
                 $i = getvalue($this->GetIDForIdent("Wert"));   
                 $i = $i + 1;
