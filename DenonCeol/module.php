@@ -43,7 +43,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             parent::ApplyChanges();
             
 
-            
+            $this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
             $this->init();
         }
  
