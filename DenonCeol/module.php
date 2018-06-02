@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         use CEOLupnp;
         use XML2Array;
         
-        public $ip;
+
         
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
@@ -74,10 +74,11 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         *
         */
         
+       
         
         private function init(){
-            public $ip = $this->ReadPropertyString('IPAddress');
-         
+            
+            $this->ip = $this->ReadPropertyString('IPAddress');
         }
         
         public function update() {
@@ -235,8 +236,64 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 																																																																																														
 		return $output;
 	}	 
-        
 
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion Navigate($Direction)
+	...............................................................................
+	Menü Navigation
+	Telnet Befehl: CurLeft // CurRight // CurUp // CurDown
+	...............................................................................
+	Parameter:  $value = left" // "right" // "up" // "down"
+	--------------------------------------------------------------------------------
+	Variable: 
+	--------------------------------------------------------------------------------
+	return:  
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+ 	Public function Navigate($Direction){
+		$host = $this->ReadPropertyString('IPAddress');
+		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		switch($Direction){
+			case 'left':
+				$cmd = 'CurLeft';
+			break;
+			case 'right':
+				$cmd = 'CurRight';
+			break;
+			case 'up':
+				$cmd = 'CurUp';
+			break;
+			case 'down':
+				$cmd = 'CurDown';
+			break;
+		}
+		$xml = $this->curl_get($url, $cmd);
+		//$output = XML2Array::createArray($xml);
+		return $xml;
+	}	       
+        
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion setBass($value)
+	...............................................................................
+	Erhöht Bass Level (Range: -10 ... +10) (40...60)
+	Telnet Befehl: PSBASS_UP // PSBAS_DOWN // PSBAS_50
+	...............................................................................
+	Parameter:  $value = "UP" // "DOWN" // "50"
+	--------------------------------------------------------------------------------
+	Variable: 
+	--------------------------------------------------------------------------------
+	return  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-05-31
+	//////////////////////////////////////////////////////////////////////////////*/
+	Public function setBass($value){ 
+		$host = $this->ReadPropertyString('IPAddress');
+		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		$cmd = 'PSBAS_'.$value;
+		$xml = $this->send_cmd($cmd);
+		return $xml;
+	}	
         
 	/*//////////////////////////////////////////////////////////////////////////////
 	Funktion setTreble($value)
@@ -253,7 +310,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-05-31
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setTreble($value){ 
-		$host = $this->ip;
+		$host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSTRE_'.$value;
 		$xml = $this->send_cmd($cmd);
@@ -275,7 +332,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-05-31
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBalance($value){ 
-		$host = $this->ip;
+		$host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSBAL_'.$value;
 		$xml = $this->send_cmd($cmd);
