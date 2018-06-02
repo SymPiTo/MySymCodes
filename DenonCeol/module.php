@@ -1,7 +1,7 @@
 <?php
 //zugehoerige Unter-Klassen    
 require_once(__DIR__ . "/DenonCeol_Interface.php");
-require_once(__DIR__ . "../lib/XML2Array.php");
+require_once(__DIR__ . "/../libs/XML2Array.php");
 
     // Klassendefinition
     class DenonCeol extends IPSModule {
