@@ -47,7 +47,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
                 $this->init();
             }
             else {
-                $this->SetTimerInterval("active", 0);
+                $this->SetTimerInterval("Update", 0);
             }
         }
  
