@@ -54,10 +54,10 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         * CEOL_XYFunktion($id);
         *
         */
-        public $ip = '';
+        
         
         private function init(){
-           $ip = $this->ReadPropertyString('IPAddress'); 
+           $this->SetValueInteger($this->GetIDForIdent("Wert"), 30);
         }
         
         public function update() {
