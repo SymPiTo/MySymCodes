@@ -1,7 +1,7 @@
 {
 	"elements":
 	[
-		{  "name": "active",	"type": "CheckBox", 		"caption": "active" }
+		{  "type": "CheckBox",	"name": "active",	"caption": "active" }
 		{ "name": "IPAddress",	"type": "ValidationTextBox", 	"caption": "IP-Address/Host" }
 
 	],
