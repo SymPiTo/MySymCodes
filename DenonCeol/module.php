@@ -189,8 +189,8 @@ require_once(__DIR__ . "../lib/XML2Array.php");
 	//$R = Get_MainZone_Status(); 
 	//print_r ($R);
 	/*****************************************************************************************************/ 
-	Public function Get_MainZone_Status()
-	{
+	Public function Get_MainZone_Status(){
+                $host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formMainZone_MainZoneXmlStatus.xml";
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
@@ -221,6 +221,7 @@ require_once(__DIR__ . "../lib/XML2Array.php");
 	
 	*******************************************************************************************************/ 	
 	Public function get_audio_status(){
+                $host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
