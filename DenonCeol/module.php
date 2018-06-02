@@ -51,7 +51,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         
         
         public function update() {
-            // Selbsterstellter Code fff
+            // Selbsterstellter Code fffdddddd
         }
         public function ping() {
             // Selbsterstellter Code test
