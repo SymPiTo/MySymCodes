@@ -1,4 +1,4 @@
-<?
+<?php
 //zugehoerige Unter-Klassen    
 require_once(__DIR__ . "/DenonCeol_Interface.php");
 
@@ -38,6 +38,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         public function ApplyChanges() {
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
+            $this->init();
         }
  
         /**
@@ -47,15 +48,18 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         * CEOL_XYFunktion($id);
         *
         */
-       // public $ip = '192.168.178.29';
+        public $ip = '';
         
+        private function init(){
+           $ip = $this->ReadPropertyString('IPAddress'); 
+        }
         
         public function update() {
-            // Selbsterstellter Code fffdddddd
+            $alive = Sys_Ping($IP_Raspberry, 1000);
+            if ($alive){
+                
+            }
         }
-        public function ping() {
-            // So eine Scheisse
-            // noch eine Scheisse
-        }
+
     }
 ?>
