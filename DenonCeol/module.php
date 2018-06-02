@@ -196,7 +196,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//print_r ($R);
 	/*****************************************************************************************************/ 
 	Public function Get_MainZone_Status(){
-                $host = $this->ReadPropertyString('IPAddress');
+                $host = $this->ip;
 		$url = "http://$host:80/goform/formMainZone_MainZoneXmlStatus.xml";
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
