@@ -66,12 +66,13 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         }
         
         public function update() {
-            //$alive = Sys_Ping($this->$ip, 1000);
-            //if ($alive){
-            $i = getvalue($this->GetIDForIdent("Wert"));   
-            $i = $i + 1;
-               SetValueInteger($this->GetIDForIdent("Wert"), $i);
-            //}
+            $ip = $this->ReadPropertyString('IPAddress');
+            $alive = Sys_Ping($this->$ip, 1000);
+            if ($alive){
+                $i = getvalue($this->GetIDForIdent("Wert"));   
+                $i = $i + 1;
+                   SetValueInteger($this->GetIDForIdent("Wert"), $i);
+                }
         }
 
     }
