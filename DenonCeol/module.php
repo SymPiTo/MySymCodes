@@ -63,8 +63,8 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         public function update() {
             //$alive = Sys_Ping($this->$ip, 1000);
             //if ($alive){
-              //  $i = $i + 1;
-                //$this->SetValueInteger('audiostream', $i);
+               $i = $i + 1;
+               $this->SetValueInteger('Wert', $i);
             //}
         }
 
