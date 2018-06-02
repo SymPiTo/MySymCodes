@@ -28,6 +28,9 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             $this->RegisterPropertyString("IPAddress", "");
             $this->RegisterPropertyInteger("UpdateInterval", 30);
            
+            //Status Variable anlegen
+            $this->RegisterVariableInteger("Wert", "Wert vom", "");
+            
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
         }
@@ -55,9 +58,10 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         }
         
         public function update() {
-            $alive = Sys_Ping($IP_Raspberry, 1000);
+            $alive = Sys_Ping($this->$ip, 1000);
             if ($alive){
-                
+                $i = $i + 1;
+                $this->SetValueInteger('audiostream', $i);
             }
         }
 
