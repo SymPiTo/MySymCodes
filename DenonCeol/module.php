@@ -4,7 +4,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
 
     // Klassendefinition
     class DenonCeol extends IPSModule {
-        //externe Klasse einbinden - ueberlagern
+        //externe Klasse einbinden - ueberlagern mit TRAIT
         use CEOLupnp;
         
         // Der Konstruktor des Moduls
@@ -16,15 +16,19 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             // Selbsterstellter Code
            
         }
- 
+        
+        // Create() wird einmalig beim Erstellen einer neuen Instanz ausgeführt
         // Überschreibt die interne IPS_Create($id) Funktion
         public function Create() {
             // Diese Zeile nicht löschen.
             parent::Create();
             
+            // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             $this->RegisterPropertyString("IPAddress", "");
         }
- 
+        
+        // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
+        // bei Änderungen der Formular Parameter (nach Übernahme Bestätigung)
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
             // Diese Zeile nicht löschen
