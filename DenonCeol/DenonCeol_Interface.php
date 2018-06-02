@@ -783,7 +783,7 @@ trait CEOLupnp
   {
     try{
 	$ip = $this->ReadPropertyString('IPAddress');
-      $client     = new SoapClient(null, array("location"   => "http://".$this->ip.":8080".$path,
+      $client     = new SoapClient(null, array("location"   => "http://".$ip.":8080".$path,
 
                                                "uri"        => $uri,
 
