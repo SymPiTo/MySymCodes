@@ -9,6 +9,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         use CEOLupnp;
         use XML2Array;
         
+        public $ip;
+        
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
         public function __construct($InstanceID) {
@@ -74,7 +76,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
         
         private function init(){
-        
+            public $ip = $this->ReadPropertyString('IPAddress');
          
         }
         
@@ -235,5 +237,53 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	}	 
         
 
-    }
+        
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion setTreble($value)
+	...............................................................................
+	Erhöht Trebble Level (Range: -10 ... +10) (40...60)
+	Telnet Befehl: PSTRE_UP // PSTRE_DOWN // PSTRE_50
+	...............................................................................
+	Parameter:  $value = "UP" // "DOWN" // "50"
+	--------------------------------------------------------------------------------
+	Variable: 
+	--------------------------------------------------------------------------------
+	return  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-05-31
+	//////////////////////////////////////////////////////////////////////////////*/
+	Public function setTreble($value){ 
+		$host = $this->ip;
+		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		$cmd = 'PSTRE_'.$value;
+		$xml = $this->send_cmd($cmd);
+		return $xml;
+	}	
+	
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion setBalance($value)
+	...............................................................................
+	Verandert den Balance Level (Range: 00 ... 99)  
+	Telnet Befehl: PSBAL_LEFT // PSBAL_RIGHT // PSBAL_50 = Center
+	...............................................................................
+	Parameter:  $value = "LEFT" // "RIGHT" // "50"
+	--------------------------------------------------------------------------------
+	Variable: 
+	--------------------------------------------------------------------------------
+	return  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-05-31
+	//////////////////////////////////////////////////////////////////////////////*/
+	Public function setBalance($value){ 
+		$host = $this->ip;
+		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		$cmd = 'PSBAL_'.$value;
+		$xml = $this->send_cmd($cmd);
+		return $xml;
+	}	
+	
+	        
+        
+        
+    } // Ende Klasse
 ?>
