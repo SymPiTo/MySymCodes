@@ -42,9 +42,13 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             
-
-            $this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
-            $this->init();
+            if($this->ReadPropertyBoolean("active")){
+                $this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
+                $this->init();
+            }
+            else {
+                $this->SetTimerInterval("active", 0);
+            }
         }
  
         /**
