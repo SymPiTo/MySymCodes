@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         use CEOLupnp;
         use XML2Array;
         
-        public $ip;
+        public $ip; 
         
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
@@ -17,7 +17,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Diese Zeile nicht löschen
             parent::__construct($InstanceID);
             
-            // Selbsterstellter Code
+            $this->ip = $this->ReadPropertyString('IPAddress');
            
         }
         
