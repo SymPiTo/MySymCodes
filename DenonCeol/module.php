@@ -32,7 +32,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             $this->RegisterVariableInteger("Wert", "Wert vom", "");
             
             // Timer erstellen
-            $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
+
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -41,6 +41,9 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         public function ApplyChanges() {
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
+            
+            $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
+            
             $this->init();
         }
  
@@ -58,11 +61,11 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
         }
         
         public function update() {
-            $alive = Sys_Ping($this->$ip, 1000);
-            if ($alive){
-                $i = $i + 1;
-                $this->SetValueInteger('audiostream', $i);
-            }
+            //$alive = Sys_Ping($this->$ip, 1000);
+            //if ($alive){
+              //  $i = $i + 1;
+                //$this->SetValueInteger('audiostream', $i);
+            //}
         }
 
     }
