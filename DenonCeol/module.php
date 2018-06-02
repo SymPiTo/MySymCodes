@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         use CEOLupnp;
         use XML2Array;
         
-
+        public $ip;
         
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
