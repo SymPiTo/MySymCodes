@@ -31,12 +31,18 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterPropertyInteger("UpdateInterval", 30);
            
             //Status Variable anlegen
-            $this->RegisterVariableInteger("Wert", "Wert vom", "");
+            $this->RegisterVariableInteger("CeolSource", "Source", "");
             $this->RegisterVariableBoolean("CeolPower", "Power");
             $this->RegisterVariableInteger("CeolVolume", "Volume", "");
             $this->RegisterVariableBoolean("CeolMute", "Mute");
-            
-            
+            $this->RegisterVariableString("CeolSZ1", "Line1");
+            $this->RegisterVariableString("CeolSZ2", "Line2");
+            $this->RegisterVariableString("CeolSZ3", "Line3");
+            $this->RegisterVariableString("CeolSZ4", "Line4");      
+            $this->RegisterVariableString("CeolSZ5", "Line5");
+            $this->RegisterVariableString("CeolSZ6", "Line6");
+            $this->RegisterVariableString("CeolSZ7", "Line7");
+            $this->RegisterVariableString("CeolSZ8", "Line8"); 
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
@@ -68,17 +74,14 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
         
         private function init(){
-           SetValueInteger($this->GetIDForIdent("Wert"), 30);
-           //$this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
+        
+         
         }
         
         public function update() {
             $ip = $this->ReadPropertyString('IPAddress');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
-                $i = getvalue($this->GetIDForIdent("Wert"));   
-                $i = $i + 1;
-                SetValueInteger($this->GetIDForIdent("Wert"), $i);
                 //MainZoneStatus auslesen   
                 $output = $this->Get_MainZone_Status();
                 $power = ($output['item']['Power']['value']);
@@ -101,7 +104,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 }
                 SetValueBoolean($this->GetIDForIdent("CeolMute"), $_mute);
                 //AudioStatus auslesen
-                /*
+
                 $output = $this->get_audio_status();		
                 $sz1 = $output['item']['szLine']['value'][0];
                 $sz2 = $output['item']['szLine']['value'][1];
@@ -111,18 +114,18 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 $sz6 = $output['item']['szLine']['value'][5];
                 $sz7 = $output['item']['szLine']['value'][6];
                 $sz8 = $output['item']['szLine']['value'][6];
-                setvalue(23849   , $sz1);
-                setvalue(24839   , $sz2);
-                setvalue(28089   , $sz3);
-                setvalue(36950   , $sz4);
-                setvalue(47520   , $sz5);
-                setvalue(54201   , $sz6);
-                setvalue(57691   , $sz7);
-                setvalue(27778   , $sz8);
+                SetValueString($this->GetIDForIdent("CeolSZ1"), $sz1);
+                SetValueString($this->GetIDForIdent("CeolSZ2"), $sz2);
+                SetValueString($this->GetIDForIdent("CeolSZ3"), $sz3);
+                SetValueString($this->GetIDForIdent("CeolSZ4"), $sz4);
+                SetValueString($this->GetIDForIdent("CeolSZ5"), $sz5);
+                SetValueString($this->GetIDForIdent("CeolSZ6"), $sz6);
+                SetValueString($this->GetIDForIdent("CeolSZ7"), $sz7);
+                SetValueString($this->GetIDForIdent("CeolSZ8"), $sz8);
 
-                $Input = $output['item']['NetFuncSelect']['value'];
+                $Source = $output['item']['NetFuncSelect']['value'];
                 $value=0;
-                switch ($Input)
+                switch ($Source)
                 {
                         case "IRadio":
                                 $value = 0;
@@ -143,8 +146,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                                 $value = 5;
                         break;		
                 }
-                setvalue(40088  , $value);  
-             */      
+                SetValueInteger($this->GetIDForIdent("CeolSource"), $value);  
+                   
             }
             else {
                 //Keine Netzwerk-Verbindung zun Client
