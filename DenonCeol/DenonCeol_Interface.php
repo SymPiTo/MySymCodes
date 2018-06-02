@@ -782,7 +782,7 @@ trait CEOLupnp
   Protected function processSoapCall($path,$uri,$action,$parameter)
   {
     try{
-
+	$ip = $this->ReadPropertyString('IPAddress');
       $client     = new SoapClient(null, array("location"   => "http://".$this->ip.":8080".$path,
 
                                                "uri"        => $uri,
