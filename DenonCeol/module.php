@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         use CEOLupnp;
         use XML2Array;
         
-        public $ip; 
+                        
         
         // Der Konstruktor des Moduls
         // Überschreibt den Standard Kontruktor von IPS
@@ -17,7 +17,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Diese Zeile nicht löschen
             parent::__construct($InstanceID);
             
-            $this->ip = $this->ReadPropertyString('IPAddress');
+                        
            
         }
         
@@ -196,7 +196,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//print_r ($R);
 	/*****************************************************************************************************/ 
 	Public function Get_MainZone_Status(){
-                $host = $this->ip;
+                $host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formMainZone_MainZoneXmlStatus.xml";
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
