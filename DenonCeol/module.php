@@ -26,7 +26,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             $this->RegisterPropertyBoolean("active", false);
             $this->RegisterPropertyString("IPAddress", "");
-            $this->ReadPropertyInteger("UpdateInterval");
+            $this->RegisterPropertyInteger("UpdateInterval");
            
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
