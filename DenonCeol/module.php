@@ -26,6 +26,10 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
             // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             $this->RegisterPropertyBoolean("active", false);
             $this->RegisterPropertyString("IPAddress", "");
+            $this->ReadPropertyInteger("UpdateInterval");
+           
+            // Timer erstellen
+            $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -46,7 +50,7 @@ require_once(__DIR__ . "/DenonCeol_Interface.php");
        // public $ip = '192.168.178.29';
         
         
-        public function MeineErsteEigeneFunktion() {
+        public function update() {
             // Selbsterstellter Code
         }
     }
