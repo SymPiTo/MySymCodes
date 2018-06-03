@@ -107,7 +107,6 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 }
                 SetValueBoolean($this->GetIDForIdent("CeolMute"), $_mute);
                 //AudioStatus auslesen
-
                 $output = $this->get_audio_status();		
                 $sz1 = $output['item']['szLine']['value'][0];
                 $sz2 = $output['item']['szLine']['value'][1];
@@ -154,20 +153,25 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             }
             else {
                 //Keine Netzwerk-Verbindung zun Client
+                $this->SendDebug("Meldung: ", "Keine Netzwerkverbindung zu Denon Ceol.", 0);
             }
-                
-        } // function ende
+        }
         
 	/**************************************************************************************************** 	
 	Funktion 	:	Status der MainZone auslesen
 					
 	Befehl		:	http://192.168.178.29:80/goform/formMainZone_MainZoneXmlStatus.xml
 	-------------------------------------------------------------------------------------------
-	Include's : 	include ("Denon_Vars.ips.php");
-	Parameter:		$host = String = Adresse von DENON CEOL
-	Rückgabewert: 	$output [Array]
-					- $output['item']['MasterVolume']['value']
-					- $output['item']['Mute']['value']
+	Include's : 	
+	Parameter:	host = String = Adresse von DENON CEOL
+	Rückgabewert: 	$xml->array = output
+	 	$output['item']['Zone']['value']		=>	MainZone
+                $output['item']['Power']['value']		=>	ON // STANDBY
+                $output['item']['Model']['value']		=>	
+                $output['item']['MasterVolume']['value']	=>	NET
+                $output['item']['MasterVolume']['value']	=>	-74.0
+                $output['item']['Mute']['value']		=>	on // off
+					output['item']['Mute']['value']
 					---------------------------------------------
 					<?xml version="1.0" encoding="UTF-8"?>
 					<item>
@@ -190,11 +194,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 							<value>off</value>
 						</Mute>
 					</item>
-	---------------------------------------------------------------------------------------------------*/ 	
-	// Testbefehl:
-	//$R = Get_MainZone_Status(); 
-	//print_r ($R);
-	/*****************************************************************************************************/ 
+	***************************************************************************************************/ 
 	Public function Get_MainZone_Status(){
                 $host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formMainZone_MainZoneXmlStatus.xml";
@@ -202,8 +202,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$xml = $this->curl_get($url, $cmd);
 		$output = XML2Array::createArray($xml);
                 $this->SendDebug("MainZone: ", $output, 0);
-		$status = ($output['item']['Power']['value']);
-                $this->SendDebug("Power: ", $xml, 0);
+		//$status = ($output['item']['Power']['value']);
+                $this->SendDebug("MainZoneStatus: ", $xml, 0);
 		return $output;
 	}		
 	/**************************************************************************************************** 	
@@ -215,7 +215,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Parameter:		$host = String = Adresse von DENON CEOL
 	Rückgabewert: 	$xml->array = output
 
-		$output['item']['MasterVolume']['value']	=>	Mastervolume Status
+		$output['item']['MasterVolume']['value']        =>	Mastervolume Status
 	 	$output['item']['szLine']['value'][0]		=>	Display Line 1
 		$output['item']['szLine']['value'][1]		=>	Display Line 2
 		$output['item']['szLine']['value'][2]		=>	Display Line 3
@@ -233,9 +233,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
-		//print_r($xml);
+		$this->SendDebug("AudioStatus: ", $xml, 0);
 		$output = XML2Array::createArray($xml);
-																																																																																														
 		return $output;
 	}	 
 
