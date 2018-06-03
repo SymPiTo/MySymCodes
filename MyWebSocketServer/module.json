@@ -1,0 +1,14 @@
+{
+	"id": "{1DC2C17D-E217-496A-9A63-00485F1132A6}",
+	"name": "MyWebSocketServer",
+	"type": 3,
+	"vendor": "",
+	"aliases": 
+	[
+		"MyWebSocketServer"
+	],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "MyWSS"
+}
