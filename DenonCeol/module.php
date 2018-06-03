@@ -81,6 +81,24 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->ip = $this->ReadPropertyString('IPAddress');
         }
         
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion function update()
+	...............................................................................
+	Funktion wird über Timer alle x Sekunden gestartet
+         *  call SubFunctions:  $this->Get_MainZone_Status()
+         *                      $this->get_audio_status(
+	...............................................................................
+	Parameter:  none
+	--------------------------------------------------------------------------------
+	SetVariable:   CeolMute
+                       CeolPower
+                       CeolVolume
+                       CeolSource
+	--------------------------------------------------------------------------------
+	return: none  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06-03
+	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
             $ip = $this->ReadPropertyString('IPAddress');
             $alive = Sys_Ping($ip, 1000);
@@ -149,7 +167,6 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                         break;		
                 }
                 SetValueInteger($this->GetIDForIdent("CeolSource"), $value);  
-                   
             }
             else {
                 //Keine Netzwerk-Verbindung zun Client
@@ -273,6 +290,38 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		//$output = XML2Array::createArray($xml);
 		return $xml;
 	}	       
+
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion SetPower($status)
+	...............................................................................
+	Denon Ceol Ein / Aus Schalten
+	...............................................................................
+	Parameter:  $status = "On" // "Standby" 
+	--------------------------------------------------------------------------------
+	Telnet-Command: http://192.168.178.29:80/goform/formiPhoneAppPower.xml?1+PowerOn
+	--------------------------------------------------------------------------------
+	return: $status = 'on' / 'Standby'   
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06-03
+	//////////////////////////////////////////////////////////////////////////////*/        
+	Public function SetPower($status){
+		$host = $this->ReadPropertyString('IPAddress');
+		$url = "http://$host:80/goform/formiPhoneAppPower.xml";
+		if ($status == "On"){
+			$cmd = '1+PowerOn';
+			$power=true;
+		}
+		if ($status == "Standby"){
+			$cmd = '1+PowerStandby';
+			$power=false;
+		}
+		$xml = $this->curl_get($url, $cmd);
+		$output = XML2Array::createArray($xml);
+ 		$status = ($output['item']['Power']['value']);
+		SetValueBoolean($this->GetIDForIdent("CeolPower"), $_power);
+		return $status;	
+	}        
         
 	/*//////////////////////////////////////////////////////////////////////////////
 	Funktion setBass($value)
@@ -290,7 +339,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBass($value){ 
 		$host = $this->ReadPropertyString('IPAddress');
-		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		//$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSBAS_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
@@ -312,7 +361,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setTreble($value){ 
 		$host = $this->ReadPropertyString('IPAddress');
-		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		//$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSTRE_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
@@ -334,7 +383,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBalance($value){ 
 		$host = $this->ReadPropertyString('IPAddress');
-		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		//$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSBAL_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
