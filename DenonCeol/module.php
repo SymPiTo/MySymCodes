@@ -377,6 +377,31 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             return $command;
 	}	
 	        
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion ToggleMute()
+	...............................................................................
+	Toggled Befehl "Mute"
+	...............................................................................
+	Parameter:  none
+	--------------------------------------------------------------------------------
+	SetValue:  CeolMute
+	--------------------------------------------------------------------------------
+	return: true  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-05-31
+	//////////////////////////////////////////////////////////////////////////////*/	
+	Public function ToggleMute(){
+            $state = GetValueBoolean($this->GetIDForIdent("CeolMute"));
+            if ($state){
+		$this->SetMute('0');
+		SetValueBoolean($this->GetIDForIdent("CeolMute"), false);
+            }
+            else{
+		$this->SetMute('1');
+		SetValueBoolean($this->GetIDForIdent("CeolMute"), true);
+            }	
+            return true;	
+	}
         
 	/*//////////////////////////////////////////////////////////////////////////////
 	Funktion setBass($value)
