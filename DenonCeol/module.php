@@ -597,8 +597,76 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	--------------------------------------------------------------------------------
 	Status: not implemented
 	//////////////////////////////////////////////////////////////////////////////*/ 
-        public function PlayFile($files){
+        public function PlayFile($file){
+   
 
+           // $positionInfo       = $ceol->GetPositionInfo();
+
+            //$mediaInfo          = $ceol->GetMediaInfo();
+
+            //$transportInfo      = $ceol->GetTransportInfo();
+
+
+           // foreach ($files as $key => $file) {
+
+                // only files on SMB share or http server can be used
+                if (preg_match('/^\/\/[\w,.,\d,-]*\/\S*/',$file) == 1){
+                    $uri = "x-file-cifs:".$file;
+                }elseif (preg_match('/^https{0,1}:\/\/[\w,.,\d,-,:]*\/\S*/',$file) == 1){
+                    $uri = $file;
+                }else{
+                    throw new Exception("File (".$file.") has to be located on a Samba share (e.g. //ipsymcon.fritz.box/tts/text.mp3) or a HTTP server (e.g. http://ipsymcon.fritz.box/tts/text.mp3)");
+                }
+                $this->SendDebug("Spiele File: ", $uri, 0);
+                //$this->SetAVTransportURI($uri);
+                //$ceol->SetPlayMode(0);	
+                //$ceol->Play();
+                IPS_Sleep(500);
+/*
+              $fileTransportInfo = $sonos->GetTransportInfo();
+
+              while ($fileTransportInfo==1 || $fileTransportInfo==5){ 
+
+                IPS_Sleep(200);
+
+                $fileTransportInfo = $ceol->GetTransportInfo();
+
+              }
+
+           // }
+
+
+
+            // reset to what was playing before
+
+            $ceol->SetAVTransportURI($mediaInfo["CurrentURI"],$mediaInfo["CurrentURIMetaData"]);
+
+            if($positionInfo["TrackDuration"] != "0:00:00" && $positionInfo["Track"] > 1)
+
+              try {
+
+                $ceol->Seek("TRACK_NR",$positionInfo["Track"]);
+
+              } catch (Exception $e) { }
+
+            if($positionInfo["TrackDuration"] != "0:00:00" && $positionInfo["RelTime"] != "NOT_IMPLEMENTED" )
+
+              try {
+
+                $ceol->Seek("REL_TIME",$positionInfo["RelTime"]);
+
+              } catch (Exception $e) { }
+
+
+
+
+            if ($transportInfo==1){
+
+              $ceol->Play();
+
+            }
+
+  */              
             
         }
         
