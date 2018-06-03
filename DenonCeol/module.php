@@ -203,7 +203,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$output = XML2Array::createArray($xml);
                 $this->SendDebug("MainZone: ", $output, 0);
 		$status = ($output['item']['Power']['value']);
-                $this->SendDebug("MainZone: ", $status, 0);
+                $this->SendDebug("Power: ", $xml, 0);
 		return $output;
 	}		
 	/**************************************************************************************************** 	
