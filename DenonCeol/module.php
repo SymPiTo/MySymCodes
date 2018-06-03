@@ -322,6 +322,61 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		SetValueBoolean($this->GetIDForIdent("CeolPower"), $_power);
 		return $status;	
 	}        
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	function SelectSource($Source)
+	...............................................................................
+	Funktion schaltet die Eingangs Quelle des Denon CEOL um:
+				 0 = iRadio
+				 1 = MediaServer
+				 2 = USB
+				 3 = IPOD
+				 4 = AUX_A
+				 5 = AUX_D
+	...............................................................................
+	Parameter:  $Source = "Radio" // "Server" // "USB" // "IPOD" // "AUX_A" // "AUX_D"
+	--------------------------------------------------------------------------------
+	Telnet Command: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?SIIRADIO
+	--------------------------------------------------------------------------------
+	return: $command / false  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06 -03
+	//////////////////////////////////////////////////////////////////////////////*/	
+	Public function SelectSource($Source){
+            switch ($Source){
+		case 'Radio':
+                    $command = "SIIRADIO";
+                    SetValueInteger($this->GetIDForIdent("CeolSource"), 0);
+		break;
+		case 'Server':
+                    $command = "SISERVER";
+                    SetValueInteger($this->GetIDForIdent("CeolSource"), 1);
+		break;
+		break;	
+		case 'USB':
+                    $command = "SIUSB";
+                    SetValueInteger($this->GetIDForIdent("CeolSource"), 2);
+		break;
+		case 'IPOD':
+                    $command = "SIIPOD";
+                    SetValueInteger($this->GetIDForIdent("CeolSource"), 3);
+		break;			
+		case 'AUX_A':
+                    $command = "SIAUXA";
+                    SetValueInteger($this->GetIDForIdent("CeolSource"), 4);
+		break;
+		case 'AUX_D':
+                    $command = "SIAUXD";
+                    SetValueInteger($this->GetIDForIdent("CeolSource"), 5);
+		break;
+		default:
+                    $this->SendDebug("Error: ", "Falscher Parameter", 0);
+		break;		
+            }
+            $this->send_cmd($command);
+            return $command;
+	}	
+	        
         
 	/*//////////////////////////////////////////////////////////////////////////////
 	Funktion setBass($value)
