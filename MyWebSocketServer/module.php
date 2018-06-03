@@ -74,8 +74,9 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                     }
                 }
             }
-            $ParentID = $this->RegisterParent();
-
+            //-$ParentID = $this->RegisterParent();
+            $ParentId = @IPS_GetInstance($this->InstanceID)['ConnectionID'];    
+            
             // Zwangskonfiguration des ServerSocket
             if ($ParentID > 0) {
                 if (IPS_GetProperty($ParentID, 'Port') <> $Port) {
