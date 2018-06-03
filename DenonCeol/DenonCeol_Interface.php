@@ -89,10 +89,97 @@ trait CEOLupnp
 	  }
 
 
+	/*//////////////////////////////////////////////////////////////////////////////
+	not tested
+	--------------------------------------------------------------------------------
+	Funktion 	:	springt zum nächsten upnp Stream
+						 
+	Befehl		:	Next()
+	--------------------------------------------------------------------------------
+	Soap / upnp-command
+	--------------------------------------------------------------------------------
+	Parameter:		 none
+					
+	Rückgabewert: 	 none
+	//////////////////////////////////////////////////////////////////////////////*/
+	  public function Next()
+	  {
+	    $this->processSoapCall("/AVTransport/ctrl",
 
+				   "urn:schemas-upnp-org:service:AVTransport:1",
 
- 
+				   "Next",
 
+				   array(
+
+					  new SoapParam("0","InstanceID")
+
+					));
+	  }
+          
+          
+	/*//////////////////////////////////////////////////////////////////////////////
+	not tested
+	--------------------------------------------------------------------------------
+	Funktion 	:	springt zum vorherigen upnp Stream
+						 
+	Befehl		:	Previous()
+	--------------------------------------------------------------------------------
+	Soap / upnp-command
+	--------------------------------------------------------------------------------
+	Parameter:		 none
+					
+	Rückgabewert: 	 none
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function Previous()
+	{
+	    $this->processSoapCall("/AVTransport/ctrl",
+
+				   "urn:schemas-upnp-org:service:AVTransport:1",
+
+				   "Previous",
+
+				   array(
+
+					  new SoapParam("0","InstanceID")
+
+					));
+	}     
+          
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	not tested
+	--------------------------------------------------------------------------------
+	Funktion 	:	sucht upnp Stream
+						 
+	Befehl		:	Seek($unit, $target)
+	--------------------------------------------------------------------------------
+	Soap / upnp-command
+	--------------------------------------------------------------------------------
+	Parameter:		 $unit = "TRACK_NR"  // REL_TIME
+				 $target = noch zu testen!	
+	Rückgabewert: 	 none
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function Seek($unit, $target)
+	{
+	    $this->processSoapCall("/AVTransport/ctrl",
+
+				   "urn:schemas-upnp-org:service:AVTransport:1",
+
+				   "Seek",
+
+				   array(
+
+                                            new SoapParam("0"     , "InstanceID"),
+
+					    new SoapParam($unit   , "Unit"      ),
+                                       
+					    new SoapParam($target , "Target"    )
+
+					));
+	} 
+
+          
 	/*//////////////////////////////////////////////////////////////////////////////
 	2018-02´5-01 (TESTED-OK)
 	--------------------------------------------------------------------------------
@@ -399,6 +486,107 @@ trait CEOLupnp
 	  }
 
 
+          
+          
+          
+	/*//////////////////////////////////////////////////////////////////////////////
+	2not tested
+	--------------------------------------------------------------------------------
+	Funktion 	:	 
+						 
+	Befehl		:	GetProtocollInfo()
+	--------------------------------------------------------------------------------
+	Soap / upnp-command
+	--------------------------------------------------------------------------------
+	Parameter:		 none
+	
+	Rückgabewert: 	
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function GetProtocollInfo()
+	{
+	    $returnContent = $this->processSoapCall("/ConnectionManager/ctrl",
+
+						    "urn:schemas-upnp-org:service:ConnectionManager:1",
+
+						    "GetProtocolInfo",
+
+						    array(
+
+
+							 ));
+
+            return $returnContent ;
+	}
+
+
+  
+	/*//////////////////////////////////////////////////////////////////////////////
+	--------------------------------------------------------------------------------
+	Funktion SetAVTransportURI()
+	--------------------------------------------------------------------------------
+	Parameter:  $ClientIP = IP Adresse der Clients , 
+				$ClientPort = Übertragungs Port des Clients', 
+				$ClientControlURL = Stammverzeichnis des Clients
+				$file = URL des mp3 files = muss STRING sein ud kein array
+				e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
+				$MetaData: meta daten (optional) = muss string sein und kein array
+	--------------------------------------------------------------------------------
+	upnp Übertragung eines files
+	--------------------------------------------------------------------------------
+	return: nur Fehler Code
+	Status: not checked
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function SetAVTransportURI($file, $MetaData){	
+	    return $this->processSoapCall("/AVTransport/ctrl",
+	
+	                           "urn:schemas-upnp-org:service:AVTransport:1",
+	
+	                           "SetAVTransportURI",
+	
+	                           array( 
+	                                  new SoapParam('0'             ,"InstanceID"         	),
+	                                  new SoapParam($file 		,"CurrentURI"       	),
+	                                  new SoapParam($MetaData       ,"CurrentURIMetaData"   )
+	                                )
+            );
+		
+	}          
+          
+          
+          
+	/*//////////////////////////////////////////////////////////////////////////////
+	--------------------------------------------------------------------------------
+	Funktion SetNextAVTransportURI()
+	--------------------------------------------------------------------------------
+	Parameter:  $ClientIP = IP Adresse der Clients , 
+				$ClientPort = Übertragungs Port des Clients', 
+				$ClientControlURL = Stammverzeichnis des Clients
+				$file_next = URL des mp3 files = muss STRING sein ud kein array
+				e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
+				$MetaData_next: meta daten (optional) = muss string sein und kein array
+	--------------------------------------------------------------------------------
+	upnp Übertragung eines files- es kann maximal ein file nachgeladen (Warteschlange) geladen werden.
+	--------------------------------------------------------------------------------
+	return: nur Fehler Code
+	Status: not checked
+	/////////////////////////////////////////////////////////////////////////////*/
+	public function SetNextAVTransportURI($file_next, $MetaData_next){
+	    return $this->processSoapCall("/AVTransport/ctrl",
+	
+	                           "urn:schemas-upnp-org:service:AVTransport:1",
+	
+	                           "SetNextAVTransportURI",
+	
+	                           array( 
+	                                  new SoapParam('0'                 ,"InstanceID"         	),
+	                                  new SoapParam($file_next          ,"NextURI"       		),
+	                                  new SoapParam($MetaData_next      ,"NextURIMetaData"     	)
+	                                )
+		);
+	}
+        
+
+          
 	/*//////////////////////////////////////////////////////////////////////////////
 	2018-02´5-01 (TESTED-OK)
 	--------------------------------------------------------------------------------
@@ -430,7 +618,37 @@ trait CEOLupnp
 
 
 
+	/*//////////////////////////////////////////////////////////////////////////////
+	not tested
+	--------------------------------------------------------------------------------
+	Funktion 	:	Playmose setzen
+						 
+	Befehl		:	SetPlayMode($mode)
+	--------------------------------------------------------------------------------
+	Soap / upnp-command
+	--------------------------------------------------------------------------------
+	Parameter: mode =   1 =	'NORMAL' 
+                            2 =	'SHUFFLE'	
+                            3 = 'REPEAT_ONE'	
+                            4 = 'REPEAT_ALL'	 
+         
+ 	
+	Rückgabewert: 	none
+	//////////////////////////////////////////////////////////////////////////////*/
+	Protected function SetPlayMode($mode)
+	  {
+	    $this->processSoapCall("/AVTransport/ctrl",
 
+				   "urn:schemas-upnp-org:service:AVTransport:1",
+
+				   "SetPlayMode",
+
+				   array(
+					  new SoapParam("0"     ,  "InstanceID" ),
+					  new SoapParam($mode, "NewPlayMode"),
+
+					));
+	  }
 
 
 
