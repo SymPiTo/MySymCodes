@@ -99,7 +99,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                //- $NewState = IS_EBASE + 2;
             }
 
-            $this->SetStatus($NewState);
+            //-$this->SetStatus($NewState);
             $this->NoNewClients = false;
         }
  
