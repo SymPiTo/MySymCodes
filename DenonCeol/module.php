@@ -145,8 +145,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 
                 $Source = $output['item']['NetFuncSelect']['value'];
                 $value=0;
-                switch ($Source)
-                {
+                switch ($Source){
                         case "IRadio":
                                 $value = 0;
                         break;	
@@ -174,13 +173,16 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             }
         }
         
-	/**************************************************************************************************** 	
-	Funktion 	:	Status der MainZone auslesen
-					
-	Befehl		:	http://192.168.178.29:80/goform/formMainZone_MainZoneXmlStatus.xml
-	-------------------------------------------------------------------------------------------
-	Include's : 	
+	/*//////////////////////////////////////////////////////////////////////////////	
+	Befehl 	: Get_MainZone_Status()
+	...............................................................................
+	Liest MainZone Status aus
+        HTTP Befehl:	http://192.168.178.29:80/goform/formMainZone_MainZoneXmlStatus.xml     
+	...............................................................................				 
+	setVariable: 
+        --------------------------------------------------------------------------------
 	Parameter:	host = String = Adresse von DENON CEOL
+        --------------------------------------------------------------------------------
 	Rückgabewert: 	$xml->array = output
 	 	$output['item']['Zone']['value']		=>	MainZone
                 $output['item']['Power']['value']		=>	ON // STANDBY
@@ -211,7 +213,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 							<value>off</value>
 						</Mute>
 					</item>
-	***************************************************************************************************/ 
+	//////////////////////////////////////////////////////////////////////////////*/ 
 	Public function Get_MainZone_Status(){
                 $host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formMainZone_MainZoneXmlStatus.xml";
@@ -222,16 +224,19 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		//$status = ($output['item']['Power']['value']);
                 $this->SendDebug("MainZoneStatus: ", $xml, 0);
 		return $output;
-	}		
-	/**************************************************************************************************** 	
-	Funktion 	:	get_audio_status()
-					 
-	Befehl		:	$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";
-	-------------------------------------------------------------------------------------------
-	Include's : 	 
-	Parameter:		$host = String = Adresse von DENON CEOL
-	Rückgabewert: 	$xml->array = output
-
+	}	
+        
+	/*//////////////////////////////////////////////////////////////////////////////	
+	Befehl 	:	get_audio_status()
+	...............................................................................
+	Liest Audio Status aus
+        HTTP Befehl:	$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";     
+	...............................................................................				 
+	setVariable: 
+        --------------------------------------------------------------------------------
+        Parameter:	none
+	--------------------------------------------------------------------------------
+        Rückgabewert: 	$xml->array = output
 		$output['item']['MasterVolume']['value']        =>	Mastervolume Status
 	 	$output['item']['szLine']['value'][0]		=>	Display Line 1
 		$output['item']['szLine']['value'][1]		=>	Display Line 2
@@ -244,7 +249,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$output['item']['NetFuncSelect']['value']	=>	Selected Input 
 		$output['item']['Mute']['value']			=>	Mute Status
 	
-	*******************************************************************************************************/ 	
+	//////////////////////////////////////////////////////////////////////////////*/	
 	Public function get_audio_status(){
                 $host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";
@@ -256,15 +261,15 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	}	 
 
 	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion Navigate($Direction)
+	Befehl: Navigate($Direction)
 	...............................................................................
 	Menü Navigation
+        HTTP Befehl:  http://$host:80/goform/formiPhoneAppNetAudioCommand.xml?CurLeft       
 	Telnet Befehl: CurLeft // CurRight // CurUp // CurDown
 	...............................................................................
 	Parameter:  $value = left" // "right" // "up" // "down"
 	--------------------------------------------------------------------------------
-	Variable: 
-	--------------------------------------------------------------------------------
+
 	return:  
 	--------------------------------------------------------------------------------
 	Status:  
@@ -299,7 +304,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	...............................................................................
 	Parameter:  $status = "On" // "Standby" 
 	--------------------------------------------------------------------------------
-	Telnet-Command: http://192.168.178.29:80/goform/formiPhoneAppPower.xml?1+PowerOn
+	HTTP-Command: http://192.168.178.29:80/goform/formiPhoneAppPower.xml?1+PowerOn
 	--------------------------------------------------------------------------------
 	return: $status = 'on' / 'Standby'   
 	--------------------------------------------------------------------------------
@@ -324,7 +329,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	}        
 
 	/*//////////////////////////////////////////////////////////////////////////////
-	function SelectSource($Source)
+	Befehl: SelectSource($Source)
 	...............................................................................
 	Funktion schaltet die Eingangs Quelle des Denon CEOL um:
 				 0 = iRadio
@@ -336,9 +341,10 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	...............................................................................
 	Parameter:  $Source = "Radio" // "Server" // "USB" // "IPOD" // "AUX_A" // "AUX_D"
 	--------------------------------------------------------------------------------
-	Telnet Command: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?SIIRADIO
-	--------------------------------------------------------------------------------
-	return: $command / false  
+	HTTP Command: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?SIIRADIO
+	Telnet Befehle: SIIRADIO // SISERVER // SIUSB // SIIPOD // SIAUXA // SIAUXD
+        --------------------------------------------------------------------------------
+        return: $command / false  
 	--------------------------------------------------------------------------------
 	Status: checked 2018-06 -03
 	//////////////////////////////////////////////////////////////////////////////*/	
@@ -382,6 +388,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	...............................................................................
 	erhöht/senkt Lautstärke-Level um 1 an Denon CEOL
 				 	- Lautstärke in % [0-100]   =  [-79dB ... -69dB] 
+        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?MVUP
         Telnet Befehl  MDUP  / MVDOWN
 	...............................................................................
 	Parameter:  none
@@ -407,7 +414,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	}
         
 	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion ToggleMute()
+	Befehl: ToggleMute()
 	...............................................................................
 	Toggled Befehl "Mute"
 	...............................................................................
@@ -431,11 +438,43 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             }	
             return true;	
 	}
+
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	Befehl: SetVolumeDB($Volume)
+	...............................................................................
+        sendet Lautstärke-Level an Denon CEOL
+		- Lautstärke in % [0-100]   =  [-79dB ... -69dB] 
+                - Begrenzung auf -69dB
+        HTTP Befehl:   http://$host:80/goform/formiPhoneAppVolume.xml?1+-72.0      
+	...............................................................................
+	Parameter:  $Volume = Integer = [0 - 100] 
+	--------------------------------------------------------------------------------
+	Variable:  none
+	--------------------------------------------------------------------------------
+	return: $output['item']['MasterVolume']['value']
+		$output['item']['Mute']['value']  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06-03
+	//////////////////////////////////////////////////////////////////////////////*/	
+	Public function SetVolumeDB($Volume){
+            $VoldB = -79.0 + ($Volume/10);
+            $Wert =intval($VoldB);
+            $Wert = str_replace(',', '.',$Wert);
+            $cmd = '1+'.$Wert;
+            $host = $this->ip;
+            $url = "http://$host:80/goform/formiPhoneAppVolume.xml";
+            $xml = $this->curl_get($url, $cmd);
+            $output = XML2Array::createArray($xml);
+            $VolDB = ($output['item']['MasterVolume']['value']);
+            return $VolDB;
+	}        
         
 	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion setBass($value)
+	Befehl: setBass($value)
 	...............................................................................
 	Erhöht Bass Level (Range: -10 ... +10) (40...60)
+        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?UP
 	Telnet Befehl: PSBASS_UP // PSBAS_DOWN // PSBAS_50
 	...............................................................................
 	Parameter:  $value = "UP" // "DOWN" // "50"
@@ -448,16 +487,16 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBass($value){ 
 		$host = $this->ReadPropertyString('IPAddress');
-		//$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSBAS_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
 	}	
         
 	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion setTreble($value)
+	Befehl: setTreble($value)
 	...............................................................................
 	Erhöht Trebble Level (Range: -10 ... +10) (40...60)
+        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?UP
 	Telnet Befehl: PSTRE_UP // PSTRE_DOWN // PSTRE_50
 	...............................................................................
 	Parameter:  $value = "UP" // "DOWN" // "50"
@@ -470,16 +509,16 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setTreble($value){ 
 		$host = $this->ReadPropertyString('IPAddress');
-		//$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSTRE_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
 	}	
 	
 	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion setBalance($value)
+	Befehl: setBalance($value)
 	...............................................................................
 	Verandert den Balance Level (Range: 00 ... 99)  
+        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?PSBAL_LEFT
 	Telnet Befehl: PSBAL_LEFT // PSBAL_RIGHT // PSBAL_50 = Center
 	...............................................................................
 	Parameter:  $value = "LEFT" // "RIGHT" // "50"
@@ -492,7 +531,6 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBalance($value){ 
 		$host = $this->ReadPropertyString('IPAddress');
-		//$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		$cmd = 'PSBAL_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
