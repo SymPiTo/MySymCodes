@@ -52,6 +52,9 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             
+            
+            define('IS_INACTIVE', IS_SBASE + 4); //module is not beeing used
+            
             $Open = $this->ReadPropertyBoolean('Open');
             $Port = $this->ReadPropertyInteger('Port');
             $this->PingInterval = $this->ReadPropertyInteger('Interval');
