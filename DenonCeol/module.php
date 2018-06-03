@@ -59,7 +59,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             
             if($this->ReadPropertyBoolean("active")){
                 $this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
-                $this->init();
+                $this->CeolInit();
             }
             else {
                 $this->SetTimerInterval("Update", 0);
@@ -76,7 +76,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
        
         
-        private function init(){
+        private function CeolInit(){
             
             $this->ip = $this->ReadPropertyString('IPAddress');
         }
@@ -201,6 +201,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
 		$output = XML2Array::createArray($xml);
+                $this->SendDebug("MainZone: ", $output, 0);
 		$status = ($output['item']['Power']['value']);
 		return $output;
 	}		
