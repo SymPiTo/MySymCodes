@@ -618,7 +618,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                     throw new Exception("File (".$file.") has to be located on a Samba share (e.g. //ipsymcon.fritz.box/tts/text.mp3) or a HTTP server (e.g. http://ipsymcon.fritz.box/tts/text.mp3)");
                 }
                 $this->SendDebug("Spiele File: ", $uri, 0);
-                $this->SetAVTransportURI($uri, "");
+                $this->SetAVTransportURI($uri, "") ;
                 $this->SetPlayMode('NORMAL');	
                 $this->Play();
                 IPS_Sleep(500);
