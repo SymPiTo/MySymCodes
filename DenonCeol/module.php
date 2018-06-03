@@ -611,7 +611,8 @@ o                    http://192.168.2.99/img/album%20art_S.png
 
                 // only files on SMB share or http server can be used
                 if (preg_match('/^\/\/[\w,.,\d,-]*\/\S*/',$file) == 1){
-                    $uri = "x-file-cifs:".$file;
+                    //$uri = "x-file-cifs:".$file;
+                    $uri = $file;
                 }elseif (preg_match('/^https{0,1}:\/\/[\w,.,\d,-,:]*\/\S*/',$file) == 1){
                     $uri = $file;
                 }else{
