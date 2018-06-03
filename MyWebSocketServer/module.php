@@ -53,22 +53,22 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             parent::ApplyChanges();
             
             
-            define('IS_INACTIVE', IS_SBASE + 4); //module is not beeing used
+           
             
             $Open = $this->ReadPropertyBoolean('Open');
             $Port = $this->ReadPropertyInteger('Port');
             $this->PingInterval = $this->ReadPropertyInteger('Interval');
             if (!$Open) {
-                $NewState = IS_INACTIVE;
+                //-$NewState = IS_INACTIVE;
             } else {
                 if (($Port < 1) or ($Port > 65535)) {
-                    $NewState = IS_EBASE + 2;
+                    //-$NewState = IS_EBASE + 2;
                     $Open = false;
                     trigger_error($this->Translate('Port invalid'), E_USER_NOTICE);
                 } else {
                     if (($this->PingInterval != 0) and ($this->PingInterval < 5)) {
                         $this->PingInterval = 0;
-                        $NewState = IS_EBASE + 4;
+                        //-$NewState = IS_EBASE + 4;
                         $Open = false;
                         trigger_error($this->Translate('Ping interval to small'), E_USER_NOTICE);
                     }
@@ -89,13 +89,13 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 }
             } else {
                 if ($Open) {
-                    $NewState = IS_INACTIVE;
+                    //-$NewState = IS_INACTIVE;
                     $Open = false;
                 }
             }
 
             if ($Open && !$this->HasActiveParent($ParentID)) {
-                $NewState = IS_EBASE + 2;
+               //- $NewState = IS_EBASE + 2;
             }
 
             $this->SetStatus($NewState);
