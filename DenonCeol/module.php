@@ -45,6 +45,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("CeolSZ6", "Line6");
             $this->RegisterVariableString("CeolSZ7", "Line7");
             $this->RegisterVariableString("CeolSZ8", "Line8"); 
+            $this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
@@ -230,7 +231,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Befehl 	:	get_audio_status()
 	...............................................................................
 	Liest Audio Status aus
-        HTTP Befehl:	$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";     
+        HTTP Befehl:	$url = "http://192.168.178.29:80/goform/formNetAudio_StatusXml.xml";     
 	...............................................................................				 
 	setVariable: 
         --------------------------------------------------------------------------------
@@ -264,7 +265,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Befehl: Navigate($Direction)
 	...............................................................................
 	Menü Navigation
-        HTTP Befehl:  http://$host:80/goform/formiPhoneAppNetAudioCommand.xml?CurLeft       
+        HTTP Befehl:  http://192.168.178.29:80/goform/formiPhoneAppNetAudioCommand.xml?CurLeft       
 	Telnet Befehl: CurLeft // CurRight // CurUp // CurDown
 	...............................................................................
 	Parameter:  $value = left" // "right" // "up" // "down"
@@ -388,7 +389,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	...............................................................................
 	erhöht/senkt Lautstärke-Level um 1 an Denon CEOL
 				 	- Lautstärke in % [0-100]   =  [-79dB ... -69dB] 
-        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?MVUP
+        HTTP Befehl: http://192.168.178.29t:80/goform/formiPhoneAppDirect.xml?MVUP
         Telnet Befehl  MDUP  / MVDOWN
 	...............................................................................
 	Parameter:  none
@@ -446,7 +447,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         sendet Lautstärke-Level an Denon CEOL
 		- Lautstärke in % [0-100]   =  [-79dB ... -69dB] 
                 - Begrenzung auf -69dB
-        HTTP Befehl:   http://$host:80/goform/formiPhoneAppVolume.xml?1+-72.0      
+        HTTP Befehl:   http://192.168.178.29:80/goform/formiPhoneAppVolume.xml?1+-72.0      
 	...............................................................................
 	Parameter:  $Volume = Integer = [0 - 100] 
 	--------------------------------------------------------------------------------
@@ -462,7 +463,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $Wert =intval($VoldB);
             $Wert = str_replace(',', '.',$Wert);
             $cmd = '1+'.$Wert;
-            $host = $this->ip;
+            $host = $this->ReadPropertyString('IPAddress');
             $url = "http://$host:80/goform/formiPhoneAppVolume.xml";
             $xml = $this->curl_get($url, $cmd);
             $output = XML2Array::createArray($xml);
@@ -474,7 +475,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Befehl: setBass($value)
 	...............................................................................
 	Erhöht Bass Level (Range: -10 ... +10) (40...60)
-        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?UP
+        HTTP Befehl: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?UP
 	Telnet Befehl: PSBASS_UP // PSBAS_DOWN // PSBAS_50
 	...............................................................................
 	Parameter:  $value = "UP" // "DOWN" // "50"
@@ -486,7 +487,6 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-05-31
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBass($value){ 
-		$host = $this->ReadPropertyString('IPAddress');
 		$cmd = 'PSBAS_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
@@ -496,7 +496,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Befehl: setTreble($value)
 	...............................................................................
 	Erhöht Trebble Level (Range: -10 ... +10) (40...60)
-        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?UP
+        HTTP Befehl: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?UP
 	Telnet Befehl: PSTRE_UP // PSTRE_DOWN // PSTRE_50
 	...............................................................................
 	Parameter:  $value = "UP" // "DOWN" // "50"
@@ -508,7 +508,6 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-05-31
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setTreble($value){ 
-		$host = $this->ReadPropertyString('IPAddress');
 		$cmd = 'PSTRE_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
@@ -518,7 +517,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Befehl: setBalance($value)
 	...............................................................................
 	Verandert den Balance Level (Range: 00 ... 99)  
-        HTTP Befehl: http://$host:80/goform/formiPhoneAppDirect.xml?PSBAL_LEFT
+        HTTP Befehl: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?PSBAL_LEFT
 	Telnet Befehl: PSBAL_LEFT // PSBAL_RIGHT // PSBAL_50 = Center
 	...............................................................................
 	Parameter:  $value = "LEFT" // "RIGHT" // "50"
@@ -530,14 +529,63 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-05-31
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setBalance($value){ 
-		$host = $this->ReadPropertyString('IPAddress');
 		$cmd = 'PSBAL_'.$value;
 		$xml = $this->send_cmd($cmd);
 		return $xml;
 	}	
 	
-	        
-        
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	Befehl: SetRadioChannel($Channel)
+	...............................................................................
+	schaltet Radiosender (Favoriten) um:
+        HTTP Befehl: http://192.168.178.29:80/goform/formiPhoneAppDirect.xml?FV 01
+	Telnet Befehl: FV 01
+	...............................................................................
+	Parameter:  $Channel = String = ['0" - '50'] 
+	--------------------------------------------------------------------------------
+	SetVariable: 
+	--------------------------------------------------------------------------------
+	return:  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-05-31
+	//////////////////////////////////////////////////////////////////////////////*/	
+	Public function SetRadioChannel($Channel){
+            $cmd = 'FV'.'%20'.$Channel;
+            $this->send_cmd($cmd);
+            SetValueInteger($this->GetIDForIdent("CeolFavChannel"), intval($Channel)-1);
+            return $Channel;
+	}	        
+       
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	Befehl: GetCover()
+	...............................................................................
+	Holt Cover Bilder des abgespielten Streams
+        HTTP Befehl: http://192.168.2.99/NetAudio/art.asp-jpg
+o                    http://192.168.2.99/img/album%20art_S.png
+	...............................................................................
+	Parameter:  none
+	--------------------------------------------------------------------------------
+	SetVariable: 
+	--------------------------------------------------------------------------------
+	return:  $xml->array = output
+	--------------------------------------------------------------------------------
+	Status: checked 2018-05-31
+	//////////////////////////////////////////////////////////////////////////////*/ 	
+	Public function GetCover(){
+            $host = $this->ReadPropertyString('IPAddress');
+            $url = "http://$host:80/NetAudio/art.asp-jpg";
+            //$url = "http://$host:80/img/album%20art_S.png";
+            $cmd = "";
+            $xml = $this->curl_get($url, $cmd);
+            $Cover ='<img src='.$url. ' width=320px height=280px scrolling="no">';	
+            setvalue(38066 /*[Denon-CEOL\_Cover]*/, $Cover);	
+            return $xml;
+	}	
+
+
+
         
     } // Ende Klasse
 ?>
