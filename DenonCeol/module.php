@@ -376,7 +376,36 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->send_cmd($command);
             return $command;
 	}	
-	        
+
+	/*//////////////////////////////////////////////////////////////////////////////
+	Funktion IncVolume() DecVolume()
+	...............................................................................
+	erhöht/senkt Lautstärke-Level um 1 an Denon CEOL
+				 	- Lautstärke in % [0-100]   =  [-79dB ... -69dB] 
+        Telnet Befehl  MDUP  / MVDOWN
+	...............................................................................
+	Parameter:  none
+	--------------------------------------------------------------------------------
+	SetValue:  CeolVolume
+	--------------------------------------------------------------------------------
+	return: true  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06-03
+	//////////////////////////////////////////////////////////////////////////////*/	
+	Public function IncVolume(){
+            $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume") + 1);
+            SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
+            $this->send_cmd('MVUP');
+            return true;
+	}	
+	
+	Public function DecVolume(){	
+            $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume") - 1);
+            SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
+            $this->send_cmd('MVUP');
+            return true;
+	}
+        
 	/*//////////////////////////////////////////////////////////////////////////////
 	Funktion ToggleMute()
 	...............................................................................
