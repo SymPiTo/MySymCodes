@@ -2,7 +2,7 @@
 	"elements":
 	[
 		{  "name": "active",	"type": "CheckBox",		"caption": "active" },
-		{ "name": "IPAddress",	"type": "ValidationTextBox", 	"caption": "IP-Address/Host" },
+		{ "name": "Port",	"type": "ValidationTextBox", 	"caption": "Port/WebSocketServer" },
 		{ "type": "NumberSpinner", "name": "UpdateInterval",    "caption": "UpdateInterval", "suffix": "milisekunden"}
                 
 	],

@@ -26,28 +26,23 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Diese Zeile nicht löschen.
             parent::Create();
             
-            // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-            $this->RegisterPropertyBoolean("active", false);
-            $this->RegisterPropertyString("IPAddress", "");
-            $this->RegisterPropertyInteger("UpdateInterval", 30);
-           
-            //Status Variable anlegen
-            $this->RegisterVariableInteger("CeolSource", "Source", "");
-            $this->RegisterVariableBoolean("CeolPower", "Power");
-            $this->RegisterVariableInteger("CeolVolume", "Volume", "");
-            $this->RegisterVariableBoolean("CeolMute", "Mute");
-            $this->RegisterVariableString("CeolSZ1", "Line1");
-            $this->RegisterVariableString("CeolSZ2", "Line2");
-            $this->RegisterVariableString("CeolSZ3", "Line3");
-            $this->RegisterVariableString("CeolSZ4", "Line4");      
-            $this->RegisterVariableString("CeolSZ5", "Line5");
-            $this->RegisterVariableString("CeolSZ6", "Line6");
-            $this->RegisterVariableString("CeolSZ7", "Line7");
-            $this->RegisterVariableString("CeolSZ8", "Line8"); 
-            $this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
-            
-            // Timer erstellen
-            $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
+            //Falls Server Socket nicht vorhanden wird ein Neuer erstellt
+            $this->RequireParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}"); // Modul ID des Server Sockets
+            //-$this->Multi_Clients = new WebSocket_ClientList();
+            //-$this->NoNewClients = true;
+            $this->RegisterPropertyBoolean("Open", false);
+            $this->RegisterPropertyInteger("Port", 8080);
+            $this->RegisterPropertyInteger("Interval", 0);
+            $this->RegisterPropertyString("URI", "/");
+            $this->RegisterPropertyBoolean("BasisAuth", false);
+            $this->RegisterPropertyString("Username", "");
+            $this->RegisterPropertyString("Password", "");
+            $this->RegisterPropertyBoolean("TLS", false);
+            $this->RegisterPropertyBoolean("Plain", true);
+            $this->RegisterPropertyString("CertFile", "");
+            $this->RegisterPropertyString("KeyFile", "");
+            $this->RegisterPropertyString("KeyPassword", "");
+            $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -57,13 +52,51 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             
-            if($this->ReadPropertyBoolean("active")){
-                $this->SetTimerInterval("Update", $this->ReadPropertyInteger("UpdateInterval"));
-                $this->CeolInit();
+            $Open = $this->ReadPropertyBoolean('Open');
+            $Port = $this->ReadPropertyInteger('Port');
+            $this->PingInterval = $this->ReadPropertyInteger('Interval');
+            if (!$Open) {
+                $NewState = IS_INACTIVE;
+            } else {
+                if (($Port < 1) or ($Port > 65535)) {
+                    $NewState = IS_EBASE + 2;
+                    $Open = false;
+                    trigger_error($this->Translate('Port invalid'), E_USER_NOTICE);
+                } else {
+                    if (($this->PingInterval != 0) and ($this->PingInterval < 5)) {
+                        $this->PingInterval = 0;
+                        $NewState = IS_EBASE + 4;
+                        $Open = false;
+                        trigger_error($this->Translate('Ping interval to small'), E_USER_NOTICE);
+                    }
+                }
             }
-            else {
-                $this->SetTimerInterval("Update", 0);
+            $ParentID = $this->RegisterParent();
+
+            // Zwangskonfiguration des ServerSocket
+            if ($ParentID > 0) {
+                if (IPS_GetProperty($ParentID, 'Port') <> $Port) {
+                    IPS_SetProperty($ParentID, 'Port', $Port);
+                }
+                if (IPS_GetProperty($ParentID, 'Open') <> $Open) {
+                    IPS_SetProperty($ParentID, 'Open', $Open);
+                }
+                if (IPS_HasChanges($ParentID)) {
+                    @IPS_ApplyChanges($ParentID);
+                }
+            } else {
+                if ($Open) {
+                    $NewState = IS_INACTIVE;
+                    $Open = false;
+                }
             }
+
+            if ($Open && !$this->HasActiveParent($ParentID)) {
+                $NewState = IS_EBASE + 2;
+            }
+
+            $this->SetStatus($NewState);
+            $this->NoNewClients = false;
         }
  
         /**
@@ -78,7 +111,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
         private function CeolInit(){
             
-            $this->ip = $this->ReadPropertyString('IPAddress');
+             
         }
         
 	/*//////////////////////////////////////////////////////////////////////////////
@@ -104,6 +137,53 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         }
         
 
+        
+        
+        
+        
+        public function KeepAlive(){
+            $this->SendDebug('KeepAlive', 'start', 0);
+            $this->SetTimerInterval('KeepAlivePing', 0);
+            $Client = true;
+/*
+            while ($Client) {
+                $Clients = $this->Multi_Clients;
+                $Client = $Clients->GetNextTimeout(1);
+                if ($Client === false) {
+                    break;
+                }
+                if (@$this->SendPing($Client->ClientIP, $Client->ClientPort, "") === false) {
+                    $this->SendDebug('TIMEOUT ' . $Client->ClientIP . ':' . $Client->ClientPort, "Ping timeout", 0);
+                    $Clients->Remove($Client);
+                    $this->Multi_Clients = $Clients;
+                }
+            }
+ */
+            $this->SendDebug('KeepAlive', 'end', 0);
+
+            
+         }
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     } // Ende Klasse
 ?>
