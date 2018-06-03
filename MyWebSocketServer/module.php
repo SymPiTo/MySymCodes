@@ -159,7 +159,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         }
         return false;
     }
-}
+
         
         
         public function KeepAlive(){
