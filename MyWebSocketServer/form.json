@@ -113,6 +113,11 @@
     "status":
             [
                 {
+                    "code": 101,
+                    "icon": "inactive",
+                    "caption": "Instance wird erstellt"
+                },
+                {
                     "code": 102,
                     "icon": "active",
                     "caption": "Interface open"
