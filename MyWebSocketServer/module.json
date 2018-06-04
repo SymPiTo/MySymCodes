@@ -9,6 +9,6 @@
 	],
         "parentRequirements": ["{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}"],
         "childRequirements": [],
-        "implemented": ["{7A1272A4-CBDB-46EF-BFC6-DCF4A53D2FC7}"],
+        "implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}"],
 	"prefix": "MyWSS"
 }
