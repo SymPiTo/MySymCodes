@@ -140,20 +140,20 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
   
         }
 
-     ################## DATAPOINTS PARENT
+        ################## DATAPOINTS PARENT
 
-    /**
-     * Empfängt Daten vom Parent.
-     *
-     * @access public
-     * @param string $JSONString Das empfangene JSON-kodierte Objekt vom Parent.
-     */
-    public function ReceiveData($JSONString)
-    {
-        $data = json_decode($JSONString);
-        //unset($data->DataID);
-        $this->SendDebug('incoming', $data, 0);
-    }
+       /**
+        * Empfängt Daten vom Parent.
+        *
+        * @access public
+        * @param string $JSONString Das empfangene JSON-kodierte Objekt vom Parent.
+        */
+       public function ReceiveData($JSONString)
+       {
+           $data = json_decode($JSONString);
+           //unset($data->DataID);
+           $this->SendDebug('incoming', $data, 0);
+       }
         
         
         
