@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         public function Create() {
             // Diese Zeile nicht löschen.
             parent::Create();
-            
+             $this->SendDebug('Create', 'Start', 0);
             //Falls Server Socket nicht vorhanden wird ein Neuer erstellt
             $this->RequireParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}"); // Modul ID des Server Sockets
             //-$this->Multi_Clients = new WebSocket_ClientList();
@@ -51,7 +51,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         public function ApplyChanges() {
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
-            
+            $this->SendDebug('Changes', 'Start', 0);
             
            
             
