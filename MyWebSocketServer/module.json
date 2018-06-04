@@ -7,7 +7,7 @@
 	[
 		"MyWebSocketServer"
 	],
-        "parentRequirements": ["{C32C9869-1743-45DC-A22C-F74738F6D61F}"],
+        "parentRequirements": ["{2726984B-6CD4-4712-8C7D-37B101B3200F}"],
         "childRequirements": [],
         "implemented": ["{7A1272A4-CBDB-46EF-BFC6-DCF4A53D2FC7}"],
 	"prefix": "MyWSS"
