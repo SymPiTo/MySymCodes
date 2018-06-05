@@ -1,6 +1,6 @@
  <?php
 
-    class MyWebSocketServer extends IPSModule {
+    class MyCUL extends IPSModule {
         //externe Klasse einbinden - ueberlagern mit TRAIT
        
 
