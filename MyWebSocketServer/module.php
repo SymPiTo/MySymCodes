@@ -158,7 +158,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
        {
            $data = json_decode($JSONString);
            //unset($data->DataID);
-           $this->SendDebug('incoming', $data, 0);
+           $this->SendDebug('incoming', utf8_decode($data->Buffer), 0);
        }
         
         
