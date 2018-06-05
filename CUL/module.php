@@ -1,4 +1,4 @@
-<?php
+ <?php
 
     class MyWebSocketServer extends IPSModule {
         //externe Klasse einbinden - ueberlagern mit TRAIT
@@ -25,7 +25,7 @@
              $this->SendDebug('Create', 'Start', 0);
             //Falls Server Socket nicht vorhanden wird ein Neuer erstellt
 
-             $this->ConnectParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}");
+             $this->ConnectParent("{6179ED6A-FC31-413C-BB8E-1204150CF376}");
 
         }
         
@@ -39,52 +39,11 @@
             
            
             
-            $Open = $this->ReadPropertyBoolean('Open');
-            $Port = $this->ReadPropertyInteger('Port');
-            $this->PingInterval = $this->ReadPropertyInteger('Interval');
-            if (!$Open) {
-                //-$NewState = IS_INACTIVE;
-            } else {
-                if (($Port < 1) or ($Port > 65535)) {
-                    //-$NewState = IS_EBASE + 2;
-                    $Open = false;
-                    trigger_error($this->Translate('Port invalid'), E_USER_NOTICE);
-                } else {
-                    if (($this->PingInterval != 0) and ($this->PingInterval < 5)) {
-                        $this->PingInterval = 0;
-                        //-$NewState = IS_EBASE + 4;
-                        $Open = false;
-                        trigger_error($this->Translate('Ping interval to small'), E_USER_NOTICE);
-                    }
-                }
-            }
+
             //-$ParentID = $this->RegisterParent();
             $ParentID = @IPS_GetInstance($this->InstanceID)['ConnectionID'];    
             
-            // Zwangskonfiguration des ServerSocket
-            if ($ParentID > 0) {
-                if (IPS_GetProperty($ParentID, 'Port') <> $Port) {
-                    IPS_SetProperty($ParentID, 'Port', $Port);
-                }
-                if (IPS_GetProperty($ParentID, 'Open') <> $Open) {
-                    IPS_SetProperty($ParentID, 'Open', $Open);
-                }
-                if (IPS_HasChanges($ParentID)) {
-                    @IPS_ApplyChanges($ParentID);
-                }
-            } else {
-                if ($Open) {
-                    //-$NewState = IS_INACTIVE;
-                    $Open = false;
-                }
-            }
 
-            if ($Open && !$this->HasActiveParent($ParentID)) {
-               //- $NewState = IS_EBASE + 2;
-            }
-
-            //-$this->SetStatus($NewState);
-            $this->NoNewClients = false;
         }
  
         /**
@@ -110,7 +69,7 @@
        public function ReceiveData($JSONString)
        {
            $data = json_decode($JSONString);
-           //unset($data->DataID);
+   
            $this->SendDebug('incoming', $data, 0);
        }
         
