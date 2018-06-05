@@ -80,6 +80,9 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $ParentID = @IPS_GetInstance($this->InstanceID)['ConnectionID'];    
              $this->SendDebug('InstanceID = ', $this->InstanceID, 0);
              
+             $this->SendDebug('$ParentID = ', $ParentID, 0);
+             
+             
             // Zwangskonfiguration des ServerSocket
             if ($ParentID > 0) {
                 if (IPS_GetProperty($ParentID, 'Port') <> $Port) {
