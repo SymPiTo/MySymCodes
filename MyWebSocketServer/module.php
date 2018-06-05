@@ -1,4 +1,5 @@
 <?php
+
 //zugehoerige Unter-Klassen    
 require_once(__DIR__ . "/../libs/XML2Array.php");
 
@@ -144,7 +145,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         ################## DATAPOINTS PARENT
 
        /**
-        * Empfängt Daten vom Parent.
+        * Empfï¿½ngt Daten vom Parent.
         *
         * @access public
         * @param string $JSONString Das empfangene JSON-kodierte Objekt vom Parent.
@@ -159,7 +160,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
         
     /**
-     * Prüft den Parent auf vorhandensein und Status.
+     * Prï¿½ft den Parent auf vorhandensein und Status.
      *
      * @access protected
      * @return bool True wenn Parent vorhanden und in Status 102, sonst false.
@@ -223,4 +224,3 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
         
     } // Ende Klasse
-?>
