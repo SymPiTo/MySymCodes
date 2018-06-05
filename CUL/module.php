@@ -25,7 +25,7 @@
              $this->SendDebug('Create', 'Start', 0);
             //Falls Server Socket nicht vorhanden wird ein Neuer erstellt
 
-             $this->ConnectParent("{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}");
+            // $this->ConnectParent("{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}");
 
         }
         
