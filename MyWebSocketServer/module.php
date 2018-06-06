@@ -100,7 +100,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
      */
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
-         $this->SendDebug('MesaageSink', '$Message', 0);   
+         $this->SendDebug('MesaageSink', 'Starte das', 0);   
         //wenn keine aktive Verbindung dann werden alle Clients gelöscht
         switch ($Message) {
             case IPS_KERNELMESSAGE:
@@ -238,7 +238,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
         */
        public function ReceiveData($JSONString)
        {
-           //Empfangene Daten aus dem Puffer 
+           IPS_LogMessage($_IPS['SELF'], "Empfangene Daten aus dem Puffer  von Funktion Receive");
+            //Empfangene Daten aus dem Puffer 
            $data = json_decode($JSONString);
             unset($data->DataID);
             $this->SendDebug('incoming', utf8_decode($data->Buffer), 0);
@@ -257,7 +258,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
              //   $this->UseTLS = $UseTLS;
             // Püfen ob Client schon vorhanden ist
             $Client = $Clients->GetByIpPort(new Websocket_Client($data->ClientIP, $data->ClientPort));
-            $this->SendDebug("Check - Client vorhanden", utf8_decode("Client"), 0);    
+            $this->SendDebug("Check - Client vorhanden", "Client", 0);    
             //Neuer Client? oder Neu mit Client Verbunden = Client sendet Handshake Request
             if (($Client === false) or (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) or ((ord($Data[0]) == 0x16) && (ord($Data[1]) == 0x03) && (ord($Data[5]) == 0x01))) { // neu oder neu verbunden!
             
