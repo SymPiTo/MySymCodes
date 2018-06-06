@@ -139,8 +139,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
         // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
-            $this->Multi_Clients = new WebSocket_ClientList();
-            $this->NoNewClients = true;
+
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             $this->SendDebug('Changes', 'Start', 0);
@@ -250,7 +249,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             //$Clients= Klasse class WebSocket_ClientList 
             //array aller Clients ist am Anfang ein leeres Array
             
-
+            $this->Multi_Clients = new WebSocket_ClientList();
+            $this->NoNewClients = true;
             
             $Clients = $this->Multi_Clients;
             //Funktion aus derKlasse class WebSocket_ClientList  aufrufen
@@ -263,7 +263,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
              //   $this->UseTLS = $UseTLS;
             // Püfen ob Client schon vorhanden ist
             $Client = $Clients->GetByIpPort(new Websocket_Client($data->ClientIP, $data->ClientPort));
-            $this->SendDebug("Check - Client vorhanden", "Client", 0);    
+            $this->SendDebug("Check - Client vorhanden", $Client, 0);    
             //Neuer Client? oder Neu mit Client Verbunden = Client sendet Handshake Request
             if (($Client === false) or (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) or ((ord($Data[0]) == 0x16) && (ord($Data[1]) == 0x03) && (ord($Data[5]) == 0x01))) { // neu oder neu verbunden!
             
