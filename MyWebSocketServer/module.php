@@ -278,6 +278,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
                 }
             }
             // Client jetzt bekannt.
+            //Client 
+            $this->SendDebug('Client Status = ', WebSocketState::HandshakeReceived, 0);
             if ($Client->State == WebSocketState::HandshakeReceived) {
                 $NewData = $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} . $Data;
                 $CheckData = $this->ReceiveHandshake($NewData);
