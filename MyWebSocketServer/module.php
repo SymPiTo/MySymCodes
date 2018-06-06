@@ -76,6 +76,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
            
         }
         
+        Public $NoNewClients;
+        
         // Create() wird einmalig beim Erstellen einer neuen Instanz ausgeführt
         // Überschreibt die interne IPS_Create($id) Funktion
         public function Create() {
@@ -85,8 +87,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             //Falls Server Socket nicht vorhanden wird ein Neuer erstellt
             $this->RequireParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}"); // Modul ID des Server Sockets
              //$this->ConnectParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}");
-            /* @var $NoNewClients type */
-            global $NoNewClients;
+           
             $this->Multi_Clients = new WebSocket_ClientList();
             $this->NoNewClients = true;
             $this->SendDebug('setze NoNewClients auf TRUE = ', $this->NoNewClients, 0);
