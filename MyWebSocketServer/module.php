@@ -76,8 +76,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
            
         }
         
-        Public $NoNewClients;
-        Public $Multi_Clients;
+        Public $NoNewClients = true;
+        Public $Multi_Clients  =  object;
         
         // Create() wird einmalig beim Erstellen einer neuen Instanz ausgeführt
         // Überschreibt die interne IPS_Create($id) Funktion
