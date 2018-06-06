@@ -87,6 +87,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
              //$this->ConnectParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}");
             $this->Multi_Clients = new WebSocket_ClientList();
             $this->NoNewClients = true;
+            $this->SendDebug('setze NoNewClients auf TRUE = ', $this->NoNewClients, 0);
             $this->RegisterPropertyBoolean("Open", false);
             $this->RegisterPropertyInteger("Port", 8080);
             $this->RegisterPropertyInteger("Interval", 0);
@@ -157,8 +158,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             $this->SendDebug('Changes', 'Start', 0);
            
             // WebsocketServer startet!
-            $this->NoNewClients = true;
-            
+            //$this->NoNewClients = true;
+            $this->SendDebug('NoNewClients = ', $this->NoNewClients, 0);
             //Meldung Kernelstatus 
             if ((float) IPS_GetKernelVersion() < 4.2) {
                 $this->RegisterMessage(0, IPS_KERNELMESSAGE);
