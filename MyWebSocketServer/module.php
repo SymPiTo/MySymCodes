@@ -316,6 +316,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
                     $Client->Timestamp = time() + $this->ReadPropertyInteger("Interval");
                     $Clients->Update($Client);
                     $this->Multi_Clients = $Clients;
+                    $this->SendDebug('Verbundener Client  = ' $Client , 0);
                     $this->SendHandshake(101, $NewData, $Client); //Handshake senden
                     $this->SendDebug('SUCCESSFULLY CONNECT', $Client, 0);
                     $this->SetNextTimer();
