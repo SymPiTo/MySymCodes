@@ -100,7 +100,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
      */
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
-            
+         $this->SendDebug('MesaageSink', '$Message, 0);   
         //wenn keine aktive Verbindung dann werden alle Clients gelöscht
         switch ($Message) {
             case IPS_KERNELMESSAGE:
