@@ -247,7 +247,10 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
            
             //$Clients= Klasse class WebSocket_ClientList 
             //array aller Clients ist am Anfang ein leeres Array
+            
             $this->Multi_Clients = new WebSocket_ClientList();
+            $this->NoNewClients = true;
+            
             $Clients = $this->Multi_Clients;
             //Funktion aus derKlasse class WebSocket_ClientList  aufrufen
             //public function GetByIpPort(Websocket_Client $Client)
