@@ -270,6 +270,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             
             $this->Multi_Clients = new WebSocket_ClientList();
             $this->NoNewClients = false;
+            $this->UsePlain = $this->ReadPropertyBoolean('Plain');
             
             $Clients = $this->Multi_Clients;
             //Funktion aus derKlasse class WebSocket_ClientList  aufrufen
