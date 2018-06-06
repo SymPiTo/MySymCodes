@@ -5,6 +5,46 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 require_once(__DIR__ . "/../libs/BasisTrait.php");
 require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
 
+
+
+
+
+      
+    // --- BASE MESSAGE
+    define('IPS_BASE', 10000);                             //Base Message
+    define('IPS_KERNELSTARTED', IPS_BASE + 1);             //Post Ready Message
+    define('IPS_KERNELSHUTDOWN', IPS_BASE + 2);            //Pre Shutdown Message, Runlevel UNINIT Follows
+ 
+ 
+    // --- KERNEL
+    define('IPS_KERNELMESSAGE', IPS_BASE + 100);           //Kernel Message
+    define('KR_CREATE', IPS_KERNELMESSAGE + 1);            //Kernel is beeing created
+    define('KR_INIT', IPS_KERNELMESSAGE + 2);              //Kernel Components are beeing initialised, Modules loaded, Settings read
+    define('KR_READY', IPS_KERNELMESSAGE + 3);             //Kernel is ready and running
+    define('KR_UNINIT', IPS_KERNELMESSAGE + 4);            //Got Shutdown Message, unloading all stuff
+    define('KR_SHUTDOWN', IPS_KERNELMESSAGE + 5);          //Uninit Complete, Destroying Kernel Inteface
+
+     // --- DATA HANDLER
+    define('IPS_FLOWMESSAGE', IPS_BASE + 1100);             //Data Handler Message
+    define('FM_CONNECT', IPS_FLOWMESSAGE + 1);             //On Instance Connect
+    define('FM_DISCONNECT', IPS_FLOWMESSAGE + 2);          //On Instance Disconnect 
+        
+    // --- INSTANCE MANAGER
+    define('IPS_INSTANCEMESSAGE', IPS_BASE + 500);         //Instance Manager Message
+    define('IM_CREATE', IPS_INSTANCEMESSAGE + 1);          //Instance created
+    define('IM_DELETE', IPS_INSTANCEMESSAGE + 2);          //Instance deleted
+    define('IM_CONNECT', IPS_INSTANCEMESSAGE + 3);         //Instance connectged
+    define('IM_DISCONNECT', IPS_INSTANCEMESSAGE + 4);      //Instance disconncted
+    define('IM_CHANGESTATUS', IPS_INSTANCEMESSAGE + 5);    //Status was Changed
+    define('IM_CHANGESETTINGS', IPS_INSTANCEMESSAGE + 6);  //Settings were Changed
+    define('IM_CHANGESEARCH', IPS_INSTANCEMESSAGE + 7);    //Searching was started/stopped
+    define('IM_SEARCHUPDATE', IPS_INSTANCEMESSAGE + 8);    //Searching found new results
+    define('IM_SEARCHPROGRESS', IPS_INSTANCEMESSAGE + 9);  //Searching progress in %
+    define('IM_SEARCHCOMPLETE', IPS_INSTANCEMESSAGE + 10); //Searching is complete        
+ 
+
+
+
     // Klassendefinition
     class MyWebSocketServer extends IPSModule {
         
@@ -349,39 +389,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
         
         
         
-        
-    // --- BASE MESSAGE
-    define('IPS_BASE', 10000);                             //Base Message
-    define('IPS_KERNELSTARTED', IPS_BASE + 1);             //Post Ready Message
-    define('IPS_KERNELSHUTDOWN', IPS_BASE + 2);            //Pre Shutdown Message, Runlevel UNINIT Follows
- 
- 
-    // --- KERNEL
-    define('IPS_KERNELMESSAGE', IPS_BASE + 100);           //Kernel Message
-    define('KR_CREATE', IPS_KERNELMESSAGE + 1);            //Kernel is beeing created
-    define('KR_INIT', IPS_KERNELMESSAGE + 2);              //Kernel Components are beeing initialised, Modules loaded, Settings read
-    define('KR_READY', IPS_KERNELMESSAGE + 3);             //Kernel is ready and running
-    define('KR_UNINIT', IPS_KERNELMESSAGE + 4);            //Got Shutdown Message, unloading all stuff
-    define('KR_SHUTDOWN', IPS_KERNELMESSAGE + 5);          //Uninit Complete, Destroying Kernel Inteface
-
-     // --- DATA HANDLER
-    define('IPS_FLOWMESSAGE', IPS_BASE + 1100);             //Data Handler Message
-    define('FM_CONNECT', IPS_FLOWMESSAGE + 1);             //On Instance Connect
-    define('FM_DISCONNECT', IPS_FLOWMESSAGE + 2);          //On Instance Disconnect 
-        
-    // --- INSTANCE MANAGER
-    define('IPS_INSTANCEMESSAGE', IPS_BASE + 500);         //Instance Manager Message
-    define('IM_CREATE', IPS_INSTANCEMESSAGE + 1);          //Instance created
-    define('IM_DELETE', IPS_INSTANCEMESSAGE + 2);          //Instance deleted
-    define('IM_CONNECT', IPS_INSTANCEMESSAGE + 3);         //Instance connectged
-    define('IM_DISCONNECT', IPS_INSTANCEMESSAGE + 4);      //Instance disconncted
-    define('IM_CHANGESTATUS', IPS_INSTANCEMESSAGE + 5);    //Status was Changed
-    define('IM_CHANGESETTINGS', IPS_INSTANCEMESSAGE + 6);  //Settings were Changed
-    define('IM_CHANGESEARCH', IPS_INSTANCEMESSAGE + 7);    //Searching was started/stopped
-    define('IM_SEARCHUPDATE', IPS_INSTANCEMESSAGE + 8);    //Searching found new results
-    define('IM_SEARCHPROGRESS', IPS_INSTANCEMESSAGE + 9);  //Searching progress in %
-    define('IM_SEARCHCOMPLETE', IPS_INSTANCEMESSAGE + 10); //Searching is complete        
- 
+  
         
         
         
