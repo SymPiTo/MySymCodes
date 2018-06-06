@@ -318,7 +318,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
                     $this->Multi_Clients = $Clients;
                
                     $this->SendHandshake(101, $NewData, $Client); //Handshake senden
-                    IPS_LogMessage($_IPS['SELF'], $Client);
+                    IPSLog('Client =', $Client);
                     $this->SendDebug('SUCCESSFULLY CONNECT', 'Client', 0);
                     //-$this->SetNextTimer();
                 } elseif ($CheckData === false) { // Daten nicht komplett, buffern.
@@ -585,7 +585,44 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
         
         
         
-        
+  
+	public function IPSLog($Text, $array) {
+		$Directory=""; 
+		$File="";
+		
+		if (!$array){
+		
+			$array = '-';
+		}
+		
+		
+		if ($File == ""){
+		
+			$File = 'IPSLog.log';
+		}
+		if ($Directory == "") {
+			$Directory = "/home/pi/pi-share/";
+			//$Directory = IPS_GetKernelDir().'/';
+			//if (function_exists('IPS_GetLogDir'))
+			//	$Directory = IPS_GetLogDir();
+		}
+		
+		if(($FileHandle = fopen($Directory.$File, "a")) === false) {
+			//SetValue($ID_OutEnabled, false);
+			Exit;
+		}
+		if (is_array($array)){
+			//$comma_seperated=implode("\r\n",$array);
+			$comma_seperated=print_r($array, true);
+		}
+		else {
+			$comma_seperated=$array;
+		}
+		fwrite($FileHandle, $Text.": ");
+		fwrite($FileHandle, $comma_seperated."\r\n");
+		fclose($FileHandle);
+	}
+    
   
         
         
