@@ -2,13 +2,16 @@
 
 //zugehoerige Unter-Klassen    
 require_once(__DIR__ . "/../libs/XML2Array.php");
+require_once(__DIR__ . "/../libs/BasisTrait.php");
+require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
 
     // Klassendefinition
     class MyWebSocketServer extends IPSModule {
-        //externe Klasse einbinden - ueberlagern mit TRAIT
-       
-        use XML2Array;
         
+    
+        //externe Klasse einbinden - ueberlagern mit TRAIT
+        use XML2Array;
+        use Definitionen;
                         
         
         // Der Konstruktor des Moduls
@@ -30,8 +33,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             //Falls Server Socket nicht vorhanden wird ein Neuer erstellt
             $this->RequireParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}"); // Modul ID des Server Sockets
              $this->ConnectParent("{8062CF2B-600E-41D6-AD4B-1BA66C32D6ED}");
-            //-$this->Multi_Clients = new WebSocket_ClientList();
-            //-$this->NoNewClients = true;
+            $this->Multi_Clients = new WebSocket_ClientList();
+            $this->NoNewClients = true;
             $this->RegisterPropertyBoolean("Open", false);
             $this->RegisterPropertyInteger("Port", 8080);
             $this->RegisterPropertyInteger("Interval", 0);
@@ -46,6 +49,51 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterPropertyString("KeyPassword", "");
             $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         }
+
+        
+
+    /**
+     * Interne Funktion des SDK.
+     *Registriete Meldungen werden abgefangen und rufen die Funktion MessageSink auf
+     * Registriern in APPLYCHANGES()
+     * @access public
+     */
+    public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    {
+            
+        //wenn keine aktive Verbindung dann werden alle Clients gelöscht
+        switch ($Message) {
+            case IPS_KERNELMESSAGE:
+                if ($Data[0] != KR_READY) {
+                    break;
+                }
+            case IPS_KERNELSTARTED:
+                $this->ApplyChanges();
+                break;
+            case IPS_KERNELSHUTDOWN:
+                $this->DisconnectAllClients();
+                break;
+            case FM_DISCONNECT:
+                $this->NoNewClients = true;
+                $this->RemoveAllClients();
+                $this->RegisterParent();
+                break;
+            case FM_CONNECT:
+                $this->ApplyChanges();
+                break;
+            case IM_CHANGESTATUS:
+                if ($SenderID == $this->ParentID) {
+                    if ($Data[0] == IS_ACTIVE) {
+                        $this->NoNewClients = false;
+                    } else {
+                        $this->NoNewClients = true;
+                        $this->RemoveAllClients();
+                    }
+                }
+                break;
+        }
+    }        
+        
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
         // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
@@ -55,7 +103,24 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             parent::ApplyChanges();
             $this->SendDebug('Changes', 'Start', 0);
             
-           
+            // WebsocketServer startet!
+            $this->NoNewClients = true;
+            
+            //Meldung Kernelstatus 
+            if ((float) IPS_GetKernelVersion() < 4.2) {
+                $this->RegisterMessage(0, IPS_KERNELMESSAGE);
+            } else {
+                $this->RegisterMessage(0, IPS_KERNELSTARTED);
+                $this->RegisterMessage(0, IPS_KERNELSHUTDOWN);
+            }
+            //Meldung Instance connected
+            $this->RegisterMessage($this->InstanceID, FM_CONNECT);
+            $this->RegisterMessage($this->InstanceID, FM_DISCONNECT);
+            
+            //Kernel nicht bereit System started
+            if (IPS_GetKernelRunlevel() <> KR_READY) {
+                return;
+            }
             
             $Open = $this->ReadPropertyBoolean('Open');
             $Port = $this->ReadPropertyInteger('Port');
@@ -119,49 +184,120 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
        
         
-        private function CeolInit(){
-            
-             
-        }
-        
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion function update()
-	...............................................................................
-	Funktion wird über Timer alle x Sekunden gestartet
-         *  call SubFunctions:  $this->Get_MainZone_Status()
-         *                      $this->get_audio_status(
-	...............................................................................
-	Parameter:  none
-	--------------------------------------------------------------------------------
-	SetVariable:   CeolMute
-                       CeolPower
-                       CeolVolume
-                       CeolSource
-	--------------------------------------------------------------------------------
-	return: none  
-	--------------------------------------------------------------------------------
-	Status: checked 2018-06-03
-	//////////////////////////////////////////////////////////////////////////////*/       
-        public function update() {
-  
-        }
+
 
         ################## DATAPOINTS PARENT
 
        /**
-        * Empf�ngt Daten vom Parent.
+        * - IPS FUNKTION - 
+        * Funtion wird automatisch aufgerufen wenn Verbindung zum Parent und dieser Daten sendet
+        * Empfaengt Daten vom Parent .
         *
         * @access public
         * @param string $JSONString Das empfangene JSON-kodierte Objekt vom Parent.
         */
        public function ReceiveData($JSONString)
        {
+           //Empfangene Daten aus dem Puffer 
            $data = json_decode($JSONString);
-           //unset($data->DataID);
-           $this->SendDebug('incoming', utf8_decode($data->Buffer), 0);
+            unset($data->DataID);
+            $this->SendDebug('incoming', utf8_decode($data->Buffer), 0);
+            $Data = utf8_decode($data->Buffer);
+           
+            //$Clients= Klasse class WebSocket_ClientList 
+            //array aller Clients ist am Anfang ein leeres Array
+            $Clients = $this->Multi_Clients;
+            //Funktion aus derKlasse class WebSocket_ClientList  aufrufen
+            //public function GetByIpPort(Websocket_Client $Client)
+            //new Websocket_Client  erstellt einen neuen Client (array mit den Feldern:
+            //        $this->ClientIP = $ClientIP;
+            //    $this->ClientPort = $ClientPort;
+            //    $this->State = $State;
+            //    $this->Timestamp = 0;
+             //   $this->UseTLS = $UseTLS;
+            $Client = $Clients->GetByIpPort(new Websocket_Client($data->ClientIP, $data->ClientPort));
+            //Neuer Client? oder Neu mit Client Verbunden = Client sendet Handshake Request
+            if (($Client === false) or (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) or ((ord($Data[0]) == 0x16) && (ord($Data[1]) == 0x03) && (ord($Data[5]) == 0x01))) { // neu oder neu verbunden!
+            
+                if ($this->NoNewClients) { //Server start neu... keine neuen Verbindungen annehmen.
+                    return;
+                }
+
+                $this->SendDebug(($Client ? "RECONNECT" : "NEW") . ' CLIENT', $Data, 0);            
+                if ($this->UsePlain and (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match))) { //valid header wenn Plain is active
+                    //neuer ClientVerbindung - Client Datensatz
+                    $Client = new Websocket_Client($data->ClientIP, $data->ClientPort);
+                    //zu Clients Sammulung hinzufügen
+                    $Clients->Update($Client);
+                    $this->Multi_Clients = $Clients;
+                    
+                    $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = "";
+                }
+                if ($Client === false) { // Paket verwerfen, da Daten nicht zum Protocol passen.
+                    return;
+                }
+            }
+            // Client jetzt bekannt.
+            if ($Client->State == WebSocketState::HandshakeReceived) {
+                $NewData = $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} . $Data;
+                $CheckData = $this->ReceiveHandshake($NewData);
+                if ($CheckData === true) { // Daten komplett und heil.
+                    $Client->State = WebSocketState::Connected; // jetzt verbunden
+                    $Client->Timestamp = time() + $this->ReadPropertyInteger("Interval");
+                    $Clients->Update($Client);
+                    $this->Multi_Clients = $Clients;
+                    $this->SendHandshake(101, $NewData, $Client); //Handshake senden
+                    $this->SendDebug('SUCCESSFULLY CONNECT', $Client, 0);
+                    $this->SetNextTimer();
+                } elseif ($CheckData === false) { // Daten nicht komplett, buffern.
+                    $this->Multi_Clients = $Clients;
+                    $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $CheckData;
+                } else { // Daten komplett, aber defekt.
+                    $this->SendHandshake($CheckData, $NewData, $Client);
+                    //$Clients->Remove($Client);
+                    $this->Multi_Clients = $Clients;
+                    //$this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = "";
+                }
+            } elseif ($Client->State == WebSocketState::Connected) { // bekannt und verbunden
+                $Client->Timestamp = time() + $this->ReadPropertyInteger("Interval");
+                $Clients->Update($Client);
+                $this->Multi_Clients = $Clients;
+                $NewData = $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} . $Data;
+                $this->SendDebug('ReceivePacket ' . $Client->ClientIP . $Client->ClientPort, $NewData, 1);
+                while (true) {
+                    if (strlen($NewData) < 2) {
+                        break;
+                    }
+                    $Frame = new WebSocketFrame($NewData);
+                    if ($NewData == $Frame->Tail) {
+                        break;
+                    }
+                    $NewData = $Frame->Tail;
+                    $Frame->Tail = null;
+                    $this->DecodeFrame($Frame, $Client);
+                    $this->SetNextTimer();
+                }
+                $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $NewData;
+            } elseif ($Client->State == WebSocketState::CloseSend) {
+                $this->SendDebug('Receive', 'client answer server stream close !', 0);
+                $this->{'WaitForClose' . $Client->ClientIP . $Client->ClientPort} = true;
+            }
+        
        }
-        
-        
+       
+    /**
+      * Leert die ClientListe und alle entsprechenden Buffer der Clients.
+      *
+      * @access private
+      */
+     protected function RemoveAllClients()
+     {
+         $Clients = $this->Multi_Clients;
+         foreach ($Clients->GetClients() as $Client) {
+             $this->RemoveClient($Client);
+         }
+         $this->Multi_Clients = new WebSocket_ClientList();
+     }
         
     /**
      * Pr�ft den Parent auf vorhandensein und Status.
@@ -214,13 +350,38 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         
         
         
+    // --- BASE MESSAGE
+    define('IPS_BASE', 10000);                             //Base Message
+    define('IPS_KERNELSTARTED', IPS_BASE + 1);             //Post Ready Message
+    define('IPS_KERNELSHUTDOWN', IPS_BASE + 2);            //Pre Shutdown Message, Runlevel UNINIT Follows
+ 
+ 
+    // --- KERNEL
+    define('IPS_KERNELMESSAGE', IPS_BASE + 100);           //Kernel Message
+    define('KR_CREATE', IPS_KERNELMESSAGE + 1);            //Kernel is beeing created
+    define('KR_INIT', IPS_KERNELMESSAGE + 2);              //Kernel Components are beeing initialised, Modules loaded, Settings read
+    define('KR_READY', IPS_KERNELMESSAGE + 3);             //Kernel is ready and running
+    define('KR_UNINIT', IPS_KERNELMESSAGE + 4);            //Got Shutdown Message, unloading all stuff
+    define('KR_SHUTDOWN', IPS_KERNELMESSAGE + 5);          //Uninit Complete, Destroying Kernel Inteface
+
+     // --- DATA HANDLER
+    define('IPS_FLOWMESSAGE', IPS_BASE + 1100);             //Data Handler Message
+    define('FM_CONNECT', IPS_FLOWMESSAGE + 1);             //On Instance Connect
+    define('FM_DISCONNECT', IPS_FLOWMESSAGE + 2);          //On Instance Disconnect 
         
-        
-        
-        
-        
-        
-        
+    // --- INSTANCE MANAGER
+    define('IPS_INSTANCEMESSAGE', IPS_BASE + 500);         //Instance Manager Message
+    define('IM_CREATE', IPS_INSTANCEMESSAGE + 1);          //Instance created
+    define('IM_DELETE', IPS_INSTANCEMESSAGE + 2);          //Instance deleted
+    define('IM_CONNECT', IPS_INSTANCEMESSAGE + 3);         //Instance connectged
+    define('IM_DISCONNECT', IPS_INSTANCEMESSAGE + 4);      //Instance disconncted
+    define('IM_CHANGESTATUS', IPS_INSTANCEMESSAGE + 5);    //Status was Changed
+    define('IM_CHANGESETTINGS', IPS_INSTANCEMESSAGE + 6);  //Settings were Changed
+    define('IM_CHANGESEARCH', IPS_INSTANCEMESSAGE + 7);    //Searching was started/stopped
+    define('IM_SEARCHUPDATE', IPS_INSTANCEMESSAGE + 8);    //Searching found new results
+    define('IM_SEARCHPROGRESS', IPS_INSTANCEMESSAGE + 9);  //Searching progress in %
+    define('IM_SEARCHCOMPLETE', IPS_INSTANCEMESSAGE + 10); //Searching is complete        
+ 
         
         
         
