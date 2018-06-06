@@ -479,8 +479,36 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
     }
     
        
-       
-       
+
+    /**
+     * Erzeugt aus einen Datenframe ein JSON für den Datenaustausch mit dem IO.
+     *
+     * @param Websocket_Client $Client Der Client an welchen die Daten gesendet werden.
+     * @param string $Data Die Nutzdaten
+     * @param type $UseTLS Bei false wird TLS nicht benutzt, auch wenn der Client dies erwartet.
+     * @return boolean|string Der JSON-String zum versand an den IO, im Fehlerfall false.
+     */
+    private function MakeJSON(Websocket_Client $Client, string $Data, $UseTLS = true)
+    {
+        if ($UseTLS and $Client->UseTLS) {
+            $TLS = $this->{"Multi_TLS_" . $Client->ClientIP . $Client->ClientPort};
+            $this->SendDebug('Send TLS', $Data, 0);
+            try {
+                $Send = $TLS->output($Data)->decode();
+            } catch (Exception $exc) {
+                return false;
+            }
+            $this->{"Multi_TLS_" . $Client->ClientIP . $Client->ClientPort} = $TLS;
+            $Data = $Send;
+        }
+        $this->SendDebug('Send', $Data, 0);
+        $SendData['DataID'] = "{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}";
+        $SendData['Buffer'] = utf8_encode($Data);
+        $SendData['ClientIP'] = $Client->ClientIP;
+        $SendData['ClientPort'] = $Client->ClientPort;
+        return json_encode($SendData);
+    }
+     
        
        
        
