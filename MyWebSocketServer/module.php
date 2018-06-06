@@ -318,7 +318,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
                     $this->Multi_Clients = $Clients;
                
                     $this->SendHandshake(101, $NewData, $Client); //Handshake senden
-this->IPSLog('Client =', $Client);
+$this->IPSLog('Client =', $Client);
                     $this->SendDebug('SUCCESSFULLY CONNECT', 'Client', 0);
                     //-$this->SetNextTimer();
                 } elseif ($CheckData === false) { // Daten nicht komplett, buffern.
