@@ -250,7 +250,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             //array aller Clients ist am Anfang ein leeres Array
             
             $this->Multi_Clients = new WebSocket_ClientList();
-            $this->NoNewClients = true;
+            $this->NoNewClients = false;
             
             $Clients = $this->Multi_Clients;
             //Funktion aus derKlasse class WebSocket_ClientList  aufrufen
