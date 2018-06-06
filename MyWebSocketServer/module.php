@@ -2,7 +2,7 @@
 
 //zugehoerige Unter-Klassen    
 require_once(__DIR__ . "/../libs/XML2Array.php");
-require_once(__DIR__ . "/../libs/BasisTrait.php");
+//require_once(__DIR__ . "/../libs/BasisTrait.php");
 require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
 
 
@@ -51,7 +51,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
     
         //externe Klasse einbinden - ueberlagern mit TRAIT
         use XML2Array;
-        use Definitionen;
+       // use Definitionen;
                         
         
         // Der Konstruktor des Moduls
