@@ -163,6 +163,13 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
                 return;
             }
             
+            parent::ApplyChanges();
+
+            $NewState = IS_ACTIVE;
+            $this->UseTLS = $this->ReadPropertyBoolean('TLS');
+            $this->UsePlain = $this->ReadPropertyBoolean('Plain');
+            
+            
             $Open = $this->ReadPropertyBoolean('Open');
             $Port = $this->ReadPropertyInteger('Port');
             $this->PingInterval = $this->ReadPropertyInteger('Interval');
