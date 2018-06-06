@@ -439,8 +439,45 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
     }
  
        
-       
-       
+
+    /**
+     * Sendet den HTTP-Response an den Client.
+     *
+     * @access private
+     * @param HTTP_ERROR_CODES $Code Der HTTP Code welcher versendet werden soll.
+     * @param string $Data Die empfangenen Daten des Clients.
+     * @param Websocket_Client $Client Der Client vom welchen die Daten empfangen wurden.
+     */
+    private function SendHandshake(int $Code, string $Data, Websocket_Client $Client)
+    {
+        preg_match("/Sec-WebSocket-Key: (.*)\r\n/", $Data, $match);
+        $SendKey = base64_encode(sha1($match[1] . "258EAFA5-E914-47DA-95CA-C5AB0DC85B11", true));
+
+        $Header[] = 'HTTP/1.1 ' . HTTP_ERROR_CODES::ToString($Code);
+        if ($Code == HTTP_ERROR_CODES::Unauthorized) {
+            $Header[] = 'WWW-Authenticate: Basic';
+        }
+        //$Header[] = 'Date: '; // Datum fehlt !
+        $Header[] = 'Server: IP-Symcon Websocket Gateway';
+        if ($Code == HTTP_ERROR_CODES::Web_Socket_Protocol_Handshake) {
+            $Header[] = 'Connection: Upgrade';
+            $Header[] = 'Sec-WebSocket-Accept: ' . $SendKey;
+            $Header[] = 'Upgrade: websocket';
+            $Header[] = "\r\n";
+            $SendHeader = implode("\r\n", $Header);
+        } else {
+            $Header[] = "Content-Length:" . strlen(HTTP_ERROR_CODES::ToString($Code));
+            $Header[] = "\r\n";
+            $SendHeader = implode("\r\n", $Header) . HTTP_ERROR_CODES::ToString($Code);
+        }
+
+        $this->SendDebug("SendHandshake " . $Client->ClientIP . ':' . $Client->ClientPort, $SendHeader, 0);
+        $SendData = $this->MakeJSON($Client, $SendHeader);
+        if ($SendData) {
+            $this->SendDataToParent($SendData);
+        }
+    }
+    
        
        
        
