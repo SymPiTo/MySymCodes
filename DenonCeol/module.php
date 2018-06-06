@@ -221,7 +221,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
 		$output = XML2Array::createArray($xml);
-                $this->SendDebug("MainZone: ", $output, 0);
+                //$this->SendDebug("MainZone: ", $output, 0);
 		//$status = ($output['item']['Power']['value']);
                 $this->SendDebug("MainZoneStatus: ", $xml, 0);
 		return $output;
