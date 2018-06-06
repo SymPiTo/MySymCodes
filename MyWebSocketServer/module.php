@@ -355,6 +355,106 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
         
        }
        
+       
+       
+       
+       
+       
+       
+       
+   /**
+     * Wertet den Handshake des Clients aus.
+     *
+     * @access private
+     * @param string $Data Die Daten des Clients.
+     * @return boolean|HTTP_ERROR_CODES True bei Erfolg, HTTP_ERROR_CODES bei Fehler, false wenn nicht genug Daten.
+     */
+    private function ReceiveHandshake(string $Data)
+    {
+        $this->SendDebug('Receive Handshake', $Data, 0);
+        if (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) {
+            if (substr($Data, -4) != "\r\n\r\n") {
+                $this->SendDebug('WAIT', $Data, 0);
+                return false;
+            }
+
+            if (trim($match[1]) != trim($this->ReadPropertyString('URI'))) {
+                $this->SendDebug('Wrong URI requested', $Data, 0);
+                return HTTP_ERROR_CODES::Not_Found;
+            }
+
+            if ($this->ReadPropertyBoolean("BasisAuth")) {
+                $realm = base64_encode($this->ReadPropertyString("Username") . ':' . $this->ReadPropertyString("Password"));
+                if (preg_match("/Authorization: Basic (.*)\r\n/", $Data, $match)) {
+                    if ($match[1] != $realm) {
+                        $this->SendDebug('Unauthorized Connection:', base64_decode($match[1]), 0);
+                        return HTTP_ERROR_CODES::Forbidden;
+                    }
+                } else {
+                    $this->SendDebug('Authorization missing', '', 0);
+                    return HTTP_ERROR_CODES::Unauthorized;
+                }
+            }
+            if (preg_match("/Connection: (.*)\r\n/", $Data, $match)) {
+                if (strtolower($match[1]) != 'upgrade') {
+                    $this->SendDebug('WRONG Connection:', $match[1], 0);
+                    return HTTP_ERROR_CODES::Method_Not_Allowed;
+                }
+            } else {
+                $this->SendDebug('MISSING', 'Connection: Upgrade', 0);
+                return HTTP_ERROR_CODES::Bad_Request;
+            }
+
+            if (preg_match("/Upgrade: (.*)\r\n/", $Data, $match)) {
+                if (strtolower($match[1]) != 'websocket') {
+                    $this->SendDebug('WRONG Upgrade:', $match[1], 0);
+                    return HTTP_ERROR_CODES::Method_Not_Allowed;
+                }
+            } else {
+                $this->SendDebug('MISSING', 'Upgrade: websocket', 0);
+                return HTTP_ERROR_CODES::Bad_Request;
+            }
+
+
+            if (preg_match("/Sec-WebSocket-Version: (.*)\r\n/", $Data, $match)) {
+                if (strpos($match[1], '13') === false) {
+                    $this->SendDebug('WRONG Version:', $match[1], 0);
+                    return HTTP_ERROR_CODES::Not_Acceptable;
+                }
+            } else {
+                $this->SendDebug('MISSING', 'Sec-WebSocket-Version', 0);
+                return HTTP_ERROR_CODES::Bad_Request;
+            }
+
+            if (!preg_match("/Sec-WebSocket-Key: (.*)\r\n/", $Data, $match)) {
+                $this->SendDebug('MISSING', 'Sec-WebSocket-Key', 0);
+                return HTTP_ERROR_CODES::Bad_Request;
+            }
+
+            return true;
+        }
+        $this->SendDebug('Invalid HTTP-Request', $Data, 0);
+
+        return HTTP_ERROR_CODES::Bad_Request;
+    }
+ 
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
     /**
       * Leert die ClientListe und alle entsprechenden Buffer der Clients.
       *
