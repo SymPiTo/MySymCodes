@@ -142,7 +142,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             $this->SendDebug('Changes', 'Start', 0);
-            
+            $this->Multi_Clients = new WebSocket_ClientList();
             // WebsocketServer startet!
             $this->NoNewClients = true;
             
