@@ -44,7 +44,7 @@ use PTLS\Exceptions\TLSAlertException;
  * @property bool $NoNewClients
  *
  */
-class WebsocketServer extends IPSModule
+class MyWebsocketServer extends IPSModule
 {
     use DebugHelper,
         InstanceStatus,
