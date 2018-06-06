@@ -257,7 +257,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
              //   $this->UseTLS = $UseTLS;
             // Püfen ob Client schon vorhanden ist
             $Client = $Clients->GetByIpPort(new Websocket_Client($data->ClientIP, $data->ClientPort));
-            $this->SendDebug("Check - Client vorhanden", "Client", 0);    
+            $this->SendDebug("Check - Client vorhanden", utf8_decode("Client"), 0);    
             //Neuer Client? oder Neu mit Client Verbunden = Client sendet Handshake Request
             if (($Client === false) or (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) or ((ord($Data[0]) == 0x16) && (ord($Data[1]) == 0x03) && (ord($Data[5]) == 0x01))) { // neu oder neu verbunden!
             
