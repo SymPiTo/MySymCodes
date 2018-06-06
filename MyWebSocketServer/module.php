@@ -269,7 +269,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             unset($data->DataID);
             $this->SendDebug('incoming', utf8_decode($data->Buffer), 0);
             $Data = utf8_decode($data->Buffer);
-           
+            $this->SendDebug('incoming IP', utf8_decode($data->ClientIP), 0);
+            $this->SendDebug('incoming PORT', utf8_decode($data->ClientPort), 0);
             //$Clients= Klasse class WebSocket_ClientList 
             //array aller Clients ist am Anfang ein leeres Array
             
