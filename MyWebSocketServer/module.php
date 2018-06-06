@@ -139,6 +139,8 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
         // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
+            $this->Multi_Clients = new WebSocket_ClientList();
+            $this->NoNewClients = true;
             // Diese Zeile nicht löschen
             parent::ApplyChanges();
             $this->SendDebug('Changes', 'Start', 0);
@@ -248,8 +250,7 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
             //$Clients= Klasse class WebSocket_ClientList 
             //array aller Clients ist am Anfang ein leeres Array
             
-            $this->Multi_Clients = new WebSocket_ClientList();
-            $this->NoNewClients = false;
+
             
             $Clients = $this->Multi_Clients;
             //Funktion aus derKlasse class WebSocket_ClientList  aufrufen
