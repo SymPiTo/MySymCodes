@@ -42,7 +42,19 @@ require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
     define('IM_SEARCHPROGRESS', IPS_INSTANCEMESSAGE + 9);  //Searching progress in %
     define('IM_SEARCHCOMPLETE', IPS_INSTANCEMESSAGE + 10); //Searching is complete        
  
-
+    // --- STATUS CODES
+    define('IS_SBASE', 100);
+    define('IS_CREATING', IS_SBASE + 1); //module is being created
+    define('IS_ACTIVE', IS_SBASE + 2); //module created and running
+    define('IS_DELETING', IS_SBASE + 3); //module us being deleted
+    define('IS_INACTIVE', IS_SBASE + 4); //module is not beeing used
+// --- ERROR CODES
+    define('IS_EBASE', 200);          //default errorcode
+    define('IS_NOTCREATED', IS_EBASE + 1); //instance could not be created
+    
+    
+    
+    
 
 
     // Klassendefinition
