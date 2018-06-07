@@ -1028,7 +1028,7 @@ class MyWebsocketServer extends IPSModule
             $First = "(";
             $Last = ")";
             
-            $Werte = substr($Data, strstr($Data, '(' ) , (strstr($Data, '(' )-8)) ;
+            $Werte = substr($Data, strstr($Data, '(' ) , (strstr($Data, ')' )-8)) ;
                 
             $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
             
