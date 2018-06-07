@@ -1028,9 +1028,9 @@ class MyWebsocketServer extends IPSModule
            $Data = substr($Data, 8, strlen($Data)-9);
            
             
-            $Werte = substr($Data, strstr($Data, '(' ) , (strstr($Data, ')' )-8)) ;
+            
                 
-            $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
+            $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
             
         }
         
