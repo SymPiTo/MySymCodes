@@ -1025,8 +1025,8 @@ class MyWebsocketServer extends IPSModule
         $this->SendDebug('Received following Data from Client', $Data, 0); 
         if(substr($Data, 0, 8) == 'setvalue'){
             
-            $First = "(";
-            $Last = ")";
+           $Data = substr($Data, 8, strlen($Data)-9);
+           
             
             $Werte = substr($Data, strstr($Data, '(' ) , (strstr($Data, ')' )-8)) ;
                 
