@@ -1024,11 +1024,12 @@ class MyWebsocketServer extends IPSModule
     {
         $this->SendDebug('Received following Data from Client', $Data, 0); 
         if(substr($Data, 0, 8) == 'setvalue'){
-            $FirstChar = '(';
-            $SecondChar = ')'; 
-            preg_match_all("/".$FirstChar."(.*?)".$SecondChar."/", $Data, $aMatches);
             
-            $Werte = $aMatches; 
+            $First = "(";
+            $Last = ")";
+            
+            $Werte = strstr($Data, '(' ) , (strstr($Data, '(' )-8)) ;
+                
             $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
             
         }
