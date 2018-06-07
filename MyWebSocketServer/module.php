@@ -588,7 +588,7 @@ class MyWebsocketServer extends IPSModule
 
         if ($Frame->Fin) {
             $this->SendDataToChilds($Data, $Client); // RAW Childs
-            $this->SendDebug('Was soll der Schrott', $Data, 0);
+            $this->CommandToServer($Data);
         } else {
             $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $Data;
         }
@@ -1008,11 +1008,11 @@ class MyWebsocketServer extends IPSModule
                 }
                 $NewData = $Frame->Tail;
                 $Frame->Tail = null;
-                $DataDeocded = $this->DecodeFrame($Frame, $Client);
+                $this->DecodeFrame($Frame, $Client);
                 $this->SetNextTimer();
             }
             $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $NewData;
-            $this->CommandToServer($DataDeocded);
+            
         } elseif ($Client->State == WebSocketState::CloseSend) {
             $this->SendDebug('Receive', 'client answer server stream close !', 0);
             $this->{'WaitForClose' . $Client->ClientIP . $Client->ClientPort} = true;
@@ -1022,7 +1022,7 @@ class MyWebsocketServer extends IPSModule
     ################## PUBLIC
     public function CommandToServer($Data)
     {
-        $this->SendDebug('Received followin Data from Client', $Data, 0); 
+        $this->SendDebug('Received following Data from Client', $Data, 0); 
     }
     
     /**
