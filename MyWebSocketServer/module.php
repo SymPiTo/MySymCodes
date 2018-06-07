@@ -74,6 +74,8 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterPropertyString("KeyFile", "");
         $this->RegisterPropertyString("KeyPassword", "");
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
+        
+        $this->RegisterVariableString("SendCmd", "");
     }
 
     /**
@@ -1024,16 +1026,20 @@ class MyWebsocketServer extends IPSModule
     {
         $this->SendDebug('Received following Data from Client', $Data, 0); 
         if(substr($Data, 0, 8) == 'setvalue'){
-            
            $Data = explode(",", substr($Data, 9, strlen($Data)-10));
-           
-            //$Data[0]; $Data[1];
             setvalue($Data[0],$Data[1]);
-                
             $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
-            
         }
-        
+        if(substr($Data, 0, 13) == 'IPS_RunScript'){
+           $Data = substr($Data, 14, strlen($Data)-15);
+            IPS_RunScript($Data[0]);
+            $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
+        }
+        if(substr($Data, 0, 7) == 'command'){
+           $Data = substr($Data, 8, strlen($Data)-9);
+            setvalue($this->GetIDForIdent("SendCmd"), $Data);
+            $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
+        }
         
     }
     
