@@ -1028,7 +1028,7 @@ class MyWebsocketServer extends IPSModule
             $SecondChar = ')'; 
             preg_match_all("/".$FirstChar."(.*?)".$SecondChar."/", $Data, $aMatches);
             
-            $Werte = $aMatches[1]; 
+            $Werte = $aMatches; 
             $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
             
         }
