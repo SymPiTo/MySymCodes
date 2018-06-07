@@ -1023,6 +1023,14 @@ class MyWebsocketServer extends IPSModule
     public function CommandToServer($Data)
     {
         $this->SendDebug('Received following Data from Client', $Data, 0); 
+        if(substr($Data, 0, 8) == 'setvalue'){
+            
+            $Werte = $this->extractStringBetween('(' , ')', $Data);
+            $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
+            
+        }
+        
+        
     }
     
     /**
@@ -1134,7 +1142,15 @@ class MyWebsocketServer extends IPSModule
 
             return true;
         }
-    }    
+    } 
+    
+    private function extractStringBetween($cFirstChar, $cSecondChar, $sString)
+{
+    preg_match_all("/\".$cFirstChar."(.*?)\".$cSecondChar."/", $sString, $aMatches);
+    return $aMatches[1];
+}
+    
+    
 }
 
 
