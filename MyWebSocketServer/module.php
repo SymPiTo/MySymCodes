@@ -1011,6 +1011,7 @@ class MyWebsocketServer extends IPSModule
                 $this->SetNextTimer();
             }
             $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $NewData;
+            $this->CommandToServer($NewData);
         } elseif ($Client->State == WebSocketState::CloseSend) {
             $this->SendDebug('Receive', 'client answer server stream close !', 0);
             $this->{'WaitForClose' . $Client->ClientIP . $Client->ClientPort} = true;
@@ -1018,7 +1019,11 @@ class MyWebsocketServer extends IPSModule
     }
 
     ################## PUBLIC
-
+    public function CommandToServer($Data)
+    {
+        $this->SendDebug('Received followin Data from Client', $Data, 0); 
+    }
+    
     /**
      * Wird vom Timer aufgerufen.
      * Sendet einen Ping an den Client welcher als nächstes das Timeout erreicht.
@@ -1088,7 +1093,7 @@ class MyWebsocketServer extends IPSModule
     }
     
     
-        public function SendText(string $ClientIP, string $ClientPort, string $Text)
+        public function SendTextToClient(string $ClientIP, string $ClientPort, string $Text)
     {
         $Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
         if ($Client === false) {
@@ -1103,24 +1108,11 @@ class MyWebsocketServer extends IPSModule
         }
         $this->SendDebug('Send Text Message to Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
         $this->Send($Text, WebSocketOPCode::text, $Client);
-        $Result = $this->WaitForPong($Client);
-        $this->{'Pong' . $Client->ClientIP . $Client->ClientPort} = "";
-        if ($Result === false) {
-            $this->SendDebug('Timeout ' . $Client->ClientIP . ':' . $Client->ClientPort, "", 0);
-            trigger_error($this->Translate('Timeout'), E_USER_NOTICE);
-            $this->Multi_Clients->Remove($Client);
-            return false;
-        }
-        if ($Result !== $Text) {
-            $this->SendDebug('Error in Pong ' . $Client->ClientIP . ':' . $Client->ClientPort, $Result, 0);
-            trigger_error($this->Translate('Wrong pong received'), E_USER_NOTICE);
-            $this->Multi_Clients->Remove($Client);
-            return false;
-        }
+
         return true;
     }
     
-        public function SendTextToAllClients(string $Text)
+        public function SendText(string $Text)
     {
         //$Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
         $ClientList = $this->Multi_Clients->GetClients();
