@@ -1146,7 +1146,7 @@ class MyWebsocketServer extends IPSModule
     
     private function extractStringBetween($cFirstChar, $cSecondChar, $sString)
 {
-    preg_match_all("/\".$cFirstChar."(.*?)\".$cSecondChar."/", $sString, $aMatches);
+    preg_match_all('/\'.$cFirstChar.'(.*?)\'.$cSecondChar.'/, $sString, $aMatches);
     return $aMatches[1];
 }
     
