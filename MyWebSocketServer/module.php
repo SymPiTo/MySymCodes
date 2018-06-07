@@ -588,6 +588,7 @@ class MyWebsocketServer extends IPSModule
 
         if ($Frame->Fin) {
             $this->SendDataToChilds($Data, $Client); // RAW Childs
+            $this->SendDebug('Was soll der Schrott', $Data, 0);
         } else {
             $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $Data;
         }
