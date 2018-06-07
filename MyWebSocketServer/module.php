@@ -1024,9 +1024,11 @@ class MyWebsocketServer extends IPSModule
     {
         $this->SendDebug('Received following Data from Client', $Data, 0); 
         if(substr($Data, 0, 8) == 'setvalue'){
-            preg_match_all("=([^>](.*))=siU", $Data, $a);
+            $FirstChar = '(';
+            $SecondChar = ')'; 
+            preg_match_all("/".$FirstChar."(.*?)".$SecondChar."/", $Data, $aMatches);
             
-            $Werte = $a[1][0]; 
+            $Werte = $aMatches[1][0]; 
             $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
             
         }
