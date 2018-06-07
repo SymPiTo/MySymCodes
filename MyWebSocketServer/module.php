@@ -1024,8 +1024,9 @@ class MyWebsocketServer extends IPSModule
     {
         $this->SendDebug('Received following Data from Client', $Data, 0); 
         if(substr($Data, 0, 8) == 'setvalue'){
+            preg_match_all("=([^>](.*))=siU", $Data, $a);
             
-            $Werte = $this->extractStringBetween('(' , ')', $Data);
+            $Werte = $a[1][0]; 
             $this->SendDebug('extrahierte Werte sind = ', $Werte, 0);
             
         }
@@ -1144,12 +1145,7 @@ class MyWebsocketServer extends IPSModule
         }
     } 
     
-    private function extractStringBetween($cFirstChar, $cSecondChar, $sString)
-{
-    preg_match_all('/\'.$cFirstChar.'(.*?)\'.$cSecondChar.'/, $sString, $aMatches);
-    return $aMatches[1];
-}
-    
+
     
 }
 
