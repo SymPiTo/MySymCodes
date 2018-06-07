@@ -1124,7 +1124,7 @@ class MyWebsocketServer extends IPSModule
     {
         //$Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
         $ClientList = $this->Multi_Clients->GetClients();
-        foreach ($this->Items as $Client) {
+        foreach ($ClientList as $Client) {
         
             if ($Client === false) {
                 $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
