@@ -62,6 +62,7 @@ class MyWebsocketServer extends IPSModule
         $this->Multi_Clients = new WebSocket_ClientList();
         $this->NoNewClients = true;
         $this->RegisterPropertyBoolean("Open", false);
+        $this->RegisterPropertyInteger("IDcommand", 111111);
         $this->RegisterPropertyInteger("Port", 8080);
         $this->RegisterPropertyInteger("Interval", 0);
         $this->RegisterPropertyString("URI", "/");
@@ -75,7 +76,7 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterPropertyString("KeyPassword", "");
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         
-        $this->RegisterVariableString("SendCmd", "");
+        $this->RegisterVariableString("", "SendCmd");
     }
 
     /**
@@ -1038,6 +1039,7 @@ class MyWebsocketServer extends IPSModule
         if(substr($Data, 0, 7) == 'command'){
            $Data = substr($Data, 8, strlen($Data)-9);
             setvalue($this->GetIDForIdent("SendCmd"), $Data);
+            IPS_RunScript($this->ReadPropertyInteger('IDcommand'));
             $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
         }
         
