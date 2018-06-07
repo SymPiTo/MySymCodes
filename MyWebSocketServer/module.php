@@ -1086,6 +1086,40 @@ class MyWebsocketServer extends IPSModule
         }
         return true;
     }
+    
+    
+        public function SendText(string $ClientIP, string $ClientPort, string $Text)
+    {
+        $Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
+        if ($Client === false) {
+            $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
+            trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
+            return false;
+        }
+        if ($Client->State != WebSocketState::Connected) {
+            $this->SendDebug('Client not connected', $ClientIP . ':' . $ClientPort, 0);
+            trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
+            return false;
+        }
+        $this->SendDebug('Send Text Message to Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
+        $this->Send($Text, WebSocketOPCode::text, $Client);
+        $Result = $this->WaitForPong($Client);
+        $this->{'Pong' . $Client->ClientIP . $Client->ClientPort} = "";
+        if ($Result === false) {
+            $this->SendDebug('Timeout ' . $Client->ClientIP . ':' . $Client->ClientPort, "", 0);
+            trigger_error($this->Translate('Timeout'), E_USER_NOTICE);
+            $this->Multi_Clients->Remove($Client);
+            return false;
+        }
+        if ($Result !== $Text) {
+            $this->SendDebug('Error in Pong ' . $Client->ClientIP . ':' . $Client->ClientPort, $Result, 0);
+            trigger_error($this->Translate('Wrong pong received'), E_USER_NOTICE);
+            $this->Multi_Clients->Remove($Client);
+            return false;
+        }
+        return true;
+    }
+    
 }
 
 
