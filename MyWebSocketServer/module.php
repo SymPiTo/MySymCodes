@@ -1038,7 +1038,8 @@ class MyWebsocketServer extends IPSModule
         }
         if(substr($Data, 0, 7) == 'command'){
            $Data = substr($Data, 8, strlen($Data)-9);
-            setvalue($this->GetIDForIdent("ClientSendCmd"), $Data);
+           SetValueString($this->GetIDForIdent("ClientSendCmd"), $Data);
+           
             IPS_RunScript($this->ReadPropertyInteger('IDcommand'));
             $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
         }
