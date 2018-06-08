@@ -1138,7 +1138,7 @@ class MyWebsocketServer extends IPSModule
     {
         //$Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
         //$ClientList = $this->Multi_Clients->GetClients();
-        $Clients = $this->Multi_Clients;
+        $Clients = $this->Multi_Clients->GetClients();
             foreach ($Clients as $Client) {
         
             if ($Client === false) {
