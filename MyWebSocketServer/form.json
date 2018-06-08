@@ -8,6 +8,10 @@
                     "type": "CheckBox",
                     "caption": "Active"
                 },
+
+                {   "type": "SelectScript", 
+                    "name": "IDcommand", 
+                    "caption": "Target Script" },
                 {
                     "name": "Port",
                     "type": "NumberSpinner",
