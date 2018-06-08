@@ -427,7 +427,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Public function DecVolume(){	
             $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume")) - 1;
             SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
-            $this->send_cmd('MVUP');
+            $this->send_cmd('MVDOWN');
             return true;
 	}
         
