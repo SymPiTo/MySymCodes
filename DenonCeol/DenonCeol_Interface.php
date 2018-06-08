@@ -839,8 +839,8 @@ trait CEOLupnp
 	Rückgabewert: 	 $xml
 	//////////////////////////////////////////////////////////////////////////////*/		
 	Protected function send_cmd($cmd){
- 		$host = $this->ip;
-		$url = "http://$host:80/goform/formiPhoneAppDirect.xml";
+ 		$ip = $this->ReadPropertyString('IPAddress');
+		$url = "http://$ip:80/goform/formiPhoneAppDirect.xml";
 		
 		$xml = $this->curl_get($url, $cmd);
 		return $xml;
