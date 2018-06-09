@@ -996,6 +996,9 @@ class MyWebsocketServer extends IPSModule
                 $this->SendHandshake(101, $NewData, $Client); //Handshake senden
                 $this->SendDebug('SUCCESSFULLY CONNECT', $Client, 0);
                 $this->SetNextTimer();
+                //nach Handshake alle Daten von Server abrufen
+                $ID_InitData = $this->GetIDForIdent("DataSendToClient");
+                $this->SendText( getvalue($ID_InitData));
             } elseif ($CheckData === false) { // Daten nicht komplett, buffern.
                 $this->Multi_Clients = $Clients;
                 $this->{'Buffer' . $Client->ClientIP . $Client->ClientPort} = $CheckData;
