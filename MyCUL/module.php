@@ -48,8 +48,7 @@ include_once(__DIR__ . "/FHZ_Class.php");
     public function __construct($InstanceID)
     {
         // 
-        $json = __DIR__ . "/module.json";
-        parent::__construct($InstanceID, $json);
+
     }
 
     //--------------------------------------------------------
