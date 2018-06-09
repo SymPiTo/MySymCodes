@@ -75,15 +75,16 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterPropertyString("KeyFile", "");
         $this->RegisterPropertyString("KeyPassword", "");
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
-        
+        // Daten die von Client kommen werden in folgende Variable geschrieben
         $this->RegisterVariableString("CommandSendToServer", "CommandSendToServer");
+        //Bei Variablenänderung folgender Variable wird dieser Inhalt an alle Clients gesendet
         $this->RegisterVariableString("DataSendToClient", "DataSendToClient");
-        
-       $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
-       IPS_SetEventTrigger($eid, 1, $this->GetIDForIdent("DataSendToClient"));        //Bei Änderung von Variable mit ID 15754
-       IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
-       IPS_SetEventActive($eid, true);             //Ereignis aktivieren
-        
+        // Trigger Event für Änderung der Variable "DataSendToClient" erstellen
+        $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
+        IPS_SetEventTrigger($eid, 1, $this->GetIDForIdent("DataSendToClient"));        //Bei Änderung von Variable mit ID 15754
+        IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
+        IPS_SetEventActive($eid, true);             //Ereignis aktivieren
+        IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($this->GetIDForIdent("DataSendToClient"));,getvalue($this->GetIDForIdent("DataSendToClient")));"); 
     }
 
     /**
