@@ -11,7 +11,7 @@
  *
  * @author Torsten
  */
-class module extends IPSModule {
+class MyUpnp extends IPSModule {
     
     // Der Konstruktor des Moduls
     // Überschreibt den Standard Kontruktor von IPS
