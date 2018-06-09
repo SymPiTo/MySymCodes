@@ -19,7 +19,7 @@ ini_set("html_errors", "0");
  * combines often used functions and constants
  *
  */
-class moduleBase extends IPSModule {
+class moduleBase {
 
         //------------------------------------------------------------------------------
         //module const and vars
