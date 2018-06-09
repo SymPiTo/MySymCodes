@@ -1,0 +1,14 @@
+{
+	"id": "{E63E3044-48C0-4E05-8E26-94CE88601CFD}",
+	"name": "MyUpnp",
+	"type": 3,
+	"vendor": "",
+	"aliases": 
+	[
+		"MyUpnp"
+	],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "UPNP"
+}
