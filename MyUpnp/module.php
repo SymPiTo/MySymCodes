@@ -25,17 +25,7 @@ class MyUpnp extends IPSModule {
     public function Create() {
         // Diese Zeile nicht löschen.
         parent::Create();
-        // Category anlegen
-        // Anlegen einer neuen Kategorie 
-        $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
-        if ($KategorieID === false){
-            $CatID = IPS_CreateCategory();       // Kategorie anlegen
-            IPS_SetName($CatID, "DIDL"); // Kategorie benennen
-            //IPS_SetParent($CatID, 12345); // Kategorie einsortieren unter dem Objekt mit der ID "12345"    
-        }
-        
-        $CatID = IPS_CreateCategory();       // Kategorie anlegen
-        IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
+
         // 
         // 
         // // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
@@ -61,7 +51,17 @@ class MyUpnp extends IPSModule {
     public function ApplyChanges() {
         // Diese Zeile nicht löschen
         parent::ApplyChanges();
-            
+        // Category anlegen
+        // Anlegen einer neuen Kategorie 
+        $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
+        if ($KategorieID === false){
+            $CatID = IPS_CreateCategory();       // Kategorie anlegen
+            IPS_SetName($CatID, "DIDL"); // Kategorie benennen
+            //IPS_SetParent($CatID, 12345); // Kategorie einsortieren unter dem Objekt mit der ID "12345"    
+        }
+        
+        $CatID = IPS_CreateCategory();       // Kategorie anlegen
+        IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
 
     }
         /**
