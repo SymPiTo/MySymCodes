@@ -76,7 +76,7 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterPropertyString("KeyPassword", "");
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         
-        $this->RegisterVariableString("ClientSendCmd", "ClientSendCmd");
+        $this->RegisterVariableString("CommandSendToServer", "ClientSendCmd");
         $DataID = $this->RegisterVariableString("", "DataSendToClient");
         
        // $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
