@@ -19,7 +19,7 @@ ini_set("html_errors", "0");
  * combines often used functions and constants
  *
  */
-class ModuleBase extends IPSModule {
+class moduleBase extends IPSModule {
 
         //------------------------------------------------------------------------------
         //module const and vars
@@ -131,7 +131,7 @@ class ModuleBase extends IPSModule {
             "FS20WUE" => "{AA2544FC-0BF8-43C1-B84C-096B844AEACC}", //FS20WUE Splitter
             "WDE1" => "{EE7F90DD-7668-459C-A233-8241C46864A5}", //WDE1 Splitter
             "AVMAHA" => "{0837AE77-B72A-4AA6-8680-D6DDCDAEFA39}", //AVM AHA Splitter
-            "CUL" => "{FF37717D-55A4-464D-9BA4-04988B557183}", //Busware CUL/CUN/COC Splitter
+            "CUL" => "{2EF71588-582D-4884-82A7-20A548FC895C}", //Busware CUL/CUN/COC Splitter
             "NUT" => "{431281F9-77DC-46A6-8AA9-A6E2C60A5FB2}", //NUT USV Splitter
             "APCUPSD" => "{11437557-8091-4FAA-9C8B-B0AA993A1347}", //APC USV Splitter
             "TE923" => "{137511E0-F98B-49F3-9A6C-95234DF2E1FB}", //TE923,Ventus etc Weather Splitter

@@ -10,8 +10,8 @@
  * @date 2017-09-16
  */
 
-include_once("moduleBase.php");
-include_once("FHZ_Class.php");
+include_once(__DIR__ . "/moduleBase.php");
+include_once(__DIR__ . "/FHZ_Class.php");
 
 /** @class CUL
  *
@@ -22,7 +22,7 @@ include_once("FHZ_Class.php");
  * protocol decodes translated from CULFW project
  * @see http://culfw.de/commandref.html
  */
-    class MyCUL extends ModuleBase {
+    class MyCUL extends moduleBase {
      //------------------------------------------------------------------------------
     //module const and vars
     //------------------------------------------------------------------------------
