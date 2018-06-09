@@ -1153,8 +1153,9 @@ class MyWebsocketServer extends IPSModule
         //$ClientList = $this->Multi_Clients->GetClients();
         $Clients = $this->Multi_Clients->GetClients();
         $this->SendDebug('Client Liste =' . $Clients, 0);
-            foreach ($Clients as $Client) {
-        
+        foreach ($Clients as $Client) {
+            $ClientIP = $Client->ClientIP ;
+            $ClientPort = $Client->ClientPort;
             if ($Client === false) {
                 $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
                 trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
@@ -1169,7 +1170,7 @@ class MyWebsocketServer extends IPSModule
             $this->Send($Text, WebSocketOPCode::text, $Client);
 
             
-        }
+           }
         return true;
     } 
     
