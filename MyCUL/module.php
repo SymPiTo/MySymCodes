@@ -60,25 +60,6 @@ include_once(__DIR__ . "/FHZ_Class.php");
         //Hint: $this->debug will not work in this stage! must use IPS_LogMessage
         //props
 
-        $this->RegisterPropertyBoolean('AutoCreate', true);
-        $this->RegisterPropertyBoolean('Debug', false);
-        $this->RegisterPropertyBoolean('Active', false);
-        $this->RegisterPropertyBoolean('UseOW', false);
-        
-        //status Vars
-        $this->RegisterVariableString('LastUpdate', 'Last Update', "", -2);
-        IPS_SetHidden($this->GetIDForIdent('LastUpdate'), true);
-        $this->RegisterVariableString('AuxMessage', 'Last System Message', "", 1);
-        $this->RegisterVariableString('Version', 'Version', "", 2);
-        $this->RegisterVariableString('Modus', 'Modus', "", 2);
-        $this->RegisterVariableInteger('Errors', 'Errors', "", 3);
-
-        //reinit timer
-        $this->RegisterTimer('ReInit', 58000, $this->module_data["prefix"] . '_ReInitEvent($_IPS[\'TARGET\']);');
-
-
-        //call init if ready and activated
-
 
     }
 
@@ -99,12 +80,7 @@ include_once(__DIR__ . "/FHZ_Class.php");
     {
         // Diese Zeile nicht loeschen
         parent::ApplyChanges();
-        if ($this->isActive() && $this->HasActiveParent()) {
-            $this->SetStatus(self::ST_AKTIV);
-            //$this->init();
-        } else {
-            $this->SetStatus(self::ST_INACTIV);
-        }
+
 
     }
 
