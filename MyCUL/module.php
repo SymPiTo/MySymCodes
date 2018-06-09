@@ -59,7 +59,8 @@ include_once(__DIR__ . "/FHZ_Class.php");
         parent::Create();
         //Hint: $this->debug will not work in this stage! must use IPS_LogMessage
         //props
-
+        //"SerialPort" => "{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}"
+        $this->RequireParent("{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}");
 
     }
 
