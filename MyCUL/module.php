@@ -59,8 +59,7 @@ include_once(__DIR__ . "/FHZ_Class.php");
         parent::Create();
         //Hint: $this->debug will not work in this stage! must use IPS_LogMessage
         //props
-        $this->RegisterPropertyString('Category', 'CUL/CUx Devices');
-        $this->RegisterPropertyInteger('ParentCategory', 0); //parent cat is root
+
         $this->RegisterPropertyBoolean('AutoCreate', true);
         $this->RegisterPropertyBoolean('Debug', false);
         $this->RegisterPropertyBoolean('Active', false);
