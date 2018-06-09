@@ -79,10 +79,10 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterVariableString("ClientSendCmd", "ClientSendCmd");
         $DataID = $this->RegisterVariableString("", "DataSendToClient");
         
-        $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
-        IPS_SetEventTrigger($eid, 1,  $DataID);        //Bei Änderung von Variable mit ID 15754
-        IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
-        IPS_SetEventActive($eid, true);             //Ereignis aktivieren
+       // $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
+        //IPS_SetEventTrigger($eid, 1,  $DataID);        //Bei Änderung von Variable mit ID 15754
+        //IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
+        //IPS_SetEventActive($eid, true);             //Ereignis aktivieren
         
     }
 
