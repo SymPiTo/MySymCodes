@@ -84,7 +84,7 @@ class MyWebsocketServer extends IPSModule
         IPS_SetEventTrigger($eid, 1, $this->GetIDForIdent("DataSendToClient"));        //Bei Änderung von Variable mit ID 15754
         IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
         IPS_SetEventActive($eid, true);             //Ereignis aktivieren
-        IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($this->GetIDForIdent("DataSendToClient"));,getvalue($this->GetIDForIdent("DataSendToClient")));"); 
+        IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($this->GetIDForIdent("DataSendToClient")),getvalue($this->GetIDForIdent("DataSendToClient")));"); 
     }
 
     /**
