@@ -85,7 +85,7 @@ class MyWebsocketServer extends IPSModule
         IPS_SetEventTrigger($eid, 1, $ID_DSTC);        //Bei Änderung von Variable mit ID 15754
         IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
         IPS_SetEventActive($eid, true);             //Ereignis aktivieren
-        IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($DSTC),getvalue($ID_DSTC));"); 
+        IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($ID_DSTC),getvalue($ID_DSTC));"); 
         IPS_SetParent($eid, $ID_DSTC);
     }
 
