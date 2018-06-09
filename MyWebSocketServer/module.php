@@ -73,7 +73,7 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterPropertyBoolean("Plain", true);
         $this->RegisterPropertyString("CertFile", "");
         $this->RegisterPropertyString("KeyFile", "");
-        $this->RegisterPropertyString("KeyPassword", "");
+        $this->RegisterPropertyString("KeyPassword", "xxx");
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         // Daten die von Client kommen werden in folgende Variable geschrieben
         $this->RegisterVariableString("CommandSendToServer", "CommandSendToServer");
