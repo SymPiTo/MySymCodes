@@ -22,7 +22,7 @@ include_once(__DIR__ . "/FHZ_Class.php");
  * protocol decodes translated from CULFW project
  * @see http://culfw.de/commandref.html
  */
-    class MyCUL extends moduleBase {
+    class MyCUL  extends IPSModule {
      //------------------------------------------------------------------------------
     //module const and vars
     //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ include_once(__DIR__ . "/FHZ_Class.php");
      * Constructor
      * @param $InstanceID
      */
-    public function __construct($InstanceID)
+    public function __construct()
     {
         // 
 
