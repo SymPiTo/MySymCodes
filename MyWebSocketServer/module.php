@@ -76,8 +76,8 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterPropertyString("KeyPassword", "");
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         
-        $this->RegisterVariableString("CommandSendToServer", "ClientSendCmd");
-        $DataId = $this->RegisterVariableString("", "DataSendToClient");
+        $this->RegisterVariableString("CommandSendToServer", "CommandSendToServer");
+        $this->RegisterVariableString("DataSendToClient", "DataSendToClient");
         
        // $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
         //IPS_SetEventTrigger($eid, 1,  $DataID);        //Bei Änderung von Variable mit ID 15754
@@ -1045,7 +1045,7 @@ class MyWebsocketServer extends IPSModule
         }
         if(substr($Data, 0, 7) == 'command'){
            $Data = substr($Data, 8, strlen($Data)-9);
-           SetValueString($this->GetIDForIdent("ClientSendCmd"), $Data);
+           SetValueString($this->GetIDForIdent("CommandSendToServer"), $Data);
            
             IPS_RunScript($this->ReadPropertyInteger('IDcommand'));
             $this->SendDebug('extrahierte Werte sind = ', $Data, 0);
