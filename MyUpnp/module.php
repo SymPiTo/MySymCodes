@@ -1,5 +1,7 @@
 <?php
 
+define("ID_SERVER_ARRAY", $this->GetIDForIdent("upnp_ServerArray"));require_once(__DIR__ . "/MyUpnpBase.php");
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -130,13 +132,11 @@ class MyUpnp extends IPSModule {
 
     }
     
-    
-    
-    
-    
-	//Server------------------------------------------------------------------------
-	const ID_SERVER_ARRAY 		= IPS_GetVariableID("upnp_ServerArray");
 
+        
+
+
+    
     
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
