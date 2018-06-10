@@ -65,8 +65,8 @@ class MyUpnp extends IPSModule {
         IPS_SetParent($this->GetIDForIdent("upnp_Date"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_TrackNo"), $ID_CatDIDL);
         
-        $this->RegisterVariableInteger("upnp_Progress", "Progress", "0");
-        $this->RegisterVariableInteger("upnp_Track", "Track", "0");
+        $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
+        $this->RegisterVariableInteger("upnp_Track", "Track", "");
         $this->RegisterVariableString("upnp_Transport_Status", "Transport_Status");
         $this->RegisterVariableString("upnp_TrackDuration", "TrackDuration [upnp:album]");
         $this->RegisterVariableString("upnp_TrackMetaData", "TrackMetaData");
@@ -88,12 +88,33 @@ class MyUpnp extends IPSModule {
         IPS_SetParent($this->GetIDForIdent("upnp_RelCount"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_AbsCount"), $ID_PosInfo);
         
+        $this->RegisterVariableString("upnp_ClientArray", "Client:Array");
+        $this->RegisterVariableString("upnp_ClientControlURL", "Client:ControlURL");
+        $this->RegisterVariableString("upnp_ClientIcon", "Client:Icon");
+        $this->RegisterVariableString("upnp_ClienIP", "Client:IP");  
+        $this->RegisterVariableInteger("upnp_ClientKey", "Client:Key", "");
+        $this->RegisterVariableString("upnp_ClientName", "Client:Name");
+        $this->RegisterVariableString("upnp_ClientPort", "Client:Port");
+        $this->RegisterVariableString("upnp_ClientRenderingControlURL", "Client:RenderingControlURL");
+        
+        $this->RegisterVariableString("upnp_ServerArray", "Server:Array");
+        $this->RegisterVariableString("upnp_ServerArray", "Server:ContentDirectory");
+        $this->RegisterVariableString("upnp_ServerArray", "Server:Icon");
+        $this->RegisterVariableString("upnp_ServerArray", "Server:IP");
+        $this->RegisterVariableInteger("upnp_ServerKey", "Server:Key", "");
+        $this->RegisterVariableString("upnp_ServerName", "Server:Name");
+        $this->RegisterVariableString("upnp_ServerPort", "Server:Port");
+        
+        $this->RegisterVariableInteger("upnp_NoTracks", "No of tracks", "");
+        $this->RegisterVariableString("upnp_PlaylistName", "PlaylistName");
+        $this->RegisterVariableString("upnp_Playlist_XML", "Playlist_XML");       
+        
         
             //$this->RegisterVariableBoolean("CeolPower", "Power");        
          
             
         // Timer erstellen
-            //$this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
+        $this->RegisterTimer("upnp_PlayInfo", 1000, '$this->GetPosInfo');
     }
         
     // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
