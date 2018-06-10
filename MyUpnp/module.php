@@ -65,7 +65,7 @@ class MyUpnp extends IPSModule {
         $ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
         //Verschieben der Variable unter Ordner DIDL
         
-        IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
+       // IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_Title"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_Description"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_AlbumArtUri"), $ID_CatDIDL);
