@@ -425,7 +425,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 return true;
             }
             else{
-                //oberer Einstellwert von -65db erreicht. /Lautstärkebegrenzung
+                //oberer Einstellwert von -65db erreicht.  /Lautstärkebegrenzung
                 return false;
             }            
 	}	
