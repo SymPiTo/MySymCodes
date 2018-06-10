@@ -97,8 +97,7 @@ class MyUpnp extends IPSModule {
         IPS_SetParent($this->GetIDForIdent("upnp_RelCount"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_AbsCount"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_Track"), $ID_PosInfo);
-        
-        
+                
         $this->RegisterVariableString("upnp_ClientArray", "Client:Array");
         $this->RegisterVariableString("upnp_ClientControlURL", "Client:ControlURL");
         $this->RegisterVariableString("upnp_ClientIcon", "Client:Icon");
