@@ -25,6 +25,9 @@ class MyUpnp extends IPSModule {
     public function Create() {
         // Diese Zeile nicht löschen.
         parent::Create();
+        
+        $this->RegisterPropertyBoolean("active", false);
+        
         // Category anlegen
         // Anlegen einer neuen Kategorie 
         $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
@@ -126,6 +129,15 @@ class MyUpnp extends IPSModule {
             
 
     }
+    
+    
+    
+    
+    
+	//Server------------------------------------------------------------------------
+	const ID_SERVER_ARRAY 		= $this->GetIDForIdent("upnp_ServerArray");
+
+    
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
         * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
