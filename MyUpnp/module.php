@@ -33,19 +33,18 @@ class MyUpnp extends IPSModule {
             IPS_SetName($CatID, "DIDL"); // Kategorie benennen
             IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unter dem Objekt mit der ID "12345"    
         }
-        
-        $CatID = IPS_CreateCategory();       // Kategorie anlegen
-        IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
-        IPS_SetParent($CatID, $this->InstanceID); 
-      
+        $KategorieID = @IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
+        if ($KategorieID === false){        
+            $CatID = IPS_CreateCategory();       // Kategorie anlegen
+            IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
+            IPS_SetParent($CatID, $this->InstanceID); 
+        }
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             //$this->RegisterPropertyBoolean("active", false);
             //$this->RegisterPropertyString("IPAddress", "");
             //$this->RegisterPropertyInteger("UpdateInterval", 30);
            
         //Status Variable anlegen
-        //$this->RegisterVariableInteger("Track", "TrackNumber [upnp:originalTrackNumber]", "");
-            //$this->RegisterVariableBoolean("CeolPower", "Power");
         $this->RegisterVariableString("Artist", "Artist [dc:creator]");
         $this->RegisterVariableString("Album", "Album [upnp:album]");
         $this->RegisterVariableString("Title", "Titel [dc:title]");
@@ -53,7 +52,7 @@ class MyUpnp extends IPSModule {
         $this->RegisterVariableString("AlbumArtUri", "AlbumArtURI [upnp:albumArtURI]");
         $this->RegisterVariableString("Genre", "Genre [upnp:genre]");
         $this->RegisterVariableString("Date", "Date [dc:date]");
-        $this->RegisterVariableString("Track", "TrackNumber [upnp:originalTrackNumber]");
+        $this->RegisterVariableString("TrackNo", "TrackNumber [upnp:originalTrackNumber]");
         $ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
         //Verschieben der Variable unter Ordner DIDL
         IPS_SetParent($this->GetIDForIdent("Album"), $ID_CatDIDL);
@@ -63,11 +62,34 @@ class MyUpnp extends IPSModule {
         IPS_SetParent($this->GetIDForIdent("Genre"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("Artist"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("Date"), $ID_CatDIDL);
-        IPS_SetParent($this->GetIDForIdent("Track"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("TrackNo"), $ID_CatDIDL);
+        
+        $this->RegisterVariableInteger("Progress", "Progress", "0");
+        $this->RegisterVariableInteger("Track", "Track", "0");
+        $this->RegisterVariableString("Transport_Status", "Transport_Status");
+        $this->RegisterVariableString("TrackDuration", "TrackDuration [upnp:album]");
+        $this->RegisterVariableString("TrackMetaData", "TrackMetaData");
+        $this->RegisterVariableString("TrackURI", "TrackURI");
+        $this->RegisterVariableString("RelTime", "RelTime");
+        $this->RegisterVariableString("AbsTime", "GAbsTime");
+        $this->RegisterVariableString("RelCount", "RelCount");
+        $this->RegisterVariableString("AbsCount", "AbsCount");
+        $ID_PosInfo =  IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
+        //Verschieben der Variable unter Ordner PositionInfo
+        IPS_SetParent($this->GetIDForIdent("Progress"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("Track"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("Transport_Status"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("TrackDuration"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("TrackMetaData"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("TrackURI"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("RelTime"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("AbsTime"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("RelCount"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("AbsCount"), $ID_PosInfo);
         
         
-        
-            //$this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
+            //$this->RegisterVariableBoolean("CeolPower", "Power");        
+         
             
         // Timer erstellen
             //$this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
