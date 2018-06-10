@@ -418,8 +418,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/	
 	Public function IncVolume(){
+            $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume")) + 1;
             if($MasterVolume < -65){
-                $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume")) + 1;
                 SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
                 $this->send_cmd('MVUP');
                 return true;
