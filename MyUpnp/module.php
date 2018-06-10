@@ -87,7 +87,7 @@ class MyUpnp extends IPSModule {
         $ID_PosInfo =  IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
         //Verschieben der Variable unter Ordner PositionInfo
         IPS_SetParent($this->GetIDForIdent("upnp_Progress"), $ID_PosInfo);
-        IPS_SetParent($this->GetIDForIdent("upnp_Track"), $ID_PosInfo);
+       
         IPS_SetParent($this->GetIDForIdent("upnp_Transport_Status"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_TrackDuration"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_TrackMetaData"), $ID_PosInfo);
@@ -96,6 +96,8 @@ class MyUpnp extends IPSModule {
         IPS_SetParent($this->GetIDForIdent("upnp_AbsTime"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_RelCount"), $ID_PosInfo);
         IPS_SetParent($this->GetIDForIdent("upnp_AbsCount"), $ID_PosInfo);
+        IPS_SetParent($this->GetIDForIdent("upnp_Track"), $ID_PosInfo);
+        
         
         $this->RegisterVariableString("upnp_ClientArray", "Client:Array");
         $this->RegisterVariableString("upnp_ClientControlURL", "Client:ControlURL");
