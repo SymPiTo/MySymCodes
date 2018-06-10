@@ -1153,26 +1153,31 @@ class MyWebsocketServer extends IPSModule
         //$Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
         //$ClientList = $this->Multi_Clients->GetClients();
         $Clients = $this->Multi_Clients->GetClients();
-        $this->SendDebug('Client Liste =' . $Clients, 0);
-        foreach ($Clients as $Client) {
-            $ClientIP = $Client->ClientIP ;
-            $ClientPort = $Client->ClientPort;
-            if ($Client === false) {
-                $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
-                trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
-                return false;
-            }
-            if ($Client->State != WebSocketState::Connected) {
-                $this->SendDebug('Client not connected', $ClientIP . ':' . $ClientPort, 0);
-                trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
-                return false;
-            }
-            $this->SendDebug('Send Text Message to Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
-            $this->Send($Text, WebSocketOPCode::text, $Client);
+        if ($Clients){
+            $this->SendDebug('Client Liste =' . $Clients, 0);
+            foreach ($Clients as $Client) {
+                $ClientIP = $Client->ClientIP ;
+                $ClientPort = $Client->ClientPort;
+                if ($Client === false) {
+                    $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
+                    trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
+                    return false;
+                }
+                if ($Client->State != WebSocketState::Connected) {
+                    $this->SendDebug('Client not connected', $ClientIP . ':' . $ClientPort, 0);
+                    trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
+                    return false;
+                }
+                $this->SendDebug('Send Text Message to Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
+                $this->Send($Text, WebSocketOPCode::text, $Client);
 
-            
-           }
-        return true;
+
+               }
+            return true;
+        }
+        else{
+            return false;
+        }
     } 
     
 
