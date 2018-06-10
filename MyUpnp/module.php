@@ -135,7 +135,7 @@ class MyUpnp extends IPSModule {
     
     
 	//Server------------------------------------------------------------------------
-	const ID_SERVER_ARRAY 		= $this->GetIDForIdent("upnp_ServerArray");
+	const ID_SERVER_ARRAY 		= IPS_GetVariableID("upnp_ServerArray");
 
     
         /**
