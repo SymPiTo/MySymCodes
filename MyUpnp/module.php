@@ -47,7 +47,6 @@ class MyUpnp extends IPSModule {
         //$this->RegisterVariableInteger("Track", "TrackNumber [upnp:originalTrackNumber]", "");
             //$this->RegisterVariableBoolean("CeolPower", "Power");
         $this->RegisterVariableString("Artist", "Artist [dc:creator]");
-
         $this->RegisterVariableString("Album", "Album [upnp:album]");
         $this->RegisterVariableString("Title", "Titel [dc:title]");
         $this->RegisterVariableString("Description", "Description [dc:description]");
@@ -55,8 +54,18 @@ class MyUpnp extends IPSModule {
         $this->RegisterVariableString("Genre", "Genre [upnp:genre]");
         $this->RegisterVariableString("Date", "Date [dc:date]");
         $this->RegisterVariableString("Track", "TrackNumber [upnp:originalTrackNumber]");
-        $ID_CatDIDL =  $this->GetIDForIdent("DIDL");
+        $ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
+        //Verschieben der Variable unter Ordner DIDL
         IPS_SetParent($this->GetIDForIdent("Album"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("Title"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("Description"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("AlbumArtUri"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("Genre"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("Artist"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("Date"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("Track"), $ID_CatDIDL);
+        
+        
         
             //$this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
             
