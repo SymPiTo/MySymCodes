@@ -106,9 +106,9 @@ class MyUpnp extends IPSModule {
         $this->RegisterVariableString("upnp_ClientRenderingControlURL", "Client:RenderingControlURL");
         
         $this->RegisterVariableString("upnp_ServerArray", "Server:Array");
-        $this->RegisterVariableString("upnp_ServerArray", "Server:ContentDirectory");
-        $this->RegisterVariableString("upnp_ServerArray", "Server:Icon");
-        $this->RegisterVariableString("upnp_ServerArray", "Server:IP");
+        $this->RegisterVariableString("upnp_ServerContentDirectory", "Server:ContentDirectory");
+        $this->RegisterVariableString("upnp_ServerIcon", "Server:Icon");
+        $this->RegisterVariableString("upnp_ServerIP", "Server:IP");
         $this->RegisterVariableInteger("upnp_ServerKey", "Server:Key", "");
         $this->RegisterVariableString("upnp_ServerName", "Server:Name");
         $this->RegisterVariableString("upnp_ServerPort", "Server:Port");
@@ -229,35 +229,35 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	return $key - Nummer des Client Arrays
 	--------------------------------------------------------------------------------
-	Status: checked 2018-05-21
+	Status: checked 2018-06-10
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function setClient($clientIP){
-		$which_key = "DeviceIP";
-		$which_value = $clientIP;
-		$array = getvalue(self::ID_CLIENT_ARRAY);
-		$Client_Array = unserialize($array);
-		$key = $this->search_key($which_key, $which_value, $Client_Array);
+            $which_key = "DeviceIP";
+            $which_value = $clientIP;
+            $array = getvalue($this->GetIDForIdent("upnp_ServerIP")ID_CLIENT_ARRAY);
+            $Client_Array = unserialize($array);
+            $key = $this->search_key($which_key, $which_value, $Client_Array);
 
-		$Client_Array[$key]['DeviceActiveIcon'] = "image/button_ok_blue_80x80.png";
-	
-		$ClientIP                   = $Client_Array[$key]['DeviceIP'];
-		$ClientPort                 = $Client_Array[$key]['DevicePort'];
-		$friendlyName               = $Client_Array[$key]['FriendlyName'];
-		$ClientControlServiceType   = $Client_Array[$key]['DeviceControlServiceType'];
-		$ClientControlURL           = $Client_Array[$key]['DeviceControlURL'];
-		$ClientRenderingServiceType = $Client_Array[$key]['DeviceRenderingServiceType'];
-		$ClientRenderingControlURL  = $Client_Array[$key]['DeviceRenderingControlURL'];
-		$ClientIconURL				= $Client_Array[$key]['IconURL'];
-		SetValue(self::ID_CLIENT_IP, $ClientIP);
-		SetValue(self::ID_CLIENT_PORT, $ClientPort);
-		SetValue(self::ID_CLIENT_NAME, $friendlyName);
-		setvalue(self::ID_CLIENT_KEY, $key);
-		//SetValue(UPNP_Device_ControlServiceType, $DeviceControlServiceType);
-		SetValue(self::ID_CLIENT_CONTROLURL, $ClientControlURL);
-		//SetValue(UPNP_Device_RenderingServiceType, $DeviceRenderingServiceType);
-		SetValue(self::ID_CLIENT_RENDER_CONTROL_URL, $ClientRenderingControlURL);
-		SetValue(12017 /*[DLNA\UPnP Class\Variable\Client:Icon]*/, $ClientIconURL);
-		return $key;
+            $Client_Array[$key]['DeviceActiveIcon'] = "image/button_ok_blue_80x80.png";
+
+            $ClientIP                   = $Client_Array[$key]['DeviceIP'];
+            $ClientPort                 = $Client_Array[$key]['DevicePort'];
+            $friendlyName               = $Client_Array[$key]['FriendlyName'];
+            $ClientControlServiceType   = $Client_Array[$key]['DeviceControlServiceType'];
+            $ClientControlURL           = $Client_Array[$key]['DeviceControlURL'];
+            $ClientRenderingServiceType = $Client_Array[$key]['DeviceRenderingServiceType'];
+            $ClientRenderingControlURL  = $Client_Array[$key]['DeviceRenderingControlURL'];
+            $ClientIconURL              = $Client_Array[$key]['IconURL'];
+            SetValue($this->GetIDForIdent("upnp_ClienIP"), $ClientIP);
+            SetValue($this->GetIDForIdent("upnp_ClientPort"), $ClientPort);
+            SetValue($this->GetIDForIdent("upnp_ClientName"), $friendlyName);
+            setvalue($this->GetIDForIdent("upnp_ClientKey"), $key);
+            //SetValue(UPNP_Device_ControlServiceType, $DeviceControlServiceType);
+            SetValue($this->GetIDForIdent("upnp_ClientControlURL"), $ClientControlURL);
+            //SetValue(UPNP_Device_RenderingServiceType, $DeviceRenderingServiceType);
+            SetValue($this->GetIDForIdent("upnp_ClientRenderingControlURL"), $ClientRenderingControlURL);
+            SetValue($this->GetIDForIdent("upnp_ClientIcon"), $ClientIconURL);
+            return $key;
 	}
 	
 	/*//////////////////////////////////////////////////////////////////////////////
@@ -271,32 +271,31 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	return $key - Nummer des Client Arrays
 	--------------------------------------------------------------------------------
-	Status: checked 2018-05-21
+	Status: checked 2018-06-10
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function setServer($serverName){
 		//IPSLog("Starte Funktion : ", 'setServer');
 		$which_key = "FriendlyName";
 		$which_value = $serverName;
-		$array = getvalue(self::ID_SERVER_ARRAY);
+		$array = getvalue($this->GetIDForIdent("upnp_ServerArray"));
 		$Server_Array = unserialize($array);
 		$key = $this->search_key($which_key, $which_value, $Server_Array);
 
 		$Server_Array[$key]['ServerActiveIcon'] = "image/button_ok_blue_80x80.png";
-	
 		$ServerIP                   = $Server_Array[$key]['ServerIP'];
 		$ServerPort                 = $Server_Array[$key]['ServerPort'];
 		$friendlyName               = $Server_Array[$key]['FriendlyName'];
 		$ServerServiceType          = $Server_Array[$key]['ServerServiceType'];
 		$ServerContentDirectory     = $Server_Array[$key]['ServerContentDirectory'];
 		$ServerActiveIcon           = $Server_Array[$key]['ServerActiveIcon'];
-		$ServerIconURL				= $Server_Array[$key]['IconURL'];
-		SetValue(self::ID_SERVER_IP, $ServerIP);
-		SetValue(self::ID_SERVER_PORT, $ServerPort);
-		SetValue(self::ID_SERVER_NAME, $friendlyName);
-		setvalue(self::ID_SERVER_KEY, $key);
+		$ServerIconURL              = $Server_Array[$key]['IconURL'];
+		SetValue($this->GetIDForIdent("upnp_ServerIP"), $ServerIP);
+		SetValue($this->GetIDForIdent("upnp_ServerPort"), $ServerPort);
+		SetValue($this->GetIDForIdent("upnp_ServerName"), $friendlyName);
+		setvalue($this->GetIDForIdent("upnp_ServerKey"), $key);
 		//SetValue(UPNP_Server_ServiceType, $ServerServiceType);
-		SetValue(self::ID_SERVER_CONTENTDIR, $ServerContentDirectory);
-		SetValue(10960 /*[DLNA\UPnP Class\Variable\Server:Icon]*/, $ServerIconURL);
+		SetValue($this->GetIDForIdent("upnp_ServerContentDirectory"), $ServerContentDirectory);
+		SetValue($this->GetIDForIdent("upnp_ServerIcon"), $ServerIconURL);
 		
 		return $key;
 	}	
