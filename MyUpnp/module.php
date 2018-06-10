@@ -37,18 +37,27 @@ class MyUpnp extends IPSModule {
         $CatID = IPS_CreateCategory();       // Kategorie anlegen
         IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
         IPS_SetParent($CatID, $this->InstanceID); 
-        // 
-        // // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
+      
+        // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             //$this->RegisterPropertyBoolean("active", false);
             //$this->RegisterPropertyString("IPAddress", "");
             //$this->RegisterPropertyInteger("UpdateInterval", 30);
            
         //Status Variable anlegen
-            //$this->RegisterVariableInteger("CeolSource", "Source", "");
+        //$this->RegisterVariableInteger("Track", "TrackNumber [upnp:originalTrackNumber]", "");
             //$this->RegisterVariableBoolean("CeolPower", "Power");
-;
-            //$this->RegisterVariableString("CeolSZ1", "Line1");
+        $this->RegisterVariableString("Artist", "Artist [dc:creator]");
 
+        $this->RegisterVariableString("Album", "Album [upnp:album]");
+        $this->RegisterVariableString("Title", "Titel [dc:title]");
+        $this->RegisterVariableString("Description", "Description [dc:description]");
+        $this->RegisterVariableString("AlbumArtUri", "AlbumArtURI [upnp:albumArtURI]");
+        $this->RegisterVariableString("Genre", "Genre [upnp:genre]");
+        $this->RegisterVariableString("Date", "Date [dc:date]");
+        $this->RegisterVariableString("Track", "TrackNumber [upnp:originalTrackNumber]");
+        $ID_CatDIDL =  $this->GetIDForIdent("DIDL");
+        IPS_SetParent($this->GetIDForIdent("Album"), $ID_CatDIDL);
+        
             //$this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
             
         // Timer erstellen
