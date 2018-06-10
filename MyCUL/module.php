@@ -45,9 +45,9 @@ include_once(__DIR__ . "/FHZ_Class.php");
      * Constructor
      * @param $InstanceID
      */
-    public function __construct()
-    {
-        // 
+    public function __construct($InstanceID){
+        // Diese Zeile nicht löschen
+        parent::__construct($InstanceID);
 
     }
 
