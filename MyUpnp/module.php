@@ -64,7 +64,7 @@ class MyUpnp extends IPSModule {
         $this->RegisterVariableString("upnp_TrackNo", "TrackNumber [upnp:originalTrackNumber]");
         $ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
         //Verschieben der Variable unter Ordner DIDL
-        IPS_SetParent($this->GetIDForIdent("upnp_Artist"), $ID_CatDIDL);
+        
         IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_Title"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_Description"), $ID_CatDIDL);
@@ -72,6 +72,7 @@ class MyUpnp extends IPSModule {
         IPS_SetParent($this->GetIDForIdent("upnp_Genre"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_Date"), $ID_CatDIDL);
         IPS_SetParent($this->GetIDForIdent("upnp_TrackNo"), $ID_CatDIDL);
+        IPS_SetParent($this->GetIDForIdent("upnp_Artist"),$ID_CatDIDL);
         
         $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
         $this->RegisterVariableInteger("upnp_Track", "Track", "");
