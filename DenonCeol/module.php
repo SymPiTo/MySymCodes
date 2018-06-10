@@ -256,7 +256,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$url = "http://$host:80/goform/formNetAudio_StatusXml.xml";
 		$cmd = "";
 		$xml = $this->curl_get($url, $cmd);
-		$this->SendDebug("AudioStatus: ", $xml, 0);
+		//$this->SendDebug("AudioStatus: ", $xml, 0);
 		$output = XML2Array::createArray($xml);
 		return $output;
 	}	 
@@ -418,17 +418,29 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/	
 	Public function IncVolume(){
-            $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume")) + 1;
-            SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
-            $this->send_cmd('MVUP');
-            return true;
+            if($MasterVolume < -65){
+                $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume")) + 1;
+                SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
+                $this->send_cmd('MVUP');
+                return true;
+            }
+            else{
+                //oberer Einstellwert von -65db erreicht. /Lautstärkebegrenzung
+                return false;
+            }            
 	}	
 	
 	Public function DecVolume(){	
             $MasterVolume = getvalue($this->GetIDForIdent("CeolVolume")) - 1;
-            SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
-            $this->send_cmd('MVDOWN');
-            return true;
+            if($MasterVolume > -80){
+                SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
+                $this->send_cmd('MVDOWN');
+                return true;
+            }
+            else{
+                //unterer Einstellwert von -79db erreicht.
+                return false;
+            }
 	}
         
 	/*//////////////////////////////////////////////////////////////////////////////
