@@ -234,7 +234,7 @@ class MyUpnp extends IPSModule {
 	public function setClient($clientIP){
             $which_key = "DeviceIP";
             $which_value = $clientIP;
-            $array = getvalue($this->GetIDForIdent("upnp_ServerIP")ID_CLIENT_ARRAY);
+            $array = getvalue($this->GetIDForIdent("upnp_ClientArray"));
             $Client_Array = unserialize($array);
             $key = $this->search_key($which_key, $which_value, $Client_Array);
 
