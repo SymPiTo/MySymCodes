@@ -1303,50 +1303,34 @@ Funktion Previous()
         (z.B. '', also leer) enthalten
         /*//////////////////////////////////////////////////////////////////////////////
 
-        Public function search_exclude_value($array, $key, $value)
-                {
-                $results = array();
-
-                if (is_array($array))
-                        {
-                        if (isset($array[$key]) && $array[$key] !== $value)
-                        $results[] = $array;
-
-                        foreach ($array as $subarray)
+        Public function search_exclude_value($array, $key, $value){
+            $results = array();
+            if (is_array($array)){
+                if (isset($array[$key]) && $array[$key] !== $value){
+                    $results[] = $array;
+                    foreach ($array as $subarray){
                         $results = array_merge($results, search_exclude_value($subarray, $key, $value));
-                        }
-
-                return $results;
+                    }
                 }
+            }
+            return $results;
+        }
 
         /*//////////////////////////////////////////////////////////////////////////////
         function search_key($which_key, $which_value, $array)
         den $key des Elternelementes in einem mehrdimensionalen Array finden
         /*//////////////////////////////////////////////////////////////////////////////
 
-        Public function search_key($which_key, $which_value, $array)
-                {
-                include_once ('32114 /*[Testumgebung\Logger\Logger]*/.ips.php');
-                //IPSLog("Starte Funktion : ", 'search_key');
-                //IPSLog("Which Key : ", $which_key);
-                //IPSLog("Which value : ", $which_value);
-                //IPSLog("SearchArray : ", $array);
-                foreach ($array as $key => $value)
-                        {
-                        //print_r($array);
-                        //echo($which_key);
-                        //echo($which_value);
-                        if($value[$which_key] === $which_value)
-                                {
-                                echo("$which_value in Key: $key found\r\n");
-                                return $key;
-                                }
-                        else
-                                {
-                                echo("$which_value in Key: $key not found\r\n");
-                                }
-                        }
+        Public function search_key($which_key, $which_value, $array){
+            foreach ($array as $key => $value){
+                if($value[$which_key] === $which_value){
+                    return $key;
                 }
+                else{
+                    //echo("$which_value in Key: $key not found\r\n");
+                }
+            }
+        }
 
 
 	
