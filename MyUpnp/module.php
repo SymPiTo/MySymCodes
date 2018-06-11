@@ -1313,6 +1313,10 @@ Funktion Previous()
                     }
                 }
             }
+            else{
+                // Array empty - search clients and Server
+                $this->SendDebug("Array empty", "Starte Suchlauf für Clients und/oder Server", 0);
+            }
             return $results;
         }
 
