@@ -808,7 +808,7 @@ Funktion Previous()
 		//wenn nur Teilrückgabe, dann mehrfach auslesen	  
 		if ($NumberReturned <= $TotalMatches) {
 			$liste = $this->BrowseList($Result_xml);
-			IPSLog("TotalMatches ",$TotalMatches);
+			//IPSLog("TotalMatches ",$TotalMatches);
 			for($i = 0; $NumberReturned*$i < $TotalMatches; ++$i){
 				$StartingIndex = $NumberReturned*$i;
 				//IPSLog("StartingIndex ",$StartingIndex);
@@ -1149,13 +1149,13 @@ Funktion Previous()
         Status:  checked - 2018-05-27
         //////////////////////////////////////////////////////////////////////////////*/
         Protected function createPlaylist($id, $PlaylistNo){
-                IPSLog("Starte Funktion CREATEPLAYLIST mit Parameter ", $id.' - '.$PlaylistNo);
+                //IPSLog("Starte Funktion CREATEPLAYLIST mit Parameter ", $id.' - '.$PlaylistNo);
                 $PlaylistArray = array();
 
 
                 //es wird der angewählte Server durchsucht
                 $ServerName = getvalue(self::ID_SERVER_NAME);
-                IPSLog('ServerName', $ServerName);
+                //IPSLog('ServerName', $ServerName);
                 //------------------------------------------------
                 // alle media files in Ordner mit ID  = $id suchen
                 //------------------------------------------------
@@ -1247,7 +1247,7 @@ Funktion Previous()
         Public function Meldung($string)
         {
         //SetValue(self::ID_MELDUNGEN, GetValue(self::ID_MELDUNGEN)."$string\r\n\r\n");
-        IPSLog('Meldung ', $string);
+        //IPSLog('Meldung ', $string);
         }
 
         /*//////////////////////////////////////////////////////////////////////////////
@@ -1327,10 +1327,10 @@ Funktion Previous()
         Public function search_key($which_key, $which_value, $array)
                 {
                 include_once ('32114 /*[Testumgebung\Logger\Logger]*/.ips.php');
-                IPSLog("Starte Funktion : ", 'search_key');
-                IPSLog("Which Key : ", $which_key);
-                IPSLog("Which value : ", $which_value);
-                IPSLog("SearchArray : ", $array);
+                //IPSLog("Starte Funktion : ", 'search_key');
+                //IPSLog("Which Key : ", $which_key);
+                //IPSLog("Which value : ", $which_value);
+                //IPSLog("SearchArray : ", $array);
                 foreach ($array as $key => $value)
                         {
                         //print_r($array);
