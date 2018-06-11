@@ -1300,7 +1300,7 @@ Funktion Previous()
         $key   -> in welchen Key
         $value -> auszuschliessender Wert
         Rückgabe eines Array, welches nur die Subarrays enthält, welche nicht den Wert
-        (z.B. '', also leer) enthalten
+        (z.B. '', also leer)  enthalten
         /*//////////////////////////////////////////////////////////////////////////////
 
         Public function search_exclude_value($array, $key, $value){
