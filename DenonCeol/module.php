@@ -580,7 +580,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Status: checked 2018-05-31
 	//////////////////////////////////////////////////////////////////////////////*/	
 	Public function SetRadioChannel($Channel){
-            $this->SendDebug('Switch Radio to Channel', $Channel, 0);
+            $this->SendDebug('Switch Radio to Channel:', $Channel, 0);
             $cmd = 'FV'.'%20'.$Channel;
             $this->send_cmd($cmd);
             SetValueInteger($this->GetIDForIdent("CeolFavChannel"), intval($Channel)-1);
