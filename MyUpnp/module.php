@@ -241,6 +241,7 @@ class MyUpnp extends IPSModule {
 
             $Client_Array[$key]['DeviceActiveIcon'] = "image/button_ok_blue_80x80.png";
 
+            
             $ClientIP                   = $Client_Array[$key]['DeviceIP'];
             $ClientPort                 = $Client_Array[$key]['DevicePort'];
             $friendlyName               = $Client_Array[$key]['FriendlyName'];
