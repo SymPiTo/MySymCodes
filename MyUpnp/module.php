@@ -173,7 +173,7 @@ class MyUpnp extends IPSModule {
 						$Device_Array[$i]['DeviceRenderingControlURL']
 						$Device_Array[$i]['DeviceActiveIcon']
 	--------------------------------------------------------------------------------
-	Status: checked 2018-05-31
+	Status: 
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function searchUPNP($member){
 		/*mögliche Aufrufe:
@@ -272,7 +272,7 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	return $key - Nummer des Client Arrays
 	--------------------------------------------------------------------------------
-	Status: checked 2018-06-10
+	Status: 
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function setServer($serverName){
 		//IPSLog("Starte Funktion : ", 'setServer');
@@ -318,7 +318,7 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	return:  none
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-30
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function play(){	
 		//IPSLog("start play", "play");
@@ -365,7 +365,7 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	return:  none
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-30
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function PlayNextTrack(){	
 		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
@@ -539,7 +539,7 @@ Funktion Previous()
 	--------------------------------------------------------------------------------
 	return:  Playlist as XML
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-30
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function loadPlaylist($AlbumNo){	
 			//IPSLog("Lade Playlist ", $AlbumNo );
@@ -584,7 +584,7 @@ Funktion Previous()
 	--------------------------------------------------------------------------------
 	return:  none
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-30
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function GetPosInfo(){ 
 		//IPAdresse und Port des gewählten Device---------------------------------------
@@ -687,7 +687,7 @@ Funktion Previous()
  	--------------------------------------------------------------------------------
 	return:  Progress - Integer Wert 0 - 100
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-30
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress($ClientIP, $ClientPort, $ControlURL){	
 		$GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
@@ -762,7 +762,7 @@ Funktion Previous()
 			//17: class
 			//18: extension
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-26
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function browseContainerServer($ObjectID){	
 		//IPSLog("Starte Funktion: browseServer mit : ",$ObjectID);
@@ -838,7 +838,7 @@ Funktion Previous()
 					['id']  
 					['title']  
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-26
+	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function getContainerServer($Mediatype){
 		//IPSLog("Starte Funktion: browseServer mit : ",$Mediatype);
@@ -971,7 +971,7 @@ Funktion Previous()
 			//17: class
 			//18: extension
 	--------------------------------------------------------------------------------
-	Status:  checked - 2018-05-26
+	Status: 
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function BrowseList($Result_xml){
 		$xml = simplexml_load_string($Result_xml); //
@@ -1146,7 +1146,7 @@ Funktion Previous()
         return:  schreibt FILE
                         $Kernel."media/Multimedia/Playlist/Musik/".$PlaylistName.".xml"]  
         --------------------------------------------------------------------------------
-        Status:  checked - 2018-05-27
+        Status: 
         //////////////////////////////////////////////////////////////////////////////*/
         Protected function createPlaylist($id, $PlaylistNo){
                 //IPSLog("Starte Funktion CREATEPLAYLIST mit Parameter ", $id.' - '.$PlaylistNo);
@@ -1196,7 +1196,7 @@ Funktion Previous()
         return:  schreibt FILES (Playlisten)
                         $Kernel."media/Multimedia/Playlist/Musik/".$ServerName."PlaylistNo".xml
         --------------------------------------------------------------------------------
-        Status:  checked - 2018-05-27
+        Status: 
         //////////////////////////////////////////////////////////////////////////////*/
         Public function createAllPlaylist($mediatype){
                 $ServerName = getvalue(self::ID_SERVER_NAME);
@@ -1320,11 +1320,22 @@ Funktion Previous()
             return $results;
         }
 
+        
         /*//////////////////////////////////////////////////////////////////////////////
         function search_key($which_key, $which_value, $array)
+        ...............................................................................
         den $key des Elternelementes in einem mehrdimensionalen Array finden
-        /*//////////////////////////////////////////////////////////////////////////////
-
+        ...............................................................................
+        Parameter:  $which_key =    = zu durchsuchedes ArrayFeld = ['FriendlyName']
+                    $which_value    = Suchwert = z.Bsp "CEOL"
+                    $array          = zu durchsuchendes Array
+        --------------------------------------------------------------------------------
+        Variable:
+        --------------------------------------------------------------------------------
+        return:  key = gefundener Datensatz index
+        --------------------------------------------------------------------------------
+        Status:  checked 11.6.2018
+        //////////////////////////////////////////////////////////////////////////////*/
         Public function search_key($which_key, $which_value, $array){
             foreach ($array as $key => $value){
                 if($value[$which_key] === $which_value){
