@@ -30,7 +30,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             $this->RegisterPropertyBoolean("active", false);
             $this->RegisterPropertyString("IPAddress", "");
-            $this->RegisterPropertyInteger("UpdateInterval", 30);
+            $this->RegisterPropertyInteger("UpdateInterval", 5000);
            
             //Status Variable anlegen
             $this->RegisterVariableInteger("CeolSource", "Source", "");
