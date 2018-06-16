@@ -10,7 +10,7 @@ require_once(__DIR__ . "/UpnpClassTrait.php");
 /**
  * Description of module
  *
- * @author Torsten
+ * @author Torsten Beck
  */
 class MyUpnp extends IPSModule {
 
