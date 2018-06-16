@@ -53,7 +53,6 @@ class MyUpnp extends IPSModule {
             //$this->RegisterPropertyInteger("UpdateInterval", 30);
            
         //Status Variable anlegen
-                                
         $this->RegisterVariableString("upnp_Artist", "Artist [dc:creator]");
         $this->RegisterVariableString("upnp_Album", "Album [upnp:album]");
         $this->RegisterVariableString("upnp_Title", "Titel [dc:title]");
