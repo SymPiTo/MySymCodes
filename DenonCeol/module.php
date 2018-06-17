@@ -645,7 +645,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $cmd = 'TO'.$stateTimerAlways.' '.$stateTimerAlways;
             
             $host = $this->ReadPropertyString('IPAddress');
-            $url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml?";
+            $url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
             $xml = $this->curl_get($url, $cmd);
             //$xml = $this->send_cmd($cmd);
             return $cmd;
