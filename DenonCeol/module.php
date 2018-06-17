@@ -578,7 +578,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	--------------------------------------------------------------------------------
 	return  
 	--------------------------------------------------------------------------------
-	Status: checked no
+	Status: checked 2018.06.18
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function showClock(){ 
 		$cmd = 'CLK';
@@ -586,8 +586,52 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		return $xml;
 	}
         
-        
-        
+	/*//////////////////////////////////////////////////////////////////////////////
+	Befehl: setTimer()
+	...............................................................................
+	Wecker stellen und starten
+	...............................................................................
+	Parameter:  $mode = once/ every 
+                    $startTime  = 07:30
+                    $endTime    = 21:30    
+                    $funct      = FA (Favorite)/ IP (IPOD) / US (USB)    
+                    $n          = 01    (Favoriten Nummer)
+                    $state      = on / off
+         
+         
+	--------------------------------------------------------------------------------
+	Variable: 
+	--------------------------------------------------------------------------------
+	return  
+	--------------------------------------------------------------------------------
+	Status: checked 2018.06.18
+	//////////////////////////////////////////////////////////////////////////////*/
+	Public function setTimer($mode, $startTime, $endTime, $funct = 'FA', $n = '01', $volT = '03', $state){    
+            $mode = strtoupper ($mode);
+            $sT= explode(':', $startTime);
+            if ((int)$sT[0] > 12){
+                $periodS = 'A';
+            }
+            else{
+                $periodS="P";
+            }
+            $eT= explode(':', $endTime);
+            if ((int)$eT[0] > 12){
+                $periodE = 'A';
+            }
+            else{
+                $periodE="P";
+            }
+            if ($state == 'on'){
+                $ts = '1';
+            }
+            else {
+                $ts = '0';
+            }
+		$cmd = 'TS'.$mode.' '.$periodS.sT[0].sT[1].'-'.periosE.eT[0].eT[1].' '.$funct.$n.' '.$volT.' '.$ts;
+		//$xml = $this->send_cmd($cmd);
+		return $cmd;
+	}     
         
 	/*//////////////////////////////////////////////////////////////////////////////
 	Befehl: SetRadioChannel($Channel)
