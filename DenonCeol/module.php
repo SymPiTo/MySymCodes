@@ -625,6 +625,29 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	}     
         
 	/*//////////////////////////////////////////////////////////////////////////////
+	Befehl: switchTimer($stateTimerOnce,$stateTimerAlways)
+	...............................................................................
+	Wecker ein/aus schalten
+	...............................................................................
+	Parameter:  $stateTimerOnce      = on / off
+                    $stateTimerAlways    = on / off
+         
+	--------------------------------------------------------------------------------
+	Variable: 
+	--------------------------------------------------------------------------------
+	return : 
+	--------------------------------------------------------------------------------
+	Status: checked no
+	//////////////////////////////////////////////////////////////////////////////*/
+	Public function switchTimer($stateTimerOnce,$stateTimerAlways){    
+            $stateTimerOnce = strtoupper ($stateTimerOnce);
+            $stateTimerAlways = strtoupper ($stateTimerAlways);
+            $cmd = 'TO'.$stateTimerAlways.' '.$stateTimerAlways;
+            $xml = $this->send_cmd($cmd);
+            return $cmd;
+	}  
+        
+	/*//////////////////////////////////////////////////////////////////////////////
 	Befehl: SetRadioChannel($Channel)
 	...............................................................................
 	schaltet Radiosender (Favoriten) um:
