@@ -610,17 +610,17 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $mode = strtoupper ($mode);
             $sT= explode(':', $startTime);
             if ((int)$sT[0] > 12){
-                $periodS = 'A';
+                $periodS = 'P';
             }
             else{
-                $periodS="P";
+                $periodS="A";
             }
             $eT= explode(':', $endTime);
             if ((int)$eT[0] > 12){
-                $periodE = 'A';
+                $periodE = 'P';
             }
             else{
-                $periodE="P";
+                $periodE="A";
             }
             if ($state == 'on'){
                 $ts = '1';
