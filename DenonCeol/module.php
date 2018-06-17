@@ -609,19 +609,10 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Public function setTimer($mode, $startTime, $endTime, $funct = 'FA', $n = '01', $volT = '03', $state){    
             $mode = strtoupper ($mode);
             $sT= explode(':', $startTime);
-            if ((int)$sT[0] > 12){
-                $periodS = 'P';
-            }
-            else{
-                $periodS="A";
-            }
+            $periodS = '2';
+
             $eT= explode(':', $endTime);
-            if ((int)$eT[0] > 12){
-                $periodE = 'P';
-            }
-            else{
-                $periodE="A";
-            }
+            $periodE = '2';
             if ($state == 'on'){
                 $ts = '1';
             }
