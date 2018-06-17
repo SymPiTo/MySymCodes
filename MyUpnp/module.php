@@ -231,9 +231,9 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	Status: checked 2018-06-10
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function setClient($clientIP){
+	public function setClient($ClientName){
             $which_key = "FriendlyName";
-            $which_value = $clientIP;
+            $which_value = $ClientName;
             $array = getvalue($this->GetIDForIdent("upnp_ClientArray"));
             $Client_Array = unserialize($array);
             $key = $this->search_key($which_key, $which_value, $Client_Array);

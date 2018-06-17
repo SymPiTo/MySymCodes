@@ -268,7 +268,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         HTTP Befehl:  http://192.168.178.29:80/goform/formiPhoneAppNetAudioCommand.xml?CurLeft       
 	Telnet Befehl: CurLeft // CurRight // CurUp // CurDown
 	...............................................................................
-	Parameter:  $value = left" // "right" // "up" // "down"
+	Parameter:  $value = left" // "right" // "up" // "down" // "ok"
 	--------------------------------------------------------------------------------
 
 	return:  
@@ -290,6 +290,9 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 			break;
 			case 'down':
 				$cmd = 'CurDown';
+			break;
+			case 'ok':
+				$cmd = 'Enter';
 			break;
 		}
 		$xml = $this->curl_get($url, $cmd);
