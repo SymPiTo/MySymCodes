@@ -604,7 +604,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	--------------------------------------------------------------------------------
 	return  
 	--------------------------------------------------------------------------------
-	Status: checked 2018.06.18
+	Status: checked no
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function setTimer($mode, $startTime, $endTime, $funct = 'FA', $n = '01', $volT = '03', $state){    
             $mode = strtoupper ($mode);
