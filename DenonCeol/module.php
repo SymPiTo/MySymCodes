@@ -643,7 +643,11 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $stateTimerOnce = strtoupper ($stateTimerOnce);
             $stateTimerAlways = strtoupper ($stateTimerAlways);
             $cmd = 'TO'.$stateTimerAlways.' '.$stateTimerAlways;
-            $xml = $this->send_cmd($cmd);
+            
+            $host = $this->ReadPropertyString('IPAddress');
+            $url = "http://$host:80/goform/AppCommand.xml";
+            $xml = $this->curl_get($url, $cmd);
+            //$xml = $this->send_cmd($cmd);
             return $cmd;
 	}  
         
