@@ -628,7 +628,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             else {
                 $ts = '0';
             }
-		$cmd = 'TS'.$mode.' '.$periodS.sT[0].sT[1].'-'.periosE.eT[0].eT[1].' '.$funct.$n.' '.$volT.' '.$ts;
+		$cmd = 'TS'.$mode.' '.$periodS.$sT[0].$sT[1].'-'.$periosE.$eT[0].$eT[1].' '.$funct.$n.' '.$volT.' '.$ts;
 		//$xml = $this->send_cmd($cmd);
 		return $cmd;
 	}     
