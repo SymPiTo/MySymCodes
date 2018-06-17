@@ -629,7 +629,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 $ts = '0';
             }
 		$cmd = 'TS'.$mode.' '.$periodS.$sT[0].$sT[1].'-'.$periodE.$eT[0].$eT[1].' '.$funct.$n.' '.$volT.' '.$ts;
-		//$xml = $this->send_cmd($cmd);
+		$xml = $this->send_cmd($cmd);
 		return $cmd;
 	}     
         
