@@ -277,22 +277,22 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	//////////////////////////////////////////////////////////////////////////////*/
  	Public function Navigate($Direction){
 		$host = $this->ReadPropertyString('IPAddress');
-		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
+		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml?";
 		switch($Direction){
                     case 'left':
-			$cmd = '?CurLeft';
+			$cmd = 'CurLeft';
 			break;
                     case 'right':
-			$cmd = '?CurRight';
+			$cmd = 'CurRight';
 			break;
                     case 'up':
-			$cmd = '?CurUp';
+			$cmd = 'CurUp';
 			break;
                     case 'down':
-			$cmd = '?CurDown';
+			$cmd = 'CurDown';
 			break;
                     case 'ok':
-			$cmd = '?Enter';
+			$cmd = 'Enter';
 			break;
 		}
 		
