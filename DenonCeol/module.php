@@ -298,7 +298,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		
                 $xml = $this->curl_get($url, $cmd);
 		//$output = XML2Array::createArray($xml);
-		return $command;
+		return $xml;
 	}	       
 
 	/*//////////////////////////////////////////////////////////////////////////////
