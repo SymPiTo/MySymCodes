@@ -281,23 +281,23 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		switch($Direction){
                     case 'left':
 			//$cmd = 'CurLeft';
-                        $command = 'MNCLT';
+                        $command = 'NS92';
 			break;
                     case 'right':
 			//$cmd = 'CurRight';
-                        $command = 'MNCRT';
+                        $command = 'NS93';
 			break;
                     case 'up':
 			//$cmd = 'CurUp';
-                        $command = 'MNCUP';
+                        $command = 'NS90';
 			break;
                     case 'down':
 			//$cmd = 'CurDown';
-                        $command = 'MNCDN';
+                        $command = 'NS91';
 			break;
                     case 'ok':
 			//$cmd = 'Enter';
-                        $command = 'MNENT';
+                        $command = 'NS94';
 			break;
 		}
 		$this->send_cmd($command);
