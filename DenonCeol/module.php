@@ -280,28 +280,23 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$url = "http://$host:80/goform/formiPhoneAppNetAudioCommand.xml";
 		switch($Direction){
                     case 'left':
-			//$cmd = 'CurLeft';
-                        $command = '?CurLeft';
+			$cmd = '?CurLeft';
 			break;
                     case 'right':
-			//$cmd = 'CurRight';
-                        $command = '?CurRight';
+			$cmd = '?CurRight';
 			break;
                     case 'up':
-			//$cmd = 'CurUp';
-                        $command = '?CurUp';
+			$cmd = '?CurUp';
 			break;
                     case 'down':
-			//$cmd = 'CurDown';
-                        $command = '?CurDown';
+			$cmd = '?CurDown';
 			break;
                     case 'ok':
-			//$cmd = 'Enter';
-                        $command = '?Enter';
+			$cmd = '?Enter';
 			break;
 		}
-		$this->send_cmd($command);
-                //$xml = $this->curl_get($url, $cmd);
+		
+                $xml = $this->curl_get($url, $cmd);
 		//$output = XML2Array::createArray($xml);
 		return $command;
 	}	       
