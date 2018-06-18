@@ -303,7 +303,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$this->send_cmd($command);
                 //$xml = $this->curl_get($url, $cmd);
 		//$output = XML2Array::createArray($xml);
-		return $xml;
+		return $command;
 	}	       
 
 	/*//////////////////////////////////////////////////////////////////////////////
