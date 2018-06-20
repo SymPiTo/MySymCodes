@@ -10,8 +10,8 @@
  * @date 2017-09-16
  */
 
-include_once(__DIR__ . "/moduleBase.php");
-include_once(__DIR__ . "/FHZ_Class.php");
+//include_once(__DIR__ . "/moduleBase.php");
+//include_once(__DIR__ . "/FHZ_Class.php");
 
 /** @class CUL
  *
