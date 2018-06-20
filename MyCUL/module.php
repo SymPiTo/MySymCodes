@@ -85,5 +85,25 @@ include_once(__DIR__ . "/FHZ_Class.php");
 
     }
 
+    
+    
+       //------------------------------------------------------------------------------
+    /**
+     * Data Interface from Parent(IO-RX)
+     * @param string $JSONString
+     * @return void
+     */
+    public function ReceiveData($JSONString)
+    {
+        //status check triggered by data
+                // decode Data from Device Instanz
+        if (strlen($JSONString) > 0) {
+            $this->debug(__FUNCTION__, 'Data arrived:' . $JSONString);
+            $this->debuglog($JSONString);
+            // decode Data from IO Instanz
+            $data = json_decode($JSONString);
+            //entry for data from parent
+        }    
+    }
 
 }//class
