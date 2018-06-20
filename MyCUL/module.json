@@ -2,13 +2,13 @@
 	"id": "{2EF71588-582D-4884-82A7-20A548FC895C}",
 	"name": "MyCUL",
 	"type": 2,
-	"vendor": "",
-	"aliases": 
+	"vendor": "Busware",
+	"aliases": ["MyCUL","MyCUN","MyCUNO","MyCOC"]
 	[
 		"MyCUL-Stick"
 	],
         "parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
-        "childRequirements": [],
+        "childRequirements": ,
         "implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}"],
 	"prefix": "MYCUL"
 }
