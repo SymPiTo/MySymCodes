@@ -47,6 +47,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("CeolSZ8", "Line8"); 
             $this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
             
+            
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
         }
@@ -705,6 +706,20 @@ o                    http://192.168.2.99/img/album%20art_S.png
             return $xml;
 	}	
 
+        
+        
+ 
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
 	/*//////////////////////////////////////////////////////////////////////////////
 	Befehl: PlayFiles(array $files)
 	...............................................................................

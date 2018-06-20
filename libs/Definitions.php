@@ -10,9 +10,12 @@
  *
  * @author Torsten
  */
-trait Definitionen {
+class def {
     
-
+    const ID_SERVER_NAME = 'someconst';
+    const ID_PLAYLIST_NAME = 'someconst';
+    const ID_PLAYLIST_XML = 'someconst';
+    const ID_TRACK = 'someconst';
  
 
 
