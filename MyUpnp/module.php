@@ -126,7 +126,7 @@ class MyUpnp extends IPSModule {
          
             
         // Timer erstellen
-        $this->RegisterTimer("upnp_PlayInfo", 0, $this->GetPosInfo());
+        $this->RegisterTimer("upnp_PlayInfo", 1000, $this->GetPosInfo());
     }
         
     // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
