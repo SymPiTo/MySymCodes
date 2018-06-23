@@ -35,7 +35,7 @@ class AyCUL extends IPSModule
 			IPS_LogMessage("IOSplitter RECV", utf8_decode($data->Buffer));
 			//We would parse our payload here before sending it further...
 			//Lets just forward to our children
-			$this->SendDataToChildren(json_encode(Array("DataID" => "{0DBE80CC-9A85-46BE-9F89-FBC374EF89D9}", "Buffer" => $data->Buffer)));
+			$this->SendDataToChildren(json_encode(Array("DataID" => "{66164EB8-3439-4599-B937-A365D7A68567}", "Buffer" => $data->Buffer)));
 		}
         }
 ?>
