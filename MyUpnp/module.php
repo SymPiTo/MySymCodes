@@ -545,16 +545,16 @@ Funktion Previous()
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function loadPlaylist($AlbumNo){	
 			//IPSLog("Lade Playlist ", $AlbumNo );
-			$Server = getvalue(self::ID_SERVER_NAME);
+			$Server = getvalue($this->GetIDForIdent("upnp_ClienIP"));
 			$PlaylistName = $Server.$AlbumNo;
-			setvalue(self::ID_PLAYLIST_NAME, $PlaylistName);
+			setvalue($this->GetIDForIdent("upnp_PlaylistName"), $PlaylistName);
 			$PlaylistFile = $PlaylistName.'.xml';
 	
 			$Playlist = file_get_contents($this->Kernel()."media/Multimedia/Playlist/Musik/".$PlaylistFile);
 			// Playlist abspeichern
-			setvalue(self::ID_PLAYLIST_XML, $Playlist);
+			setvalue($this->GetIDForIdent("upnp_Playlist_XML"), $Playlist);
 			// neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
-			setvalue(self::ID_TRACK, 1);
+			setvalue($this->GetIDForIdent("upnp_Track"), 1);
 			
 			$vars 					= explode(".", $PlaylistFile);
 			$PlaylistName 			= $vars[0];
