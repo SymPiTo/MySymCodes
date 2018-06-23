@@ -31,7 +31,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterPropertyBoolean("active", false);
             $this->RegisterPropertyString("IPAddress", "");
             $this->RegisterPropertyInteger("UpdateInterval", 5000);
-           
+            $this->RegisterPropertyBoolean("Telnet", false);
+            
             //Status Variable anlegen
             $this->RegisterVariableInteger("CeolSource", "Source", "");
             $this->RegisterVariableBoolean("CeolPower", "Power");
@@ -50,6 +51,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
+            
+            $this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
