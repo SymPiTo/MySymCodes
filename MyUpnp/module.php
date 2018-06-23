@@ -342,8 +342,9 @@ class MyUpnp extends IPSModule {
 
 		$metadata = $xml->$track->metadata; // gibt resource des Titels aus
 		//UPNP_GetPositionInfo_Playing abschalten zum Ausführen des Transitioning
-		IPS_SetScriptTimer($this->GetIDForIdent("upnp_PlayInfo"), 0);
-		if ($TrackNo == 1){	
+		//IPS_SetScriptTimer($this->GetIDForIdent("upnp_PlayInfo"), 0);
+		$this->SetTimerInterval('upnp_PlayInfo', 0);
+                if ($TrackNo == 1){	
 			$this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
 		}
 		//Transport starten
@@ -351,7 +352,8 @@ class MyUpnp extends IPSModule {
 		//Stream ausführen	
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
 		// Postion Timer starten
-		IPS_SetEventActive($this->GetIDForIdent("upnp_PlayInfo"), true);  // Aktivert Ereignis
+		//IPS_SetEventActive($this->GetIDForIdent("upnp_PlayInfo"), true);  // Aktivert Ereignis
+                $this->SetTimerInterval('upnp_PlayInfo', 1);
 	}
 
 	/*//////////////////////////////////////////////////////////////////////////////
