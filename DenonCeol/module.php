@@ -31,7 +31,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterPropertyBoolean("active", false);
             $this->RegisterPropertyString("IPAddress", "");
             $this->RegisterPropertyInteger("UpdateInterval", 5000);
-            $this->RegisterPropertyBoolean("Telnet", false);
+           
             
             //Status Variable anlegen
             $this->RegisterVariableInteger("CeolSource", "Source", "");
@@ -52,13 +52,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
             
-            //Server Client erzeugen für Telnet Zugang
-            $this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
-            $ParentId = @IPS_GetInstance($this->InstanceID)['ConnectionID'];
-            
-            // Hier soll die Konfiguration der ModBus-Instanz mit der ID 12345 gesetzt werden.
-            IPS_SetConfiguration($ParentId, '{"Host":"192.168.178.29","Open":false,"Port":23}');
-            IPS_ApplyChanges($ParentId); //Neue Konfiguration übernehmen
+
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
