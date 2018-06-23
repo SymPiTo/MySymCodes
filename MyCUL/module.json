@@ -5,7 +5,7 @@
 	"vendor": "MyBusware",
 	"aliases": ["MyCUL"],
         "parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
-        "childRequirements": ["{CD3D1E2D-83ED-4595-90CD-3444A22AAA66}"] , 
-        "implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}"],
+        "childRequirements": ["{A7484D6B-159C-4426-B8B6-51DCC29ED1E3}"] , 
+        "implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}", "{5CD01BF2-E1DF-4893-9225-A0E70CB234DF}"],
 	"prefix": "MYCUL"
 }
