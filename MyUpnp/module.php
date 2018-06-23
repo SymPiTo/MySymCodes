@@ -554,7 +554,7 @@ Funktion Previous()
 	
 			$Playlist = file_get_contents($this->Kernel()."media/Multimedia/Playlist/Musik/".$PlaylistFile);
 			// Playlist abspeichern
-			setvalue($this->GetIDForIdent("upnp_Playlist_XML"), $Playlist);
+			setvalue($this->GetIDForIdent("upnp_Playlist_XML"), "$Playlist");
 			// neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
 			setvalue($this->GetIDForIdent("upnp_Track"), $this->GetIDForIdent("upnp_Track"));
 			
