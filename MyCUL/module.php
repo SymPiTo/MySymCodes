@@ -9,7 +9,7 @@ class AyCUL extends IPSModule
 			//Never delete this line!
 			parent::ApplyChanges();
 			//Always cgreate our own VirtualIO, when no parent is already available
-			$this->RequireParent("{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}");
+			$this->RequireParent("{6179ED6A-FC31-413C-BB8E-1204150CF376}");
 		}
 
 		
