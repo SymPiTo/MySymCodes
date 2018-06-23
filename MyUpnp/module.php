@@ -1349,6 +1349,11 @@ Funktion Previous()
             }
         }
 
-
+        /* Pfad von IPS
+**********************************************/
+        Protected function Kernel(){ 
+            $Kernel = str_replace("\\", "/", IPS_GetKernelDir());
+            return $Kernel;
+        }
 	
 }
