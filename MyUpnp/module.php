@@ -324,22 +324,22 @@ class MyUpnp extends IPSModule {
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function play(){	
 		//IPSLog("start play", "play");
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
-		$Playlist 	= getvalue(self::ID_PLAYLIST_XML);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
+		$Playlist 	= getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 		
 		$xml = new SimpleXMLElement($Playlist);
 		$tracks = $xml->count();
-		setvalue(self::ID_MAXTRACK,$tracks);
- 		$TrackNo = getvalue(self::ID_TRACK)-1;
+		setvalue($this->GetIDForIdent("upnp_NoTracks"),$tracks);
+ 		$TrackNo = getvalue($this->GetIDForIdent("upnp_Track"))-1;
 		$track = ("Track".strval($TrackNo));
 			
 		$res = $xml->$track->resource; // gibt resource des Titels aus
 
 		$metadata = $xml->$track->metadata; // gibt resource des Titels aus
 		//UPNP_GetPositionInfo_Playing abschalten zum Ausführen des Transitioning
-		IPS_SetScriptTimer(30169, 0);
+		IPS_SetScriptTimer($this->GetIDForIdent("upnp_PlayInfo"), 0);
 		if ($TrackNo == 1){	
 			$this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
 		}
@@ -348,7 +348,7 @@ class MyUpnp extends IPSModule {
 		//Stream ausführen	
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
 		// Postion Timer starten
-		IPS_SetEventActive(self::ID_POS_TIMER, true);  // Aktivert Ereignis
+		IPS_SetEventActive($this->GetIDForIdent("upnp_PlayInfo"), true);  // Aktivert Ereignis
 	}
 
 	/*//////////////////////////////////////////////////////////////////////////////
