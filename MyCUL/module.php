@@ -15,7 +15,7 @@ class MyCUL extends IPSModule
 
 			
 
-			//Always create our own VirtualIO, when no parent is already available
+			//Always cgreate our own VirtualIO, when no parent is already available
 
 			$this->RequireParent("{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}");
 
