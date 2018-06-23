@@ -127,7 +127,7 @@ class MyUpnp extends IPSModule {
          
             
         // Timer erstellen
-        $this->RegisterTimer("upnp_PlayInfo", 1000, '$this->GetInfo();');
+        $this->RegisterTimer("upnp_PlayInfo", 1000, '$this->GetPosInfo();');
     }
         
     // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -375,14 +375,14 @@ class MyUpnp extends IPSModule {
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function PlayNextTrack(){	
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 		
-		$track 		= getvalue(self::ID_TRACK)+1;
-		setvalue(self::ID_TRACK,$track);
+		$track 		= getvalue($this->GetIDForIdent("upnp_Track"))+1;
+		setvalue($this->GetIDForIdent("upnp_Track"),$track);
 		$trackNo 	= ("Track".strval($track));
-		$Playlist 	= getvalue(self::ID_PLAYLIST_XML);
+		$Playlist 	= getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 		$xml = new SimpleXMLElement($Playlist);
 		
 		$res = $xml->$trackNo->resource; // gibt resource des Titels aus
@@ -403,13 +403,13 @@ Funktion Stop()
 	{	
 		//include_once ("46564 /*[DLNA\Sub Functions\_UPNP_Functions]*/.ips.php"); //UPNP_Functions
 		
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 			
-		$Playlist = getvalue(self::ID_PLAYLIST_XML);
+		$Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 		$xml = new SimpleXMLElement($Playlist);
-		$SelectedFile = GetValue(self::ID_TRACK); 
+		$SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
 		$track = ("Track".($SelectedFile));
 				
 		$DIDL_Lite_Class = $xml->$track->class;
@@ -425,7 +425,7 @@ Funktion Stop()
 
 		if($class == "object.item.audioItem.musicTrack")
 		{
-			IPS_SetScriptTimer(30169, 0); //GetPositionInfo abschalten
+			$this->SetTimerInterval('upnp_PlayInfo', 0);
 		}
 
 		if($class == "object.item.videoItem")
@@ -450,11 +450,11 @@ Funktion Pause()
 	{	
  
 		
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 		
-		setvalue(self::ID_CONTROL_STATUS, 'PAUSE');
+		//setvalue(self::ID_CONTROL_STATUS, 'PAUSE');
 		
 		$this->Pause_AV($ClientIP, $ClientPort, $ControlURL);
 	}
@@ -469,30 +469,28 @@ Funktion Next()
 //////////////////////////////////////////////////////////////////////////////*/
 	public function next()
 	{	
-		include_once ("46564 /*[DLNA\Sub Functions\_UPNP_Functions]*/.ips.php"); //UPNP_Functions
-		include_once ('32114 /*[Testumgebung\Logger\Logger]*/.ips.php');
-		//IPSLog("Starte Funktion : ", "Play next");
+
 		
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 		
-		$Playlist = getvalue(self::ID_PLAYLIST_XML);
+		$Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 		$xml = new SimpleXMLElement($Playlist);
 		//$count = count($xml->children()); 
 		//IPSLog("Anzahl XML Elemente : ", $count);
 		
-		$SelectedFile = GetValue(self::ID_TRACK_NO); 
+		$SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
 		
 		$track = ("Track".($SelectedFile+1));
 
 		//Aktueller Track = Selected File-----------------------------------------
-		SetValue(self::ID_TRACK_NO, ($SelectedFile+1));
-		setvalue(self::ID_CONTROL_STATUS, 'NEXT');
+		SetValue($this->GetIDForIdent("upnp_Track"), ($SelectedFile+1));
+		//setvalue(self::ID_CONTROL_STATUS, 'NEXT');
 		
-		IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, false);
-		setvalue(self::ID_BUTTON_CONTROL, 1);
-		IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, true);
+		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, false);
+		//setvalue(self::ID_BUTTON_CONTROL, 1);
+		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, true);
 		
 		$this->play('next');	
 
@@ -510,22 +508,22 @@ Funktion Previous()
 	{	
 		include_once ("46564 /*[DLNA\Sub Functions\_UPNP_Functions]*/.ips.php"); //UPNP_Functions
 		
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 		
-		$Playlist = getvalue(self::ID_PLAYLIST_XML);
+		$Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 		$xml = new SimpleXMLElement($Playlist);
-		$SelectedFile = GetValue(self::ID_TRACK_NO); 
+		$SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
 		$track = ("Track".($SelectedFile-1));
 
 		//Aktueller Track = Selected File-----------------------------------------
-		SetValue(self::ID_TRACK_NO, ($SelectedFile-1));
-		setvalue(self::ID_CONTROL_STATUS, 'PREVIOUS');
+		SetValue($this->GetIDForIdent("upnp_Track"), ($SelectedFile-1));
+		//setvalue(self::ID_CONTROL_STATUS, 'PREVIOUS');
 		
-		IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, false);
+		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, false);
 		setvalue(self::ID_BUTTON_CONTROL, 1);
-		IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, true);
+		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, true);
 		
 		$this->play('previous');
 
@@ -595,10 +593,10 @@ Funktion Previous()
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function GetPosInfo(){ 
 		//IPAdresse und Port des gewählten Device---------------------------------------
-		$ControlURL = getvalue(self::ID_CLIENT_CONTROLURL);
-		$ClientIP 	= getvalue(self::ID_CLIENT_IP);
-		$ClientPort = getvalue(self::ID_CLIENT_PORT);
-		$RenderingControlURL = getvalue(self::ID_CLIENT_RENDER_CONTROL_URL);
+		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
+		$RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
 		
 		$fsock = fsockopen($ClientIP, $ClientPort, $errno, $errstr, $timeout = '1');
 		if ( !$fsock ){
@@ -611,9 +609,9 @@ Funktion Previous()
 			bei "PLAYING" -> GetPositionInfo -> Progress wird angezeigt
 			bei "STOPPED" -> nächster Titel wird aufgerufen
 			/*///////////////////////////////////////////////////////////////////////////
-			$Playlist = getvalue(self::ID_PLAYLIST_XML);
+			$Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 			$xml = new SimpleXMLElement($Playlist);
-			$SelectedFile = GetValue(self::ID_TRACK)-1; 
+			$SelectedFile = GetValue($this->GetIDForIdent("upnp_Track"))-1; 
 			$track = ("Track".($SelectedFile));
 				
 			$DIDL_Lite_Class = $xml->$track->class;
@@ -621,26 +619,26 @@ Funktion Previous()
 			/* Transport Status abfragen */
 			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);
 			//IPSLog('PlayStatus ', $Playing);
- 			setvalue(self::ID_TRANSPORT_STATUS, $Playing['CurrentTransportState']);
+ 			setvalue($this->GetIDForIdent("upnp_Transport_Status"), $Playing['CurrentTransportState']);
 			
 			//Transport Status auswerten
 			switch ($Playing['CurrentTransportState']){
 				case 'NO_MEDIA_PRESENT':
-						IPS_SetEventActive(self::ID_POS_TIMER, false);  // DeAktivert Ereignis
-						setvalue(self::ID_PROGRESS,0);
-						setvalue(self::ID_TRACK,0);
+						$this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
+						setvalue($this->GetIDForIdent("upnp_Progress"),0);
+						setvalue($this->GetIDForIdent("upnp_Track"),0);
 				break;
 				case 'STOPPED':
-					$lastTrack = getvalue(self::ID_TRACK);
-					$maxTrack = getvalue(self::ID_MAXTRACK);
+					$lastTrack = getvalue($this->GetIDForIdent("upnp_Track"));
+					$maxTrack = getvalue($this->GetIDForIdent("upnp_NoTracks"));
 					if ($lastTrack > 0  AND $lastTrack < $maxTrack){
 						$this->PlayNextTrack();		
 					}
 					else {
 						 
-						IPS_SetEventActive(self::ID_POS_TIMER, false);  // DeAktivert Ereignis
-						setvalue(self::ID_PROGRESS,0);
-						setvalue(self::ID_TRACK,0);
+						$this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
+						setvalue($this->GetIDForIdent("upnp_Progress"),0);
+						setvalue($this->GetIDForIdent("upnp_Track"),0);
 					}
 				break;
 				case 'PLAYING':
@@ -712,14 +710,14 @@ Funktion Previous()
 		$AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
 		$genre = $didlXml->item[0]->xpath('upnp:genre')[0];
 		$date = $didlXml->item[0]->xpath('dc:date')[0];
-		setvalue(self::ID_DIDL_ARTIST, (string) $creator);
-		setvalue(self::ID_DIDL_TITEL, (string) $title);
-		setvalue(self::ID_DIDL_ALBUM, (string) $album);		
-		setvalue(self::ID_DIDL_TRACK, (string) $TrackNo);
-		setvalue(self::ID_DIDL_DESCRIPT, (string) $description);
-		setvalue(self::ID_DIDL_DATE, (string) $date);
-		setvalue(self::ID_DIDL_ALBUMARTURI, (string) $AlbumArtURI);
-		setvalue(self::ID_DIDL_GENRE, (string) $genre);
+		setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
+		setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
+		setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
+		setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
+		setvalue($this->GetIDForIdent("upnp_Description"), (string) $description);
+		setvalue($this->GetIDForIdent("upnp_Date"), (string) $date);
+		setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
+		setvalue($this->GetIDForIdent("upnp_Genre"), (string) $genre);
 
  
 			function get_time_difference($Duration, $RelTime){
@@ -735,7 +733,7 @@ Funktion Previous()
 			$Duration = (string) $GetPositionInfo[AbsTime]; //AbsTime
 		}
 		$Progress = get_time_difference($Duration, $RelTime);
-		SetValueInteger(self::ID_PROGRESS, $Progress);
+		SetValueInteger($this->GetIDForIdent("upnp_Progress"), $Progress);
 		return $Progress;
 	}
 
