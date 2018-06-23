@@ -1,26 +1,15 @@
  <?php
-class MyCUL extends IPSModule
+class AyCUL extends IPSModule
 
 	{
-
-		
 
 		public function ApplyChanges()
 
 		{
-
 			//Never delete this line!
-
 			parent::ApplyChanges();
-
-			
-
 			//Always cgreate our own VirtualIO, when no parent is already available
-
 			$this->RequireParent("{6DC3D946-0D31-450F-A8C6-C42DB8D7D4F1}");
-
-			
-
 		}
 
 		
@@ -28,27 +17,13 @@ class MyCUL extends IPSModule
 		public function ForwardData($JSONString)
 
 		{
-
 			$data = json_decode($JSONString);
-
 			IPS_LogMessage("IOSplitter FRWD", utf8_decode($data->Buffer));
-
-
-
 			//We would package our payload here before sending it further...
-
-
-
 			$this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data->Buffer)));
-
-			
-
 			//Normally we would wait here for ReceiveData getting called asynchronically and buffer some data
-
 			//Then we should extract the relevant feedback/data and return it to the caller
-
 			return "String data for the device instance!";
-
 		}
 
 		
@@ -56,26 +31,11 @@ class MyCUL extends IPSModule
 		public function ReceiveData($JSONString)
 
 		{
-
 			$data = json_decode($JSONString);
-
 			IPS_LogMessage("IOSplitter RECV", utf8_decode($data->Buffer));
-
-
-
 			//We would parse our payload here before sending it further...
-
-
-
 			//Lets just forward to our children
-
 			$this->SendDataToChildren(json_encode(Array("DataID" => "{0DBE80CC-9A85-46BE-9F89-FBC374EF89D9}", "Buffer" => $data->Buffer)));
-
 		}
-
-		
-
-	
-
-	}
-    
+        }
+                
