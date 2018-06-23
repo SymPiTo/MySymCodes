@@ -7,11 +7,6 @@
                 {
                     "type": "Label",
                     "label": "--------------------------------------------------"
-                },
-		{    
-                    "type": "CheckBox",	
-                    "name": "Telnet",	
-                    "caption": "active" 
                 }
                 
 	]
