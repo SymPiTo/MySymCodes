@@ -65,7 +65,7 @@ class MyUpnp extends IPSModule {
             $CatID = IPS_CreateCategory();       // Kategorie anlegen
             IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
             IPS_SetParent($CatID, $this->InstanceID); 
-             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
+            $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Transport_Status");
             $this->RegisterVariableString("upnp_TrackDuration", "TrackDuration [upnp:album]");
@@ -556,7 +556,7 @@ Funktion Previous()
 			// neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
 			setvalue($this->GetIDForIdent("upnp_Track"), 1);
 			
-			$vars 					= explode(".", $PlaylistFile);
+			$vars 				= explode(".", $PlaylistFile);
 			$PlaylistName 			= $vars[0];
 			$PlaylistExtension		= $vars[1];
 
