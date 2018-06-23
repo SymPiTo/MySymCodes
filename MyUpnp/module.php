@@ -127,7 +127,7 @@ class MyUpnp extends IPSModule {
          
             
         // Timer erstellen
-        $this->RegisterTimer("upnp_PlayInfo", 1000, '');
+        $this->RegisterTimer("upnp_PlayInfo", 1000, '$this->GetInfo();');
     }
         
     // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -353,7 +353,7 @@ class MyUpnp extends IPSModule {
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
 		// Postion Timer starten
 		//IPS_SetEventActive($this->GetIDForIdent("upnp_PlayInfo"), true);  // Aktivert Ereignis
-                $this->SetTimerInterval('upnp_PlayInfo', 1);
+                $this->SetTimerInterval('upnp_PlayInfo', 1000);
 	}
 
 	/*//////////////////////////////////////////////////////////////////////////////
