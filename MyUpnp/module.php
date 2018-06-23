@@ -35,11 +35,11 @@ class MyUpnp extends IPSModule {
 
         // Category anlegen
         // Anlegen einer neuen Kategorie 
-        $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
-        if ($KategorieID === false){
-            $CatID = IPS_CreateCategory();       // Kategorie anlegen
-            IPS_SetName($CatID, "DIDL"); // Kategorie benennen
-            IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unter dem Objekt mit der ID "12345"  
+       // $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
+        //if ($KategorieID === false){
+            //$CatID = IPS_CreateCategory();       // Kategorie anlegen
+            //IPS_SetName($CatID, "DIDL"); // Kategorie benennen
+            //IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unter dem Objekt mit der ID "12345"  
               //Status Variable anlegen
             $this->RegisterVariableString("upnp_Artist", "Artist [dc:creator]");
             $this->RegisterVariableString("upnp_Album", "Album [upnp:album]");
@@ -49,47 +49,46 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableString("upnp_Genre", "Genre [upnp:genre]");
             $this->RegisterVariableString("upnp_Date", "Date [dc:date]");
             $this->RegisterVariableString("upnp_TrackNo", "TrackNumber [upnp:originalTrackNumber]");
-            $ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
+            //$ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
             //Verschieben der Variable unter Ordner DIDL
-            IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_Title"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_Description"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_AlbumArtUri"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_Genre"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_Date"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_TrackNo"), $ID_CatDIDL);
-            IPS_SetParent($this->GetIDForIdent("upnp_Artist"),$ID_CatDIDL);              
+            //IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Title"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Description"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_AlbumArtUri"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Genre"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Date"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_TrackNo"), $ID_CatDIDL);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Artist"),$ID_CatDIDL);              
         }
 
-        $KategorieID = @IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
-        if ($KategorieID === false){        
-            $CatID = IPS_CreateCategory();       // Kategorie anlegen
-            IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
-            IPS_SetParent($CatID, $this->InstanceID); 
+        //$KategorieID = @IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
+        //if ($KategorieID === false){        
+            //$CatID = IPS_CreateCategory();       // Kategorie anlegen
+            //IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
+            //IPS_SetParent($CatID, $this->InstanceID); 
             //Status Variable anlegen
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
-            $this->RegisterVariableInteger("upnp_Track", "Track", "");
-            $this->RegisterVariableString("upnp_Transport_Status", "Transport_Status");
-            $this->RegisterVariableString("upnp_TrackDuration", "TrackDuration [upnp:album]");
-            $this->RegisterVariableString("upnp_TrackMetaData", "TrackMetaData");
-            $this->RegisterVariableString("upnp_TrackURI", "TrackURI");
-            $this->RegisterVariableString("upnp_RelTime", "RelTime");
-            $this->RegisterVariableString("upnp_AbsTime", "GAbsTime");
-            $this->RegisterVariableString("upnp_RelCount", "RelCount");
-            $this->RegisterVariableString("upnp_AbsCount", "AbsCount");
-            $ID_PosInfo =  IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
+            $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
+            $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
+            $this->RegisterVariableString("upnp_TrackDuration", "Pos:TrackDuration [upnp:album]");
+            $this->RegisterVariableString("upnp_TrackMetaData", "Pos:TrackMetaData");
+            $this->RegisterVariableString("upnp_TrackURI", "Pos:TrackURI");
+            $this->RegisterVariableString("upnp_RelTime", "Pos:RelTime");
+            $this->RegisterVariableString("upnp_AbsTime", "Pos:AbsTime");
+            $this->RegisterVariableString("upnp_RelCount", "Pos:RelCount");
+            $this->RegisterVariableString("upnp_AbsCount", "Pos:AbsCount");
+            //$ID_PosInfo =  IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
             //Verschieben der Variable unter Ordner PositionInfo
-            IPS_SetParent($this->GetIDForIdent("upnp_Progress"), $ID_PosInfo);
-
-            IPS_SetParent($this->GetIDForIdent("upnp_Transport_Status"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_TrackDuration"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_TrackMetaData"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_TrackURI"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_RelTime"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_AbsTime"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_RelCount"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_AbsCount"), $ID_PosInfo);
-            IPS_SetParent($this->GetIDForIdent("upnp_Track"), $ID_PosInfo);       
+            //IPS_SetParent($this->GetIDForIdent("upnp_Progress"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Transport_Status"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_TrackDuration"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_TrackMetaData"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_TrackURI"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_RelTime"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_AbsTime"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_RelCount"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_AbsCount"), $ID_PosInfo);
+            //IPS_SetParent($this->GetIDForIdent("upnp_Track"), $ID_PosInfo);       
         }
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             //$this->RegisterPropertyBoolean("active", false);
