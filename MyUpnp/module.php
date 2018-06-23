@@ -545,7 +545,7 @@ Funktion Previous()
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function loadPlaylist($AlbumNo){	
 			//IPSLog("Lade Playlist ", $AlbumNo );
-			$Server = getvalue($this->GetIDForIdent("upnp_ClienIP"));
+			$Server = getvalue($this->GetIDForIdent("upnp_ServerName"));
 			$PlaylistName = $Server.$AlbumNo;
 			setvalue($this->GetIDForIdent("upnp_PlaylistName"), $PlaylistName);
 			$PlaylistFile = $PlaylistName.'.xml';
