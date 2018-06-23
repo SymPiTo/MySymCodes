@@ -59,14 +59,15 @@ class MyUpnp extends IPSModule {
             //IPS_SetParent($this->GetIDForIdent("upnp_Date"), $ID_CatDIDL);
             //IPS_SetParent($this->GetIDForIdent("upnp_TrackNo"), $ID_CatDIDL);
             //IPS_SetParent($this->GetIDForIdent("upnp_Artist"),$ID_CatDIDL);              
-        }
+        //}
 
         //$KategorieID = @IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
         //if ($KategorieID === false){        
             //$CatID = IPS_CreateCategory();       // Kategorie anlegen
             //IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
             //IPS_SetParent($CatID, $this->InstanceID); 
-            //Status Variable anlegen
+            //Status Variable anlegen;
+        
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
@@ -89,7 +90,7 @@ class MyUpnp extends IPSModule {
             //IPS_SetParent($this->GetIDForIdent("upnp_RelCount"), $ID_PosInfo);
             //IPS_SetParent($this->GetIDForIdent("upnp_AbsCount"), $ID_PosInfo);
             //IPS_SetParent($this->GetIDForIdent("upnp_Track"), $ID_PosInfo);       
-        }
+        //}
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
             //$this->RegisterPropertyBoolean("active", false);
             //$this->RegisterPropertyString("IPAddress", "");
