@@ -1,5 +1,5 @@
  <?php
-class MyCul extends IPSModule
+class MyCUL extends IPSModule
 
 	{
 
