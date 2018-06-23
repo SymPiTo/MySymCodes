@@ -1,11 +1,21 @@
 {
-	"id": "{2EF71588-582D-4884-82A7-20A548FC895C}",
+
+	"id": "{43DBCB38-27F5-4C58-81CF-8A2A0D2813E2}",
+
 	"name": "MyCUL",
+
 	"type": 2,
-	"vendor": "MyBusware",
+
+	"vendor": "",
+
 	"aliases": ["MyCUL"],
-        "parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
-        "childRequirements": ["{A7484D6B-159C-4426-B8B6-51DCC29ED1E3}"] , 
-        "implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}", "{5CD01BF2-E1DF-4893-9225-A0E70CB234DF}"],
-	"prefix": "MYCUL"
+
+	"parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
+
+	"childRequirements": ["{66164EB8-3439-4599-B937-A365D7A68567}"],
+
+	"implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}", "{B87AC955-F258-468B-92FE-F4E0866A9E18}"],
+
+	"prefix": "MyCul"
+
 }
