@@ -1,7 +1,0 @@
-{
-	"elements":
-	[
-		{ "name": "Active", "type": "CheckBox", "caption": "Activate Instance" }
-
-	]
-}
