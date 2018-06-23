@@ -964,11 +964,11 @@ trait CEOLupnp
             } 
             $cmd = $command.$value.chr(13);
             fputs($socket, $cmd); 
-            $buffer = ""; 
-            while(!feof($socket)) 
-            { 
-                $buffer .=fgets($socket, 4096); 
-            } 
+            //$buffer = ""; 
+            //while(!feof($socket)) 
+            //{ 
+              //  $buffer .=fgets($socket, 4096); 
+            //} 
 
             //print_r($buffer); 
             //echo "<br /><br /><br />"; 
