@@ -556,7 +556,7 @@ Funktion Previous()
 			// Playlist abspeichern
 			setvalue($this->GetIDForIdent("upnp_Playlist_XML"), $Playlist);
 			// neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
-			setvalue($this->GetIDForIdent("upnp_Track"), 1);
+			setvalue($this->GetIDForIdent("upnp_Track"), $this->GetIDForIdent("upnp_Track"));
 			
 			$vars 				= explode(".", $PlaylistFile);
 			$PlaylistName 			= $vars[0];
