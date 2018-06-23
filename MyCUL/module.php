@@ -1,4 +1,4 @@
- <?
+ <?php
 
 class MyCULYSplitter extends IPSModule
 {

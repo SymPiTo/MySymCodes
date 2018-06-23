@@ -1,4 +1,4 @@
-<?
+<?php
 
 class MyCULY extends IPSModule
 {
@@ -10,7 +10,8 @@ class MyCULY extends IPSModule
 		
 		//These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.$this->ConnectParent("{010A75B4-2260-4D13-03EC-E4A0B6AEAD0B}"); // Splitter}
-
+    }
+    
     public function ApplyChanges()
     {
 	//Never delete this line!
