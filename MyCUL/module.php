@@ -38,4 +38,5 @@ class AyCUL extends IPSModule
 			$this->SendDataToChildren(json_encode(Array("DataID" => "{0DBE80CC-9A85-46BE-9F89-FBC374EF89D9}", "Buffer" => $data->Buffer)));
 		}
         }
+?>
                 
