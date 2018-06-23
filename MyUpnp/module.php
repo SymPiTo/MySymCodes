@@ -32,6 +32,14 @@ class MyUpnp extends IPSModule {
         parent::Create();
         
         $this->RegisterPropertyBoolean("active", false);
+
+        // Category anlegen
+        // Anlegen einer neuen Kategorie 
+        $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
+        if ($KategorieID === false){
+            $CatID = IPS_CreateCategory();       // Kategorie anlegen
+            IPS_SetName($CatID, "DIDL"); // Kategorie benennen
+            IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unter dem Objekt mit der ID "12345"  
               //Status Variable anlegen
             $this->RegisterVariableString("upnp_Artist", "Artist [dc:creator]");
             $this->RegisterVariableString("upnp_Album", "Album [upnp:album]");
@@ -41,14 +49,6 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableString("upnp_Genre", "Genre [upnp:genre]");
             $this->RegisterVariableString("upnp_Date", "Date [dc:date]");
             $this->RegisterVariableString("upnp_TrackNo", "TrackNumber [upnp:originalTrackNumber]");
-        // Category anlegen
-        // Anlegen einer neuen Kategorie 
-        $KategorieID = @IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
-        if ($KategorieID === false){
-            $CatID = IPS_CreateCategory();       // Kategorie anlegen
-            IPS_SetName($CatID, "DIDL"); // Kategorie benennen
-            IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unter dem Objekt mit der ID "12345"  
-
             $ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
             //Verschieben der Variable unter Ordner DIDL
             IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
@@ -60,6 +60,12 @@ class MyUpnp extends IPSModule {
             IPS_SetParent($this->GetIDForIdent("upnp_TrackNo"), $ID_CatDIDL);
             IPS_SetParent($this->GetIDForIdent("upnp_Artist"),$ID_CatDIDL);              
         }
+
+        $KategorieID = @IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
+        if ($KategorieID === false){        
+            $CatID = IPS_CreateCategory();       // Kategorie anlegen
+            IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
+            IPS_SetParent($CatID, $this->InstanceID); 
             //Status Variable anlegen
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Track", "");
@@ -71,13 +77,6 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableString("upnp_AbsTime", "GAbsTime");
             $this->RegisterVariableString("upnp_RelCount", "RelCount");
             $this->RegisterVariableString("upnp_AbsCount", "AbsCount");
-        $KategorieID = @IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
-        if ($KategorieID === false){        
-            $CatID = IPS_CreateCategory();       // Kategorie anlegen
-            IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
-            IPS_SetParent($CatID, $this->InstanceID); 
-
-            
             $ID_PosInfo =  IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
             //Verschieben der Variable unter Ordner PositionInfo
             IPS_SetParent($this->GetIDForIdent("upnp_Progress"), $ID_PosInfo);
