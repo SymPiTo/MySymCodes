@@ -948,7 +948,34 @@ trait CEOLupnp
 		curl_close($ch);
 		return $result;
 	}
+        
+            
+        Public function TelnetCeol($command, $value) {
+            $ip = $this->ReadPropertyString('IPAddress');
+            $socket = fsockopen($ip, 23, $errno, $errstr); 
 
+            if($socket) 
+            { 
+                //echo "Connected <br /><br />"; 
+            } 
+            else 
+            { 
+                //echo "Connection failed!<br /><br />"; 
+            } 
+            $cmd = $command.$value.chr(13);
+            fputs($socket, $cmd); 
+            $buffer = ""; 
+            while(!feof($socket)) 
+            { 
+                $buffer .=fgets($socket, 4096); 
+            } 
+
+            //print_r($buffer); 
+            //echo "<br /><br /><br />"; 
+            //var_dump($buffer); 
+
+            fclose($socket); 
+        }
 } //Ende der Klasse
 
 
