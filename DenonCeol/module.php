@@ -57,8 +57,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $ParentId = @IPS_GetInstance($this->InstanceID)['ConnectionID'];
             
             // Hier soll die Konfiguration der ModBus-Instanz mit der ID 12345 gesetzt werden.
-            IPS_SetConfiguration($ParentID, '{"Host":"192.168.178.29","Open":false,"Port":23}');
-            IPS_ApplyChanges($ParentID); //Neue Konfiguration übernehmen
+            IPS_SetConfiguration($ParentId, '{"Host":"192.168.178.29","Open":false,"Port":23}');
+            IPS_ApplyChanges($ParentId); //Neue Konfiguration übernehmen
         }
         
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
