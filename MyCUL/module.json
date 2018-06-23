@@ -1,6 +1,6 @@
 {
 
-	"id": "{43DBCB38-27F5-4C58-81CF-8A2A0D2813E2}",
+	"id": "{6AAB0DCA-1371-446D-A302-48E0FEE91BC1}",
 
 	"name": "MyCUL",
 
@@ -12,10 +12,10 @@
 
 	"parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
 
-	"childRequirements": ["{66164EB8-3439-4599-B937-A365D7A68567}"],
+	"childRequirements": ["{0DBE80CC-9A85-46BE-9F89-FBC374EF89D9}"],
 
 	"implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}", "{B87AC955-F258-468B-92FE-F4E0866A9E18}"],
 
-	"prefix": "MyCul"
+	"prefix": "MyCUL"
 
 }
