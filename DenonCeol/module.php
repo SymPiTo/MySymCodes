@@ -54,7 +54,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             
             //Server Client erzeugen für Telnet Zugang
             $this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
-            $ParentID = $this->RegisterParent();
+            $ParentId = @IPS_GetInstance($this->InstanceID)['ConnectionID'];
             
             // Hier soll die Konfiguration der ModBus-Instanz mit der ID 12345 gesetzt werden.
             IPS_SetConfiguration($ParentID, '{"Host":"192.168.178.29","Open":false,"Port":23}');
