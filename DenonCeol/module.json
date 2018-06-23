@@ -7,8 +7,8 @@
 	[
 		"Denon_Ceol"
 	],
-	"parentRequirements": [],
+	"parentRequirements": ["{1E5C828D-6E41-0312-8603-F8DFC51B740D}"],
 	"childRequirements": [],
-	"implemented": [],
+	"implemented": ["{1E5C828D-6E41-0312-8603-F8DFC51B740D}"],
 	"prefix": "CEOL"
 }
