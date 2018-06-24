@@ -8,25 +8,67 @@ require_once(__DIR__ . "/UpnpClassTrait.php");
  */
 
 /**
- * Description of module
- *f
- * @author Torsten Beck
+ * class: MyUpnp extends IPSModule
+ * 
+ * 
  */
 class MyUpnp extends IPSModule {
 
     //Traits verbinden
-    
+        /* About: TRAITS
+         * UpnpClassTrait.php
+         */
     use upnp;
     
-    // Der Konstruktor des Moduls
-    // Überschreibt den Standard Kontruktor von IPS
+    /* Constructor: 
+    Der Konstruktor des Moduls
+    Überschreibt den Standard Kontruktor von IPS
+     */
     public function __construct($InstanceID) {
         // Diese Zeile nicht löschen
         parent::__construct($InstanceID);
     }
-        
-    // Create() wird einmalig beim Erstellen einer neuen Instanz ausgeführt
-    // Überschreibt die interne IPS_Create($id)  Funktion
+    //*****************************************************************************
+    /* Function: Create()    
+    * Create() wird einmalig beim Erstellen einer neuen Instanz ausgeführt
+    * Überschreibt die interne IPS_Create($id)  Funktion
+    Variable:
+     * *STATUSVARIABLE
+    --- Code
+        * (String)  upnp_Artist             =>  DIDL_Artist [dc:creator]
+        * (String)  upnp_Album              =>  DIDL_Album [upnp:album]
+        * (String)  upnp_Title              =>  DIDL_Titel [dc:title]
+        * (String)  upnp_Actor              =>  DIDL_Actor [upnp:actor]
+        * (String)  upnp_AlbumArtUri        =>  DIDL_AlbumArtURI [upnp:albumArtURI]
+        * (String)  upnp_Genre              =>  DIDL_Genre [upnp:genre]
+        * (String)  upnp_Genre              =>  DIDL_Genre [upnp:genre]
+        * (String)  upnp_Date               =>  DIDL_Date [dc:date]
+        * (Integer) upnp_Progress           =>  Progress, "UPNP_Progress
+        * (Integer) upnp_Track              =>  Pos:Track", "" 
+        * (String)  upnp_Transport_Status   =>  Pos:Transport_Status
+        * (String)  upnp_ClientArray        =>  Client:Array")
+        * (String)  upnp_ClientControlURL   =>  Client:ControlURL")
+        * (String)  upnp_ClientIcon         =>  Client:Icon
+        * (String)  upnp_ClienIP            =>  Client:IP 
+        * (String)  upnp_ClientKey          =>  Client:Key", ""
+        * (String)  upnp_ClientName         =>  Client:Name");
+        * (String)  upnp_ClientPort         =>  Client:Port");
+        * (String)  upnp_ServerArray        =>  Server:Array
+        * (String)  upnp_ServerIcon         =>  Server:Icon
+        * (String)  upnp_ServerIP           =>  Server:IP");
+        * (String)  upnp_ServerKey          =>  Server:Key", ""
+        * (String)  upnp_ServerName         =>  Server:Name
+        * (String)  upnp_ServerPort         =>  Server:Port
+        * (Integer) upnp_NoTracks           =>  No of tracks, ""
+        * (String)  upnp_PlaylistName       =>  PlaylistName
+        * (String)  upnp_Playlist_XML       =>  Playlist_XML  
+        * (String)  upnp_ClientRenderingControlURL  =>  Client:RenderingControlURL   
+        * (String)  upnp_ServerContentDirectory     =>  Server:ContentDirectory  
+        *      
+        * RegisterTimer("upnp_PlayInfo", 1000,  'UPNP_GetPosInfo(' . $this->InstanceID . ');');
+     * 
+    --- 
+    */
     public function Create() {
         // Diese Zeile nicht löschen.
         parent::Create();
@@ -128,10 +170,14 @@ class MyUpnp extends IPSModule {
         // Timer erstellen
         $this->RegisterTimer("upnp_PlayInfo", 1000,  'UPNP_GetPosInfo(' . $this->InstanceID . ');');
     }
-        
-    // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
-     // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
-    // Überschreibt die intere IPS_ApplyChanges($id) Funktion
+    
+    //*****************************************************************************
+    /* Function: ApplyChanges()
+    * ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
+    * bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
+    * Überschreibt die intere IPS_ApplyChanges($id) Funktion
+    * 
+    */
     public function ApplyChanges() {
         // Diese Zeile nicht löschen
         parent::ApplyChanges();
@@ -143,42 +189,43 @@ class MyUpnp extends IPSModule {
         
 
 
-    
-    
-        /**
+        /* About: Public Funtions
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
         * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
         *
-        * CEOL_XYFunktion($id);
+        * CEOL_XYFunktion($Instance_id, ... );
         *
         */
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion searchUPNP($member)
+    
+    
+
+	//*****************************************************************************
+	/* Function: searchUPNP($member)
 	...............................................................................
 	Sucht alle UPNP Clients / Server
 	...............................................................................
-	Parameter:  $member = "client" // "server"
+	Parameters:  
+            $member - "client" // "server".
 	--------------------------------------------------------------------------------
-	Variable: SetValue(ID_CLIENT_ARRAY, $DeviceArray); // ID_SERVER_ARRAY
-	--------------------------------------------------------------------------------
-	return Device Array[]
-						$Device_Array[$i]['DeviceDescription'] 
-						$Device_Array[$i]['Root']
-						$Device_Array[$i]['DeviceIP']
-						$Device_Array[$i]['DevicePort']
-						$Device_Array[$i]['ModelName'] 
-						$Device_Array[$i]['UDN']
-						$Device_Array[$i]['FriendlyName'] 
-						$Device_Array[$i]['IconURL'] = $iconurl;
-						$Device_Array[$i]['DeviceControlServiceType']
-						$Device_Array[$i]['DeviceControlURL']
-						$Device_Array[$i]['DeviceRenderingServiceType']
-						$Device_Array[$i]['DeviceRenderingControlURL']
-						$Device_Array[$i]['DeviceActiveIcon']
-	--------------------------------------------------------------------------------
-	Status: 
-	//////////////////////////////////////////////////////////////////////////////*/
-	public function searchUPNP($member){
+	Returns: 
+                * Device Array[]_.
+                    - $Device_Array[$i]['DeviceDescription']. 
+                    - $Device_Array[$i]['Root'].
+                    - $Device_Array[$i]['DeviceIP'].
+                    - $Device_Array[$i]['DevicePort'].
+                    - $Device_Array[$i]['ModelName']. 
+                    - $Device_Array[$i]['UDN'].
+                    - $Device_Array[$i]['FriendlyName']. 
+                    - $Device_Array[$i]['IconURL'].
+                    - $Device_Array[$i]['DeviceControlServiceType'].
+                    - $Device_Array[$i]['DeviceControlURL'].
+                    - $Device_Array[$i]['DeviceRenderingServiceType'].
+                    - $Device_Array[$i]['DeviceRenderingControlURL'].
+                    - $Device_Array[$i]['DeviceActiveIcon'].
+	--------------------------------------------------------------------------------*/
+        //Status:
+	/* **************************************************************************** */
+	public function searchUPNP(string $member){
 		/*mögliche Aufrufe:
 		$ST_ALL = "ssdp:all";
 		$ST_RD = "upnp:rootdevice";
@@ -222,20 +269,20 @@ class MyUpnp extends IPSModule {
 	}
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion setClient($clientIP)
+	//*****************************************************************************
+	/* Function: setClient($ClientName)
 	...............................................................................
-	Umschalten auf Client
-	...............................................................................
-	Parameter:  $ClientIP = IP des Clients
+	Umschalten auf Client mit der IP Adresse
+        ...............................................................................
+	Parameters:  
+            $ClientName - Friendly Name des Clients.
 	--------------------------------------------------------------------------------
-	Variable:
-	--------------------------------------------------------------------------------
-	return $key - Nummer des Client Arrays
-	--------------------------------------------------------------------------------
+	Returns: 
+            $key - Nummer des Client Arrays
+        --------------------------------------------------------------------------------
 	Status: checked 2018-06-10
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function setClient($ClientName){
+	public function setClient(string $ClientName){
             $which_key = "FriendlyName";
             $which_value = $ClientName;
             $array = getvalue($this->GetIDForIdent("upnp_ClientArray"));
@@ -265,20 +312,20 @@ class MyUpnp extends IPSModule {
             return $key;
 	}
 	
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion setServer($serverName)
+	//*****************************************************************************
+	/* Function: setServer($serverName)
 	...............................................................................
 	Umschalten auf Client
-	...............................................................................
-	Parameter:  $serverName = "Friendly Name des Servers"  = "Plex" // "AVM"
+        ...............................................................................
+	Parameters:  
+            $serverName - "Friendly Name des Servers"  = "Plex" // "AVM"
 	--------------------------------------------------------------------------------
-	Variable:
-	--------------------------------------------------------------------------------
-	return $key - Nummer des Client Arrays
-	--------------------------------------------------------------------------------
+	Returns:
+            $key - Nummer des Client Arrays
+        --------------------------------------------------------------------------------
 	Status: 
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function setServer($serverName){
+	public function setServer(string $serverName){
 		//IPSLog("Starte Funktion : ", 'setServer');
 		$which_key = "FriendlyName";
 		$which_value = $serverName;
@@ -305,22 +352,16 @@ class MyUpnp extends IPSModule {
 		return $key;
 	}	
 	
-	/*//////////////////////////////////////////////////////////////////////////////
-	Function play()
+	//*****************************************************************************
+	/* Function: play()
 	...............................................................................
 	vorgewählte Playlist abspielen
-	...............................................................................
-	Parameter:  none
+        ...............................................................................
+	Parameters: 
+            none.
 	--------------------------------------------------------------------------------
-	Variable: 	getvalue(	ID_CLIENT_CONTROLURL
-					ID_CLIENT_IP
-					ID_CLIENT_PORT
-					ID_PLAYLIST_XML
-					ID_TRACK
-							
-			setvalue(	ID_MAXTRACK
-	--------------------------------------------------------------------------------
-	return:  none
+	Returns:  
+            none
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
@@ -355,21 +396,16 @@ class MyUpnp extends IPSModule {
                 $this->SetTimerInterval('upnp_PlayInfo', 1000);
 	}
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Function PlayNextTrack()
+	//*****************************************************************************
+	/* Function: PlayNextTrack()
 	...............................................................................
 	nächsten Track aus der vorgewählten Playlist abspielen
 	...............................................................................
-	Parameter:  none
+	Parameters:  
+            none.
 	--------------------------------------------------------------------------------
-	Variable: 	getvalue(	ID_CLIENT_CONTROLURL
-							ID_CLIENT_IP
-							ID_CLIENT_PORT
-							ID_PLAYLIST_XML
-							ID_TRACK
-				setvalue(	
-	--------------------------------------------------------------------------------
-	return:  none
+	Returns:  
+            none
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
@@ -392,12 +428,17 @@ class MyUpnp extends IPSModule {
 	}
 
 
-/*//////////////////////////////////////////////////////////////////////////////
---------------------------------------------------------------------------------
-Funktion Stop()
---------------------------------------------------------------------------------
-
-//////////////////////////////////////////////////////////////////////////////*/
+	//*****************************************************************************
+	/* Function: Stop()
+        --------------------------------------------------------------------------------
+        Stop
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:  
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
 	public function stop()
 	{	
 		//include_once ("46564 /*[DLNA\Sub Functions\_UPNP_Functions]*/.ips.php"); //UPNP_Functions
@@ -439,33 +480,37 @@ Funktion Stop()
 	}
 	
 	
-/*//////////////////////////////////////////////////////////////////////////////
---------------------------------------------------------------------------------
-Funktion Pause()
---------------------------------------------------------------------------------
-
-//////////////////////////////////////////////////////////////////////////////*/
+	//*****************************************************************************
+	/* Function: Pause()
+        --------------------------------------------------------------------------------
+         Pause
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
 	public function pause()
 	{	
- 
-		
 		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
 		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
 		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
-		
-		//setvalue(self::ID_CONTROL_STATUS, 'PAUSE');
-		
 		$this->Pause_AV($ClientIP, $ClientPort, $ControlURL);
 	}
 
 
 	
-/*//////////////////////////////////////////////////////////////////////////////
---------------------------------------------------------------------------------
-Funktion Next()
---------------------------------------------------------------------------------
-
-//////////////////////////////////////////////////////////////////////////////*/
+	//*****************************************************************************
+	/* Function: Next()
+        --------------------------------------------------------------------------------
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
 	public function next()
 	{	
 
@@ -497,12 +542,17 @@ Funktion Next()
 	
 	
 	
-/*//////////////////////////////////////////////////////////////////////////////
---------------------------------------------------------------------------------
-Funktion Previous()
---------------------------------------------------------------------------------
-
-//////////////////////////////////////////////////////////////////////////////*/
+	//*****************************************************************************
+	/* Function: Previous()
+        -------------------------------------------------------------------------------
+        nächste 
+        ...............................................................................
+	Parameters:
+            none.
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
 	public function previous()
 	{	
 		include_once ("46564 /*[DLNA\Sub Functions\_UPNP_Functions]*/.ips.php"); //UPNP_Functions
@@ -529,23 +579,20 @@ Funktion Previous()
 	}	
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Function loadPlaylist($AlbumNo)
+	//*****************************************************************************
+	/* Function: loadPlaylist($AlbumNo)
 	...............................................................................
 	Playlist aus Datei laden (XML) und in Variable Playlist_XML schreiben
 	...............................................................................
-	Parameter:  $AlbumNo = String '0001'
+	Parameters:  
+            $AlbumNo - Album Nummer = '0001'.
 	--------------------------------------------------------------------------------
-	Variable: 	getvalue(	ID_SERVER_NAME
-				setvalue(	ID_PLAYLIST_NAME
-							ID_PLAYLIST_XML
-							ID_TRACK
-	--------------------------------------------------------------------------------
-	return:  Playlist as XML 
+	Returns:  
+            $xml - Playlist as XML 
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function loadPlaylist($AlbumNo){	
+	public function loadPlaylist(string $AlbumNo){	
             $this->SendDebug('Send','lade Play Liste' , 0);
             $Server = getvalue($this->GetIDForIdent("upnp_ServerName"));
             $PlaylistName = $Server.$AlbumNo;
@@ -568,25 +615,17 @@ Funktion Previous()
 	}
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Function GetPosInfo()
+	//*****************************************************************************
+	/* Function: GetPosInfo()
 	...............................................................................
 	Aufruf durch Timer jede Sekunde
 	überprüft 'CurrentTransportState' und PositionInfo
 	...............................................................................
-	Parameter:  none
+	Parameters:
+            none.
 	--------------------------------------------------------------------------------
-	Variable: getvalue(		ID_CLIENT_CONTROLURL
-							ID_CLIENT_IP
-							ID_CLIENT_RENDER_CONTROL_URL
-							ID_PLAYLIST_XML
-							ID_TRACK
-				setvalue(	ID_TRANSPORT_STATUS
-							ID_PROGRESS
-							ID_TRACK
-							ID_MAXTRACK
-	--------------------------------------------------------------------------------
-	return:  none
+	Returns:  
+            none.
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
@@ -657,8 +696,8 @@ Funktion Previous()
 	
 	
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion: progress ($ClientIP, $ClientPort, $ControlURL)
+	//*****************************************************************************
+	/* Function: progress ($ClientIP, $ClientPort, $ControlURL)
 	...............................................................................
 	Fortschrittsanzeige
 	Liest PositionInfo aus aktuellem Stream aus:
@@ -674,25 +713,17 @@ Funktion Previous()
 									'upnp:genre'
 									'dc:date'
 	...............................................................................
-	Parameter:  $ClientIP = Client IP auf dem wiedergeben wird
-				$ClientPort
-				$ControlURL
+	Parameters:  
+            $ClientIP - Client IP auf dem wiedergeben wird.
+            $ClientPort - IP des Clients.
+            $ControlURL - Control URL des Clients.
 	--------------------------------------------------------------------------------
-	Variable: setvalue(	ID_PROGRESS
-						ID_DIDL_ARTIST
-						ID_DIDL_TITEL
-						ID_DIDL_ALBUM
-						ID_DIDL_TRACK
-						ID_DIDL_DESCRIPT
-						ID_DIDL_DATE
-						ID_DIDL_ALBUMARTURI
-						ID_DIDL_GENRE
- 	--------------------------------------------------------------------------------
-	return:  Progress - Integer Wert 0 - 100 
-	--------------------------------------------------------------------------------
+	Returns:  
+            $Progress - Integer Wert 0 - 100 
+        -------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function progress($ClientIP, $ClientPort, $ControlURL){	
+	Protected function progress(string $ClientIP, string $ClientPort, string $ControlURL){	
             $GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
     
             $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
@@ -731,38 +762,38 @@ Funktion Previous()
 	}
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion: browseContainerServer($ObjectID)
+	//*****************************************************************************
+	/* Function: browseContainerServer($ObjectID)
 	...............................................................................
 	Liest alle Objecte eines Containers/Folders mit ID aus 
 	...............................................................................
-	Parameter:  $ObjectID
+	Parameters:  
+            $ObjectID - ID des Objectes.
 	--------------------------------------------------------------------------------
-	Variable:
-	--------------------------------------------------------------------------------
-	return:  array: [$liste][$i]
-			//01: container/item
-			//02: id
-			//03: refID
-			//04: parentid
-			//05: restricted
-			//06: artist
-			//07: album
-			//08: title
-			//09: resource
-			//10: duration
-			//11: size
-			//12: bitrate
-			//13: albumArtURI
-			//14: genre
-			//15: date
-			//16: originalTrackNumber
-			//17: class
-			//18: extension
+	Returns:    
+            * _array: [$liste][$i]_.
+              * - //01: container/item.
+                - //02: id.
+                - //03: refID.
+                - //04: parentid.
+                - //05: restricted.
+                - //06: artist.
+                - //07: album.
+                - //08: title.
+                - //09: resource.
+                - //10: duration.
+                - //11: size.
+                - //12: bitrate.
+                - //13: albumArtURI.
+                - //14: genre.
+                - //15: date.
+                - //16: originalTrackNumber.
+                - //17: class.
+                - //18: extension.
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function browseContainerServer($ObjectID){	
+	Protected function browseContainerServer(string $ObjectID){	
 		//IPSLog("Starte Funktion: browseServer mit : ",$ObjectID);
 		$ServerContentDirectory = GetValue(self::ID_SERVER_CONTENTDIR);
 		$ServerIP= GetValue(self::ID_SERVER_IP);
@@ -822,23 +853,23 @@ Funktion Previous()
 
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion: getContainerServer($Mediatype)
+	//*****************************************************************************
+	/* Function: getContainerServer($Mediatype)
 	...............................................................................
 	Alle Container/Folder eines Servers ab Stammverzeichnis $Mediatype oder ab Filter auslesen 
 	...............................................................................
-	Parameter:  $Mediatype = 'Musik' - 'Audiobook' - Foto' - 'Video'
+	Parameters:  
+            $Mediatype - 'Musik' // 'Audiobook' // 'Foto' // 'Video'
 	--------------------------------------------------------------------------------
-	Variable:
-	--------------------------------------------------------------------------------
-	return:  array: [$container]
-					['class']  
-					['id']  
-					['title']  
+	Returns:   
+            * array: [$container]
+		* - ['class']  
+		  - ['id']  
+		  - ['title']  
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
-	Public function getContainerServer($Mediatype){
+	Public function getContainerServer(string $Mediatype){
 		//IPSLog("Starte Funktion: browseServer mit : ",$Mediatype);
 		$ServerContentDirectory = GetValue(self::ID_SERVER_CONTENTDIR);
 		$ServerIP= GetValue(self::ID_SERVER_IP);
@@ -940,34 +971,34 @@ Funktion Previous()
 	}
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
-	Function BrowseList($Result) --> $Results in Arrays ausgeben
+	//*****************************************************************************
+	/* Function: BrowseList($Result)
 	...............................................................................
 	Alle Container/Folder eines Servers ab Stammverzeichnis $Mediatype oder ab Filter auslesen 
 	...............................................................................
-	Parameter:  $Mediatype = 'Musik' - 'Audiobook' - Foto' - 'Video'
-	--------------------------------------------------------------------------------
-	Variable:
-	--------------------------------------------------------------------------------
-	return:  array: [$liste]
-			//01: container/item
-			//02: id
-			//03: refID
-			//04: parentid
-			//05: restricted
-			//06: artist
-			//07: album
-			//08: title
-			//09: resource
-			//10: duration
-			//11: size
-			//12: bitrate
-			//13: albumArtURI
-			//14: genre
-			//15: date
-			//16: originalTrackNumber
-			//17: class
-			//18: extension
+	Parameters:  
+            $Mediatype - 'Musik' // 'Audiobook' // 'Foto' // 'Video'
+  	--------------------------------------------------------------------------------
+	Returns:  
+            * _array: [$liste]_
+		*	- //01: container/item
+			- //02: id
+			- //03: refID
+			- //04: parentid
+			- //05: restricted
+			- //06: artist
+			- //07: album
+			- //08: title
+			- //09: resource
+			- //10: duration
+			- //11: size
+			- //12: bitrate
+			- //13: albumArtURI
+			- //14: genre
+			- //15: date
+			- //16: originalTrackNumber
+			- //17: class
+			- //18: extension
 	--------------------------------------------------------------------------------
 	Status: 
 	//////////////////////////////////////////////////////////////////////////////*/
@@ -1129,24 +1160,24 @@ Funktion Previous()
 
 
 
-        /*//////////////////////////////////////////////////////////////////////////////
-        Funktion createPlaylist($id, $PlaylistNo)
+	//*****************************************************************************
+	/* Function: createPlaylist($id, $PlaylistNo)
         ...............................................................................
         Erzeugt eine Playliste aus dem Container mit der ID und 
         bennent sie nach Servername + PlaylistNo
         "AVM0001.xml"
         ...............................................................................
-        Parameter:  $id = Container ID
-                                PlaylistNo = "0001"
-        --------------------------------------------------------------------------------
-        Variable:
-        --------------------------------------------------------------------------------
-        return:  schreibt FILE
-                        $Kernel."media/Multimedia/Playlist/Musik/".$PlaylistName.".xml"]  
+        Parameters:  
+            $id         - Container ID.
+            $PlaylistNo - Playlist Nummer z.Bsp "0001".
+ 	--------------------------------------------------------------------------------
+	Returns:    
+            * schreibt FILE.
+                * $Kernel."media/Multimedia/Playlist/Musik/".$PlaylistName.".xml"].  
         --------------------------------------------------------------------------------
         Status: 
         //////////////////////////////////////////////////////////////////////////////*/
-        Protected function createPlaylist($id, $PlaylistNo){
+        Protected function createPlaylist(string $id, string $PlaylistNo){
                 //IPSLog("Starte Funktion CREATEPLAYLIST mit Parameter ", $id.' - '.$PlaylistNo);
                 $PlaylistArray = array();
 
@@ -1181,22 +1212,22 @@ Funktion Previous()
 
 
 
-        /*//////////////////////////////////////////////////////////////////////////////
-        Funktion createAllPlaylist($mediatype)
+	//*****************************************************************************
+	/* Function: createAllPlaylist($mediatype)
         ...............................................................................
         Erzeugt alle Playlisten vom Typ Mediatype
         bennent sie nach Servername + PlaylistNo + .xml
         ...............................................................................
-        Parameter:  $mediatype = "Musik"
-        --------------------------------------------------------------------------------
-        Variable:
-        --------------------------------------------------------------------------------
-        return:  schreibt FILES (Playlisten)
-                        $Kernel."media/Multimedia/Playlist/Musik/".$ServerName."PlaylistNo".xml
+        Parameters:  
+            $mediatype - "Musik".
+ 	--------------------------------------------------------------------------------
+	Returns: 
+            * schreibt FILES (Playlisten)
+                * _$Kernel."media/Multimedia/Playlist/Musik/".$ServerName."PlaylistNo".xml_.
         --------------------------------------------------------------------------------
         Status: 
         //////////////////////////////////////////////////////////////////////////////*/
-        Public function createAllPlaylist($mediatype){
+        Public function createAllPlaylist(string $mediatype){
                 $ServerName = getvalue(self::ID_SERVER_NAME);
                 if ($mediatype == 'Fotos'){
                         $DB_Fotos_Compressed = getvalue(45521 /*[DLNA\Medienbibliothek\DB_Fotos]*/);

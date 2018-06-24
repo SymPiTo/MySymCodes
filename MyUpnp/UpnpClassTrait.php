@@ -411,14 +411,14 @@ trait upnp {
 	--------------------------------------------------------------------------------
 	return:  Array
 			(
-    			[Track] => 1
-				[TrackDuration] => 0:07:12
-				[TrackMetaData] =>
-    			[TrackURI] =>
-    			[RelTime] => 0:04:09
-				[AbsTime] => 5:30:22
-				[RelCount] => 249000
-				[AbsCount] => 19822482
+                            [Track] => 1
+                            [TrackDuration] => 0:07:12
+                            [TrackMetaData] =>
+                            [TrackURI] =>
+                            [RelTime] => 0:04:09
+                            [AbsTime] => 5:30:22
+                            [RelCount] => 249000
+                            [AbsCount] => 19822482
 			)
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
