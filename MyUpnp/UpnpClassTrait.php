@@ -7,39 +7,35 @@
  */
 
 /**
- *
- * @author Torsten
+ * class: upnp TRAIT
+ * 
+ * 
  */
-
-
-
 trait upnp {
 
-    
-	
- 
-	
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	Funktion ContentDirectory_Browse()
-	--------------------------------------------------------------------------------
-	Parameter:  $ServerIP, 
-				$ServerPort $Kernel, 
-				$ServerContentDirectory, 
-				$ObjectID, 
-				$BrowseFlag, 
-				$Filter, 
-				$StartingIndex, 
-				$RequestedCount, 
-				$SortCriteria
-	
-	--------------------------------------------------------------------------------
-	upnp Auslesen des Server Inhaltes einer ID
-	--------------------------------------------------------------------------------
-	return array ['Result'] as xml, ['NumberReturned'] as integer, ['TotalMatches'] as integer, ['UpdateID'] as integer;
+	//*****************************************************************************
+	/* Function: ContentDirectory_Browse()
+   	...............................................................................
+        upnp Auslesen des Server Inhaltes einer ID
+	...............................................................................
+	Parameter:  
+         *   $ClientIP - IP Adresse der Clients.
+         *   $ClientPort - Übertragungs Port des Clients.
+         *   $ClientControlURL - Stammverzeichnis des Clients
+         *   $Kernel
+   	 *   $ServerContentDirectory
+	 *   $ObjectID
+	 *   $BrowseFlag
+         *   $Filter
+	 *   $StartingIndex
+	 *   $RequestedCount
+	 *   $SortCriteria
+ 	--------------------------------------------------------------------------------
+	Returns:
+            array ['Result'] as xml, ['NumberReturned'] as integer, ['TotalMatches'] as integer, ['UpdateID'] as integer;
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function ContentDirectory_Browse ($ServerIP, $ServerPort, $Kernel, $ServerContentDirectory, $ObjectID, $BrowseFlag, $Filter, $StartingIndex, $RequestedCount, $SortCriteria)
+	Protected function ContentDirectory_Browse (string $ServerIP, string $ServerPort, string $Kernel, $ServerContentDirectory, $ObjectID, $BrowseFlag, $Filter, $StartingIndex, $RequestedCount, $SortCriteria)
 	{	
 	    return $this->processSoapCall($ServerIP, $ServerPort, $ServerContentDirectory,
 	
@@ -59,23 +55,24 @@ trait upnp {
 		
 	}
 	
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	Funktion SetAVTransportURI()
-	--------------------------------------------------------------------------------
-	Parameter:  $ClientIP = IP Adresse der Clients , 
-				$ClientPort = Übertragungs Port des Clients', 
-				$ClientControlURL = Stammverzeichnis des Clients
-				$file = URL des mp3 files = muss STRING sein ud kein array
-				e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
-				$MetaData: meta daten (optional) = muss string sein und kein array
-	--------------------------------------------------------------------------------
-	upnp Übertragung eines files
-	--------------------------------------------------------------------------------
-	return: nur Fehler Code
+	//*****************************************************************************
+	/* Function: SetAVTransportURI($ClientIP, $ClientPort, $ClientControlURL, $file, $MetaData)
+   	...............................................................................
+        uupnp Übertragung eines files
+	...............................................................................
+	Parameter:  
+         *   $ClientIP - IP Adresse der Clients.
+         *   $ClientPort - Übertragungs Port des Clients.
+         *   $ClientControlURL - Stammverzeichnis des Clients
+         *   $file_next - URL des mp3 files = muss STRING sein ud kein array
+         *   e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
+         *   $MetaData -  meta daten (optional) = muss string sein und kein array
+ 	--------------------------------------------------------------------------------
+	Returns:
+            nur Fehler Code
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function SetAVTransportURI($ClientIP, $ClientPort, $ClientControlURL, $file, $MetaData){	
+	Protected function SetAVTransportURI(string $ClientIP, string $ClientPort, string $ClientControlURL, string $file, string$MetaData){	
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -90,24 +87,25 @@ trait upnp {
 		);
 		
 	}
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	Funktion SetNextAVTransportURI()
-	--------------------------------------------------------------------------------
-	Parameter:  $ClientIP = IP Adresse der Clients , 
-				$ClientPort = Übertragungs Port des Clients', 
-				$ClientControlURL = Stammverzeichnis des Clients
-				$file_next = URL des mp3 files = muss STRING sein ud kein array
-				e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
-				$MetaData_next: meta daten (optional) = muss string sein und kein array
-	--------------------------------------------------------------------------------
-	upnp Übertragung eines files- es kann maximal ein file nachgeladen (Warteschlange) geladen werden.
-	--------------------------------------------------------------------------------
-	return: nur Fehler Code
+        
+	//*****************************************************************************
+	/* Function: SetNextAVTransportURI($ClientIP, $ClientPort, $ClientControlURL, $file_next, $MetaData_next)
+  	...............................................................................
+        upnp Übertragung eines files- es kann maximal ein file nachgeladen (Warteschlange) geladen werden.
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+         *   $file_next         - URL des mp3 files = muss STRING sein ud kein array
+         *   e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
+         *   $MetaData_next     - meta daten (optional) = muss string sein und kein array
+ 	--------------------------------------------------------------------------------
+	Returns:
+            nur Fehler Code
 	Status: checked
-	
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function SetNextAVTransportURI($ClientIP, $ClientPort, $ClientControlURL, $file_next, $MetaData_next){
+	Protected function SetNextAVTransportURI(string $ClientIP, string $ClientPort, string $ClientControlURL, string $file_next, string $MetaData_next){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -121,8 +119,21 @@ trait upnp {
 	                                )
 		);
 	}
-
-	Protected function Play_AV($ClientIP, $ClientPort, $ClientControlURL){	
+        
+	//*****************************************************************************
+	/* Function:  Play_AV($ClientIP, $ClientPort, $ClientControlURL)
+  	...............................................................................
+        Spielt den stream auf Device
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns:
+         *  Error Code
+         */
+	Protected function Play_AV(string $ClientIP, string $ClientPort, string $ClientControlURL){	
 		//IPSLog('start Play_AV Funktion ',$ClientPort);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
@@ -137,20 +148,22 @@ trait upnp {
 		);
  
 	}
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	Funktion Stop_AV($ClientIP, $ClientPort, $ClientControlURL)
-	
-	Parameter:  $ClientIP = IP Adresse der Clients , 
-				$ClientPort = Übertragungs Port des Clients', 
-				$ClientControlURL = Stammverzeichnis des Clients
-	--------------------------------------------------------------------------------
-	Stopped die upnp Übertragung
-	--------------------------------------------------------------------------------
-	return: nur Fehler Code
+        
+	//*****************************************************************************
+	/* Function: Stop_AV($ClientIP, $ClientPort, $ClientControlURL)
+  	...............................................................................
+        Stopped die upnp Übertragung
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns:
+             nur Fehler Code
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function Stop_AV($ClientIP, $ClientPort, $ClientControlURL){
+	Protected function Stop_AV(string $ClientIP, string $ClientPort, string $ClientControlURL){
 		//IPSLog('start stop_AV Funktion ',$ClientControlURL);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
@@ -164,20 +177,21 @@ trait upnp {
 		);
 	}
 	
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	Funktion Pause_AV($ClientIP, $ClientPort, $ClientControlURL)
-	
-	Parameter:  $ClientIP = IP Adresse der Clients , 
-				$ClientPort = Übertragungs Port des Clients', 
-				$ClientControlURL = Stammverzeichnis des Clients
-	--------------------------------------------------------------------------------
-	Hält die upnp Übertragung an-erneutes Pause Signal setzt Wiedergabe fort
-	--------------------------------------------------------------------------------
-	return: nur Fehler Code
+	//*****************************************************************************
+	/* Function: Pause_AV($ClientIP, $ClientPort, $ClientControlURL)
+  	...............................................................................
+        Hält die upnp Übertragung an-erneutes Pause Signal setzt Wiedergabe fort
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns:
+            FehlerCode
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function Pause_AV($ClientIP, $ClientPort, $ClientControlURL){
+	Protected function Pause_AV(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -188,9 +202,22 @@ trait upnp {
 	                                  new SoapParam('0'             ,"InstanceID"         )
 	                                )
 		);
-	}		
-	
-	Protected function Next_AV($ClientIP, $ClientPort, $ControlURL){
+	}	
+        
+	//*****************************************************************************
+	/* Function: Next_AV($ClientIP, $ClientPort, $ControlURL)
+  	...............................................................................
+  	This is a convenient action to advance to the next track. This action is functionally equivalent to
+        Seek(“TRACK_NR”, “CurrentTrackNr+1”). This action does not cycle back to the first track.
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns:
+         */
+	Protected function Next_AV(string $ClientIP, string $ClientPort, string $ControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -202,8 +229,21 @@ trait upnp {
 	                                )
 		);
 	}		
-	
-	Protected function Previous_AV($ClientIP, $ClientPort, $ClientControlURL){
+
+	//*****************************************************************************
+	/* Function: Previous_AV($ClientIP, $ClientPort, $ClientControlURL)
+ 	...............................................................................
+  	This is a convenient action to advance to the previous track. This action is functionally 
+        equivalent to Seek(“TRACK_NR”, “CurrentTrackNr-1”). This action does not cycle back to the last track.
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns:
+         */        
+	Protected function Previous_AV(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -215,8 +255,22 @@ trait upnp {
 	                                )
 		);
 	}
-	
-	Protected function Seek_AV($ClientIP, $ClientPort, $ClientControlURL, $position){
+
+	//*****************************************************************************
+	/* Function: Seek_AV($ClientIP, $ClientPort, $ClientControlURL, $position)
+ 	...............................................................................
+	This action starts seeking through the resource controlled by the specified instance - 
+        as fast as possible - to the position, specified in the Target argument. 
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+         *   $position =  
+ 	--------------------------------------------------------------------------------
+	Returns:
+         */       
+	Protected function Seek_AV(string $ClientIP, string $ClientPort, string $ClientControlURL, $position){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -231,14 +285,21 @@ trait upnp {
 		);
 	}
 	
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	FunktionPlaymode()
-	--------------------------------------------------------------------------------
-	Parameter: $Playmode = 'NORMAL' , 'RANDOM', 'REPEAT_ONE', REPEAT_ALL
-	
+	//*****************************************************************************
+	/* Function: Playmode($ClientIP, $ClientPort, $ClientControlURL, $Playmode)
+ 	...............................................................................
+	Setzt den Playmode für das Device
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+         *   $Playmode          - $Playmode = 'NORMAL' , 'RANDOM', 'REPEAT_ONE', REPEAT_ALL
+ 	--------------------------------------------------------------------------------
+	Returns:
+
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function Playmode($ClientIP, $ClientPort, $ClientControlURL, $Playmode){
+	Protected function Playmode(string $ClientIP, string $ClientPort, string $ClientControlURL, string $Playmode){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -252,8 +313,20 @@ trait upnp {
 		);
 	}
 	
-	
-	Protected function SetVolume($ClientIP, $ClientPort, $RenderingControlURL, $DesiredVolume){
+	//*****************************************************************************
+	/* Function: SetVolume($ClientIP, $ClientPort, $RenderingControlURL, $DesiredVolume)
+ 	...............................................................................
+	Setzt die Lautstärke des Device auf Wert $DesiredVolume
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+         *   $DesiredVolume     - Lautstärke Wert
+ 	--------------------------------------------------------------------------------
+	Returns:
+         */
+	Protected function SetVolume(string $ClientIP, string $ClientPort, string $RenderingControlURL, $DesiredVolume){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -268,8 +341,19 @@ trait upnp {
 		);
 	}
 	
-	
-	Protected function GetVolume($ClientIP, $ClientPort, $RenderingControlURL){
+	//*****************************************************************************
+	/* Function: GetVolume($ClientIP, $ClientPort, $RenderingControlURL)
+  	...............................................................................
+	Gibt die Lautstärke des Device zurück
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns: 
+         */
+	Protected function GetVolume(string $ClientIP, string $ClientPort, string $RenderingControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -283,8 +367,20 @@ trait upnp {
 		);
 	}
 	
-	
-	Protected function SetMute($ClientIP, $ClientPort, $RenderingControlURL, $DesiredMute){
+	//*****************************************************************************
+	/* Function: SetMute($ClientIP, $ClientPort, $RenderingControlURL, $DesiredMute)
+  	...............................................................................
+	Schaltet Upnp Device stumm
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+         *   $DesiredMute
+	--------------------------------------------------------------------------------
+	Returns: 
+         */
+	Protected function SetMute(string $ClientIP, string $ClientPort, string $RenderingControlURL, $DesiredMute){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -299,8 +395,19 @@ trait upnp {
 		);
 	}
 	
-	
-	Protected function GetMute($ClientIP, $ClientPort, $RenderingControlURL){
+	//*****************************************************************************
+	/* Function: GetMute($ClientIP, $ClientPort, $RenderingControlURL)
+ 	...............................................................................
+	Gibt den Mute Status zurück
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+	--------------------------------------------------------------------------------
+	Returns: 
+         */
+	Protected function GetMute(string $ClientIP, string $ClientPort, string $RenderingControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -314,7 +421,24 @@ trait upnp {
 		);
 	}
 
-	Protected function GetDeviceCapabilities($ClientIP, $ClientPort, $ClientControlURL){
+	//*****************************************************************************
+	/* Function: GetDeviceCapabilities($ClientIP, $ClientPort, $ClientControlURL)
+ 	...............................................................................
+	This action returns information on device capabilities of the specified instance, 
+        such as the supported playback and recording formats, and the supported quality levels 
+        for recording. This action has no effect on state.
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+	--------------------------------------------------------------------------------
+	Returns: 
+         * PlayMedia
+         * RecMedia
+         * RecQualityModes 
+         */        
+	Protected function GetDeviceCapabilities(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -327,8 +451,35 @@ trait upnp {
 		);
 	}
 
-
-	Protected function GetMediaInfo ($ClientIP, $ClientPort, $ClientControlURL){
+	//*****************************************************************************
+	/* Function: GetMediaInfo ($ClientIP, $ClientPort, $ClientControlURL)
+	...............................................................................
+	Liefert den Transport Status als array
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+	--------------------------------------------------------------------------------
+	Returns:   
+         * This action returns information associated with the current media of the specified instance; 
+         * it has no effect on state
+         * Array()
+            --- Code
+            * NumberOfTracks
+            * CurrentMediaDuration
+            * AVTransportURI
+            * AVTransportURIMetaData
+            * NextAVTransportURI
+            * NextAVTransportURIMetaData
+            * PlaybackStorageMedium
+            * RecordStorageMedium
+            * RecordMediumWriteStatus 
+            ---
+        --------------------------------------------------------------------------------
+	Status: checked 
+         */
+	Protected function GetMediaInfo (string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -341,25 +492,27 @@ trait upnp {
 		);
 	}
 
-	/*//////////////////////////////////////////////////////////////////////////////
+	//*****************************************************************************
+	/* Function: GetTransportInfo($ClientIP, $ClientPort, $ClientControlURL)
+	...............................................................................
+	Liefert den Transport Status als array
+	...............................................................................
+	Parameter:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
 	--------------------------------------------------------------------------------
-	Funktion GetTransportInfo($ClientIP, $ClientPort, $ClientControlURL)
-	
-	Parameter:  $ClientIP = IP Adresse der Clients , 
-				$ClientPort = Übertragungs Port des Clients', 
-				$ClientControlURL = Stammverzeichnis des Clients
-	--------------------------------------------------------------------------------
-	HLiefert den Transport Status als array
-	--------------------------------------------------------------------------------
-	return:  Array
-			(
-    			[CurrentTransportState] => PLAYING // NO_MEDIA_PRESENT //STOPPED //PAUSED_PLAYBACK
-    			[CurrentTransportStatus] => OK
-    			[CurrentSpeed] => 1
-			)
+	Returns:   
+         * Array()
+            --- Code
+                [CurrentTransportState] => PLAYING // NO_MEDIA_PRESENT //STOPPED //PAUSED_PLAYBACK
+                [CurrentTransportStatus] => OK
+                [CurrentSpeed] => 1
+             ---
+        --------------------------------------------------------------------------------
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function GetTransportInfo($ClientIP, $ClientPort, $ClientControlURL){
+	Protected function GetTransportInfo(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -372,7 +525,22 @@ trait upnp {
 		);
 	}
 
-	Protected function GetTransportSettings($ClientIP, $ClientPort, $ClientControlURL){
+	//*****************************************************************************
+	/* Function: GetTransportSettings($ClientIP, $ClientPort, $ClientControlURL)
+	...............................................................................
+	 
+	...............................................................................
+	Parameters:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+	--------------------------------------------------------------------------------
+	Returns: 
+         * This action returns information on various settings of the specified instance, 
+         * such as the current play mode
+         * and the current recording quality mode.This action has no effect on state.
+         */        
+	Protected function GetTransportSettings(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -385,7 +553,19 @@ trait upnp {
 		);
 	}
 
-
+	//*****************************************************************************
+	/* Function: GetCurrentTransportActions($ClientIP, $ClientPort, $ClientControlURL)
+	...............................................................................
+	 
+	...............................................................................
+	Parameters:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+	--------------------------------------------------------------------------------
+	Returns: 
+         * Returns the CurrentTransportActions state variable for the specified instance.
+         */ 
 	Protected function GetCurrentTransportActions($ClientIP, $ClientPort, $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
@@ -399,18 +579,20 @@ trait upnp {
 		);
 	}
 	
-	/*//////////////////////////////////////////////////////////////////////////////
-	--------------------------------------------------------------------------------
-	Funktion GetPositionInfo($ClientIP, $ClientPort, $ClientControlURL)
-	
-	Parameter:  $ClientIP = IP Adresse der Clients , 
-				$ClientPort = Übertragungs Port des Clients', 
-				$ClientControlURL = Stammverzeichnis des Clients
-	--------------------------------------------------------------------------------
-	Liefert den Position Status als array
-	--------------------------------------------------------------------------------
-	return:  Array
-			(
+	//*****************************************************************************
+	/* Function: GetPositionInfo($ClientIP, $ClientPort, $ClientControlURL)
+	...............................................................................
+	*Liest die Positions Informationen des upnp streams aus und 
+        * gibt Ergebnis als Array zurück
+	...............................................................................
+	Parameters:  
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+ 	--------------------------------------------------------------------------------
+	Returns: 
+            * Array ()
+		   --- Code
                             [Track] => 1
                             [TrackDuration] => 0:07:12
                             [TrackMetaData] =>
@@ -419,10 +601,10 @@ trait upnp {
                             [AbsTime] => 5:30:22
                             [RelCount] => 249000
                             [AbsCount] => 19822482
-			)
+		    ---
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function GetPositionInfo($ClientIP, $ClientPort, $ClientControlURL){
+	Protected function GetPositionInfo(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -444,12 +626,25 @@ trait upnp {
 
 
 
-	/*//////////////////////////////////////////////////////////////////////////////
+	//*****************************************************************************
+	/* Function: processSoapCall($ip, $port, $path, $uri, $action, $parameter)
+	...............................................................................
+	sendet einen HTTP string per curl an Netzwerk device
+	...............................................................................
+	Parameters:  
+         *  $ip         - IP des device
+         *  $port       - Port des device
+         *  $path       - ClientControlURL
+         *  $uri        - "urn:schemas-upnp-org:service:AVTransport:1"
+         *  $action     - "GetPositionInfo"
+         *  $parameter  - Soap Parameter
 	--------------------------------------------------------------------------------
-	Sub Functions()
-	--------------------------------------------------------------------------------
-	//////////////////////////////////////////////////////////////////////////////*/	
-	Protected function processSoapCall($ip, $port, $path, $uri, $action, $parameter)
+	Returns: 
+         * output_headers
+         *      Sofern vorhanden, wird dieses Array mit den Headern des SOAP-Response gefüllt.
+         *      Sonst Fehler Meldung  
+         */	
+	Protected function processSoapCall(string $ip, string $port, string $path, string $uri, string $action, array $parameter)
     {
 	    try{
 	    	$client     = new SoapClient(null, array("location"   => "http://".$ip.':'.$port.$path,
@@ -472,9 +667,20 @@ trait upnp {
 
 
 
-
-  	private function resolveErrorCode($path,$errorCode)
-	{
+	//*****************************************************************************
+	/* Function: resolveErrorCode($path,$errorCode)
+	...............................................................................
+	FehlerCode Auswertung. Wandelt Error Code in einen Fehler Text um. 
+	...............................................................................
+	Parameters:  
+         *  $path  -   "/AVTransport/ctrl" // "/RenderingControl/ctrl" // "/ContentDirectory/ctrl" 
+         *  $errorCode    
+	--------------------------------------------------------------------------------
+	Returns: 
+         * $errorList[$path][$errorCode]
+         * "UNKNOWN"
+         */
+  	private function resolveErrorCode($path, $errorCode){
    		$errorList = array( "/AVTransport/ctrl"      => array(
                                                                            "701" => "ERROR_AV_UPNP_AVT_INVALID_TRANSITION",
                                                                            "702" => "ERROR_AV_UPNP_AVT_NO_CONTENTS",
@@ -520,12 +726,12 @@ trait upnp {
                                                                            "719" => "ERROR_AV_UPNP_CD_DESTINATION_RESOURCE_ACCESS_DENIED",
                                                                            "720" => "ERROR_AV_UPNP_CD_REQUEST_FAILED"
                                                                          ) ); 
-    	if (isset($errorList[$path][$errorCode])){
-			return $errorList[$path][$errorCode] ;
-    	}
-		else{
-      		return "UNKNOWN";
-    	}
+            if (isset($errorList[$path][$errorCode])){
+                            return $errorList[$path][$errorCode] ;
+            }
+                    else{
+                    return "UNKNOWN";
+            }
    	}
 
 
