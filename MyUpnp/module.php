@@ -41,14 +41,14 @@ class MyUpnp extends IPSModule {
             //IPS_SetName($CatID, "DIDL"); // Kategorie benennen
             //IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unter dem Objekt mit der ID "12345"  
               //Status Variable anlegen
-            $this->RegisterVariableString("upnp_Artist", "Artist [dc:creator]");
-            $this->RegisterVariableString("upnp_Album", "Album [upnp:album]");
-            $this->RegisterVariableString("upnp_Title", "Titel [dc:title]");
-            $this->RegisterVariableString("upnp_Actor", "Actor [upnp:actor]");
-            $this->RegisterVariableString("upnp_AlbumArtUri", "AlbumArtURI [upnp:albumArtURI]");
-            $this->RegisterVariableString("upnp_Genre", "Genre [upnp:genre]");
-            $this->RegisterVariableString("upnp_Date", "Date [dc:date]");
-            $this->RegisterVariableString("upnp_TrackNo", "TrackNumber [upnp:originalTrackNumber]");
+            $this->RegisterVariableString("upnp_Artist", "DIDL_Artist [dc:creator]");
+            $this->RegisterVariableString("upnp_Album", "DIDL_Album [upnp:album]");
+            $this->RegisterVariableString("upnp_Title", "DIDL_Titel [dc:title]");
+            $this->RegisterVariableString("upnp_Actor", "DIDL_Actor [upnp:actor]");
+            $this->RegisterVariableString("upnp_AlbumArtUri", "DIDL_AlbumArtURI [upnp:albumArtURI]");
+            $this->RegisterVariableString("upnp_Genre", "DIDL_Genre [upnp:genre]");
+            $this->RegisterVariableString("upnp_Date", "DIDL_Date [dc:date]");
+            $this->RegisterVariableString("upnp_TrackNo", "DIDL_TrackNumber [upnp:originalTrackNumber]");
             //$ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
             //Verschieben der Variable unter Ordner DIDL
             //IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
