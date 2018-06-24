@@ -694,7 +694,7 @@ Funktion Previous()
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress($ClientIP, $ClientPort, $ControlURL){	
 		$GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
-	$this->SendDebug('Send', (string) $GetPositionInfo[AbsTime], 0);
+	$this->SendDebug('Send', (string) $GetPositionInfo['AbsTime'], 0);
 		$Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
 		$RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
 		$TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
@@ -728,7 +728,7 @@ Funktion Previous()
 			}
 			
 		if($Duration == "0:00:00"){
-			$Duration = (string) $GetPositionInfo[AbsTime]; //AbsTime
+			$Duration = (string) $GetPositionInfo['AbsTime']; //AbsTime
 		}
 		$Progress = get_time_difference($Duration, $RelTime);
 		SetValueInteger($this->GetIDForIdent("upnp_Progress"), $Progress);
