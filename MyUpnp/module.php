@@ -699,8 +699,7 @@ Funktion Previous()
 		$RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
 		$TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
  		$b = html_entity_decode($TrackMeta);
-            $fp = fopen('data.txt', 'w');
-            fwrite($fp, $b);
+$this->SendDebug('Send', $b, 0);
                 $didlXml = simplexml_load_string($b); 
 		$creator = $didlXml->item[0]->xpath('dc:creator')[0];
 		$title = $didlXml->item[0]->xpath('dc:title')[0];
