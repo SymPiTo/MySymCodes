@@ -44,7 +44,7 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableString("upnp_Artist", "Artist [dc:creator]");
             $this->RegisterVariableString("upnp_Album", "Album [upnp:album]");
             $this->RegisterVariableString("upnp_Title", "Titel [dc:title]");
-            $this->RegisterVariableString("upnp_Description", "Description [dc:description]");
+            $this->RegisterVariableString("upnp_Actor", "Actor [upnp:actor]");
             $this->RegisterVariableString("upnp_AlbumArtUri", "AlbumArtURI [upnp:albumArtURI]");
             $this->RegisterVariableString("upnp_Genre", "Genre [upnp:genre]");
             $this->RegisterVariableString("upnp_Date", "Date [dc:date]");
@@ -694,26 +694,25 @@ Funktion Previous()
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress($ClientIP, $ClientPort, $ControlURL){	
 		$GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
-		
+	$this->SendDebug('Send', (string) $GetPositionInfo[AbsTime], 0);
 		$Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
 		$RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
 		$TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
  		$b = html_entity_decode($TrackMeta);
-$this->SendDebug('Send', $b, 0);
                 $didlXml = simplexml_load_string($b); 
 		$creator = $didlXml->item[0]->xpath('dc:creator')[0];
 		$title = $didlXml->item[0]->xpath('dc:title')[0];
 		$album = $didlXml->item[0]->xpath('upnp:album')[0];
 		$TrackNo = $didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
-		$description = $didlXml->item[0]->xpath('dc:description')[0];
+		$actor = $didlXml->item[0]->xpath('upnp:actor')[0];
 		$AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
 		$genre = $didlXml->item[0]->xpath('upnp:genre')[0];
 		$date = $didlXml->item[0]->xpath('dc:date')[0];
 		setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
 		setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
 		setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
-		setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
-		setvalue($this->GetIDForIdent("upnp_Description"), (string) $description);
+                setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
+                setvalue($this->GetIDForIdent("upnp_Actor"), (string) $actor);
 		setvalue($this->GetIDForIdent("upnp_Date"), (string) $date);
 		setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
 		setvalue($this->GetIDForIdent("upnp_Genre"), (string) $genre);
