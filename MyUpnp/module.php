@@ -313,12 +313,12 @@ class MyUpnp extends IPSModule {
 	Parameter:  none
 	--------------------------------------------------------------------------------
 	Variable: 	getvalue(	ID_CLIENT_CONTROLURL
-							ID_CLIENT_IP
-							ID_CLIENT_PORT
-							ID_PLAYLIST_XML
-							ID_TRACK
+					ID_CLIENT_IP
+					ID_CLIENT_PORT
+					ID_PLAYLIST_XML
+					ID_TRACK
 							
-				setvalue(	ID_MAXTRACK
+			setvalue(	ID_MAXTRACK
 	--------------------------------------------------------------------------------
 	return:  none
 	--------------------------------------------------------------------------------
@@ -617,39 +617,38 @@ Funktion Previous()
 			
 			/* Transport Status abfragen */
 			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);
-			//IPSLog('PlayStatus ', $Playing);
+
  			setvalue($this->GetIDForIdent("upnp_Transport_Status"), $Playing['CurrentTransportState']);
 			
 			//Transport Status auswerten
 			switch ($Playing['CurrentTransportState']){
 				case 'NO_MEDIA_PRESENT':
-						$this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
-						setvalue($this->GetIDForIdent("upnp_Progress"),0);
-						setvalue($this->GetIDForIdent("upnp_Track"),0);
+                                    $this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
+                                    setvalue($this->GetIDForIdent("upnp_Progress"),0);
+                                    setvalue($this->GetIDForIdent("upnp_Track"),0);
 				break;
 				case 'STOPPED':
-					$lastTrack = getvalue($this->GetIDForIdent("upnp_Track"));
-					$maxTrack = getvalue($this->GetIDForIdent("upnp_NoTracks"));
-					if ($lastTrack > 0  AND $lastTrack < $maxTrack){
-						$this->PlayNextTrack();		
-					}
-					else {
-						 
-						$this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
-						setvalue($this->GetIDForIdent("upnp_Progress"),0);
-						setvalue($this->GetIDForIdent("upnp_Track"),0);
-					}
+                                    $lastTrack = getvalue($this->GetIDForIdent("upnp_Track"));
+                                    $maxTrack = getvalue($this->GetIDForIdent("upnp_NoTracks"));
+                                    if ($lastTrack > 0  AND $lastTrack < $maxTrack){
+                                            $this->PlayNextTrack();		
+                                    }
+                                    else {
+                                        $this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
+                                        setvalue($this->GetIDForIdent("upnp_Progress"),0);
+                                        setvalue($this->GetIDForIdent("upnp_Track"),0);
+                                    }
 				break;
 				case 'PLAYING':
-					if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
-						$fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
-					}
-					if($DIDL_Lite_Class == "object.item.videoItem"){
-						//include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
-					}
-					if($DIDL_Lite_Class == "object.item.imageItem.photo"){
-						//include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
-					}			
+                                    if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
+                                            $fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
+                                    }
+                                    if($DIDL_Lite_Class == "object.item.videoItem"){
+                                            //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
+                                    }
+                                    if($DIDL_Lite_Class == "object.item.imageItem.photo"){
+                                            //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
+                                    }			
 				break;
 			}
 		}
@@ -695,12 +694,14 @@ Funktion Previous()
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress($ClientIP, $ClientPort, $ControlURL){	
 		$GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
-		//IPSLog('Aktuelle Track Nummer ', $GetPositionInfo);
+		
 		$Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
 		$RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
 		$TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
  		$b = html_entity_decode($TrackMeta);
-	 	$didlXml = simplexml_load_string($b); 
+            $fp = fopen('data.txt', 'w');
+            fwrite($fp, $b);
+                $didlXml = simplexml_load_string($b); 
 		$creator = $didlXml->item[0]->xpath('dc:creator')[0];
 		$title = $didlXml->item[0]->xpath('dc:title')[0];
 		$album = $didlXml->item[0]->xpath('upnp:album')[0];
