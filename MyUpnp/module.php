@@ -71,13 +71,13 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
-            $this->RegisterVariableString("upnp_TrackDuration", "Pos:TrackDuration [upnp:album]");
-            $this->RegisterVariableString("upnp_TrackMetaData", "Pos:TrackMetaData");
-            $this->RegisterVariableString("upnp_TrackURI", "Pos:TrackURI");
-            $this->RegisterVariableString("upnp_RelTime", "Pos:RelTime");
-            $this->RegisterVariableString("upnp_AbsTime", "Pos:AbsTime");
-            $this->RegisterVariableString("upnp_RelCount", "Pos:RelCount");
-            $this->RegisterVariableString("upnp_AbsCount", "Pos:AbsCount");
+            //$this->RegisterVariableString("upnp_TrackDuration", "Pos:TrackDuration [upnp:album]");
+            //$this->RegisterVariableString("upnp_TrackMetaData", "Pos:TrackMetaData");
+            //$this->RegisterVariableString("upnp_TrackURI", "Pos:TrackURI");
+            //$this->RegisterVariableString("upnp_RelTime", "Pos:RelTime");
+            //$this->RegisterVariableString("upnp_AbsTime", "Pos:AbsTime");
+            //$this->RegisterVariableString("upnp_RelCount", "Pos:RelCount");
+            //$this->RegisterVariableString("upnp_AbsCount", "Pos:AbsCount");
             //$ID_PosInfo =  IPS_GetCategoryIDByName("PositionInfo", $this->InstanceID);
             //Verschieben der Variable unter Ordner PositionInfo
             //IPS_SetParent($this->GetIDForIdent("upnp_Progress"), $ID_PosInfo);
@@ -327,9 +327,9 @@ class MyUpnp extends IPSModule {
 	public function play(){	
 		//IPSLog("start play", "play");
 		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
-		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
 		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
-		$Playlist 	= getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
+		$Playlist   = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
 		
 		$xml = new SimpleXMLElement($Playlist);
 		$tracks = $xml->count();
@@ -416,15 +416,15 @@ Funktion Stop()
 		 
 		
 
-      	setvalue(self::ID_TRACK, 0);
+            setvalue(self::ID_TRACK, 0);
 		
 	  	
 	  /*Timer abschalten--------------------------------------------------------*/
-      $class = $DIDL_Lite_Class;
+            $class = $DIDL_Lite_Class;
 
 		if($class == "object.item.audioItem.musicTrack")
 		{
-			$this->SetTimerInterval('upnp_PlayInfo', 0);
+                    $this->SetTimerInterval('upnp_PlayInfo', 0);
 		}
 
 		if($class == "object.item.videoItem")
@@ -546,25 +546,25 @@ Funktion Previous()
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function loadPlaylist($AlbumNo){	
-			//IPSLog("Lade Playlist ", $AlbumNo );
-			$Server = getvalue($this->GetIDForIdent("upnp_ServerName"));
-			$PlaylistName = $Server.$AlbumNo;
-			setvalue($this->GetIDForIdent("upnp_PlaylistName"), $PlaylistName);
-			$PlaylistFile = $PlaylistName.'.xml';
-	
-			$Playlist = file_get_contents($this->Kernel()."media/Multimedia/Playlist/Musik/".$PlaylistFile);
-			// Playlist abspeichern
-			setvalue($this->GetIDForIdent("upnp_Playlist_XML"), $Playlist);
-			// neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
-			setvalue($this->GetIDForIdent("upnp_Track"), 1);
-			
-			$vars 				= explode(".", $PlaylistFile);
-			$PlaylistName 			= $vars[0];
-			$PlaylistExtension		= $vars[1];
+            $this->SendDebug('Send','lade Play Liste' , 0);
+            $Server = getvalue($this->GetIDForIdent("upnp_ServerName"));
+            $PlaylistName = $Server.$AlbumNo;
+            setvalue($this->GetIDForIdent("upnp_PlaylistName"), $PlaylistName);
+            $PlaylistFile = $PlaylistName.'.xml';
 
-			$xml = new SimpleXMLElement($Playlist);
-			
-			return $xml;
+            $Playlist = file_get_contents($this->Kernel()."media/Multimedia/Playlist/Musik/".$PlaylistFile);
+            // Playlist abspeichern
+            setvalue($this->GetIDForIdent("upnp_Playlist_XML"), $Playlist);
+            // neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
+            setvalue($this->GetIDForIdent("upnp_Track"), 1);
+
+            $vars 				= explode(".", $PlaylistFile);
+            $PlaylistName 			= $vars[0];
+            $PlaylistExtension		= $vars[1];
+
+            $xml = new SimpleXMLElement($Playlist);
+
+            return $xml;
 	}
 
 
@@ -593,14 +593,14 @@ Funktion Previous()
 	public function GetPosInfo(){ 
 		//IPAdresse und Port des gewählten Device---------------------------------------
 		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
-		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+		$ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
 		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 		$RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
 		
 		$fsock = fsockopen($ClientIP, $ClientPort, $errno, $errstr, $timeout = '1');
 		if ( !$fsock ){
-			//nicht erreichbar --> Timer abschalten--------------------------------
-			echo ("$DeviceIP nicht erreichbar !!!");
+                    //nicht erreichbar --> Timer abschalten--------------------------------
+                    $this->SendDebug('Send', $ClientIP.'ist nicht erreichbar!', 0);
 		}
 		else{
 			/*///////////////////////////////////////////////////////////////////////////
@@ -622,34 +622,34 @@ Funktion Previous()
 			
 			//Transport Status auswerten
 			switch ($Playing['CurrentTransportState']){
-				case 'NO_MEDIA_PRESENT':
+                            case 'NO_MEDIA_PRESENT':
+                                $this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
+                                setvalue($this->GetIDForIdent("upnp_Progress"),0);
+                                setvalue($this->GetIDForIdent("upnp_Track"),0);
+                            break;
+                            case 'STOPPED':
+                                $lastTrack = getvalue($this->GetIDForIdent("upnp_Track"));
+                                $maxTrack = getvalue($this->GetIDForIdent("upnp_NoTracks"));
+                                if ($lastTrack > 0  AND $lastTrack < $maxTrack){
+                                        $this->PlayNextTrack();		
+                                }
+                                else {
                                     $this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
                                     setvalue($this->GetIDForIdent("upnp_Progress"),0);
                                     setvalue($this->GetIDForIdent("upnp_Track"),0);
-				break;
-				case 'STOPPED':
-                                    $lastTrack = getvalue($this->GetIDForIdent("upnp_Track"));
-                                    $maxTrack = getvalue($this->GetIDForIdent("upnp_NoTracks"));
-                                    if ($lastTrack > 0  AND $lastTrack < $maxTrack){
-                                            $this->PlayNextTrack();		
-                                    }
-                                    else {
-                                        $this->SetTimerInterval('upnp_PlayInfo', 0);  // DeAktivert Ereignis
-                                        setvalue($this->GetIDForIdent("upnp_Progress"),0);
-                                        setvalue($this->GetIDForIdent("upnp_Track"),0);
-                                    }
-				break;
-				case 'PLAYING':
-                                    if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
-                                            $fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
-                                    }
-                                    if($DIDL_Lite_Class == "object.item.videoItem"){
-                                            //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
-                                    }
-                                    if($DIDL_Lite_Class == "object.item.imageItem.photo"){
-                                            //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
-                                    }			
-				break;
+                                }
+                            break;
+                            case 'PLAYING':
+                                if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
+                                    $fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
+                                }
+                                if($DIDL_Lite_Class == "object.item.videoItem"){
+                                        //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
+                                }
+                                if($DIDL_Lite_Class == "object.item.imageItem.photo"){
+                                        //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
+                                }			
+                            break;
 			}
 		}
 	}
@@ -693,46 +693,41 @@ Funktion Previous()
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress($ClientIP, $ClientPort, $ControlURL){	
-		$GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
-	$this->SendDebug('Send', (string) $GetPositionInfo['AbsTime'], 0);
-		$Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
-		$RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
-		$TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
- 		$b = html_entity_decode($TrackMeta);
-                $didlXml = simplexml_load_string($b); 
-		$creator = $didlXml->item[0]->xpath('dc:creator')[0];
-		$title = $didlXml->item[0]->xpath('dc:title')[0];
-		$album = $didlXml->item[0]->xpath('upnp:album')[0];
-		$TrackNo = $didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
-		$actor = $didlXml->item[0]->xpath('upnp:actor')[0];
-		$AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
-		$genre = $didlXml->item[0]->xpath('upnp:genre')[0];
-		$date = $didlXml->item[0]->xpath('dc:date')[0];
-		setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
-		setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
-		setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
-                setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
-                setvalue($this->GetIDForIdent("upnp_Actor"), (string) $actor);
-		setvalue($this->GetIDForIdent("upnp_Date"), (string) $date);
-		setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
-		setvalue($this->GetIDForIdent("upnp_Genre"), (string) $genre);
-
- 
-			function get_time_difference($Duration, $RelTime){
-				$duration = explode(":", $Duration);
-				//print_r ($duration);
-				$reltime = explode(":", $RelTime);
-				//print_r ($reltime);
-				$time_difference = round((((($reltime[0] * 3600) + ($reltime[1] * 60) + ($reltime[2]))* 100) / (($duration[0] * 3600) + ($duration[1] * 60) + ($duration[2]))), 0, PHP_ROUND_HALF_UP);
-				return ($time_difference);
-			}
-			
-		if($Duration == "0:00:00"){
-			$Duration = (string) $GetPositionInfo['AbsTime']; //AbsTime
-		}
-		$Progress = get_time_difference($Duration, $RelTime);
-		SetValueInteger($this->GetIDForIdent("upnp_Progress"), $Progress);
-		return $Progress;
+            $GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
+    
+            $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
+            $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
+            $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
+            $b = html_entity_decode($TrackMeta);
+            $didlXml = simplexml_load_string($b); 
+            $creator = $didlXml->item[0]->xpath('dc:creator')[0];
+            $title = $didlXml->item[0]->xpath('dc:title')[0];
+            $album = $didlXml->item[0]->xpath('upnp:album')[0];
+            $TrackNo = $didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
+            $actor = $didlXml->item[0]->xpath('upnp:actor')[0];
+            $AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
+            $genre = $didlXml->item[0]->xpath('upnp:genre')[0];
+            $date = $didlXml->item[0]->xpath('dc:date')[0];
+            setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
+            setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
+            setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
+            setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
+            setvalue($this->GetIDForIdent("upnp_Actor"), (string) $actor);
+            setvalue($this->GetIDForIdent("upnp_Date"), (string) $date);
+            setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
+            setvalue($this->GetIDForIdent("upnp_Genre"), (string) $genre);
+                function get_time_difference($Duration, $RelTime){
+                        $duration = explode(":", $Duration);
+                        $reltime = explode(":", $RelTime);
+                        $time_difference = round((((($reltime[0] * 3600) + ($reltime[1] * 60) + ($reltime[2]))* 100) / (($duration[0] * 3600) + ($duration[1] * 60) + ($duration[2]))), 0, PHP_ROUND_HALF_UP);
+                        return ($time_difference);
+                }
+            if($Duration == "0:00:00"){
+                    $Duration = (string) $GetPositionInfo['AbsTime']; //AbsTime
+            }
+            $Progress = get_time_difference($Duration, $RelTime);
+            SetValueInteger($this->GetIDForIdent("upnp_Progress"), $Progress);
+            return $Progress;
 	}
 
 
@@ -1277,23 +1272,18 @@ Funktion Previous()
         function ping($IP, $Port, $timeout)
         /*//////////////////////////////////////////////////////////////////////////////
 
-        Public function ping($IP, $Port, $timeout)
-                {
-                $fsock = @fsockopen($IP, $Port, $errno, $errstr, $timeout);
-
-                //socket_set_timeout($fsock, $timeout);
-
-                if ( ! $fsock )
-                        {
-                        $this->Meldung($IP.": nicht erreichbar\r\n\r\n");
-                        return ("false");
-                        }
-                else
-                        {
-                        $this->Meldung($IP.": erreichbar\r\n\r\n");
-                        return ("true");
-                        }
-                }
+        Public function ping($IP, $Port, $timeout){
+            $fsock = @fsockopen($IP, $Port, $errno, $errstr, $timeout);
+            //socket_set_timeout($fsock, $timeout);
+            if ( ! $fsock ){
+                $this->SendDebug('Send', $IP.'ist nicht erreichbar!', 0);
+                return ("false");
+            }
+            else{
+                $this->Meldung($IP.": erreichbar\r\n\r\n");
+                return ("true");
+            }
+        }
 
         /*//////////////////////////////////////////////////////////////////////////////
         function search_exclude_value($array, $key, $value)
@@ -1306,7 +1296,7 @@ Funktion Previous()
         (z.B. '', also leer)  enthalten
         /*//////////////////////////////////////////////////////////////////////////////
 
-        Public function search_exclude_value($array, $key, $value){
+        Protected function search_exclude_value($array, $key, $value){
             $results = array();
             if (is_array($array)){
                 if (isset($array[$key]) && $array[$key] !== $value){
@@ -1339,7 +1329,7 @@ Funktion Previous()
         --------------------------------------------------------------------------------
         Status:  checked 11.6.2018
         //////////////////////////////////////////////////////////////////////////////*/
-        Public function search_key($which_key, $which_value, $array){
+        Protected function search_key($which_key, $which_value, $array){
             foreach ($array as $key => $value){
                 if($value[$which_key] === $which_value){
                     return $key;
