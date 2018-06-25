@@ -431,7 +431,9 @@ class MyUpnp extends IPSModule {
 	//*****************************************************************************
 	/* Function: Stop()
         --------------------------------------------------------------------------------
-        Stop
+        * Stream stoppen
+        * Track Zähler zurücksetzen
+        * Positions - Timer ausschalten
         ...............................................................................
 	Parameters: 
             none.
@@ -439,27 +441,21 @@ class MyUpnp extends IPSModule {
 	Returns:  
             none.
         //////////////////////////////////////////////////////////////////////////////*/
-	public function stop()
-	{	
-		//include_once ("46564 /*[DLNA\Sub Functions\_UPNP_Functions]*/.ips.php"); //UPNP_Functions
-		
-		$ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
-		$ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
-		$ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
-			
-		$Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
-		$xml = new SimpleXMLElement($Playlist);
-		$SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
-		$track = ("Track".($SelectedFile));
-				
-		$DIDL_Lite_Class = $xml->$track->class;
-		$this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
-		 
-		
+	public function stop(){	
+            $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+            $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
 
-            setvalue($this->GetIDForIdent("upnp_Track"), 0);
-		
-	  	
+            $Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
+            $xml = new SimpleXMLElement($Playlist);
+            $SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
+            $track = ("Track".($SelectedFile));
+
+            $DIDL_Lite_Class = $xml->$track->class;
+            $this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
+            //Track Zähler auf Anfang zurücksetzen
+            setvalue($this->GetIDForIdent("upnp_Track"), 1);
+	
 	  /*Timer abschalten--------------------------------------------------------*/
             $class = $DIDL_Lite_Class;
 
