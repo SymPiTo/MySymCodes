@@ -19,21 +19,27 @@ trait upnp {
         upnp Auslesen des Server Inhaltes einer ID
 	...............................................................................
 	Parameter:  
-         *   $ClientIP - IP Adresse der Clients.
-         *   $ClientPort - Übertragungs Port des Clients.
-         *   $ClientControlURL - Stammverzeichnis des Clients
-         *   $Kernel
-   	 *   $ServerContentDirectory
-	 *   $ObjectID
-	 *   $BrowseFlag
-         *   $Filter
-	 *   $StartingIndex
-	 *   $RequestedCount
-	 *   $SortCriteria
+         *   $ClientIP                  - IP Adresse der Clients.
+         *   $ClientPort                - Übertragungs Port des Clients.
+         *   $ClientControlURL          - Stammverzeichnis des Clients
+         *   $Kernel                    - 
+   	 *   $ServerContentDirectory    - 
+	 *   $ObjectID                  - 
+	 *   $BrowseFlag                - 
+         *   $Filter                    - 
+	 *   $StartingIndex             - 
+	 *   $RequestedCount            - 
+	 *   $SortCriteria              - 
  	--------------------------------------------------------------------------------
 	Returns:
-            array ['Result'] as xml, ['NumberReturned'] as integer, ['TotalMatches'] as integer, ['UpdateID'] as integer;
-	Status: checked
+            array ['Result'] as xml, 
+          --- Code
+          ['NumberReturned'] as integer, 
+          ['TotalMatches'] as integer, 
+          ['UpdateID'] as integer;
+          --- 
+         *          */
+
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function ContentDirectory_Browse (string $ServerIP, string $ServerPort, string $Kernel, $ServerContentDirectory, $ObjectID, $BrowseFlag, $Filter, $StartingIndex, $RequestedCount, $SortCriteria)
 	{	
@@ -61,12 +67,12 @@ trait upnp {
         uupnp Übertragung eines files
 	...............................................................................
 	Parameter:  
-         *   $ClientIP - IP Adresse der Clients.
-         *   $ClientPort - Übertragungs Port des Clients.
-         *   $ClientControlURL - Stammverzeichnis des Clients
-         *   $file_next - URL des mp3 files = muss STRING sein ud kein array
-         *   e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'
-         *   $MetaData -  meta daten (optional) = muss string sein und kein array
+         *   $ClientIP          - IP Adresse der Clients.
+         *   $ClientPort        - Übertragungs Port des Clients.
+         *   $ClientControlURL  - Stammverzeichnis des Clients
+         *   $file_next - URL des mp3 files = muss STRING sein ud kein array.
+         *   e.g. 'http://192.168.178.1:49200/AUDIO/DLNA-1-0/Musik/Katie_Melua%20-%20(Pictures)_%23M/1%20-%20If%20The%20Lights%20Go%20Out.mp3'.
+         *   $MetaData          -  meta daten (optional) = muss string sein und kein array
  	--------------------------------------------------------------------------------
 	Returns:
             nur Fehler Code
