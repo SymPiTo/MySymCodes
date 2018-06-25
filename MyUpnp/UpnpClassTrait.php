@@ -276,7 +276,7 @@ trait upnp {
  	--------------------------------------------------------------------------------
 	Returns:
          */       
-	Protected function Seek_AV(string $ClientIP, string $ClientPort, string $ClientControlURL, $position){
+	Public function Seek_AV(string $ClientIP, string $ClientPort, string $ClientControlURL, $position){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
