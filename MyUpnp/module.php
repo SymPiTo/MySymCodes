@@ -249,18 +249,18 @@ class MyUpnp extends IPSModule {
 		 	$UPNP_Device_Array = $this->create_UPNP_Device_Array($SSDP_Array); 
 			//IPSLog('create Device Ergebnis ',$UPNP_Device_Array);
 			//Ergebnis wird als ARRAY in ID_CLIENT_ARRAY in Subfunctions gespeichert;
-			$array = getvalue(self::ID_CLIENT_ARRAY);
+			$array = getvalue($this->GetIDForIdent("upnp_ClientArray"));
 			if ($array){$result = true;}
 			else{$result = false;}
 		}
 		if ($member == "server"){
-			setvalue(self::ID_SERVER_ARRAY, '');
+			setvalue($this->GetIDForIdent("upnp_ServerArray"), '');
 			$SSDP_Search_Array = $this->mSearch($ST_MS);
 			$SSDP_Array = $this->array_multi_unique($SSDP_Search_Array);
 			//IPSLog('bereinigtes mSearch Ergebnis ',$SSDP_Array);
 		 	$UPNP_Server_Array = $this->create_UPNP_Server_Array($SSDP_Array); 
 			//Ergebnis wird als ARRAY in ID_Server_ARRAY in Subfunctions gespeichert;
-			$array = getvalue(self::ID_SERVER_ARRAY);
+			$array = getvalue($this->GetIDForIdent("upnp_ServerArray"));
 			if ($array){$result = true;}
 			else{$result = false;}
 		}
@@ -457,7 +457,7 @@ class MyUpnp extends IPSModule {
 		 
 		
 
-            setvalue(self::ID_TRACK, 0);
+            setvalue($this->GetIDForIdent("upnp_Track"), 0);
 		
 	  	
 	  /*Timer abschalten--------------------------------------------------------*/
@@ -530,12 +530,7 @@ class MyUpnp extends IPSModule {
 
 		//Aktueller Track = Selected File-----------------------------------------
 		SetValue($this->GetIDForIdent("upnp_Track"), ($SelectedFile+1));
-		//setvalue(self::ID_CONTROL_STATUS, 'NEXT');
-		
-		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, false);
-		//setvalue(self::ID_BUTTON_CONTROL, 1);
-		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, true);
-		
+
 		$this->play('next');	
 
 	}	
@@ -568,11 +563,6 @@ class MyUpnp extends IPSModule {
 
 		//Aktueller Track = Selected File-----------------------------------------
 		SetValue($this->GetIDForIdent("upnp_Track"), ($SelectedFile-1));
-		//setvalue(self::ID_CONTROL_STATUS, 'PREVIOUS');
-		
-		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, false);
-		setvalue(self::ID_BUTTON_CONTROL, 1);
-		//IPS_SetEventActive(10862 /*[DLNA\Bedienelemente\Control\ControlPanel\Bei Variablenaktualisierung der Variable "DLNA\Bedienelemente\Control"]*/, true);
 		
 		$this->play('previous');
 
@@ -795,9 +785,9 @@ class MyUpnp extends IPSModule {
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function browseContainerServer(string $ObjectID){	
 		//IPSLog("Starte Funktion: browseServer mit : ",$ObjectID);
-		$ServerContentDirectory = GetValue(self::ID_SERVER_CONTENTDIR);
-		$ServerIP= GetValue(self::ID_SERVER_IP);
-		$ServerPort= GetValue(self::ID_SERVER_PORT);
+		$ServerContentDirectory = GetValue($this->GetIDForIdent("upnp_ServerContentDirectory"));
+		$ServerIP= GetValue($this->GetIDForIdent("upnp_ServerIP"));
+		$ServerPort= GetValue($this->GetIDForIdent("upnp_ServerPort"));
 		
 		//Suchvariablen-----------------------------------------------------------------
 		$BrowseFlag = "BrowseDirectChildren"; //"BrowseMetadata"; //"BrowseDirectChildren";
@@ -810,8 +800,6 @@ class MyUpnp extends IPSModule {
 
 		//Function ContentDirectory_Browse aufrufen-------------------------------------
 		$BrowseResult = $this->ContentDirectory_Browse ( $ServerIP, $ServerPort, $Kernel, $ServerContentDirectory, $ObjectID, $BrowseFlag, $Filter, $StartingIndex, $RequestedCount, $SortCriteria);
-		//print_r ($BrowseResult);
-		//IPSLog('BrowseServer Result  ', $BrowseResult);
 		sleep(2);
 
 		$Result_xml = $BrowseResult['Result'] ;
@@ -831,16 +819,13 @@ class MyUpnp extends IPSModule {
 			else{
 				// Result mit gefundenden media files bearbeiten 
 				$liste = $this->BrowseList($Result_xml);
-				//print_r ($liste); //Testanzeige
-				}
-			  }
+                        }
+                }
 		//wenn nur Teilrückgabe, dann mehrfach auslesen	  
 		if ($NumberReturned <= $TotalMatches) {
 			$liste = $this->BrowseList($Result_xml);
-			//IPSLog("TotalMatches ",$TotalMatches);
 			for($i = 0; $NumberReturned*$i < $TotalMatches; ++$i){
 				$StartingIndex = $NumberReturned*$i;
-				//IPSLog("StartingIndex ",$StartingIndex);
 				$BrowseArray_add =  $this->ContentDirectory_Browse ( $ServerIP, $ServerPort, $Kernel, $ServerContentDirectory, $ObjectID, $BrowseFlag, $Filter, $StartingIndex, $RequestedCount, $SortCriteria);
 				$BrowseResult_add = $BrowseArray_add['Result'];
 				$liste_add = $this->BrowseList($BrowseResult_add);
@@ -871,10 +856,10 @@ class MyUpnp extends IPSModule {
 	//////////////////////////////////////////////////////////////////////////////*/
 	Public function getContainerServer(string $Mediatype){
 		//IPSLog("Starte Funktion: browseServer mit : ",$Mediatype);
-		$ServerContentDirectory = GetValue(self::ID_SERVER_CONTENTDIR);
-		$ServerIP= GetValue(self::ID_SERVER_IP);
-		$ServerPort = GetValue(self::ID_SERVER_PORT);
-		$ServerName = GetValue(self::ID_SERVER_NAME);
+		$ServerContentDirectory = GetValue($this->GetIDForIdent("upnp_ServerContentDirectory"));
+		$ServerIP= GetValue($this->GetIDForIdent("upnp_ServerIP"));
+		$ServerPort = GetValue($this->GetIDForIdent("upnp_ServerPort"));
+		$ServerName = GetValue($this->GetIDForIdent("upnp_ServerName"));
 
 		//Suchvariablen-----------------------------------------------------------------
 		$BrowseFlag = "BrowseDirectChildren"; //"BrowseMetadata"; //"BrowseDirectChildren";
@@ -900,14 +885,11 @@ class MyUpnp extends IPSModule {
 		} 
 		for($n = 0; $n <= $i; ++$n){	
 			$ObjectID = $container[$n]['id'];	
-			//IPSLog('ContentDirectory_Browse mit Object ID mit '.$n." - ", $ObjectID);
 			//Function ContentDirectory_Browse aufrufen-------------------------------------
 			$BrowseResult = $this->ContentDirectory_Browse ($ServerIP, $ServerPort, $Kernel, $ServerContentDirectory, $ObjectID, $BrowseFlag, $Filter, $StartingIndex, $RequestedCount, $SortCriteria);
 			$Result_xml = $BrowseResult['Result'] ;
 			$NumberReturned = intval($BrowseResult['NumberReturned']);
 			$TotalMatches = intval($BrowseResult['TotalMatches']);
-			//IPSLog("NumberReturned", $NumberReturned);	
-			//IPSLog("Total Matches", $TotalMatches);	
 			if ($NumberReturned == $TotalMatches){
 				$liste = $this->BrowseList($Result_xml);
 				foreach ($liste as $value) {
@@ -921,7 +903,6 @@ class MyUpnp extends IPSModule {
 							$container[$i]['class'] = $value['typ'];
 							$container[$i]['id'] = $value['id'];
 							$container[$i]['title'] = $value['title'];	
-							//IPSLog('gefundener Container Titel mit neuer array ID -'. $value['id']." - ",$container[$i]['title']);		
 					}
 
 				}
@@ -933,8 +914,6 @@ class MyUpnp extends IPSModule {
 			else if ($NumberReturned < $TotalMatches){
 				//$SI = 0;	
 				$StartingIndex = 0;
-				//IPSLog("Teilrückgabe - Anzahl zurueckgegebener Datensätze", $NumberReturned);
-				//IPSLog("Teilrückgabe - Anzahl TotalMatches Datensätze", $TotalMatches);
 				if ($NumberReturned > 0){
 					for($SI = 0; $NumberReturned*$SI < $TotalMatches; ++$SI){
 						$StartingIndex = $NumberReturned*$SI;
@@ -950,8 +929,7 @@ class MyUpnp extends IPSModule {
 								$container[$i]['class'] = $value['typ'];
 								$container[$i]['id'] = $value['id'];
 								$container[$i]['title'] = $value['title'];	
-								//IPSLog('gefundener Teil-Container Titel - '.$i." - ",$container[$i]['title']);			
-							}
+                                                        }
 						}
 					}
 				}
@@ -1004,8 +982,6 @@ class MyUpnp extends IPSModule {
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function BrowseList($Result_xml){
 		$xml = simplexml_load_string($Result_xml); //
-		//IPSLog("Starte Funktion  - Browse Liste /r/n","..");
-		//IPSLog("XML Array = ", $Result);
 		$skip = false;
 		$liste = array();
 		
@@ -1152,7 +1128,6 @@ class MyUpnp extends IPSModule {
 			}
 			$skip=false;
 		}	
-		//IPSLog('Ergebnis als Liste Array ', $liste);
 		return ($liste); //Rückgabe
 	}
 
@@ -1183,7 +1158,7 @@ class MyUpnp extends IPSModule {
 
 
                 //es wird der angewählte Server durchsucht
-                $ServerName = getvalue(self::ID_SERVER_NAME);
+                $ServerName = getvalue($this->GetIDForIdent("upnp_ServerName"));
                 //IPSLog('ServerName', $ServerName);
                 //------------------------------------------------
                 // alle media files in Ordner mit ID  = $id suchen
@@ -1228,7 +1203,7 @@ class MyUpnp extends IPSModule {
         Status: 
         //////////////////////////////////////////////////////////////////////////////*/
         Public function createAllPlaylist(string $mediatype){
-                $ServerName = getvalue(self::ID_SERVER_NAME);
+                $ServerName = getvalue($this->GetIDForIdent("upnp_ServerName"));
                 if ($mediatype == 'Fotos'){
                         $DB_Fotos_Compressed = getvalue(45521 /*[DLNA\Medienbibliothek\DB_Fotos]*/);
                         $DB_Fotos = unserialize($DB_Fotos_Compressed);
@@ -1261,30 +1236,44 @@ class MyUpnp extends IPSModule {
 
 
 
+	//*****************************************************************************
+	/*  - Sammlung / Tools
         /*//////////////////////////////////////////////////////////////////////////////
-        UPNP_Function_Tools.ips.php V1.2                          2015 by André Liebmann
-        21.07.2015
-        --------------------------------------------------------------------------------
-        Funktionen - Sammlung / Tools
-        /*//////////////////////////////////////////////////////////////////////////////
-
-        /*//////////////////////////////////////////////////////////////////////////////
-        function Meldung($string)
+        //
+	//*****************************************************************************
+	/* Function: Meldung($Meldung)
+        ...............................................................................
         Anzeige im Meldungsfenster (Textbox) ObjectID 11701
-        /*//////////////////////////////////////////////////////////////////////////////
+        ...............................................................................
+        Parameters: 
+            $Meldung - Ausgabetext in Debug Fenster
+ 	--------------------------------------------------------------------------------
+	Returns: 
+        -----------------------------------------------------------------------------
+        Status: 
+        *****************************************************************************/
 
-        Public function Meldung($string)
-        {
-        //SetValue(self::ID_MELDUNGEN, GetValue(self::ID_MELDUNGEN)."$string\r\n\r\n");
-        //IPSLog('Meldung ', $string);
+        Protected function Meldung(string $Meldung){
+            $this->SendDebug('Send', 'Meldung: '. $Meldung, 0);
         }
 
-        /*//////////////////////////////////////////////////////////////////////////////
-        function rekey_array($input, $prefix)
+                            
+        
+                            
+	//*****************************************************************************
+	/* Function: rekey_array($input, $prefix)
+        ...............................................................................
         umbenennen der im Array enthaltenen numerischen Keys mit einem Präfix
-        /*//////////////////////////////////////////////////////////////////////////////
-
-        function rekey_array($input, $prefix)
+        ...............................................................................
+        Parameters: 
+            *  $input - ""
+            *  $prefix - "" 
+ 	--------------------------------------------------------------------------------
+	Returns: 
+        -----------------------------------------------------------------------------
+        Status: 
+        *****************************************************************************/
+        Protected function rekey_array($input, $prefix)
                 {
                 $out = array();
                 foreach($input as $i => $v)
@@ -1299,11 +1288,23 @@ class MyUpnp extends IPSModule {
                         return $out;
                 }
 
-        /*//////////////////////////////////////////////////////////////////////////////
-        function ping($IP, $Port, $timeout)
-        /*//////////////////////////////////////////////////////////////////////////////
 
-        Public function ping($IP, $Port, $timeout){
+                            
+	//*****************************************************************************
+	/* Function: ping($IP, $Port, $timeout)
+        ...............................................................................
+        Ping
+        ...............................................................................
+        Parameters: 
+            *  $IP - IP Adresse
+            *  $Port - Port
+            *  $timeout - timeout Zeit in ms
+ 	--------------------------------------------------------------------------------
+	Returns: 
+        -----------------------------------------------------------------------------
+        Status: 
+        *****************************************************************************/
+        Protected function ping($IP, $Port, $timeout){
             $fsock = @fsockopen($IP, $Port, $errno, $errstr, $timeout);
             //socket_set_timeout($fsock, $timeout);
             if ( ! $fsock ){
@@ -1316,7 +1317,10 @@ class MyUpnp extends IPSModule {
             }
         }
 
-        /*//////////////////////////////////////////////////////////////////////////////
+
+	//*****************************************************************************
+	/* Function: search_exclude_value($array, $key, $value)
+        ...............................................................................
         function search_exclude_value($array, $key, $value)
         ein mehrdimensionales Array wird durchsucht nach allen Subarrays welche nicht
         den Wert ($value) enthalten
@@ -1325,8 +1329,17 @@ class MyUpnp extends IPSModule {
         $value -> auszuschliessender Wert
         Rückgabe eines Array, welches nur die Subarrays enthält, welche nicht den Wert
         (z.B. '', also leer)  enthalten
-        /*//////////////////////////////////////////////////////////////////////////////
-
+        ...............................................................................
+        Parameters: 
+            *  $array - das mehrdimensionale Array
+            *  $key - in welchen Key
+            *  $value - auszuschliessender Wert
+ 	--------------------------------------------------------------------------------
+	Returns: 
+         * bereinigtes array
+        -----------------------------------------------------------------------------
+        Status: 
+        *****************************************************************************/
         Protected function search_exclude_value($array, $key, $value){
             $results = array();
             if (is_array($array)){
@@ -1345,20 +1358,20 @@ class MyUpnp extends IPSModule {
         }
 
         
-        /*//////////////////////////////////////////////////////////////////////////////
-        function search_key($which_key, $which_value, $array)
+	//*****************************************************************************
+	/* Function: search_key($which_key, $which_value, $array)
         ...............................................................................
         den $key des Elternelementes in einem mehrdimensionalen Array finden
         ...............................................................................
-        Parameter:  $which_key =    = zu durchsuchedes ArrayFeld = ['FriendlyName']
-                    $which_value    = Suchwert = z.Bsp "CEOL"
-                    $array          = zu durchsuchendes Array
+        Parameter:  
+            * $which_key =    = zu durchsuchedes ArrayFeld = ['FriendlyName']
+            * $which_value    = Suchwert = z.Bsp "CEOL"
+            * $array          = zu durchsuchendes Array
         --------------------------------------------------------------------------------
-        Variable:
+        return:  
+            * key = gefundener Datensatz index
         --------------------------------------------------------------------------------
-        return:  key = gefundener Datensatz index
-        --------------------------------------------------------------------------------
-        Status:  checked 11.6.2018
+        Status  checked 11.6.2018
         //////////////////////////////////////////////////////////////////////////////*/
         Protected function search_key($which_key, $which_value, $array){
             foreach ($array as $key => $value){
@@ -1371,8 +1384,19 @@ class MyUpnp extends IPSModule {
             }
         }
 
-        /* Pfad von IPS
-**********************************************/
+	//*****************************************************************************
+	/* Function: Kernel()
+        ...............................................................................
+        Stammverzeichnis von IP Symcon
+        ...............................................................................
+        Parameter:  
+
+        --------------------------------------------------------------------------------
+        return:  
+
+        --------------------------------------------------------------------------------
+        Status  checked 11.6.2018
+        //////////////////////////////////////////////////////////////////////////////*/
         Protected function Kernel(){ 
             $Kernel = str_replace("\\", "/", IPS_GetKernelDir());
             return $Kernel;

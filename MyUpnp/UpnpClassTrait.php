@@ -22,14 +22,14 @@ trait upnp {
          *   $ClientIP                  - IP Adresse der Clients.
          *   $ClientPort                - Übertragungs Port des Clients.
          *   $ClientControlURL          - Stammverzeichnis des Clients
-         *   $Kernel                    - 
-   	 *   $ServerContentDirectory    - 
-	 *   $ObjectID                  - 
-	 *   $BrowseFlag                - 
-         *   $Filter                    - 
-	 *   $StartingIndex             - 
-	 *   $RequestedCount            - 
-	 *   $SortCriteria              - 
+         *   $Kernel                    -  Stammverzeichnis IPS
+   	 *   $ServerContentDirectory    -  /MediaServer/ContentDirectory/Control = Stammverzeichnis Server
+	 *   $ObjectID                  -  Object ID
+	 *   $BrowseFlag                -  "BrowseDirectChildren"; //"BrowseMetadata"; //"BrowseDirectChildren"
+         *   $Filter                    -  "*"; //GetValue()
+	 *   $StartingIndex             -  "0"; //GetValue()  = Start Object ID
+	 *   $RequestedCount            -  "0"; //GetValue();
+	 *   $SortCriteria              -  ""; //GetValue();
  	--------------------------------------------------------------------------------
 	Returns:
             array ['Result'] as xml, 
