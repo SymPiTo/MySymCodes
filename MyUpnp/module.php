@@ -1375,7 +1375,8 @@ class MyUpnp extends IPSModule {
                     return $key;
                 }
                 else{
-                    //echo("$which_value in Key: $key not found\r\n");
+                    $this->SendDebug('Send', $which_value.' in Key: '.$key.' not found', 0);
+
                 }
             }
         }
