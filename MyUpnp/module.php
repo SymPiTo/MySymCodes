@@ -1355,7 +1355,7 @@ class MyUpnp extends IPSModule {
 
         
 	//*****************************************************************************
-	/* Function: search_key($which_key, $which_value, $array)
+	/* Function:  search_key($which_key, $which_value, $array)
         ...............................................................................
         den $key des Elternelementes in einem mehrdimensionalen Array finden
         ...............................................................................
