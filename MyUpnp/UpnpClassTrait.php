@@ -78,7 +78,7 @@ trait upnp {
             nur Fehler Code
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function SetAVTransportURI(string $ClientIP, string $ClientPort, string $ClientControlURL, string $file, string$MetaData){	
+	Protected function SetAVTransportURI(string $ClientIP, string $ClientPort, string $ClientControlURL, string $file, string $MetaData){	
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -87,7 +87,7 @@ trait upnp {
 	
 	                           array( 
 	                                  new SoapParam('0'             ,"InstanceID"         		),
-	                                  new SoapParam($file 			,"CurrentURI"       		),
+	                                  new SoapParam($file 		,"CurrentURI"       		),
 	                                  new SoapParam($MetaData       ,"CurrentURIMetaData"       )
 	                                )
 		);
