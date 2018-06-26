@@ -286,7 +286,7 @@ trait upnp {
 	                           array( 
 	                                  new SoapParam('0'             ,"InstanceID"       ),
 	                                  new SoapParam('REL_TIME'      ,"Unit"         	),
-	                                  new SoapParam($position       ,"SeekTarget"         	)  
+	                                  new SoapParam($position       ,"Target"         	)  
 	                                )
 		);
 	}
