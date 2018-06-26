@@ -79,6 +79,8 @@ trait upnp {
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function SetAVTransportURI(string $ClientIP, string $ClientPort, string $ClientControlURL, string $file, string $MetaData){
+            $this->SendDebug('Send', 'IP: '.$ClientIP, 0);
+            $this->SendDebug('Send', 'Port: '.$ClientPort, 0);
             $this->SendDebug('Send', 'FILE: '.$file, 0);
             $this->SendDebug('Send', 'MetaData: '.$MetaData, 0);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
