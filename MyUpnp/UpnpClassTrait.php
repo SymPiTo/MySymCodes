@@ -79,10 +79,10 @@ trait upnp {
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function SetAVTransportURI(string $ClientIP, string $ClientPort, string $ClientControlURL, string $file, string $MetaData){
-            $this->SendDebug('Send', 'IP: '.$ClientIP, 0);
-            $this->SendDebug('Send', 'Port: '.$ClientPort, 0);
-            $this->SendDebug('Send', 'FILE: '.$file, 0);
-            $this->SendDebug('Send', 'MetaData: '.$MetaData, 0);
+            $this->SendDebug('SetAVTransportURI', 'IP: '.$ClientIP, 0);
+            $this->SendDebug('SetAVTransportURI', 'Port: '.$ClientPort, 0);
+            $this->SendDebug('SetAVTransportURI', 'FILE: '.$file, 0);
+            $this->SendDebug('SetAVTransportURI', 'MetaData: '.$MetaData, 0);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -144,9 +144,9 @@ trait upnp {
          *  Error Code
          */
 	Protected function Play_AV(string $ClientIP, string $ClientPort, string $ClientControlURL){	
-            $this->SendDebug('Send', 'IP: '.$ClientIP, 0);
-            $this->SendDebug('Send', 'Port: '.$ClientPort, 0);
-            $this->SendDebug('Send', 'ClientControlURL: '.$ClientControlURL, 0);
+            $this->SendDebug('Play_AV', 'IP: '.$ClientIP, 0);
+            $this->SendDebug('Play_AV', 'Port: '.$ClientPort, 0);
+            $this->SendDebug('Play_AV', 'ClientControlURL: '.$ClientControlURL, 0);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
