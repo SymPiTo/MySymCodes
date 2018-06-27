@@ -1,5 +1,5 @@
 <?php
-
+require_once(__DIR__ . "/UpnpDiscoveryClassTrait.php");
 require_once(__DIR__ . "/UpnpClassTrait.php");
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +19,7 @@ class MyUpnp extends IPSModule {
          * UpnpClassTrait.php
          */
     use upnp;
+    use UpnpDiscoveryClassTrait;
     
     /* Constructor: 
     Der Konstruktor des Moduls
