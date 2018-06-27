@@ -144,7 +144,9 @@ trait upnp {
          *  Error Code
          */
 	Protected function Play_AV(string $ClientIP, string $ClientPort, string $ClientControlURL){	
-		//IPSLog('start Play_AV Funktion ',$ClientPort);
+            $this->SendDebug('Send', 'IP: '.$ClientIP, 0);
+            $this->SendDebug('Send', 'Port: '.$ClientPort, 0);
+            $this->SendDebug('Send', 'ClientControlURL: '.$ClientControlURL, 0);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
