@@ -458,6 +458,7 @@ trait UpnpDiscoveryClassTrait {
 
                                             //Name -> nur erste 10 Zeichen anzeigen, sonst passt es nicht in den Button
                                             $friendlyName_raw = $xmldesc->device->friendlyName;
+                                            $this->SendDebug('create_UPNP_Device_Array', 'friendlyName:'.$friendlyName, 0);
 
                                             if (stripos($friendlyName_raw, " ")) //wenn Leerzeichen nur ersten Teil
                                             {
@@ -601,7 +602,7 @@ trait UpnpDiscoveryClassTrait {
             $SaveArray = serialize($Clean_Device_Array);
             SetValue($this->GetIDForIdent("upnp_ClientArray"), $SaveArray);
             //$this->stdout("DeviceArray:$Device_Array\r\n");
-            
+             $this->SendDebug('create_UPNP_Device_Array', 'ENDE: Client Array abgespeichert!' , 0);
             //print_r($Clean_Device_Array);
             return $SaveArray;
     }
