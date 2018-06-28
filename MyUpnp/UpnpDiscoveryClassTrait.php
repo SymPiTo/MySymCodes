@@ -434,7 +434,7 @@ trait UpnpDiscoveryClassTrait {
                                     else
                                             {
                                           
-                                             $this->SendDebug('create_UPNP_Device_Array', 'Device erreichbar !', 0);
+                                            $this->SendDebug('create_UPNP_Device_Array', 'Device erreichbar !', 0);
                                            
                                             $this->SendDebug('create_UPNP_Device_Array', 'DeviceDescription ladbar !', 0);
                                             /*/////////////////////////////////////////////////////////////////////
@@ -456,7 +456,7 @@ trait UpnpDiscoveryClassTrait {
                                             //UDN lesen
                                             $UDN = (string)$xmldesc->device->UDN;
 
-                                            //Name -> nur erste 10 Zeichen anzeigen, sonst passt es nicht in den Button
+                                            //Name 
                                             $friendlyName_raw = $xmldesc->device->friendlyName;
                                             $this->SendDebug('create_UPNP_Device_Array', 'friendlyName:'.$friendlyName, 0);
 
@@ -552,6 +552,7 @@ trait UpnpDiscoveryClassTrait {
                                                             {
                                                                     $DeviceControlServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
+                                                                    $this->SendDebug('Directory CONTROLURL',  $Directory, 0);
                                                                     $DeviceControlURL = $this->directory($Directory);
                                                             }
                                                             else
@@ -563,6 +564,7 @@ trait UpnpDiscoveryClassTrait {
                                                             {
                                                                     $DeviceRenderingServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
+                                                                    $this->SendDebug('Directory CONTROLURL', $Directory, 0);
                                                                     $DeviceRenderingControlURL = $this->directory($Directory);
                                                             }
                                                             else
