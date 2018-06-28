@@ -562,7 +562,7 @@ trait UpnpDiscoveryClassTrait {
                                                             if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")) {
                                                                     $DeviceRenderingServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
-                                                                    $this->SendDebug('DeviceRenderingControlURL', '$Directory', 0);
+                                                                    $this->SendDebug('DeviceRenderingControlURL', $Directory, 0);
                                                                     $DeviceRenderingControlURL = $this->directory($Directory);
                                                             }
                                                             else {
