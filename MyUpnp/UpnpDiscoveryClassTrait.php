@@ -548,7 +548,7 @@ trait UpnpDiscoveryClassTrait {
                                                     {
                                                             $serviceType = $service->serviceType;
                                                             $this->SendDebug('Device Desription', 'service Type: '.$serviceType, 0);
-                                                            if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport"))
+                                                            if (strpos($serviceType, "urn:schemas-upnp-org:service:AVTransport"))
                                                             {
                                                                     $DeviceControlServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
@@ -561,7 +561,7 @@ trait UpnpDiscoveryClassTrait {
                                                                     $DeviceControlServiceType = "";
                                                                     $DeviceControlURL = "";
                                                             }
-                                                            if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl"))
+                                                            if (strpos($serviceType, "urn:schemas-upnp-org:service:RenderingControl"))
                                                             {
                                                                     $DeviceRenderingServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
