@@ -546,30 +546,26 @@ trait UpnpDiscoveryClassTrait {
                                             {
                                                     foreach($xmldesc->device->serviceList->service as $service)
                                                     {
-                                                            $serviceType = $service->serviceType;
+                                                            $serviceType = (string)$service->serviceType;
                                                             $this->SendDebug('Device Desription', 'service Type: '.$serviceType, 0);
-                                                            if ($serviceType == "urn:schemas-upnp-org:service:AVTransport:1")
-                                                            {
+                                                            if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport")){
                                                                     $DeviceControlServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
                                                                     $this->SendDebug('DeviceControlURL',  $Directory, 0);
                                                                     $DeviceControlURL = $this->directory($Directory);
                                                             }
-                                                            else
-                                                            {
+                                                            else {
                                                                     $this->SendDebug('Directory CONTROLURL',  'not found', 0);
                                                                     $DeviceControlServiceType = "";
                                                                     $DeviceControlURL = "";
                                                             }
-                                                            if (strpos($serviceType, "urn:schemas-upnp-org:service:RenderingControl"))
-                                                            {
+                                                            if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")) {
                                                                     $DeviceRenderingServiceType = (string)$service->serviceType;
                                                                     $Directory = $service->controlURL;
                                                                     $this->SendDebug('DeviceRenderingControlURL', '$Directory', 0);
                                                                     $DeviceRenderingControlURL = $this->directory($Directory);
                                                             }
-                                                            else
-                                                            {
+                                                            else {
                                                                     $this->SendDebug('DeviceRenderingControlURL',  'not found', 0);
                                                                     $DeviceRenderingServiceType = "";
                                                                     $DeviceRenderingControlURL = "";
