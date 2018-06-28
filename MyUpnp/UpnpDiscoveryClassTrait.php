@@ -455,10 +455,10 @@ trait UpnpDiscoveryClassTrait {
                                             $this->SendDebug('Device Desription','Model Name: '.$modelName, 0);    
                                             //UDN lesen
                                             $UDN = (string)$xmldesc->device->UDN;
-
+                                            $this->SendDebug('device Desription', 'UDN:'.$UDN, 0);
                                             //Name 
                                             $friendlyName_raw = $xmldesc->device->friendlyName;
-                                            $this->SendDebug('evice Desription', 'friendlyName:'.$friendlyName, 0);
+                                            
 
                                             if (stripos($friendlyName_raw, " ")) //wenn Leerzeichen nur ersten Teil
                                             {
@@ -481,7 +481,7 @@ trait UpnpDiscoveryClassTrait {
                                             if ($modelName == "Sonos PLAY:3"){
                                                     $friendlyName = "SonosSZ";
                                             }
-
+                                            $this->SendDebug('device Desription', 'friendlyName:'.$friendlyName, 0);
                                             /*/////////////////////////////////////////////////////////////////////
                                             verfügbare Icons ermitteln
                                             /*/////////////////////////////////////////////////////////////////////
