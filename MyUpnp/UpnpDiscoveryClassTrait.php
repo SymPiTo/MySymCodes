@@ -452,13 +452,13 @@ trait UpnpDiscoveryClassTrait {
 
                                             //Modelname lesen
                                             $modelName = (string)$xmldesc->device->modelName;
-
+                                            $this->SendDebug('Device Desription','Model Name: '.$modelName, 0);    
                                             //UDN lesen
                                             $UDN = (string)$xmldesc->device->UDN;
 
                                             //Name 
                                             $friendlyName_raw = $xmldesc->device->friendlyName;
-                                            $this->SendDebug('create_UPNP_Device_Array', 'friendlyName:'.$friendlyName, 0);
+                                            $this->SendDebug('evice Desription', 'friendlyName:'.$friendlyName, 0);
 
                                             if (stripos($friendlyName_raw, " ")) //wenn Leerzeichen nur ersten Teil
                                             {
@@ -547,7 +547,7 @@ trait UpnpDiscoveryClassTrait {
                                                     foreach($xmldesc->device->serviceList->service as $service)
                                                     {
                                                             $serviceType = $service->serviceType;
-
+                                                            $this->SendDebug('Device Desription', 'service Type: '.$serviceType, 0);
                                                             if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport"))
                                                             {
                                                                     $DeviceControlServiceType = (string)$service->serviceType;
