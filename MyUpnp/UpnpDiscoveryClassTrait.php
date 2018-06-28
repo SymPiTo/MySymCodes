@@ -478,7 +478,7 @@ trait UpnpDiscoveryClassTrait {
                         }
 
                         /* /////////////////////////////////////////////////////////////////////
-                          Services auslesen und auf AVTransport und RenderingControl beschränken
+                          Services auslesen und auf AV Transport und RenderingControl beschränken
                           / */////////////////////////////////////////////////////////////////////
 
                         if (isset($xmldesc->device->serviceList->service)) {
