@@ -486,6 +486,7 @@ trait UpnpDiscoveryClassTrait {
                                 $serviceType = (string) $service->serviceType;
                                 $this->SendDebug('Device Desription', 'service Type: ' . $serviceType, 0);
                                 if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport")){
+                                    $this->SendDebug('Directory CONTROLURL', 'found', 0);
                                     $DeviceControlServiceType = (string) $service->serviceType;
                                     $Directory = $service->controlURL;
                                     $this->SendDebug('DeviceControlURL', $Directory, 0);
@@ -498,6 +499,7 @@ trait UpnpDiscoveryClassTrait {
                                     
                                 }
                                 if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")){
+                                    $this->SendDebug('DeviceRenderingControlURL', 'found', 0);
                                     $DeviceRenderingServiceType = (string) $service->serviceType;
                                     $Directory = $service->controlURL;
                                     $this->SendDebug('DeviceRenderingControlURL', $Directory , 0);
