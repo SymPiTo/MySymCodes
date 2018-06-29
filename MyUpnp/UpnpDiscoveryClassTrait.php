@@ -11,26 +11,26 @@
  * class: UpnpDiscoveryClassTrait
  */
 trait UpnpDiscoveryClassTrait {
-    /* //////////////////////////////////////////////////////////////////////////////
-      UPNP_Discovery_Functions_V2.6                             2015 by André Liebmann
-      21.07.2015
-      --------------------------------------------------------------------------------
-      Funktionssammlung Discovery
-      --------------------------------------------------------------------------------
-      mögliche Aufrufe:
-      $ST_ALL = "ssdp:all";
-      $ST_RD = "upnp:rootdevice";
-      $ST_AV = "urn:dial-multiscreen-org:service:dial:1";
-      $ST_MR = "urn:schemas-upnp-org:device:MediaRenderer:1";
-      $ST_MS = "urn:schemas-upnp-org:device:MediaServer:1";
-      $ST_CD = "urn:schemas-upnp-org:service:ContentDirectory:1";
-      $ST_RC = "urn:schemas-upnp-org:service:RenderingControl:1";
-      --------------------------------------------------------------------------------
-      für Tests:
-      $ST = $ST_ALL;
-      print_r (mSearch($ST));
-      ////////////////////////////////////////////////////////////////////////////// */
-
+    //*****************************************************************************
+    /* Function: mSearch($ST)
+    ...............................................................................
+    Sucht alle UPNP Clients / Server
+    ...............................................................................
+    Parameters:  
+     * $ST = $ST_MR for Clients / $ST_MS for server
+        $ST_ALL - "ssdp:all";
+        $ST_RD - "upnp:rootdevice";
+        $ST_AV - "urn:dial-multiscreen-org:service:dial:1";
+        $ST_MR - "urn:schemas-upnp-org:device:MediaRenderer:1";
+        $ST_MS - "urn:schemas-upnp-org:device:MediaServer:1";
+        $ST_CD - "urn:schemas-upnp-org:service:ContentDirectory:1";
+        $ST_RC - "urn:schemas-upnp-org:service:RenderingControl:1";
+    --------------------------------------------------------------------------------
+    Returns: 
+        $response
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function mSearch($ST) {
         error_reporting(E_ALL | E_STRICT);
 
@@ -115,24 +115,27 @@ trait UpnpDiscoveryClassTrait {
         return $response;
     }
 
-    //------------------------------------------------------------------------------
-    //UPNP_Discovery_Functions.ips.php---------------------2013 von André Liebmann--
-    //UPNP_Discovery_Functions_V1.3-------------------------------------------------
-    //07.09.2013--------------------------------------------------------------------
-    //------------------------------------------------------------------------------
-    //mögliche Aufrufe:-------------------------------------------------------------
-    //$ST_ALL = "ssdp:all";
-    //$ST_RD = "upnp:rootdevice";
-    //$ST_AV = "urn:dial-multiscreen-org:service:dial:1";
-    //$ST_MS = "urn:schemas-upnp-org:device:MediaServer:1";
-    //$ST_CD = "urn:schemas-upnp-org:service:ContentDirectory:1";
-    //$ST_RC = "urn:schemas-upnp-org:service:RenderingControl:1";
-    //------------------------------------------------------------------------------
-    //Test:-------------------------------------------------------------------------
-    //$ST = $ST_ALL;
-    //print_r (mSearch($ST));
-    //------------------------------------------------------------------------------
 
+    //*****************************************************************************
+    /* Function: mSearchNeu($ST)
+    ...............................................................................
+    Sucht alle UPNP Clients / Server
+    ...............................................................................
+    Parameters:  
+     * $ST = $ST_MR for Clients / $ST_MS for server
+        $ST_ALL - "ssdp:all";
+        $ST_RD - "upnp:rootdevice";
+        $ST_AV - "urn:dial-multiscreen-org:service:dial:1";
+        $ST_MR - "urn:schemas-upnp-org:device:MediaRenderer:1";
+        $ST_MS - "urn:schemas-upnp-org:device:MediaServer:1";
+        $ST_CD - "urn:schemas-upnp-org:service:ContentDirectory:1";
+        $ST_RC - "urn:schemas-upnp-org:service:RenderingControl:1";
+    --------------------------------------------------------------------------------
+    Returns: 
+        $response
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function mSearchNeu($ST) {
         //Variablen------------------------------------------------------------------
         $USER_AGENT = 'WINDOWS, UPnP/1.0, Intel MicroStack/1.0.1497';
@@ -176,11 +179,24 @@ trait UpnpDiscoveryClassTrait {
         
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////
-      function parseMSearchResponse( $response )
-      Aufarbeitung der SSDP-Response
-      / *//////////////////////////////////////////////////////////////////////////////
-
+/* //////////////////////////////////////////////////////////////////////////////
+  function parseMSearchResponse( $response )
+  Aufarbeitung der SSDP-Response
+  / *//////////////////////////////////////////////////////////////////////////////
+  //
+    //*****************************************************************************
+    /* Function: parseMSearchResponse($response)
+    ...............................................................................
+    Aufarbeitung der SSDP-Response
+    ...............................................................................
+    Parameters:  
+     * $response - SSDP-Response
+    --------------------------------------------------------------------------------
+    Returns: 
+        $parsedResponse - array
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function parseMSearchResponse($response) {
         $responseArray = explode("\r\n", $response);
 
@@ -267,11 +283,21 @@ trait UpnpDiscoveryClassTrait {
         return $parsedResponse;
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////
-      function array_multi_unique($multiArray)
-      Entfernung von Duplikaten
-      / *//////////////////////////////////////////////////////////////////////////////
 
+      
+    //*****************************************************************************
+    /* Function: array_multi_unique($multiArray)
+    ...............................................................................
+    Entfernung von Duplikaten
+    ...............................................................................
+    Parameters:  
+     * $multiArray - Array mit Duplikaten
+    --------------------------------------------------------------------------------
+    Returns: 
+        $uniqueArray - bereinigtes array
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function array_multi_unique($multiArray) {
         $uniqueArray = array();
 
@@ -283,14 +309,22 @@ trait UpnpDiscoveryClassTrait {
         return $uniqueArray;
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////
-      function directory($Directory)
-      nur ein Verzeichnis und keine komplette URL als ServerContentDirectory,
-      RenderingControlURL und ControlURL wird übergeben
-      / *//////////////////////////////////////////////////////////////////////////////
 
+    //*****************************************************************************
+    /* Function: directory($Directory)
+    ...............................................................................
+    nur ein Verzeichnis und keine komplette URL als ServerContentDirectory,
+    RenderingControlURL und ControlURL wird übergeben
+    ...............................................................................
+    Parameters:  
+     * $Directory - ADirectory als string
+    --------------------------------------------------------------------------------
+    Returns: 
+        $parsed_Directory - bereinigtes Directory
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function directory($Directory) {
-        $this->SendDebug('Directory übergebenr Wert: ', $Directory , 0);
         if (stristr($Directory, "http") == true) { //komplette URL vorhanden ?
             $vars1 = explode("//", $Directory, 2); //cut nach http
             $cutted1 = $vars1[0];
@@ -305,15 +339,24 @@ trait UpnpDiscoveryClassTrait {
             $raw_Directory = $Directory;
         }
         $parsed_Directory = ("/" . $raw_Directory);
-        $this->SendDebug('Directory bereinigter Wert: ', $parsed_Directory , 0);
+        //$this->SendDebug('Directory bereinigter Wert: ', $parsed_Directory , 0);
         return $parsed_Directory;
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////
-      function create_UPNP_Device_Array()
 
-      / *///////////////////////////////////////////////////////////////////////////////
-
+    //*****************************************************************************
+    /* Function: create_UPNP_Device_Array($Device_SSDPArray)
+    ...............................................................................
+    erzeugt ein Array aus allen gefundenen Upnp clients
+    ...............................................................................
+    Parameters:  
+     * $Device_SSDPArray - Array der gefundenen Clients
+    --------------------------------------------------------------------------------
+    Returns: 
+        $SaveArray - abgespeichertes Upnp Client Array
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function create_UPNP_Device_Array($Device_SSDPArray) {
         //include_once ("13355 /*[DLNA\UPnP Class\UPnP_API]*/.ips.php"); //UPNP_Klasse
         //include_once ('32114 /*[Testumgebung\Logger\Logger]*/.ips.php');
@@ -329,7 +372,7 @@ trait UpnpDiscoveryClassTrait {
             $DeviceDescription = $Device_SSDPArray[$i]['LOCATION'];
 
             //$this->stdout(print_r($DeviceDescription));
-            $this->SendDebug('create_UPNP_Device_Array', 'DeviceDescription:' . $DeviceDescription, 0);
+            //$this->SendDebug('create_UPNP_Device_Array', 'DeviceDescription:' . $DeviceDescription, 0);
             //Rootverzeichnis/IP/Port
 
             $vars1 = explode("//", $DeviceDescription, 2); //cut nach http
@@ -408,10 +451,10 @@ trait UpnpDiscoveryClassTrait {
 
                         //Modelname lesen
                         $modelName = (string) $xmldesc->device->modelName;
-                        $this->SendDebug('Device Desription', 'Model Name: ' . $modelName, 0);
+                        //$this->SendDebug('Device Desription', 'Model Name: ' . $modelName, 0);
                         //UDN lesen
                         $UDN = (string) $xmldesc->device->UDN;
-                        $this->SendDebug('device Desription', 'UDN:' . $UDN, 0);
+                        //$this->SendDebug('device Desription', 'UDN:' . $UDN, 0);
                         //Name 
                         $friendlyName_raw = $xmldesc->device->friendlyName;
 
@@ -435,7 +478,7 @@ trait UpnpDiscoveryClassTrait {
                         if ($modelName == "Sonos PLAY:3") {
                             $friendlyName = "SonosSZ";
                         }
-                        $this->SendDebug('device Desription', 'friendlyName:' . $friendlyName, 0);
+                        //$this->SendDebug('device Desription', 'friendlyName:' . $friendlyName, 0);
                         /* /////////////////////////////////////////////////////////////////////
                           verfügbare Icons ermitteln
                           / */////////////////////////////////////////////////////////////////////
@@ -490,21 +533,17 @@ trait UpnpDiscoveryClassTrait {
                                 $serviceType = (string) $service->serviceType;
                                 $this->SendDebug('Device Desription', 'service Type: ' . $serviceType, 0);
                                 if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport")){
-                                    $this->SendDebug('Directory CONTROLURL', 'found', 0);
                                     $DeviceControlServiceType = (string) $service->serviceType;
                                     $Directory = (string)$service->controlURL;
-                                    
                                     $DeviceControlURL = $this->directory($Directory);  
-                                    $this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
+                                    //$this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
                                 } 
 
                                 if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")){
-                                    $this->SendDebug('DeviceRenderingControlURL', 'found', 0);
                                     $DeviceRenderingServiceType = (string) $service->serviceType;
                                     $Directory = (string)$service->controlURL;
-                                    
                                     $DeviceRenderingControlURL = $this->directory($Directory);
-                                    $this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
+                                    //$this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
                                 } 
                             }
                         }
@@ -516,32 +555,33 @@ trait UpnpDiscoveryClassTrait {
                     $DeviceActiveIcon = "";
 
                     //DeviceArray erstellen
+                    $this->SendDebug('Client: ',$friendlyName. ' found', 0);
                     $Device_Array[$i]['DeviceDescription'] = $DeviceDescription;
-                    $this->SendDebug('DeviceDescription', $DeviceDescription, 0);
+                    $this->SendDebug('Client-DeviceDescription', $DeviceDescription, 0);
                     $Device_Array[$i]['Root'] = $root;
-                    $this->SendDebug('Root', $root, 0);
+                    $this->SendDebug('Client-Root', $root, 0);
                     $Device_Array[$i]['DeviceIP'] = $DeviceIP;
-                    $this->SendDebug('DeviceIP', $DeviceIP, 0);
+                    $this->SendDebug('Client-DeviceIP', $DeviceIP, 0);
                     $Device_Array[$i]['DevicePort'] = $DevicePort;
-                    $this->SendDebug('DevicePort', $DevicePort, 0);
+                    $this->SendDebug('Client-DevicePort', $DevicePort, 0);
                     $Device_Array[$i]['ModelName'] = $modelName;
-                    $this->SendDebug('ModelName', $modelName, 0);
+                    $this->SendDebug('Client-ModelName', $modelName, 0);
                     $Device_Array[$i]['UDN'] = $UDN;
-                    $this->SendDebug('UDN', $UDN, 0);
+                    $this->SendDebug('Client-UDN', $UDN, 0);
                     $Device_Array[$i]['FriendlyName'] = $friendlyName;
-                    $this->SendDebug('FriendlyName', $friendlyName, 0);
+                    $this->SendDebug('Client-FriendlyName', $friendlyName, 0);
                     $Device_Array[$i]['IconURL'] = $iconurl;
-                    $this->SendDebug('IconURL', $iconurl, 0);
+                    $this->SendDebug('Client-IconURL', $iconurl, 0);
                     $Device_Array[$i]['DeviceControlServiceType'] = $DeviceControlServiceType;
-                    $this->SendDebug('DeviceControlServiceType', $DeviceControlServiceType, 0);
+                    $this->SendDebug('Client-DeviceControlServiceType', $DeviceControlServiceType, 0);
                     $Device_Array[$i]['DeviceControlURL'] = $DeviceControlURL;
-                    $this->SendDebug('DeviceControlURL', $DeviceControlURL, 0);
+                    $this->SendDebug('Client-DeviceControlURL', $DeviceControlURL, 0);
                     $Device_Array[$i]['DeviceRenderingServiceType'] = $DeviceRenderingServiceType;
-                    $this->SendDebug('DeviceRenderingServiceType', $DeviceRenderingServiceType, 0);
+                    $this->SendDebug('Client-DeviceRenderingServiceType', $DeviceRenderingServiceType, 0);
                     $Device_Array[$i]['DeviceRenderingControlURL'] = $DeviceRenderingControlURL;
-                    $this->SendDebug('DeviceRenderingControlURL', $DeviceRenderingControlURL, 0);
+                    $this->SendDebug('Client-DeviceRenderingControlURL', $DeviceRenderingControlURL, 0);
                     $Device_Array[$i]['DeviceActiveIcon'] = $DeviceActiveIcon;
-                    $this->SendDebug('DeviceActiveIcon', $DeviceActiveIcon, 0);
+                    $this->SendDebug('Client-DeviceActiveIcon', $DeviceActiveIcon, 0);
                     
                 }
             }
@@ -552,25 +592,32 @@ trait UpnpDiscoveryClassTrait {
         SetValue($this->GetIDForIdent("upnp_ClientArray"), $SaveArray);
         //$this->stdout("DeviceArray:$Device_Array\r\n");
         $this->SendDebug('create_UPNP_Device_Array', 'ENDE: Client Array abgespeichert!', 0);
-        //print_r($Clean_Device_Array);
+        
         return $SaveArray;
     }
 
-    /* //////////////////////////////////////////////////////////////////////////////
-      function create_UPNP_Server_Array()
-      / *//////////////////////////////////////////////////////////////////////////////
-
+   //*****************************************************************************
+    /* Function: create_UPNP_Server_Array($Server_SSDPArray)
+    ...............................................................................
+    erzeugt ein Array aus allen gefundenen Upnp Server
+    ...............................................................................
+    Parameters:  
+     * $Server_SSDPArray - Array der gefundenen Server
+    --------------------------------------------------------------------------------
+    Returns: 
+        $SaveArray - abgespeichertes Upnp Server Array
+    --------------------------------------------------------------------------------*/
+    //Status: checked 29.6.2018
+    /* **************************************************************************** */
     Protected function create_UPNP_Server_Array($Server_SSDPArray) {
         /* //////////////////////////////////////////////////////////////////////////////
           Auslesen des Arrays und Abfrage der Descriptions, wenn erreichbar
           / *//////////////////////////////////////////////////////////////////////////////
-        //include_once ("13355 /*[DLNA\UPnP Class\UPnP_API]*/.ips.php"); //UPNP_Klasse
-        //include_once ('32114 /*[Testumgebung\Logger\Logger]*/.ips.php');
-        //$DLNA = new DLNA();
+
 
         $LoadArray = GetValue(self::ID_SERVER_ARRAY);
         $Server_Array = unserialize($LoadArray);
-        //print_r($Server_Array);
+
         //$Server_Array = array();
 
 
@@ -721,7 +768,7 @@ trait UpnpDiscoveryClassTrait {
 
                                 if (stristr($serviceType, "urn:schemas-upnp-org:service:ContentDirectory")) {
                                     $ServerServiceType = (string) $service->serviceType;
-                                    $Directory = $service->controlURL;
+                                    $Directory = (string)$service->controlURL;
                                     $ServerContentDirectory = $this->directory($Directory);
                                 }
                             }
@@ -732,17 +779,29 @@ trait UpnpDiscoveryClassTrait {
                 $ServerActiveIcon = "";
 
                 //ServerArray erstellen
+                $this->SendDebug('Server: ',$friendlyName. ' found', 0);
                 $Server_Array[$i]['ServerDescription'] = $ServerDescription;
+                $this->SendDebug('Server-Description', $ServerDescription, 0);
                 $Server_Array[$i]['Root'] = $root;
+                $this->SendDebug('Server-Root', $root, 0);
                 $Server_Array[$i]['ServerIP'] = $ServerIP;
+                $this->SendDebug('Server-IP', $ServerIP, 0);
                 $Server_Array[$i]['ServerPort'] = $ServerPort;
+                $this->SendDebug('Server-Port', $ServerPort, 0);
                 $Server_Array[$i]['ModelName'] = $modelName;
+                $this->SendDebug('Server-ModelName', $modelName, 0);
                 $Server_Array[$i]['UDN'] = $UDN;
+                $this->SendDebug('Server-UDN', $UDN, 0);
                 $Server_Array[$i]['FriendlyName'] = $friendlyName;
+                $this->SendDebug('Server-FriendlyName', $friendlyName, 0);
                 $Server_Array[$i]['IconURL'] = $iconurl;
+                $this->SendDebug('Server-IconURL', $iconurl, 0);
                 $Server_Array[$i]['ServerServiceType'] = $ServerServiceType;
+                $this->SendDebug('Server-ServiceType', $ServerServiceType, 0);
                 $Server_Array[$i]['ServerContentDirectory'] = $ServerContentDirectory;
+                $this->SendDebug('Server-ContentDirectory', $ServerContentDirectory, 0);
                 $Server_Array[$i]['ServerActiveIcon'] = $ServerActiveIcon;
+                $this->SendDebug('Server-ActiveIcon', $ServerActiveIcon, 0);
             }
         }//1
         // Array von Doppelten Einträgen bereinigen

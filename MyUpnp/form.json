@@ -1,14 +1,14 @@
 {
 	"elements":
 	[
-		{  "name": "active",	"type": "CheckBox",		"caption": "active" },
-		{ "name": "IPAddress",	"type": "ValidationTextBox", 	"caption": "IP-Address/Host" },
-		{ "type": "NumberSpinner", "name": "UpdateInterval",    "caption": "UpdateInterval", "suffix": "milisekunden"}
+		{  "name": "active",	"type": "CheckBox",		"caption": "active" }
+
                 
 	],
 	"actions":
 	[
-		{ "type": "Button", "label": "Update Radio Stations",  "onClick": "SNS_UpdateRadioStations($id);" }
+		{ "type": "Button", "label": "Search Upnp Clients.",  "onClick": "UPNP_searchUPNP($id,'client');" },
+                { "type": "Button", "label": "Search Upnp Server.",  "onClick": "UPNP_searchUPNP($id,'server');" }
 
         ]
 }
