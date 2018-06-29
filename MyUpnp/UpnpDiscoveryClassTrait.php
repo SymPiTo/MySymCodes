@@ -489,8 +489,9 @@ trait UpnpDiscoveryClassTrait {
                                     $this->SendDebug('Directory CONTROLURL', 'found', 0);
                                     $DeviceControlServiceType = (string) $service->serviceType;
                                     $Directory = (string)$service->controlURL;
-                                    $this->SendDebug('DeviceControlURL', $Directory, 0);
-                                    $DeviceControlURL = $this->directory($Directory);                                    
+                                    
+                                    $DeviceControlURL = $this->directory($Directory);  
+                                    $this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
                                 } 
                                 else {
                                     $this->SendDebug('Directory CONTROLURL', 'not found', 0);
@@ -502,8 +503,9 @@ trait UpnpDiscoveryClassTrait {
                                     $this->SendDebug('DeviceRenderingControlURL', 'found', 0);
                                     $DeviceRenderingServiceType = (string) $service->serviceType;
                                     $Directory = (string)$service->controlURL;
-                                    $this->SendDebug('DeviceRenderingControlURL', $Directory , 0);
+                                    
                                     $DeviceRenderingControlURL = $this->directory($Directory);
+                                    $this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
                                 } else {
                                     $this->SendDebug('DeviceRenderingControlURL', 'not found', 0);
                                     $DeviceRenderingServiceType = "";
