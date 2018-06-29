@@ -389,7 +389,10 @@ class MyUpnp extends IPSModule {
 			$this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
 		}
 		//Transport starten
-		$this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata);
+		if($this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata)== '702'){
+                    $metadata='';
+                    $this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata);
+                }
 		//Stream ausführen	
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
 		// Postion Timer starten
