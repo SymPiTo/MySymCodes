@@ -86,7 +86,7 @@ trait UpnpDiscoveryClassTrait {
         if (!socket_sendto($socket, $msg, strlen($msg), 0, $MULTICASTIP, $PORT)) {
             $this->SendDebug('mSearch', 'socket_sendto() schlug fehl.\nGrund: ($result) ' . socket_strerror(socket_last_error($socket)), 0);
         } else {
-            $this->SendDebug('mSearch', 'socket_sendto OK.\nMessage:' . $msg . 'gesendet', 0);
+            $this->SendDebug('mSearch', 'sende MultiCast Anfrage.', 0);
         }
 
         //RESPONSE empfangen und bearbeiten -> parseMSearchResponse()////////////////
@@ -297,10 +297,10 @@ trait UpnpDiscoveryClassTrait {
             $cutted2 = $vars1[1];
             $vars2 = explode("/", $cutted2, 2); //cut nach Port (", 2" --> 2 Teile)
             $cutted3 = $vars2[0];
-            $Directory = $vars2[1];
+            $Directory = (string)$vars2[1];
         }
         if (strpos($Directory, "/") == 0) { //prüfen, ob erstes Zeichen ein "/" ist
-            $raw_Directory = trim(end($Directory), "/");
+            $raw_Directory = trim($Directory), "/");
         } else {
             $raw_Directory = $Directory;
         }
