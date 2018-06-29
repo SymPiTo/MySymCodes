@@ -693,6 +693,7 @@ trait upnp {
          * "UNKNOWN"
          */
   	private function resolveErrorCode($path, $errorCode){
+                $this->SendDebug('resolveErrorCode', $path.'- '.$errorCode, 0);
    		$errorList = array( "/AVTransport/ctrl"      => array(
                                                                            "701" => "ERROR_AV_UPNP_AVT_INVALID_TRANSITION",
                                                                            "702" => "ERROR_AV_UPNP_AVT_NO_CONTENTS",
