@@ -482,6 +482,10 @@ trait UpnpDiscoveryClassTrait {
                           / */////////////////////////////////////////////////////////////////////
 
                         if (isset($xmldesc->device->serviceList->service)) {
+                                    $DeviceControlServiceType = "";
+                                    $DeviceControlURL = "";
+                                    $DeviceRenderingServiceType = "";
+                                    $DeviceRenderingControlURL = "";
                             foreach ($xmldesc->device->serviceList->service as $service) {
                                 $serviceType = (string) $service->serviceType;
                                 $this->SendDebug('Device Desription', 'service Type: ' . $serviceType, 0);
@@ -493,12 +497,7 @@ trait UpnpDiscoveryClassTrait {
                                     $DeviceControlURL = $this->directory($Directory);  
                                     $this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
                                 } 
-                                else {
-                                    $this->SendDebug('Directory CONTROLURL', 'not found', 0);
-                                    $DeviceControlServiceType = "";
-                                    $DeviceControlURL = "";
-                                    
-                                }
+
                                 if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")){
                                     $this->SendDebug('DeviceRenderingControlURL', 'found', 0);
                                     $DeviceRenderingServiceType = (string) $service->serviceType;
@@ -506,11 +505,7 @@ trait UpnpDiscoveryClassTrait {
                                     
                                     $DeviceRenderingControlURL = $this->directory($Directory);
                                     $this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
-                                } else {
-                                    $this->SendDebug('DeviceRenderingControlURL', 'not found', 0);
-                                    $DeviceRenderingServiceType = "";
-                                    $DeviceRenderingControlURL = "";
-                                }
+                                } 
                             }
                         }
                     }
