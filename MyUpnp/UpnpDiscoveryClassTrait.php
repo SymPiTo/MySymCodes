@@ -300,7 +300,7 @@ trait UpnpDiscoveryClassTrait {
             $Directory = (string)$vars2[1];
         }
         if (strpos($Directory, "/") == 0) { //prüfen, ob erstes Zeichen ein "/" ist
-            $raw_Directory = trim($Directory), "/");
+            $raw_Directory = trim($Directory, "/");
         } else {
             $raw_Directory = $Directory;
         }
