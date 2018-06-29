@@ -173,7 +173,7 @@ trait UpnpDiscoveryClassTrait {
         socket_close($sock);
 
         return $response;
-        print_r($response);
+        
     }
 
     /* //////////////////////////////////////////////////////////////////////////////
@@ -290,6 +290,7 @@ trait UpnpDiscoveryClassTrait {
       / *//////////////////////////////////////////////////////////////////////////////
 
     Protected function directory($Directory) {
+        $this->SendDebug('Directory übergebenr Wert: ', $Directory , 0);
         if (stristr($Directory, "http") == true) { //komplette URL vorhanden ?
             $vars1 = explode("//", $Directory, 2); //cut nach http
             $cutted1 = $vars1[0];
@@ -304,7 +305,7 @@ trait UpnpDiscoveryClassTrait {
             $raw_Directory = $Directory;
         }
         $parsed_Directory = ("/" . $raw_Directory);
-
+        $this->SendDebug('Directory bereinigter Wert: ', $parsed_Directory , 0);
         return $parsed_Directory;
     }
 
@@ -321,7 +322,7 @@ trait UpnpDiscoveryClassTrait {
         $LoadArray = GetValue($this->GetIDForIdent("upnp_ClientArray"));
         $Device_Array = unserialize($LoadArray);
         //$this->stdout(print_r($Device_Array));
-        $this->SendDebug('create_UPNP_Device_Array', '$Device_Array:', 0);
+       
 
         for ($i = 0, $size = count($Device_SSDPArray); $i < $size; $i++) {
 
@@ -400,8 +401,7 @@ trait UpnpDiscoveryClassTrait {
 
                         $xml = @file_get_contents("$DeviceDescription", -1);
                         $xml = str_replace("&", "&amp;", $xml);
-                        //print_r($xml);
-
+                        //Enable (TRUE) user error handling                        
                         libxml_use_internal_errors(true);
 
                         $xmldesc = new SimpleXMLElement($xml);
