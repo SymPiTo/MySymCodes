@@ -520,18 +520,32 @@ trait UpnpDiscoveryClassTrait {
 
                     //DeviceArray erstellen
                     $Device_Array[$i]['DeviceDescription'] = $DeviceDescription;
+                    $this->SendDebug('DeviceDescription', $DeviceDescription, 0);
                     $Device_Array[$i]['Root'] = $root;
+                    $this->SendDebug('Root', $root, 0);
                     $Device_Array[$i]['DeviceIP'] = $DeviceIP;
+                    $this->SendDebug('DeviceIP', $DeviceIP, 0);
                     $Device_Array[$i]['DevicePort'] = $DevicePort;
+                    $this->SendDebug('DevicePort', $DevicePort, 0);
                     $Device_Array[$i]['ModelName'] = $modelName;
+                    $this->SendDebug('ModelName', $modelName, 0);
                     $Device_Array[$i]['UDN'] = $UDN;
+                    $this->SendDebug('UDN', $UDN, 0);
                     $Device_Array[$i]['FriendlyName'] = $friendlyName;
+                    $this->SendDebug('FriendlyName', $friendlyName, 0);
                     $Device_Array[$i]['IconURL'] = $iconurl;
+                    $this->SendDebug('IconURL', $iconurl, 0);
                     $Device_Array[$i]['DeviceControlServiceType'] = $DeviceControlServiceType;
+                    $this->SendDebug('DeviceControlServiceType', $DeviceControlServiceType, 0);
                     $Device_Array[$i]['DeviceControlURL'] = $DeviceControlURL;
+                    $this->SendDebug('DeviceControlURL', $DeviceControlURL, 0);
                     $Device_Array[$i]['DeviceRenderingServiceType'] = $DeviceRenderingServiceType;
+                    $this->SendDebug('DeviceRenderingServiceType', $DeviceRenderingServiceType, 0);
                     $Device_Array[$i]['DeviceRenderingControlURL'] = $DeviceRenderingControlURL;
+                    $this->SendDebug('DeviceRenderingControlURL', $DeviceRenderingControlURL, 0);
                     $Device_Array[$i]['DeviceActiveIcon'] = $DeviceActiveIcon;
+                    $this->SendDebug('DeviceActiveIcon', $DeviceActiveIcon, 0);
+                    
                 }
             }
         }//1
