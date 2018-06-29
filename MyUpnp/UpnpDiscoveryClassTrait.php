@@ -358,9 +358,6 @@ trait UpnpDiscoveryClassTrait {
     //Status: checked 29.6.2018
     /* **************************************************************************** */
     Protected function create_UPNP_Device_Array($Device_SSDPArray) {
-        //include_once ("13355 /*[DLNA\UPnP Class\UPnP_API]*/.ips.php"); //UPNP_Klasse
-        //include_once ('32114 /*[Testumgebung\Logger\Logger]*/.ips.php');
-        //$DLNA = new DLNA();
 
         $LoadArray = GetValue($this->GetIDForIdent("upnp_ClientArray"));
         $Device_Array = unserialize($LoadArray);
@@ -615,7 +612,7 @@ trait UpnpDiscoveryClassTrait {
           / *//////////////////////////////////////////////////////////////////////////////
 
 
-        $LoadArray = GetValue(self::ID_SERVER_ARRAY);
+        $LoadArray = GetValue($this->GetIDForIdent("upnp_ServerArray"));
         $Server_Array = unserialize($LoadArray);
 
         //$Server_Array = array();
