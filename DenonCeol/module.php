@@ -84,10 +84,12 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                     //Neuen Wert in die Statusvariable schreiben
                     //SetValue($this->GetIDForIdent($Ident), $Value);
                         if($Value){
+                            $url = "http://$host:80/goform/formiPhoneAppPower.xml";
                             $cmd = '1+PowerOn';
                             $xml = $this->curl_get($url, $cmd);
                         }
                         else{
+                            $url = "http://$host:80/goform/formiPhoneAppPower.xml";
                             $cmd = '1+PowerStandby';
                             $xml = $this->curl_get($url, $cmd);
                         }
