@@ -92,6 +92,7 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableString("upnp_Genre", "DIDL_Genre [upnp:genre]");
             $this->RegisterVariableString("upnp_Date", "DIDL_Date [dc:date]");
             $this->RegisterVariableString("upnp_TrackNo", "DIDL_TrackNumber [upnp:originalTrackNumber]");
+            
             //$ID_CatDIDL =  IPS_GetCategoryIDByName("DIDL", $this->InstanceID);
             //Verschieben der Variable unter Ordner DIDL
             //IPS_SetParent($this->GetIDForIdent("upnp_Album"), $ID_CatDIDL);
@@ -110,7 +111,7 @@ class MyUpnp extends IPSModule {
             //IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
             //IPS_SetParent($CatID, $this->InstanceID); 
             //Status Variable anlegen;
-        
+            $this->RegisterVariableInteger("upnp_Volume", "Volume", "UPNP_Volume");
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
@@ -683,9 +684,27 @@ class MyUpnp extends IPSModule {
 			}
 		}
 	}
-	
-	
-	
+        
+	//*****************************************************************************
+	/* Function: GetVolume()
+	...............................................................................
+	Lautstärke auslesen des UPNP Clients
+	...............................................................................
+	Parameters:
+            none.
+	--------------------------------------------------------------------------------
+	Returns:  
+            $UpnpVol - Lautstärke als integer
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function GetVolume(){ 
+            $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
+            $RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
+            $UpnpVol = $this->GetVolume($ClientIP, $ClientPort, $RenderingControlURL);
+            setvalue($this->GetIDForIdent("upnp_Volume"), $UpnpVol);
+	}
 
 	//*****************************************************************************
 	/* Function: progress ($ClientIP, $ClientPort, $ControlURL)
