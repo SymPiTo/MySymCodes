@@ -48,6 +48,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("CeolSZ8", "Line8"); 
             $this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
             
+            // Aktiviert die Standardaktion der Statusvariable
+            $this->EnableAction("CeolPower");
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
@@ -71,6 +73,30 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             }
         }
  
+        public function RequestAction($Ident, $Value) {
+            switch($Ident) {
+                case "CeolPower":
+                    //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
+                    //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
+
+                    //Neuen Wert in die Statusvariable schreiben
+                    SetValue($this->GetIDForIdent($Ident), $Value);
+                    break;
+                default:
+                    throw new Exception("Invalid Ident");
+            }
+
+        } 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
         * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
