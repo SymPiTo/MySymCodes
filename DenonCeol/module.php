@@ -378,7 +378,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$xml = $this->curl_get($url, $cmd);
 		$output = XML2Array::createArray($xml);
  		$status = ($output['item']['Power']['value']);
-		SetValueBoolean($this->GetIDForIdent("CeolPower"), $_power);
+		SetValueBoolean($this->GetIDForIdent("CeolPower"), $power);
 		return $status;	
 	}        
 
