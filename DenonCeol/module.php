@@ -80,7 +80,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                     //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
                     //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
                     $this->SendDebug('RequestAktion', 'Wert: '.$Value, 0);
-                    $this->SetPower($Value);
+                    //$this->SetPower($Value);
                     //Neuen Wert in die Statusvariable schreiben
                     //SetValue($this->GetIDForIdent($Ident), $Value);
                     
@@ -368,7 +368,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Public function SetPower($status){
 		$host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formiPhoneAppPower.xml";
-		if (($status == "On")or($status)){
+		if ($status == "On"){
                     $this->SendDebug('SetPower', 'Power: '.'einschalten', 0);
 			$cmd = '1+PowerOn';
 			$power=true;
