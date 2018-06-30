@@ -369,6 +369,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 		$host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formiPhoneAppPower.xml";
 		if (($status == "On")or($status == 1)){
+                    $this->SendDebug('SetPower', 'Power: '.'einschalten', 0);
 			$cmd = '1+PowerOn';
 			$power=true;
 		}
