@@ -79,11 +79,18 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 case "CeolPower":
                     //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
                     //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
-                    $this->SendDebug('RequestAktion', 'Wert: '.$Value, 0);
+                
                     //$this->SetPower($Value);
                     //Neuen Wert in die Statusvariable schreiben
                     //SetValue($this->GetIDForIdent($Ident), $Value);
-                    
+                        if($Value){
+                            $cmd = '1+PowerOn';
+                            $xml = $this->curl_get($url, $cmd);
+                        }
+                        else{
+                            $cmd = '1+PowerStandby';
+                            $xml = $this->curl_get($url, $cmd);
+                        }
                     break;
                 default:
                     throw new Exception("Invalid Ident");
