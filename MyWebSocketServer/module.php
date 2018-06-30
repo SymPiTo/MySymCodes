@@ -83,7 +83,7 @@ class MyWebsocketServer extends IPSModule
         $ID_DSTC = $this->GetIDForIdent("DataSendToClient");
         
         $ParentID = IPS_GetVariableIDByName("DataSendToClient", $this->InstanceID);
-        if (!IPS_EventExists(IPS_GetEventIDByName("EventChangedIpsValues", $ParentID))){
+        if (!IPS_EventExists(@IPS_GetEventIDByName("EventChangedIpsValues", $ParentID))){
             
         
         // Trigger Event für Änderung der Variable "DataSendToClient" erstellen
