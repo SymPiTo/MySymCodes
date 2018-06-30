@@ -118,8 +118,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         * CEOL_XYFunktion($id);
         *
         */
-        
-       
+
         
         private function CeolInit(){
             

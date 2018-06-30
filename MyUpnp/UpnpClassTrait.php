@@ -696,7 +696,7 @@ trait upnp {
                 $this->SendDebug('resolveErrorCode', $path.'- '.$errorCode, 0);
    		$errorList = array( "/AVTransport/ctrl"      => array(
                                                                            "701" => "ERROR_AV_UPNP_AVT_INVALID_TRANSITION",
-                                                                           "702" => "ERROR_AV_UPNP_AVT_NO_CONTENTS",
+                                                                           "702" => "The media does not contain any contents that can be played. ",
                                                                            "703" => "ERROR_AV_UPNP_AVT_READ_ERROR",
                                                                            "704" => "ERROR_AV_UPNP_AVT_UNSUPPORTED_PLAY_FORMAT",
                                                                            "705" => "ERROR_AV_UPNP_AVT_TRANSPORT_LOCKED",
