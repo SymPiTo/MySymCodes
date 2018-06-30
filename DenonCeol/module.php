@@ -83,7 +83,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                     $this->SetPower($Value);
                     //Neuen Wert in die Statusvariable schreiben
                     SetValue($this->GetIDForIdent($Ident), $Value);
-                    
+                    IPS_SLEEP(5000);
                     break;
                 default:
                     throw new Exception("Invalid Ident");
@@ -368,12 +368,12 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Public function SetPower($status){
 		$host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formiPhoneAppPower.xml";
-		if (($status == "On")or($status == 1)){
+		if (($status == "On")or($status)){
                     $this->SendDebug('SetPower', 'Power: '.'einschalten', 0);
 			$cmd = '1+PowerOn';
 			$power=true;
 		}
-		if (($status == "Standby") or ($status == 0)){
+		if (($status == "Standby") or (!$status)){
 			$cmd = '1+PowerStandby';
 			$power=false;
 		}
