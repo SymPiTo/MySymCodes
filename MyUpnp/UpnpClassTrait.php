@@ -365,7 +365,7 @@ trait upnp {
  	--------------------------------------------------------------------------------
 	Returns: 
          */
-	Protected function GetVolume(string $ClientIP, string $ClientPort, string $RenderingControlURL){
+	Protected function GetVolume($ClientIP, $ClientPort, $RenderingControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -379,6 +379,8 @@ trait upnp {
 		);
 	}
 	
+       
+        
 	//*****************************************************************************
 	/* Function: SetMute($ClientIP, $ClientPort, $RenderingControlURL, $DesiredMute)
   	...............................................................................
