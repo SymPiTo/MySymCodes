@@ -15,7 +15,7 @@ trait CEOLupnp
 	Soap / upnp-command
 	Stopped upnp Stream
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function Stop()
+	  public function Stop_AV()
 	  {
 	    $this->processSoapCall("/AVTransport/ctrl",
 
@@ -46,7 +46,7 @@ trait CEOLupnp
 					
 	Rückgabewert: 	 none
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function Pause()
+	public function Pause_AV()
 	{
 		$this->processSoapCall("/AVTransport/ctrl",
 		"urn:schemas-upnp-org:service:AVTransport:1",
@@ -71,7 +71,7 @@ trait CEOLupnp
 					
 	Rückgabewert: 	 none
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function Play()
+	  public function Play_AV()
 	  {
 	    $this->processSoapCall("/AVTransport/ctrl",
 
@@ -102,7 +102,7 @@ trait CEOLupnp
 					
 	Rückgabewert: 	 none
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function Next()
+	  public function Next_AV()
 	  {
 	    $this->processSoapCall("/AVTransport/ctrl",
 
@@ -131,7 +131,7 @@ trait CEOLupnp
 					
 	Rückgabewert: 	 none
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function Previous()
+	public function Previous_AV()
 	{
 	    $this->processSoapCall("/AVTransport/ctrl",
 
@@ -160,7 +160,7 @@ trait CEOLupnp
 				 $target = noch zu testen!	
 	Rückgabewert: 	 none
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function Seek($unit, $target)
+	public function Seek_AV($unit, $target)
 	{
 	    $this->processSoapCall("/AVTransport/ctrl",
 
@@ -193,7 +193,7 @@ trait CEOLupnp
 					
 	Rückgabewert: 	 Integer Wert 0 - x 
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function GetVolume($channel = 'Master')
+	  public function GetVolume_AV($channel = 'Master')
 	  {
 	    return (int)$this->processSoapCall("/RenderingControl/ctrl",
 
@@ -227,7 +227,7 @@ trait CEOLupnp
 	Rückgabewert: 	 0  - Mute nicht gesetzt 
 					 1  - Mute gesetzt 
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function GetMute()
+	  public function GetMute_AV()
 	  {
 	    return (int)$this->processSoapCall("/RenderingControl/ctrl",
 
@@ -273,7 +273,7 @@ trait CEOLupnp
 		  $mediaInfo["title"] 
 	]
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function GetMediaInfo()
+	  public function GetMediaInfo_AV()
 	  {
 	    $mediaInfo = $this->processSoapCall("/AVTransport/ctrl",
 
@@ -328,7 +328,7 @@ trait CEOLupnp
 							$positionInfo["streamContent"]
 						]
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function GetPositionInfo()
+	  public function GetPositionInfo_AV()
 	  {
 	    $positionInfo = $this->processSoapCall("/AVTransport/ctrl",
 
@@ -403,7 +403,7 @@ trait CEOLupnp
 					5	- TRANSITIONING  
 					deafult - Fehlermeldung
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function GetTransportInfo()
+	  public function GetTransportInfo_AV()
 	  {
 	    $returnContent = $this->processSoapCall("/AVTransport/ctrl",
 
@@ -451,7 +451,7 @@ trait CEOLupnp
 					4   - SHUFFLE_REPEAT_ONE 
 					5	- Fehlermeldung  
 	//////////////////////////////////////////////////////////////////////////////*/
-	  public function GetTransportSettings()
+	  public function GetTransportSettings_AV()
 	  {
 	    $returnContent = $this->processSoapCall("/AVTransport/ctrl",
 
@@ -502,7 +502,7 @@ trait CEOLupnp
 	
 	Rückgabewert: 	
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function GetProtocollInfo()
+	public function GetProtocollInfo_AV()
 	{
 	    $returnContent = $this->processSoapCall("/ConnectionManager/ctrl",
 
@@ -536,7 +536,7 @@ trait CEOLupnp
 	return: nur Fehler Code
 	Status: not checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function SetAVTransportURI($file, $MetaData){	
+	public function SetAVTransportURI_AV($file, $MetaData){	
 	    return $this->processSoapCall("/AVTransport/ctrl",
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -570,7 +570,7 @@ trait CEOLupnp
 	return: nur Fehler Code
 	Status: not checked
 	/////////////////////////////////////////////////////////////////////////////*/
-	public function SetNextAVTransportURI($file_next, $MetaData_next){
+	public function SetNextAVTransportURI_AV($file_next, $MetaData_next){
 	    return $this->processSoapCall("/AVTransport/ctrl",
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -601,7 +601,7 @@ trait CEOLupnp
  	
 	Rückgabewert: 	none
 	//////////////////////////////////////////////////////////////////////////////*/
-	  Protected function SetMute($mute)
+	  Protected function SetMute_AV($mute)
 	  {
 	    $this->processSoapCall("/RenderingControl/ctrl",
 
@@ -635,7 +635,7 @@ trait CEOLupnp
  	
 	Rückgabewert: 	none
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function SetPlayMode($mode)
+	Protected function SetPlayMode_AV($mode)
 	  {
 	    $this->processSoapCall("/AVTransport/ctrl",
 

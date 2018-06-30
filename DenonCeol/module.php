@@ -507,11 +507,11 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	Public function ToggleMute(){
             $state = GetValueBoolean($this->GetIDForIdent("CeolMute"));
             if ($state){
-		$this->SetMute('0');
+		$this->SetMute_AV('0');
 		SetValueBoolean($this->GetIDForIdent("CeolMute"), false);
             }
             else{
-		$this->SetMute('1');
+		$this->SetMute_AV('1');
 		SetValueBoolean($this->GetIDForIdent("CeolMute"), true);
             }	
             return true;	
@@ -798,9 +798,9 @@ o                    http://192.168.2.99/img/album%20art_S.png
                    throw new Exception("File (".$file.") has to be located on a Samba share (e.g. //ipsymcon.fritz.box/tts/text.mp3) or a HTTP server (e.g. http://ipsymcon.fritz.box/tts/text.mp3)");
                 }
                 $this->SendDebug("Spiele File: ", $uri, 0);
-                $this->SetAVTransportURI($uri, "") ;
-                $this->SetPlayMode('NORMAL');	
-                $this->Play();
+                $this->SetAVTransportURI_AV($uri, "") ;
+                $this->SetPlayMode_AV('NORMAL');	
+                $this->Play_AV();
                 IPS_Sleep(500);
 /*
               $fileTransportInfo = $sonos->GetTransportInfo();

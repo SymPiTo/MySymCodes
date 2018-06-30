@@ -338,7 +338,7 @@ trait upnp {
  	--------------------------------------------------------------------------------
 	Returns:
          */
-	Protected function SetVolume(string $ClientIP, string $ClientPort, string $RenderingControlURL, $DesiredVolume){
+	Protected function SetVolume_AV(string $ClientIP, string $ClientPort, string $RenderingControlURL, $DesiredVolume){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -365,7 +365,7 @@ trait upnp {
  	--------------------------------------------------------------------------------
 	Returns: 
          */
-	Protected function GetVolumeUPNP($ClientIP, $ClientPort, $RenderingControlURL){
+	Protected function GetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -394,7 +394,7 @@ trait upnp {
 	--------------------------------------------------------------------------------
 	Returns: 
          */
-	Protected function SetMute(string $ClientIP, string $ClientPort, string $RenderingControlURL, $DesiredMute){
+	Protected function SetMute_AV(string $ClientIP, string $ClientPort, string $RenderingControlURL, $DesiredMute){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -421,7 +421,7 @@ trait upnp {
 	--------------------------------------------------------------------------------
 	Returns: 
          */
-	Protected function GetMute(string $ClientIP, string $ClientPort, string $RenderingControlURL){
+	Protected function GetMute_AV(string $ClientIP, string $ClientPort, string $RenderingControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $RenderingControlURL,
 	
 	                           "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -493,7 +493,7 @@ trait upnp {
         --------------------------------------------------------------------------------
 	Status: checked 
          */
-	Protected function GetMediaInfo (string $ClientIP, string $ClientPort, string $ClientControlURL){
+	Protected function GetMediaInfo(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
