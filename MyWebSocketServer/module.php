@@ -78,7 +78,7 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterTimer('KeepAlivePing', 0, 'WSS_KeepAlive($_IPS[\'TARGET\']);');
         // Daten die von Client kommen werden in folgende Variable geschrieben
         $this->RegisterVariableString("CommandSendToServer", "CommandSendToServer");
-        //Bei Variablenänderung folgender Variable wird dieser Inhalt an alle Clients gesendet
+        //Bei  Variablenänderung folgender Variable wird dieser Inhalt an alle Clients gesendet
         $this->RegisterVariableString("DataSendToClient", "DataSendToClient");
         $ID_DSTC = $this->GetIDForIdent("DataSendToClient");
         
