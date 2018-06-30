@@ -83,7 +83,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                     $this->SetPower($Value);
                     //Neuen Wert in die Statusvariable schreiben
                     //SetValue($this->GetIDForIdent($Ident), $Value);
-                    IPS_SLEEP(5000);
+                    
                     break;
                 default:
                     throw new Exception("Invalid Ident");
@@ -373,7 +373,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 			$cmd = '1+PowerOn';
 			$power=true;
 		}
-		if (($status == "Standby") or (!$status)){
+		if ($status == "Standby"){
 			$cmd = '1+PowerStandby';
 			$power=false;
 		}
