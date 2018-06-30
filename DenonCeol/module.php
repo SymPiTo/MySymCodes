@@ -50,6 +50,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             
             // Aktiviert die Standardaktion der Statusvariable
             $this->EnableAction("CeolPower");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolPower"), "~Switch");
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
@@ -78,7 +79,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 case "CeolPower":
                     //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
                     //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
-
+                    
+                    $this->SetPower($Value);
                     //Neuen Wert in die Statusvariable schreiben
                     SetValue($this->GetIDForIdent($Ident), $Value);
                     break;
@@ -358,18 +360,18 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
 	--------------------------------------------------------------------------------
 	HTTP-Command: http://192.168.178.29:80/goform/formiPhoneAppPower.xml?1+PowerOn
 	--------------------------------------------------------------------------------
-	return: $status = 'on' / 'Standby'   
+	return: $status = 'on' / 'Standby'  // 0 / 1 
 	--------------------------------------------------------------------------------
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/        
 	Public function SetPower($status){
 		$host = $this->ReadPropertyString('IPAddress');
 		$url = "http://$host:80/goform/formiPhoneAppPower.xml";
-		if ($status == "On"){
+		if (($status == "On")or($status)){
 			$cmd = '1+PowerOn';
 			$power=true;
 		}
-		if ($status == "Standby"){
+		if (($status == "Standby") or (!$status)){
 			$cmd = '1+PowerStandby';
 			$power=false;
 		}
