@@ -702,7 +702,7 @@ class MyUpnp extends IPSModule {
             $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
             $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
             $RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
-            $UpnpVol = $this->upnp_GetVolume($ClientIP, $ClientPort, $RenderingControlURL);
+            $UpnpVol = $this->GetVolumeUPNP($ClientIP, $ClientPort, $RenderingControlURL);
             //setvalue($this->GetIDForIdent("upnp_Volume"), $UpnpVol);
             return $UpnpVol;
 	}
