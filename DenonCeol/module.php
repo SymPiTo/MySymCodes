@@ -196,7 +196,9 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 $output = $this->get_audio_status();		
                 $sz1 = $output['item']['szLine']['value'][0];
                 $sz2 = $output['item']['szLine']['value'][1];
+                if (empty($sz2)){$sz2 = '- - - -';}
                 $sz3 = $output['item']['szLine']['value'][2];
+                if (empty($sz3)){$sz2 = '- - - -';}
                 $sz4 = $output['item']['szLine']['value'][3];
                 $sz5 = $output['item']['szLine']['value'][4];
                 $sz6 = $output['item']['szLine']['value'][5];
