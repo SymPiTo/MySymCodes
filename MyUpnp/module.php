@@ -112,7 +112,7 @@ class MyUpnp extends IPSModule {
             //IPS_SetParent($CatID, $this->InstanceID); 
             //Status Variable anlegen;
             $this->RegisterVariableBoolean("upnp_Mute", "Mute");
-            $this->RegisterVariableInteger("upnp_Volume", "Volume", "UPNP_Volume");
+            $this->RegisterVariableFloat("upnp_Volume", "Volume", "");
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
@@ -395,12 +395,12 @@ class MyUpnp extends IPSModule {
             setvalue($this->GetIDForIdent("upnp_Volume"), intval($UpnpVol));
             switch ($value){
                 case 'up':
-                    $vol = intval($UpnpVol) + 10;
+                    $vol = intval($UpnpVol) + 5;
                     $this->SetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL, (string)$vol);
                 
                     break;
                 case 'down':
-                    $vol = intval($UpnpVol) - 1;
+                    $vol = intval($UpnpVol) - 5;
                     $this->SetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL, (string)$vol);
                 
                     break;
