@@ -747,7 +747,7 @@ class MyUpnp extends IPSModule {
             $album = $didlXml->item[0]->xpath('upnp:album')[0];
             $TrackNo = $didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
             $actor = $didlXml->item[0]->xpath('upnp:actor')[0];
-            $AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
+            //$AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
             $genre = $didlXml->item[0]->xpath('upnp:genre')[0];
             $date = $didlXml->item[0]->xpath('dc:date')[0];
             setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
@@ -756,7 +756,7 @@ class MyUpnp extends IPSModule {
             setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
             setvalue($this->GetIDForIdent("upnp_Actor"), (string) $actor);
             setvalue($this->GetIDForIdent("upnp_Date"), (string) $date);
-            setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
+            //setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
             setvalue($this->GetIDForIdent("upnp_Genre"), (string) $genre);
                 function get_time_difference($Duration, $RelTime){
                         $duration = explode(":", $Duration);
