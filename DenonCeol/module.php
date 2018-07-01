@@ -203,7 +203,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 $sz7 = $output['item']['szLine']['value'][6];
                 $sz8 = $output['item']['szLine']['value'][6];
                 SetValueString($this->GetIDForIdent("CeolSZ1"), $sz1);
-                SetValueString($this->GetIDForIdent("CeolSZ2"), $sz2);
+                SetValueString($this->GetIDForIdent("CeolSZ2"), substr($sz2, 0,60));
                 SetValueString($this->GetIDForIdent("CeolSZ3"), $sz3);
                 SetValueString($this->GetIDForIdent("CeolSZ4"), $sz4);
                 SetValueString($this->GetIDForIdent("CeolSZ5"), $sz5);
