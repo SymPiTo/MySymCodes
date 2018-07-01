@@ -390,7 +390,7 @@ trait upnp {
          *   $ClientIP          - IP Adresse der Clients.
          *   $ClientPort        - Übertragungs Port des Clients.
          *   $ClientControlURL  - Stammverzeichnis des Clients
-         *   $DesiredMute
+         *   $DesiredMute       - 1 // 0
 	--------------------------------------------------------------------------------
 	Returns: 
          */

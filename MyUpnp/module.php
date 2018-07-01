@@ -111,6 +111,7 @@ class MyUpnp extends IPSModule {
             //IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
             //IPS_SetParent($CatID, $this->InstanceID); 
             //Status Variable anlegen;
+            $this->RegisterVariableBoolean("upnp_Mute", "Mute");
             $this->RegisterVariableInteger("upnp_Volume", "Volume", "UPNP_Volume");
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
@@ -167,7 +168,8 @@ class MyUpnp extends IPSModule {
         
         
             //$this->RegisterVariableBoolean("CeolPower", "Power");        
-         
+            $this->EnableAction("upnp_Mute");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("upnp_Mute"), "~Switch");
             
         // Timer erstellen
         $this->RegisterTimer("upnp_PlayInfo", 1000,  'UPNP_GetPosInfo(' . $this->InstanceID . ');');
@@ -187,7 +189,25 @@ class MyUpnp extends IPSModule {
 
     }
     
+    public function RequestAction($Ident, $Value) {
+        switch($Ident) {
+            case "upnp_Mute":
+                //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
+                //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
+                if($Value){
+                    $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '1');
+                    SetValue($this->GetIDForIdent("upnp_Mute"), true);
+                }
+                else{
+                    $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '0');
+                    SetValue($this->GetIDForIdent("upnp_Mute"), false);
+                }
+                break;
+            default:
+                throw new Exception("Invalid Ident");
+        }
 
+    } 
         
 
 
@@ -354,6 +374,49 @@ class MyUpnp extends IPSModule {
 		return $key;
 	}	
 	
+        
+	//*****************************************************************************
+	/* Function: setMute($value)
+	...............................................................................
+	UPNP Client Stumm schalten
+        ...............................................................................
+	Parameters: 
+            $value - 'on' 'off' 'toggle'
+	--------------------------------------------------------------------------------
+	Returns:  
+            none
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function setMute($value){	
+            $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort")); 
+            $RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
+            switch ($value){
+		case 'on':
+                    $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '1');
+                    SetValue($this->GetIDForIdent("upnp_Mute"), true);
+                    break;
+		case 'off':
+                    $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '0');
+                    SetValue($this->GetIDForIdent("upnp_Mute"), false);
+                    break;
+ 		case 'toggle':
+                    $state = GetValue($this->GetIDForIdent("upnp_Mute"));
+                    if($state){
+                        $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '0');
+                        SetValue($this->GetIDForIdent("upnp_Mute"), false);
+                    }
+                    else {
+                        $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '1');
+                        SetValue($this->GetIDForIdent("upnp_Mute"), true);
+                    }
+                    break;
+                default :
+                    $this->SendDebug("Error_setMute: ", 'wrong parameter.', 0);
+              }    
+        }
+        
 	//*****************************************************************************
 	/* Function: play()
 	...............................................................................
