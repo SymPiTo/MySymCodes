@@ -374,6 +374,36 @@ class MyUpnp extends IPSModule {
 		return $key;
 	}	
 	
+	//*****************************************************************************
+	/* Function: setVolume($value)
+	...............................................................................
+	UPNP Client Lautstärke einstellen
+        ...............................................................................
+	Parameters: 
+            $value - 'up' // 'down' // 21
+	--------------------------------------------------------------------------------
+	Returns:  
+            none
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function setVolume($value){
+            $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort")); 
+            $RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
+            $UpnpVol = $this->GetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL);
+            setvalue($this->GetIDForIdent("upnp_Volume"), $UpnpVol);
+            switch ($value){
+                case 'up':
+                    break;
+                case 'down':
+                    break;
+                default :
+                    $this->SetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL, $value);
+            }
+            
+                    
+        }
         
 	//*****************************************************************************
 	/* Function: setMute($value)
@@ -386,7 +416,7 @@ class MyUpnp extends IPSModule {
 	Returns:  
             none
 	--------------------------------------------------------------------------------
-	Status:  
+	Status:   checked 1.7.2018
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function setMute($value){	
             $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
