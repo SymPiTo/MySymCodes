@@ -55,6 +55,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolMute"), "~Switch");
             $this->EnableAction("CeolSource");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolSource"), "DehonCEOL_Source");
+            $this->EnableAction("CeolVolume");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolVolume"), "DehonCEOL_Volume");
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
