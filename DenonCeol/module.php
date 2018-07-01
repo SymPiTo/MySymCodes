@@ -51,6 +51,10 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             // Aktiviert die Standardaktion der Statusvariable
             $this->EnableAction("CeolPower");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolPower"), "~Switch");
+            $this->EnableAction("CeolMute");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolMute"), "~Switch");
+            $this->EnableAction("CeolSource");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolSource"), "DehonCEOL_Source");
             
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
@@ -95,6 +99,22 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                             $cmd = '1+PowerStandby';
                             $xml = $this->curl_get($url, $cmd);
                         }
+                    break;
+                case "CeolSource":
+                    break;
+                case "CeolVolume":
+                    break;
+                case "CeolMute":
+                        if($Value){
+                            $this->SetMute_AV('1');
+                            SetValueBoolean($this->GetIDForIdent("CeolMute"), true);
+                        }
+                        else{
+                            $this->SetMute_AV('0');
+                            SetValueBoolean($this->GetIDForIdent("CeolMute"), false);
+                        }
+                    break;
+                case "CeolFavChannel":
                     break;
                 default:
                     throw new Exception("Invalid Ident");
@@ -158,6 +178,8 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 }
                 else{
                         $_power = false;
+                        SetValueString($this->GetIDForIdent("CeolSZ2"), 'Denon CEOL Picolo');
+                        SetValueString($this->GetIDForIdent("CeolSZ3"), 'ausgeshaltet');
                 }
                 SetValueBoolean($this->GetIDForIdent("CeolPower"), $_power);
                 SetValueInteger($this->GetIDForIdent("CeolVolume"), $MasterVolume);
