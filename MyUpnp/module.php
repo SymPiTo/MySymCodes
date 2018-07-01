@@ -387,7 +387,7 @@ class MyUpnp extends IPSModule {
 	--------------------------------------------------------------------------------
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
-	public function setVolume($value){
+	public function setVolume(string $value){
             $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
             $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort")); 
             $RenderingControlURL = getvalue($this->GetIDForIdent("upnp_ClientRenderingControlURL"));
@@ -395,8 +395,14 @@ class MyUpnp extends IPSModule {
             setvalue($this->GetIDForIdent("upnp_Volume"), $UpnpVol);
             switch ($value){
                 case 'up':
+                    $vol = intval($UpnpVol) + 1;
+                    $this->SetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL, (string)$vol);
+                    setvalue($this->GetIDForIdent("upnp_Volume"), $vol);
                     break;
                 case 'down':
+                    $vol = intval($UpnpVol) - 1;
+                    $this->SetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL, (string)$vol);
+                    setvalue($this->GetIDForIdent("upnp_Volume"), $vol);
                     break;
                 default :
                     $this->SetVolume_AV($ClientIP, $ClientPort, $RenderingControlURL, $value);
