@@ -278,11 +278,12 @@ trait upnp {
          *   $ClientIP          - IP Adresse der Clients.
          *   $ClientPort        - Übertragungs Port des Clients.
          *   $ClientControlURL  - Stammverzeichnis des Clients
-         *   $position =  
+         *   $position =        - '0:00:00.000'
  	--------------------------------------------------------------------------------
 	Returns:
          */       
 	Public function Seek_AV(string $ClientIP, string $ClientPort, string $ClientControlURL,string $position){
+            $this->SendDebug('Seek_AV', $position, 0);
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
