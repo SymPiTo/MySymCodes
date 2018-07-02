@@ -122,6 +122,7 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
             $this->RegisterVariableString("upnp_RelTime", "RelTime");
+            $this->RegisterVariableString("upnp_TrackDuration", "TrackDuration");
             //$this->RegisterVariableString("upnp_TrackDuration", "Pos:TrackDuration [upnp:album]");
             //$this->RegisterVariableString("upnp_TrackMetaData", "Pos:TrackMetaData");
             //$this->RegisterVariableString("upnp_TrackURI", "Pos:TrackURI");
@@ -676,8 +677,50 @@ class MyUpnp extends IPSModule {
 		$this->play('previous');
 
 	}	
-
-
+        
+	//*****************************************************************************
+	/* Function: seekForward()
+        -------------------------------------------------------------------------------
+        spult Lied um 20 Sekunden vor
+        ...............................................................................
+	Parameters:
+            none.
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function seekForward(){	
+            $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+            $ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
+            $postime = getvalue($this->GetIDForIdent("upnp_RelTime"));
+                $posArray = explode(":",$postime);
+                //$position ='0:02:10.000'; 
+            $position = $posArray[0] + ':' + $posArray[1] + ':' + (string)(intval($posArray[2])+20)+'.000';
+            $this->Seek_AV($ClientIP, $ClientPort, $ClientControlURL, (string) $position);
+	}
+	//*****************************************************************************
+	/* Function: seekForward()
+        -------------------------------------------------------------------------------
+        spult Lied um 20 Sekunden vor
+        ...............................................................................
+	Parameters:
+            none.
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function seekBackward(){	
+            $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+            $ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
+            $postime = getvalue($this->GetIDForIdent("upnp_RelTime"));
+                $posArray = explode(":",$postime);
+                //$position ='0:02:10.000'; 
+            $position = $posArray[0] + ':' + $posArray[1] + ':' + (string)(intval($posArray[2])-20)+'.000';
+            $this->Seek_AV($ClientIP, $ClientPort, $ClientControlURL, (string) $position);
+	}
+        
 	//*****************************************************************************
 	/* Function: loadPlaylist($AlbumNo)
 	...............................................................................
@@ -857,6 +900,7 @@ class MyUpnp extends IPSModule {
             $AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
             $genre = $didlXml->item[0]->xpath('upnp:genre')[0];
             $date = $didlXml->item[0]->xpath('dc:date')[0];
+            setvalue($this->GetIDForIdent("upnp_TrackDuration"), (string) $Duration);
             setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);
             setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
             setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
