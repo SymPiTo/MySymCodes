@@ -1,6 +1,10 @@
 <?php
 require_once(__DIR__ . "/UpnpDiscoveryClassTrait.php");
 require_once(__DIR__ . "/UpnpClassTrait.php");
+
+
+require_once(__DIR__ . "/../libs/XML2Array.php");  // diverse Klassen
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
