@@ -1272,7 +1272,7 @@ class MyUpnp extends IPSModule {
         --------------------------------------------------------------------------------
         Status: 
         //////////////////////////////////////////////////////////////////////////////*/
-        Protected function createPlaylist(string $id, string $PlaylistNo){
+        Public function createPlaylist(string $id, string $PlaylistNo){
                 //IPSLog("Starte Funktion CREATEPLAYLIST mit Parameter ", $id.' - '.$PlaylistNo);
                 $PlaylistArray = array();
 
