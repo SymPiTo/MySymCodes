@@ -696,7 +696,7 @@ class MyUpnp extends IPSModule {
             $postime = getvalue($this->GetIDForIdent("upnp_RelTime"));
             $seconds = 20;
             $time_now = "00:00:00.000";
-
+            $this->SendDebug('seekForward', $postime, 0);
             $position = date("H:i:s.ms", (strtotime(date($postime)) + $seconds));
 
             $this->SendDebug('seekForward', $position, 0);
