@@ -1129,7 +1129,7 @@ class MyUpnp extends IPSModule {
 					$raw_metadata_string 	= $xml->item[$i]->asxml();
 					$metadata_string 			= str_replace(array("<", ">"), array("&lt;", "&gt;"), $raw_metadata_string);
 					$metadata_close  			= '&lt;/DIDL-Lite&gt;';
-					$metadata					= ("$metadata_header"."$metadata_string"."$metadata_close");
+					$metadata					= ("$metadata_header"."$raw_metadata_string"."$metadata_close");
 			
 					$liste[$i]['metadata']	= $metadata;
 					//IPSLog("Item der Liste zugefügt = ", $liste[$i]['metadata']);
