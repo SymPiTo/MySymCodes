@@ -24,7 +24,7 @@ class MyUpnp extends IPSModule {
          */
     use upnp;
     use UpnpDiscoveryClassTrait;
-    use XML2Array;
+    
     
     /* Constructor: 
     Der Konstruktor des Moduls
