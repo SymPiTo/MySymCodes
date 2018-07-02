@@ -532,7 +532,9 @@ class MyUpnp extends IPSModule {
 		
 		$res = $xml->$trackNo->resource; // gibt resource des Titels aus
 		$metadata = $xml->$trackNo->metadata; // gibt resource des Titels aus
-
+                if ($ClientPort == '52235'){
+                    $metadata='';
+                }
 		$this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata);
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
 	}
