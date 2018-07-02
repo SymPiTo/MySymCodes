@@ -957,6 +957,10 @@ class MyUpnp extends IPSModule {
 				$liste = array_merge($liste, $liste_add);
 			}
 		}
+                
+$handle = fopen($Kernel."media/Multimedia/Playlist/Musik/".'containerListe'.".xml", "w");
+fwrite($handle, $liste);
+fclose($handle);
 		return $liste;
 	}
 
