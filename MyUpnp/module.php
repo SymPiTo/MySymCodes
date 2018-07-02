@@ -958,9 +958,7 @@ class MyUpnp extends IPSModule {
 			}
 		}
                 
-$handle = fopen($Kernel."media/Multimedia/Playlist/Musik/".'containerListe'.".xml", "w");
-fwrite($handle, $liste);
-fclose($handle);
+                $this->SendDebug('browseContainerServer', 'BrowseContainer Liste: '. $liste, 0);
 		return $liste;
 	}
 
