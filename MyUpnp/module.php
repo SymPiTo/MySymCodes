@@ -697,6 +697,7 @@ class MyUpnp extends IPSModule {
                 $posArray = explode(":",$postime);
                 //$position ='0:02:10.000'; 
             $position = $posArray[0] + ':' + $posArray[1] + ':' + (string)(intval($posArray[2])+20)+'.000';
+            $this->SendDebug('seekForward', $position, 0);
             $this->Seek_AV($ClientIP, $ClientPort, $ControlURL, (string) $position);
 	}
 	//*****************************************************************************
@@ -718,6 +719,7 @@ class MyUpnp extends IPSModule {
                 $posArray = explode(":",$postime);
                 //$position ='0:02:10.000'; 
             $position = $posArray[0] + ':' + $posArray[1] + ':' + (string)(intval($posArray[2])-20)+'.000';
+            $this->SendDebug('seekBackward', $position, 0);
             $this->Seek_AV($ClientIP, $ClientPort, $ControlURL, (string) $position);
 	}
         
