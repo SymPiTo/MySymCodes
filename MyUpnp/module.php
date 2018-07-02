@@ -694,9 +694,11 @@ class MyUpnp extends IPSModule {
             $ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
             $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
             $postime = getvalue($this->GetIDForIdent("upnp_RelTime"));
-                $posArray = explode(":",$postime);
-                //$position ='0:02:10.000'; 
-            $position = $posArray[0] + ':' + $posArray[1] + ':' + (string)(intval($posArray[2])+20)+'.000';
+            $seconds = 20;
+            $time_now = "00:00:00.000";
+
+            $position = date("H:i:s.ms", (strtotime(date($time_now)) + $seconds));
+
             $this->SendDebug('seekForward', $position, 0);
             $this->Seek_AV($ClientIP, $ClientPort, $ControlURL, (string) $position);
 	}
