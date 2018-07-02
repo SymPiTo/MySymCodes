@@ -3,7 +3,7 @@ require_once(__DIR__ . "/UpnpDiscoveryClassTrait.php");
 require_once(__DIR__ . "/UpnpClassTrait.php");
 
 
-require_once(__DIR__ . "/../libs/XML2Array.php");  // diverse Klassen
+require_once(__DIR__ . "/../libs/Array2XML.php");  // diverse Klassen
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +24,7 @@ class MyUpnp extends IPSModule {
          */
     use upnp;
     use UpnpDiscoveryClassTrait;
+    use XML2Array;
     
     /* Constructor: 
     Der Konstruktor des Moduls
