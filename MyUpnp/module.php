@@ -700,7 +700,7 @@ class MyUpnp extends IPSModule {
             $position = date("H:i:s.000", (strtotime(date($postime)) + $seconds));
 
             $this->SendDebug('seekForward', $position, 0);
-            $this->Seek_AV($ClientIP, $ClientPort, $ControlURL, (string) $position);
+            $this->Seek_AV($ClientIP, $ClientPort, $ControlURL, $position);
 	}
 	//*****************************************************************************
 	/* Function: seekForward()
