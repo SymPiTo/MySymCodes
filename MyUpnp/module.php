@@ -958,7 +958,7 @@ class MyUpnp extends IPSModule {
 			}
 		}
                 
-                $this->SendDebug('browseContainerServer', 'BrowseContainer Liste: '. $liste, 0);
+                $this->SendDebug('browseContainerServer', $liste, 0);
 		return $liste;
 	}
 
