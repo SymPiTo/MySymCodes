@@ -121,6 +121,7 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
             $this->RegisterVariableInteger("upnp_Track", "Pos:Track", "");
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
+            $this->RegisterVariableString("upnp_RelTime", "RelTime");
             //$this->RegisterVariableString("upnp_TrackDuration", "Pos:TrackDuration [upnp:album]");
             //$this->RegisterVariableString("upnp_TrackMetaData", "Pos:TrackMetaData");
             //$this->RegisterVariableString("upnp_TrackURI", "Pos:TrackURI");
@@ -853,9 +854,10 @@ class MyUpnp extends IPSModule {
             $album = $didlXml->item[0]->xpath('upnp:album')[0];
             $TrackNo = $didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
             $actor = $didlXml->item[0]->xpath('upnp:actor')[0];
-            //$AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
+            $AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
             $genre = $didlXml->item[0]->xpath('upnp:genre')[0];
             $date = $didlXml->item[0]->xpath('dc:date')[0];
+            setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);
             setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
             setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
             setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
