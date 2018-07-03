@@ -906,9 +906,10 @@ class MyUpnp extends IPSModule {
             $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
             setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);          
             $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
-            $TrackMeta = $GetPositionInfo['TrackMetaData'];
-            $b = html_entity_decode($TrackMeta, ENT_QUOTES , 'UTF-8');
-            $didlXml = Array2XML::createXML('',$b); 
+            $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
+            $b = html_entity_decode($TrackMeta, ENT_XML1 , 'UTF-8');
+            $this->IPSLog('HTML: ', $b);
+            $didlXml = simplexml_load_string($b); 
             $this->SendDebug("progress-DIDL INFO ", $didlXml , 0);
             $creator = $didlXml->item[0]->xpath('dc:creator')[0];
             $title = $didlXml->item[0]->xpath('dc:title')[0];
@@ -1594,5 +1595,44 @@ class MyUpnp extends IPSModule {
             $Kernel = str_replace("\\", "/", IPS_GetKernelDir());
             return $Kernel;
         }
+        
+	Protected function IPSLog($Text, $array) {
+		$Directory=""; 
+		$File="";
+		
+		if (!$array){
+		
+			$array = '-';
+		}
+		
+		
+		if ($File == ""){
+		
+			$File = 'IPSLog.log';
+		}
+		if ($Directory == "") {
+			$Directory = "/home/pi/pi-share/";
+			//$Directory = IPS_GetKernelDir().'/';
+			//if (function_exists('IPS_GetLogDir'))
+			//	$Directory = IPS_GetLogDir();
+		}
+		
+		if(($FileHandle = fopen($Directory.$File, "a")) === false) {
+			//SetValue($ID_OutEnabled, false);
+			Exit;
+		}
+		if (is_array($array)){
+			//$comma_seperated=implode("\r\n",$array);
+			$comma_seperated=print_r($array, true);
+		}
+		else {
+			$comma_seperated=$array;
+		}
+		fwrite($FileHandle, $Text.": ");
+		fwrite($FileHandle, $comma_seperated."\r\n");
+		fclose($FileHandle);
+        }
+        
+        
 	
 }
