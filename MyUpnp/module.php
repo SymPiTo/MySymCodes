@@ -901,7 +901,9 @@ class MyUpnp extends IPSModule {
             $GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
              
             $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
+            setvalue($this->GetIDForIdent("upnp_TrackDuration"), (string) $Duration);           
             $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
+            setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);          
             $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
             $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
             $b = html_entity_decode($TrackMeta);
@@ -914,8 +916,7 @@ class MyUpnp extends IPSModule {
             $AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
             $genre = $didlXml->item[0]->xpath('upnp:genre')[0];
             $date = $didlXml->item[0]->xpath('dc:date')[0];
-            setvalue($this->GetIDForIdent("upnp_TrackDuration"), (string) $Duration);
-            setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);
+
             setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
             setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
             setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
