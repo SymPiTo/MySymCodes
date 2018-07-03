@@ -909,6 +909,7 @@ class MyUpnp extends IPSModule {
             $TrackMeta =  $GetPositionInfo['TrackMetaData'];
             $b = html_entity_decode($TrackMeta);
             $didlXml = simplexml_load_string($b); 
+            $this->SendDebug("progress-DIDL INFO ", $didlXmlfo , 0);
             $creator = $didlXml->item[0]->xpath('dc:creator')[0];
             $title = $didlXml->item[0]->xpath('dc:title')[0];
             $album = $didlXml->item[0]->xpath('upnp:album')[0];
