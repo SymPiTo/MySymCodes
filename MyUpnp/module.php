@@ -563,34 +563,38 @@ class MyUpnp extends IPSModule {
             $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
             
             $this->SendDebug('STOP', 'Stream stoppen', 0);
-            
-            $Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
-            $xml = new SimpleXMLElement($Playlist);
-            $SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
-            $track = ("Track".($SelectedFile));
-
-            $DIDL_Lite_Class = $xml->$track->class;
+            /*Timer abschalten--------------------------------------------------------*/
+            $this->SetTimerInterval('upnp_PlayInfo', 0);
+            /*Stram stoppen--------------------------------------------------------*/
             $this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
             //Track Zähler auf Anfang zurücksetzen
             setvalue($this->GetIDForIdent("upnp_Track"), 1);
+            //Transport Status zurücksetzen auf Anfang zurücksetzen
+            setvalue($this->GetIDForIdent("upnp_Transport_Status"), '');
+            
+            //$Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
+            //$xml = new SimpleXMLElement($Playlist);
+            //$SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
+            //$track = ("Track".($SelectedFile));
+
+            //$DIDL_Lite_Class = $xml->$track->class;
+
                 
-	  /*Timer abschalten--------------------------------------------------------*/
-            $class = $DIDL_Lite_Class;
+            /*Timer abschalten--------------------------------------------------------*/
+           // $class = $DIDL_Lite_Class;
                 
-		if($class == "object.item.audioItem.musicTrack")
-		{
+		//if($class == "object.item.audioItem.musicTrack"){
                     //$this->SetTimerInterval('upnp_PlayInfo', 0);
-		}
+		//}
 
-		if($class == "object.item.videoItem")
-		{
+		//if($class == "object.item.videoItem") {
 			//IPS_SetScriptTimer(UPNP_GetPositionInfo_Playing, 0); //GetPositionInfo abschalten
-		}
+		//}
 
-		if($class == "object.item.imageItem.photo")
-		{
+		//if($class == "object.item.imageItem.photo"){
 				//IPS_SetScriptTimer(UPNP_SlideShow, 0); //GetPositionInfo abschalten
-		}
+		//}
+                
 	}
 	
 	
