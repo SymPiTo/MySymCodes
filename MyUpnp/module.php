@@ -907,7 +907,7 @@ class MyUpnp extends IPSModule {
             setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);          
             $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
             $TrackMeta =  $GetPositionInfo['TrackMetaData'];
-            $b = html_entity_decode($TrackMeta);
+            $b = html_entity_decode($TrackMeta, ENT_XML1 , 'UTF-8');
             $didlXml = simplexml_load_string($b); 
             $this->SendDebug("progress-DIDL INFO ", $b , 0);
             $creator = $didlXml->item[0]->xpath('dc:creator')[0];
