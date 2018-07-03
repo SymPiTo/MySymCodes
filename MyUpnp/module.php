@@ -807,12 +807,12 @@ class MyUpnp extends IPSModule {
 			$track = ("Track".($SelectedFile));
 				
 			$DIDL_Lite_Class = $xml->$track->class;
-			
+			$this->SendDebug("GetPosInfo ", 'class des Tracks abfragen: '.$DIDL_Lite_Class , 0);
 			/* Transport Status abfragen */
 			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);
 
  			setvalue($this->GetIDForIdent("upnp_Transport_Status"), $Playing['CurrentTransportState']);
-			 $this->SendDebug("GetPosInfo ", 'Transport Status setzen', 0);
+			 $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing['CurrentTransportState'] , 0);
 			//Transport Status auswerten
 			switch ($Playing['CurrentTransportState']){
                             case 'NO_MEDIA_PRESENT':
@@ -834,8 +834,8 @@ class MyUpnp extends IPSModule {
                             break;
                             case 'PLAYING':
                                 if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
-                                    $fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
                                     $this->SendDebug("GetPosInfo ", 'progress aufrufen', 0);
+                                    $fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
                                 }
                                 if($DIDL_Lite_Class == "object.item.videoItem"){
                                         //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
