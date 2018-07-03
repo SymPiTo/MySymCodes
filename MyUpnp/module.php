@@ -571,13 +571,13 @@ class MyUpnp extends IPSModule {
             $this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
             //Track Zähler auf Anfang zurücksetzen
             setvalue($this->GetIDForIdent("upnp_Track"), 1);
-	
+                
 	  /*Timer abschalten--------------------------------------------------------*/
             $class = $DIDL_Lite_Class;
-
+                $this->SendDebug('STOP', $class, 0);
 		if($class == "object.item.audioItem.musicTrack")
 		{
-                    $this->SetTimerInterval('upnp_PlayInfo', 0);
+                    //$this->SetTimerInterval('upnp_PlayInfo', 0);
 		}
 
 		if($class == "object.item.videoItem")
