@@ -899,9 +899,10 @@ class MyUpnp extends IPSModule {
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress(string $ClientIP, string $ClientPort, string $ControlURL){	
             $GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
-             $this->SendDebug("progress ", ' $GetPositionInfo', 0);
+             
             $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
             $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
+            $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
             $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
             $b = html_entity_decode($TrackMeta);
             $didlXml = simplexml_load_string($b); 
