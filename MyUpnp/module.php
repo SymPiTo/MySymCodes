@@ -911,23 +911,23 @@ class MyUpnp extends IPSModule {
             $this->IPSLog('HTML: ', $b);
             $didlXml = simplexml_load_string($b); 
             $this->SendDebug("progress-DIDL INFO ", $didlXml , 0);
-            $creator = $didlXml->item[0]->xpath('dc:creator')[0];
-            $title = $didlXml->item[0]->xpath('dc:title')[0];
-            $album = $didlXml->item[0]->xpath('upnp:album')[0];
-            $TrackNo = $didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
-            $actor = $didlXml->item[0]->xpath('upnp:actor')[0];
-            $AlbumArtURI = $didlXml->item[0]->xpath('upnp:albumArtURI')[0];
-            $genre = $didlXml->item[0]->xpath('upnp:genre')[0];
-            $date = $didlXml->item[0]->xpath('dc:date')[0];
+            $creator = (string)$didlXml->item[0]->xpath('dc:creator')[0];
+            $title = (string) $didlXml->item[0]->xpath('dc:title')[0];
+            $album = (string)$didlXml->item[0]->xpath('upnp:album')[0];
+            $TrackNo = (string)$didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
+            $actor = (string)$didlXml->item[0]->xpath('upnp:actor')[0];
+            $AlbumArtURI = (string)$didlXml->item[0]->xpath('upnp:albumArtURI')[0];
+            $genre = (string)$didlXml->item[0]->xpath('upnp:genre')[0];
+            $date = (string)$didlXml->item[0]->xpath('dc:date')[0];
 
-            setvalue($this->GetIDForIdent("upnp_Artist"), (string) $creator);
-            setvalue($this->GetIDForIdent("upnp_Title"), (string) $title);
-            setvalue($this->GetIDForIdent("upnp_Album"), (string) $album);		
-            setvalue($this->GetIDForIdent("upnp_TrackNo"), (string) $TrackNo);
-            setvalue($this->GetIDForIdent("upnp_Actor"), (string) $actor);
-            setvalue($this->GetIDForIdent("upnp_Date"), (string) $date);
+            setvalue($this->GetIDForIdent("upnp_Artist"),  $creator);
+            setvalue($this->GetIDForIdent("upnp_Title"),  $title);
+            setvalue($this->GetIDForIdent("upnp_Album"),  $album);		
+            setvalue($this->GetIDForIdent("upnp_TrackNo"),  $TrackNo);
+            setvalue($this->GetIDForIdent("upnp_Actor"),  $actor);
+            setvalue($this->GetIDForIdent("upnp_Date"),  $date);
             //setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
-            setvalue($this->GetIDForIdent("upnp_Genre"), (string) $genre);
+            setvalue($this->GetIDForIdent("upnp_Genre"),  $genre);
                 function get_time_difference($Duration, $RelTime){
                         $duration = explode(":", $Duration);
                         $reltime = explode(":", $RelTime);
