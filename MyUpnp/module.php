@@ -908,8 +908,8 @@ class MyUpnp extends IPSModule {
             $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
             $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
             $b = htmlspecialchars_decode($TrackMeta);
-            $this->IPSLog('HTML: ', $b);
-            $didlXml = simplexml_load_string($b); 
+            //$this->IPSLog('HTML: ', $b);
+            $didlXml = simplexml_load_string($TrackMeta); 
             $this->SendDebug("progress-DIDL INFO ", $didlXml , 0);
             $creator = (string)$didlXml->item[0]->xpath('dc:creator')[0];
             $title = (string) $didlXml->item[0]->xpath('dc:title')[0];
