@@ -561,7 +561,9 @@ class MyUpnp extends IPSModule {
             $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
             $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
             $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
-
+            
+            $this->SendDebug('STOP', 'Stream stoppen', 0);
+            
             $Playlist = getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
             $xml = new SimpleXMLElement($Playlist);
             $SelectedFile = GetValue($this->GetIDForIdent("upnp_Track")); 
@@ -574,7 +576,7 @@ class MyUpnp extends IPSModule {
                 
 	  /*Timer abschalten--------------------------------------------------------*/
             $class = $DIDL_Lite_Class;
-                $this->SendDebug('STOP', $class, 0);
+                
 		if($class == "object.item.audioItem.musicTrack")
 		{
                     //$this->SetTimerInterval('upnp_PlayInfo', 0);
