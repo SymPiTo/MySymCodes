@@ -906,10 +906,10 @@ class MyUpnp extends IPSModule {
             $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
             setvalue($this->GetIDForIdent("upnp_RelTime"), (string) $RelTime);          
             $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
-            $TrackMeta =  $GetPositionInfo['TrackMetaData'];
+            $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
             $b = html_entity_decode($TrackMeta, ENT_XML1 , 'UTF-8');
             $didlXml = simplexml_load_string($b); 
-            $this->SendDebug("progress-DIDL INFO ", $b , 0);
+            $this->SendDebug("progress-DIDL INFO ", $didlXml , 0);
             $creator = $didlXml->item[0]->xpath('dc:creator')[0];
             $title = $didlXml->item[0]->xpath('dc:title')[0];
             $album = $didlXml->item[0]->xpath('upnp:album')[0];
