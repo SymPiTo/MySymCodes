@@ -555,7 +555,7 @@ class MyUpnp extends IPSModule {
             none.
 	--------------------------------------------------------------------------------
 	Returns:  
-            none.
+              none.
         //////////////////////////////////////////////////////////////////////////////*/
 	public function stop(){	
             $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
