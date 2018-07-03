@@ -500,12 +500,14 @@ class MyUpnp extends IPSModule {
                 }
 		//Transport starten
                 $this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata);
-
+                $this->SendDebug("PLAY ", 'SetAVTransportURI', 0);
 		//Stream ausführen	
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
+                $this->SendDebug("PLAY ", 'Play_AV', 0);
 		// Postion Timer starten
 		//IPS_SetEventActive($this->GetIDForIdent("upnp_PlayInfo"), true);  // Aktivert Ereignis
                 $this->SetTimerInterval('upnp_PlayInfo', 1000);
+                $this->SendDebug("PLAY ", 'Timer Position aktivieren', 0);
 	}
 
 	//*****************************************************************************
@@ -804,7 +806,7 @@ class MyUpnp extends IPSModule {
 			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);
 
  			setvalue($this->GetIDForIdent("upnp_Transport_Status"), $Playing['CurrentTransportState']);
-			
+			 $this->SendDebug("GetPosInfo ", 'Transport Status setzen', 0);
 			//Transport Status auswerten
 			switch ($Playing['CurrentTransportState']){
                             case 'NO_MEDIA_PRESENT':
@@ -827,6 +829,7 @@ class MyUpnp extends IPSModule {
                             case 'PLAYING':
                                 if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
                                     $fortschritt = $this->progress($ClientIP, $ClientPort, $ControlURL);
+                                    $this->SendDebug("GetPosInfo ", 'progress aufrufen', 0);
                                 }
                                 if($DIDL_Lite_Class == "object.item.videoItem"){
                                         //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
@@ -890,7 +893,7 @@ class MyUpnp extends IPSModule {
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress(string $ClientIP, string $ClientPort, string $ControlURL){	
             $GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ControlURL);
-    
+             $this->SendDebug("progress ", ' $GetPositionInfo', 0);
             $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
             $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
             $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
