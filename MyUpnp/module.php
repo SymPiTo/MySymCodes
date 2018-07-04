@@ -909,7 +909,7 @@ class MyUpnp extends IPSModule {
             $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
             $b = htmlspecialchars_decode($TrackMeta);
             //$this->IPSLog('HTML: ', $b);
-            $didlXml = simplexml_load_string($TrackMeta); 
+            $didlXml = simplexml_load_string($b); 
             $this->SendDebug("progress-DIDL INFO ", $didlXml , 0);
             $creator = (string)$didlXml->item[0]->xpath('dc:creator')[0];
             $title = (string) $didlXml->item[0]->xpath('dc:title')[0];
@@ -1200,8 +1200,9 @@ class MyUpnp extends IPSModule {
 					//MetaData für jeden Titel zusammenstellen--------------------------------
 					$metadata_header 			= '&lt;DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/"&gt;';
 					$raw_metadata_string 	= $xml->item[$i]->asxml();
-					$metadata_string 			= str_replace(array("<", ">"), array("&lt;", "&gt;"), $raw_metadata_string);
-					$metadata_close  			= '&lt;/DIDL-Lite&gt;';
+					//$metadata_string 			= str_replace(array("<", ">"), array("&lt;", "&gt;"), $raw_metadata_string);
+					$metadata_string    = htmlspecialchars ($raw_metadata_string);
+                                        $metadata_close  			= '&lt;/DIDL-Lite&gt;';
 					$metadata					= ("$metadata_header"."$metadata_string"."$metadata_close");
 			
 					$liste[$i]['metadata']	= $metadata;
