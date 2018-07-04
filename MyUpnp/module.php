@@ -1202,7 +1202,7 @@ class MyUpnp extends IPSModule {
 					$raw_metadata_string 	= $xml->item[$i]->asxml();
 					//$metadata_string 			= str_replace(array("<", ">"), array("&lt;", "&gt;"), $raw_metadata_string);
 					//$metadata_string    = htmlspecialchars ($raw_metadata_string);
-                                        htmlentities ($raw_metadata_string, ENT_NOQUOTES | ENT_SUBSTITUTE, "UTF-8");
+                                        $metadata_string    =  htmlentities ($raw_metadata_string, ENT_NOQUOTES | ENT_SUBSTITUTE, "UTF-8");
                                         $metadata_close  			= '&lt;/DIDL-Lite&gt;';
 					$metadata					= ("$metadata_header"."$metadata_string"."$metadata_close");
 			
