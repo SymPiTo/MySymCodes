@@ -1209,6 +1209,7 @@ class MyUpnp extends IPSModule {
                                         
 					$metadata	= $metadata_header.$metadata_string.$metadata_close;
                                         $metadatahtml = str_replace('&amp;', '&', $metadata);
+                                         $metadatahtml = str_replace('amp;', '', $metadatahtml);
 					$liste[$i]['metadata']	= $metadatahtml;
 					//IPSLog("Item der Liste zugefügt = ", $liste[$i]['metadata']);
 		
