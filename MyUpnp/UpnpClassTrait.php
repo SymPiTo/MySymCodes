@@ -619,7 +619,7 @@ trait upnp {
 		    ---
 	Status: checked
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function GetPositionInfo(string $ClientIP, string $ClientPort, string $ClientControlURL){
+	public function GetPositionInfo(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
