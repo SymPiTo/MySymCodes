@@ -495,9 +495,9 @@ class MyUpnp extends IPSModule {
                 if ($TrackNo == 1){	
 			$this->Stop_AV($ClientIP, $ClientPort, $ControlURL);
 		}
-                if ($ClientPort == '52235'){
-                    $metadata='';
-                }
+               // if ($ClientPort == '52235'){
+                  //  $metadata='';
+                //}
 		//Transport starten
                 $this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata);
                 $this->SendDebug("PLAY ", 'SetAVTransportURI', 0);
@@ -536,9 +536,9 @@ class MyUpnp extends IPSModule {
 		
 		$res = $xml->$trackNo->resource; // gibt resource des Titels aus
 		$metadata = $xml->$trackNo->metadata; // gibt resource des Titels aus
-                if ($ClientPort == '52235'){
-                    $metadata='';
-                }
+               // if ($ClientPort == '52235'){
+                 //   $metadata='';
+                //}
 		$this->SetAVTransportURI($ClientIP, $ClientPort, $ControlURL, (string) $res, (string) $metadata);
 		$this->Play_AV($ClientIP, $ClientPort, $ControlURL);
 	}
