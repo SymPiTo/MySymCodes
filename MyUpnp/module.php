@@ -1198,20 +1198,22 @@ class MyUpnp extends IPSModule {
 					$liste[$i]['typ'] = "item";
 			
 					//MetaData für jeden Titel zusammenstellen--------------------------------
-					$metadata_header 			= '&lt;DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/"&gt;';
+					$metadata_header 			= '<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/">';
 					$raw_metadata_string 	= $xml->item[$i]->asxml();
 					//$metadata_string 			= str_replace(array("<", ">"), array("&lt;", "&gt;"), $raw_metadata_string);
 					//$metadata_string    = htmlspecialchars ($raw_metadata_string);
                                         //$metadata_string    =  htmlentities ($raw_metadata_string, ENT_NOQUOTES | ENT_SUBSTITUTE, "UTF-8");
                                         
-                                       $metadata_string = (string) $raw_metadata_string;
-                                        $metadata_close  			= '&lt;/DIDL-Lite&gt;';
+                                       $metadata_string =   $raw_metadata_string;
+                                        $metadata_close  = '</DIDL-Lite>';
+                                        $metadata_header1 =  str_replace(array("<", ">"), array("&lt;", "&gt;"), $metadata_header);
+                                        $metadata_string1 = str_replace('&amp;', '&', $metadata_string);
+                                        $metadata_close1 =  str_replace(array("<", ">"), array("&lt;", "&gt;"), $metadata_close);
+					$metadata	= $metadata_header1.$metadata_string1.$metadata_close1;
                                         
-					$metadata	= $metadata_header.$metadata_string.$metadata_close;
-                                        $metadatahtml = str_replace('&amp;', '&', $metadata);
-                                         $metadatahtml = str_replace('amp;', '', $metadatahtml);
-					$liste[$i]['metadata']	= $metadatahtml;
-					//IPSLog("Item der Liste zugefügt = ", $liste[$i]['metadata']);
+                            
+					$liste[$i]['metadata']	= $metadata;
+                            
 		
 				}
 			else
