@@ -1204,7 +1204,7 @@ class MyUpnp extends IPSModule {
 					//$metadata_string    = htmlspecialchars ($raw_metadata_string);
                                         //$metadata_string    =  htmlentities ($raw_metadata_string, ENT_NOQUOTES | ENT_SUBSTITUTE, "UTF-8");
                                         
-                                       // $metadata_string = $raw_metadata_string;
+                                       $metadata_string = $raw_metadata_string;
                                         $metadata_close  			= '&lt;/DIDL-Lite&gt;';
                                         
 					$metadata	= $metadata_header.$metadata_string.$metadata_close;
