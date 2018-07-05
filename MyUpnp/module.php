@@ -1457,7 +1457,7 @@ class MyUpnp extends IPSModule {
                                 $id = $value['id'];		
                                 $PlaylistNo = substr($value['title'],0,4);
                                 $this->createPlaylist($id, $PlaylistNo);
-                                $this->Meldung($ServerName.$PlaylistNo.'.mp3', 0);
+                                $this->Meldung($ServerName.$PlaylistNo.'.mp3');
                         }
                         $this->Meldung( 'Fertig - alle Playlisten erzeugt!');
                 }
