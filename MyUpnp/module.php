@@ -123,6 +123,8 @@ class MyUpnp extends IPSModule {
             $this->RegisterVariableString("upnp_Transport_Status", "Pos:Transport_Status");
             $this->RegisterVariableString("upnp_RelTime", "RelTime");
             $this->RegisterVariableString("upnp_TrackDuration", "TrackDuration");
+            
+            
             //$this->RegisterVariableString("upnp_TrackDuration", "Pos:TrackDuration [upnp:album]");
             //$this->RegisterVariableString("upnp_TrackMetaData", "Pos:TrackMetaData");
             //$this->RegisterVariableString("upnp_TrackURI", "Pos:TrackURI");
@@ -172,7 +174,7 @@ class MyUpnp extends IPSModule {
         $this->RegisterVariableInteger("upnp_NoTracks", "No of tracks", "");
         $this->RegisterVariableString("upnp_PlaylistName", "PlaylistName");
         $this->RegisterVariableString("upnp_Playlist_XML", "Playlist_XML");       
-        
+        $this->RegisterVariableString("upnp_Message", "Message");
         
             //$this->RegisterVariableBoolean("CeolPower", "Power");        
             $this->EnableAction("upnp_Mute");
@@ -735,6 +737,31 @@ class MyUpnp extends IPSModule {
 	}
         
 	//*****************************************************************************
+	/* Function: seekPos($Seek)
+        -------------------------------------------------------------------------------
+        spult Lied auf $position %  der Lieddauer
+        ...............................................................................
+	Parameters:
+            $Seek = Angabe 0 ...100 wird in % der Duration umgerechnet
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+	--------------------------------------------------------------------------------
+	Status:   checked 5.7.2018  nur für TV und MusikPal CEOL funktiniert nicht
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function seekPos(integer $Seek){	
+            $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+            $ClientIP 	= getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort"));
+            $GetPositionInfo = $this->GetPositionInfo($ClientIP, $ClientPort, $ClientControlURL);
+            $Duration = $GetPositionInfo['TrackDuration'];
+            $duration = explode(":", $Duration);
+            $seconds = round(((($duration[0] * 3600) + ($duration[1] * 60) + ($duration[2])) * ($Seek/100)), 0, PHP_ROUND_HALF_UP);
+            $position = gmdate('H:i:s', $seconds);
+            $this->Seek_AV($ClientIP,  $ClientPort,  $ClientControlURL, $position );
+	}
+        
+	//*****************************************************************************
 	/* Function: loadPlaylist($AlbumNo)
 	...............................................................................
 	Playlist aus Datei laden (XML) und in Variable Playlist_XML schreiben
@@ -1035,6 +1062,8 @@ class MyUpnp extends IPSModule {
 	/* Function: getContainerServer($Mediatype)
 	...............................................................................
 	Alle Container/Folder eines Servers ab Stammverzeichnis $Mediatype oder ab Filter auslesen 
+        Ergebnis wird als compressed Array in File geschrieben
+        /media/Multimedia/Playlist/Musik/".$ServerName."_Musik_Container.con"
 	...............................................................................
 	Parameters:  
             $Mediatype - 'Musik' // 'Audiobook' // 'Foto' // 'Video'
@@ -1391,7 +1420,11 @@ class MyUpnp extends IPSModule {
 	//*****************************************************************************
 	/* Function: createAllPlaylist($mediatype)
         ...............................................................................
-        Erzeugt alle Playlisten vom Typ Mediatype
+        Vorbedingung:
+        getContainerServer(string $Mediatype)
+        muss vorher ausgeführt worden sein,
+        
+        Erzeugt alle Playlisten vom Typ Mediatype  
         bennent sie nach Servername + PlaylistNo + .xml
         ...............................................................................
         Parameters:  
@@ -1424,7 +1457,9 @@ class MyUpnp extends IPSModule {
                                 $id = $value['id'];		
                                 $PlaylistNo = substr($value['title'],0,4);
                                 $this->createPlaylist($id, $PlaylistNo);
+                                $this->Meldung($ServerName.$PlaylistNo.'.mp3', 0);
                         }
+                        $this->Meldung( 'Fertig - alle Playlisten erzeugt!');
                 }
         }
 
@@ -1455,7 +1490,8 @@ class MyUpnp extends IPSModule {
         *****************************************************************************/
 
         Protected function Meldung(string $Meldung){
-            $this->SendDebug('Send', 'Meldung: '. $Meldung, 0);
+            $this->SendDebug('UPNP: ', $Meldung, 0);
+            setvalue($this->GetIDForIdent("upnp_Meldung"), $Meldung);
         }
 
                             
