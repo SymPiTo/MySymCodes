@@ -1491,7 +1491,7 @@ class MyUpnp extends IPSModule {
 
         Protected function Meldung(string $Meldung){
             $this->SendDebug('UPNP: ', $Meldung, 0);
-            setvalue($this->GetIDForIdent("upnp_Meldung"), $Meldung);
+            setvalue($this->GetIDForIdent("upnp_Message"), $Meldung);
         }
 
                             
