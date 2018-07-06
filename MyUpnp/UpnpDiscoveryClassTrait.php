@@ -521,8 +521,8 @@ trait UpnpDiscoveryClassTrait {
                         /* /////////////////////////////////////////////////////////////////////
                           Services von SONOS Player auslesen und auf AV Transport und RenderingControl beschränken
                           / *///////////////////////////////////////////////////////////////////// 
-                        if (isset($xmldesc->deviceList->device)) {
-                            foreach ($xmldesc->deviceList->device as $device) {
+                        if (isset($xmldesc->device->deviceList->device)) {
+                            foreach ($xmldesc->device->deviceList->device as $device) {
                                 $deviceType = (string) $device->deviceType;
                                 if($deviceType == 'urn:schemas-upnp-org:device:MediaRenderer:1'){
                                     $DeviceControlServiceType = "";
