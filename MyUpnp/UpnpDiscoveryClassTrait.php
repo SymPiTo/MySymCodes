@@ -544,6 +544,38 @@ trait UpnpDiscoveryClassTrait {
                                 } 
                             }
                         }
+                        /* /////////////////////////////////////////////////////////////////////
+                          Services von SONOS Player auslesen und auf AV Transport und RenderingControl beschränken
+                          / *///////////////////////////////////////////////////////////////////// 
+                        if (isset($xmldesc->deviceList->device)) {
+                            foreach ($xmldesc->deviceList->device as $device) {
+                                $deviceType = (string) $device->deviceType;
+                                if($deviceType == 'urn:schemas-upnp-org:device:MediaRenderer:1'){
+                                    $DeviceControlServiceType = "";
+                                    $DeviceControlURL = "";
+                                    $DeviceRenderingServiceType = "";
+                                    $DeviceRenderingControlURL = "";
+                                            foreach ($device->serviceList->service as $service) {
+                                                $serviceType = (string) $service->serviceType;
+                                                $this->SendDebug('Device Desription', 'service Type: ' . $serviceType, 0);
+                                                if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport")){
+                                                    $DeviceControlServiceType = (string) $service->serviceType;
+                                                    $Directory = (string)$service->controlURL;
+                                                    $DeviceControlURL = $this->directory($Directory);  
+                                                    //$this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
+                                                } 
+
+                                                if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")){
+                                                    $DeviceRenderingServiceType = (string) $service->serviceType;
+                                                    $Directory = (string)$service->controlURL;
+                                                    $DeviceRenderingControlURL = $this->directory($Directory);
+                                                    //$this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
+                                                } 
+                                            }
+                                            
+                                }            
+                            }                
+                        }
                     }
                 }//2
                 // alle Lokalen Devices ausschliesen
