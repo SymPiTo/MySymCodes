@@ -520,30 +520,31 @@ trait UpnpDiscoveryClassTrait {
                         /* /////////////////////////////////////////////////////////////////////
                           Services auslesen und auf AV Transport und RenderingControl beschränken
                           / */////////////////////////////////////////////////////////////////////
+                        if (!isset($xmldesc->deviceList->device)) {    
+                            if (isset($xmldesc->device->serviceList->service)) {
+                                        $DeviceControlServiceType = "";
+                                        $DeviceControlURL = "";
+                                        $DeviceRenderingServiceType = "";
+                                        $DeviceRenderingControlURL = "";
+                                foreach ($xmldesc->device->serviceList->service as $service) {
+                                    $serviceType = (string) $service->serviceType;
+                                    $this->SendDebug('Device Desription', 'service Type: ' . $serviceType, 0);
+                                    if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport")){
+                                        $DeviceControlServiceType = (string) $service->serviceType;
+                                        $Directory = (string)$service->controlURL;
+                                        $DeviceControlURL = $this->directory($Directory);  
+                                        //$this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
+                                    } 
 
-                        if (isset($xmldesc->device->serviceList->service)) {
-                                    $DeviceControlServiceType = "";
-                                    $DeviceControlURL = "";
-                                    $DeviceRenderingServiceType = "";
-                                    $DeviceRenderingControlURL = "";
-                            foreach ($xmldesc->device->serviceList->service as $service) {
-                                $serviceType = (string) $service->serviceType;
-                                $this->SendDebug('Device Desription', 'service Type: ' . $serviceType, 0);
-                                if (stristr($serviceType, "urn:schemas-upnp-org:service:AVTransport")){
-                                    $DeviceControlServiceType = (string) $service->serviceType;
-                                    $Directory = (string)$service->controlURL;
-                                    $DeviceControlURL = $this->directory($Directory);  
-                                    //$this->SendDebug('DeviceControlURL: - ', $DeviceControlURL, 0);
-                                } 
-
-                                if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")){
-                                    $DeviceRenderingServiceType = (string) $service->serviceType;
-                                    $Directory = (string)$service->controlURL;
-                                    $DeviceRenderingControlURL = $this->directory($Directory);
-                                    //$this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
-                                } 
+                                    if (stristr($serviceType, "urn:schemas-upnp-org:service:RenderingControl")){
+                                        $DeviceRenderingServiceType = (string) $service->serviceType;
+                                        $Directory = (string)$service->controlURL;
+                                        $DeviceRenderingControlURL = $this->directory($Directory);
+                                        //$this->SendDebug('$DeviceRenderingControlURL: - ', $Directory , 0);
+                                    } 
+                                }
                             }
-                        }
+                        }    
                         /* /////////////////////////////////////////////////////////////////////
                           Services von SONOS Player auslesen und auf AV Transport und RenderingControl beschränken
                           / *///////////////////////////////////////////////////////////////////// 
