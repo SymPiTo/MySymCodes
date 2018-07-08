@@ -116,6 +116,7 @@ class MyUpnp extends IPSModule {
             //IPS_SetName($CatID, "PositionInfo"); // Kategorie benennen
             //IPS_SetParent($CatID, $this->InstanceID); 
             //Status Variable anlegen;
+            $this->RegisterVariableInteger("upnp_PlayMode", "PlayMode", "UPNP_Playmode");
             $this->RegisterVariableBoolean("upnp_Mute", "Mute");
             $this->RegisterVariableFloat("upnp_Volume", "Volume", "");
             $this->RegisterVariableInteger("upnp_Progress", "Progress", "UPNP_Progress");
@@ -211,6 +212,23 @@ class MyUpnp extends IPSModule {
                     $this->SetMute_AV($ClientIP, $ClientPort, $RenderingControlURL, '0');
                     SetValue($this->GetIDForIdent("upnp_Mute"), false);
                 }
+                break;
+            case "upnp_PlayMode":
+                switch ($value){
+                    case 0:
+                        $playmode = "NORMAL";
+                        break;
+                    case 1:
+                         $playmode = "RANDOM";
+                        break;
+                    case 2:
+                         $playmode = "REPEAT_ONE";
+                        break;
+                    case 3;
+                        $playmode = "REPEAT_ALL";
+                        break;
+                }
+                $this->setPlayMode($playmode);
                 break;
             default:
                 throw new Exception("Invalid Ident");
@@ -419,6 +437,42 @@ class MyUpnp extends IPSModule {
             
                     
         }
+
+	//*****************************************************************************
+	/* Function: setPlayMode($Playmode)
+	...............................................................................
+	Playmode auswählen
+        ...............................................................................
+	Parameters: 
+            $Playmode = 'NORMAL' , 'RANDOM', 'REPEAT_ONE', REPEAT_ALL
+	--------------------------------------------------------------------------------
+	Returns:  
+            none.
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function setPlayMode(string $Playmode){
+            $ClientIP   = getvalue($this->GetIDForIdent("upnp_ClienIP"));
+            $ClientPort = getvalue($this->GetIDForIdent("upnp_ClientPort")); 
+            $ControlURL = getvalue($this->GetIDForIdent("upnp_ClientControlURL"));
+                switch ($Playmode){
+                    case 'NORMAL':
+                        $value = 0;
+                        break;
+                    case 'RANDOM':
+                         $value = 1;
+                        break;
+                    case 'REPEAT_ONE':
+                         $value = 2;
+                        break;
+                    case 'REPEAT_ALL';
+                        $value = 3;
+                        break;
+                }    
+                $this->Playmode_AV( $ClientIP,  $ClientPort,  $ControlURL,  $Playmode);
+                SetValue($this->GetIDForIdent("upnp_PlayMode"),$value);
+                $this->SendDebug("set PlayMode to : ", $Playmode , 0);
+        }        
         
 	//*****************************************************************************
 	/* Function: setMute($value)
