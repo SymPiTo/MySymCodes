@@ -890,9 +890,28 @@ class MyUpnp extends IPSModule {
 				
 			$DIDL_Lite_Class = $xml->$track->class;
 			$this->SendDebug("GetPosInfo ", 'class des Tracks abfragen: '.$DIDL_Lite_Class , 0);
-			/* Transport Status abfragen */
-			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);
 
+			/* Transport Status abfragen */
+			$PlayMode = $this->GetTransportSettings($ClientIP, $ClientPort,  $ControlURL);
+                        switch ($PlayMode) {
+                            case 'NORMAL':
+                                $PlayModeIndex = 0;
+                                break;
+                            case 'RANDOM':
+                                $PlayModeIndex = 1;
+                                break;
+                            case 'REPEAT_ONE':
+                                $PlayModeIndex = 2;
+                                break;   
+                            case 'REPEAT_ALL':
+                                $PlayModeIndex = 3;
+                                break;
+                            default:
+                                break;
+                        }
+                        setvalue($this->GetIDForIdent("upnp_PlayMode"), $PlayModeIndex);
+ 			/* Transport Status abfragen */
+			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);                       
  			setvalue($this->GetIDForIdent("upnp_Transport_Status"), $Playing['CurrentTransportState']);
 			 $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing['CurrentTransportState'] , 0);
 			//Transport Status auswerten
