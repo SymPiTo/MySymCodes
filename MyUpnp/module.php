@@ -444,7 +444,7 @@ class MyUpnp extends IPSModule {
 	Playmode auswählen
         ...............................................................................
 	Parameters: 
-            $Playmode = 'NORMAL' , 'RANDOM', 'REPEAT_ONE', REPEAT_ALL
+            $Playmode = 'NORMAL' , 'RANDOM', 'REPEAT_ONE', REPEAT_ALL,
 	--------------------------------------------------------------------------------
 	Returns:  
             none.
