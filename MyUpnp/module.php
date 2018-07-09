@@ -180,7 +180,8 @@ class MyUpnp extends IPSModule {
             //$this->RegisterVariableBoolean("CeolPower", "Power");        
             $this->EnableAction("upnp_Mute");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("upnp_Mute"), "~Switch");
-            
+            $this->EnableAction("upnp_PlayMode");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("upnp_PlayMode"), "UPNP_Playmode");
         // Timer erstellen
         $this->RegisterTimer("upnp_PlayInfo", 1000,  'UPNP_GetPosInfo(' . $this->InstanceID . ');');
     }
