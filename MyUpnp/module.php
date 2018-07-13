@@ -894,6 +894,7 @@ class MyUpnp extends IPSModule {
 
 			/* Transport Status abfragen */
 			$PlayMode = $this->GetTransportSettings($ClientIP, $ClientPort,  $ControlURL);
+                        $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayMode , 0);
                         switch ($PlayMode) {
                             case 'NORMAL':
                                 $PlayModeIndex = 0;
