@@ -957,7 +957,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		$fsock = fsockopen($this->GetIDForIdent("IPAddress"), $ClientPort, $errno, $errstr, $timeout = '1');
 		if ( !$fsock ){
                     //nicht erreichbar --> Timer abschalten--------------------------------
-                    $this->SendDebug('Send', $ClientIP.'ist nicht erreichbar!', 0);
+                    $this->SendDebug('Send',$this->GetIDForIdent("IPAddress").'ist nicht erreichbar!', 0);
 		}
 		else{
 			/*///////////////////////////////////////////////////////////////////////////
