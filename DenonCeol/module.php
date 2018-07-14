@@ -995,7 +995,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                         }
                         setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
  			/* Transport Status abfragen */
-			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);                       
+                        $Playing = $this->GetTransportInfo_AV();                       
  			setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $Playing['CurrentTransportState']);
 			 $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing['CurrentTransportState'] , 0);
 			//Transport Status auswerten
