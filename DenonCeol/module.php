@@ -974,25 +974,10 @@ o                    http://192.168.2.99/img/album%20art_S.png
 			$this->SendDebug("GetPosInfo ", 'class des Tracks abfragen: '.$DIDL_Lite_Class , 0);
 
 			/* Transport Status abfragen */
-			$PlayMode = $this->GetTransportSettings_AV();
+			$PlayModeIndex = $this->GetTransportSettings_AV();
                         //$this->IPSLog("Playmode Array", $PlayMode); 
                         $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayMode['PlayMode'] , 0);
-                        switch ($PlayMode['PlayMode']) {
-                            case 'NORMAL':
-                                $PlayModeIndex = 0;
-                                break;
-                            case 'RANDOM':
-                                $PlayModeIndex = 1;
-                                break;
-                            case 'REPEAT_ONE':
-                                $PlayModeIndex = 2;
-                                break;   
-                            case 'REPEAT_ALL':
-                                $PlayModeIndex = 3;
-                                break;
-                            default:
-                                break;
-                        }
+
                         setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
  			/* Transport Status abfragen */
                         $Playing = $this->GetTransportInfo_AV();                       
