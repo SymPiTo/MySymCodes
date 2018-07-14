@@ -935,6 +935,110 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	}
 
         
+
+	//*****************************************************************************
+	/* Function: Stop()
+        --------------------------------------------------------------------------------
+        * Stream stoppen
+        * Track Zähler zurücksetzen
+        * Positions - Timer ausschalten
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:  
+              none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function stop(){	
+
+            
+            $this->SendDebug('STOP', 'Stream stoppen', 0);
+            /*Timer abschalten--------------------------------------------------------*/
+            $this->SetTimerInterval('Ceol_PlayInfo', 0);
+            /*Stram stoppen--------------------------------------------------------*/
+            $this->Stop_AV();
+            //Track Zähler auf Anfang zurücksetzen
+            setvalue($this->GetIDForIdent("Ceol_Track"), 1);
+            //Transport Status zurücksetzen auf Anfang zurücksetzen
+            setvalue($this->GetIDForIdent("Ceol_Transport_Status"), '');
+         
+	}
+	
+	//*****************************************************************************
+	/* Function: Pause()
+        --------------------------------------------------------------------------------
+         Pause
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function pause()
+	{	
+		$this->Pause_AV();
+	}
+
+
+	
+	//*****************************************************************************
+	/* Function: Next()
+        --------------------------------------------------------------------------------
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function next()
+	{	
+		$Playlist = getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
+		$xml = new SimpleXMLElement($Playlist);
+		//$count = count($xml->children()); 
+		//IPSLog("Anzahl XML Elemente : ", $count);
+		
+		$SelectedFile = GetValue($this->GetIDForIdent("Ceol_Track")); 
+		
+		$track = ("Track".($SelectedFile+1));
+
+		//Aktueller Track = Selected File-----------------------------------------
+		SetValue($this->GetIDForIdent("Ceol_Track"), ($SelectedFile+1));
+
+		$this->play();	
+
+	}	
+	
+	
+	
+	//*****************************************************************************
+	/* Function: Previous()
+        -------------------------------------------------------------------------------
+        nächste 
+        ...............................................................................
+	Parameters:
+            none.
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function previous()
+	{	
+	
+		$Playlist = getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
+		$xml = new SimpleXMLElement($Playlist);
+		$SelectedFile = GetValue($this->GetIDForIdent("Ceol_Track")); 
+		$track = ("Track".($SelectedFile-1));
+
+		//Aktueller Track = Selected File-----------------------------------------
+		SetValue($this->GetIDForIdent("Ceol_Track"), ($SelectedFile-1));
+		
+		$this->play();
+
+	}	
+        
+        
         
 	//*****************************************************************************
 	/* Function: GetPosInfo()

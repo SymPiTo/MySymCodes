@@ -706,7 +706,7 @@ class MyUpnp extends IPSModule {
 		//Aktueller Track = Selected File-----------------------------------------
 		SetValue($this->GetIDForIdent("upnp_Track"), ($SelectedFile+1));
 
-		$this->play('next');	
+		$this->play();	
 
 	}	
 	
@@ -739,7 +739,7 @@ class MyUpnp extends IPSModule {
 		//Aktueller Track = Selected File-----------------------------------------
 		SetValue($this->GetIDForIdent("upnp_Track"), ($SelectedFile-1));
 		
-		$this->play('previous');
+		$this->play();
 
 	}	
         
