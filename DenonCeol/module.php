@@ -68,7 +68,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("Ceol_Genre", "DIDL_Genre [upnp:genre]");
             $this->RegisterVariableString("Ceol_Date", "DIDL_Date [dc:date]");
             
-            $this->RegisterVariableInteger("upnp_PlayMode", "PlayMode", "UPNP_Playmode");
+            $this->RegisterVariableInteger("Ceol_PlayMode", "PlayMode", "UPNP_Playmode");
             $this->RegisterVariableInteger("Ceol_NoTracks", "No of tracks", "");
             $this->RegisterVariableString("Ceol_PlaylistName", "PlaylistName");
             $this->RegisterVariableString("Ceol_Playlist_XML", "Playlist_XML");  
