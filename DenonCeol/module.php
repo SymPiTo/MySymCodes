@@ -1093,7 +1093,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                                 $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
                                 setvalue($this->GetIDForIdent("Ceol_Progress"),0);
                                 setvalue($this->GetIDForIdent("Ceol_Track"),0);
-                            break;
+                                break;
                             case 'STOPPED':
                                 $lastTrack = getvalue($this->GetIDForIdent("Ceol_Track"));
                                 $maxTrack = getvalue($this->GetIDForIdent("Ceol_NoTracks"));
@@ -1105,7 +1105,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                                     setvalue($this->GetIDForIdent("Ceol_Progress"),0);
                                     setvalue($this->GetIDForIdent("Ceol_Track"),0);
                                 }
-                            break;
+                                break;
                             case 'PLAYING':
                                 if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
                                     $this->SendDebug("GetPosInfo ", 'progress aufrufen', 0);
@@ -1118,7 +1118,12 @@ o                    http://192.168.2.99/img/album%20art_S.png
                                         //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
                                 }
                                 else {$this->Stop_AV();}
-                            break;
+                                break;
+                            default:
+                                $this->Stop_AV();
+                                $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
+                                setvalue($this->GetIDForIdent("Ceol_Progress"),0);
+                                setvalue($this->GetIDForIdent("Ceol_Track"),0);
 			}
 		}
 	}
