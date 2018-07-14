@@ -312,7 +312,7 @@ trait upnp {
 	Returns:
 
 	//////////////////////////////////////////////////////////////////////////////*/
-	Protected function Playmode(string $ClientIP, string $ClientPort, string $ClientControlURL, string $Playmode){
+	Protected function Playmode_AV(string $ClientIP, string $ClientPort, string $ClientControlURL, string $Playmode){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,
 	
 	                           "urn:schemas-upnp-org:service:AVTransport:1",
@@ -554,6 +554,7 @@ trait upnp {
          * This action returns information on various settings of the specified instance, 
          * such as the current play mode
          * and the current recording quality mode.This action has no effect on state.
+         * as Array ['PlayMode'] and [RecQualityMode]  
          */        
 	Protected function GetTransportSettings(string $ClientIP, string $ClientPort, string $ClientControlURL){
 	    return $this->processSoapCall($ClientIP, $ClientPort, $ClientControlURL,

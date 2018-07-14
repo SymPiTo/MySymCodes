@@ -48,6 +48,21 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("CeolSZ8", "Line8"); 
             $this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
             
+            
+                
+            //UPNP Variable
+            $this->RegisterVariableString("Ceol_ServerArray", "Server:Array");
+            $this->RegisterVariableString("Ceol_ServerContentDirectory", "Server:ContentDirectory");
+            $this->RegisterVariableString("Ceol_ServerIcon", "Server:Icon");
+            $this->RegisterVariableString("Ceol_ServerIP", "Server:IP");
+            $this->RegisterVariableInteger("Ceol_ServerKey", "Server:Key", "");
+            $this->RegisterVariableString("Ceol_ServerName", "Server:Name");
+            $this->RegisterVariableString("Ceol_ServerPort", "Server:Port");
+
+            $this->RegisterVariableInteger("Ceol_NoTracks", "No of tracks", "");
+            $this->RegisterVariableString("Ceol_PlaylistName", "PlaylistName");
+            $this->RegisterVariableString("Ceol_Playlist_XML", "Playlist_XML");  
+            
             // Aktiviert die Standardaktion der Statusvariable
             $this->EnableAction("CeolPower");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolPower"), "~Switch");
@@ -776,11 +791,123 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	}	
 
         
-        
+	//*****************************************************************************
+	/* Function: setServer($serverName)
+	...............................................................................
+	Umschalten auf Client
+        ...............................................................................
+	Parameters:  
+            $serverName - "Friendly Name des Servers"  = "Plex" // "AVM"
+	--------------------------------------------------------------------------------
+	Returns:
+            $key - Nummer des Client Arrays
+        --------------------------------------------------------------------------------
+	Status: 14.7.2018 checked
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function setServer(string $serverName){
+		//IPSLog("Starte Funktion : ", 'setServer');
+		$which_key = "FriendlyName";
+		$which_value = $serverName;
+		$array = getvalue($this->GetIDForIdent("CEOL_ServerArray"));
+		$Server_Array = unserialize($array);
+		$key = $this->search_key($which_key, $which_value, $Server_Array);
+
+		$Server_Array[$key]['ServerActiveIcon'] = "image/button_ok_blue_80x80.png";
+		$ServerIP                   = $Server_Array[$key]['ServerIP'];
+		$ServerPort                 = $Server_Array[$key]['ServerPort'];
+		$friendlyName               = $Server_Array[$key]['FriendlyName'];
+		$ServerServiceType          = $Server_Array[$key]['ServerServiceType'];
+		$ServerContentDirectory     = $Server_Array[$key]['ServerContentDirectory'];
+		$ServerActiveIcon           = $Server_Array[$key]['ServerActiveIcon'];
+		$ServerIconURL              = $Server_Array[$key]['IconURL'];
+		SetValue($this->GetIDForIdent("CEOL_ServerIP"), $ServerIP);
+		SetValue($this->GetIDForIdent("CEOL_ServerPort"), $ServerPort);
+		SetValue($this->GetIDForIdent("CEOL_ServerName"), $friendlyName);
+		setvalue($this->GetIDForIdent("CEOL_ServerKey"), $key);
+		//SetValue(UPNP_Server_ServiceType, $ServerServiceType);
+		SetValue($this->GetIDForIdent("CEOL_ServerContentDirectory"), $ServerContentDirectory);
+		SetValue($this->GetIDForIdent("CEOL_ServerIcon"), $ServerIconURL);
+		return $key;
+	}   
  
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+ 
+        
+	//*****************************************************************************
+	/* Function:  search_key($which_key, $which_value, $array)
+        ...............................................................................
+        den $key des Elternelementes in einem mehrdimensionalen Array finden
+        ...............................................................................
+        Parameter:  
+            * $which_key =    = zu durchsuchedes ArrayFeld = ['FriendlyName']
+            * $which_value    = Suchwert = z.Bsp "CEOL"
+            * $array          = zu durchsuchendes Array
+        --------------------------------------------------------------------------------
+        return:  
+            * key = gefundener Datensatz index
+        --------------------------------------------------------------------------------
+        Status  checked 11.6.2018
+        //////////////////////////////////////////////////////////////////////////////*/
+        Protected function search_key($which_key, $which_value, $array){
+            foreach ($array as $key => $value){
+                if($value[$which_key] === $which_value){
+                    return $key;
+                }
+                else{
+                    //$this->SendDebug('Send', $which_value.' in Key: '.$key.' not found', 0);
+
+                }
+            }
+        }
+
+	//*****************************************************************************
+	/* Function: Kernel()
+        ...............................................................................
+        Stammverzeichnis von IP Symcon
+        ...............................................................................
+        Parameter:  
+
+        --------------------------------------------------------------------------------
+        return:  
+
+        --------------------------------------------------------------------------------
+        Status  checked 11.6.2018
+        //////////////////////////////////////////////////////////////////////////////*/
+        Protected function Kernel(){ 
+            $Kernel = str_replace("\\", "/", IPS_GetKernelDir());
+            return $Kernel;
+        }    
+        
       
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
