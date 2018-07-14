@@ -808,7 +808,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		//IPSLog("Starte Funktion : ", 'setServer');
 		$which_key = "FriendlyName";
 		$which_value = $serverName;
-		$array = getvalue($this->GetIDForIdent("CEOL_ServerArray"));
+		$array = getvalue($this->GetIDForIdent("Ceol_ServerArray"));
 		$Server_Array = unserialize($array);
 		$key = $this->search_key($which_key, $which_value, $Server_Array);
 
@@ -820,13 +820,13 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		$ServerContentDirectory     = $Server_Array[$key]['ServerContentDirectory'];
 		$ServerActiveIcon           = $Server_Array[$key]['ServerActiveIcon'];
 		$ServerIconURL              = $Server_Array[$key]['IconURL'];
-		SetValue($this->GetIDForIdent("CEOL_ServerIP"), $ServerIP);
-		SetValue($this->GetIDForIdent("CEOL_ServerPort"), $ServerPort);
-		SetValue($this->GetIDForIdent("CEOL_ServerName"), $friendlyName);
-		setvalue($this->GetIDForIdent("CEOL_ServerKey"), $key);
+		SetValue($this->GetIDForIdent("Ceol_ServerIP"), $ServerIP);
+		SetValue($this->GetIDForIdent("Ceol_ServerPort"), $ServerPort);
+		SetValue($this->GetIDForIdent("Ceol_ServerName"), $friendlyName);
+		setvalue($this->GetIDForIdent("Ceol_ServerKey"), $key);
 		//SetValue(UPNP_Server_ServiceType, $ServerServiceType);
-		SetValue($this->GetIDForIdent("CEOL_ServerContentDirectory"), $ServerContentDirectory);
-		SetValue($this->GetIDForIdent("CEOL_ServerIcon"), $ServerIconURL);
+		SetValue($this->GetIDForIdent("Ceol_ServerContentDirectory"), $ServerContentDirectory);
+		SetValue($this->GetIDForIdent("Ceol_ServerIcon"), $ServerIconURL);
 		return $key;
 	}   
  
