@@ -976,7 +976,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 			/* Transport Status abfragen */
 			$PlayModeIndex = $this->GetTransportSettings_AV();
                         //$this->IPSLog("Playmode Array", $PlayMode); 
-                        $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayMode['PlayMode'] , 0);
+                        $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayModeIndex , 0);
 
                         setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
  			/* Transport Status abfragen */
