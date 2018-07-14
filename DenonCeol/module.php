@@ -59,6 +59,15 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("Ceol_ServerName", "Server:Name");
             $this->RegisterVariableString("Ceol_ServerPort", "Server:Port");
 
+            
+            $this->RegisterVariableString("Ceol_Artist", "DIDL_Artist [dc:creator]");
+            $this->RegisterVariableString("Ceol_Album", "DIDL_Album [upnp:album]");
+            $this->RegisterVariableString("Ceol_Title", "DIDL_Titel [dc:title]");
+            $this->RegisterVariableString("Ceol_Actor", "DIDL_Actor [upnp:actor]");
+            $this->RegisterVariableString("Ceol_AlbumArtUri", "DIDL_AlbumArtURI [upnp:albumArtURI]");
+            $this->RegisterVariableString("Ceol_Genre", "DIDL_Genre [upnp:genre]");
+            $this->RegisterVariableString("Ceol_Date", "DIDL_Date [dc:date]");
+            
             $this->RegisterVariableInteger("Ceol_NoTracks", "No of tracks", "");
             $this->RegisterVariableString("Ceol_PlaylistName", "PlaylistName");
             $this->RegisterVariableString("Ceol_Playlist_XML", "Playlist_XML");  
@@ -78,9 +87,14 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->EnableAction("CeolVolume");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolVolume"), "DenonCEOL_Volume");
             
+            $this->EnableAction("Ceol_PlayMode");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("Ceol_PlayMode"), "UPNP_Playmode");
+            
+            
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
-            
+            // Progress Timer erstellen
+            $this->RegisterTimer("Ceol_PlayInfo", 1000,  'CEOL_GetPosInfo(' . $this->InstanceID . ');');
 
         }
         
@@ -847,7 +861,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	Returns:  
             $xml - Playlist as XML 
 	--------------------------------------------------------------------------------
-	Status:  
+	Status:  14.7.2018 checked
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function loadPlaylist(string $AlbumNo){	
             $this->SendDebug('Send','lade Play Liste' , 0);
@@ -872,13 +886,226 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	}
   
         
+	//*****************************************************************************
+	/* Function: play()
+	...............................................................................
+	vorgewählte Playlist abspielen
+        ...............................................................................
+	Parameters: 
+            none.
+	--------------------------------------------------------------------------------
+	Returns:  
+            none
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function play(){	
+                
+		$Playlist   = getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
+		
+		$xml = new SimpleXMLElement($Playlist);
+		$tracks = $xml->count();
+		setvalue($this->GetIDForIdent("Ceol_NoTracks"),$tracks);
+ 		$TrackNo = getvalue($this->GetIDForIdent("Ceol_Track"))-1;
+		$track = ("Track".strval($TrackNo));
+			
+		$res = $xml->$track->resource; // gibt resource des Titels aus
+
+		$metadata = $xml->$track->metadata; // gibt resource des Titels aus
+		//UPNP_GetPositionInfo_Playing abschalten zum Ausführen des Transitioning
+		//IPS_SetScriptTimer($this->GetIDForIdent("upnp_PlayInfo"), 0);
+		$this->SetTimerInterval('Ceol_PlayInfo', 0);
+                if ($TrackNo == 1){	
+			$this->Stop_AV();
+		}
+               // if ($ClientPort == '52235'){
+                  //  $metadata='';
+                //}
+		//Transport starten 
+                $this->SetAVTransportURI_AV((string) $res, (string) $metadata);
+                $this->SendDebug("PLAY ", 'SetAVTransportURI', 0);
+		//Stream ausführen	
+		$this->Play_AV();
+                $this->SendDebug("PLAY ", 'Play_AV', 0);
+		// Postion Timer starten
+                
+                $this->SetTimerInterval('Ceol_PlayInfo', 1000);
+                $this->SendDebug("PLAY ", 'Timer Position aktivieren', 0);
+	}
+
         
         
+	//*****************************************************************************
+	/* Function: GetPosInfo()
+	...............................................................................
+	Aufruf durch Timer jede Sekunde
+	überprüft 'CurrentTransportState' und PositionInfo
+	...............................................................................
+	Parameters:
+            none.
+	--------------------------------------------------------------------------------
+	Returns:  
+            none.
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function GetPosInfo(){ 
+		//IPAdresse und Port des gewählten Device---------------------------------------
+                $ClientPort = '8080';
+		
+		$fsock = fsockopen($this->GetIDForIdent("IPAddress"), $ClientPort, $errno, $errstr, $timeout = '1');
+		if ( !$fsock ){
+                    //nicht erreichbar --> Timer abschalten--------------------------------
+                    $this->SendDebug('Send', $ClientIP.'ist nicht erreichbar!', 0);
+		}
+		else{
+			/*///////////////////////////////////////////////////////////////////////////
+			Auswertung nach CurrentTransportState "PLAYING" oder "STOPPED"
+			bei "PLAYING" -> GetPositionInfo -> Progress wird angezeigt
+			bei "STOPPED" -> nächster Titel wird aufgerufen
+			/*///////////////////////////////////////////////////////////////////////////
+			$Playlist = getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
+			$xml = new SimpleXMLElement($Playlist);
+			$SelectedFile = GetValue($this->GetIDForIdent("Ceol_Track"))-1; 
+			$track = ("Track".($SelectedFile));
+				
+			$DIDL_Lite_Class = $xml->$track->class;
+			$this->SendDebug("GetPosInfo ", 'class des Tracks abfragen: '.$DIDL_Lite_Class , 0);
+
+			/* Transport Status abfragen */
+			$PlayMode = $this->GetTransportSettings_AV();
+                        //$this->IPSLog("Playmode Array", $PlayMode); 
+                        $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayMode['PlayMode'] , 0);
+                        switch ($PlayMode['PlayMode']) {
+                            case 'NORMAL':
+                                $PlayModeIndex = 0;
+                                break;
+                            case 'RANDOM':
+                                $PlayModeIndex = 1;
+                                break;
+                            case 'REPEAT_ONE':
+                                $PlayModeIndex = 2;
+                                break;   
+                            case 'REPEAT_ALL':
+                                $PlayModeIndex = 3;
+                                break;
+                            default:
+                                break;
+                        }
+                        setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
+ 			/* Transport Status abfragen */
+			$Playing = $this->GetTransportInfo($ClientIP, $ClientPort, $ControlURL);                       
+ 			setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $Playing['CurrentTransportState']);
+			 $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing['CurrentTransportState'] , 0);
+			//Transport Status auswerten
+			switch ($Playing['CurrentTransportState']){
+                            case 'NO_MEDIA_PRESENT':
+                                $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
+                                setvalue($this->GetIDForIdent("Ceol_Progress"),0);
+                                setvalue($this->GetIDForIdent("Ceol_Track"),0);
+                            break;
+                            case 'STOPPED':
+                                $lastTrack = getvalue($this->GetIDForIdent("Ceol_Track"));
+                                $maxTrack = getvalue($this->GetIDForIdent("Ceol_NoTracks"));
+                                if ($lastTrack > 0  AND $lastTrack < $maxTrack){
+                                        $this->PlayNextTrack();		
+                                }
+                                else {
+                                    $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
+                                    setvalue($this->GetIDForIdent("Ceol_Progress"),0);
+                                    setvalue($this->GetIDForIdent("Ceol_Track"),0);
+                                }
+                            break;
+                            case 'PLAYING':
+                                if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
+                                    $this->SendDebug("GetPosInfo ", 'progress aufrufen', 0);
+                                    $fortschritt = $this->progress();
+                                }
+                                else if($DIDL_Lite_Class == "object.item.videoItem"){
+                                        //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
+                                }
+                                else if($DIDL_Lite_Class == "object.item.imageItem.photo"){
+                                        //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
+                                }
+                                else {$this->Stop_AV();}
+                            break;
+			}
+		}
+	}
+            
         
-        
-        
-        
-        
+
+	//*****************************************************************************
+	/* Function: progress ($ClientIP, $ClientPort, $ControlURL)
+	...............................................................................
+	Fortschrittsanzeige
+	Liest PositionInfo aus aktuellem Stream aus:
+		['TrackDuration']
+		['RelTime']
+		['TrackMetaData'] = DIDL =
+									'dc:creator'
+									'dc:title'
+									'upnp:album'
+									'upnp:originalTrackNumber'
+									'dc:description'
+									'upnp:albumArtURI'
+									'upnp:genre'
+									'dc:date'
+	...............................................................................
+	Parameters:  
+            $ClientIP - Client IP auf dem wiedergeben wird.
+            $ClientPort - IP des Clients.
+            $ControlURL - Control URL des Clients.
+	--------------------------------------------------------------------------------
+	Returns:  
+            $Progress - Integer Wert 0 - 100 
+        -------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	Protected function progress(){	
+            $GetPositionInfo = $this->GetPositionInfo_AV();
+             
+            $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
+            setvalue($this->GetIDForIdent("Ceol_TrackDuration"), (string) $Duration);           
+            $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
+            setvalue($this->GetIDForIdent("Ceol_RelTime"), (string) $RelTime);          
+            $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
+            $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
+            $b = htmlspecialchars_decode($TrackMeta);
+            //$this->IPSLog('HTML: ', $b);
+            $didlXml = simplexml_load_string($b); 
+            $this->SendDebug("progress-DIDL INFO ", $didlXml , 0);
+            $creator = (string)$didlXml->item[0]->xpath('dc:creator')[0];
+            $title = (string) $didlXml->item[0]->xpath('dc:title')[0];
+            $album = (string)$didlXml->item[0]->xpath('upnp:album')[0];
+            $TrackNo = (string)$didlXml->item[0]->xpath('upnp:originalTrackNumber')[0];
+            $actor = (string)$didlXml->item[0]->xpath('upnp:actor')[0];
+            $AlbumArtURI = (string)$didlXml->item[0]->xpath('upnp:albumArtURI')[0];
+            $genre = (string)$didlXml->item[0]->xpath('upnp:genre')[0];
+            $date = (string)$didlXml->item[0]->xpath('dc:date')[0];
+
+            setvalue($this->GetIDForIdent("Ceol_Artist"),  $creator);
+            setvalue($this->GetIDForIdent("Ceol_Title"),  $title);
+            setvalue($this->GetIDForIdent("Ceol_Album"),  $album);		
+            setvalue($this->GetIDForIdent("Ceol_TrackNo"),  $TrackNo);
+            setvalue($this->GetIDForIdent("Ceol_Actor"),  $actor);
+            setvalue($this->GetIDForIdent("Ceol_Date"),  $date);
+            //setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
+            setvalue($this->GetIDForIdent("Ceol_Genre"),  $genre);
+                function get_time_difference($Duration, $RelTime){
+                        $duration = explode(":", $Duration);
+                        $reltime = explode(":", $RelTime);
+                        $time_difference = round((((($reltime[0] * 3600) + ($reltime[1] * 60) + ($reltime[2]))* 100) / (($duration[0] * 3600) + ($duration[1] * 60) + ($duration[2]))), 0, PHP_ROUND_HALF_UP);
+                        return ($time_difference);
+                }
+            if($Duration == "0:00:00"){
+                    $Duration = (string) $GetPositionInfo['AbsTime']; //AbsTime
+            }
+            $Progress = get_time_difference($Duration, $RelTime);
+            SetValueInteger($this->GetIDForIdent("Ceol_Progress"), $Progress);
+            return $Progress;
+	}
+
         
         
         
