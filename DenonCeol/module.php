@@ -62,6 +62,11 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableInteger("Ceol_NoTracks", "No of tracks", "");
             $this->RegisterVariableString("Ceol_PlaylistName", "PlaylistName");
             $this->RegisterVariableString("Ceol_Playlist_XML", "Playlist_XML");  
+            $this->RegisterVariableInteger("Ceol_Progress", "Progress", "UPNP_Progress");
+            $this->RegisterVariableInteger("Ceol_Track", "Pos:Track", "");
+            $this->RegisterVariableString("Ceol_Transport_Status", "Pos:Transport_Status");
+            $this->RegisterVariableString("Ceol_RelTime", "RelTime");
+            $this->RegisterVariableString("Ceol_TrackDuration", "TrackDuration");
             
             // Aktiviert die Standardaktion der Statusvariable
             $this->EnableAction("CeolPower");
@@ -831,6 +836,41 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	}   
  
         
+	//*****************************************************************************
+	/* Function: loadPlaylist($AlbumNo)
+	...............................................................................
+	Playlist aus Datei laden (XML) und in Variable Playlist_XML schreiben
+	...............................................................................
+	Parameters:  
+            $AlbumNo - Album Nummer = '0001'.
+	--------------------------------------------------------------------------------
+	Returns:  
+            $xml - Playlist as XML 
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function loadPlaylist(string $AlbumNo){	
+            $this->SendDebug('Send','lade Play Liste' , 0);
+            $Server = getvalue($this->GetIDForIdent("Ceol_ServerName"));
+            $PlaylistName = $Server.$AlbumNo;
+            setvalue($this->GetIDForIdent("Ceol_PlaylistName"), $PlaylistName);
+            $PlaylistFile = $PlaylistName.'.xml';
+
+            $Playlist = file_get_contents($this->Kernel()."media/Multimedia/Playlist/Musik/".$PlaylistFile);
+            // Playlist abspeichern
+            setvalue($this->GetIDForIdent("Ceol_Playlist_XML"), $Playlist);
+            // neue Playlist wurde geladen - TrackNo auf 0 zurücksetzen
+            setvalue($this->GetIDForIdent("Ceol_Track"), 1);
+
+            $vars 				= explode(".", $PlaylistFile);
+            $PlaylistName 			= $vars[0];
+            $PlaylistExtension		= $vars[1];
+
+            $xml = new SimpleXMLElement($Playlist);
+
+            return $xml;
+	}
+  
         
         
         
