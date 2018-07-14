@@ -1132,7 +1132,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
         return:  
             * key = gefundener Datensatz index
         --------------------------------------------------------------------------------
-        Status  checked 11.6.2018
+        Status  checked  
         //////////////////////////////////////////////////////////////////////////////*/
         Protected function search_key($which_key, $which_value, $array){
             foreach ($array as $key => $value){
