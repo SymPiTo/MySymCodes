@@ -953,11 +953,11 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	public function GetPosInfo(){ 
 		//IPAdresse und Port des gewählten Device---------------------------------------
                 $ClientPort = '8080';
-		
-		$fsock = fsockopen($this->GetIDForIdent("IPAddress"), $ClientPort, $errno, $errstr, $timeout = '1');
+		$host = $this->ReadPropertyString('IPAddress');
+		$fsock = fsockopen($host, $ClientPort, $errno, $errstr, $timeout = '1');
 		if ( !$fsock ){
                     //nicht erreichbar --> Timer abschalten--------------------------------
-                    $this->SendDebug('Send',$this->GetIDForIdent("IPAddress").'ist nicht erreichbar!', 0);
+                    $this->SendDebug('Send', $host.'ist nicht erreichbar!', 0);
 		}
 		else{
 			/*///////////////////////////////////////////////////////////////////////////
