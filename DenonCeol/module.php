@@ -908,7 +908,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		$tracks = $xml->count();
 		setvalue($this->GetIDForIdent("Ceol_NoTracks"),$tracks);
  		$TrackNo = getvalue($this->GetIDForIdent("Ceol_Track"))-1;
-                if ($TrackNo < 1){$TrackNo = 1;}
+                if ($TrackNo < 0){$TrackNo = 0;}
 		$track = ("Track".strval($TrackNo));
 			
 		$res = $xml->$track->resource; // gibt resource des Titels aus
@@ -921,9 +921,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                 if ($TrackNo == 1){	
 			$this->Stop_AV();
 		}
-               // if ($ClientPort == '52235'){
-                  //  $metadata='';
-                //}
+      
 		//Transport starten 
                 $this->SetAVTransportURI_AV((string) $res, (string) $metadata);
                 $this->SendDebug("PLAY ", 'SetAVTransportURI', 0);
@@ -1075,6 +1073,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 			$Playlist = getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
 			$xml = new SimpleXMLElement($Playlist);
                         $TNo = GetValue($this->GetIDForIdent("Ceol_Track"));
+                        $this->SendDebug("GetPosInfo ", 'Track Nummer '.$TNo, 0);
 			$SelectedFile = $TNo -1; 
                         if ($TNo === 0){
                             $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
