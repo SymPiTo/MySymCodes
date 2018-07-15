@@ -1129,11 +1129,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                                     else {$this->Stop_AV();}
                                     break;
                                 default:
-                                    $this->Stop_AV();
-                                    $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                                    $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil kein Transport Info', 0);
-                                    setvalue($this->GetIDForIdent("Ceol_Progress"),0);
-                                    setvalue($this->GetIDForIdent("Ceol_Track"),0);
+
                             }
                         }    
 		}
