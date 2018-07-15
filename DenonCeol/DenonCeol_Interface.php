@@ -398,10 +398,10 @@ trait CEOLupnp
 	Parameter:		 none
 	
 	Rückgabewert: 	1   - PLAYING  
-					2   - PAUSED_PLAYBACK 
-					3   - STOPPED 
-					5	- TRANSITIONING  
-					deafult - Fehlermeldung
+			2   - PAUSED_PLAYBACK 
+			3   - STOPPED 
+			5	- TRANSITIONING  
+			deafult - Fehlermeldung
 	//////////////////////////////////////////////////////////////////////////////*/
 	  public function GetTransportInfo_AV()
 	  {
@@ -417,18 +417,7 @@ trait CEOLupnp
 
 							 ));
 
-	    switch ($returnContent["CurrentTransportState"]){
-	      case "PLAYING":
-		return 1;
-	      case "PAUSED_PLAYBACK":
-		return 2;
-	      case "STOPPED":
-		return 3;
-	      case "TRANSITIONING":
-		return 5;
-	      default:
-		throw new Exception("Unknown Transport State: ".$returnContent["CurrentTransportState"]); 
-	    }
+	    return $returnContent["CurrentTransportState"];
 	  }
 
 
