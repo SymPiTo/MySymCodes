@@ -956,7 +956,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $this->SendDebug('STOP', 'Stream stoppen', 0);
             /*Timer abschalten--------------------------------------------------------*/
             $this->SetTimerInterval('Ceol_PlayInfo', 0);
-            $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+            $this->SendDebug("STOP ", 'Timer Position Deaktivieren', 0);
             /*Stram stoppen--------------------------------------------------------*/
             $this->Stop_AV();
             //Track Zähler auf Anfang zurücksetzen
@@ -1078,7 +1078,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 			$SelectedFile = $TNo -1; 
                         if ($TNo === 0){
                             $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                            $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                            $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil Track = 0', 0);
                         }
                         else {
                             $track = ("Track".($SelectedFile));
@@ -1098,7 +1098,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                             switch ($Playing['CurrentTransportState']){
                                 case 'NO_MEDIA_PRESENT':
                                     $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                                    $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                                    $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil NO MEDIA', 0);
                                     setvalue($this->GetIDForIdent("Ceol_Progress"),0);
                                     setvalue($this->GetIDForIdent("Ceol_Track"),0);
                                     break;
@@ -1110,7 +1110,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                                     }
                                     else {
                                         $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                                        $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                                        $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil STOPPED und TRACK = 0', 0);
                                         setvalue($this->GetIDForIdent("Ceol_Progress"),0);
                                         setvalue($this->GetIDForIdent("Ceol_Track"),0);
                                     }
@@ -1131,7 +1131,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                                 default:
                                     $this->Stop_AV();
                                     $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                                    $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                                    $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil kein Transport Info', 0);
                                     setvalue($this->GetIDForIdent("Ceol_Progress"),0);
                                     setvalue($this->GetIDForIdent("Ceol_Track"),0);
                             }
