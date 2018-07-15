@@ -247,30 +247,30 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 SetValueString($this->GetIDForIdent("CeolSZ6"), $sz6);
                 SetValueString($this->GetIDForIdent("CeolSZ7"), $sz7);
                 SetValueString($this->GetIDForIdent("CeolSZ8"), $sz8);
-
+                
                 $Source = $output['item']['NetFuncSelect']['value'];
                 
                 switch ($Source){
                         case "IRadio":
-                                $value = 0;
+                            SetValueInteger($this->GetIDForIdent("CeolSource"), 0);
                         break;	
                         case "MediaServer":
-                                $value = 1;
+                            SetValueInteger($this->GetIDForIdent("CeolSource"), 1);
                         break;	
                         case "USB":
-                                $value = 2;
+                            SetValueInteger($this->GetIDForIdent("CeolSource"), 2);
                         break;	
                         case "IPOD":
-                                $value = 3;
+                            SetValueInteger($this->GetIDForIdent("CeolSource"), 3);
                         break;	
                         case "AUX_A":
-                                $value = 4;
+                            SetValueInteger($this->GetIDForIdent("CeolSource"), 4);
                         break;	
                         case "AUX_D":
-                                $value = 5;
+                            SetValueInteger($this->GetIDForIdent("CeolSource"), 5);
                         break;		
                 }
-                SetValueInteger($this->GetIDForIdent("CeolSource"), $value);  
+                  
             }
             else {
                 //Keine Netzwerk-Verbindung zun Client
