@@ -950,6 +950,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	//////////////////////////////////////////////////////////////////////////////*/
 	public function PlayNextTrack(){	
             $track 	= getvalue($this->GetIDForIdent("Ceol_Track"));
+            $this->SendDebug("PlayNextTrack ", $track, 0);
             setvalue($this->GetIDForIdent("Ceol_Track"),$track+1);
             $trackNo 	= ("Track".strval($track));
             $Playlist 	= getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
