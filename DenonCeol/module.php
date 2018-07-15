@@ -926,16 +926,16 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		//Transport starten 
                 $this->SetAVTransportURI_AV((string) $res, (string) $metadata);
                 $this->SendDebug("PLAY ", 'SetAVTransportURI', 0);              
-
-              
+                            $TransStatus = $this->GetTransportInfo_AV();                       
+                            setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $TransStatus); 
 		//Stream ausführen	
 		$this->Play_AV();
                 $this->SendDebug("PLAY ", 'Play_AV', 0);
-                             $TransStatus = $this->GetTransportInfo_AV();                       
+                            $TransStatus = $this->GetTransportInfo_AV();                       
                             setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $TransStatus);               
-		// Postion Timer starten
-                //IPS_Sleep(2000);
-                 
+
+                IPS_Sleep(2000);
+		// Postion Timer starten                 
                 $this->SetTimerInterval('Ceol_PlayInfo', 1000);
                 $this->SendDebug("PLAY ", 'Timer Position aktivieren', 0);  
 	}
