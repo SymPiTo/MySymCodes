@@ -935,7 +935,33 @@ o                    http://192.168.2.99/img/album%20art_S.png
                 $this->SendDebug("PLAY ", 'Timer Position aktivieren', 0);
 	}
 
-        
+	//*****************************************************************************
+	/* Function: PlayNextTrack()
+	...............................................................................
+	nächsten Track aus der vorgewählten Playlist abspielen
+	...............................................................................
+	Parameters:  
+            none.
+	--------------------------------------------------------------------------------
+	Returns:  
+            none
+	--------------------------------------------------------------------------------
+	Status:  
+	//////////////////////////////////////////////////////////////////////////////*/
+	public function PlayNextTrack(){	
+            $track 	= getvalue($this->GetIDForIdent("Ceol_Track"));
+            setvalue($this->GetIDForIdent("Ceol_Track"),$track+1);
+            $trackNo 	= ("Track".strval($track));
+            $Playlist 	= getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
+            $xml = new SimpleXMLElement($Playlist);
+
+            $res = $xml->$trackNo->resource; // gibt resource des Titels aus
+            $metadata = $xml->$trackNo->metadata; // gibt resource des Titels aus
+
+            $this->SetAVTransportURI((string) $res, (string) $metadata);
+            $this->Play_AV();
+	}
+  
 
 	//*****************************************************************************
 	/* Function: Stop()
