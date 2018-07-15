@@ -1073,63 +1073,68 @@ o                    http://192.168.2.99/img/album%20art_S.png
 			/*///////////////////////////////////////////////////////////////////////////
 			$Playlist = getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
 			$xml = new SimpleXMLElement($Playlist);
-			$SelectedFile = GetValue($this->GetIDForIdent("Ceol_Track"))-1; 
-			$track = ("Track".($SelectedFile));
-				
-			$DIDL_Lite_Class = $xml->$track->class;
-			$this->SendDebug("GetPosInfo ", 'class des Tracks abfragen: '.$DIDL_Lite_Class , 0);
+                        $TNo = GetValue($this->GetIDForIdent("Ceol_Track"));
+			$SelectedFile = $TNo -1; 
+                        if ($TNo === 0){
+                            $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
+                            $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                        }
+                        else {
+                            $track = ("Track".($SelectedFile));
+                            $DIDL_Lite_Class = $xml->$track->class;
+                            $this->SendDebug("GetPosInfo ", 'class des Tracks abfragen: '.$DIDL_Lite_Class , 0);
+                            /* Transport Status abfragen */
+                            $PlayModeIndex = $this->GetTransportSettings_AV();
+                            //$this->IPSLog("Playmode Array", $PlayMode); 
+                            $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayModeIndex , 0);
 
-			/* Transport Status abfragen */
-			$PlayModeIndex = $this->GetTransportSettings_AV();
-                        //$this->IPSLog("Playmode Array", $PlayMode); 
-                        $this->SendDebug("GetPosInfo ", 'Playmode: '.$PlayModeIndex , 0);
-
-                        setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
- 			/* Transport Status abfragen */
-                        $Playing = $this->GetTransportInfo_AV();                       
- 			setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $Playing['CurrentTransportState']);
-			 $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing , 0);
-			//Transport Status auswerten
-			switch ($Playing['CurrentTransportState']){
-                            case 'NO_MEDIA_PRESENT':
-                                $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                                $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
-                                setvalue($this->GetIDForIdent("Ceol_Progress"),0);
-                                setvalue($this->GetIDForIdent("Ceol_Track"),0);
-                                break;
-                            case 'STOPPED':
-                                $lastTrack = getvalue($this->GetIDForIdent("Ceol_Track"));
-                                $maxTrack = getvalue($this->GetIDForIdent("Ceol_NoTracks"));
-                                if ($lastTrack > 0  AND $lastTrack < $maxTrack){
-                                        $this->PlayNextTrack();		
-                                }
-                                else {
+                            setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
+                            /* Transport Status abfragen */
+                            $Playing = $this->GetTransportInfo_AV();                       
+                            setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $Playing['CurrentTransportState']);
+                             $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing['CurrentTransportState'] , 0);
+                            //Transport Status auswerten
+                            switch ($Playing['CurrentTransportState']){
+                                case 'NO_MEDIA_PRESENT':
                                     $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
                                     $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
                                     setvalue($this->GetIDForIdent("Ceol_Progress"),0);
                                     setvalue($this->GetIDForIdent("Ceol_Track"),0);
-                                }
-                                break;
-                            case 'PLAYING':
-                                if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
-                                    $this->SendDebug("GetPosInfo ", 'progress aufrufen', 0);
-                                    $fortschritt = $this->progress();
-                                }
-                                else if($DIDL_Lite_Class == "object.item.videoItem"){
-                                        //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
-                                }
-                                else if($DIDL_Lite_Class == "object.item.imageItem.photo"){
-                                        //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
-                                }
-                                else {$this->Stop_AV();}
-                                break;
-                            default:
-                                $this->Stop_AV();
-                                $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
-                                $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
-                                setvalue($this->GetIDForIdent("Ceol_Progress"),0);
-                                setvalue($this->GetIDForIdent("Ceol_Track"),0);
-			}
+                                    break;
+                                case 'STOPPED':
+                                    $lastTrack = getvalue($this->GetIDForIdent("Ceol_Track"));
+                                    $maxTrack = getvalue($this->GetIDForIdent("Ceol_NoTracks"));
+                                    if ($lastTrack > 0  AND $lastTrack < $maxTrack){
+                                            $this->PlayNextTrack();		
+                                    }
+                                    else {
+                                        $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
+                                        $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                                        setvalue($this->GetIDForIdent("Ceol_Progress"),0);
+                                        setvalue($this->GetIDForIdent("Ceol_Track"),0);
+                                    }
+                                    break;
+                                case 'PLAYING':
+                                    if($DIDL_Lite_Class == "object.item.audioItem.musicTrack"){
+                                        $this->SendDebug("GetPosInfo ", 'progress aufrufen', 0);
+                                        $fortschritt = $this->progress();
+                                    }
+                                    else if($DIDL_Lite_Class == "object.item.videoItem"){
+                                            //include_once ("35896 /*[Multimedia\Core\UPNP_Progress]*/.ips.php"); //UPNP_Progress
+                                    }
+                                    else if($DIDL_Lite_Class == "object.item.imageItem.photo"){
+                                            //include_once ("57444 /*[Multimedia\Core\UPNP_SlideShow]*/.ips.php"); //UPNP_SlideShow
+                                    }
+                                    else {$this->Stop_AV();}
+                                    break;
+                                default:
+                                    $this->Stop_AV();
+                                    $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
+                                    $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
+                                    setvalue($this->GetIDForIdent("Ceol_Progress"),0);
+                                    setvalue($this->GetIDForIdent("Ceol_Track"),0);
+                            }
+                        }    
 		}
 	}
             
