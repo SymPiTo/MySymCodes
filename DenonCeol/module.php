@@ -952,7 +952,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $track 	= getvalue($this->GetIDForIdent("Ceol_Track"));
             setvalue($this->GetIDForIdent("Ceol_Track"),$track+1);
             $trackNo 	= ("Track".strval($track));
-            $Playlist 	= getvalue($this->GetIDForIdent("upnp_Playlist_XML"));
+            $Playlist 	= getvalue($this->GetIDForIdent("Ceol_Playlist_XML"));
             $xml = new SimpleXMLElement($Playlist);
 
             $res = $xml->$trackNo->resource; // gibt resource des Titels aus
@@ -1191,13 +1191,14 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	Status:  
 	//////////////////////////////////////////////////////////////////////////////*/
 	Protected function progress(){	
-            $GetPositionInfo = $this->GetPositionInfo_AV();
+            $PositionInfo = $this->GetPositionInfo_AV();
              
-            $Duration = (string) $GetPositionInfo['TrackDuration']; //Duration
+            $Duration = (string) $PositionInfo['TrackDuration']; //Duration
             setvalue($this->GetIDForIdent("Ceol_TrackDuration"), (string) $Duration);           
-            $RelTime = (string) $GetPositionInfo['RelTime']; //RelTime
+            $RelTime = (string) $PositionInfo['RelTime']; //RelTime
             setvalue($this->GetIDForIdent("Ceol_RelTime"), (string) $RelTime);          
             $this->SendDebug("progress ", ' GetRelTIME PositionInfo: '.$RelTime, 0);
+            /*
             $TrackMeta = (string) $GetPositionInfo['TrackMetaData'];
             $b = htmlspecialchars_decode($TrackMeta);
             //$this->IPSLog('HTML: ', $b);
@@ -1211,15 +1212,17 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $AlbumArtURI = (string)$didlXml->item[0]->xpath('upnp:albumArtURI')[0];
             $genre = (string)$didlXml->item[0]->xpath('upnp:genre')[0];
             $date = (string)$didlXml->item[0]->xpath('dc:date')[0];
-
-            setvalue($this->GetIDForIdent("Ceol_Artist"),  $creator);
-            setvalue($this->GetIDForIdent("Ceol_Title"),  $title);
-            setvalue($this->GetIDForIdent("Ceol_Album"),  $album);		
-            setvalue($this->GetIDForIdent("Ceol_TrackNo"),  $TrackNo);
-            setvalue($this->GetIDForIdent("Ceol_Actor"),  $actor);
-            setvalue($this->GetIDForIdent("Ceol_Date"),  $date);
-            //setvalue($this->GetIDForIdent("upnp_AlbumArtUri"), (string) $AlbumArtURI);
-            setvalue($this->GetIDForIdent("Ceol_Genre"),  $genre);
+            */
+                                
+            setvalue($this->GetIDForIdent("Ceol_Artist"),  $PositionInfo["artist"]);
+            setvalue($this->GetIDForIdent("Ceol_Title"),  $PositionInfo["title"]);
+            setvalue($this->GetIDForIdent("Ceol_Album"),  $PositionInfo["album"]);		
+            //setvalue($this->GetIDForIdent("Ceol_TrackNo"),  $PositionInfo["TrackNo"]);
+            
+            //setvalue($this->GetIDForIdent("Ceol_Actor"),  $PositionInfo["album"]);
+            setvalue($this->GetIDForIdent("Ceol_Date"),  $PositionInfo["album"]);
+            setvalue($this->GetIDForIdent("Ceol_AlbumArtUri"), $PositionInfo["albumArtURI"]);
+            //setvalue($this->GetIDForIdent("Ceol_Genre"),  $PositionInfo["genre"]);
                 function get_time_difference($Duration, $RelTime){
                         $duration = explode(":", $Duration);
                         $reltime = explode(":", $RelTime);
@@ -1227,7 +1230,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
                         return ($time_difference);
                 }
             if($Duration == "0:00:00"){
-                    $Duration = (string) $GetPositionInfo['AbsTime']; //AbsTime
+                    $Duration = (string) $PositionInfo['AbsTime']; //AbsTime
             }
             $Progress = get_time_difference($Duration, $RelTime);
             SetValueInteger($this->GetIDForIdent("Ceol_Progress"), $Progress);
