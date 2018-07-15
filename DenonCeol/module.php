@@ -921,7 +921,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		//IPS_SetScriptTimer($this->GetIDForIdent("upnp_PlayInfo"), 0);
 		$this->SetTimerInterval('Ceol_PlayInfo', 0);
                 $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
-                 //Transport zuruecksetzen  
+                 //Transport zuruecksetzen  wenn Media Stream verlinkt
                             $TransStatus = $this->GetTransportInfo_AV();                       
                             setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $TransStatus); 
                 if ($TransStatus != 'NO_MEDIA_PRESENT') {          
@@ -1076,7 +1076,70 @@ o                    http://192.168.2.99/img/album%20art_S.png
 
 	}	
         
+ 	//*****************************************************************************
+	/* Function: seekForward()
+        -------------------------------------------------------------------------------
+        spult Lied um 20 Sekunden vor
+        ...............................................................................
+	Parameters:
+            none.
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function seekForward(){	
+ 
+            $postime = getvalue($this->GetIDForIdent("Ceol_RelTime"));
+            $seconds = 20;
+            $time_now = "00:00:00.000";
+            $this->SendDebug('seekForward', $postime, 0);
+            $position = date("H:i:s.000", (strtotime(date($postime)) + $seconds));
+
+            $this->SendDebug('seekForward', $position, 0);
+            $this->Seek_AV('REL_TIME', $position);
+	}
+	//*****************************************************************************
+	/* Function: seekForward()
+        -------------------------------------------------------------------------------
+        spult Lied um 20 Sekunden vor
+        ...............................................................................
+	Parameters:
+            none.
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function seekBackward(){	
+            $postime = getvalue($this->GetIDForIdent("Ceol_RelTime"));
+            $seconds = 20;
+            $time_now = "00:00:00.000";
+            $this->SendDebug('seekForward', $postime, 0);
+            $position = date("H:i:s.000", (strtotime(date($postime)) - $seconds));
+            $this->SendDebug('seekBackward', $position, 0);
+            $this->Seek_AV('REL_TIME', (string) $position);
+	}
         
+	//*****************************************************************************
+	/* Function: seekPos($Seek)
+        -------------------------------------------------------------------------------
+        spult Lied auf $position %  der Lieddauer
+        ...............................................................................
+	Parameters:
+            $Seek = Angabe 0 ...100 wird in % der Duration umgerechnet
+        --------------------------------------------------------------------------------
+	Returns:
+            none.
+	--------------------------------------------------------------------------------
+	Status:   checked 5.7.2018  nur für TV und MusikPal CEOL funktiniert nicht
+        //////////////////////////////////////////////////////////////////////////////*/
+	public function seekPos(integer $Seek){	
+            $GetPositionInfo = $this->GetPositionInfo_AV();
+            $Duration = $GetPositionInfo['TrackDuration'];
+            $duration = explode(":", $Duration);
+            $seconds = round(((($duration[0] * 3600) + ($duration[1] * 60) + ($duration[2])) * ($Seek/100)), 0, PHP_ROUND_HALF_UP);
+            $position = gmdate('H:i:s', $seconds);
+            $this->Seek_AV('REL_TIME', $position );
+	}       
         
 	//*****************************************************************************
 	/* Function: GetPosInfo()
