@@ -958,12 +958,9 @@ o                    http://192.168.2.99/img/album%20art_S.png
 
             $res = $xml->$trackNo->resource; // gibt resource des Titels aus
             $metadata = $xml->$trackNo->metadata; // gibt resource des Titels aus
-            $this->SetTimerInterval('Ceol_PlayInfo', 0);
-            $this->SendDebug("PlayNextTrack ", 'Timer Position Deaktivieren', 0);
-            $this->SetAVTransportURI((string) $res, (string) $metadata);
+
+            $this->SetAVTransportURI_AV((string) $res, (string) $metadata);
             $this->Play_AV();
-            $this->SetTimerInterval('Ceol_PlayInfo', 1000);
-            $this->SendDebug("PlayNextTrack ", 'Timer Position aktivieren', 0);
 	}
   
 
