@@ -908,6 +908,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		$tracks = $xml->count();
 		setvalue($this->GetIDForIdent("Ceol_NoTracks"),$tracks);
  		$TrackNo = getvalue($this->GetIDForIdent("Ceol_Track"))-1;
+                if ($TrackNo < 1){$TrackNo = 1;}
 		$track = ("Track".strval($TrackNo));
 			
 		$res = $xml->$track->resource; // gibt resource des Titels aus
