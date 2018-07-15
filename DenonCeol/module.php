@@ -921,8 +921,12 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		//IPS_SetScriptTimer($this->GetIDForIdent("upnp_PlayInfo"), 0);
 		$this->SetTimerInterval('Ceol_PlayInfo', 0);
                 $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
-                 //Transport zuruecksetzen    
-		$this->Stop_AV();
+                 //Transport zuruecksetzen  
+                try {
+                    $this->Stop_AV();
+                } catch (Exception $e) {
+                     $this->SendDebug("Exception abgefangen:  ", $e->getMessage(), 0); 
+                }    
 		//Transport starten 
                 $this->SetAVTransportURI_AV((string) $res, (string) $metadata);
                 $this->SendDebug("PLAY ", 'SetAVTransportURI', 0);              
