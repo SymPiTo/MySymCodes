@@ -922,10 +922,10 @@ o                    http://192.168.2.99/img/album%20art_S.png
 		$this->SetTimerInterval('Ceol_PlayInfo', 0);
                 $this->SendDebug("PLAY ", 'Timer Position Deaktivieren', 0);
                  //Transport zuruecksetzen  
-                try {
+                            $TransStatus = $this->GetTransportInfo_AV();                       
+                            setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $TransStatus); 
+                if ($TransStatus != 'NO_MEDIA_PRESENT') {          
                     $this->Stop_AV();
-                } catch (Exception $e) {
-                     $this->SendDebug("Exception abgefangen:  ", $e->getMessage(), 0); 
                 }    
 		//Transport starten 
                 $this->SetAVTransportURI_AV((string) $res, (string) $metadata);
