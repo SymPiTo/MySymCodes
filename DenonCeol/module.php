@@ -987,7 +987,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
             /*Stram stoppen--------------------------------------------------------*/
             $this->Stop_AV();
             //Track Zähler auf Anfang zurücksetzen
-            setvalue($this->GetIDForIdent("Ceol_Track"), 1);
+            setvalue($this->GetIDForIdent("Ceol_Track"), 0);
             //Transport Status zurücksetzen auf Anfang zurücksetzen
             setvalue($this->GetIDForIdent("Ceol_Transport_Status"), '');
          
@@ -1123,6 +1123,9 @@ o                    http://192.168.2.99/img/album%20art_S.png
                              $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$TransStatus , 0);
                             //Transport Status auswerten.
                             switch ($TransStatus){
+                                case 'TRANSITIONING':
+                                    IPS_Sleep(1000);
+                                    break;
                                 case 'NO_MEDIA_PRESENT':
                                     $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
                                     $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil NO MEDIA', 0);
