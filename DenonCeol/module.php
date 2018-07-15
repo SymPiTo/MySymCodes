@@ -1091,11 +1091,11 @@ o                    http://192.168.2.99/img/album%20art_S.png
 
                             setvalue($this->GetIDForIdent("Ceol_PlayMode"), $PlayModeIndex);
                             /* Transport Status abfragen */
-                            $Playing = $this->GetTransportInfo_AV();                       
-                            setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $Playing['CurrentTransportState']);
-                             $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$Playing['CurrentTransportState'] , 0);
+                            $TransStatus = $this->GetTransportInfo_AV();                       
+                            setvalue($this->GetIDForIdent("Ceol_Transport_Status"), $TransStatus);
+                             $this->SendDebug("GetPosInfo ", 'Transport Status abfragen: '.$TransStatus , 0);
                             //Transport Status auswerten.
-                            switch ($Playing['CurrentTransportState']){
+                            switch ($TransStatus){
                                 case 'NO_MEDIA_PRESENT':
                                     $this->SetTimerInterval('Ceol_PlayInfo', 0);  // DeAktivert Ereignis
                                     $this->SendDebug("GetPosInfo ", 'Timer Position Deaktivieren weil NO MEDIA', 0);
