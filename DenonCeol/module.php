@@ -78,7 +78,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("Ceol_RelTime", "RelTime");
             $this->RegisterVariableString("Ceol_TrackDuration", "TrackDuration");
             
-            // Aktiviert die Standardaktion der Statusvariable
+            // Aktiviert die Standardaktion der Statusvariable im Webfront
             $this->EnableAction("CeolPower");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolPower"), "~Switch");
             $this->EnableAction("CeolMute");
@@ -87,11 +87,22 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolSource"), "DenonCEOL_Source");
             $this->EnableAction("CeolVolume");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolVolume"), "DenonCEOL_Volume");
-            
+            $this->EnableAction("CeolFavChannel");
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("CeolFavChannel"), "");
             $this->EnableAction("Ceol_PlayMode");
             IPS_SetVariableCustomProfile($this->GetIDForIdent("Ceol_PlayMode"), "UPNP_Playmode");
             
+            // Objekte unsichbar machen in webfront
+            IPS_SetHidden($this->GetIDForIdent("Ceol_ServerArray"), true); //Objekt verstecken
+            IPS_SetHidden($this->GetIDForIdent("Ceol_ServerContentDirectory"), true); //Objekt verstecken
+            IPS_SetHidden($this->GetIDForIdent("Ceol_ServerKey"), true); //Objekt verstecken
+            IPS_SetHidden($this->GetIDForIdent("Ceol_ServerArray"), true); //Objekt verstecken
+            IPS_SetHidden($this->GetIDForIdent("Ceol_Playlist_XML"), true); //Objekt verstecken
             
+            
+            
+            
+            //
             // Timer erstellen
             $this->RegisterTimer("Update", $this->ReadPropertyInteger("UpdateInterval"), 'CEOL_update($_IPS[\'TARGET\']);');
             // Progress Timer erstellen
@@ -1116,7 +1127,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $this->SendDebug('seekForward', $postime, 0);
             $position = date("H:i:s.000", (strtotime(date($postime)) - $seconds));
             $this->SendDebug('seekBackward', $position, 0);
-            $this->Seek_AV('REL_TIME', (string) $position);
+            $this->Seek_AV('REL_TIME', $position);
 	}
         
 	//*****************************************************************************
