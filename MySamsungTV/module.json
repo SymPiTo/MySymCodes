@@ -1,14 +1,14 @@
 {
-	"id": "{AA5F7BDD-D4B4-4C50-81CF-5DC7E7049B3D}",
-	"name": "DenonCeol",
+	"id": "{862C2E7C-3398-44C4-4B77-A0BD136FD438}",
+	"name": "MySamsungTV",
 	"type": 3,
 	"vendor": "PiTo",
 	"aliases": 
 	[
-		"Denon_Ceol"
+		"Samsung TV"
 	],
 	"parentRequirements": [],
 	"childRequirements": [],
 	"implemented": [],
-	"prefix": "CEOL"
+	"prefix": "STV"
 }

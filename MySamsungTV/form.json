@@ -1,0 +1,14 @@
+{
+	"elements":
+	[
+		{ "name": "active",	"type": "CheckBox",		"caption": "active" },
+		{ "name": "IPAddress",	"type": "ValidationTextBox", 	"caption": "IP-Address/Host" },
+		{ "type": "NumberSpinner", "name": "UpdateInterval",    "caption": "UpdateInterval", "suffix": "milisekunden"},
+                {
+                    "type": "Label",
+                    "label": "--------------------------------------------------"
+                }
+                
+	]
+
+}
