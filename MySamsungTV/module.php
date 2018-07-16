@@ -1,4 +1,4 @@
-<?
+<?php
 
 class MySamsungTV extends IPSModule
 {
@@ -9,10 +9,13 @@ class MySamsungTV extends IPSModule
         parent::Create();
 		
 		//These lines are parsed on Symcon Startup or Instance creation
-        //You cannot use variables here. Just static values.}
-
-    public function ApplyChanges()
-    {
+        //You cannot use variables here. Just static values.
+    }
+    
+        // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
+        // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
+        // Überschreibt die intere IPS_ApplyChanges($id) Funktion
+    public function ApplyChanges() {
 	//Never delete this line!
         parent::ApplyChanges();
        
