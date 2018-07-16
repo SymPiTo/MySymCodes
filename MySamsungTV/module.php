@@ -129,7 +129,7 @@ class MySamsungTV extends IPSModule
 						'value' => -1
 					],
 					[
-						'label' => 'Samsung UE40D8000',
+						'label' => 'Type 1',
 						'value' => 0
 					],
 					[
