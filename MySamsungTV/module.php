@@ -8,7 +8,7 @@ class MySamsungTV extends IPSModule
 	//Never delete this line!
         parent::Create();
         //Form erstellen und form.json überschreiben.    
-        $this->GetConfigurationForm();	
+        //$this->GetConfigurationForm();	
             
 		//These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.
