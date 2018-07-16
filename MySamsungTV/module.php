@@ -7,9 +7,13 @@ class MySamsungTV extends IPSModule
     {
 	//Never delete this line!
         parent::Create();
-        //Form erstellen und form.json überschreiben.    
-        //$this->GetConfigurationForm();	
-            
+           
+        // Variable aus dem Instanz Formular registrieren (um zugänglich zu machen)
+        $this->RegisterPropertyBoolean("active", false);
+        $this->RegisterPropertyString("ip", "192.168.178.35");
+        $this->RegisterPropertyInteger("updateInterval", 10000);	
+        $this->RegisterPropertyInteger("devicetype", 1);
+        
 		//These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.
     }
@@ -119,9 +123,29 @@ class MySamsungTV extends IPSModule
 	protected function FormHead()
 	{
 		$form = [
+ 			[
+				'name' => 'active',
+				'type' => 'CheckBox',
+				'caption' => 'active',
+			],
 			[
-				'type' => 'Label',
-				'label' => 'Samsung TV UE40D8000'
+				'name' => 'devicetype',
+				'type' => 'Select',
+				'caption' => 'device type',
+				'options' => [
+					[
+						'label' => 'Please choose',
+						'value' => -1
+					],
+					[
+						'label' => 'Samsung UE40D8000',
+						'value' => 0
+					],
+					[
+						'label' => 'Type 2',
+						'value' => 1
+					]
+				]
 			],
 			[
 				'type' => 'Label',
@@ -137,7 +161,7 @@ class MySamsungTV extends IPSModule
 				'label' => 'update Interval'
 			],
 			[
-				'name' => 'update',
+				'name' => 'updateInterval',
 				'type' => 'ValidationTextBox',
 				'caption' => 'update Interval [ms]'
 			]
