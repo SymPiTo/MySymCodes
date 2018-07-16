@@ -7,7 +7,7 @@ class MySamsungTV extends IPSModule
     {
 	//Never delete this line!
         parent::Create();
-            
+        //Form erstellen und form.json überschreiben.    
         $this->GetConfigurationForm();	
             
 		//These lines are parsed on Symcon Startup or Instance creation
@@ -129,7 +129,7 @@ class MySamsungTV extends IPSModule
 						'value' => -1
 					],
 					[
-						'label' => 'Type 1',
+						'label' => 'Samsung UE40D8000',
 						'value' => 0
 					],
 					[
@@ -146,6 +146,15 @@ class MySamsungTV extends IPSModule
 				'name' => 'ip',
 				'type' => 'ValidationTextBox',
 				'caption' => 'IP adress'
+			],
+			[
+				'type' => 'Label',
+				'label' => 'update Interval'
+			],
+			[
+				'name' => 'update',
+				'type' => 'ValidationTextBox',
+				'caption' => 'update Interval [ms]'
 			]
 		];
 		return $form;
