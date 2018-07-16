@@ -120,23 +120,8 @@ class MySamsungTV extends IPSModule
 	{
 		$form = [
 			[
-				'name' => 'devicetype',
-				'type' => 'Select',
-				'caption' => 'device type',
-				'options' => [
-					[
-						'label' => 'Please choose',
-						'value' => -1
-					],
-					[
-						'label' => 'Type 1',
-						'value' => 0
-					],
-					[
-						'label' => 'Type 2',
-						'value' => 1
-					]
-				]
+				'type' => 'Label',
+				'label' => 'Samsung TV UE40D8000'
 			],
 			[
 				'type' => 'Label',
