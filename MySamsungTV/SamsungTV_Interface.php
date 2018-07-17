@@ -431,7 +431,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetAVTransportURI(string $CurrentURI, string $CurrentURIMetaData=""){
+    public function SetAVTransportURI_AV(string $CurrentURI, string $CurrentURIMetaData=NULL){
 
         $this->processSoapCall("/upnp/control/AVTransport1",
 
