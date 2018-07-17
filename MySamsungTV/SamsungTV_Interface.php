@@ -868,7 +868,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/   
-  public function SetMainTVChannel_MTVA(string $Channel, integer $AntennaMode = 2, string $ChannelListType = '0x01',  $SatelliteID = 0) {
+  public function SetMainTVChannel_MTVA(string $Channel, $AntennaMode = 2, $ChannelListType = '0x01',  $SatelliteID = 0) {
 
         $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
