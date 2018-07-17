@@ -1739,39 +1739,39 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: GetDTVInformation_MTVA ()
     ...............................................................................
-     * gibt  
+     * gibt  DTV Informationen zurück
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
     Returns:  (array)
-            $output['Result']   = OK
-            $output['SUPPORTANTMODE']   = 
-            $output['SUPPORTCHSORT']  = 
-            $output['SUPPORTCLONEVIEW']  = 
-            $output['SUPPORTSECONDTVVIEW']      = 
-            $output['SUPPORTEXTSOURCEVIEW']  = 
-            $output['SUPPORTDTV']   = 
-            $output['TUNERCOUNT']   = 
-            $output['SUPPORTTVVERSION']  = 
-            $output['SUPPORTCHANNELLOCK']  = 
-            $output['SUPPORTCHANNELINFO']      = 
-            $output['SUPPORTCHANNELDELETE']  = 
-            $output['SUPPORTEDITNUMMODE']['NUMMODE']  = 
-            $output['SUPPORTEDITNUMMODE']['MINVALUE']  = 
-            $output['SUPPORTEDITNUMMODE']['MAXVALUE']  = 
-            $output['EDITNUMMODE']['NUMMODE']  = 
-            $output['EDITNUMMODE']['MINVALUE']  = 
-            $output['EDITNUMMODE']['MAXVALUE']  =  
-            $output['SUPPORTREGIONALVARIANT'] 
-            $output['SUPPORTSTREAM']['CONTAINER']   
-            $output['SUPPORTSTREAM']['VIDEOFORMAT']   
-            $output['SUPPORTSTREAM']['AUDIOFORMAT']   
-            $output['SUPPORTSTREAM']['XRESOLUTION']   
-            $output['SUPPORTSTREAM']['YRESOLUTION']   
-            $output['SUPPORTSTREAM']['AUDIOSAMPLINGRATE']   
-            $output['SUPPORTSTREAM']['AUDIOCHANNELS'] 
-            $output['SUPPORTPVR']   =  
-            $output['TARGETLOCATION']   =  
+            $output['Result']                           = OK
+            $output['SUPPORTANTMODE']                   = 1,2,3
+            $output['SUPPORTCHSORT']                    = Yes
+            $output['SUPPORTCLONEVIEW']                 = Yes
+            $output['SUPPORTSECONDTVVIEW']              = Yes
+            $output['SUPPORTEXTSOURCEVIEW']             = Yes
+            $output['SUPPORTDTV']                       = Yes
+            $output['TUNERCOUNT']                       = 1
+            $output['SUPPORTTVVERSION']                 = 2011
+            $output['SUPPORTCHANNELLOCK']               = No
+            $output['SUPPORTCHANNELINFO']               = Yes
+            $output['SUPPORTCHANNELDELETE']             = Yes
+            $output['SUPPORTEDITNUMMODE']['NUMMODE']    = IGITAL_SWAP
+            $output['SUPPORTEDITNUMMODE']['MINVALUE']   =  0
+            $output['SUPPORTEDITNUMMODE']['MAXVALUE']   = 9999
+            $output['EDITNUMMODE']['NUMMODE']           = ANALOG_INSERT
+            $output['EDITNUMMODE']['MINVALUE']          = 0
+            $output['EDITNUMMODE']['MAXVALUE']          = 99
+            $output['SUPPORTREGIONALVARIANT']           = No
+            $output['SUPPORTSTREAM']['CONTAINER']       = MPEG2 
+            $output['SUPPORTSTREAM']['VIDEOFORMAT']     = MPEG4SP
+            $output['SUPPORTSTREAM']['AUDIOFORMAT']     = MP3
+            $output['SUPPORTSTREAM']['XRESOLUTION']     = 672
+            $output['SUPPORTSTREAM']['YRESOLUTION']     = 544 
+            $output['SUPPORTSTREAM']['AUDIOSAMPLINGRATE']   = 48000 
+            $output['SUPPORTSTREAM']['AUDIOCHANNELS']   = 2
+            $output['SUPPORTPVR']                       =  Yes
+            $output['TARGETLOCATION']                   =  TARGET_LOCATION_PANEURO
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
@@ -1808,7 +1808,7 @@ trait SamsungUPNP {
 		$output['SUPPORTCHANNELINFO'] = $vals[10]['value'];
 		$output['SUPPORTCHANNELDELETE'] = $vals[11]['value'];
 		$output['SUPPORTEDITNUMMODE']['NUMMODE'] = $vals[14]['value'];
-		$output['SUPPORTEDITNUMMODE']['MINVALUE'] = $vals[14]['value'];
+		$output['SUPPORTEDITNUMMODE']['MINVALUE'] = $vals[15]['value'];
 		$output['SUPPORTEDITNUMMODE']['MAXVALUE'] = $vals[16]['value'];	
 		
 		$output['EDITNUMMODE']['NUMMODE'] = $vals[19]['value'];
@@ -1827,6 +1827,40 @@ trait SamsungUPNP {
 		$output['TARGETLOCATION']  = $vals[35]['value'];
         return $output;    
     }  
+    
+    
+    //*****************************************************************************
+    /* Function: GetMuteStatus_MTVA ()
+    ...............................................................................
+     * prüft ob Mute aktiv ist
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetMuteStatus_MTVA(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetMuteStatus",
+
+                               array(
+
+                                    ));
+
+         return $result;    
+    }     
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
