@@ -1755,19 +1755,22 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: GetCurrentMainTVChannel()
     ...............................................................................
-     * gibt die aktuelle Abspiel Quelle aus
+     * gibt den aktuellen Fernseh Kanal zurück
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
     Returns:  (array)
-     * [Result] => OK
-     * [CurrentExternalSource] => TV
-     * [ID] => 0
+            $output['Result']   = OK
+            $output['ChType']   = CDTV
+            $output['MAJORCH']  = 305
+            $output['MINORCH']  = 65534
+            $output['PTC']      = 1
+            $output['PROGNUM']  = 12103
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetCurrentMainTVChannel(){
-        return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
 
@@ -1776,6 +1779,21 @@ trait SamsungUPNP {
                                array(
 
                                     ));
+        // $result = array  [Result] = (string)  
+        //                  ['CurrentChannel'] = (xml)
+        $xml = $result['CurrentChannel'];
+        $xmlParser = xml_parser_create("UTF-8");
+        xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
+        xml_parse_into_struct($xmlParser, $xml, $vals, $index);
+        xml_parser_free($xmlParser);
+            $output['Result'] = $result['Result'];
+            $output['ChType'] = $vals[1]['value'];
+            $output['MAJORCH'] = $vals[2]['value'];
+            $output['MINORCH'] = $vals[3]['value'];
+            $output['PTC'] = $vals[4]['value'];
+            $output['PROGNUM'] = $vals[5]['value'];
+            
+        return $output;    
     }  
     
     
