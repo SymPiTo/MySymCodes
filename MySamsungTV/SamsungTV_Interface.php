@@ -1950,6 +1950,7 @@ trait SamsungUPNP {
                                array(
 
                                     ));
+    /*    
         //Ausgabe: array [Result] und [SourceList].
         $xml = $result['SourceList'];
                 $xmlParser = xml_parser_create("UTF-8");
@@ -1970,14 +1971,40 @@ trait SamsungUPNP {
         $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8*$index1]['value'];    
         $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9*$index1]['value'];
         }
+    */    
         
-        
-         return $output;    
+         return $result;    
     }       
     
     
     
     
+     //*****************************************************************************
+    /* Function: GetScheduleListURL_MTVA ()
+    ...............................................................................
+     *  Gibt den Volume Wert zurück
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+     * [Result] => OK
+     * [Volume] => 8
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetVolume_MTVA(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetVolume",
+
+                               array(
+
+                                    ));
+
+         return $result;    
+    }    
     
     
     
