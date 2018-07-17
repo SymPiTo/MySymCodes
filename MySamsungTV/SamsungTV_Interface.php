@@ -1950,7 +1950,7 @@ trait SamsungUPNP {
                                array(
 
                                     ));
-        //Ausgabe: array [Result] und [SourceList]
+        //Ausgabe: array [Result] und [SourceList].
         $xml = $result['SourceList'];
                 $xmlParser = xml_parser_create("UTF-8");
                 xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
