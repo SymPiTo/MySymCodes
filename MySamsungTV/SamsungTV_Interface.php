@@ -1707,7 +1707,7 @@ trait SamsungUPNP {
 
                                "urn:samsung.com:service:MainTVAgent2:1",
 
-                               "GetCurrentExternalSourc",
+                               "GetCurrentExternalSource",
 
                                array(
 
