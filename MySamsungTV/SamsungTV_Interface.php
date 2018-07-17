@@ -1667,10 +1667,10 @@ trait SamsungUPNP {
     ...............................................................................
      * gibt ein URL mit der Liste aller Sender zurück
     ...............................................................................
-    Parameters: 
+    Parameters: none
     --------------------------------------------------------------------------------
-    Returns:  
-     *  [Result] => OK
+    Returns:  (array)
+     * [Result] => OK
      * [ChannelListVersion] => 190
      * [SupportChannelList] => 0x01Number0x03Number0x04Number
      * [ChannelListURL] => http://192.168.178.35:9090/BinaryBlob/3/ChannelList.dat
@@ -1695,12 +1695,16 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: GetCurrentExternalSource_MTVA()
     ...............................................................................
+     * gibt die aktuelle Abspiel Quelle aus
     ...............................................................................
-    Parameters: 
+    Parameters: none
     --------------------------------------------------------------------------------
-    Returns:  
+    Returns:  (array)
+     * [Result] => OK
+     * [CurrentExternalSource] => TV
+     * [ID] => 0
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetCurrentExternalSource_MTVA(){
         return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -1725,7 +1729,6 @@ trait SamsungUPNP {
     ...............................................................................
     Parameters: 
      * $PIN (string)
-     *
     --------------------------------------------------------------------------------
     Returns:  
      * <Result>     NOTOK_InvalidPIN   // OK
@@ -1749,7 +1752,31 @@ trait SamsungUPNP {
     
     
     
-    
+    //*****************************************************************************
+    /* Function: GetCurrentMainTVChannel()
+    ...............................................................................
+     * gibt die aktuelle Abspiel Quelle aus
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+     * [Result] => OK
+     * [CurrentExternalSource] => TV
+     * [ID] => 0
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetCurrentMainTVChannel(){
+        return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetCurrentMainTVChannel",
+
+                               array(
+
+                                    ));
+    }  
     
     
     
