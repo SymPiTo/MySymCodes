@@ -1203,58 +1203,7 @@ trait SamsungUPNP {
 
     }
     
-     //*****************************************************************************
-    /* Function: GetWatchingInformation_MTVA()
-    ...............................................................................
-	 
-    ...............................................................................
-    Parameters: 
-    
-    --------------------------------------------------------------------------------
-    Returns:  
-     * <Result>OK
-     * <TVMode>Tuner
-     * <WatchingInformation>Hilf mir! Jung, pleite, verzweifelt... on RTL2 (01:0PM~02:00PM)
-     * 
-    --------------------------------------------------------------------------------
-    Status:  
-    //////////////////////////////////////////////////////////////////////////////*/   
-    public function GetWatchingInformation_MTVA(){
-	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
-	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
-	        ."<s:Body>\r\n"
-	        ."<u:GetWatchingInformation xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
-	        ."</s:Body>\r\n"
-	        ."</s:Envelope>\r\n";
-	$soap_do = curl_init();
-	
-	$header = array(
-	        "Content-Type: text/xml",
-	        "Cache-Control: no-cache",
-	        "Pragma: no-cache",
-	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetWatchingInformation\"",
-	        "Content-length: ".strlen($sPostfields),
-	);
-	
-	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
-	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
-	curl_setopt($soap_do, CURLOPT_POST,           true );
-	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
-	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
-	
-	$output = curl_exec($soap_do);
-	$aInfo = curl_getinfo($soap_do);
-	curl_close($soap_do);
-	//print_r( $output );
-	//print_r( $aInfo );
-	$xmlParser = xml_parser_create("UTF-8");
-        xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
-        xml_parse_into_struct($xmlParser, $output, $vals, $index);
-        xml_parser_free($xmlParser);
 
-	return $vals[5]['value'];
-	exit();
-    }
     
     
 
@@ -2007,7 +1956,35 @@ trait SamsungUPNP {
     }    
     
     
+     //*****************************************************************************
+    /* Function: GetWatchingInformation_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
     
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+     * ['Result´]   = OK
+     * ['TVMode´]Tuner
+     * ['WatchingInformation'] = Hilf mir! Jung, pleite, verzweifelt... on RTL2 (01:0PM~02:00PM)
+     * 
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+    public function GetWatchingInformation_MTVA(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               ":GetWatchingInformation",
+
+                               array(
+
+                                    ));
+
+         return $result;   
+    }    
     
     
     
