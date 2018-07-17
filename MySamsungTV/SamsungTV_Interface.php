@@ -1977,7 +1977,7 @@ trait SamsungUPNP {
 
                                "urn:samsung.com:service:MainTVAgent2:1",
 
-                               ":GetWatchingInformation",
+                               "GetWatchingInformation",
 
                                array(
 
