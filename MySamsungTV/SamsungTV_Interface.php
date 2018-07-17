@@ -1865,7 +1865,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Returns:  (array)
      * [Result] => OK
-     * [MuteStatus] => Disable
+     * [[NetworkInformation] ] => BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxOTIuMTY4LjE3OC4xAAAAAAAAAAA=
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
@@ -1884,7 +1884,32 @@ trait SamsungUPNP {
     }     
     
     
-    
+    //*****************************************************************************
+    /* Function: GetRecordChannel_MTVA ()
+    ...............................................................................
+     *  
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+     * [Result] => OK
+     * [[NetworkInformation] ] => BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxOTIuMTY4LjE3OC4xAAAAAAAAAAA=
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetRecordChannel_MTVA(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetRecordChannel",
+
+                               array(
+
+                                    ));
+
+         return $result;    
+    }      
     
     
     
