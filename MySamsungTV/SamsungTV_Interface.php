@@ -1754,17 +1754,13 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: GetCurrentProgramInformationURL_MTVA()
     ...............................................................................
-     * gibt den aktuellen Fernseh Kanal zurück
+     * gibt die URL der Sender Programmliste
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
     Returns:  (array)
-            $output['Result']   = OK
-            $output['ChType']   = CDTV
-            $output['MAJORCH']  = 305
-            $output['MINORCH']  = 65534
-            $output['PTC']      = 1
-            $output['PROGNUM']  = 12103
+     * [Result] (string)            => OK
+     * [CurrentProgInfoURL] (xml)   => http://192.168.178.35:9090/BinaryBlob/0/CurrentProgInfo.dat
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
@@ -1784,7 +1780,33 @@ trait SamsungUPNP {
     }  
     
    
-    
+    //*****************************************************************************
+    /* Function: GetCurrentTime ()
+    ...............................................................................
+     * gibt die URL der Sender Programmliste
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+     * [Result] (string)            => OK
+     * [CurrentTime] (xml)   => http://192.168.178.35:9090/BinaryBlob/0/CurrentProgInfo.dat
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetCurrentTime(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetCurrentTime",
+
+                               array(
+
+                                    ));
+
+            
+        return $result;    
+    } 
     
     
     
