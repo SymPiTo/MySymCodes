@@ -1419,53 +1419,6 @@ trait SamsungUPNP {
             exit();
     }
     
-     //*****************************************************************************
-    /* Function: GetCurrentMainTVChannel_MTVA()
-    ...............................................................................
-	 
-    ...............................................................................
-    Parameters: 
-    
-    --------------------------------------------------------------------------------
-    Returns:  
-     * <Result>             OK
-     * <CurrentChannnel    <?xml version="1.0" encoding="UTF-8"?><Channel><ChType>CDTV</ChType><MajorCh>308</MajorCh><MinorCh>65534</MinorCh><PTC>1</PTC><ProgNum>12105</ProgNum></Channel>
-    --------------------------------------------------------------------------------
-    Status:  
-    //////////////////////////////////////////////////////////////////////////////*/  
-    public function GetCurrentMainTVChannel_MTVA() {
-	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
-	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
-	        ."<s:Body>\r\n"
-	        ."<u:GetCurrentMainTVChannel xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
-	        ."</s:Body>\r\n"
-	        ."</s:Envelope>\r\n";
-	$soap_do = curl_init();
-	
-	$header = array(
-	        "Content-Type: text/xml",
-	        "Cache-Control: no-cache",
-	        "Pragma: no-cache",
-	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetCurrentMainTVChannel\"",
-	        "Content-length: ".strlen($sPostfields),
-	);
-	
-	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
-	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
-	curl_setopt($soap_do, CURLOPT_POST,           true );
-	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
-	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
-	
-	$output = curl_exec($soap_do);
-	$aInfo = curl_getinfo($soap_do);
-	curl_close($soap_do);
-	print_r( $output );
-	print_r( $aInfo );
-	exit();
-
-	return $output;
-    }
-    
     
     //*****************************************************************************
     /* Function: GetAllProgramInformationURL_MTVA($Channel, $AntennaMode)
@@ -1753,7 +1706,7 @@ trait SamsungUPNP {
     
     
     //*****************************************************************************
-    /* Function: GetCurrentMainTVChannel()
+    /* Function: GetCurrentMainTVChannel_MTVA()
     ...............................................................................
      * gibt den aktuellen Fernseh Kanal zurück
     ...............................................................................
@@ -1769,7 +1722,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function GetCurrentMainTVChannel(){
+    public function GetCurrentMainTVChannel_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
@@ -1798,6 +1751,39 @@ trait SamsungUPNP {
     
     
     
+    //*****************************************************************************
+    /* Function: GetCurrentProgramInformationURL_MTVA()
+    ...............................................................................
+     * gibt den aktuellen Fernseh Kanal zurück
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+            $output['Result']   = OK
+            $output['ChType']   = CDTV
+            $output['MAJORCH']  = 305
+            $output['MINORCH']  = 65534
+            $output['PTC']      = 1
+            $output['PROGNUM']  = 12103
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetCurrentProgramInformationURL_MTVA(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetCurrentProgramInformationURL",
+
+                               array(
+
+                                    ));
+
+            
+        return $result;    
+    }  
+    
+   
     
     
     
