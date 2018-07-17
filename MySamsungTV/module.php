@@ -1,8 +1,21 @@
 <?php
+//zugehoerige TRAIT-Klassen    
+require_once(__DIR__ . "/SamsungTV_Interface.php");
+
 
 class MySamsungTV extends IPSModule
 {
-
+    
+    //externe Klasse einbinden - ueberlagern mit TRAIT
+    use SamsungUPNP;
+        
+    //*****************************************************************************
+    /* Function: Standardfunktinen für ein Modul
+    ...............................................................................
+    *  Create()
+     * ApplyChanges()
+     */
+    /* **************************************************************************** */
     public function Create()
     {
 	//Never delete this line!
@@ -27,6 +40,16 @@ class MySamsungTV extends IPSModule
        
     }
     
+    //*****************************************************************************
+    /* Function: Hilfs funktinen für ein Modul
+    ...............................................................................
+    *  SendToSplitter(string $payload)
+     * GetIPSVersion()
+     * RegisterProfile()
+     * RegisterProfileAssociation()
+     *  SetValue($Ident, $Value)
+     */
+    /* **************************************************************************** */
     protected function SendToSplitter(string $payload)
 		{						
 			//an Splitter schicken
@@ -97,15 +120,24 @@ class MySamsungTV extends IPSModule
 		}
 
 	}
+        
+  	//Add this Polyfill for IP-Symcon 4.4 and older
+	protected function SetValue($Ident, $Value)
+	{
 
-	/***********************************************************
-	 * Configuration Form
-	 ***********************************************************/
+		if (IPS_GetKernelVersion() >= 5) {
+			parent::SetValue($Ident, $Value);
+		} else {
+			SetValue($this->GetIDForIdent($Ident), $Value);
+		}
+	}
 
-	/**
-	 * build configuration form
-	 * @return string
-	 */
+    //*****************************************************************************
+    /* Function: Build Configuration Form
+    ...............................................................................
+    *  Überschreibt form.jsom
+     */
+    /* **************************************************************************** */
 	public function GetConfigurationForm()
 	{
 		// return current form
@@ -222,15 +254,18 @@ class MySamsungTV extends IPSModule
 		return $form;
 	}
 
-	//Add this Polyfill for IP-Symcon 4.4 and older
-	protected function SetValue($Ident, $Value)
-	{
 
-		if (IPS_GetKernelVersion() >= 5) {
-			parent::SetValue($Ident, $Value);
-		} else {
-			SetValue($this->GetIDForIdent($Ident), $Value);
-		}
-	}
-		
+    //*****************************************************************************
+    /* Function: Eigene Public Funktionen
+    /* **************************************************************************** */		
+        
+        
+        
+    //*****************************************************************************
+    /* Function: Eigene Interne Funktionen
+    /* **************************************************************************** */	        
+      
+        
+        
+        
 }

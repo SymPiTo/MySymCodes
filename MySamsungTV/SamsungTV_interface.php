@@ -616,6 +616,952 @@ trait SamsungUPNP {
 
     } 
     
+    //POST /RCR/control/TestRCRService HTTP/1.1 
+    
+    //*****************************************************************************
+    /* Function: SendKeyCode_AV(integer $KeyCode, string KeyDescription)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $KeyCode
+     *  KeyDescription
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/
+    public function SendKeyCode_AV(integer $KeyCode, string $KeyDescription){
+            
+        $this->processSoapCall("/RCR/control/TestRCRService",
+
+                                           "urn:samsung.com:service:TestRCRService:1",
+
+                                           "SendKeyCode" ,
+
+                                                array(
+
+                                                    new SoapParam($KeyCode    ,"KeyCode"   ),
+                                                    
+                                                    new SoapParam($KeyDescription   ,"KeyDescription"   )
+
+                                                     ));
+
+    }     
+    
+    
+// Rendering Control 
+    
+    
+    //*****************************************************************************
+    /* Function: SetSharpness_AV($Sharpness)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $Sharpness = integer 0 ... 4
+      
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/
+  
+    public function SetSharpness_AV(integer $Sharpness){
+
+        $this->processSoapCall("/upnp/control/RenderingControl1",
+
+                               "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                               "SetSharpness",
+
+                               array(
+
+                                      new SoapParam("0"    ,"InstanceID"   ),
+
+                                      new SoapParam($Sharpness,"DesiredSharpness")
+
+                                    ));
+
+    }
+    
+    
+    
+    
+    //*****************************************************************************
+    /* Function: SetContrast_AV($Contrast)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $Contrast = integer 0 ... 4
+      
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/
+    public function SetContrast_AV(integer $Contrast){
+
+        $this->processSoapCall("/upnp/control/RenderingControl1",
+
+                               "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                               "SetContrast",
+
+                               array(
+
+                                      new SoapParam("0"    ,"InstanceID"   ),
+
+                                      new SoapParam($Contrast,"DesiredContrast")
+
+                                    ));
+
+    }
+ 
+    //*****************************************************************************
+    /* Function: SetColorTemperature_AV($ColorTemperature)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $ColorTemperature = integer 0 ... 4
+      
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/
+    public function SetColorTemperature_AV(integer $ColorTemperature){
+
+        $this->processSoapCall("/upnp/control/RenderingControl1",
+
+                               "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                               "SetColorTemperature",
+
+                               array(
+
+                                      new SoapParam("0"    ,"InstanceID"   ),
+
+                                      new SoapParam($ColorTemperature,"DesiredColorTemperature")
+
+                                    ));
+
+    }
+    
+    //*****************************************************************************
+    /* Function: SetBrightness_AV($Brightness)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $ColorTemperature = integer 0 ... 4
+      
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+    public function SetBrightness_AV(integer $Brightness){
+
+        $this->processSoapCall("/upnp/control/RenderingControl1",
+
+                               "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                               "SetBrightness",
+
+                               array(
+
+                                      new SoapParam("0"    ,"InstanceID"   ),
+
+                                      new SoapParam($Brightness,"DesiredBrightness")
+
+                                    ));
+
+    }
+    
+    //*****************************************************************************
+    /* Function: SetVolume_RC($volume)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $volume = integer 0 ... 4
+      
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function SetVolume_RC(integer $volume, $channel = 'Master'){
+
+        $this->processSoapCall("/upnp/control/RenderingControl1",
+
+                               "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                               "SetVolume",
+
+                               array(
+
+                                      new SoapParam("0"     ,"InstanceID"   ),
+
+                                      new SoapParam($channel,"Channel"      ),
+
+                                      new SoapParam($volume ,"DesiredVolume")
+
+                                    ));
+
+    }
+    
+    //*****************************************************************************
+    /* Function: SetVolume_MTVA($volume)
+    ...............................................................................
+    UPNP  
+    ...............................................................................
+    Parameters: 
+     *  $volume = integer 0 ... 16
+      
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function SetVolume_MTVA(integer $volume){
+
+        $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "SetVolume",
+
+                               array(
+
+                                      new SoapParam($volume ,"Volume")
+
+                                    ));
+
+    } 
+    
+    
+    //*****************************************************************************
+    /* Function: SetMainTVChannel_MTVA($Channel, $AntennaMode = 2, $ChannelListType = '0x01', $SatelliteID = 0)
+    ...............................................................................
+	TV Channel umschalten
+    ...............................................................................
+    Parameters: 
+     *   $Channel   = string 
+     *              = <Channel><ChType>CDTV</ChType><MajorCh>1</MajorCh><MinorCh>65534</MinorCh><PTC>28</PTC><ProgNum>11100</ProgNum></Channel>
+     *   $AntennaMode = 0...4  - Antenna Mode = 2
+     *   $ChannelListType = '0x01'  -  (von GetChannelListUrl auslesen)
+     *   $SatelliteID = 0  - SateliteID nicht verwendet bleibt auf = 0
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+  public function SetMainTVChannel_MTVA(string $Channel, integer $AntennaMode = 2, string $ChannelListType = '0x01', integer $SatelliteID = 0) {
+
+        $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "SetMainTVChannel",
+
+                               array(
+
+                                      new SoapParam($AntennaMode    ,"AntennaMode"   ),
+
+                                      new SoapParam($ChannelListType , "ChannelListType"),
+
+                                      new SoapParam($SatelliteID    ,"SatelliteID"   ),
+
+                                      new SoapParam($Channel , "Channel")
+                                    ));
+
+  }
+    
+    //*****************************************************************************
+    /* Function: SetMute_RC($mute)
+    ...............................................................................
+	TV stumm schalten
+    ...............................................................................
+    Parameters: 
+     *   $mute   = boolean true/false 
+
+    --------------------------------------------------------------------------------
+    Returns:  
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/      
+    public function SetMute_RC($mute) {
+        if($mute){
+          $mute = "1";
+        }else{
+          $mute = "0";
+        }
+        $this->processSoapCall("/upnp/control/RenderingControl1",
+
+                               "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                               "SetMute",
+
+                               array(
+
+                                      new SoapParam("0"     ,"InstanceID" ),
+
+                                      new SoapParam("Master","Channel"    ),
+
+                                      new SoapParam($mute   ,"DesiredMute")
+
+                                    ));
+  }
+
+    
+    //*****************************************************************************
+    /* Function: GetTransportInfo_AV()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+     
+
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentTransportState>      NO_MEDIA_PRESENT
+     * <CurrentTransportStatus>     OK
+     * <CurrentSpeed>               1
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/    
+    public function GetTransportInfo_AV() {
+        $returnContent = $this->processSoapCall("/upnp/control/AVTransport1",
+
+                                            "urn:schemas-upnp-org:service:AVTransport:1",
+
+                                            "GetTransportInfo",
+
+                                            array(
+
+                                                   new SoapParam("0","InstanceID")
+
+                                                 ));
+
+        switch ($returnContent["CurrentTransportState"]){
+            case "PLAYING":
+                return 1;
+                break;
+            case "PAUSED_PLAYBACK":
+                return 2;
+                break;
+            case "STOPPED":
+                return 3;
+                break;
+            case "NO_MEDIA_PRESENT":
+                return 4;
+                break;
+            case "TRANSITIONING":
+                return 5;
+                break;
+            default:
+                throw new Exception("Unknown Transport State: ".$returnContent["CurrentTransportState"]); 
+        }
+    }
+    
+    
+    //*****************************************************************************
+    /* Function: GetMute_RC()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+     
+
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentMute>    0
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/     
+    public function GetMute_RC(){
+
+        return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
+
+                                           "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                                           "GetMute",
+
+                                           array(
+
+                                                  new SoapParam("0"     ,"InstanceID"),
+
+                                                  new SoapParam("Master","Channel"   )
+
+                                                ));
+
+    }
+    
+    
+    
+    //*****************************************************************************
+    /* Function: GetVolume_RC($channel = 'Master')
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+     
+
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentVolume>  2
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/
+    public function GetVolume_RC($channel = 'Master'){
+
+        return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
+
+                                           "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                                           "GetVolume",
+
+                                           array(
+
+                                                  new SoapParam("0"     ,"InstanceID"),
+
+                                                  new SoapParam($channel,"Channel"   )
+
+                                                ));
+
+    }
+    
+    
+    //*****************************************************************************
+    /* Function: GetColorTemperature_RC()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+     
+
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentColorTemperature>    3
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/
+    public function GetColorTemperature_RC(){
+
+        return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
+
+                                           "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                                           "GetColorTemperature",
+
+                                           array(
+
+                                                  new SoapParam("0"     ,"InstanceID") 
+
+                                                ));
+
+    } 
+    
+    
+     //*****************************************************************************
+    /* Function: GetColorTemperature_RC()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentSharpness>   60
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+     public function GetSharpness_RC(){
+
+        return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
+
+                                           "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                                           "GetSharpness",
+
+                                           array(
+
+                                                  new SoapParam("0"     ,"InstanceID") 
+
+                                                ));
+
+    }
+    
+    
+     //*****************************************************************************
+    /* Function: GetContrast_RC()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentContrast>    80
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/ 
+    public function GetContrast_RC(){
+
+        return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
+
+                                           "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                                           "GetContrast",
+
+                                           array(
+
+                                                  new SoapParam("0"     ,"InstanceID") 
+
+                                                ));
+
+    }
+    
+    
+    
+     //*****************************************************************************
+    /* Function: GetBrightness_RC()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <CurrentBrightness>  50
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+    public function GetBrightness_RC(){
+
+        return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
+
+                                           "urn:schemas-upnp-org:service:RenderingControl:1",
+
+                                           "GetBrightness",
+
+                                           array(
+
+                                                  new SoapParam("0"     ,"InstanceID") 
+
+                                                ));
+
+    } 
+    
+    
+     //*****************************************************************************
+    /* Function: GetCurrentConnection_CM()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <ConnectionIDs>  0
+
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+    public function GetCurrentConnection_CM() {
+
+        return (int)$this->processSoapCall("/upnp/control/ConnectionManager1",
+
+                                           "urn:schemas-upnp-org:service:ConnectionManager:1",
+
+                                           "GetCurrentConnection" ,
+
+                                                array(
+
+                                                       new SoapParam("0","InstanceID")
+
+                                                     ));
+
+    }
+    
+     //*****************************************************************************
+    /* Function: GetWatchingInformation_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>OK
+     * <TVMode>Tuner
+     * <WatchingInformation>Hilf mir! Jung, pleite, verzweifelt... on RTL2 (01:0PM~02:00PM)
+     * 
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/   
+    public function GetWatchingInformation_MTVA(){
+	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
+	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
+	        ."<s:Body>\r\n"
+	        ."<u:GetWatchingInformation xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
+	        ."</s:Body>\r\n"
+	        ."</s:Envelope>\r\n";
+	$soap_do = curl_init();
+	
+	$header = array(
+	        "Content-Type: text/xml",
+	        "Cache-Control: no-cache",
+	        "Pragma: no-cache",
+	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetWatchingInformation\"",
+	        "Content-length: ".strlen($sPostfields),
+	);
+	
+	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
+	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt($soap_do, CURLOPT_POST,           true );
+	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
+	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
+	
+	$output = curl_exec($soap_do);
+	$aInfo = curl_getinfo($soap_do);
+	curl_close($soap_do);
+	//print_r( $output );
+	//print_r( $aInfo );
+	$xmlParser = xml_parser_create("UTF-8");
+        xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
+        xml_parse_into_struct($xmlParser, $output, $vals, $index);
+        xml_parser_free($xmlParser);
+
+	return $vals[5]['value'];
+	exit();
+    }
+    
+    
+     //*****************************************************************************
+    /* Function: GetSourceList_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>OK
+     * <SourceList>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;SourceList&gt;&lt;CurrentSourceType&gt;TV&lt;/CurrentSourceType&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;Source&gt;&lt;SourceType&gt;TV&lt;/SourceType&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;Editable&gt;No&lt;/Editable&gt;&lt;DeviceName&gt;&lt;/DeviceName&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;SCART1&lt;/SourceType&gt;&lt;ID&gt;75&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;SCART2&lt;/SourceType&gt;&lt;ID&gt;76&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;PC&lt;/SourceType&gt;&lt;ID&gt;67&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;No&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;USB&lt;/SourceType&gt;&lt;ID&gt;24&lt;/ID&gt;&lt;Editable&gt;No&lt;/Editable&gt;&lt;DeviceName&gt;Transcend 16GB&lt;/DeviceName&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;No&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;DLNA&lt;/SourceType&gt;&lt;ID&gt;23&lt;/ID&gt;&lt;Editable&gt;No&lt;/Editable&gt;&lt;DeviceName&gt;AVM Mediaserver&lt;/DeviceName&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;No&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI1/DVI&lt;/SourceType&gt;&lt;ID&gt;71&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI2&lt;/SourceType&gt;&lt;ID&gt;72&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;AV_RCV&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI3&lt;/SourceType&gt;&lt;ID&gt;73&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;DMA&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI4&lt;/SourceType&gt;&lt;ID&gt;74&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;BLUE_RAY&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;AV&lt;/SourceType&gt;&lt;ID&gt;55&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;COMPONENT&lt;/SourceType&gt;&lt;ID&gt;63&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;/SourceList&gt;</SourceList></u:GetSourceListResponse></s:Body></s:Envelope> 
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function GetSourceList_MTVA(){
+	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
+	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
+	        ."<s:Body>\r\n"
+	        ."<u:GetSourceList xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
+	        ."</s:Body>\r\n"
+	        ."</s:Envelope>\r\n";
+	$soap_do = curl_init();
+	
+	$header = array(
+	        "Content-Type: text/xml",
+	        "Cache-Control: no-cache",
+	        "Pragma: no-cache",
+	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetSourceList\"",
+	        "Content-length: ".strlen($sPostfields),
+	);
+	
+	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
+	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt($soap_do, CURLOPT_POST,           true );
+	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
+	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
+	
+	$output = curl_exec($soap_do);
+	$aInfo = curl_getinfo($soap_do);
+	curl_close($soap_do);
+	//print_r( $output );
+	//print_r( $aInfo );
+	//$str =htmlspecialchars_decode($output);
+
+        //$p = xml_parser_create();
+        //xml_parse_into_struct($p, $str, $vals, $index);
+        //xml_parser_free($p);
+        //echo "Index array\n";
+        //print_r($index);
+        //echo "\nVals array\n";
+        //print_r($vals);
+		 	return $output;
+	exit();
+
+    } 
+    
+    
+     //*****************************************************************************
+    /* Function: GetDTVInformation_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>OK
+     * <DTVInformation> <?xml version="1.0" encoding="UTF-8"?><DTVInformation><SupportAntMode>1,2,3</SupportAntMode><SupportChSort>Yes</SupportChSort><SupportCloneView>Yes</SupportCloneView><SupportSecondTVView>Yes</SupportSecondTVView><SupportExtSourceView>Yes</SupportExtSourceView><SupportDTV>Yes</SupportDTV><TunerCount>1</TunerCount><SupportTVVersion>2011</SupportTVVersion><SupportChannelLock>No</SupportChannelLock><SupportChannelInfo>Yes</SupportChannelInfo><SupportChannelDelete>Yes</SupportChannelDelete><SupportEditNumMode><EditNumMode><NumMode>DIGITAL_SWAP</NumMode><MinValue>1</MinValue><MaxValue>9999</MaxValue></EditNumMode><EditNumMode><NumMode>ANALOG_INSERT</NumMode><MinValue>0</MinValue><MaxValue>99</MaxValue></EditNumMode></SupportEditNumMode><SupportRegionalVariant>No</SupportRegionalVariant><SupportStream><Container>MPEG2</Container><VideoFormat>MPEG4SP</VideoFormat><AudioFormat>MP3</AudioFormat><XResolution>672</XResolution><YResolution>544</YResolution><AudioSamplingRate>48000</AudioSamplingRate><AudioChannels>2</AudioChannels></SupportStream><SupportPVR>Yes</SupportPVR><TargetLocation>TARGET_LOCATION_PANEURO</TargetLocation></DTVInformation>
+     * 
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function GetDTVInformation_MTVA(){
+	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
+	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
+	        ."<s:Body>\r\n"
+	        ."<u:GetDTVInformation xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
+	        ."</s:Body>\r\n"
+	        ."</s:Envelope>\r\n";
+	$soap_do = curl_init();
+	
+	$header = array(
+	        "Content-Type: text/xml",
+	        "Cache-Control: no-cache",
+	        "Pragma: no-cache",
+	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetDTVInformation\"",
+	        "Content-length: ".strlen($sPostfields),
+	);
+	
+	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
+	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt($soap_do, CURLOPT_POST,           true );
+	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
+	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
+	
+	$output = curl_exec($soap_do);
+	$aInfo = curl_getinfo($soap_do);
+	curl_close($soap_do);
+	print_r( $output );
+	print_r( $aInfo );
+	exit();
+
+	return $output;
+    }
+    
+    
+    
+     //*****************************************************************************
+    /* Function: GetCurrentTime_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>         OK
+     * <CurrentTime>    2018-07-17T13:15:06
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function GetCurrentTime_MTVA() {
+	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
+	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
+	        ."<s:Body>\r\n"
+	        ."<u:GetCurrentTime xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
+	        ."</s:Body>\r\n"
+	        ."</s:Envelope>\r\n";
+	$soap_do = curl_init();
+	
+	$header = array(
+	        "Content-Type: text/xml",
+	        "Cache-Control: no-cache",
+	        "Pragma: no-cache",
+	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetCurrentTime\"",
+	        "Content-length: ".strlen($sPostfields),
+	);
+	
+	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
+	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt($soap_do, CURLOPT_POST,           true );
+	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
+	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
+	
+	$output = curl_exec($soap_do);
+	$aInfo = curl_getinfo($soap_do);
+	curl_close($soap_do);
+	//print_r( $output );
+	//print_r( $aInfo );
+
+        $xmlParser = xml_parser_create("UTF-8");
+
+        xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
+
+        xml_parse_into_struct($xmlParser, $output, $vals, $index);
+
+        xml_parser_free($xmlParser);
+            $result = $vals[4]['value'];
+            return $result;	
+            exit();
+    }
+    
+     //*****************************************************************************
+    /* Function: GetCurrentMainTVChannel_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>             OK
+     * <CurrentChannnel    <?xml version="1.0" encoding="UTF-8"?><Channel><ChType>CDTV</ChType><MajorCh>308</MajorCh><MinorCh>65534</MinorCh><PTC>1</PTC><ProgNum>12105</ProgNum></Channel>
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function GetCurrentMainTVChannel_MTVA() {
+	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
+	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
+	        ."<s:Body>\r\n"
+	        ."<u:GetCurrentMainTVChannel xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
+	        ."</s:Body>\r\n"
+	        ."</s:Envelope>\r\n";
+	$soap_do = curl_init();
+	
+	$header = array(
+	        "Content-Type: text/xml",
+	        "Cache-Control: no-cache",
+	        "Pragma: no-cache",
+	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetCurrentMainTVChannel\"",
+	        "Content-length: ".strlen($sPostfields),
+	);
+	
+	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
+	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt($soap_do, CURLOPT_POST,           true );
+	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
+	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
+	
+	$output = curl_exec($soap_do);
+	$aInfo = curl_getinfo($soap_do);
+	curl_close($soap_do);
+	print_r( $output );
+	print_r( $aInfo );
+	exit();
+
+	return $output;
+    }
+    
+    
+    //*****************************************************************************
+    /* Function: GetAllProgramInformationURL_MTVA($Channel, $AntennaMode)
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+     * $Channel
+     * $AntennaMode
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>         OK
+     *  
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/ 
+    public function GetAllProgramInformationURL_MTVA($Channel, $AntennaMode){
+	
+            /*
+             $AntennaMode = 2  
+            $Channel = "<ChType>CDTV</ChType><MajorCh>301</MajorCh><MinorCh>65534</MinorCh><PTC>26</PTC><ProgNum>28106</ProgNum>"
+
+            */
+
+       return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetAllProgramInformationURL",
+
+                               array(
+
+                                      new SoapParam($AntennaMode, "AntennaMode"),
+
+                                      new SoapParam($Channel, "Channel"    )
+
+                                    ));
+    } 
+    
+    //*****************************************************************************
+    /* Function: GetAllProgramInformationURL_MTVA($Channel, $AntennaMode)
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
+     * $Channel
+     * $AntennaMode
+    
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>         OK
+     *  
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
