@@ -1257,61 +1257,7 @@ trait SamsungUPNP {
     }
     
     
-     //*****************************************************************************
-    /* Function: GetSourceList_MTVA()
-    ...............................................................................
-	 
-    ...............................................................................
-    Parameters: 
-    
-    --------------------------------------------------------------------------------
-    Returns:  
-     * <Result>OK
-     * <SourceList>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;SourceList&gt;&lt;CurrentSourceType&gt;TV&lt;/CurrentSourceType&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;Source&gt;&lt;SourceType&gt;TV&lt;/SourceType&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;Editable&gt;No&lt;/Editable&gt;&lt;DeviceName&gt;&lt;/DeviceName&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;SCART1&lt;/SourceType&gt;&lt;ID&gt;75&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;SCART2&lt;/SourceType&gt;&lt;ID&gt;76&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;PC&lt;/SourceType&gt;&lt;ID&gt;67&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;No&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;USB&lt;/SourceType&gt;&lt;ID&gt;24&lt;/ID&gt;&lt;Editable&gt;No&lt;/Editable&gt;&lt;DeviceName&gt;Transcend 16GB&lt;/DeviceName&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;No&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;DLNA&lt;/SourceType&gt;&lt;ID&gt;23&lt;/ID&gt;&lt;Editable&gt;No&lt;/Editable&gt;&lt;DeviceName&gt;AVM Mediaserver&lt;/DeviceName&gt;&lt;Connected&gt;Yes&lt;/Connected&gt;&lt;SupportView&gt;No&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI1/DVI&lt;/SourceType&gt;&lt;ID&gt;71&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI2&lt;/SourceType&gt;&lt;ID&gt;72&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;AV_RCV&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI3&lt;/SourceType&gt;&lt;ID&gt;73&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;DMA&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;HDMI4&lt;/SourceType&gt;&lt;ID&gt;74&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;BLUE_RAY&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;AV&lt;/SourceType&gt;&lt;ID&gt;55&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;Source&gt;&lt;SourceType&gt;COMPONENT&lt;/SourceType&gt;&lt;ID&gt;63&lt;/ID&gt;&lt;Editable&gt;Yes&lt;/Editable&gt;&lt;EditNameType&gt;NONE&lt;/EditNameType&gt;&lt;Connected&gt;No&lt;/Connected&gt;&lt;SupportView&gt;Yes&lt;/SupportView&gt;&lt;/Source&gt;&lt;/SourceList&gt;</SourceList></u:GetSourceListResponse></s:Body></s:Envelope> 
-    --------------------------------------------------------------------------------
-    Status:  
-    //////////////////////////////////////////////////////////////////////////////*/  
-    public function GetSourceList_MTVA(){
-	$sPostfields ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"
-	        ."<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n"
-	        ."<s:Body>\r\n"
-	        ."<u:GetSourceList xmlns:u=\"urn:samsung.com:service:MainTVAgent2:1\" />\r\n"
-	        ."</s:Body>\r\n"
-	        ."</s:Envelope>\r\n";
-	$soap_do = curl_init();
-	
-	$header = array(
-	        "Content-Type: text/xml",
-	        "Cache-Control: no-cache",
-	        "Pragma: no-cache",
-	        "SOAPAction: \"urn:samsung.com:service:MainTVAgent2:1#GetSourceList\"",
-	        "Content-length: ".strlen($sPostfields),
-	);
-	
-	curl_setopt($soap_do, CURLOPT_URL,            "http://192.168.178.35:52235/MainTVServer2/control/MainTVAgent2" );
-	curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true );
-	curl_setopt($soap_do, CURLOPT_POST,           true );
-	curl_setopt($soap_do, CURLOPT_POSTFIELDS,     $sPostfields);
-	curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header );
-	
-	$output = curl_exec($soap_do);
-	$aInfo = curl_getinfo($soap_do);
-	curl_close($soap_do);
-	//print_r( $output );
-	//print_r( $aInfo );
-	//$str =htmlspecialchars_decode($output);
 
-        //$p = xml_parser_create();
-        //xml_parse_into_struct($p, $str, $vals, $index);
-        //xml_parser_free($p);
-        //echo "Index array\n";
-        //print_r($index);
-        //echo "\nVals array\n";
-        //print_r($vals);
-		 	return $output;
-	exit();
-
-    } 
     
     
  
@@ -1980,7 +1926,33 @@ trait SamsungUPNP {
     }   
     
     
+     //*****************************************************************************
+    /* Function: GetSourceList_MTVA()
+    ...............................................................................
+	 
+    ...............................................................................
+    Parameters: 
     
+    --------------------------------------------------------------------------------
+    Returns:  
+     * <Result>OK
+     * <SourceList
+    --------------------------------------------------------------------------------
+    Status:  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function GetSourceList_MTVA(){
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetSourceList",
+
+                               array(
+
+                                    ));
+
+         return $result;    
+    }       
     
     
     
