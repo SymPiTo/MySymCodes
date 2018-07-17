@@ -1739,13 +1739,39 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: GetDTVInformation_MTVA ()
     ...............................................................................
-     * gibt das aktuelle Datum und Uhrzeit
+     * gibt  
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
     Returns:  (array)
-     * [Result] (string)     => OK
-     * [CurrentTime] (xml)   =>  2018-07-17T15:56:14
+            $output['Result']   = OK
+            $output['SUPPORTANTMODE']   = 
+            $output['SUPPORTCHSORT']  = 
+            $output['SUPPORTCLONEVIEW']  = 
+            $output['SUPPORTSECONDTVVIEW']      = 
+            $output['SUPPORTEXTSOURCEVIEW']  = 
+            $output['SUPPORTDTV']   = 
+            $output['TUNERCOUNT']   = 
+            $output['SUPPORTTVVERSION']  = 
+            $output['SUPPORTCHANNELLOCK']  = 
+            $output['SUPPORTCHANNELINFO']      = 
+            $output['SUPPORTCHANNELDELETE']  = 
+            $output['SUPPORTEDITNUMMODE']['NUMMODE']  = 
+            $output['SUPPORTEDITNUMMODE']['MINVALUE']  = 
+            $output['SUPPORTEDITNUMMODE']['MAXVALUE']  = 
+            $output['EDITNUMMODE']['NUMMODE']  = 
+            $output['EDITNUMMODE']['MINVALUE']  = 
+            $output['EDITNUMMODE']['MAXVALUE']  =  
+            $output['SUPPORTREGIONALVARIANT'] 
+            $output['SUPPORTSTREAM']['CONTAINER']   
+            $output['SUPPORTSTREAM']['VIDEOFORMAT']   
+            $output['SUPPORTSTREAM']['AUDIOFORMAT']   
+            $output['SUPPORTSTREAM']['XRESOLUTION']   
+            $output['SUPPORTSTREAM']['YRESOLUTION']   
+            $output['SUPPORTSTREAM']['AUDIOSAMPLINGRATE']   
+            $output['SUPPORTSTREAM']['AUDIOCHANNELS'] 
+            $output['SUPPORTPVR']   =  
+            $output['TARGETLOCATION']   =  
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
@@ -1759,9 +1785,46 @@ trait SamsungUPNP {
                                array(
 
                                     ));
-
-            
-        return $result;    
+        
+        // $result = array  [Result] = (string)  
+        //                  ['DTVInformation'] = (xml)
+        $xmlParser = xml_parser_create("UTF-8");
+        xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
+        xml_parse_into_struct($xmlParser, $xml, $vals, $index);
+        xml_parser_free($xmlParser);
+		 
+		$output['Result'] = $result['Result'];
+		$output['SUPPORTANTMODE'] = $vals[1]['value'];
+		$output['SUPPORTCHSORT'] = $vals[2]['value'];
+		$output['SUPPORTCLONEVIEW'] = $vals[3]['value'];
+		$output['SUPPORTSECONDTVVIEW'] = $vals[4]['value'];
+		$output['SUPPORTEXTSOURCEVIEW'] = $vals[5]['value'];
+		$output['SUPPORTDTV'] = $vals[6]['value'];
+		$output['TUNERCOUNT'] = $vals[7]['value'];
+		
+		$output['SUPPORTTVVERSION'] =  $vals[8]['value'];
+		$output['SUPPORTCHANNELLOCK'] = $vals[9]['value'];
+		$output['SUPPORTCHANNELINFO'] = $vals[10]['value'];
+		$output['SUPPORTCHANNELDELETE'] = $vals[11]['value'];
+		$output['SUPPORTEDITNUMMODE']['NUMMODE'] = $vals[14]['value'];
+		$output['SUPPORTEDITNUMMODE']['MINVALUE'] = $vals[14]['value'];
+		$output['SUPPORTEDITNUMMODE']['MAXVALUE'] = $vals[16]['value'];	
+		
+		$output['EDITNUMMODE']['NUMMODE'] = $vals[19]['value'];
+		$output['EDITNUMMODE']['MINVALUE']  = $vals[20]['value'];
+		$output['EDITNUMMODE']['MAXVALUE']  = $vals[21]['value'];
+		$output['SUPPORTREGIONALVARIANT'] = $vals[24]['value'];
+		$output['SUPPORTSTREAM']['CONTAINER']  = $vals[26]['value'];
+		$output['SUPPORTSTREAM']['VIDEOFORMAT']  = $vals[27]['value'];
+		$output['SUPPORTSTREAM']['AUDIOFORMAT']  = $vals[28]['value'];
+		$output['SUPPORTSTREAM']['XRESOLUTION']  = $vals[29]['value'];
+		$output['SUPPORTSTREAM']['YRESOLUTION']  = $vals[30]['value'];
+		$output['SUPPORTSTREAM']['AUDIOSAMPLINGRATE']  = $vals[31]['value'];
+		$output['SUPPORTSTREAM']['AUDIOCHANNELS']  = $vals[32]['value'];
+		
+		$output['SUPPORTPVR']  = $vals[34]['value'];
+		$output['TARGETLOCATION']  = $vals[35]['value'];
+        return $output;    
     }  
     
     
