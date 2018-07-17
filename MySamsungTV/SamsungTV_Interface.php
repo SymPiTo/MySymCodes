@@ -1788,6 +1788,7 @@ trait SamsungUPNP {
         
         // $result = array  [Result] = (string)  
         //                  ['DTVInformation'] = (xml)
+        $xml = $result['DTVInformation'];
         $xmlParser = xml_parser_create("UTF-8");
         xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
         xml_parse_into_struct($xmlParser, $xml, $vals, $index);
