@@ -179,10 +179,10 @@ class MySamsungTV extends IPSModule
         $data = json_decode(file_get_contents(__DIR__ . "/form.json"));
 	//if we have file data available lets show something...
 	$data->actions[0]->label = substr(base64_decode($this->ReadPropertyString("FileData")), 0, 64);
-        //$Channellist = json_encode($data);
-        $this->IPSLog('GUCK ', $data);
+        $Channellist = json_encode($data);
+        $this->IPSLog('GUCK ', $Channellist);
         $Channellist = $data;
-        $channel = explode("\n", $data->actions[0]->label);
+        $channel = explode("\n", $Channellist);
         $n =  0;
         foreach($channel as $ch) {
                 $kanal = explode("\t", $ch);
