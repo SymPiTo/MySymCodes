@@ -267,7 +267,7 @@ class MySamsungTV extends IPSModule
     /* **************************************************************************** */		
     public function buildChannelList() {
         //$Kernel = str_replace("\\", "/", IPS_GetKernelDir());
-        $Channellist = file_get_contents($$this->Kernel."media/".'channellist.txt');
+        $Channellist = file_get_contents($this->Kernel."media/".'channellist.txt');
         $channel = explode("\n", $Channellist);
 
         $n =  0;
@@ -285,13 +285,13 @@ class MySamsungTV extends IPSModule
                         //$result =   STV_sendKey($ID, $key);
                         //$result =   STV_sendKey($ID, 'KEY_ENTER');
 
-                        $mc = STV_GetCurrentMainTVChannel_MTVA($ID);
+                        $mc = $this->GetCurrentMainTVChannel_MTVA();
                         $chlist[$n]['ChType'] = $mc['ChType'];
                         $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
                         $chlist[$n]['MINORCH'] = $mc['MINORCH'];
                         $chlist[$n]['PTC'] = $mc['PTC'];
                         $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
-                        STV_sendKey($ID, $key);
+                        $this->sendKey($key);
                         //IPS_SLEEP(100);
 
                 }
@@ -308,5 +308,21 @@ class MySamsungTV extends IPSModule
       
         
         
-        
+	//*****************************************************************************
+	/* Function: Kernel()
+        ...............................................................................
+        Stammverzeichnis von IP Symcon
+        ...............................................................................
+        Parameter:  
+
+        --------------------------------------------------------------------------------
+        return:  
+
+        --------------------------------------------------------------------------------
+        Status  checked 11.6.2018
+        //////////////////////////////////////////////////////////////////////////////*/
+        Protected function Kernel(){ 
+            $Kernel = str_replace("\\", "/", IPS_GetKernelDir());
+            return $Kernel;
+        }         
 }
