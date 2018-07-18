@@ -223,7 +223,7 @@ class MySamsungTV extends IPSModule
 		$form = [
 			[
 				'type' => 'Label',
-				'label' => 'Update channellist.txt located in \media\'
+				'label' => 'Update channellist.txt located in media'
 			],
 			[
 				'type' => 'Button',
