@@ -2592,7 +2592,7 @@ trait SamsungUPNP {
             $src = "192.168.178.28"; # ip des IPS Servers
             $mac = "B8:27:EB:9D:78:B5"; # mac des IPS Servers
             $remote = "php Samsung Remote";
-            $dst = $this->ip; # ip of tv
+            $dst =  $this->ReadPropertyString('ip');
             $app = "iphone..iapp.samsung";
             $tv = "iphone.UE40D8000.iapp.samsung"; # iphone.UE40D8000.iapp.samsung
 
@@ -2605,7 +2605,7 @@ trait SamsungUPNP {
             }
 
             echo "Attempting to connect to '$dst' on port '$port'...";
-            $result = socket_connect($socket, $this->ip, $port);
+            $result = socket_connect($socket, $dst, $port);
             if ($result === false) {
                 echo "socket_connect() failed.\nReason: ($result) " . 
                       socket_strerror(socket_last_error($socket)) . "\n";
