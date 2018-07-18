@@ -10,7 +10,7 @@ class MySamsungTV extends IPSModule
     use SamsungUPNP;
         
     //*****************************************************************************
-    /* Function: Standardfunktinen für ein Modul
+    /* Function: Standardfunktinen für ein Modul.
     ...............................................................................
     *  Create()
      * ApplyChanges()

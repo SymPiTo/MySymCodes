@@ -2,7 +2,7 @@
 	"elements":
 	[
 			{
-				"name" : " active",
+				"name" : " aktiv",
 				"type" :  "CheckBox",
 				"caption" : "active"
 			},
