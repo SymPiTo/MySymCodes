@@ -757,7 +757,7 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: SetBrightness_RC($Brightness)
     ...............................................................................
-     Stellet die Helligkeit auf Wert  $Brightness
+     Stellt die Helligkeit auf Wert  $Brightness
     ...............................................................................
     Parameters: 
      *  $Brightness (integer) =  0 ... 4
