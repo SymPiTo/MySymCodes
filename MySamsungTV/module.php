@@ -27,6 +27,13 @@ class MySamsungTV extends IPSModule
         $this->RegisterPropertyInteger("updateInterval", 10000);	
         $this->RegisterPropertyInteger("devicetype", 1);
         
+        //Variable anlegen.
+        $this->RegisterVariableString("TVchList", "ChannelList");
+        
+        
+        
+        
+        
 		//These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.
     }
@@ -258,7 +265,41 @@ class MySamsungTV extends IPSModule
     //*****************************************************************************
     /* Function: Eigene Public Funktionen
     /* **************************************************************************** */		
-        
+    public function buildChannelList() {
+        //$Kernel = str_replace("\\", "/", IPS_GetKernelDir());
+        $Channellist = file_get_contents($$this->Kernel."media/".'channellist.txt');
+        $channel = explode("\n", $Channellist);
+
+        $n =  0;
+        foreach($channel as $ch) {
+                $kanal = explode("\t", $ch);
+                if ($kanal[0] == 'List'){
+                        $head = $kanal;
+                }else{
+
+                        $chlist[$n][$head[1]] = $kanal[1];
+                        $chlist[$n][$head[2]] = $kanal[2];
+                        // auf Kanal schalten und MainChannel XML auslesen
+                        //$key = 'KEY_' +  $kanal[2];
+                        $key = 'KEY_CHUP'; 
+                        //$result =   STV_sendKey($ID, $key);
+                        //$result =   STV_sendKey($ID, 'KEY_ENTER');
+
+                        $mc = STV_GetCurrentMainTVChannel_MTVA($ID);
+                        $chlist[$n]['ChType'] = $mc['ChType'];
+                        $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
+                        $chlist[$n]['MINORCH'] = $mc['MINORCH'];
+                        $chlist[$n]['PTC'] = $mc['PTC'];
+                        $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
+                        STV_sendKey($ID, $key);
+                        //IPS_SLEEP(100);
+
+                }
+                $n= $n + 1;
+        } 
+        $chListSer = serialize($chlist);
+        setvalue(TVchList, $chListSer);
+    }    
         
         
     //*****************************************************************************
