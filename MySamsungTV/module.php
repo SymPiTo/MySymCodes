@@ -22,7 +22,7 @@ class MySamsungTV extends IPSModule
         parent::Create();
            
         // Variable aus dem Instanz Formular registrieren (um zugänglich zu machen)
-        $this->RegisterPropertyBoolean("active", false);
+        $this->RegisterPropertyBoolean("aktiv", false);
         $this->RegisterPropertyString("ip", "192.168.178.35");
         $this->RegisterPropertyInteger("updateInterval", 10000);	
         $this->RegisterPropertyInteger("devicetype", 1);
