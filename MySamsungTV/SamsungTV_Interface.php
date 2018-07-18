@@ -1944,6 +1944,7 @@ trait SamsungUPNP {
             $output['MINORCH'] = $vals[3]['value'];
             $output['PTC'] = $vals[4]['value'];
             $output['PROGNUM'] = $vals[5]['value'];
+            $output['xml'] = $xml;
             
         return $output;    
     }  
