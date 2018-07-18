@@ -180,7 +180,7 @@ class MySamsungTV extends IPSModule
 	//if we have file data available lets show something...
 	$data->actions[0]->label = substr(base64_decode($this->ReadPropertyString("FileData")), 0, 64);
         //$Channellist = json_encode($data);
-        setvalue($this->GetIDForIdent("TVchList"), $data);
+        $this->IPSLog('GUCK ', $data);
         $Channellist = $data;
         $channel = explode("\n", $data->actions[0]->label);
         $n =  0;
@@ -231,5 +231,46 @@ class MySamsungTV extends IPSModule
         Protected function Kernel(){ 
             $Kernel = str_replace("\\", "/", IPS_GetKernelDir());
             return $Kernel;
-        }         
+        }
+        
+        
+	Protected function IPSLog($Text, $array) {
+		$Directory=""; 
+		$File="";
+		
+		if (!$array){
+		
+			$array = '-';
+		}
+		
+		
+		if ($File == ""){
+		
+			$File = 'IPSLog.log';
+		}
+		if ($Directory == "") {
+			$Directory = "/home/pi/pi-share/";
+			//$Directory = IPS_GetKernelDir().'/';
+			//if (function_exists('IPS_GetLogDir'))
+			//	$Directory = IPS_GetLogDir();
+		}
+		
+		if(($FileHandle = fopen($Directory.$File, "a")) === false) {
+			//SetValue($ID_OutEnabled, false);
+			Exit;
+		}
+		if (is_array($array)){
+			//$comma_seperated=implode("\r\n",$array);
+			$comma_seperated=print_r($array, true);
+		}
+		else {
+			$comma_seperated=$array;
+		}
+		fwrite($FileHandle, $Text.": ");
+		fwrite($FileHandle, $comma_seperated."\r\n");
+		fclose($FileHandle);
+        }        
+
+
+        
 }
