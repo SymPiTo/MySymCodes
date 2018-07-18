@@ -269,7 +269,7 @@ class MySamsungTV extends IPSModule
         //$Kernel = str_replace("\\", "/", IPS_GetKernelDir());
         $Channellist = file_get_contents($this->Kernel()."media/".'channellist.txt');
         $channel = explode("\n", $Channellist);
-
+         
         $n =  0;
         foreach($channel as $ch) {
                 $kanal = explode("\t", $ch);
@@ -298,7 +298,7 @@ class MySamsungTV extends IPSModule
                 $n= $n + 1;
         } 
         $chListSer = serialize($chlist);
-        setvalue('TVchList', $chListSer);
+        setvalue($this->GetIDForIdent("TVchList"), $chListSer);
     }    
         
         
