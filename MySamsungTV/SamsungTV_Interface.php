@@ -17,18 +17,15 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: GetCurrentTransportActions_AV()
     ...............................................................................
-    UPNP Transport Actin
+    UPNP Transport Action
     ...............................................................................
     Parameters: 
-         
     --------------------------------------------------------------------------------
-    Returns:  
-        none.
+    Returns:      none.
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function GetCurrentTransportActions_AV(){
-
     return  $this->processSoapCall("/upnp/control/AVTransport1",
 
                                        "urn:schemas-upnp-org:service:AVTransport:1",
@@ -45,13 +42,12 @@ trait SamsungUPNP {
   }
 
 
-     //*****************************************************************************
+    //*****************************************************************************
     /* Function: GetDeviceCapabilities_AV()
     ...............................................................................
     UPNP  
     ...............................................................................
     Parameters: 
-         
     --------------------------------------------------------------------------------
     Returns:  
      *   PlayMedia (string) = NETWORK,NONE
@@ -61,7 +57,6 @@ trait SamsungUPNP {
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
   public function GetDeviceCapabilities_AV () {
-
     $this->processSoapCall("/upnp/control/AVTransport1",
 
                            "urn:schemas-upnp-org:service:AVTransport:1",
@@ -82,19 +77,16 @@ trait SamsungUPNP {
     UPNP  
     ...............................................................................
     Parameters: 
-         
     --------------------------------------------------------------------------------
     Returns:  
      *   NrTracks (Integer)             =  0
      *   MediaDuration (string)         =  0:00:00   
      *   CurrentURI (string)            = 
      *   CurrentURIMetaData (string)    =   
-     
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function GetMediaInfo_AV(){
-
     $mediaInfo = $this->processSoapCall("/upnp/control/AVTransport1",
 
                                         "urn:schemas-upnp-org:service:AVTransport:1",
@@ -108,26 +100,15 @@ trait SamsungUPNP {
                                              ));
 
 
-
-    $xmlParser = xml_parser_create("UTF-8");
-
-    xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
-
-    xml_parse_into_struct($xmlParser, $mediaInfo["CurrentURIMetaData"], $vals, $index);
-
-    xml_parser_free($xmlParser);
-
-    if (isset($index["DC:TITLE"]) and isset($vals[$index["DC:TITLE"][0]]["value"])){
-
-      $mediaInfo["title"] = $vals[$index["DC:TITLE"][0]]["value"];
-
-    }else{
-
-      $mediaInfo["title"] = "";
-
-    }
-
-
+        $xmlParser = xml_parser_create("UTF-8");
+        xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
+        xml_parse_into_struct($xmlParser, $mediaInfo["CurrentURIMetaData"], $vals, $index);
+        xml_parser_free($xmlParser);
+        if (isset($index["DC:TITLE"]) and isset($vals[$index["DC:TITLE"][0]]["value"])){
+          $mediaInfo["title"] = $vals[$index["DC:TITLE"][0]]["value"];
+        }else{
+          $mediaInfo["title"] = "";
+        }
     return $mediaInfo;
   }
 
@@ -137,19 +118,16 @@ trait SamsungUPNP {
     UPNP  
     ...............................................................................
     Parameters: 
-         
     --------------------------------------------------------------------------------
     Returns:  
      *   Track (Integer)             =  0
      *   TrackDuration (string)      =  0:00:00   
      *   TrackMetaData (string)      = 
      *   TrackURI (string)           =   
-     
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function GetPositionInfo_AV() {
-
         $positionInfo = $this->processSoapCall("/upnp/control/AVTransport1",
 
                                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -166,7 +144,6 @@ trait SamsungUPNP {
         xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
         xml_parse_into_struct($xmlParser, $positionInfo["TrackMetaData"], $vals, $index);
         xml_parser_free($xmlParser);
-
 
         if (isset($index["DC:CREATOR"]) and isset($vals[$index["DC:CREATOR"][0]]["value"])){
           $positionInfo["artist"] = $vals[$index["DC:CREATOR"][0]]["value"];
@@ -202,7 +179,6 @@ trait SamsungUPNP {
         }else{
           $positionInfo["streamContent"] = "";
         }
-
         return $positionInfo;
     }
 
@@ -212,17 +188,14 @@ trait SamsungUPNP {
     UPNP  
     ...............................................................................
     Parameters: 
-         
     --------------------------------------------------------------------------------
     Returns:  
      *   PlayMode (string)            =   
      *   RecQualityMode (string)      =    
-     
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
-    public function GetTransportSettings() {
-
+    public function GetTransportSettings_AV() {
         $returnContent = $this->processSoapCall("/upnp/control/AVTransport1",
 
                                                 "urn:schemas-upnp-org:service:AVTransport:1",
@@ -260,16 +233,13 @@ trait SamsungUPNP {
     ...............................................................................
     UPNP  
     ...............................................................................
-    Parameters: 
-         
+    Parameters: none
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function Next_AV() {
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -289,16 +259,13 @@ trait SamsungUPNP {
     ...............................................................................
     UPNP  
     ...............................................................................
-    Parameters: 
-         
+    Parameters: none
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function Pause_AV() {
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -319,16 +286,13 @@ trait SamsungUPNP {
     ...............................................................................
     UPNP  
     ...............................................................................
-    Parameters: 
-         
+    Parameters: none
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function Play(){
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -342,7 +306,6 @@ trait SamsungUPNP {
                                       new SoapParam("1","Speed"     )
 
                                     ));
-
     }
     
     
@@ -352,15 +315,12 @@ trait SamsungUPNP {
     UPNP  
     ...............................................................................
     Parameters: 
-         
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function Previous_AV() {
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -372,7 +332,6 @@ trait SamsungUPNP {
                                        new SoapParam("0","InstanceID")
 
                                      ));
-
     }
     
     //*****************************************************************************
@@ -391,12 +350,10 @@ trait SamsungUPNP {
      *
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function Seek_AV(string $unit, string $target){
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -412,7 +369,6 @@ trait SamsungUPNP {
                                       new SoapParam($target,"Target"    )
 
                                     ));
-
     }
     
     
@@ -427,12 +383,10 @@ trait SamsungUPNP {
      *
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function SetAVTransportURI_AV(string $CurrentURI, string $CurrentURIMetaData=NULL){
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -448,9 +402,6 @@ trait SamsungUPNP {
                                       new SoapParam($CurrentURIMetaData             ,"CurrentURIMetaData")
 
                                     ));
-
-
-
     }
     
     
@@ -499,18 +450,15 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: Stop_AV()
     ...............................................................................
-    UPNP  
+     stopped Stream 
     ...............................................................................
-    Parameters: 
-            
+    Parameters: none
     --------------------------------------------------------------------------------
     Returns:  
-
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
     public function Stop_AV() {
-
         $this->processSoapCall("/upnp/control/AVTransport1",
 
                                "urn:schemas-upnp-org:service:AVTransport:1",
@@ -915,8 +863,6 @@ trait SamsungUPNP {
 	 
     ...............................................................................
     Parameters: 
-     
-
     --------------------------------------------------------------------------------
     Returns:  
      * <CurrentTransportState>      NO_MEDIA_PRESENT
@@ -2593,6 +2539,109 @@ trait SamsungUPNP {
   }
    
     
+  
+  
+	/* Remote Control Tasten simulieren
+    //KEY_0
+    //KEY_1
+    //KEY_2
+    //KEY_3
+    //KEY_4
+    //KEY_5
+    //KEY_6
+    //KEY_7
+    //KEY_8
+    //KEY_9
+    //KEY_UP
+    //KEY_DOWN
+    //KEY_LEFT
+    //KEY_RIGHT
+    //KEY_MENU
+    //KEY_PRECH
+    //KEY_GUIDE
+    //KEY_INFO
+    //KEY_RETURN
+    //KEY_CH_LIST
+    //KEY_EXIT
+    //KEY_ENTER
+    //KEY_SOURCE
+    //KEY_AD
+    //KEY_PLAY
+    //KEY_PAUSE
+    //KEY_MUTE
+    //KEY_PICTURE_SIZE
+    //KEY_VOLUP
+    //KEY_VOLDOWN
+    //KEY_TOOLS
+    //KEY_POWEROFF
+    //KEY_CHUP
+    //KEY_CHDOWN
+    //KEY_CONTENTS
+    //KEY_W_LINK //Media P
+    //KEY_RSS //Internet
+    //KEY_MTS //Dual
+    //KEY_CAPTION //Subt
+    //KEY_REWIND
+    //KEY_FF
+    //KEY_REC
+    //KEY_STOP
+	**************************************/
+    public function sendKey($key)
+    {
+            $port = 55000;
+            $src = "192.168.178.28"; # ip des IPS Servers
+            $mac = "B8:27:EB:9D:78:B5"; # mac des IPS Servers
+            $remote = "php Samsung Remote";
+            $dst = $this->ip; # ip of tv
+            $app = "iphone..iapp.samsung";
+            $tv = "iphone.UE40D8000.iapp.samsung"; # iphone.UE40D8000.iapp.samsung
+
+
+            /* Create a TCP/IP socket. */
+            $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+            if ($socket === false) {
+                echo "socket_create() failed: reason: " . 
+                     socket_strerror(socket_last_error()) . "\n";
+            }
+
+            echo "Attempting to connect to '$dst' on port '$port'...";
+            $result = socket_connect($socket, $this->ip, $port);
+            if ($result === false) {
+                echo "socket_connect() failed.\nReason: ($result) " . 
+                      socket_strerror(socket_last_error($socket)) . "\n";
+            }
+
+            //------------------------------------------------------------
+            //This part send once - asking for release remote control
+            // will stay till TV aunpluged
+            //-------------------------------------------------------------
+            $msg = chr(0x64).chr(0x00).chr(strlen(base64_encode($src))).chr(0x00).base64_encode($src).chr(strlen(base64_encode($mac))).chr(0x00).base64_encode($mac).chr(strlen(base64_encode($remote))).chr(0x00).base64_encode($remote);
+            $relremote = chr(0x00).chr(strlen($app)).chr(0x00).$app.chr(strlen($msg)).chr(0x00).$msg;
+
+            socket_write($socket, $relremote, strlen($relremote)); 
+
+            //------------------------------------------------------------------
+            // Key übertragen
+            //------------------------------------------------------------------
+
+                    $msg = chr(0x00).chr(0x00).chr(0x00).chr(strlen(base64_encode($key))).chr(0x00).base64_encode($key);
+                    $data = chr(0x00).chr(strlen($tv)).chr(0x00).$tv.chr(strlen($msg)).chr(0x00).$msg;
+
+
+                    //$out = '';
+
+                    echo "Sending HTTP HEAD request...";
+                    socket_write($socket, $data, strlen($data));
+                    echo "OK.\n";
+
+            //echo "Reading response:\n\n";
+            //$out = socket_read($socket, 2048);
+            //echo $out."\n";
+
+            socket_close($socket);
+            sleep(1);
+    }
+  
     
     
 }
