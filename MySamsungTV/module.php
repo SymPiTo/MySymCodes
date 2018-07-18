@@ -203,7 +203,13 @@ class MySamsungTV extends IPSModule
 				'name' => 'updateInterval',
 				'type' => 'ValidationTextBox',
 				'caption' => 'update Interval [ms]'
-			]
+			],
+                    
+                        [       "type" => "SelectFile", 
+                                "name" => "PropertyStringFile", 
+                                "caption" => "Target", 
+                                "extensions" => ".txt" 
+                        ]
 		];
 		return $form;
 	}
