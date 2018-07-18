@@ -298,7 +298,7 @@ class MySamsungTV extends IPSModule
                 $n= $n + 1;
         } 
         $chListSer = serialize($chlist);
-        setvalue(TVchList, $chListSer);
+        setvalue('TVchList', $chListSer);
     }    
         
         
