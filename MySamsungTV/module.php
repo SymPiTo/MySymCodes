@@ -26,7 +26,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterPropertyString("ip", "192.168.178.35");
         $this->RegisterPropertyInteger("updateInterval", 10000);	
         $this->RegisterPropertyInteger("devicetype", 1);
-        $this->RegisterPropertyString("FileData", "channellist.txt");
+        $this->RegisterPropertyString("FileData", "");
         
         //Variable anlegen.
         $this->RegisterVariableString("TVchList", "ChannelList");
@@ -208,7 +208,7 @@ class MySamsungTV extends IPSModule
                     
                         [       "type" => "SelectFile", 
                                 "name" => "FileData", 
-                                "caption" => "Target", 
+                                "caption" => "Filet", 
                                 "extensions" => ".txt" 
                         ]
 		];
