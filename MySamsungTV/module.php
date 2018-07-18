@@ -217,12 +217,12 @@ class MySamsungTV extends IPSModule
 		$form = [
 			[
 				'type' => 'Label',
-				'label' => 'Update'
+				'label' => 'Update channellist.txt located in \media\'
 			],
 			[
 				'type' => 'Button',
-				'label' => 'labelname',
-				'onClick' => 'Prefix_Functionname($id);'
+				'label' => 'build ChannelList',
+				'onClick' => 'STV_buildChannelList($this->InstanceID);'
 			]
 		];
 
