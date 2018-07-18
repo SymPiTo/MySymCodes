@@ -180,8 +180,9 @@ class MySamsungTV extends IPSModule
 	//if we have file data available lets show something...
 	$data->actions[0]->label = substr(base64_decode($this->ReadPropertyString("FileData")), 0, 64);
         //$Channellist = json_encode($data);
+        setvalue($this->GetIDForIdent("TVchList"), $data);
         $Channellist = $data;
-        $channel = explode("\n", $Channellist);
+        $channel = explode("\n", $data->actions[0]->label);
         $n =  0;
         foreach($channel as $ch) {
                 $kanal = explode("\t", $ch);
