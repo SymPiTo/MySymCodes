@@ -267,7 +267,7 @@ class MySamsungTV extends IPSModule
     /* **************************************************************************** */		
     public function buildChannelList() {
         //$Kernel = str_replace("\\", "/", IPS_GetKernelDir());
-        $Channellist = file_get_contents($this->Kernel."media/".'channellist.txt');
+        $Channellist = file_get_contents($this->Kernel()."media/".'channellist.txt');
         $channel = explode("\n", $Channellist);
 
         $n =  0;
