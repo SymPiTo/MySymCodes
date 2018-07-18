@@ -229,7 +229,7 @@ class MySamsungTV extends IPSModule
 			[
 				'type' => 'Button',
 				'label' => 'build ChannelList',
-				'onClick' => 'STV_buildChannelList($this->InstanceID);'
+				'onClick' => '$this->buildChannelList();'
 			]
 		];
 
