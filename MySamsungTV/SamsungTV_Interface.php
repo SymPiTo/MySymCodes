@@ -558,7 +558,7 @@ trait SamsungUPNP {
     
     
     //*****************************************************************************
-    /* Function: GetCurrentConnectionInfo()
+    /* Function: GetCurrentConnectionInfoCM()
     ...............................................................................
     UPNP  
     ...............................................................................
@@ -570,17 +570,16 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
-    public function GetCurrentConnectionInfo(){
-
+    public function GetCurrentConnectionInfo_CM(){
         return (int)$this->processSoapCall("/upnp/control/ConnectionManager1",
 
                                            "urn:schemas-upnp-org:service:ConnectionManager:1",
 
-                                           "GetCurrentConnectionIDs" ,
+                                           "GetCurrentConnectionInfo" ,
 
                                                 array(
 
-                                                    new SoapParam("0"    ,"InstanceID"   ),
+                                                    new SoapParam("0"    ,"ConnectionID"   ),
 
                                                      ));
 
@@ -588,20 +587,19 @@ trait SamsungUPNP {
     
     
      //*****************************************************************************
-    /* Function: GetProtocolInfo()
+    /* Function: GetProtocolInfo_CM()
     ...............................................................................
     UPNP  
     ...............................................................................
-    Parameters: 
-            
+    Parameters: none
     --------------------------------------------------------------------------------
     Returns:  
-
+     * Source
+     * Sink
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  not tested
     //////////////////////////////////////////////////////////////////////////////*/
-    public function GetProtocolInfo(){
-
+    public function GetProtocolInfo_CM(){
         return (int)$this->processSoapCall("/upnp/control/ConnectionManager1",
 
                                            "urn:schemas-upnp-org:service:ConnectionManager:1",
@@ -655,21 +653,18 @@ trait SamsungUPNP {
     
     
     //*****************************************************************************
-    /* Function: SetSharpness_AV($Sharpness)
+    /* Function: SetSharpness_RC($Sharpness)
     ...............................................................................
-    UPNP  
+     Stellt die Schärfe auf Wert $Sharpness ein.
     ...............................................................................
     Parameters: 
      *  $Sharpness = integer 0 ... 4
-      
     --------------------------------------------------------------------------------
-    Returns:  
-
-    --------------------------------------------------------------------------------
-    Status:  
+    Returns:  none
+   --------------------------------------------------------------------------------
+    Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-  
-    public function SetSharpness_AV(integer $Sharpness){
+    public function SetSharpness_RC(integer $Sharpness){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -691,20 +686,18 @@ trait SamsungUPNP {
     
     
     //*****************************************************************************
-    /* Function: SetContrast_AV($Contrast)
+    /* Function: SetContrast_RC($Contrast)
     ...............................................................................
-    UPNP  
+     Stellt den Kontrast Wert auf Wert  $Contrast ein.
     ...............................................................................
     Parameters: 
-     *  $Contrast = integer 0 ... 4
-      
+     *  $Contrast(integer)  = 0 ... 4
     --------------------------------------------------------------------------------
-    Returns:  
-
+    Returns:  none
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetContrast_AV(integer $Contrast){
+    public function SetContrast_RC(integer $Contrast){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -723,20 +716,18 @@ trait SamsungUPNP {
     }
  
     //*****************************************************************************
-    /* Function: SetColorTemperature_AV($ColorTemperature)
+    /* Function: SetColorTemperature_RC($ColorTemperature)
     ...............................................................................
-    UPNP  
+     Stellt den Farbwert auf Wert  $ColorTemperature  ein
     ...............................................................................
     Parameters: 
-     *  $ColorTemperature = integer 0 ... 4
-      
+     *  $ColorTemperature (integer)  = 0 ... 4
     --------------------------------------------------------------------------------
-    Returns:  
-
+    Returns:  none
     --------------------------------------------------------------------------------
-    Status:  
+    Status: 18.07.2018 - OK 
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetColorTemperature_AV(integer $ColorTemperature){
+    public function SetColorTemperature_RC(integer $ColorTemperature){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -787,19 +778,16 @@ trait SamsungUPNP {
     //*****************************************************************************
     /* Function: SetVolume_RC($volume)
     ...............................................................................
-    UPNP  
+     Stellt die Lautstärke auf Wert   $volume ein.
     ...............................................................................
     Parameters: 
-     *  $volume = integer 0 ... 4
-      
+     *  $volume (integer) =  0 ... 4
     --------------------------------------------------------------------------------
-    Returns:  
-
+    Returns: none
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/    
     public function SetVolume_RC(integer $volume, $channel = 'Master'){
-
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
                                "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -892,12 +880,10 @@ trait SamsungUPNP {
     ...............................................................................
     Parameters: 
      *   $mute   = boolean true/false 
-
     --------------------------------------------------------------------------------
-    Returns:  
-
+    Returns:  none
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/      
     public function SetMute_RC($mute) {
         if($mute){
