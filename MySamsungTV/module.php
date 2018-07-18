@@ -208,7 +208,7 @@ class MySamsungTV extends IPSModule
                     
                         [       "type" => "SelectFile", 
                                 "name" => "FileData", 
-                                "caption" => "Filet", 
+                                "caption" => "File channellist.txt", 
                                 "extensions" => ".txt" 
                         ]
 		];
@@ -271,41 +271,62 @@ class MySamsungTV extends IPSModule
 
     //*****************************************************************************
     /* Function: Eigene Public Funktionen
-    /* **************************************************************************** */		
+    /* **************************************************************************** */	
+        
+        
+    //*****************************************************************************
+    /* Function: buildChannelList()
+    ...............................................................................
+     * erzeugt ein Array aller Channels
+     * Vorraussetzung: es muss eine channellist.txt erzeugt werden mit ChanSort.exe
+     * (siehe Manuals)
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  (array)
+     * [Pr#] =>  
+     * [ChannelName] =>  
+     * [ChType] =>  
+     * [MAJORCH] =>  
+     * [MINORCH] =>  
+     * [PTC] =>  
+     * [PROGNUM] =>  
+     * 
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/  
     public function buildChannelList() {
         //$Kernel = str_replace("\\", "/", IPS_GetKernelDir());
-        $Channellist = file_get_contents($this->Kernel()."media/".'channellist.txt');
+        //$Channellist = file_get_contents($this->Kernel()."media/".'channellist.txt');
+        $data = json_decode(file_get_contents(__DIR__ . "/form.json"));
+	//if we have file data available lets show something...
+	$data->actions[0]->label = substr(base64_decode($this->ReadPropertyString("FileData")), 0, 64);
+        $Channellist = json_encode($data);
+        
         $channel = explode("\n", $Channellist);
-         
         $n =  0;
         foreach($channel as $ch) {
                 $kanal = explode("\t", $ch);
                 if ($kanal[0] == 'List'){
                         $head = $kanal;
                 }else{
-
-                        $chlist[$n][$head[1]] = $kanal[1];
-                        $chlist[$n][$head[2]] = $kanal[2];
-                        // auf Kanal schalten und MainChannel XML auslesen
-                        //$key = 'KEY_' +  $kanal[2];
-                        $key = 'KEY_CHUP'; 
-                        //$result =   STV_sendKey($ID, $key);
-                        //$result =   STV_sendKey($ID, 'KEY_ENTER');
-
-                        $mc = $this->GetCurrentMainTVChannel_MTVA();
-                        $chlist[$n]['ChType'] = $mc['ChType'];
-                        $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
-                        $chlist[$n]['MINORCH'] = $mc['MINORCH'];
-                        $chlist[$n]['PTC'] = $mc['PTC'];
-                        $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
-                        $this->sendKey($key);
-                        //IPS_SLEEP(100);
-
+                    $chlist[$n][$head[1]] = $kanal[1];
+                    $chlist[$n][$head[2]] = $kanal[2];
+                    // auf Kanal schalten und MainChannel XML auslesen
+                    $key = 'KEY_CHUP'; 
+                    $mc = $this->GetCurrentMainTVChannel_MTVA();
+                    $chlist[$n]['ChType'] = $mc['ChType'];
+                    $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
+                    $chlist[$n]['MINORCH'] = $mc['MINORCH'];
+                    $chlist[$n]['PTC'] = $mc['PTC'];
+                    $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
+                    $this->sendKey($key);
                 }
                 $n= $n + 1;
         } 
         $chListSer = serialize($chlist);
         setvalue($this->GetIDForIdent("TVchList"), $chListSer);
+        return  $chlist;
     }    
         
         
