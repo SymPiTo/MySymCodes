@@ -205,7 +205,7 @@ class MySamsungTV extends IPSModule
         
         if($vol['Return']){
           SetValue($this->GetIDForIdent("TVVolume"), (int)$vol['Volume']);  
-          return $vol;
+          return (int)$vol['Volume'];
         }else{
           return false;
         }
