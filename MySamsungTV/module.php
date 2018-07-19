@@ -50,6 +50,7 @@ class MySamsungTV extends IPSModule
 	//Never delete this line!
         parent::ApplyChanges();
             if($this->ReadPropertyBoolean("aktiv")){
+                SetValue('TVVolume', 99); 
                 $this->SetTimerInterval("update", $this->ReadPropertyInteger("updateInterval"));
             }
             else {
@@ -168,7 +169,7 @@ class MySamsungTV extends IPSModule
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
                 $vol = $this->GetVolume_MTVA();
-                SetValue('TVVolume', $vol);            
+                SetValue('TVVolume', (int)$vol);            
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
