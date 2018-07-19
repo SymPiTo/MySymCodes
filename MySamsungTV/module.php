@@ -304,9 +304,10 @@ class MySamsungTV extends IPSModule
                     $chlist[$n]['MINORCH'] = $mc['MINORCH'];
                     $chlist[$n]['PTC'] = $mc['PTC'];
                     $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
+                    $this->SendDebug("ChannelList ", $chlist[$n], 0);
                     $this->sendKey($key);
                 }
-                $n= $n + 1;
+                $n = $n + 1;
         } 
         $chListSer = serialize($chlist);
         setvalue($this->GetIDForIdent("TVchList"), $chListSer);
