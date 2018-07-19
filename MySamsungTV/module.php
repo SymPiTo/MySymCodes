@@ -232,7 +232,7 @@ class MySamsungTV extends IPSModule
         $PTC        = $ch['PTC'];  
         $ProgNum    = $ch['PROGNUM'];      
         $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
-        return (int)$ch['$channel'];
+        return $ch['PTC'];
     } 
 
       //*****************************************************************************
@@ -252,7 +252,7 @@ class MySamsungTV extends IPSModule
         $ch = $this->GetCurrentMainTVChannel_MTVA();
         $chListSer = getValue($this->GetIDForIdent("TVchList"));
         $chList = unserialize($chListSer);
-        $key = array_search($ch,  array_column($chList, 'PTC')); 
+        $key = array_search($ch, array_column($chList, 'PTC')); 
         
         SetValue($this->GetIDForIdent("TVchLName"), $chList[$key]['ChannelName']);  
         return  $chList[$key]['ChannelName'];
