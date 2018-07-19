@@ -800,7 +800,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  17.7.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/   
-  public function SetMainTVChannel_MTVA(string $Channel, $AntennaMode = 2, $ChannelListType = '0x01',  $SatelliteID = 0) {
+  protected function SetMainTVChannel_MTVA(string $Channel, $AntennaMode = 2, $ChannelListType = '0x01',  $SatelliteID = 0) {
 
         $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
