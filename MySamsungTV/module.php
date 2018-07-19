@@ -173,8 +173,7 @@ class MySamsungTV extends IPSModule
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
-                $vol = $this->GetVolume_MTVA();
-                SetValue($this->GetIDForIdent("TVVolume"), (int)$vol[Volume]); 
+                $vol = $this->getVolume);    
                 $ch =  $this->GetCurrentMainTVChannel_MTVA(); 
 
             }
@@ -188,7 +187,31 @@ class MySamsungTV extends IPSModule
     /* Function: Eigene Public Funktionen
     /* **************************************************************************** */	
         
+     //*****************************************************************************
+    /* Function: getVolume()
+    ...............................................................................
+     * gibt den Lautstärke Wert als Integer zurück.
+     * und schreibt Ergebnis in die Variable Volume
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     * $volume (integer)
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getVolume() {
+        $vol = $this->GetVolume_MTVA();
         
+        if($vol[Return]){
+          SetValue($this->GetIDForIdent("TVVolume"), (int)$vol[Volume]);  
+          return $vol;
+        }else{
+          return false;
+        }
+        
+    }   
+    
     //*****************************************************************************
     /* Function: buildChannelList()
     ...............................................................................
