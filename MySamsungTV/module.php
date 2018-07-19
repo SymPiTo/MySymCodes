@@ -167,12 +167,12 @@ class MySamsungTV extends IPSModule
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
-            
+                $vol = $this->GetVolume_MTVA();
+                setvalue('TVVolume', $vol);            
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
-                $vol = $this->GetVolume_MTVA();
-                setvalue('TVVolume', $vol);
+
                 $ch =  $this->GetCurrentMainTVChannel_MTVA(); 
 
             }
