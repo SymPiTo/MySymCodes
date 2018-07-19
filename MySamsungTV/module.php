@@ -50,7 +50,7 @@ class MySamsungTV extends IPSModule
 	//Never delete this line!
         parent::ApplyChanges();
             if($this->ReadPropertyBoolean("aktiv")){
-                SetValue('TVVolume', 99); 
+                SetValue($this->GetIDForIdent("TVVolume"), 99); 
                 $this->SetTimerInterval("update", $this->ReadPropertyInteger("updateInterval"));
             }
             else {
@@ -139,6 +139,7 @@ class MySamsungTV extends IPSModule
 
 	}
         
+        /*
   	//Add this Polyfill for IP-Symcon 4.4 and older
 	protected function SetValue($Ident, $Value)
 	{
@@ -150,7 +151,7 @@ class MySamsungTV extends IPSModule
 		}
 	}
 
-
+*/
 
 
 	/*//////////////////////////////////////////////////////////////////////////////
@@ -169,7 +170,7 @@ class MySamsungTV extends IPSModule
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
                 $vol = $this->GetVolume_MTVA();
-                SetValue('TVVolume', (int)$vol);            
+                SetValue($this->GetIDForIdent("TVVolume"), (int)$vol);            
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
