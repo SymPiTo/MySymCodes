@@ -20,7 +20,7 @@ class MySamsungTV extends IPSModule
     {
 	//Never delete this line!
         parent::Create();
-           
+        //These lines are parsed on Symcon Startup or Instance creation   
         // Variable aus dem Instanz Formular registrieren (um zugänglich zu machen)
         $this->RegisterPropertyBoolean("aktiv", false);
         $this->RegisterPropertyString("ip", "192.168.178.35");
@@ -30,13 +30,17 @@ class MySamsungTV extends IPSModule
         
         //Variable anlegen.
         $this->RegisterVariableString("TVchList", "ChannelList");
+        $this->RegisterVariableInteger("TVVolume", "Volume", "");
+        $this->RegisterVariableInteger("TVChannel", "Channel", "");
         
         
         
+		
+      
+        // Timer erstellen
+        $this->RegisterTimer("update", $this->ReadPropertyInteger("updateInterval"), 'STV_update($_IPS[\'TARGET\']);');
         
         
-		//These lines are parsed on Symcon Startup or Instance creation
-        //You cannot use variables here. Just static values.
     }
     
         // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
@@ -45,7 +49,12 @@ class MySamsungTV extends IPSModule
     public function ApplyChanges() {
 	//Never delete this line!
         parent::ApplyChanges();
-       
+            if($this->ReadPropertyBoolean("aktiv")){
+                $this->SetTimerInterval("update", $this->ReadPropertyInteger("updateInterval"));
+            }
+            else {
+                $this->SetTimerInterval("update", 0);
+            }
     }
     
     //*****************************************************************************
@@ -143,8 +152,34 @@ class MySamsungTV extends IPSModule
 
 
 
+	/*//////////////////////////////////////////////////////////////////////////////
+	Function:  update()
+	...............................................................................
+	Funktion wird über Timer alle x Sekunden gestartet
+         *  call SubFunctions:   
+	...............................................................................
+	Parameter:  none
+	--------------------------------------------------------------------------------
+	SetVariable:    
+	--------------------------------------------------------------------------------
+	return: none  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06-03
+	//////////////////////////////////////////////////////////////////////////////*/       
+        public function update() {
+            
+            $ip = $this->ReadPropertyString('ip');
+            $alive = Sys_Ping($ip, 1000);
+            if ($alive){
+                $vol = $this->GetVolume_MTVA();
+                setvalue('TVVolume', $vol);
+                $ch =  $this->GetCurrentMainTVChannel_MTVA(); 
 
-
+            }
+            else{
+                $this->SetTimerInterval("update", 0);
+            }
+        }
 
 
     //*****************************************************************************
@@ -174,25 +209,14 @@ class MySamsungTV extends IPSModule
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/  
     public function buildChannelList() {
-        //$Kernel = str_replace("\\", "/", IPS_GetKernelDir());
-        //$Channellist = file_get_contents($this->Kernel()."media/".'channellist.txt');
-        
-        /*
-        $data = json_decode(file_get_contents(__DIR__ . "/form.json"));
-	//if we have file data available lets show something...
-	$data->actions[0]->label = substr(base64_decode($this->ReadPropertyString("FileData")), 0, 64);
-        $Channellist = json_encode($data);
-        $this->IPSLog('GUCK ', $Channellist);
-        $Channellist = $data;
-          
-         
-         */
-        
         $Channellist = base64_decode($this->ReadPropertyString("FileData"));
-        
-        
         $channel = explode("\n", $Channellist);
         $n =  0;
+        //auf Ferseh Kanal 1 schalten!
+        $key = 'KEY_1';
+        $result =   $this->sendKey($key);
+        $key = 'KEY_ENTER';
+        $result =   $this->sendKey($key);
         foreach($channel as $ch) {
                 $kanal = explode("\t", $ch);
                 if ($kanal[0] == 'List'){
