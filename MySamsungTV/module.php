@@ -32,7 +32,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableString("TVchList", "ChannelList");
         $this->RegisterVariableInteger("TVVolume", "Volume", "");
         $this->RegisterVariableInteger("TVChannel", "Channel", "");
-        
+        $this->RegisterVariableString("TVchLName", "ChannelName");
         
         
 		
@@ -174,8 +174,9 @@ class MySamsungTV extends IPSModule
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
                 $vol = $this->getVolume();    
-                $ch =  $this->GetCurrentMainTVChannel_MTVA(); 
-
+                 
+                $channel = $this->getChannel();
+                $chName = $this->getChannelName();
             }
             else{
                 $this->SetTimerInterval("update", 0);
@@ -205,6 +206,58 @@ class MySamsungTV extends IPSModule
         SetValue($this->GetIDForIdent("TVVolume"), (int)$vol['Volume']);  
         return (int)$vol['Volume'];
     }   
+  
+   
+        
+     //*****************************************************************************
+    /* Function: getChannel()
+    ...............................................................................
+     * gibt den aktuell eingestellten SendeKanal zurück
+     * und schreibt Ergebnis in die Variable Channel
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     * $channel (xml-string)
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getChannel() {
+        $ch = $this->GetCurrentMainTVChannel_MTVA();
+        SetValue($this->GetIDForIdent("TVChannel"), (int)$ch['PTC']);  
+        $ChType     = $ch['ChType'];
+        $MajorCh    = $ch['MAJORCH'];        
+        $MinorCh    = $ch['MINORCH'];       
+        $PTC        = $ch['PTC'];  
+        $ProgNum    = $ch['PROGNUM'];      
+        $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
+        return (int)$ch['$channel'];
+    } 
+
+      //*****************************************************************************
+    /* Function: getChannelName()
+    ...............................................................................
+     * gibt den Namen des aktuellen Senders zurück
+     * und schreibt Ergebnis in die Variable ChannelName
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     * $chName (string)
+    --------------------------------------------------------------------------------
+    Status:  17.07.2018 - OK  
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getChannelName() {
+        $ch = $this->GetCurrentMainTVChannel_MTVA();
+        $chListSer = getValue($this->GetIDForIdent("TVchList"));
+        $chList = unserialize($chListSer);
+        $key = array_search($ch,  array_column($chList, 'PTC')); 
+        
+        SetValue($this->GetIDForIdent("TVchLName"), $chList[$key]['ChannelName']);  
+        return  $chList[$key]['ChannelName'];
+    }   
+    
+    
     
     //*****************************************************************************
     /* Function: buildChannelList()

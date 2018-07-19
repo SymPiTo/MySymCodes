@@ -1908,6 +1908,8 @@ trait SamsungUPNP {
     /* Function: GetCurrentMainTVChannel_MTVA()
     ...............................................................................
      * gibt den aktuellen Fernseh Kanal zurück
+     * <Channel><ChType>CDTV</ChType><MajorCh>1</MajorCh><MinorCh>65534</MinorCh><PTC>28</PTC><ProgNum>11100</ProgNum></Channel> 
+     *
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
@@ -1921,7 +1923,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function GetCurrentMainTVChannel_MTVA(){
+    protected function GetCurrentMainTVChannel_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
@@ -2280,7 +2282,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function GetVolume_MTVA(){
+    protected function GetVolume_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
