@@ -4,7 +4,7 @@
 			{
 				"name" : "aktiv",
 				"type" :  "CheckBox",
-				"caption" : "active"
+				"caption" : "aktive"
 			},
 			{
 				"name" : "devicetype",

@@ -194,7 +194,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
         }
         
 	/*//////////////////////////////////////////////////////////////////////////////
-	Funktion function update()
+	Funktion:  update()
 	...............................................................................
 	Funktion wird über Timer alle x Sekunden gestartet
          *  call SubFunctions:  $this->Get_MainZone_Status()
