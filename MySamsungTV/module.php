@@ -202,14 +202,8 @@ class MySamsungTV extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getVolume() {
         $vol = $this->GetVolume_MTVA();
-        
-        if($vol['Return']){
-          SetValue($this->GetIDForIdent("TVVolume"), (int)$vol['Volume']);  
-          return (int)$vol['Volume'];
-        }else{
-          return false;
-        }
-        
+        SetValue($this->GetIDForIdent("TVVolume"), (int)$vol['Volume']);  
+        return (int)$vol['Volume'];
     }   
     
     //*****************************************************************************
