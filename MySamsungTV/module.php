@@ -295,8 +295,8 @@ class MySamsungTV extends IPSModule
                 if ($kanal[0] == 'List'){
                         $head = $kanal;
                 }else{
-                    $chlist[$n][$head[1]] = $kanal[1];
-                    $chlist[$n][$head[2]] = $kanal[2];
+                    $chlist[$n]['Pr#'] = $kanal[1];
+                    $chlist[$n]['ChannelName'] = $kanal[2];
                     // auf Kanal schalten und MainChannel XML auslesen
                     $key = 'KEY_CHUP'; 
                     $mc = $this->GetCurrentMainTVChannel_MTVA();
