@@ -173,7 +173,7 @@ class MySamsungTV extends IPSModule
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
-                $vol = $this->getVolume);    
+                $vol = $this->getVolume();    
                 $ch =  $this->GetCurrentMainTVChannel_MTVA(); 
 
             }
