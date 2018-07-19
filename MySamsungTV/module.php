@@ -252,6 +252,7 @@ class MySamsungTV extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getChannel() {
         $ch = $this->GetCurrentMainTVChannel_MTVA();
+        $this->SendDebug("ChannelList ", $ch['MajorCh'], 0);
         SetValue($this->GetIDForIdent("TVChannel"), (int)$ch['MajorCh']);  
         $ChType     = $ch['ChType'];
         $MajorCh    = $ch['MAJORCH'];        
