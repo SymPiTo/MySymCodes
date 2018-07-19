@@ -168,7 +168,7 @@ class MySamsungTV extends IPSModule
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
                 $vol = $this->GetVolume_MTVA();
-                setvalue('TVVolume', $vol);            
+                SetValue('TVVolume', $vol);            
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
