@@ -254,7 +254,7 @@ class MySamsungTV extends IPSModule
 
         $chListSer = getValue($this->GetIDForIdent("TVchList"));
         $chList = unserialize($chListSer);
-        $key = array_search($such, array_column($chList, 'MAJORCH')); 
+        $key = searchForValue($such, $chList);
         
         SetValue($this->GetIDForIdent("TVchLName"), $chList[$key]['ChannelName']);  
         return  $chList[$key]['ChannelName'];
@@ -382,5 +382,17 @@ class MySamsungTV extends IPSModule
         }        
 
 
+        
+        
+        
+        protected function searchForValue($value, $array) {
+           foreach ($array as $key => $val) {
+                           
+               if ($val['MAJORCH'] === $value) {
+                   return $key;
+               }
+           }
+           return "null";
+        }
         
 }
