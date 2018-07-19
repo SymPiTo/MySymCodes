@@ -40,22 +40,25 @@ class MySamsungTV extends IPSModule
       
         // Timer erstellen
         $this->RegisterTimer("update", $this->ReadPropertyInteger("updateInterval"), 'STV_update($_IPS[\'TARGET\']);');
-        
+        $this->RegisterTimer("watchdog", 60000, 'STV_watchdog($_IPS[\'TARGET\']);');
         
     }
     
-        // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
-        // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
-        // Überschreibt die intere IPS_ApplyChanges($id) Funktion
+    // ApplyChanges() wird einmalig aufgerufen beim Erstellen einer neuen Instanz und
+    // bei Änderungen der Formular Parameter (form.json) (nach Übernahme Bestätigung)
+    // Überschreibt die intere IPS_ApplyChanges($id) Funktion
+    /* **************************************************************************** */
     public function ApplyChanges() {
 	//Never delete this line!
         parent::ApplyChanges();
             if($this->ReadPropertyBoolean("aktiv")){
-                SetValue($this->GetIDForIdent("TVVolume"), 99); 
+                
                 $this->SetTimerInterval("update", $this->ReadPropertyInteger("updateInterval"));
+                $this->SetTimerInterval("watchdog", 60000);
             }
             else {
                 $this->SetTimerInterval("update", 0);
+                $this->SetTimerInterval("watchdog", 0);
             }
     }
     
@@ -153,7 +156,32 @@ class MySamsungTV extends IPSModule
 	}
 
 */
-
+        
+        
+	/*//////////////////////////////////////////////////////////////////////////////
+	Function:  watchdog()
+	...............................................................................
+	Funktion wird über Timer alle 60 Sekunden gestartet
+         *  call SubFunctions:   
+	...............................................................................
+	Parameter:  none
+	--------------------------------------------------------------------------------
+	SetVariable:    
+	--------------------------------------------------------------------------------
+	return: none  
+	--------------------------------------------------------------------------------
+	Status: checked 2018-06-03
+	//////////////////////////////////////////////////////////////////////////////*/       
+        public function watchdog() {
+            $ip = $this->ReadPropertyString('ip');
+            $alive = Sys_Ping($ip, 1000);
+           if ($alive){
+               $this->SetTimerInterval("update", $this->ReadPropertyInteger("updateInterval"));
+           }
+           else {
+               $this->SetTimerInterval("update", 0);
+           }
+        }
 
 	/*//////////////////////////////////////////////////////////////////////////////
 	Function:  update()
@@ -170,7 +198,6 @@ class MySamsungTV extends IPSModule
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
-           
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
