@@ -318,7 +318,7 @@ class MySamsungTV extends IPSModule
         
         
     //*****************************************************************************
-    /* Function: Eigene Interne Funktionen
+    /* Function: Eigene Interne Funktionen.
     /* **************************************************************************** */	        
       
         
