@@ -357,7 +357,7 @@ class MySamsungTV extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getTVGuide() {  
         //URL des TV Guides holen
-        $TVGuideURL =   $this-STV_GetCurrentProgramInformationURL_MTVA();
+        $TVGuideURL =   $this-GetCurrentProgramInformationURL_MTVA();
         $url = $TVGuideURL['CurrentProgInfoURL'];
 	//TV Guide file auslesen
         $ch = curl_init();
