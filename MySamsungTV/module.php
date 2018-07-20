@@ -452,8 +452,8 @@ class MySamsungTV extends IPSModule
            }
            foreach ($array as $key => $val) {
                $x =  $val[$prop] ; 
-               $this->SendDebug("searchForValue vergleiche: ", $x." mit ".$value, 0);
-               if ( $x ==  $value) {
+               $this->SendDebug("searchForValue vergleiche: ", $x." mit ".strval($value), 0);
+               if ( $x ==  strval($value)) {
                    
                    $this->SendDebug("searchForValue ", $key." Wert  gefunden.", 0);
                    return $key;
