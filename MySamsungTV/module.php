@@ -310,13 +310,14 @@ class MySamsungTV extends IPSModule
         $chList = unserialize($chListSer);
         $key = $this->searchForValue($ChName, $prop, $chList);
         $ch =  $chList[$key];
+        $this->SendDebug("setChannelbyName ", "found: ".$ch, 0);
         $ChType     = $ch['ChType'];
         $MajorCh    = $ch['MAJORCH'];        
         $MinorCh    = $ch['MINORCH'];       
         $PTC        = $ch['PTC'];  
         $ProgNum    = $ch['PROGNUM'];      
         $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
-        SetMainTVChannel_MTVA($Channel,  2,  '0x01',  0);
+        $this->SetMainTVChannel_MTVA($Channel,  2,  '0x01',  0);
     }   
     
     //*****************************************************************************
