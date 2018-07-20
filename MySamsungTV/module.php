@@ -310,11 +310,11 @@ class MySamsungTV extends IPSModule
         $chList = unserialize($chListSer);
          
         
-        $value = $ChName;
+        $searchvalue = "VOX";
         $key = "ChannelName";
         $array = $chList;
 
-        $result = $this->searcharray($value, $key, $array);
+        $result = $this->searcharray($searchvalue, $key, $array);
         
          $ch =  $chList[$result];
         $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
@@ -455,7 +455,7 @@ class MySamsungTV extends IPSModule
                    return $k;
                }
            }
-           $this->SendDebug("searcharray ", "GEFUNDEN!", 0);
+           $this->SendDebug("searcharray ", "nicht GEFUNDEN!", 0);
            return null;
         }
   
