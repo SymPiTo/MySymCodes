@@ -380,8 +380,8 @@ $i=0;
             foreach($xml->ProgramInfo as $elem){
                 if($elem->DispChName == $ch){
                         $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
-                        $TVGuide[$i]['Time'] = $elem[0]->StartTime." - ".$elem->EndTime;
-                        $TVGuide[$i]['ProgTitle'] = (string) $elem[0]->ProgTitle;
+                        $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
+                        $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
                         $i=$i+1;
                 }
             }
