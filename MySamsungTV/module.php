@@ -353,11 +353,11 @@ class MySamsungTV extends IPSModule
      *                   "RTLplus" );
      *
     --------------------------------------------------------------------------------
-    Status:   
+    Status:      
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getTVGuide() {  
         //URL des TV Guides holen
-        $TVGuideURL =   $this-GetCurrentProgramInformationURL_MTVA();
+        $TVGuideURL = $this-GetCurrentProgramInformationURL_MTVA();
         $url = $TVGuideURL['CurrentProgInfoURL'];
 	//TV Guide file auslesen
         $ch = curl_init();
