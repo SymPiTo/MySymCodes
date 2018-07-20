@@ -437,6 +437,7 @@ class MySamsungTV extends IPSModule
 		fwrite($FileHandle, $Text.": ");
 		fwrite($FileHandle, $comma_seperated."\r\n");
 		fclose($FileHandle);
+                
         }        
 
 
