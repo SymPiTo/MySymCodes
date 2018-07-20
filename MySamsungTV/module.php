@@ -248,7 +248,7 @@ class MySamsungTV extends IPSModule
     Returns:  
      * $channel (xml-string)
     --------------------------------------------------------------------------------
-    Status:  17.07.2018 - OK  
+    Status:  17.07.2018 - OK  v
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getChannel() {
         $ch = $this->GetCurrentMainTVChannel_MTVA();
@@ -362,6 +362,7 @@ class MySamsungTV extends IPSModule
                     $chlist[$n]['MINORCH'] = $mc['MINORCH'];
                     $chlist[$n]['PTC'] = $mc['PTC'];
                     $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
+                    $chlist[$n]['channelXml'] = "<Channel><ChType>".$chlist[$n]['ChType']."</ChType><MajorCh>".$chlist[$n]['MAJORCH']."</MajorCh><MinorCh>".$chlist[$n]['MINORCH']."</MinorCh><PTC>".$chlist[$n]['PTC']."</PTC><ProgNum>".$chlist[$n]['PROGNUM']."</ProgNum></Channel>" ;
                     $this->SendDebug("ChannelList ", $chlist[$n], 0);
                     $this->sendKey($key);
                     $n = $n + 1;
