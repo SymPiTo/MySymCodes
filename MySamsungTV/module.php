@@ -241,7 +241,7 @@ class MySamsungTV extends IPSModule
     /* Function: getChannel()
     ...............................................................................
      * gibt den aktuell eingestellten SendeKanal zurück
-     * und schreibt Ergebnis in die Variable Channel
+     * und schreibt Ergebnis in die Variable Channel 
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
