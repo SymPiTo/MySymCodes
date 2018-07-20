@@ -1,5 +1,5 @@
 <?php
-//zugehoerige TRAIT-Klassen    
+//zugehoerige TRAIT-Klassen    TEST
 require_once(__DIR__ . "/SamsungTV_Interface.php");
 require_once(__DIR__ . "/../libs/NetworkTraits.php");
 
