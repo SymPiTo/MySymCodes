@@ -314,7 +314,7 @@ class MySamsungTV extends IPSModule
         $key = "ChannelName";
         $array = $chList;
 
-        $result = searcharray($value, $key, $array);
+        $result = $this->searcharray($value, $key, $array);
         
          $ch =  $chList[$result];
         $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
@@ -449,7 +449,7 @@ class MySamsungTV extends IPSModule
         }        
 
        
-        function searcharray($value, $key, $array) {
+        protected function searcharray($value, $key, $array) {
            foreach ($array as $k => $val) {
                if ($val[$key] == $value) {
                    return $k;
