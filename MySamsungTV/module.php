@@ -328,6 +328,90 @@ class MySamsungTV extends IPSModule
         $this->SetMainTVChannel_MTVA($channel,  2,  '0x01',  0);
     }   
     
+    
+     //*****************************************************************************
+    /* Function: getTVGuide(channel as array)
+    ...............................................................................
+     *  
+     *  
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     * $channel (array)
+     * $channels= array("Das Erste HD", 
+     *                  "ZDF HD", 
+     *                  "RTL Television", 
+     *                  "ProSieben", 
+     *                  "kabel eins", 
+     *                   "RTL2", 
+     *                   "SAT.1", 
+     *                   "3sat", 
+     *                   "VOX", 
+     *                   "Tele 5", 
+     *                   "ONE HD", 
+     *                   "RTLplus" );
+     *
+    --------------------------------------------------------------------------------
+    Status:   
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getTVGuide() {  
+        //URL des TV Guides holen
+        $TVGuideURL =   STV_GetCurrentProgramInformationURL_MTVA($ID);
+        $url = $TVGuideURL['CurrentProgInfoURL'];
+	//TV Guide file auslesen
+        $ch = curl_init();
+	$timeout = 5;
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+	$data = curl_exec($ch);
+	curl_close($ch);
+        //XML file bereinigen, da sonst nicht als xml lesbar (&)
+        $data=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	
+        //xml laden
+        $xml = simplexml_load_file($data);
+
+
+$channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
+$i=0;
+        
+        foreach($channels as $ch){
+            foreach($xml->ProgramInfo as $elem){
+                if($elem->DispChName == $ch){
+                        $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
+                        $TVGuide[$i]['Time'] = $elem[0]->StartTime." - ".$elem->EndTime;
+                        $TVGuide[$i]['ProgTitle'] = (string) $elem[0]->ProgTitle;
+                        $i=$i+1;
+                }
+            }
+
+        }
+	
+	IPSLog("gg",$TVGuide );
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //*****************************************************************************
     /* Function: buildChannelList() 
     ...............................................................................
