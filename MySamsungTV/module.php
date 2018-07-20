@@ -310,7 +310,7 @@ class MySamsungTV extends IPSModule
         $chList = unserialize($chListSer);
          
         
-        $searchvalue = '"VOX"';
+        $searchvalue = '"'.$ChName.'"';
         $key = "ChannelName";
         $array = $chList;
 
