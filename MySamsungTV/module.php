@@ -324,6 +324,7 @@ class MySamsungTV extends IPSModule
         $PTC        = $ch['PTC'];  
         $ProgNum    = $ch['PROGNUM'];      
         $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
+        $this->SendDebug("setChannelbyName ", $channel, 0);
         $this->SetMainTVChannel_MTVA($Channel,  2,  '0x01',  0);
     }   
     
