@@ -321,7 +321,7 @@ class MySamsungTV extends IPSModule
     }   
     
     //*****************************************************************************
-    /* Function: buildChannelList()
+    /* Function: buildChannelList() 
     ...............................................................................
      * erzeugt ein Array aller Channels
      * Vorraussetzung: es muss eine channellist.txt erzeugt werden mit ChanSort.exe
