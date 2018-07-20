@@ -446,21 +446,20 @@ class MySamsungTV extends IPSModule
         
         
         protected function searchForValue($value, $prop, $array) {
-           
-           $y['Wert'] = $value;
-           $this->SendDebug("searchForValue ", $y." in Prop ".$prop, 0);
+           $this->SendDebug("searchForValue ", $value." in Prop ".$prop, 0);
            if ($prop=="ChannelName"){
                // $this->SendDebug("searchForValue ", $array, 0);
            }
            foreach ($array as $key => $val) {
-               $x =   $val[$prop]; 
-               $this->SendDebug("searchForValue ", "x-Wert ".$x, 0);
-               if ( $x ==  $y) {
+               $x =  $val[$prop] ; 
+               $this->SendDebug("searchForValue vergleiche: ", $x." mit ".$value, 0);
+               if ( $x ==  $value) {
                    
                    $this->SendDebug("searchForValue ", $key." Wert  gefunden.", 0);
                    return $key;
                }
            }
+           $this->SendDebug("searchForValue ",  " Wert  nicht gefunden.", 0);
            return "null" ;
         }
         
