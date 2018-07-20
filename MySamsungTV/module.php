@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
 class MySamsungTV extends IPSModule
 {
     
-    //externe Klasse einbinden - ueberlagern mit TRAIT
+    //externe Klasse einbinden - ueberlagern mit TRAIT.
     use SamsungUPNP,
         DebugHelper;
      
