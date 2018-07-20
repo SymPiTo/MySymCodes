@@ -308,9 +308,16 @@ class MySamsungTV extends IPSModule
         $prop = "ChannelName";
         $chListSer = getValue($this->GetIDForIdent("TVchList"));
         $chList = unserialize($chListSer);
-        $key = $this->searchChName($ChName, $chList);
-        $ch =  $chList[$key];
-        $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$key, 0);
+         
+        
+        $value = $ChName;
+        $key = "ChannelName";
+        $array = $chList;
+
+        $result = searcharray($value, $key, $array);
+        
+         $ch =  $chList[$result];
+        $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
         $ChType     = $ch['ChType'];
         $MajorCh    = $ch['MAJORCH'];        
         $MinorCh    = $ch['MINORCH'];       
@@ -441,21 +448,17 @@ class MySamsungTV extends IPSModule
                 
         }        
 
-        protected function searchChName($value, $array) {
-           $this->SendDebug("searchForValue ", $value, 0);
-
-           foreach ($array as $key => $val) {
-               $x =  $val['ChannelName']; 
-               $this->SendDebug("searchChName vergleiche: ", $x." mit ".$value, 0);
-               if ( $x == $value ) {
-                   
-                   $this->SendDebug("searchChName ", $key." Wert  gefunden.", 0);
-                   return $key;
+       
+        function searcharray($value, $key, $array) {
+           foreach ($array as $k => $val) {
+               if ($val[$key] == $value) {
+                   return $k;
                }
            }
-           $this->SendDebug("searchChName ",  " Wert  nicht gefunden.", 0);
-           return "null" ;
+           $this->SendDebug("searcharray ", "GEFUNDEN!", 0);
+           return null;
         }
+  
         
         
         
