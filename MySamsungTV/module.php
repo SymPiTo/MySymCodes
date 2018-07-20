@@ -454,7 +454,7 @@ class MySamsungTV extends IPSModule
                    return $key;
                }
            }
-           return "null";
+           return "null" ;
         }
         
 }
