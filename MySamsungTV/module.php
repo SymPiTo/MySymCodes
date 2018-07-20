@@ -282,10 +282,10 @@ class MySamsungTV extends IPSModule
         $prop = "MAJORCH";
         $chListSer = getValue($this->GetIDForIdent("TVchList"));
         $chList = unserialize($chListSer);
-        $this->SendDebug("getChannelName ", "suche..". $such." in Baum: ". $prop, 0);
+        
         $key = $this->searchForValue($such, $prop, $chList);
         $chN = $chList[$key]['ChannelName'];
-        $this->SendDebug("getChannelName: KanalName RAW ", $chN, 0);
+        
         $chName = substr($chN,1,strlen($chN)-2);
         SetValue($this->GetIDForIdent("TVchLName"),$chName );  
         return  $chList[$key]['$chName'];
@@ -445,10 +445,9 @@ class MySamsungTV extends IPSModule
         
         
         protected function searchForValue($value, $prop, $array) {
-            $this->SendDebug("searchForValue ", $prop, 0);
+           // $this->SendDebug("searchForValue ", $prop, 0);
            foreach ($array as $key => $val) {
                $x =  $val[$prop] ; 
-                $this->SendDebug("searchForValue ","X-WERT: ". $x, 0);
                if ( $x == $value) {
                    return $key;
                }
