@@ -368,9 +368,9 @@ class MySamsungTV extends IPSModule
 	$data = curl_exec($ch);
 	curl_close($ch);
         //XML file bereinigen, da sonst nicht als xml lesbar (&)
-        $data=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	
+        $dataxml=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	
         //xml laden
-        $xml = simplexml_load_file($data);
+        $xml = simplexml_load_file($dataxml);
 
 
 $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
