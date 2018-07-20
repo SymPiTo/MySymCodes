@@ -367,12 +367,28 @@ class MySamsungTV extends IPSModule
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 	$data = curl_exec($ch);
 	curl_close($ch);
-        //XML file bereinigen, da sonst nicht als xml lesbar (&)
-        $dataxml=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	
+         //XML file bereinigen, da sonst nicht als xml lesbar (&)
+        $dataxml=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	  
+        
+ 	$my_file ="programmliste.xml"; 
+        $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+        fwrite($handle, $data);       
+        
+
+        
+        
         //xml laden
-        $xml = simplexml_load_file($dataxml);
+        //$xml = simplexml_load_file($dataxml);
 
 
+        
+        
+        
+        
+        //$file = file_get_contents('programmliste.dat');
+        $xml = simplexml_load_file('programmliste.xml');
+        
+        
 $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
 $i=0;
         
