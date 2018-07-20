@@ -372,7 +372,7 @@ class MySamsungTV extends IPSModule
         
  	$my_file ="programmliste.xml"; 
         $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
-        fwrite($handle, $data);       
+        fwrite($handle, $dataxml);       
         
 
         
