@@ -11,7 +11,7 @@ class MySamsungTV extends IPSModule
         DebugHelper;
      
     //*****************************************************************************
-    /* Function: Standardfunktinen für ein Modul.
+    /* Function: Standardfunktinen für ein Modul. 
     ...............................................................................
     *  Create()
      * ApplyChanges()
