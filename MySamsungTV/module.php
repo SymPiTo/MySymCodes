@@ -287,7 +287,7 @@ class MySamsungTV extends IPSModule
         $chN = $chList[$key]['ChannelName'];
         
         $chName = substr($chN,1,strlen($chN)-2);
-        SetValue($this->GetIDForIdent("TVchLName"),$chName );  
+        SetValue($this->GetIDForIdent("TVchLName"),(string)$chN );  
         return  $chList[$key]['$chName'];
     }   
     
