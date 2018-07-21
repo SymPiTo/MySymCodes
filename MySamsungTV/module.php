@@ -34,7 +34,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableInteger("TVVolume", "Volume", "");
         $this->RegisterVariableInteger("TVChannel", "Channel", "");
         $this->RegisterVariableString("TVchLName", "ChannelName");
-        
+        $this->RegisterVariableString("TVGuide", "TVGuide");
         
 		
       
@@ -403,7 +403,8 @@ $i=0;
             }
 
         }
-	
+	setvalue($this->GetIDForIdent("TVGuide"), json_encode($TVGuide);
+        
 	//$this->IPSLog("gg",$TVGuide );
  
     }
