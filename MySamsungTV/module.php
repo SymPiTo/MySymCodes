@@ -404,7 +404,7 @@ $i=0;
 
         }
 	
-	$this->IPSLog("gg",$TVGuide );
+	//$this->IPSLog("gg",$TVGuide );
  
     }
     
