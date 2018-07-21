@@ -267,7 +267,7 @@ class MySamsungTV extends IPSModule
     /* Function: getChannelName()
     ...............................................................................
      * gibt den Namen des aktuellen Senders zurück 
-     * und schreibt Ergebnis in die Variable ChannelName
+     * und schreibt Ergebnis in die Variable ChannelName 
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
