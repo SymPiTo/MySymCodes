@@ -1977,7 +1977,7 @@ trait SamsungUPNP {
 
                                     ));
 
-            
+        $this->SendDebug("GetCurrentProgramInformationURL_MTVA ", $result);    
         return $result;    
     }  
     
