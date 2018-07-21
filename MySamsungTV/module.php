@@ -292,7 +292,7 @@ class MySamsungTV extends IPSModule
     }   
     
      //*****************************************************************************
-    /* Function: setChannelbyName(string $ChName)
+    /* Function: setChannelbyName(string $ChName) 
     ...............................................................................
      * schaltet auf den übergebenen SenderNamen um
      *  
