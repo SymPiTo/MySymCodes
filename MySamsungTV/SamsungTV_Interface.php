@@ -2410,7 +2410,7 @@ trait SamsungUPNP {
       }else{
         $this->SendDebug("Error during Soap Call:  ", $faultstring." ".$faultcode);
         throw new Exception("Error during Soap Call: ".$faultstring." ".$faultcode);
-
+        return $faultcode;
       }
 
     }
