@@ -196,7 +196,15 @@ class MyUpnp extends IPSModule {
     public function ApplyChanges() {
         // Diese Zeile nicht löschen
         parent::ApplyChanges();
-            
+            if($this->ReadPropertyBoolean("active")){
+                
+                
+                
+            }
+            else {
+                $this->SetTimerInterval("upnp_PlayInfo", 0);
+                
+            }   
 
     }
     
