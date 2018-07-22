@@ -2408,7 +2408,7 @@ trait SamsungUPNP {
         throw new Exception("Error during Soap Call: ".$faultstring." ".$faultcode." ".$errorCode." (".$this->resolveErrorCode($path,$errorCode).")");
 
       }else{
-        $this->SendDebug("Error during Soap Call:  ", $faultstring." ".$faultcode);
+        $this->SendDebug("Error during Soap Call:  ", $faultstring." ".$faultcode,0);
         throw new Exception("Error during Soap Call: ".$faultstring." ".$faultcode);
         return $faultcode;
       }
