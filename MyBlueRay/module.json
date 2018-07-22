@@ -1,0 +1,11 @@
+{
+	"id": "{C1E6B422-7E31-DF8E-E55C-09B2A5C98BB3}",
+	"name": "MyBlueRay",
+	"type": 3,
+	"vendor": "PiTo",
+	"aliases": ["LG BlueRay Player"],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "BR"
+}
