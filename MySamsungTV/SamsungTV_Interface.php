@@ -1435,7 +1435,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/     
-    public function RunBrowser_MTVA(string $URL){
+    protected function RunBrowser_MTVA(string $URL){
         return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
