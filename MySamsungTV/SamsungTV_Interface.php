@@ -2037,7 +2037,7 @@ trait SamsungUPNP {
     //////////////////////////////////////////////////////////////////////////////*/    
     protected function GetCurrentProgramInformationURL_MTVA(){
         try {
-       return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+       $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
 
@@ -2047,6 +2047,7 @@ trait SamsungUPNP {
 
                                     ));
         
+            return $result;
         } catch (Exception $e) {
         $this->SendDebug("GetCurrentProgramInformationURL_MTVA ", $result);  
         
