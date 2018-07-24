@@ -362,7 +362,9 @@ class MySamsungTV extends IPSModule
     public function getTVGuide() {  
         //URL des TV Guides holen
         $TVGuideURL = $this->GetCurrentProgramInformationURL_MTVA();
-        if (!$TVGuideURL){
+        if ($TVGuideURL == false){
+            $this->SendDebug("getTVGuide ", "TV ausgeschaltet", 0);
+        }else{    
         $this->SendDebug("getTVGuide ", $TVGuideURL, 0);
         
         $url = $TVGuideURL['CurrentProgInfoURL'];
