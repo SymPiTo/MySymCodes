@@ -2049,8 +2049,8 @@ trait SamsungUPNP {
         
             return $result;
         } catch (Exception $e) {
-        $this->SendDebug("GetCurrentProgramInformationURL_MTVA ", $e, 0);  
-        
+        $this->SendDebug("GetCurrentProgramInformationURL_MTVA ", $e->getMessage(), 0);  
+        return false;
         }   
     }  
     
