@@ -3,6 +3,8 @@
 require_once(__DIR__ . "/SamsungTV_Interface.php");
 require_once(__DIR__ . "/../libs/NetworkTraits.php");
 
+
+
 class MySamsungTV extends IPSModule
 {
     
@@ -36,7 +38,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableString("TVchLName", "ChannelName");
         $this->RegisterVariableString("TVGuide", "Guide");
         
-		
+	
       
         // Timer erstellen
         $this->RegisterTimer("update", $this->ReadPropertyInteger("updateInterval"), 'STV_update($_IPS[\'TARGET\']);');
@@ -233,6 +235,7 @@ class MySamsungTV extends IPSModule
         $vol = $this->GetVolume_MTVA();
         SetValue($this->GetIDForIdent("TVVolume"), (int)$vol['Volume']);  
         return (int)$vol['Volume'];
+       
     }   
   
    
@@ -261,6 +264,7 @@ class MySamsungTV extends IPSModule
         $ProgNum    = $ch['PROGNUM'];      
         $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
         return $channel;
+       
     } 
 
      //*****************************************************************************
@@ -285,7 +289,7 @@ class MySamsungTV extends IPSModule
         
         $key = $this->searchForValue($such, $prop, $chList);
         $chN = $chList[$key]['ChannelName'];
-        
+       
         $chName = substr($chN,1,strlen($chN)-2);
         SetValue($this->GetIDForIdent("TVchLName"),(string)$chN );  
         return  $chList[$key]['$chName'];
@@ -308,7 +312,7 @@ class MySamsungTV extends IPSModule
         $prop = "ChannelName";
         $chListSer = getValue($this->GetIDForIdent("TVchList"));
         $chList = unserialize($chListSer);
-         
+        
         
         $searchvalue = '"'.$ChName.'"';
         $key = "ChannelName";
