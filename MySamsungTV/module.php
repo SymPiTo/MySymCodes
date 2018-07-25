@@ -365,57 +365,57 @@ class MySamsungTV extends IPSModule
         if ($TVGuideURL == false){
             $this->SendDebug("getTVGuide ", "TV ausgeschaltet", 0);
         }else{    
-        $this->SendDebug("getTVGuide ", $TVGuideURL, 0);
-        
-        $url = $TVGuideURL['CurrentProgInfoURL'];
-	//TV Guide file auslesen
-        $ch = curl_init();
-	$timeout = 5;
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$data = curl_exec($ch);
-	curl_close($ch);
-         //XML file bereinigen, da sonst nicht als xml lesbar (&)
-        $dataxml=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	  
-        
- 	$my_file ="programmliste.xml"; 
-        $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
-        fwrite($handle, $dataxml);       
-        
+            $this->SendDebug("getTVGuide ", $TVGuideURL, 0);
 
-        
-        
-        //xml laden
-        //$xml = simplexml_load_file($dataxml);
+            $url = $TVGuideURL['CurrentProgInfoURL'];
+            //TV Guide file auslesen
+            $ch = curl_init();
+            $timeout = 5;
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+            $data = curl_exec($ch);
+            curl_close($ch);
+             //XML file bereinigen, da sonst nicht als xml lesbar (&)
+            $dataxml=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $data);	  
+
+            $my_file ="programmliste.xml"; 
+            $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
+            fwrite($handle, $dataxml);       
 
 
-        
-        
-        
-        
-        //$file = file_get_contents('programmliste.dat');
-        $xml = simplexml_load_file('programmliste.xml');
-        
-        
-$channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
-$i=0;
-        
-        foreach($channels as $ch){
-            foreach($xml->ProgramInfo as $elem){
-                if($elem->DispChName == $ch){
-                        $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
-                        $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
-                        $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
-                        $Guide = $Guide.$TVGuide[$i]['DispChName'].";".$TVGuide[$i]['Time'].";".$TVGuide[$i]['ProgTitle'].";";
-                        $i=$i+1;
+
+
+            //xml laden
+            //$xml = simplexml_load_file($dataxml);
+
+
+
+
+
+
+            //$file = file_get_contents('programmliste.dat');
+            $xml = simplexml_load_file('programmliste.xml');
+
+
+            $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
+            $i=0;
+
+            foreach($channels as $ch){
+                foreach($xml->ProgramInfo as $elem){
+                    if($elem->DispChName == $ch){
+                            $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
+                            $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
+                            $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
+                            $Guide = $Guide.$TVGuide[$i]['DispChName'].";".$TVGuide[$i]['Time'].";".$TVGuide[$i]['ProgTitle'].";";
+                            $i=$i+1;
+                    }
                 }
-            }
 
-        }
-	setvalue($this->GetIDForIdent("TVGuide"), $Guide);
-        
-	//$this->IPSLog("gg",$TVGuide );
+            }
+            setvalue($this->GetIDForIdent("TVGuide"), $Guide);
+
+             
         }
     }
     
@@ -437,7 +437,28 @@ $i=0;
     }  
     
     
-    
+    /*//////////////////////////////////////////////////////////////////////////////
+    Befehl: ToggleMute()
+    ...............................................................................
+    Toggled Befehl "Mute"
+    ...............................................................................
+    Parameter:  none
+    --------------------------------------------------------------------------------
+    SetValue:   
+    --------------------------------------------------------------------------------
+    return: none
+    --------------------------------------------------------------------------------
+    Status:   
+    //////////////////////////////////////////////////////////////////////////////*/	
+    Public function ToggleMute(){
+        $state[MuteStatus] = GetMuteStatus_MTVA();
+        if ($state == "Disable"){
+            $this->SetMute_MTVA('Enable');
+        }
+        else{
+           $this->SetMute_MTVA('Disable');
+        }	
+    }   
     
     
     

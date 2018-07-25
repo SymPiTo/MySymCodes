@@ -1584,17 +1584,29 @@ trait SamsungUPNP {
     }
      
     //*****************************************************************************
-    /* Function: SetMute_MTVA()
+    /* Function: SetMute_MTVA($mute)
     ...............................................................................
     ...............................................................................
     Parameters: 
+     * $mute = "Enable"    // "Disable"
     --------------------------------------------------------------------------------
     Returns:  
+     * <Result>OK</Result>
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/     
-     public function SetMute_MTVA() {
-        
+     protected function SetMute_MTVA(string $mute) {
+        return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "SetMute",
+
+                               array(
+
+                                      new SoapParam($mute, "Mute"    )
+
+                                    ));
     }  
         
     
@@ -2049,8 +2061,8 @@ trait SamsungUPNP {
         
             return $result;
         } catch (Exception $e) {
-        $this->SendDebug("GetCurrentProgramInformationURL_MTVA ", $e->getMessage(), 0);  
-        return false;
+            $this->SendDebug("GetCurrentProgramInformationURL_MTVA ", $e->getMessage(), 0);  
+            return false;
         }   
     }  
     
@@ -2187,11 +2199,11 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Returns:  (array)
      * [Result] => OK
-     * [MuteStatus] => Disable
+     * [MuteStatus] => Disable  // Enable
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function GetMuteStatus_MTVA(){
+    protected function GetMuteStatus_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
