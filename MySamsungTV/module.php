@@ -478,7 +478,9 @@ class MySamsungTV extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/	
     Public function incVolume(){   
         $actVol = $this->GetVolume_MTVA();
+        $this->SendDebug("incVolume ", $actVol,0);
         $vol = intval($actVol) + 1;
+        $this->SendDebug("incVolume ", $vol,0);
         $this->SetVolume_MTVA((string)$vol);
     
     }
@@ -499,7 +501,9 @@ class MySamsungTV extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/	
     Public function decVolume(){   
         $actVol = $this->GetVolume_MTVA();
+                $this->SendDebug("incVolume ", $actVol,0);
         $vol = intval($actVol) - 1;
+                $this->SendDebug("incVolume ", $vol,0);
         $this->SetVolume_MTVA((string)$vol);
     
     }    
