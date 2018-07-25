@@ -451,9 +451,10 @@ class MySamsungTV extends IPSModule
     Status:   
     //////////////////////////////////////////////////////////////////////////////*/	
     Public function ToggleMute(){
-        $state['MuteStatus'] = $this->GetMuteStatus_MTVA();
+        $result = $this->GetMuteStatus_MTVA();
+        $state = $result['MuteStatus'];
         $this->SendDebug("ToggleMute ", $state,0);
-        if ($state['MuteStatus'] == "Disable"){
+        if ($state == "Disable"){
             $this->SetMute_MTVA('Enable');
         }
         else{
