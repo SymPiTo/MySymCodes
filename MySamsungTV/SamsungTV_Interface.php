@@ -763,9 +763,9 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Returns:  none
    --------------------------------------------------------------------------------
-    Status: 18.07.2018 - OK 
+    Status:  
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function SetVolume_MTVA(integer $volume){
+    protected function SetVolume_MTVA(integer $volume){
 
         $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
