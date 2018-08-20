@@ -2,7 +2,7 @@
 	"elements":
 	[
 			{
-				"name": "ObjectID",
+				"name": "FS20RSU_ID",
 				"type": "SelectObject",
 				"caption": "FS20_RSU Objekt selektieren."
 			},

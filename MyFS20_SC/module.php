@@ -24,6 +24,7 @@ class MyFS20_SC extends IPSModule
         
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
         // Aufruf dieser Form Variable mit -> $this->GetIDForIdent("IDENTNAME")
+        $this->RegisterPropertyInteger("FS20RSU_ID", 0);
         $this->RegisterPropertyFloat("Time_OU", 0.5);
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
@@ -31,9 +32,8 @@ class MyFS20_SC extends IPSModule
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
-       // if (!IPS_VariableExists($this->GetIDForIdent("FSSC_Position"))){
-            $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
-        //}
+        $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
+ 
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("FSSC_Position"), "Rollo.Position");
@@ -45,8 +45,61 @@ class MyFS20_SC extends IPSModule
         parent::ApplyChanges();
        
     }
-    
+    public function RequestAction($Ident, $Value) {
+         switch($Ident) {
+            case "FSSC_Position":
+                //Hier würde normalerweise eine Aktion z.B. das Schalten ausgeführt werden
+                //Ausgaben über 'echo' werden an die Visualisierung zurückgeleitet
+                $this->setRollo($Value);
 
+                //Neuen Wert in die Statusvariable schreiben
+                //SetValue($this->GetIDForIdent($Ident), $Value);
+                break;
+            default:
+                throw new Exception("Invalid Ident");
+        }
+ 
+    }
+
+    
+    
+    
+    public function SetRollo($pos) {
+        $lastPos = getvalue($this->GetIDForIdent("FSSC_Position"));
+        if($pos>$lastPos){
+            //runterfahren
+            //Abstand ermitteln
+            $dpos = $pos-$lastPos;
+            //Zeit ermitteln für dpos
+            $Tdown = getvalue($this->GetIDForIdent("Time_OU"));
+            $Tmid = getvalue($this->GetIDForIdent("Time_OM"));
+            if($dpos<51){
+                $time = $dpos * ($Tmid/50);
+                FS20_SwitchDuration(getvalue($this->GetIDForIdent("FS20RSU_ID")), true, $time); 
+            }
+            else{
+                $time = $dpos * ($Tdown/50);
+                FS20_SwitchDuration(getvalue($this->GetIDForIdent("FS20RSU_ID")), true, $time); 
+            }
+        }
+        else{
+            //hochfahren
+            
+        }
+            
+        
+        SetValue($this->GetIDForIdent($Ident), pos);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 		
 	/**
 	 * gets current IP-Symcon version
