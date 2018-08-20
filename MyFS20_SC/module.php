@@ -43,6 +43,11 @@ class MyFS20_SC extends IPSModule
         $this->RegisterVariableBoolean("UpDown", "Rollo Up/Down");
         $this->RegisterVariableBoolean("Mode", "Mode");
         
+        //String Variable anlegen
+        //RegisterVariableString (  $Ident,  $Name, $Profil, $Position )
+         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+        $this->RegisterVariableString("Test", "ahahaha");
+        
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("FSSC_Position"), "Rollo.Position");
@@ -55,7 +60,8 @@ class MyFS20_SC extends IPSModule
         
         //Wochenplan - Ereignis erzeugen
         $EreignisID = @IPS_GetEventIDByName("SwitchTimeEvent", $this->InstanceID);
-        if (!$EreignisID){
+        setvalue(getvalue($this->GetIDForIdent("Test")), $this->InstanceID);
+        if ($EreignisID == false){
             $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
             IPS_SetName($eid, "SwitchTimeEvent");
             IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
