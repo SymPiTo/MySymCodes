@@ -89,7 +89,7 @@ class MyFS20_SC extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-        
+            $eid = IPS_GetEventIDByName("SwitchTimeEvent", $this->GetIDForIdent("UpDown"));
             if($this->ReadPropertyBoolean("SunRise")){
                 $sunrise = getvalue(56145);
                 $sunrise_H = date("H", $sunrise); 
