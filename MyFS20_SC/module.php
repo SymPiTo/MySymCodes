@@ -86,7 +86,7 @@ class MyFS20_SC extends IPSModule
         else{
             //hochfahren
             //Abstand ermitteln
-            $dpos = $lastPos->$pos;
+            $dpos = $lastPos-$pos;
             //Zeit ermitteln für dpos
             
             $Tdown = $this->ReadPropertyFloat('Time_UO');
