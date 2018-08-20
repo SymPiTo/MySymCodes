@@ -50,6 +50,7 @@ class MyFS20_SC extends IPSModule
         
         //Wochenplan - Ereignis erzeugen
         //if (IPS_EventExists(34881))
+        
         $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
         //Anlegen von Gruppen
         IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
