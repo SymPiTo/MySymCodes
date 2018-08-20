@@ -60,8 +60,8 @@ class MyFS20_SC extends IPSModule
 
         //Anlegen von Aktionen 
         //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'echo 'Hallo';');
-        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'echo 'Hallo';');
+        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'echo "Hallo";');
+        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'echo "Hallo";');
         
 
         
