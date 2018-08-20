@@ -54,16 +54,16 @@ class MyFS20_SC extends IPSModule
         $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
         IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
         IPS_SetEventActive($eid, true);             //Ereignis aktivieren
-        
+        //Anlegen von Gruppen
+        IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+        IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
 
         //Anlegen von Aktionen 
         //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
-        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
+        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'echo 'Hallo';');
+        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'echo 'Hallo';');
         
-        //Anlegen von Gruppen
-        IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-        IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)
+
         
          /* 
         //Anlegen von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr)
