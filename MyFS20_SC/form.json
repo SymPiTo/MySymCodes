@@ -68,7 +68,7 @@
                         { 
                                 "type": "HorizontalSlider", 
                                 "name": "Slider", 
-                                "caption": "ID-Schieberegler", 
+                                "caption": "Position", 
                                 "minimum": 0, 
                                 "maximum": 100, 
                                 "onChange": "SetRollo($id, 50);" 
