@@ -48,9 +48,12 @@ class MyFS20_SC extends IPSModule
         IPS_SetVariableCustomProfile($this->GetIDForIdent("UpDown"), "Rollo.UpDown");
         
         
-        //Ereignis erzeugen
+        //Wochenplan - Ereignis erzeugen
         //if (IPS_EventExists(34881))
         $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
+        //Anlegen von Gruppen
+        IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+        IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
         IPS_SetParent($eid, $_IPS['SELF']);         //Eregnis zuordnen
         IPS_SetEventActive($eid, true);             //Ereignis aktivieren
         
