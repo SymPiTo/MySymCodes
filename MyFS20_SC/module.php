@@ -65,7 +65,7 @@ class MyFS20_SC extends IPSModule
                 break;
             case "UpDown":
                 SetValue($this->GetIDForIdent($Ident), $Value);
-                if($value){
+                if(getvalue($this->GetIDForIdent($Ident))){
                     $this->SetRolloDown();  
                 }
                 else{
