@@ -58,8 +58,8 @@ class MyFS20_SC extends IPSModule
         IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
         IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
         //Anlegen von Aktionen 
-        IPS_SetEventScheduleAction($EreignisID, 0, "Up", 0xFF0000, "FSSC_SetRolloUp();");
-        IPS_SetEventScheduleAction($EreignisID, 1, "Down", 0x0000FF, "FSSC_SetRolloDown();");
+        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, "FSSC_SetRolloUp();");
+        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, "FSSC_SetRolloDown();");
             
  
 
