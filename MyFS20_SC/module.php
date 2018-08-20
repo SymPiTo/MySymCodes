@@ -31,8 +31,9 @@ class MyFS20_SC extends IPSModule
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
-        $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
-
+        if (!IPS_VariableExists($this->GetIDForIdent("FSSC_Position"))){
+            $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
+        }
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("FSSC_Position"), "Rollo.Position");
