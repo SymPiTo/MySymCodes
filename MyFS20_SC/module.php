@@ -85,7 +85,20 @@ class MyFS20_SC extends IPSModule
         }
         else{
             //hochfahren
+            //Abstand ermitteln
+            $dpos = $pos-$lastPos;
+            //Zeit ermitteln für dpos
             
+            $Tdown = $this->ReadPropertyFloat('Time_UO');
+            $Tmid = $this->ReadPropertyFloat('Time_UM');
+            if($dpos<51){
+                $time = $dpos * ($Tmid/50);
+                FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
+            }
+            else{
+                $time = $dpos * ($Tdown/50);
+                FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
+            } 
             
         }
             
