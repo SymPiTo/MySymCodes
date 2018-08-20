@@ -54,31 +54,29 @@ class MyFS20_SC extends IPSModule
         IPS_SetVariableCustomProfile($this->GetIDForIdent("Mode"), "Rollo.Mode");
         
         //Wochenplan - Ereignis erzeugen
-        $EreignisID = @IPS_GetObjectIDByName("RegenerfSwitchTimeEventassung", $this->InstanceID);
+        $EreignisID = @IPS_GetEventIDByName("SwitchTimeEvent", $this->InstanceID);
+        if (!$EreignisID){
+            $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
+            IPS_SetName($eid, "SwitchTimeEvent");
+            IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
+            IPS_SetEventActive($eid, true);             //Ereignis aktivieren
+            //Anlegen von Gruppen
+            IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+            IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
 
-        //if (IPS_EventExists(34881))
-        //$this->InstanceID
-        $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
-        IPS_SetName($eid, "SwitchTimeEvent");
-        IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
-        IPS_SetEventActive($eid, true);             //Ereignis aktivieren
-        //Anlegen von Gruppen
-        IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-        IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
+            //Anlegen von Aktionen 
+            //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
+            IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
+            IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
 
-        //Anlegen von Aktionen 
-        //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
-        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
-        
-        //Anlegen von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr)
-        //IPS_SetEventScheduleGroupPoint ($EreignisID, $GruppenID, $SchaltpunktID, Stunde,Minute,Sekunde, $AktionsID )
-        IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-        IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-        IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-        IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-        
-            
+            //Anlegen von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr)
+            //IPS_SetEventScheduleGroupPoint ($EreignisID, $GruppenID, $SchaltpunktID, Stunde,Minute,Sekunde, $AktionsID )
+            IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+            IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+            IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+            IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+        }
+
  
 
             
