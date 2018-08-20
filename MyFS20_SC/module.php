@@ -89,6 +89,28 @@ class MyFS20_SC extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
+        
+            if($this->ReadPropertyBoolean("SunRise")){
+                $sunrise = getvalue(56145);
+                $sunrise_H = date("H", $sunrise); 
+                $sunrise_M = date("i", $sunrise); 
+                $sunset = getvalue(25305);
+                $sunset_H = date("H", $sunset); 
+                $sunset_M = date("i", $sunset); 
+                //Ändern von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr) ID = 1 (=Sa-So)
+
+                IPS_SetEventScheduleGroupPoint($eid, 0, 0, $sunrise_H, $sunrise_M, 0, 0); //Um Sonnenaufgang Aktion mit ID 0 (Up) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 0, 1, $sunset_H, $sunset_M, 0, 1); //Um Sonnenuntergang Aktion mit ID 1 (Down) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 1, 0, $sunrise_H, $sunrise_M, 0, 0); //Um Sonnenaufgang Aktion mit ID 0 (Up) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 1, 1, $sunset_H, $sunset_M, 0, 1); //Um Sonnenuntergang Aktion mit ID 1 (Down) aufrufen
+            
+            }
+            else {
+                IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+            } 
        
     }
     public function RequestAction($Ident, $Value) {
