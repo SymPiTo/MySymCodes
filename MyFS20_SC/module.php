@@ -90,7 +90,7 @@ class MyFS20_SC extends IPSModule
         }
             
         
-        SetValue($this->GetIDForIdent($Ident), pos);
+        SetValue($this->GetIDForIdent("FSSC_Position"), $pos);
     }
     
     
