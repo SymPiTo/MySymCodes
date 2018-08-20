@@ -23,10 +23,15 @@ class MyFS20_SC extends IPSModule
         //You cannot use variables here. Just static values.}
         
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
+        // Aufruf dieser Form Variable mit -> $this->GetIDForIdent("IDENTNAME")
         $this->RegisterPropertyFloat("Time_OU", 0.5);
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
         $this->RegisterPropertyFloat("Time_UM", 0.5);
+        
+        //Integer Variable anlegen
+        //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
+        $this->RegisterVariableInteger("SC_Position", "Position", "Rollo.Position");
 
     }
     public function ApplyChanges()
