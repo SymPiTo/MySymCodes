@@ -53,6 +53,7 @@ class MyFS20_SC extends IPSModule
         
         $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
         IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
+        IPS_SetEventActive($eid, true);             //Ereignis aktivieren
         
         //Anlegen von Gruppen
         IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
@@ -77,7 +78,7 @@ class MyFS20_SC extends IPSModule
  
 
        
-        IPS_SetEventActive($eid, true);             //Ereignis aktivieren
+        
         */
     }
     public function ApplyChanges()
