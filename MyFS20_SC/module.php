@@ -120,7 +120,7 @@ class MyFS20_SC extends IPSModule
     }
 
     public function SetMode(bool $mode) {
-        $eid = @IPS_GetEventIDByName("SwitchTimeEvent", $this->InstanceID);;
+        $eid = IPS_GetEventIDByName("SwitchTimeEvent", $this->InstanceID);
         if ($mode) {
            IPS_SetEventActive($eid, true); 
         } 
