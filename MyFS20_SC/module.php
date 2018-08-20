@@ -63,7 +63,7 @@ class MyFS20_SC extends IPSModule
             $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
             IPS_SetName($eid, "SwitchTimeEvent");
             IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
-            IPS_SetEventActive($eid, false);             //Ereignis deaktivieren
+            IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
             //Anlegen von Gruppen
             IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
             IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
