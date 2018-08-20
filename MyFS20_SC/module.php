@@ -23,7 +23,7 @@ class MyFS20_SC extends IPSModule
         //You cannot use variables here. Just static values.}
         
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-        // Aufruf dieser Form Variable mit -> $this->GetIDForIdent("IDENTNAME")
+        // Aufruf dieser Form Variable mit $Tup = $this->ReadPropertyFloat('IDENTNAME'); 
         $this->RegisterPropertyInteger("FS20RSU_ID", 0);
         $this->RegisterPropertyFloat("Time_OU", 0.5);
         $this->RegisterPropertyFloat("Time_UO", 0.5);
@@ -32,7 +32,13 @@ class MyFS20_SC extends IPSModule
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
+        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
         $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
+        
+        //Boolean Variable anlegen
+        //void RegisterPropertyBoolean ( string $Name, boolean $Standardwert )
+        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+        $this->RegisterVariableBoolean("UpDown", false);
  
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
@@ -55,6 +61,15 @@ class MyFS20_SC extends IPSModule
                 //Neuen Wert in die Statusvariable schreiben
                 //SetValue($this->GetIDForIdent($Ident), $Value);
                 break;
+            case "UpDown":
+                SetValue($this->GetIDForIdent($Ident), $Value);
+                if($value){
+                    $this->SetRolloDown();  
+                }
+                else{
+                    $this->SetRolloUp();
+                }
+                break;
             default:
                 throw new Exception("Invalid Ident");
         }
@@ -65,13 +80,13 @@ class MyFS20_SC extends IPSModule
     public function SetRolloUp() {
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
-       SetValue($this->GetIDForIdent("FSSC_Position"), 100);
+       SetValue($this->GetIDForIdent("FSSC_Position"), 0);
     }   
 
      public function SetRolloDown() {
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
-       SetValue($this->GetIDForIdent("FSSC_Position"), 0);
+       SetValue($this->GetIDForIdent("FSSC_Position"), 100);
     }   
     
     public function SetRollo($pos) {
