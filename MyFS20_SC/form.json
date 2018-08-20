@@ -2,90 +2,61 @@
 	"elements":
 	[
 			{
-				"name" : "aktiv",
-				"type" :  "CheckBox",
-				"caption" : "aktive"
-			},
-			{
-				"name" : "devicetype",
-				"type" : "Select",
-				"caption" : "device type",
-				"options" : [
-					{
-						"label" : "Please choose",
-						"value" : -1
-					},
-					{
-						"label" : "Samsung UE40D8000",
-						"value" : 0
-					},
-					{
-						"label" : "Type 2",
-						"value" : 1
-					}
-				]
+				"name": "ObjectID",
+				"type": "SelectObject",
+				"caption": "FS20_RSU Objekt selektieren."
 			},
 			{
 				"type" : "Label",
-				"label" : "IP adress"
+				"label" : "Zeit Unten bis oben"
 			},
 			{
-				"name" : "ip",
-				"type" : "ValidationTextBox",
-				"caption" : "IP adress"
+				"name" : "UO",
+				"type": "NumberSpinner",
+				"caption" : "Zeit in Sekunden",
+                                "digits"  : 1
 			},
 			{
 				"type" : "Label",
-				"label" : "update Interval"
+				"label" : "Zeit Oben bis Unten"
 			},
 			{
-				"name" : "updateInterval",
-				"type" : "ValidationTextBox",
-				"caption" : "update Interval [ms]"
+				"name" : "OU",
+				"type" : "NumberSpinner",
+				"caption" : "Zeit in Sekunden",
+                                "digits"  : 1  
 			},
-                    
-                        {       "type" : "SelectFile", 
-                                "name" : "FileData", 
-                                "caption" : "File channellist.txt", 
-                                "extensions" : ".txt" 
-                        }
+			{
+				"type" : "Label",
+				"label" : "Zeit Unten bis Mitte"
+			},
+			{
+				"name" : "UM",
+				"type": "NumberSpinner",
+				"caption" : "Zeit in Sekunden",
+                                "digits"  : 1
+			},
+			{
+				"type" : "Label",
+				"label" : "Zeit Oben bis Mitte"
+			},
+			{
+				"name" : "OM",
+				"type" : "NumberSpinner",
+				"caption" : "Zeit in Sekunden",
+                                "digits"  : 1  
+			}
+
                 
 	],
 	"actions":
 	[
-			{
-				"type" : "Label",
-				"label" : "Update channellist.txt located in media"
-			},
-			{
-				"type" : "Button",
-				"label" : "build ChannelList",
-				"onClick" : "STV_buildChannelList($id);"
-			}
+
         ],
         
 	"status" : 
         [
-			{
-				"code" : 101,
-				"icon" : "inactive",
-				"caption" : "Creating instance."
-			},
-			{
-				"code" : 102,
-				"icon" : "active",
-				"caption" : "Device created."
-			},
-			{
-				"code" : 104,
-				"icon" : "inactive",
-				"caption" : "interface closed."
-			},
-			{
-				"code" : 201,
-				"icon" : "error",
-				"caption" : "special errorcode"
-			}
+
 	]
         
         
