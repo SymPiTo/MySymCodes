@@ -36,14 +36,16 @@ class MyFS20_SC extends IPSModule
         $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
         
         //Boolean Variable anlegen
-        //void RegisterPropertyBoolean ( string $Name, boolean $Standardwert )
+        //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
-        $this->RegisterVariableBoolean("UpDown", false);
+        $this->RegisterVariableBoolean("UpDown", "Rollo Up/Down");
  
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("FSSC_Position"), "Rollo.Position");
-        
+     
+        $this->EnableAction("UpDown");
+        IPS_SetVariableCustomProfile($this->GetIDForIdent("UpDown"), "Rollo.UpDown");
     }
     public function ApplyChanges()
     {
