@@ -2,7 +2,7 @@
 	"id": "{67DF332A-D3B9-680B-E718-2BAB35E8511D}",
 	"name": "MyFS20_SC",
 	"type": 3,
-	"vendor": "",
+	"vendor": "PiTo",
 	"aliases": ["MyFS20SC"],
 	"parentRequirements": [],
 	"childRequirements": [],

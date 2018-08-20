@@ -19,8 +19,14 @@ class MyFS20_SC extends IPSModule
 	//Never delete this line!
         parent::Create();
 		
-		//These lines are parsed on Symcon Startup or Instance creation
+	//These lines are parsed on Symcon Startup or Instance creation
         //You cannot use variables here. Just static values.}
+        
+        // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
+        $TimeOU_ID = $this->RegisterVariableFloat("Time_OU", "Time Up to Down");
+        $TimeUO_ID = $this->RegisterVariableFloat("Time_UO", "Time Down to Up");
+        $TimeOM_ID = $this->RegisterVariableFloat("Time_OM", "Time Up to Mid");
+        $TimeUM_ID = $this->RegisterVariableFloat("Time_UM", "Time Down to Mid");
     }
     public function ApplyChanges()
     {

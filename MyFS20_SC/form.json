@@ -11,7 +11,7 @@
 				"label" : "Zeit Unten bis oben"
 			},
 			{
-				"name" : "UO",
+				"name" : "Time_UO",
 				"type": "NumberSpinner",
 				"caption" : "Zeit in Sekunden",
                                 "digits"  : 1
@@ -21,7 +21,7 @@
 				"label" : "Zeit Oben bis Unten"
 			},
 			{
-				"name" : "OU",
+				"name" : "Time_OU",
 				"type" : "NumberSpinner",
 				"caption" : "Zeit in Sekunden",
                                 "digits"  : 1  
@@ -31,7 +31,7 @@
 				"label" : "Zeit Unten bis Mitte"
 			},
 			{
-				"name" : "UM",
+				"name" : "Time_UM",
 				"type": "NumberSpinner",
 				"caption" : "Zeit in Sekunden",
                                 "digits"  : 1
@@ -41,7 +41,7 @@
 				"label" : "Zeit Oben bis Mitte"
 			},
 			{
-				"name" : "OM",
+				"name" : "Time_OM",
 				"type" : "NumberSpinner",
 				"caption" : "Zeit in Sekunden",
                                 "digits"  : 1  
