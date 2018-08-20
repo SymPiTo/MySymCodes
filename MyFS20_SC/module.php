@@ -29,6 +29,8 @@ class MyFS20_SC extends IPSModule
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
         $this->RegisterPropertyFloat("Time_UM", 0.5);
+        $this->RegisterPropertyBoolean("SunRise", true);
+
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
@@ -39,7 +41,8 @@ class MyFS20_SC extends IPSModule
         //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
         $this->RegisterVariableBoolean("UpDown", "Rollo Up/Down");
- 
+        $this->RegisterVariableBoolean("Mode", "Mode");
+        
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("FSSC_Position"), "Rollo.Position");
@@ -47,11 +50,16 @@ class MyFS20_SC extends IPSModule
         $this->EnableAction("UpDown");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("UpDown"), "Rollo.UpDown");
         
+        $this->EnableAction("Mode");
+        IPS_SetVariableCustomProfile($this->GetIDForIdent("Mode"), "Rollo.Mode");
         
         //Wochenplan - Ereignis erzeugen
+        $EreignisID = @IPS_GetObjectIDByName("RegenerfSwitchTimeEventassung", $this->InstanceID);
+
         //if (IPS_EventExists(34881))
-        
+        //$this->InstanceID
         $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
+        IPS_SetName($eid, "SwitchTimeEvent");
         IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
         IPS_SetEventActive($eid, true);             //Ereignis aktivieren
         //Anlegen von Gruppen
