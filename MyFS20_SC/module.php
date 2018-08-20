@@ -60,8 +60,8 @@ class MyFS20_SC extends IPSModule
 
         //Anlegen von Aktionen 
         //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'echo "Hallo";');
-        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'echo "Hallo";');
+        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS['SELF']);');
+        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS['SELF']);');
         
         //Anlegen von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr)
         //IPS_SetEventScheduleGroupPoint ($EreignisID, $GruppenID, $SchaltpunktID, Stunde,Minute,Sekunde, $AktionsID )
@@ -74,8 +74,8 @@ class MyFS20_SC extends IPSModule
 
         //Anlegen von Aktionen 
         //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
-        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
+        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS['SELF']);');
+        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS['SELF']);');
         IPS_SetEventScheduleAction($eid, 2, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
         IPS_SetEventScheduleAction($eid, 3, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
  
