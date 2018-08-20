@@ -23,10 +23,11 @@ class MyFS20_SC extends IPSModule
         //You cannot use variables here. Just static values.}
         
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-        $TimeOU_ID = $this->RegisterVariableFloat("Time_OU", "Time Up to Down");
-        $TimeUO_ID = $this->RegisterVariableFloat("Time_UO", "Time Down to Up");
-        $TimeOM_ID = $this->RegisterVariableFloat("Time_OM", "Time Up to Mid");
-        $TimeUM_ID = $this->RegisterVariableFloat("Time_UM", "Time Down to Mid");
+        $this->RegisterPropertyFloat("Time_OU", 0.5);
+        $this->RegisterPropertyFloat("Time_UO", 0.5);
+        $this->RegisterPropertyFloat("Time_OM", 0.5);
+        $this->RegisterPropertyFloat("Time_UM", 0.5);
+
     }
     public function ApplyChanges()
     {
