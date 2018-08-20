@@ -62,10 +62,10 @@ class MyFS20_SC extends IPSModule
         IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 3); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
         //Anlegen von Aktionen 
         //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, "FSSC_SetRolloUp();");
-        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, "FSSC_SetRolloDown();");
-        IPS_SetEventScheduleAction($eid, 2, "Up", 0xFF0000, "FSSC_SetRolloUp();");
-        IPS_SetEventScheduleAction($eid, 3, "Down", 0x0000FF, "FSSC_SetRolloDown();");  
+        IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
+        IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
+        IPS_SetEventScheduleAction($eid, 2, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
+        IPS_SetEventScheduleAction($eid, 3, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
  
 
         IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
