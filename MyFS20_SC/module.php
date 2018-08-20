@@ -62,7 +62,17 @@ class MyFS20_SC extends IPSModule
     }
 
     
-    
+    public function SetRolloUp() {
+       $Tup = $this->ReadPropertyFloat('Time_UO'); 
+       FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
+       SetValue($this->GetIDForIdent("FSSC_Position"), 100);
+    }   
+
+     public function SetRolloDown() {
+       $Tdown = $this->ReadPropertyFloat('Time_OU'); 
+       FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
+       SetValue($this->GetIDForIdent("FSSC_Position"), 0);
+    }   
     
     public function SetRollo($pos) {
         $lastPos = getvalue($this->GetIDForIdent("FSSC_Position"));
@@ -89,14 +99,14 @@ class MyFS20_SC extends IPSModule
             $dpos = $lastPos-$pos;
             //Zeit ermitteln für dpos
             
-            $Tdown = $this->ReadPropertyFloat('Time_UO');
+            $Tup = $this->ReadPropertyFloat('Time_UO');
             $Tmid = $this->ReadPropertyFloat('Time_UM');
             if($dpos<51){
                 $time = $dpos * ($Tmid/50);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
             }
             else{
-                $time = $dpos * ($Tdown/50);
+                $time = $dpos * ($Tup/50);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
             } 
             

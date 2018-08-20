@@ -51,7 +51,28 @@
 	],
 	"actions":
 	[
-
+    			{
+				"type" : "Label",
+				"label" : "Test Umgebung:"
+			},
+                        { 
+                                "type": "Button", 
+                                "caption": "Hoch", 
+                                "onClick": "FSSC_SetRolloUp($id);" 
+                        },
+                        { 
+                                "type": "Button", 
+                                "caption": "Runter", 
+                                "onClick": "FSSC_SetRolloDown($id);" 
+                        },
+                        { 
+                                "type": "HorizontalSlider", 
+                                "name": "Slider", 
+                                "caption": "ID-Schieberegler", 
+                                "minimum": 0, 
+                                "maximum": 100, 
+                                "onChange": "SetRollo($id, 50);" 
+                        }
         ],
         
 	"status" : 
