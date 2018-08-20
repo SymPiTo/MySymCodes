@@ -60,7 +60,7 @@ class MyFS20_SC extends IPSModule
         
         //Wochenplan - Ereignis erzeugen
         $EreignisID = @IPS_GetEventIDByName("SwitchTimeEvent", $this->InstanceID);
-        setvalue(getvalue($this->GetIDForIdent("Test")), (string)($this->InstanceID));
+        setvalue(getvalue($this->GetIDForIdent("Test")), (string)$EreignisID);
         if ($EreignisID == false){
             $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
             IPS_SetName($eid, "SwitchTimeEvent");
