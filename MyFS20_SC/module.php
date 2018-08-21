@@ -103,7 +103,7 @@ class MyFS20_SC extends IPSModule
         
         //Aktionen erstellen mit  ($EventID, $ActionID, $Name, $Color, $Script)
 	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 0, "Up", 0x40FF00, "FSSC_SetRolloUp(\$_IPS['TARGET']);");
-	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 1, "Down", 0xFF0040, "FSSC_SetRolloUp(\$_IPS['TARGET']);");
+	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 1, "Down", 0xFF0040, "FSSC_SetRolloDown(\$_IPS['TARGET']);");
          
 
 
@@ -128,7 +128,7 @@ class MyFS20_SC extends IPSModule
             else {
                 //Ändern von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr) ID = 1 (=Sa-So)
                 IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 0, 1, 11, 04, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
                 IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
                 IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
             } 
