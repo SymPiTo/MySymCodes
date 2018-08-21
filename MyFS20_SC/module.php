@@ -189,10 +189,10 @@ class MyFS20_SC extends IPSModule
      public function SetRolloStop() {
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){
-            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
+            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0); 
        }
        else{
-           FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0); 
+           FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
        }     
     }  
     
