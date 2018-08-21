@@ -58,30 +58,7 @@ class MyFS20_SC extends IPSModule
         $this->EnableAction("Mode");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("Mode"), "Rollo.Mode");
         
-        //Wochenplan - Ereignis erzeugen
 
-            //$eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
-            //IPS_SetName($eid, "SwitchTimeEvent");
-            //IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
-            //IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
-            //Anlegen von Gruppen
-            //IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-            //IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
-
-            //Anlegen von Aktionen 
-            //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-            //IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
-            //IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
-
-            //Anlegen von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr)
-            //IPS_SetEventScheduleGroupPoint ($EreignisID, $GruppenID, $SchaltpunktID, Stunde,Minute,Sekunde, $AktionsID )
-           // IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-            //IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-            //IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-            //IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-    
-
- 
 
             
     }
@@ -90,51 +67,56 @@ class MyFS20_SC extends IPSModule
 	//Never delete this line!
         parent::ApplyChanges();
         //Wird ausgeführt, wenn auf der Konfigurationsseite "Übernehmen" gedrückt wird und nach dem unittelbaren Erstellen der Instanz.
-        
+        //--------------------------------------------------------------------------------------------------------------------------------
+            
     	// Anlegen des Wochenplans mit ($Name, $Ident, $Typ, $Parent, $Position)
 	$this->RegisterEvent("Wochenplan", "SwitchTimeEvent".$this->InstanceID, 2, $this->InstanceID, 20);    
- 
-    
+     
 	// Anlegen der Daten für den Wochenplan
         IPS_SetEventScheduleGroup($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
         IPS_SetEventScheduleGroup($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 1, 96); //Sa + So (32 + 64)     
-        
-
         
         //Aktionen erstellen mit  ($EventID, $ActionID, $Name, $Color, $Script)
 	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 0, "Up", 0x40FF00, "FSSC_SetRolloUp(\$_IPS['TARGET']);");
 	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 1, "Down", 0xFF0040, "FSSC_SetRolloDown(\$_IPS['TARGET']);");
          
+        //Ändern von Schaltpunkten für Gruppe mit ID = 0 (Mo-Fr) ID = 1 (Sa-So)
+        $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
+        IPS_SetEventScheduleGroupPoint($eid, 0, 0, 7, 0, 0, 0); //Um 7:00 Aktion mit ID 0 (Up) aufrufen
+        IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 00, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+        IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+        IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 00, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+        IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
+
+    	// Anlegen des cyclic events SunRise mit ($Name, $Ident, $Typ, $Parent, $Position)
+	$this->RegisterEvent("SunRise", "SunRiseEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
+        $SunRiseEventID = $this->GetIDForIdent("SunRiseEvent".$this->InstanceID);
+        // täglich, um x Uhr
+        $sunrise = getvalue(56145);
+        $sunrise_H = date("H", $sunrise); 
+        $sunrise_M = date("i", $sunrise); 
+        IPS_SetEventCyclicTimeFrom($SunRiseEventID, $sunrise_H, $sunrise_M, 0);
+    	// Anlegen des cyclic events SunSet mit ($Name, $Ident, $Typ, $Parent, $Position)
+	$this->RegisterEvent("SunSet", "SunSetEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
+        $SunSetEventID = $this->GetIDForIdent("SunSetEvent".$this->InstanceID);
+        // täglich, um x Uhr
+        $sunset = getvalue(25305);
+        $sunset_H = date("H", $sunset); 
+        $sunset_M = date("i", $sunset); 
+        IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
 
 
 
-
-            $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
-            if($this->ReadPropertyBoolean("SunRise")){
-                $sunrise = getvalue(56145);
-                $sunrise_H = date("H", $sunrise); 
-                $sunrise_M = date("i", $sunrise); 
-                $sunset = getvalue(25305);
-                $sunset_H = date("H", $sunset); 
-                $sunset_M = date("i", $sunset); 
-                //Ändern von Schaltpunkten für Gruppe mit ID = 0 (Mo-Fr) ID = 1 (Sa-So)
-                //Schaltpunkten mit ID 1 für Gruppe mit ID = 0 (=Mo-Fr) wieder löschen
-
-                IPS_SetEventScheduleGroupPoint($eid, 0, 0, $sunrise_H, $sunrise_M, 0, 0); //Um Sonnenaufgang Aktion mit ID 0 (Up) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 0, 1, $sunset_H, $sunset_M, 0, 1); //Um Sonnenuntergang Aktion mit ID 1 (Down) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 1, 0, $sunrise_H, $sunrise_M, 0, 0); //Um Sonnenaufgang Aktion mit ID 0 (Up) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 1, 1, $sunset_H, $sunset_M, 0, 1); //Um Sonnenuntergang Aktion mit ID 1 (Down) aufrufen
-                IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
-            }
-            else {
-                //Ändern von Schaltpunkten für Gruppe mit ID = 0 (Mo-Fr) ID = 1 (Sa-So)
-
-                IPS_SetEventScheduleGroupPoint($eid, 0, 0, 6, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 0, 1, 11, 20, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-                IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
-            } 
+        
+            
+        if($this->ReadPropertyBoolean("SunRise")){
+            IPS_SetEventActive($SunRiseEventID, true);             //Ereignis  aktivieren
+            IPS_SetEventActive($SunSetEventID, true);             //Ereignis  aktivieren
+        }
+        else {
+            IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  aktivieren
+            IPS_SetEventActive($SunSetEventID, false);             //Ereignis  aktivieren
+        } 
        
     }
     public function RequestAction($Ident, $Value) {
@@ -251,7 +233,7 @@ class MyFS20_SC extends IPSModule
 		    	IPS_SetIdent($EventID, $Ident);
 		    	IPS_SetName($EventID, $Name);
 		    	IPS_SetPosition($EventID, $Position);
-		    	IPS_SetEventActive($EventID, true);  
+		    	IPS_SetEventActive($EventID, false);  
 		}
 	}
     
