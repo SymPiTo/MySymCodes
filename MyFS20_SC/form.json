@@ -71,6 +71,11 @@
                         },
                         { 
                                 "type": "Button", 
+                                "caption": "Stop", 
+                                "onClick": "FSSC_SetRolloStop($id);" 
+                        },
+                        { 
+                                "type": "Button", 
                                 "caption": "Runter", 
                                 "onClick": "FSSC_SetRolloDown($id);" 
                         },
