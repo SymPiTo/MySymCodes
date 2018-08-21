@@ -111,13 +111,24 @@ class MyFS20_SC extends IPSModule
         if($this->ReadPropertyBoolean("SunRise")){
             IPS_SetEventActive($SunRiseEventID, true);             //Ereignis  aktivieren
             IPS_SetEventActive($SunSetEventID, true);             //Ereignis  aktivieren
-            IPS_SetEventActive($eid, false);             //Ereignis  aktivieren
-            
+            IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
+            IPS_SetHidden($eid, true); //Objekt verstecken
+            IPS_SetDisabled($eid, true);// Das Objekt wird inaktiv gesetzt.
+             IPS_SetHidden($SunRiseEventID, false); //Objekt verstecken
+            IPS_SetDisabled($SunRiseEventID, true);// Das Objekt wird inaktiv gesetzt.
+            IPS_SetHidden($SunSetEventID, false); //Objekt verstecken
+            IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
         }
         else {
             IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  deaktivieren
             IPS_SetEventActive($SunSetEventID, false);             //Ereignis  deaktivieren
             IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
+            IPS_SetHidden($eid, false); //Objekt nicht verstecken
+            IPS_SetDisabled($eid, false);// Das Objekt wird aktiv gesetzt.
+            IPS_SetHidden($SunRiseEventID, true); //Objekt verstecken
+            IPS_SetDisabled($SunRiseEventID, true);// Das Objekt wird inaktiv gesetzt.
+            IPS_SetHidden($SunSetEventID, true); //Objekt verstecken
+            IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
         } 
        
     }
