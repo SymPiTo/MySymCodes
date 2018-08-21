@@ -96,6 +96,7 @@ class MyFS20_SC extends IPSModule
         $sunrise_H = date("H", $sunrise); 
         $sunrise_M = date("i", $sunrise); 
         IPS_SetEventCyclicTimeFrom($SunRiseEventID, $sunrise_H, $sunrise_M, 0);
+        IPS_SetEventScript($SunRiseEventID, "FSSC_SetRolloUp(\$_IPS['TARGET']);");
     	// Anlegen des cyclic events SunSet mit ($Name, $Ident, $Typ, $Parent, $Position)
 	$this->RegisterEvent("SunSet", "SunSetEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
         $SunSetEventID = $this->GetIDForIdent("SunSetEvent".$this->InstanceID);
@@ -104,21 +105,20 @@ class MyFS20_SC extends IPSModule
         $sunset_H = date("H", $sunset); 
         $sunset_M = date("i", $sunset); 
         IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
+        IPS_SetEventScript($SunSetEventID, "FSSC_SetRolloDown(\$_IPS['TARGET']);");
 
-
-
-        
             
         if($this->ReadPropertyBoolean("SunRise")){
             IPS_SetEventActive($SunRiseEventID, true);             //Ereignis  aktivieren
             IPS_SetEventActive($SunSetEventID, true);             //Ereignis  aktivieren
         }
         else {
-            IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  aktivieren
-            IPS_SetEventActive($SunSetEventID, false);             //Ereignis  aktivieren
+            IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  deaktivieren
+            IPS_SetEventActive($SunSetEventID, false);             //Ereignis  deaktivieren
         } 
        
     }
+    
     public function RequestAction($Ident, $Value) {
          switch($Ident) {
             case "FSSC_Position":
