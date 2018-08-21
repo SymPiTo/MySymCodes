@@ -60,25 +60,25 @@ class MyFS20_SC extends IPSModule
         
         //Wochenplan - Ereignis erzeugen
 
-            $eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
-            IPS_SetName($eid, "SwitchTimeEvent");
-            IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
-            IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
+            //$eid = IPS_CreateEvent(2);                  //Wochenplan Ereignis
+            //IPS_SetName($eid, "SwitchTimeEvent");
+            //IPS_SetParent($eid, $this->GetIDForIdent("UpDown"));         //Eregnis zuordnen
+            //IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
             //Anlegen von Gruppen
-            IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-            IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
+            //IPS_SetEventScheduleGroup($eid, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+            //IPS_SetEventScheduleGroup($eid, 1, 96); //Sa + So (32 + 64)      
 
             //Anlegen von Aktionen 
             //IPS_SetEventScheduleAction ($EreignisID, $AktionsID, $Name, $Farbe, $Skriptinhalt )
-            IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
-            IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
+            //IPS_SetEventScheduleAction($eid, 0, "Up", 0xFF0000, 'FSSC_SetRolloUp($_IPS[\'TARGET\']);');
+            //IPS_SetEventScheduleAction($eid, 1, "Down", 0x0000FF, 'FSSC_SetRolloDown($_IPS[\'TARGET\']);');
 
             //Anlegen von Schaltpunkten für Gruppe mit ID = 0 (=Mo-Fr)
             //IPS_SetEventScheduleGroupPoint ($EreignisID, $GruppenID, $SchaltpunktID, Stunde,Minute,Sekunde, $AktionsID )
-            IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-            IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
-            IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-            IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+           // IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+            //IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+            //IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
+            //IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
     
 
  
@@ -89,7 +89,27 @@ class MyFS20_SC extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-            $eid = IPS_GetEventIDByName("SwitchTimeEvent", $this->GetIDForIdent("UpDown"));
+        //Wird ausgeführt, wenn auf der Konfigurationsseite "Übernehmen" gedrückt wird und nach dem unittelbaren Erstellen der Instanz.
+        
+    	// Anlegen des Wochenplans mit ($Name, $Ident, $Typ, $Parent, $Position)
+	$this->RegisterEvent("Wochenplan", "SwitchTimeEvent".$this->InstanceID, 2, $this->InstanceID, 20);    
+ 
+    
+	// Anlegen der Daten für den Wochenplan
+        IPS_SetEventScheduleGroup($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+        IPS_SetEventScheduleGroup($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 1, 96); //Sa + So (32 + 64)     
+        
+
+        
+        //Aktionen erstellen mit  ($EventID, $ActionID, $Name, $Color, $Script)
+	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 0, "Up", 0x40FF00, "FSSC_SetRolloUp(\$_IPS['TARGET']);");
+	$this->RegisterScheduleAction($this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID), 1, "Down", 0xFF0040, "FSSC_SetRolloUp(\$_IPS['TARGET']);");
+         
+
+
+
+
+            $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
             if($this->ReadPropertyBoolean("SunRise")){
                 $sunrise = getvalue(56145);
                 $sunrise_H = date("H", $sunrise); 
@@ -212,9 +232,31 @@ class MyFS20_SC extends IPSModule
     
     
     
+    	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+		    	$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+		    	IPS_DeleteEvent($eid);
+		    	$eid = 0;
+		}
+		//we need to create one
+		if ($eid == 0) {
+			$EventID = IPS_CreateEvent($Typ);
+		    	IPS_SetParent($EventID, $Parent);
+		    	IPS_SetIdent($EventID, $Ident);
+		    	IPS_SetName($EventID, $Name);
+		    	IPS_SetPosition($EventID, $Position);
+		    	IPS_SetEventActive($EventID, true);  
+		}
+	}
     
     
-    
+	private function RegisterScheduleAction($EventID, $ActionID, $Name, $Color, $Script)
+	{
+		IPS_SetEventScheduleAction($EventID, $ActionID, $Name, $Color, $Script);
+	}
     
 		
 	/**
