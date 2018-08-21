@@ -85,7 +85,7 @@
                                 "caption": "Position", 
                                 "minimum": 0, 
                                 "maximum": 100, 
-                                "onChange": "FSSC_SetRollo($id, $_IPS['VALUE']);" 
+                                "onChange": "setvalue(34080, $_IPS['VALUE']);" 
                         }
         ],
         
