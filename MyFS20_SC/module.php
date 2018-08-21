@@ -161,6 +161,14 @@ class MyFS20_SC extends IPSModule
  
     }
 
+    public function StepRolloDown(){
+        FS20_DimDown($this->ReadPropertyInteger("FS20RSU_ID"));
+    }   
+    
+    public function StepRolloUp(){
+        FS20_DimUp($this->ReadPropertyInteger("FS20RSU_ID"));
+    }
+    
     public function SetMode(bool $mode) {
         $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
         if ($mode) {
