@@ -29,7 +29,7 @@ class MyFS20_SC extends IPSModule
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
         $this->RegisterPropertyFloat("Time_UM", 0.5);
-        $this->RegisterPropertyBoolean("SunRise", true);
+        $this->RegisterPropertyBoolean("SunRise", false);
 
         
         //Integer Variable anlegen
