@@ -127,7 +127,7 @@ class MyFS20_SC extends IPSModule
             else {
                 //Ändern von Schaltpunkten für Gruppe mit ID = 0 (Mo-Fr) ID = 1 (Sa-So)
                 IPS_SetEventScheduleGroupPoint($eid, 0, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
-                IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 04, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+                IPS_SetEventScheduleGroupPoint($eid, 0, 1, 11, 15, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
                 IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
                 IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
                 IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
