@@ -111,10 +111,13 @@ class MyFS20_SC extends IPSModule
         if($this->ReadPropertyBoolean("SunRise")){
             IPS_SetEventActive($SunRiseEventID, true);             //Ereignis  aktivieren
             IPS_SetEventActive($SunSetEventID, true);             //Ereignis  aktivieren
+            IPS_SetEventActive($eid, false);             //Ereignis  aktivieren
+            
         }
         else {
             IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  deaktivieren
             IPS_SetEventActive($SunSetEventID, false);             //Ereignis  deaktivieren
+            IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
         } 
        
     }
