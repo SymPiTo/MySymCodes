@@ -175,12 +175,14 @@ class MyFS20_SC extends IPSModule
     public function SetRolloUp() {
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
+       Setvalue($this->GetIDForIdent("UpDown"),false);
        SetValue($this->GetIDForIdent("FSSC_Position"), 0);
     }   
 
      public function SetRolloDown() {
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
+       Setvalue($this->GetIDForIdent("UpDown"),true); 
        SetValue($this->GetIDForIdent("FSSC_Position"), 100);
     }   
     
