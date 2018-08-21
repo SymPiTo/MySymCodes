@@ -209,10 +209,12 @@ class MyFS20_SC extends IPSModule
             if($dpos<51){
                 $time = $dpos * ($Tmid/50);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $time); 
+                Setvalue($this->GetIDForIdent("UpDown"),true); 
             }
             else{
                 $time = $dpos * ($Tdown/50);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $time); 
+                Setvalue($this->GetIDForIdent("UpDown"),true); 
             }
         }
         else{
@@ -226,10 +228,12 @@ class MyFS20_SC extends IPSModule
             if($dpos<51){
                 $time = $dpos * ($Tmid/50);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
+                Setvalue($this->GetIDForIdent("UpDown"),false); 
             }
             else{
                 $time = $dpos * ($Tup/50);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
+                Setvalue($this->GetIDForIdent("UpDown"),false);
             } 
             
         }
