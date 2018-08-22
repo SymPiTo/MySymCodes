@@ -762,7 +762,7 @@ class '.$modulename.'Splitter extends IPSModule
 
     protected function CreateDeviceModuleJSONScript($guids, $deviceident, $CategoryID)
     {
-		$dataflowtype = $this->ReadPropertyInteger("dataflowtype");
+	$dataflowtype = $this->ReadPropertyInteger("dataflowtype");
     	$vendor = $this->ReadPropertyString("vendor");
         $prefix = $this->ReadPropertyString("prefix");
         $aliases = $this->ReadPropertyString("aliases");
@@ -846,18 +846,73 @@ class '.$modulename.'Splitter extends IPSModule
             IPS_SetName($ScriptID, $Scriptname);
             IPS_SetParent($ScriptID, $CategoryID);
             IPS_SetIdent($ScriptID, $deviceident);
+            
+            
             $content = '<?
-
-class '.$modulename.' extends IPSModule
+/**
+ * Title: FS20 RSU Shutter Control
+  *
+ * author PiTo
+ * 
+ * GITHUB = <https://github.com/SymPiTo/MySymCodes/tree/master/MyFS20_SC>
+ * 
+ * Version:1.0.2018.08.21
+ */
+//Class: '.$modulename.'
+class '.$modulename." extends IPSModule
 {
+    /* 
+    _______________________________________________________________________ 
+     Section: Internal Modul Funtions
+     Die folgenden Funktionen sind Standard Funktionen zur Modul Erstellung.
+    _______________________________________________________________________ 
+     */
+            
+    /* ------------------------------------------------------------ 
+    Function: Create  
+    Create() wird einmalig beim Erstellen einer neuen Instanz und 
+    neu laden der Modulesausgeführt. Vorhandene Variable werden nicht veändert, auch nicht 
+    eingetragene Werte (Properties).
+    Variable können hier nicht verwendet werden nur statische Werte.
+    Überschreibt die interne IPS_Create($id)  Funktion
+   
+     CONFIG-VARIABLE:
+      FS20RSU_ID   -   ID des FS20RSU Modules (selektierbar).
+     
+    STANDARD-AKTIONEN:
+      FSSC_Position    -   Position (integer)
 
+    ------------------------------------------------------------- */
     public function Create()
     {
 	//Never delete this line!
         parent::Create();
-		
-		//These lines are parsed on Symcon Startup or Instance creation
-        //You cannot use variables here. Just static values.';
+
+         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
+         //Aufruf dieser Form Variable mit $variable = $this->ReadPropertyFloat("IDENTNAME")
+        //$this->RegisterPropertyInteger("FS20RSU_ID", 0);
+        //$this->RegisterPropertyFloat("Time_OU", 0.5);
+        //$this->RegisterPropertyBoolean("SunRise", false);
+        
+            
+        
+        //Integer Variable anlegen
+        //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
+        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+        //$this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
+    
+      
+        //Boolean Variable anlegen
+        //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
+        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+        //$this->RegisterVariableBoolean("Mode", "Mode");
+        
+        //String Variable anlegen
+        //RegisterVariableString (  $Ident,  $Name, $Profil, $Position )
+         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+      
+
+    .";
             if($dataflowtype == 0)
 			{
 				$content .= '$this->ConnectParent("'.$splitter_guid.'"); // Splitter';
