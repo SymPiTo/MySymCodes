@@ -331,7 +331,7 @@ class MyFS20_SC extends IPSModule
            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
        }     
        $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = $VarArray["VariableUpdated"];
+       $zeit = time();
        $dTime = $zeit - $startTime;
        Setvalue($this->GetIDForIdent("FSSC_Timer1"), $zeit);
     }  
