@@ -318,7 +318,7 @@ class MyFS20_SC extends IPSModule
         none
     --------------------------------------------------------------------------------
     Returns:    
-        none
+         none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
        $EreignisInfo = IPS_GetEvent($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID));
