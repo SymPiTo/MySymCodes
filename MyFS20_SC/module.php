@@ -294,7 +294,7 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
     public function SetRolloUp() {
-       SendDebug( "SetRolloUp", "Fahre Rolladen hoch", 0); 
+       $this->SendDebug( "SetRolloUp", "Fahre Rolladen hoch", 0); 
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
@@ -313,7 +313,7 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloDown() {
-        SendDebug( "SetRolloDown", "Fahre Rolladen runter", 0); 
+       $this->SendDebug( "SetRolloDown", "Fahre Rolladen runter", 0); 
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
@@ -332,11 +332,12 @@ class MyFS20_SC extends IPSModule
          none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
+        $this->SendDebug( "SetRolloStop", "Rolladen anhalten", 0);
         $this->SetTimerInterval("LaufzeitTimer", 0);  
         $jetzt = time();
         $StartTime = getvalue($this->GetIDForIdent("FSSC_Timer")); 
         $Laufzeit =  $jetzt - $StartTime;  
-        SendDebug( "SetRolloStop", "Laufzeit: ".$Laufzeit, 0); 
+        $this->SendDebug( "SetRolloStop", "Laufzeit: ".$Laufzeit, 0); 
         $aktPos = getvalue($this->GetIDForIdent("FSSC_Position"));
         if ($aktPos > 99){$aktPos = 0;}
         $direct = getvalue($this->GetIDForIdent("UpDown"));  
