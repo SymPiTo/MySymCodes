@@ -121,7 +121,7 @@ class MyFS20_SC extends IPSModule
         //anlegen eines Zyklischen Laufzeit Events mit Interval
         $this->RegisterEvent("Laufzeit", "LaufzeitEvent".$this->InstanceID, 1, $this->InstanceID, 22);
         $LaufzeitEventID = $this->GetIDForIdent("LaufzeitEvent".$this->InstanceID);
-        IPS_SetEventCyclic($LaufzeitEventID, 0, 0, 0, 0, 1, 30 /* Alle 30 Sekunden */);    
+        IPS_SetEventCyclic($LaufzeitEventID, 0, 0, 0, 0, 1, 35 /* Alle 35 Sekunden */);    
         IPS_SetEventScript($LaufzeitEventID, "FSSC_reset(\$_IPS['TARGET']);");
         
     	// Anlegen des cyclic events SunRise mit ($Name, $Ident, $Typ, $Parent, $Position)
@@ -330,20 +330,18 @@ class MyFS20_SC extends IPSModule
        setvalue(37611,$StartTime);
        setvalue(56551,$jetzt);
        setvalue(49920,$Laufzeit);
+       $aktPos = getvalue($this->GetIDForIdent("FSSC_Position"));
+       if ($aktPos > 99){$aktPos = 0;}
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){  
-            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0); 
+            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0);
+            Setvalue($this->GetIDForIdent("FSSC_Position"), $aktPos + ($Laufzeit * (100/$this->ReadPropertyFloat('Time_OU'))));
        }
        else{
            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
+           Setvalue($this->GetIDForIdent("FSSC_Position"), $aktPos - ($Laufzeit * (100/$this->ReadPropertyFloat('Time_UO'))));  
        }     
-            
-       if($direct){
-            Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) + ($Laufzeit * (100/$this->ReadPropertyFloat('Time_OU'))));
-       }
-       else{
-          Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) - ($Laufzeit * (100/$this->ReadPropertyFloat('Time_UO'))));  
-       } 
+
     }  
     //*****************************************************************************
     /* Function: SetRollo
