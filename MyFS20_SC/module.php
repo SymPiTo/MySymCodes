@@ -421,6 +421,7 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
     public function reset(){
+       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);         
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){
             SetValue($this->GetIDForIdent("FSSC_Position"), 100);
@@ -428,8 +429,6 @@ class MyFS20_SC extends IPSModule
        else{
            SetValue($this->GetIDForIdent("FSSC_Position"), 0);
        } 
-       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);  
-        
     }
     
     //*****************************************************************************
