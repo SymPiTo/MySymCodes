@@ -326,8 +326,8 @@ class MyFS20_SC extends IPSModule
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);  
        
        $Laufzeit =  $NextEvent - time();  
-       setvalue(24314,$NextEvent);
-       setvalue(43446,$time);
+       setvalue(37611,$NextEvent);
+       setvalue(56551,$time);
        setvalue(49920,$Laufzeit);
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){  
