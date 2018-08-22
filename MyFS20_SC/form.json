@@ -60,7 +60,17 @@
 	],
 	"actions":
 	[
-    			{
+                        { 
+                                "type": "Button", 
+                                "caption": "Step Up", 
+                                "onClick": "FSSC_StepRolloUp($id);" 
+                        },
+                        { 
+                                "type": "Button", 
+                                "caption": "Step Down", 
+                                "onClick": "FSSC_StepRolloDown($id);" 
+                        },
+                        {
 				"type" : "Label",
 				"label" : "Test Umgebung:"
 			},
@@ -86,11 +96,6 @@
                                 "minimum": 0, 
                                 "maximum": 100, 
                                 "onChange": "FSSC_SetRollo($id, 50);" 
-                        },
-                        { 
-                                "type": "Button", 
-                                "caption": "Einstellen", 
-                                "onClick": "FSSC_Setup($id);" 
                         }
         ],
         
