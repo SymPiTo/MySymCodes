@@ -52,13 +52,14 @@ class MyFS20_SC extends IPSModule
         $this->RegisterPropertyFloat("Time_UM", 0.5);
         $this->RegisterPropertyBoolean("SunRise", false);
         
-        
+            
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
         $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
-        
+        $this->RegisterVariableInteger("FSSC_Timer", "Timer", "");
+         
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
@@ -97,7 +98,7 @@ class MyFS20_SC extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-$this->Setup();
+
     	// Anlegen des Wochenplans mit ($Name, $Ident, $Typ, $Parent, $Position)
 	$this->RegisterEvent("Wochenplan", "SwitchTimeEvent".$this->InstanceID, 2, $this->InstanceID, 20);    
      
@@ -224,6 +225,9 @@ $this->Setup();
     //////////////////////////////////////////////////////////////////////////////*/
     public function StepRolloDown(){
         FS20_DimDown($this->ReadPropertyInteger("FS20RSU_ID"));
+        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) + 5; 
+        if($aktpos > 100){$aktpos = 100;}
+        setvalue($this->GetIDForIdent("FSSC_Position"), $aktpos ); //Stellung um 5% verändern        
     }   
     //*****************************************************************************
     /* Function: StepRolloUp
@@ -238,6 +242,9 @@ $this->Setup();
     //////////////////////////////////////////////////////////////////////////////*/
     public function StepRolloUp(){
         FS20_DimUp($this->ReadPropertyInteger("FS20RSU_ID"));
+        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) + 5; 
+        if($aktpos < 0){$aktpos = 0;}
+        setvalue($this->GetIDForIdent("FSSC_Position"), $aktpos ); //Stellung um 5% verändern  
     }
     //*****************************************************************************
     /* Function: SetMode
@@ -277,6 +284,9 @@ $this->Setup();
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
+       $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
+       $zeit = $VarArray[VariableUpdated];
+       Setvalue($this->GetIDForIdent("FSSC_Timer"), $zeit);
        SetValue($this->GetIDForIdent("FSSC_Position"), 0);
     }   
     //*****************************************************************************
@@ -294,6 +304,9 @@ $this->Setup();
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
+       $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
+       $zeit = $VarArray[VariableUpdated];
+       Setvalue($this->GetIDForIdent("FSSC_Timer"), $zeit);
        SetValue($this->GetIDForIdent("FSSC_Position"), 100);
     }   
     //*****************************************************************************
@@ -308,6 +321,7 @@ $this->Setup();
         none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
+       $startTime = getvalue($this->GetIDForIdent("FSSC_Timer"));  
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){
             FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0); 
@@ -315,6 +329,8 @@ $this->Setup();
        else{
            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
        }     
+       $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
+       $zeit = $VarArray[VariableUpdated];
     }  
     //*****************************************************************************
     /* Function: SetRollo
@@ -370,22 +386,7 @@ $this->Setup();
         }
         SetValue($this->GetIDForIdent("FSSC_Position"), $pos);
     }
-    //*****************************************************************************
-    /* Function: Setup
-    ...............................................................................
-    Schreibt Aktions Zeit in Timer
-    ...............................................................................
-    Parameters: 
-        none
-    --------------------------------------------------------------------------------
-    Returns:    
-        none
-    //////////////////////////////////////////////////////////////////////////////*/
-    public function Setup(){
-       IPS_SetProperty(51711, "Time_OU", 90.2); // 
-            
-    }  
-    
+
    /* ---------------------------------------------------------------------
     * Section: Private Funtions
     * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
