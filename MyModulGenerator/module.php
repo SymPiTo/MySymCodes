@@ -1,6 +1,6 @@
 <?
 
-class DataFlowGenerator extends IPSModule
+class MyModuleGenerator extends IPSModule
 {
 
     public function Create()
