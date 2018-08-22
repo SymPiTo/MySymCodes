@@ -328,6 +328,7 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
+       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);   
        $startTime = getvalue($this->GetIDForIdent("FSSC_Timer"));  
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){
