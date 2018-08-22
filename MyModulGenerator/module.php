@@ -889,27 +889,27 @@ class '.$modulename." extends IPSModule
         parent::Create();
 
          // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-         //Aufruf dieser Form Variable mit $variable = $this->ReadPropertyFloat("IDENTNAME")
-        //$this->RegisterPropertyInteger("FS20RSU_ID", 0);
-        //$this->RegisterPropertyFloat("Time_OU", 0.5);
-        //$this->RegisterPropertyBoolean("SunRise", false);
+         //Aufruf dieser Form Variable mit  §this->ReadPropertyFloat('IDENTNAME')
+        //§this->RegisterPropertyInteger('FS20RSU_ID', 0);
+        //§this->RegisterPropertyFloat('Time_OU', 0.5);
+        //§this->RegisterPropertyBoolean('SunRise', false);
         
             
         
         //Integer Variable anlegen
-        //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
-        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
-        //$this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
+        //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
+        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
+        //§this->RegisterVariableInteger('FSSC_Position', 'Position', 'Rollo.Position');
     
       
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
-        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
-        //$this->RegisterVariableBoolean("Mode", "Mode");
+        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
+        //§this->RegisterVariableBoolean('Mode', 'Mode');
         
         //String Variable anlegen
-        //RegisterVariableString (  $Ident,  $Name, $Profil, $Position )
-         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+        //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
+         // Aufruf dieser Variable mit getvalue($this->GetIDForIdent('IDENTNAME'))
       
 
     .";
