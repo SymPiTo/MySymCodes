@@ -52,7 +52,7 @@ class MyFS20_SC extends IPSModule
         $this->RegisterPropertyFloat("Time_UM", 0.5);
         $this->RegisterPropertyBoolean("SunRise", false);
         
-        $this->Setup();
+        
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
@@ -97,7 +97,7 @@ class MyFS20_SC extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-
+$this->Setup();
     	// Anlegen des Wochenplans mit ($Name, $Ident, $Typ, $Parent, $Position)
 	$this->RegisterEvent("Wochenplan", "SwitchTimeEvent".$this->InstanceID, 2, $this->InstanceID, 20);    
      
