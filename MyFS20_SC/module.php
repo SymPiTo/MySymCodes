@@ -342,10 +342,10 @@ class MyFS20_SC extends IPSModule
        $dTime = $zeit - $startTime;
        Setvalue($this->GetIDForIdent("FSSC_Timer"), $dTime);
        if($direct){
-            Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) + $dTime * (100/$this->ReadPropertyFloat('Time_OU')));
+            Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) - $dTime * (100/$this->ReadPropertyFloat('Time_OU')));
        }
        else{
-          Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) - $dTime * (100/$this->ReadPropertyFloat('Time_UO')));  
+          Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) + $dTime * (100/$this->ReadPropertyFloat('Time_UO')));  
        } 
     }  
     //*****************************************************************************
