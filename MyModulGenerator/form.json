@@ -1,0 +1,91 @@
+{
+    "elements":
+            [
+                { "type": "Label", "label": "This module is creating templates for the dataflow in a PHP module for IP-Symcon" },
+                { "type": "Label", "label": "Select category for the scripts" },
+                { "type": "SelectCategory", "name": "CategoryID", "caption": "Category" },
+                { "type": "ValidationTextBox", "name": "author", "caption": "author" },
+                { "type": "ValidationTextBox", "name": "modulename", "caption": "module name" },
+                { "type": "ValidationTextBox", "name": "url", "caption": "url" },
+                { "type": "ValidationTextBox", "name": "version", "caption": "version" },
+                { "type": "NumberSpinner", "name": "build", "caption": "build", "digits": 1},
+                { "type": "Label", "label": "Use existing GUID or generate GUID" },
+                { "type": "Select", "name": "generateguid", "caption": "GUID",
+                  "options": [
+                    { "label": "Generate GUID", "value": 0 },
+                    { "label": "Existing GUID", "value": 1 }
+                  ]
+                },
+                { "type": "ValidationTextBox", "name": "library_guid", "caption": "GUID library" },
+                { "type": "ValidationTextBox", "name": "io_guid", "caption": "GUID IO" },
+                { "type": "ValidationTextBox", "name": "rx_guid", "caption": "GUID RX" },
+                { "type": "ValidationTextBox", "name": "tx_guid", "caption": "GUID TX" },
+                { "type": "ValidationTextBox", "name": "splitter_guid", "caption": "GUID splitter" },
+                { "type": "ValidationTextBox", "name": "splitterinterface_guid", "caption": "GUID splitter interface" },
+                { "type": "ValidationTextBox", "name": "device_guid", "caption": "GUID device" },
+                { "type": "ValidationTextBox", "name": "deviceinterface_guid", "caption": "GUID device interface" },
+                { "type": "ValidationTextBox", "name": "vendor", "caption": "vendor" },
+                { "type": "ValidationTextBox", "name": "prefix", "caption": "prefix" },
+                { "type": "ValidationTextBox", "name": "aliases", "caption": "aliases" },
+                { "type": "Label", "label": "Use own IO or standard IP-Symcon IO" },
+                { "type": "Select", "name": "ownio", "caption": "Own IO",
+                  "options": [
+                    { "label": "Standard IO", "value": 0 },
+                    { "label": "Own IO", "value": 1 }
+                  ]
+                },
+                { "type": "Label", "label": "Select Type of IO" },
+                { "type": "Select", "name": "typeio", "caption": "IO type",
+                  "options": [
+                    { "label": "TCP", "value": 0 },
+                    { "label": "UDP", "value": 1 },
+                    { "label": "Multicast", "value": 2 }
+                  ]
+                }
+            ],
+	"actions":
+			[
+				{ "type": "Label", "label": "Generate GUID" },
+				{ "type": "Button", "label": "Generate GUID", "onClick": "DataFlowGenerator_getGUID($id);" },
+                { "type": "Label", "label": "Generate scripts" },
+                { "type": "Button", "label": "Generate GUID", "onClick": "DataFlowGenerator_CreateScripts($id);" }
+			],		
+    "status":
+            [
+                {
+                    "code": 101,
+                    "icon": "inactive",
+                    "caption": "Creating instance."
+                },
+				{
+                    "code": 102,
+                    "icon": "active",
+                    "caption": "Module active"
+                },
+                {
+                    "code": 104,
+                    "icon": "inactive",
+                    "caption": "interface closed."
+                },
+                {
+                    "code": 202,
+                    "icon": "error",
+                    "caption": "field must not empty."
+                },
+				{
+                    "code": 203,
+                    "icon": "error",
+                    "caption": "Not valid."
+                },
+				{
+                    "code": 205,
+                    "icon": "error",
+                    "caption": "field must not be empty."
+                },
+				{
+                    "code": 206,
+                    "icon": "error",
+                    "caption": "category must not be empty."
+                }
+            ]
+}

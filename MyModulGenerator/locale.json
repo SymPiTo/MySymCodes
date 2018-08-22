@@ -1,0 +1,49 @@
+{
+	"translations": {
+		"de": {
+			"This module is creating templates for the dataflow in a PHP module for IP-Symcon":"Dieses Modul erstellt Vorlagen für den Dataflow in einem PHP Modul mit IP-Symcon",
+			"Select category for the scripts":"Bitte eine Kategorie für die Skript Vorlagen auswählen",
+			"Category":"Kategorie",
+			"author":"Verfasser",
+			"module name":"Modul Name",
+			"url":"URL",
+			"version":"Version",
+			"build":"Build",
+			"Use existing GUID or generate GUID":"Vorhandende GUID nutzten oder neue GUID generieren",
+			"GUID":"GUID",
+			"Generate GUID":"GUID generieren",
+			"Existing GUID":"Vorhandene GUID",
+			"GUID library":"GUID Bibliothek",
+			"GUID IO":"GUID IO",
+			"GUID RX":"GUID RX",
+			"GUID TX":"GUID TX",
+			"GUID splitter":"GUID Splitter",
+			"GUID splitter interface":"GUID Splitter Interface",
+			"GUID device":"GUID Gerät",
+			"GUID device interface":"GUID Geräte Interface",
+			"vendor":"Hersteller",
+			"prefix":"Prefix",
+			"aliases":"Alias",
+			"Use own IO or standard IP-Symcon IO":"Eigenen IO verwenden oder einen Standard IP-Symcon IO",
+			"Own IO":"Eigener IO",
+			"Standard IO":"Standard IO",
+			"Select Type of IO":"IO Typ auswählen",
+			"IO type":"IO Typ",
+			"TCP":"TCP",
+			"UDP":"UDP",
+			"Generate GUIDs":"GUIDs generieren",
+			"Generate scripts":"Skriptevorlagen generieren",
+			"Generate Scripts":"Skripte generieren",
+			"Creating instance.":"Creating instance.",
+			"Module active":"Module active",
+			"interface closed.":"interface closed.",
+			"field must not empty.":"field must not empty.",
+			"Not valid.":"Not valid.",
+			"field must not be empty.":"field must not be empty.",
+			"category must not be empty.": "Es muss eine Kategorie ausgewählt werden.",
+			"email not vaild": "Email Adresse nicht gültig"
+			
+			
+		}
+	}
+}

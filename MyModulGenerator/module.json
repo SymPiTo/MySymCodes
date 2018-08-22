@@ -1,0 +1,11 @@
+{
+    "id": "{5A16A2CD-427F-8333-C9AC-AF0976B95D76}",
+    "name": "MyModuleGenerator",
+    "type": 3,
+    "vendor": "PiTo",
+    "aliases": ["PHP Modul Generator"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "ModuleGenerator"
+}
