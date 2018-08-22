@@ -113,7 +113,7 @@ class MyFS20_SC extends IPSModule
         //Ändern von Schaltpunkten für Gruppe mit ID = 0 (Mo-Fr) ID = 1 (Sa-So)
         $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
         IPS_SetEventScheduleGroupPoint($eid, 0, 0, 7, 0, 0, 0); //Um 7:00 Aktion mit ID 0 (Up) aufrufen
-        IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 00, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
+        IPS_SetEventScheduleGroupPoint($eid, 0, 1, 22, 30, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
         IPS_SetEventScheduleGroupPoint($eid, 1, 0, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 (Up) aufrufen
         IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 00, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
         IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
@@ -150,7 +150,7 @@ class MyFS20_SC extends IPSModule
             IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
             IPS_SetHidden($eid, true); //Objekt verstecken
             IPS_SetDisabled($eid, true);// Das Objekt wird inaktiv gesetzt.
-             IPS_SetHidden($SunRiseEventID, false); //Objekt verstecken
+            IPS_SetHidden($SunRiseEventID, false); //Objekt verstecken
             IPS_SetDisabled($SunRiseEventID, true);// Das Objekt wird inaktiv gesetzt.
             IPS_SetHidden($SunSetEventID, false); //Objekt verstecken
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
@@ -211,24 +211,25 @@ class MyFS20_SC extends IPSModule
         }
  
     }
-    /* Section: Public Funtions
+    /*  ----------------------------------------------------------------------------------------------------------------- 
+     Section: Public Funtions
      Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
      Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
     
      FSSC_XYFunktion($Instance_id, ... );
-    */
+     ---------------------------------------------------------------------------------------------------------------------  */
     
-    //*****************************************************************************
+    //-----------------------------------------------------------------------------
     /* Function: StepRolloDown
     ...............................................................................
     fährt den Rolladen Schrittweise Zu = Down
     ...............................................................................
     Parameters: 
         none
-    --------------------------------------------------------------------------------
+    ...............................................................................
     Returns:    
         none
-    //////////////////////////////////////////////////////////////////////////////*/
+    ------------------------------------------------------------------------------  */
     public function StepRolloDown(){
         FS20_DimDown($this->ReadPropertyInteger("FS20RSU_ID"));
         $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) + 5; 
