@@ -390,7 +390,7 @@ class MyFS20_SC extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/
     public function Setup(){
        IPS_SetProperty(51711, "Time_OU", 99.0); // 
-
+       IPS_ApplyChanges(51711); //Neue Konfiguration übernehmen
     }   
     //*****************************************************************************
     /* Function: SetTimer
