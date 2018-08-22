@@ -874,7 +874,7 @@ class '.$modulename." extends IPSModule
     neu laden der Modulesausgeführt. Vorhandene Variable werden nicht veändert, auch nicht 
     eingetragene Werte (Properties).
     Variable können hier nicht verwendet werden nur statische Werte.
-    Überschreibt die interne IPS_Create($id)  Funktion
+    Überschreibt die interne IPS_Create(§id)  Funktion
    
      CONFIG-VARIABLE:
       FS20RSU_ID   -   ID des FS20RSU Modules (selektierbar).
@@ -903,13 +903,13 @@ class '.$modulename." extends IPSModule
     
       
         //Boolean Variable anlegen
-        //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
+        //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
         //§this->RegisterVariableBoolean('Mode', 'Mode');
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
-         // Aufruf dieser Variable mit getvalue($this->GetIDForIdent('IDENTNAME'))
+         // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
       
 
     .";
