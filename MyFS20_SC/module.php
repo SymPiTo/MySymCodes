@@ -366,7 +366,7 @@ class MyFS20_SC extends IPSModule
     Returns:    
         none
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetRollo(integer $pos) {
+    public function SetRollo($pos) {
         $lastPos = getvalue($this->GetIDForIdent("FSSC_Position"));
         if($pos>$lastPos){
             //runterfahren
