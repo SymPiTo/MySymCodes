@@ -388,7 +388,7 @@ class MyFS20_SC extends IPSModule
     Returns:    
         none
     //////////////////////////////////////////////////////////////////////////////*/
-    private function Setup(){
+    public function Setup(){
        IPS_SetProperty(51711, "Time_OU", 99.0); // 
 
     }   
