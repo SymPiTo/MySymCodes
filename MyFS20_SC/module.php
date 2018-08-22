@@ -368,15 +368,6 @@ class MyFS20_SC extends IPSModule
         }
         SetValue($this->GetIDForIdent("FSSC_Position"), $pos);
     }
-
-    
-   /* ---------------------------------------------------------------------
-    * Section: Private Funtions
-    * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
-    *   Hilfsfunktionen
-    * ---------------------------------------------------------------------
-    */  
-    
     //*****************************************************************************
     /* Function: Setup
     ...............................................................................
@@ -389,9 +380,18 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
     public function Setup(){
-       IPS_SetProperty(51711, "Time_OU", 99.0); // 
-       IPS_ApplyChanges(51711); //Neue Konfiguration übernehmen
-    }   
+       IPS_SetProperty(51711, "Time_OU", 90.2); // 
+       
+    }  
+    
+   /* ---------------------------------------------------------------------
+    * Section: Private Funtions
+    * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
+    *   Hilfsfunktionen
+    * ---------------------------------------------------------------------
+    */  
+    
+ 
     //*****************************************************************************
     /* Function: SetTimer
     ...............................................................................
