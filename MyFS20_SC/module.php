@@ -59,7 +59,8 @@ class MyFS20_SC extends IPSModule
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
         $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
         $this->RegisterVariableInteger("FSSC_Timer", "Timer", "");
-         
+        $this->RegisterVariableInteger("FSSC_Timer1", "Timer1", "");
+      
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
@@ -332,7 +333,7 @@ class MyFS20_SC extends IPSModule
        $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
        $zeit = $VarArray["VariableUpdated"];
        $dTime = $zeit - $startTime;
-       Setvalue($this->GetIDForIdent("FSSC_Timer"), $dTime);
+       Setvalue($this->GetIDForIdent("FSSC_Timer1"), $zeit);
     }  
     //*****************************************************************************
     /* Function: SetRollo
