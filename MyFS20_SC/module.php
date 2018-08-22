@@ -290,7 +290,7 @@ class MyFS20_SC extends IPSModule
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
-       SetValue($this->GetIDForIdent("FSSC_Timer",time()));
+       SetValue($this->GetIDForIdent("FSSC_Timer"),time());
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);       
     }   
     //*****************************************************************************
@@ -308,7 +308,7 @@ class MyFS20_SC extends IPSModule
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
-       SetValue($this->GetIDForIdent("FSSC_Timer",time()));
+       SetValue($this->GetIDForIdent("FSSC_Timer"),time());
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);  
     }   
     //*****************************************************************************
