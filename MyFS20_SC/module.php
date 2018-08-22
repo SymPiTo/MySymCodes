@@ -13,12 +13,13 @@
 class MyFS20_SC extends IPSModule
 {
     /* Section: Internal Modul Funtions
-     Die folgenden Funktionen sind Standard Fuunktionen zur Modul Erstellung.
+     Die folgenden Funktionen sind Standard Funktionen zur Modul Erstellung.
     */
     //*****************************************************************************
     /* Function: Create  
     Create() wird einmalig beim Erstellen einer neuen Instanz und 
-    neu laden der Modulesausgeführt.
+    neu laden der Modulesausgeführt. Vorhandene Variable werden nicht veändert, auch nicht 
+    eingetragene Werte (Properties).
     Überschreibt die interne IPS_Create($id)  Funktion
    
      CONFIG-VARIABLE:
@@ -50,7 +51,8 @@ class MyFS20_SC extends IPSModule
         $this->RegisterPropertyFloat("Time_OM", 0.5);
         $this->RegisterPropertyFloat("Time_UM", 0.5);
         $this->RegisterPropertyBoolean("SunRise", false);
-
+        
+        $this->Setup();
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
@@ -381,7 +383,7 @@ class MyFS20_SC extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/
     public function Setup(){
        IPS_SetProperty(51711, "Time_OU", 90.2); // 
-       IPS_ApplyChanges(51711); //Neue Konfiguration übernehmen
+            
     }  
     
    /* ---------------------------------------------------------------------
