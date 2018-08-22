@@ -58,8 +58,7 @@ class MyFS20_SC extends IPSModule
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
         $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
-        $this->RegisterVariableInteger("FSSC_Timer", "Timer", "");
-            
+                   
       
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
@@ -291,9 +290,6 @@ class MyFS20_SC extends IPSModule
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
-       $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = $VarArray["VariableUpdated"];
-       Setvalue($this->GetIDForIdent("FSSC_Timer"), $zeit);
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);       
     }   
     //*****************************************************************************
@@ -311,9 +307,6 @@ class MyFS20_SC extends IPSModule
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
-       $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = $VarArray["VariableUpdated"];
-       Setvalue($this->GetIDForIdent("FSSC_Timer"), $zeit);
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);  
     }   
     //*****************************************************************************
@@ -328,24 +321,23 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
-       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);   
-       $startTime = getvalue($this->GetIDForIdent("FSSC_Timer"));  
+       $EreignisInfo = IPS_GetEvent($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID));
+       $NextEvent = $EreignisInfo["NextRun"];
+       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);  
+       $Laufzeit =  $NextEvent - time();  
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
-       if($direct){
+       if($direct){  
             FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0); 
        }
        else{
            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
        }     
-       $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = time();
-       $dTime = $zeit - $startTime;
-       Setvalue($this->GetIDForIdent("FSSC_Timer"), $dTime);
+            
        if($direct){
-            Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) - $dTime * (100/$this->ReadPropertyFloat('Time_OU')));
+            Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) - $Laufzeit * (100/$this->ReadPropertyFloat('Time_OU')));
        }
        else{
-          Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) + $dTime * (100/$this->ReadPropertyFloat('Time_UO')));  
+          Setvalue($this->GetIDForIdent("FSSC_Position"), getvalue($this->GetIDForIdent("FSSC_Position")) + $Laufzeit * (100/$this->ReadPropertyFloat('Time_UO')));  
        } 
     }  
     //*****************************************************************************
@@ -432,20 +424,8 @@ class MyFS20_SC extends IPSModule
        } 
     }
     
-    //*****************************************************************************
-    /* Function: SetTimer
-    ...............................................................................
-    Schreibt Aktions Zeit in Timer
-    ...............................................................................
-    Parameters: 
-        none
-    --------------------------------------------------------------------------------
-    Returns:    
-        none
-    //////////////////////////////////////////////////////////////////////////////*/
-    private function SetTimer(){
-       
-    }
+
+
     
     //*****************************************************************************
     /* Function: RegisterEvent
