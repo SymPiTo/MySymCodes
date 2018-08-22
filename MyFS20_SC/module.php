@@ -58,7 +58,7 @@ class MyFS20_SC extends IPSModule
         //integer RegisterVariableInteger ( string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
         $this->RegisterVariableInteger("FSSC_Position", "Position", "Rollo.Position");
-                   
+        $this->RegisterVariableInteger("FSSC_Timer", "Timer", "");          
       
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string $Ident, string $Name, string $Profil, integer $Position )
@@ -290,6 +290,7 @@ class MyFS20_SC extends IPSModule
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
+       SetValue($this->GetIDForIdent("FSSC_Timer",time()));
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);       
     }   
     //*****************************************************************************
@@ -307,6 +308,7 @@ class MyFS20_SC extends IPSModule
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
+       SetValue($this->GetIDForIdent("FSSC_Timer",time()));
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);  
     }   
     //*****************************************************************************
@@ -321,12 +323,11 @@ class MyFS20_SC extends IPSModule
          none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
-       $EreignisInfo = IPS_GetEvent($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID));
-       $NextEvent = $EreignisInfo["NextRun"];
        IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);  
        $jetzt = time();
-       $Laufzeit =  $NextEvent - $jetzt;  
-       setvalue(37611,$NextEvent);
+       $StartTime = getvalue($this->GetIDForIdent("FSSC_Timer")); 
+       $Laufzeit =  $jetzt - $StartTime;  
+       setvalue(37611,$StartTime);
        setvalue(56551,$jetzt);
        setvalue(49920,$Laufzeit);
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
