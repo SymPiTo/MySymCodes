@@ -339,7 +339,7 @@ class MyFS20_SC extends IPSModule
         $Laufzeit =  $jetzt - $StartTime;  
         $this->SendDebug( "SetRolloStop", "Laufzeit: ".$Laufzeit, 0); 
         $aktPos = getvalue($this->GetIDForIdent("FSSC_Position"));
-        if ($aktPos > 99){$aktPos = 0;}
+        //if ($aktPos > 99){$aktPos = 0;}
         $direct = getvalue($this->GetIDForIdent("UpDown"));  
         if($direct){  
             FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0);
