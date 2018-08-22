@@ -46,9 +46,9 @@
 	"actions":
 			[
 				{ "type": "Label", "label": "Generate GUID" },
-				{ "type": "Button", "label": "Generate GUID", "onClick": "DataFlowGenerator_getGUID($id);" },
+				{ "type": "Button", "label": "Generate GUID", "onClick": "MG_getGUID($id);" },
                 { "type": "Label", "label": "Generate scripts" },
-                { "type": "Button", "label": "Generate GUID", "onClick": "DataFlowGenerator_CreateScripts($id);" }
+                { "type": "Button", "label": "Generate GUID", "onClick": "MG_CreateScripts($id);" }
 			],		
     "status":
             [
