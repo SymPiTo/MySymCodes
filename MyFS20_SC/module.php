@@ -331,6 +331,8 @@ class MyFS20_SC extends IPSModule
        }     
        $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
        $zeit = $VarArray["VariableUpdated"];
+       $dTime = $zeit - $startTime;
+       Setvalue($this->GetIDForIdent("FSSC_Timer"), $dTime);
     }  
     //*****************************************************************************
     /* Function: SetRollo
