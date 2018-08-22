@@ -1,8 +1,7 @@
 <?php
 /**
  * Title: FS20 RSU Shutter Control
- * 
- *
+  *
  * author PiTo
  * 
  * GITHUB = <https://github.com/SymPiTo/MySymCodes/tree/master/MyFS20_SC>
@@ -12,11 +11,16 @@
 //Class: MyFS20_SC
 class MyFS20_SC extends IPSModule
 {
-    /* Section: Internal Modul Funtions
+    
+    /* 
+    _______________________________________________________________________ 
+     Section: Internal Modul Funtions
      Die folgenden Funktionen sind Standard Funktionen zur Modul Erstellung.
-    */
-    //*****************************************************************************
-    /* Function: Create  
+    _______________________________________________________________________ 
+     */
+            
+    /* ------------------------------------------------------------ 
+    Function: Create  
     Create() wird einmalig beim Erstellen einer neuen Instanz und 
     neu laden der Modulesausgeführt. Vorhandene Variable werden nicht veändert, auch nicht 
     eingetragene Werte (Properties).
@@ -34,7 +38,7 @@ class MyFS20_SC extends IPSModule
       FSSC_Position    -   Position (integer)
       UpDown           -   up/Down  (bool)
       Mode             -   Automatik/Manual (bool)
-    */
+    ------------------------------------------------------------- */
     public function Create()
     {
 	//Never delete this line!
@@ -86,19 +90,19 @@ class MyFS20_SC extends IPSModule
         
         
     }
-    //*****************************************************************************
-    /* Function: ApplyChanges    
+   /* ------------------------------------------------------------ 
+     Function: ApplyChanges    
       ApplyChanges() Wird ausgeführt, wenn auf der Konfigurationsseite "Übernehmen" gedrückt wird 
       und nach dem unittelbaren Erstellen der Instanz.
      
     SYSTEM-VARIABLE:
-    InstanceID - $this->InstanceID.
+        InstanceID - $this->InstanceID.
 
     EVENTS:
-     SwitchTimeEvent".$this->InstanceID   -   Wochenplan (Mo-Fr und Sa-So)
-    SunRiseEvent".$this->InstanceID       -   cyclice Time Event jeden Tag at SunRise
-     SunSetEvent".$this->InstanceID       -   cyclice Time Event jeden Tag at SunSet
-    */
+        SwitchTimeEvent".$this->InstanceID   -   Wochenplan (Mo-Fr und Sa-So)
+        SunRiseEvent".$this->InstanceID       -   cyclice Time Event jeden Tag at SunRise
+        SunSetEvent".$this->InstanceID       -   cyclice Time Event jeden Tag at SunSet
+    ------------------------------------------------------------- */
     public function ApplyChanges()
     {
 	//Never delete this line!
@@ -174,8 +178,8 @@ class MyFS20_SC extends IPSModule
         } 
        
     }
-    //*****************************************************************************
-    /* Function: RequestAction  
+   /* ------------------------------------------------------------ 
+      Function: RequestAction  
       RequestAction() Wird ausgeführt, wenn auf der Webfront eine Variable
       geschaltet oder verändert wird. Es werden die System Variable des betätigten
       Elementes übergeben.
@@ -189,7 +193,7 @@ class MyFS20_SC extends IPSModule
       FSSC_Position    -   Slider für Position
       UpDown           -   Switch für up / Down
       Mode             -   Switch für Automatik/Manual
-    */
+     ------------------------------------------------------------- */
     public function RequestAction($Ident, $Value) {
          switch($Ident) {
             case "FSSC_Position":
@@ -238,7 +242,7 @@ class MyFS20_SC extends IPSModule
     ------------------------------------------------------------------------------  */
     public function StepRolloDown(){
         FS20_DimDown($this->ReadPropertyInteger("FS20RSU_ID"));
-        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) + 5; 
+        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) + 6; 
         if($aktpos > 100){$aktpos = 100;}
         setvalue($this->GetIDForIdent("FSSC_Position"), $aktpos ); //Stellung um 5% verändern        
     }   
@@ -255,7 +259,7 @@ class MyFS20_SC extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/
     public function StepRolloUp(){
         FS20_DimUp($this->ReadPropertyInteger("FS20RSU_ID"));
-        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) - 5; 
+        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) - 6; 
         if($aktpos < 0){$aktpos = 0;}
         setvalue($this->GetIDForIdent("FSSC_Position"), $aktpos ); //Stellung um 5% verändern  
     }
@@ -406,11 +410,11 @@ class MyFS20_SC extends IPSModule
         SetValue($this->GetIDForIdent("FSSC_Position"), $pos);
     }
 
-   /* ---------------------------------------------------------------------
+   /* _______________________________________________________________________
     * Section: Private Funtions
     * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
     *   Hilfsfunktionen
-    * ---------------------------------------------------------------------
+    * _______________________________________________________________________
     */  
     
     //*****************************************************************************
@@ -499,17 +503,18 @@ class MyFS20_SC extends IPSModule
     }
     
 		
-    //*****************************************************************************
-    /* Function: GetIPSVersion
+
+    /* ----------------------------------------------------------------------------
+     Function: GetIPSVersion
     ...............................................................................
     gibt die instalierte IPS Version zurück
     ...............................................................................
     Parameters: 
         none
-    --------------------------------------------------------------------------------
+    ..............................................................................
     Returns:   
         $ipsversion
-    //////////////////////////////////////////////////////////////////////////////*/
+    ------------------------------------------------------------------------------- */
     protected function GetIPSVersion()
     {
             $ipsversion = floatval(IPS_GetKernelVersion());

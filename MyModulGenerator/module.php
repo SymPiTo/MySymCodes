@@ -859,7 +859,7 @@ class '.$modulename.'Splitter extends IPSModule
  * Version:1.0.2018.08.21
  */
 //Class: '.$modulename.'
-class '.$modulename." extends IPSModule
+class '.$modulename.' extends IPSModule
 {
     /* 
     _______________________________________________________________________ 
@@ -887,32 +887,41 @@ class '.$modulename." extends IPSModule
     {
 	//Never delete this line!
         parent::Create();
-
+'.' 
          // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-         //Aufruf dieser Form Variable mit  §this->ReadPropertyFloat('IDENTNAME')
-        //§this->RegisterPropertyInteger('FS20RSU_ID', 0);
-        //§this->RegisterPropertyFloat('Time_OU', 0.5);
-        //§this->RegisterPropertyBoolean('SunRise', false);
+         // Aufruf dieser Form Variable mit  §this->ReadPropertyFloat(-IDENTNAME-)
+        //§this->RegisterPropertyInteger(!IDENTNAME!, 0);
+        //§this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
+        //§this->RegisterPropertyBoolean(!IDENTNAME!, false);
         
-            
+       
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
-        //§this->RegisterVariableInteger('FSSC_Position', 'Position', 'Rollo.Position');
-    
+        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent(!IDENTNAME!))
+        //§this->RegisterVariableInteger(!FSSC_Position!, !Position!, !Rollo.Position!);
       
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
-        //§this->RegisterVariableBoolean('Mode', 'Mode');
+        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent(!IDENTNAME!))
+        //§this->RegisterVariableBoolean(!FSSC_Mode!, !Mode!);
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
-         // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent('IDENTNAME'))
+         // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent(!IDENTNAME!))
       
+ 
+        // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
+        
+        §this->EnableAction(-IDENTNAME-);
+        IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
+        
+        //anlegen eines Timers
+        §this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
+            
 
-    .";
+
+    .';
             if($dataflowtype == 0)
 			{
 				$content .= '$this->ConnectParent("'.$splitter_guid.'"); // Splitter';
@@ -922,7 +931,18 @@ class '.$modulename." extends IPSModule
 				$content .= '$this->ConnectParent("'.$io_guid.'"); // I/O';
 			}
     $content .='}
+   /* ------------------------------------------------------------ 
+     Function: ApplyChanges 
+      ApplyChanges() Wird ausgeführt, wenn auf der Konfigurationsseite "Übernehmen" gedrückt wird 
+      und nach dem unittelbaren Erstellen der Instanz.
+     
+    SYSTEM-VARIABLE:
+        InstanceID - $this->InstanceID.
 
+    EVENTS:
+        SwitchTimeEvent".$this->InstanceID   -   Wochenplan (Mo-Fr und Sa-So)
+        SunRiseEvent".$this->InstanceID       -   cyclice Time Event jeden Tag at SunRise
+    ------------------------------------------------------------- */
     public function ApplyChanges()
     {
 	//Never delete this line!
@@ -930,6 +950,73 @@ class '.$modulename." extends IPSModule
        
     }
     
+   /* ------------------------------------------------------------ 
+      Function: RequestAction  
+      RequestAction() Wird ausgeführt, wenn auf der Webfront eine Variable
+      geschaltet oder verändert wird. Es werden die System Variable des betätigten
+      Elementes übergeben.
+      Ausgaben über echo werden an die Visualisierung zurückgeleitet
+     
+   
+    SYSTEM-VARIABLE:
+      $this->GetIDForIdent($Ident)     -   ID der von WebFront geschalteten Variable
+      $Value                           -   Wert der von Webfront geänderten Variable
+
+   STANDARD-AKTIONEN:
+      FSSC_Position    -   Slider für Position
+      UpDown           -   Switch für up / Down
+      Mode             -   Switch für Automatik/Manual
+     ------------------------------------------------------------- */
+    public function RequestAction($Ident, $Value) {
+         switch($Ident) {
+            case "UpDown":
+                SetValue($this->GetIDForIdent($Ident), $Value);
+                if(getvalue($this->GetIDForIdent($Ident))){
+                    $this->SetRolloDown();  
+                }
+                else{
+                    $this->SetRolloUp();
+                }
+                break;
+             case "Mode":
+                $this->SetMode($Value);  
+                break;
+            default:
+                throw new Exception("Invalid Ident");
+        }
+ 
+    }
+
+  /* ______________________________________________________________________________________________________________________
+     Section: Public Funtions
+     Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
+     Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
+    
+     FSSC_XYFunktion($Instance_id, ... );
+     ________________________________________________________________________________________________________________________ */
+    //-----------------------------------------------------------------------------
+    /* Function: xxxx
+    ...............................................................................
+    Beschreibung
+    ...............................................................................
+    Parameters: 
+        none
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------  */
+    public function xxxx(){
+       
+    }  
+
+
+   /* _______________________________________________________________________
+    * Section: Private Funtions
+    * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
+    *   Hilfsfunktionen
+    * _______________________________________________________________________
+    */  
+
     protected function SendToSplitter(string $payload)
 		{						
 			//an Splitter schicken
@@ -937,10 +1024,17 @@ class '.$modulename." extends IPSModule
 			return $result;
 		}
 		
-	/**
-	 * gets current IP-Symcon version
-	 * @return float|int
-	 */
+        /* ----------------------------------------------------------------------------
+         Function: GetIPSVersion
+        ...............................................................................
+        gibt die instalierte IPS Version zurück
+        ...............................................................................
+        Parameters: 
+            none
+        ..............................................................................
+        Returns:   
+            $ipsversion (floatint)
+        ------------------------------------------------------------------------------- */
 	protected function GetIPSVersion()
 	{
 		$ipsversion = floatval(IPS_GetKernelVersion());
@@ -967,160 +1061,69 @@ class '.$modulename." extends IPSModule
 		return $ipsversion;
 	}
 
-	//Profile
-	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype)
-	{
+ 
+    /* --------------------------------------------------------------------------- 
+    Function: RegisterEvent
+    ...............................................................................
+    legt einen Event an wenn nicht schon vorhanden
+      Beispiel:
+      ("Wochenplan", "SwitchTimeEvent".$this->InstanceID, 2, $this->InstanceID, 20);  
+      ...............................................................................
+    Parameters: 
+      $Name        -   Name des Events
+      $Ident       -   Ident Name des Events
+      $Typ         -   Typ des Events (1=cyclic 2=Wochenplan)
+      $Parent      -   ID des Parents
+      $Position    -   Position der Instanz
+    ...............................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------*/
+    private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
+    {
+            $eid = @$this->GetIDForIdent($Ident);
+            if($eid === false) {
+                    $eid = 0;
+            } elseif(IPS_GetEvent($eid)[!EventType!] <> $Typ) {
+                    IPS_DeleteEvent($eid);
+                    $eid = 0;
+            }
+            //we need to create one
+            if ($eid == 0) {
+                    $EventID = IPS_CreateEvent($Typ);
+                    IPS_SetParent($EventID, $Parent);
+                    IPS_SetIdent($EventID, $Ident);
+                    IPS_SetName($EventID, $Name);
+                    IPS_SetPosition($EventID, $Position);
+                    IPS_SetEventActive($EventID, false);  
+            }
+    }
+    
+ 
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: RegisterScheduleAction
+    ...............................................................................
+     *  Legt eine Aktion für den Event fest
+     * Beispiel:
+     * ("SwitchTimeEvent".$this->InstanceID), 1, "Down", 0xFF0040, "FSSC_SetRolloDown(\$_IPS[!TARGET!]);");
+    ...............................................................................
+    Parameters: 
+      $EventID
+      $ActionID
+      $Name
+      $Color
+      $Script
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
+    private function RegisterScheduleAction($EventID, $ActionID, $Name, $Color, $Script)
+    {
+            IPS_SetEventScheduleAction($EventID, $ActionID, $Name, $Color, $Script);
+    }
 
-		if (!IPS_VariableProfileExists($Name)) {
-			IPS_CreateVariableProfile($Name, $Vartype); // 0 boolean, 1 int, 2 float, 3 string,
-		} else {
-			$profile = IPS_GetVariableProfile($Name);
-			if ($profile[\'ProfileType\'] != $Vartype)
-				$this->SendDebug("BMW:", "Variable profile type does not match for profile " . $Name, 0);
-		}
 
-		IPS_SetVariableProfileIcon($Name, $Icon);
-		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
-		IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
-		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
-	}
 
-	protected function RegisterProfileAssociation($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $Stepsize, $Digits, $Vartype, $Associations)
-	{
-		if (sizeof($Associations) === 0) {
-			$MinValue = 0;
-			$MaxValue = 0;
-		}
-
-		$this->RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $Stepsize, $Digits, $Vartype);
-
-		//boolean IPS_SetVariableProfileAssociation ( string $ProfilName, float $Wert, string $Name, string $Icon, integer $Farbe )
-		foreach ($Associations as $Association) {
-			IPS_SetVariableProfileAssociation($Name, $Association[0], $Association[1], $Association[2], $Association[3]);
-		}
-
-	}
-
-	/***********************************************************
-	 * Configuration Form
-	 ***********************************************************/
-
-	/**
-	 * build configuration form
-	 * @return string
-	 */
-	public function GetConfigurationForm()
-	{
-		// return current form
-		return json_encode([
-			\'elements\' => $this->FormHead(),
-			\'actions\' => $this->FormActions(),
-			\'status\' => $this->FormStatus()
-		]);
-	}
-
-	/**
-	 * return form configurations on configuration step
-	 * @return array
-	 */
-	protected function FormHead()
-	{
-		$form = [
-			[
-				\'name\' => \'devicetype\',
-				\'type\' => \'Select\',
-				\'caption\' => \'device type\',
-				\'options\' => [
-					[
-						\'label\' => \'Please choose\',
-						\'value\' => -1
-					],
-					[
-						\'label\' => \'Type 1\',
-						\'value\' => 0
-					],
-					[
-						\'label\' => \'Type 2\',
-						\'value\' => 1
-					]
-				]
-			],
-			[
-				\'type\' => \'Label\',
-				\'label\' => \'IP adress\'
-			],
-			[
-				\'name\' => \'ip\',
-				\'type\' => \'ValidationTextBox\',
-				\'caption\' => \'IP adress\'
-			]
-		];
-		return $form;
-	}
-
-	/**
-	 * return form actions
-	 * @return array
-	 */
-	protected function FormActions()
-	{
-		$form = [
-			[
-				\'type\' => \'Label\',
-				\'label\' => \'Update\'
-			],
-			[
-				\'type\' => \'Button\',
-				\'label\' => \'labelname\',
-				\'onClick\' => \'Prefix_Functionname($id);\'
-			]
-		];
-
-		return $form;
-	}
-
-	/**
-	 * return from status
-	 * @return array
-	 */
-	protected function FormStatus()
-	{
-		$form = [
-			[
-				\'code\' => 101,
-				\'icon\' => \'inactive\',
-				\'caption\' => \'Creating instance.\'
-			],
-			[
-				\'code\' => 102,
-				\'icon\' => \'active\',
-				\'caption\' => \'Device created.\'
-			],
-			[
-				\'code\' => 104,
-				\'icon\' => \'inactive\',
-				\'caption\' => \'interface closed.\'
-			],
-			[
-				\'code\' => 201,
-				\'icon\' => \'error\',
-				\'caption\' => \'special errorcode\'
-			]
-		];
-
-		return $form;
-	}
-
-	//Add this Polyfill for IP-Symcon 4.4 and older
-	protected function SetValue($Ident, $Value)
-	{
-
-		if (IPS_GetKernelVersion() >= 5) {
-			parent::SetValue($Ident, $Value);
-		} else {
-			SetValue($this->GetIDForIdent($Ident), $Value);
-		}
-	}
 		
 }';
             IPS_SetScriptContent($ScriptID, $content);
