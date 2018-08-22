@@ -80,6 +80,11 @@ class MyFS20_SC extends IPSModule
         
         $this->EnableAction("Mode");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("Mode"), "Rollo.Mode");
+        
+        //anlegen eines Timers
+        $this->RegisterTimer("LaufzeitTimer", 0, "FSSC_reset(\$_IPS['TARGET']);");
+        
+        
     }
     //*****************************************************************************
     /* Function: ApplyChanges    
@@ -118,11 +123,12 @@ class MyFS20_SC extends IPSModule
         IPS_SetEventScheduleGroupPoint($eid, 1, 1, 22, 00, 0, 1); //Um 22:30 Aktion mit ID 1 (Down) aufrufen
         IPS_SetEventActive($eid, true);             //Ereignis  aktivieren
 
-        //anlegen eines Zyklischen Laufzeit Events mit Interval
-        $this->RegisterEvent("Laufzeit", "LaufzeitEvent".$this->InstanceID, 1, $this->InstanceID, 22);
-        $LaufzeitEventID = $this->GetIDForIdent("LaufzeitEvent".$this->InstanceID);
-        IPS_SetEventCyclic($LaufzeitEventID, 0, 0, 0, 0, 1, 35 /* Alle 35 Sekunden */);    
-        IPS_SetEventScript($LaufzeitEventID, "FSSC_reset(\$_IPS['TARGET']);");
+
+
+        //$this->RegisterEvent("Laufzeit", "LaufzeitEvent".$this->InstanceID, 1, $this->InstanceID, 22);
+        //$LaufzeitEventID = $this->GetIDForIdent("LaufzeitEvent".$this->InstanceID);
+        //IPS_SetEventCyclic($LaufzeitEventID, 0, 0, 0, 0, 1, 35 /* Alle 35 Sekunden */);    
+        //IPS_SetEventScript($LaufzeitEventID, "FSSC_reset(\$_IPS['TARGET']);");
         
     	// Anlegen des cyclic events SunRise mit ($Name, $Ident, $Typ, $Parent, $Position)
 	$this->RegisterEvent("SunRise", "SunRiseEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
@@ -288,11 +294,12 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
     public function SetRolloUp() {
+       SendDebug( "SetRolloUp", "Fahre Rolladen hoch", 0); 
        $Tup = $this->ReadPropertyFloat('Time_UO'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
        SetValue($this->GetIDForIdent("FSSC_Timer"),time());
-       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);       
+       $this->SetTimerInterval("LaufzeitTimer", 35000);
     }   
     //*****************************************************************************
     /* Function: SetRolloDown
@@ -306,11 +313,12 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloDown() {
+        SendDebug( "SetRolloDown", "Fahre Rolladen runter", 0); 
        $Tdown = $this->ReadPropertyFloat('Time_OU'); 
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
        SetValue($this->GetIDForIdent("FSSC_Timer"),time());
-       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), true);  
+       $this->SetTimerInterval("LaufzeitTimer", 35000); 
     }   
     //*****************************************************************************
     /* Function: StepRolloStop
@@ -324,24 +332,22 @@ class MyFS20_SC extends IPSModule
          none
     //////////////////////////////////////////////////////////////////////////////*/
      public function SetRolloStop() {
-       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);  
-       $jetzt = time();
-       $StartTime = getvalue($this->GetIDForIdent("FSSC_Timer")); 
-       $Laufzeit =  $jetzt - $StartTime;  
-       setvalue(37611,$StartTime);
-       setvalue(56551,$jetzt);
-       setvalue(49920,$Laufzeit);
-       $aktPos = getvalue($this->GetIDForIdent("FSSC_Position"));
-       if ($aktPos > 99){$aktPos = 0;}
-       $direct = getvalue($this->GetIDForIdent("UpDown"));  
-       if($direct){  
+        $this->SetTimerInterval("LaufzeitTimer", 0);  
+        $jetzt = time();
+        $StartTime = getvalue($this->GetIDForIdent("FSSC_Timer")); 
+        $Laufzeit =  $jetzt - $StartTime;  
+        SendDebug( "SetRolloStop", "Laufzeit: ".$Laufzeit, 0); 
+        $aktPos = getvalue($this->GetIDForIdent("FSSC_Position"));
+        if ($aktPos > 99){$aktPos = 0;}
+        $direct = getvalue($this->GetIDForIdent("UpDown"));  
+        if($direct){  
             FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, 0);
             Setvalue($this->GetIDForIdent("FSSC_Position"), $aktPos + ($Laufzeit * (100/$this->ReadPropertyFloat('Time_OU'))));
-       }
-       else{
+        }
+        else{
            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
            Setvalue($this->GetIDForIdent("FSSC_Position"), $aktPos - ($Laufzeit * (100/$this->ReadPropertyFloat('Time_UO'))));  
-       }     
+        }     
 
     }  
     //*****************************************************************************
@@ -418,14 +424,14 @@ class MyFS20_SC extends IPSModule
         none
     //////////////////////////////////////////////////////////////////////////////*/
     public function reset(){
-       IPS_SetEventActive($this->GetIDForIdent("LaufzeitEvent".$this->InstanceID), false);         
-       $direct = getvalue($this->GetIDForIdent("UpDown"));  
-       if($direct){
+        $this->SetTimerInterval("LaufzeitTimer", 0);       
+        $direct = getvalue($this->GetIDForIdent("UpDown"));  
+        if($direct){
             SetValue($this->GetIDForIdent("FSSC_Position"), 100);
-       }
-       else{
+        }
+        else{
            SetValue($this->GetIDForIdent("FSSC_Position"), 0);
-       } 
+        } 
     }
     
 
