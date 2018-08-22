@@ -123,7 +123,7 @@ class MyFS20_SC extends IPSModule
         $this->RegisterEvent("Laufzeit", "LaufzeitEvent".$this->InstanceID, 1, $this->InstanceID, 22);
         $LaufzeitEventID = $this->GetIDForIdent("LaufzeitEvent".$this->InstanceID);
         IPS_SetEventCyclic($LaufzeitEventID, 0, 0, 0, 0, 1, 30 /* Alle 30 Sekunden */);    
-        IPS_SetEventScript($LaufzeitEventID, "$this->reset()");
+        IPS_SetEventScript($LaufzeitEventID, "FSSC_reset(\$_IPS['TARGET']);");
         
     	// Anlegen des cyclic events SunRise mit ($Name, $Ident, $Typ, $Parent, $Position)
 	$this->RegisterEvent("SunRise", "SunRiseEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
@@ -420,7 +420,7 @@ class MyFS20_SC extends IPSModule
     Returns:    
         none
     //////////////////////////////////////////////////////////////////////////////*/
-    private function reset(){
+    public function reset(){
        $direct = getvalue($this->GetIDForIdent("UpDown"));  
        if($direct){
             SetValue($this->GetIDForIdent("FSSC_Position"), 100);
