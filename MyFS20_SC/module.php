@@ -242,7 +242,7 @@ class MyFS20_SC extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/
     public function StepRolloUp(){
         FS20_DimUp($this->ReadPropertyInteger("FS20RSU_ID"));
-        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) + 5; 
+        $aktpos = getvalue($this->GetIDForIdent("FSSC_Position")) - 5; 
         if($aktpos < 0){$aktpos = 0;}
         setvalue($this->GetIDForIdent("FSSC_Position"), $aktpos ); //Stellung um 5% verändern  
     }
@@ -285,7 +285,7 @@ class MyFS20_SC extends IPSModule
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $Tup); 
        Setvalue($this->GetIDForIdent("UpDown"),false);
        $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = $VarArray[VariableUpdated];
+       $zeit = $VarArray["VariableUpdated"];
        Setvalue($this->GetIDForIdent("FSSC_Timer"), $zeit);
        SetValue($this->GetIDForIdent("FSSC_Position"), 0);
     }   
@@ -305,7 +305,7 @@ class MyFS20_SC extends IPSModule
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
        $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = $VarArray[VariableUpdated];
+       $zeit = $VarArray["VariableUpdated"];
        Setvalue($this->GetIDForIdent("FSSC_Timer"), $zeit);
        SetValue($this->GetIDForIdent("FSSC_Position"), 100);
     }   
@@ -330,7 +330,7 @@ class MyFS20_SC extends IPSModule
            FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, 0); 
        }     
        $VarArray = IPS_GetVariable($this->GetIDForIdent("UpDown"));
-       $zeit = $VarArray[VariableUpdated];
+       $zeit = $VarArray["VariableUpdated"];
     }  
     //*****************************************************************************
     /* Function: SetRollo
