@@ -86,6 +86,11 @@
                                 "minimum": 0, 
                                 "maximum": 100, 
                                 "onChange": "FSSC_SetRollo($id, 50);" 
+                        },
+                        { 
+                                "type": "Button", 
+                                "caption": "Einstellen", 
+                                "onClick": "FSSC_Setup($id);" 
                         }
         ],
         
