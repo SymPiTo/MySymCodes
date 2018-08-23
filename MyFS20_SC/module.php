@@ -166,7 +166,7 @@ class MyFS20_SC extends IPSModule
             IPS_SetHidden($SunSetEventID, false); //Objekt verstecken
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
             $sunriseA = date(' H:i:s', $sunrise);
-            $sunsetA = date(' H:i:s', $sunrise);
+            $sunsetA = date(' H:i', $sunset);
             setvalue($this->GetIDForIdent("SZ_MoFr"), $sunriseA." - ".$sunsetA);
             setvalue($this->GetIDForIdent("SZ_SaSo"), $sunriseA." - ".$sunsetA);
         }
