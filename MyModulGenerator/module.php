@@ -890,26 +890,26 @@ class '.$modulename.' extends IPSModule
 '.' 
          // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
          // Aufruf dieser Form Variable mit  §this->ReadPropertyFloat(-IDENTNAME-)
-        //§this->RegisterPropertyInteger(!IDENTNAME!, 0);
-        //§this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
-        //§this->RegisterPropertyBoolean(!IDENTNAME!, false);
+        //$this->RegisterPropertyInteger(!IDENTNAME!, 0);
+        //$this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
+        //$this->RegisterPropertyBoolean(!IDENTNAME!, false);
         
        
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent(!IDENTNAME!))
-        //§this->RegisterVariableInteger(!FSSC_Position!, !Position!, !Rollo.Position!);
+        // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
+        //$this->RegisterVariableInteger(!FSSC_Position!, !Position!, !Rollo.Position!);
       
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent(!IDENTNAME!))
-        //§this->RegisterVariableBoolean(!FSSC_Mode!, !Mode!);
+        // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
+        //$this->RegisterVariableBoolean(!FSSC_Mode!, !Mode!);
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
-         // Aufruf dieser Variable mit getvalue(§this->GetIDForIdent(!IDENTNAME!))
-      
+         // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
+         //$this->RegisterVariableString("SZ_MoFr", "SchaltZeiten Mo-Fr");
  
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         
@@ -917,7 +917,7 @@ class '.$modulename.' extends IPSModule
         IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
         
         //anlegen eines Timers
-        §this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
+        $this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
             
 
 
