@@ -521,7 +521,7 @@ class MyFS20_SC extends IPSModule
             $SP2A_M = $SP[0]['Start']['Minute'];
             $SP2B_H = $SP[1]['Start']['Hour'];
             $SP2B_M = $SP[1]['Start']['Minute'];
-            $SP2 = $SP2A_H.".".$SP2A_M." - ".$SP2B_H.".".$SP2B_M;
+            $SP2 = str_pad($SP2A_H, 2, 0, STR_PAD_LEFT).":".str_pad($SP2A_M, 2, 0, STR_PAD_LEFT)." - ".str_pad($SP2B_H, 2, 0, STR_PAD_LEFT).":".str_pad($SP2B_M, 2, 0, STR_PAD_LEFT);
             
             setvalue($this->GetIDForIdent("SZ_MoFr"), $SP1);
             setvalue($this->GetIDForIdent("SZ_SaSo"), $SP2);
