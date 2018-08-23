@@ -188,36 +188,7 @@ class MyFS20_SC extends IPSModule
             
             $this->GetWochenplanAction(); 
             
-           /*
-            $EreignisInfo = IPS_GetEvent($eid);
-            $SZ1 = $EreignisInfo['ScheduleGroups'][0];
-            $SZ1A_H = $SZ1[0]['Start']['Hour'];
-            $SZ1A_M = $SZ1[0]['Start']['Minute'];
-            $SZ1B_H = $SZ1[1]['Start']['Hour'];
-            $SZ1B_M = $SZ1[1]['Start']['Minute'];
-            $SZ1_T = $SZ1A_H.".".$SZ1A_M." - ".$SZ1B_H.".".$SZ1B_M;
-            */
-            
-            /*
-            $SZ1A_H = $SZ1[0]['Start']['Hour'];
-            $SZ1A_M = $SZ1[0]['Start']['Minute'];
-            $SZ1B_H = $SZ1[1]['Start']['Hour'];
-            $SZ1B_M = $SZ1[1]['Start']['Minute'];
-            $SZ1_T = $SZ1A_H.".".$SZ1A_M." - ".$SZ1B_H.".".$SZ1B_M;
-             
-             */
-            
-            $SZ2 = $EreignisInfo['ScheduleGroups'][1];
-            /*
-            $SZ2A_H = $SZ2[0]['Start']['Hour'];
-            $SZ2A_M = $SZ2[0]['Start']['Minute'];
-            $SZ2B_H = $SZ2[0]['Start']['Hour'];
-            $SZ2B_M = $SZ2[0]['Start']['Minute'];    
-            $SZ2_T = $SZ2A_H.".".$SZ2A_M." - ".$SZ2B_H.".".$SZ2B_M;
-            setvalue($this->GetIDForIdent("SZ_MoFr"), $SZ1_T);
-            setvalue($this->GetIDForIdent("SZ_SaSo"), $SZ2_T);
-             
-             */
+
         } 
        
     }
