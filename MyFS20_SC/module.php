@@ -539,12 +539,13 @@ class MyFS20_SC extends IPSModule
         
         $a = IPS_GetEvent($EventID); 
 
-        $tag = 0; 
+            
             
 
 
             // Wochenplan für jeden Tag 
-            $heute = $a['ScheduleGroups'][$tag]['Points']; 
+            $SP = $a['ScheduleGroups'][0]['Points']; 
+            $SP1A = $SP[0]['Start']['Hour'];
             /*
             foreach($heute as $heuteDetails) 
             { 
@@ -559,7 +560,7 @@ class MyFS20_SC extends IPSModule
             } 
 */
             // Den "spätesten" treffenden Wert ausgeben 
-            return $heute; 
+            return $SP1A; 
         
     }  
     
