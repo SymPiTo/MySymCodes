@@ -185,10 +185,12 @@ class MyFS20_SC extends IPSModule
             IPS_SetDisabled($SunRiseEventID, true);// Das Objekt wird inaktiv gesetzt.
             IPS_SetHidden($SunSetEventID, true); //Objekt verstecken
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
+            
+            $this->GetWochenplanAction(); 
+            
+           /*
             $EreignisInfo = IPS_GetEvent($eid);
             $SZ1 = $EreignisInfo['ScheduleGroups'][0];
-            $SZ1A_H = $EreignisInfo['ScheduleGroups'][0][0]['Start']['Hour'];
-           /*
             $SZ1A_H = $SZ1[0]['Start']['Hour'];
             $SZ1A_M = $SZ1[0]['Start']['Minute'];
             $SZ1B_H = $SZ1[1]['Start']['Hour'];
@@ -498,7 +500,7 @@ class MyFS20_SC extends IPSModule
     ...............................................................................
     Parameters: 
         none
-    --------------------------------------------------------------------------------
+    ...............................................................................
     Returns:    
         none
     ------------------------------------------------------------------------------ */
@@ -518,6 +520,48 @@ class MyFS20_SC extends IPSModule
         IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
     }    
         
+
+    
+    /* ---------------------------------------------------------------------------
+     Function: GetWochenplanAction
+    ...............................................................................
+    
+    ...............................................................................
+    Parameters: 
+        none
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------ */
+    public function GetWochenplanAction() 
+    { 
+        $EventID = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
+        
+        $a = IPS_GetEvent($EventID); 
+
+        $tag = 0; 
+            
+
+
+            // Wochenplan für jeden Tag 
+            $heute = $a['ScheduleGroups'][$tag]['Points']; 
+            /*
+            foreach($heute as $heuteDetails) 
+            { 
+                if($stunde >= $heuteDetails['Start']['Hour']) 
+                { 
+                    if($minute >= $heuteDetails['Start']['Minute']) 
+                    { 
+                        $actionID = $heuteDetails['ActionID']; 
+                    } 
+                }  
+
+            } 
+*/
+            // Den "spätesten" treffenden Wert ausgeben 
+            return $heute; 
+        } 
+    }  
     
     /* ----------------------------------------------------------------------------
      Function: RegisterEvent
