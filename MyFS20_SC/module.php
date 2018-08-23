@@ -368,6 +368,7 @@ class MyFS20_SC extends IPSModule
     //////////////////////////////////////////////////////////////////////////////*/
     public function SetRollo($pos) {
         $lastPos = getvalue($this->GetIDForIdent("FSSC_Position"));
+        $this->SendDebug( "SetRollo", "Letzte Position: ".$lastPos , 0);
         if($pos>$lastPos){
             //runterfahren
             //Abstand ermitteln
@@ -390,7 +391,7 @@ class MyFS20_SC extends IPSModule
                 Setvalue($this->GetIDForIdent("UpDown"),true); 
             }
         }
-        else{
+        elseif($pos<$lastPos){
             //hochfahren
             //Abstand ermitteln
             $dpos = $lastPos-$pos;
@@ -411,6 +412,9 @@ class MyFS20_SC extends IPSModule
                 Setvalue($this->GetIDForIdent("UpDown"),false);
             } 
             
+        }
+        else{
+            // do nothing
         }
         SetValue($this->GetIDForIdent("FSSC_Position"), $pos);
     }
