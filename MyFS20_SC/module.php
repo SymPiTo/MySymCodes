@@ -435,6 +435,40 @@ class MyFS20_SC extends IPSModule
         SetValue($this->GetIDForIdent("FSSC_Position"), $pos);
     }
 
+    /* ---------------------------------------------------------------------------
+     Function: SetSPonMoFr
+    ...............................................................................
+    
+    ...............................................................................
+    Parameters: 
+        none
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------ */
+    public function SetSPonMoFr($value) 
+    {
+        
+    }    
+    
+     /* ---------------------------------------------------------------------------
+     Function: SetSPonSaSo
+    ...............................................................................
+    
+    ...............................................................................
+    Parameters: 
+        none
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------ */
+    public function SetSPonSaSo() 
+    {
+        
+    }    
+    
+    
+    
    /* _______________________________________________________________________
     * Section: Private Funtions
     * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
@@ -515,7 +549,7 @@ class MyFS20_SC extends IPSModule
             $SP1A_M = $SP[0]['Start']['Minute'];
             $SP1B_H = $SP[1]['Start']['Hour'];
             $SP1B_M = $SP[1]['Start']['Minute'];
-            $SP1 = $SP1A_H.".".$SP1A_M." - ".$SP1B_H.".".$SP1B_M;
+            $SP1 = str_pad($SP1A_H, 2, 0, STR_PAD_LEFT).":".str_pad($SP1A_M, 2, 0, STR_PAD_LEFT)." - ".str_pad($SP1B_H, 2, 0, STR_PAD_LEFT).":".str_pad($SP1B_M, 2, 0, STR_PAD_LEFT);
             
             $SP2A_H = $SP[0]['Start']['Hour'];
             $SP2A_M = $SP[0]['Start']['Minute'];
