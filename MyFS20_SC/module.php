@@ -167,8 +167,8 @@ class MyFS20_SC extends IPSModule
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
             $sunriseA = date('m/d/Y H:i:s', $sunrise);
             $sunsetA = date('m/d/Y H:i:s', $sunrise);
-            setvalue(getvalue($this->GetIDForIdent("SZ_MoFr")), $sunriseA." - ".$sunsetA);
-            setvalue(getvalue($this->GetIDForIdent("SZ_SaSo")), $sunriseA." - ".$sunsetA);
+            setvalue($this->GetIDForIdent("SZ_MoFr"), $sunriseA." - ".$sunsetA);
+            setvalue($this->GetIDForIdent("SZ_SaSo"), $sunriseA." - ".$sunsetA);
         }
         else {
             IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  deaktivieren
@@ -193,8 +193,8 @@ class MyFS20_SC extends IPSModule
             $SZ2B_H = $SZ2[0]['Start']['Hour'];
             $SZ2B_M = $SZ2[0]['Start']['Minute'];    
             $SZ2_T = $SZ2A_H.".".$SZ2A_M." - ".$SZ2B_H.".".$SZ2B_M;
-            setvalue(getvalue($this->GetIDForIdent("SZ_MoFr")), $SZ1_T);
-            setvalue(getvalue($this->GetIDForIdent("SZ_SaSo")), $SZ2_T);
+            setvalue($this->GetIDForIdent("SZ_MoFr"), $SZ1_T);
+            setvalue($this->GetIDForIdent("SZ_SaSo"), $SZ2_T);
         } 
        
     }
