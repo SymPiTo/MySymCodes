@@ -376,13 +376,16 @@ class MyFS20_SC extends IPSModule
             
             $Tdown = $this->ReadPropertyFloat('Time_OU');
             $Tmid = $this->ReadPropertyFloat('Time_OM');
+
             if($dpos<51){
                 $time = $dpos * ($Tmid/50);
+                $this->SendDebug( "SetRollo", "Errechnete Zeit für ".$pos."ist: ".$time, 0);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $time); 
                 Setvalue($this->GetIDForIdent("UpDown"),true); 
             }
             else{
                 $time = $dpos * ($Tdown/50);
+                $this->SendDebug( "SetRollo", "Errechnete Zeit für ".$pos."ist: ".$time, 0);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $time); 
                 Setvalue($this->GetIDForIdent("UpDown"),true); 
             }
@@ -397,11 +400,13 @@ class MyFS20_SC extends IPSModule
             $Tmid = $this->ReadPropertyFloat('Time_UM');
             if($dpos<51){
                 $time = $dpos * ($Tmid/50);
+                $this->SendDebug( "SetRollo", "Errechnete Zeit für ".$pos."ist: ".$time, 0);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
                 Setvalue($this->GetIDForIdent("UpDown"),false); 
             }
             else{
                 $time = $dpos * ($Tup/50);
+                $this->SendDebug( "SetRollo", "Errechnete Zeit für ".$pos."ist: ".$time, 0);
                 FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), true, $time); 
                 Setvalue($this->GetIDForIdent("UpDown"),false);
             } 
