@@ -560,7 +560,7 @@ class MyFS20_SC extends IPSModule
 */
             // Den "spätesten" treffenden Wert ausgeben 
             return $heute; 
-        } 
+        
     }  
     
     /* ----------------------------------------------------------------------------
