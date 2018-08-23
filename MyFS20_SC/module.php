@@ -545,22 +545,12 @@ class MyFS20_SC extends IPSModule
 
             // Wochenplan für jeden Tag 
             $SP = $a['ScheduleGroups'][0]['Points']; 
-            $SP1A = $SP[0]['Start']['Hour'];
-            /*
-            foreach($heute as $heuteDetails) 
-            { 
-                if($stunde >= $heuteDetails['Start']['Hour']) 
-                { 
-                    if($minute >= $heuteDetails['Start']['Minute']) 
-                    { 
-                        $actionID = $heuteDetails['ActionID']; 
-                    } 
-                }  
-
-            } 
-*/
-            // Den "spätesten" treffenden Wert ausgeben 
-            return $SP1A; 
+            $SP1A_H = $SP[0]['Start']['Hour'];
+            $SP1A_M = $SP[0]['Start']['Minute'];
+            $SP1B_H = $SP[1]['Start']['Hour'];
+            $SP1B_M = $SP[1]['Start']['Minute'];
+            $SP1 = $SP1A_H.".".$SP1A_M." - ".$SP1B_H.".".$SP1B_M;
+            return $SP1; 
         
     }  
     
