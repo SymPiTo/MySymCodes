@@ -183,6 +183,7 @@ class MyFS20_SC extends IPSModule
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
             $EreignisInfo = IPS_GetEvent($eid);
             $SZ1 = $EreignisInfo['ScheduleGroups'][0];
+            $this->SendDebug( "SetRolloDown", $SZ1, 0);
             /*
             $SZ1A_H = $SZ1[0]['Start']['Hour'];
             $SZ1A_M = $SZ1[0]['Start']['Minute'];
