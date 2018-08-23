@@ -186,7 +186,7 @@ class MyFS20_SC extends IPSModule
             IPS_SetHidden($SunSetEventID, true); //Objekt verstecken
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
             
-           // $this->GetWochenplanAction(); 
+            $this->GetWochenplanAction(); 
             
            /*
             $EreignisInfo = IPS_GetEvent($eid);
@@ -539,18 +539,21 @@ class MyFS20_SC extends IPSModule
         
         $a = IPS_GetEvent($EventID); 
 
-            
-            
-
-
-            // Wochenplan für jeden Tag 
             $SP = $a['ScheduleGroups'][0]['Points']; 
             $SP1A_H = $SP[0]['Start']['Hour'];
             $SP1A_M = $SP[0]['Start']['Minute'];
             $SP1B_H = $SP[1]['Start']['Hour'];
             $SP1B_M = $SP[1]['Start']['Minute'];
             $SP1 = $SP1A_H.".".$SP1A_M." - ".$SP1B_H.".".$SP1B_M;
-            return $SP1; 
+            
+            $SP2A_H = $SP[0]['Start']['Hour'];
+            $SP2A_M = $SP[0]['Start']['Minute'];
+            $SP2B_H = $SP[1]['Start']['Hour'];
+            $SP2B_M = $SP[1]['Start']['Minute'];
+            $SP2 = $SP2A_H.".".$SP2A_M." - ".$SP2B_H.".".$SP2B_M;
+            
+            setvalue($this->GetIDForIdent("SZ_MoFr"), $SP1);
+            setvalue($this->GetIDForIdent("SZ_SaSo"), $SP2);
         
     }  
     
