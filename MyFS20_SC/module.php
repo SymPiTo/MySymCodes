@@ -481,7 +481,7 @@ class MyFS20_SC extends IPSModule
     --------------------------------------------------------------------------------
     Returns:    
         none
-    //////////////////////////////////////////////////////////////////////////////*/
+    ------------------------------------------------------------------------------ */
     private function updateSunRise(){
         $SunRiseEventID = $this->GetIDForIdent("SunRiseEvent".$this->InstanceID);
         // täglich, um x Uhr
@@ -499,8 +499,8 @@ class MyFS20_SC extends IPSModule
     }    
         
     
-    //*****************************************************************************
-    /* Function: RegisterEvent
+    /* ----------------------------------------------------------------------------
+     Function: RegisterEvent
     ...............................................................................
     legt einen Event an wenn nicht schon vorhanden
       Beispiel:
@@ -516,7 +516,7 @@ class MyFS20_SC extends IPSModule
     --------------------------------------------------------------------------------
     Returns:    
         none
-    //////////////////////////////////////////////////////////////////////////////*/
+    -------------------------------------------------------------------------------- */
     private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
     {
             $eid = @$this->GetIDForIdent($Ident);
