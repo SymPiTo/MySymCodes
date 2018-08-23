@@ -89,7 +89,7 @@ class MyFS20_SC extends IPSModule
         
         //anlegen eines Timers
         $this->RegisterTimer("LaufzeitTimer", 0, "FSSC_reset(\$_IPS['TARGET']);");
-        IPS_SetHidden($this->GetIDForIdent("LaufzeitTimer"), true); //Objekt verstecken
+        
         
     }
    /* ------------------------------------------------------------ 
@@ -488,14 +488,14 @@ class MyFS20_SC extends IPSModule
         $sunrise = getvalue(56145);
         $sunrise_H = date("H", $sunrise); 
         $sunrise_M = date("i", $sunrise); 
-        //IPS_SetEventCyclicTimeFrom($SunRiseEventID, $sunrise_H, $sunrise_M, 0);
+        IPS_SetEventCyclicTimeFrom($SunRiseEventID, $sunrise_H, $sunrise_M, 0);
                 
         $SunSetEventID = $this->GetIDForIdent("SunSetEvent".$this->InstanceID);
         // täglich, um x Uhr
         $sunset = getvalue(25305);
         $sunset_H = date("H", $sunset); 
         $sunset_M = date("i", $sunset); 
-        //IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
+        IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
     }    
         
     
