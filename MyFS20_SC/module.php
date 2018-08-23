@@ -193,8 +193,8 @@ class MyFS20_SC extends IPSModule
             $SZ2B_H = $SZ2[0]['Start']['Hour'];
             $SZ2B_M = $SZ2[0]['Start']['Minute'];    
             $SZ2_T = $SZ2A_H.".".$SZ2A_M." - ".$SZ2B_H.".".$SZ2B_M;
-            setvalue(getvalue($this->GetIDForIdent("SZ_MoFr"), $SZ1_T);
-            setvalue(getvalue($this->GetIDForIdent("SZ_SaSo"), $SZ2_T);
+            setvalue(getvalue($this->GetIDForIdent("SZ_MoFr")), $SZ1_T);
+            setvalue(getvalue($this->GetIDForIdent("SZ_SaSo")), $SZ2_T);
         } 
        
     }
