@@ -72,8 +72,9 @@ class MyFS20_SC extends IPSModule
         
         //String Variable anlegen
         //RegisterVariableString (  $Ident,  $Name, $Profil, $Position )
-         // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
-        
+        // Aufruf dieser Variable mit "getvalue($this->GetIDForIdent("IDENTNAME"))"
+        $this->RegisterVariableString("SZ_MoFr", "SchaltZeiten Mo-Fr");
+        $this->RegisterVariableString("SZ_SaSo", "SchaltZeiten Sa-So");
         
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         $this->EnableAction("FSSC_Position");
@@ -164,6 +165,10 @@ class MyFS20_SC extends IPSModule
             IPS_SetDisabled($SunRiseEventID, true);// Das Objekt wird inaktiv gesetzt.
             IPS_SetHidden($SunSetEventID, false); //Objekt verstecken
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
+            $sunriseA = date('m/d/Y H:i:s', $sunrise);
+            $sunsetA = date('m/d/Y H:i:s', $sunrise);
+            setvalue(getvalue($this->GetIDForIdent("SZ_MoFr"), $sunriseA." - ".$sunsetA);
+            setvalue(getvalue($this->GetIDForIdent("SZ_SaSo"), $sunriseA." - ".$sunsetA);
         }
         else {
             IPS_SetEventActive($SunRiseEventID, false);             //Ereignis  deaktivieren
@@ -175,6 +180,21 @@ class MyFS20_SC extends IPSModule
             IPS_SetDisabled($SunRiseEventID, true);// Das Objekt wird inaktiv gesetzt.
             IPS_SetHidden($SunSetEventID, true); //Objekt verstecken
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
+            $EreignisInfo = IPS_GetEvent($eid);
+            $SZ1 =$EreignisInfo['ScheduleGroups'][0];
+            $SZ1A_H = $SZ1[0]['Start']['Hour'];
+            $SZ1A_M = $SZ1[0]['Start']['Minute'];
+            $SZ1B_H = $SZ1[1]['Start']['Hour'];
+            $SZ1B_M = $SZ1[1]['Start']['Minute'];
+            $SZ1_T = $SZ1A_H.".".$SZ1A_M." - ".$SZ1B_H.".".$SZ1B_M
+            $SZ2 =$EreignisInfo['ScheduleGroups'][1];
+            $SZ2A_H = $SZ2[0]['Start']['Hour'];
+            $SZ2A_M = $SZ2[0]['Start']['Minute'];
+            $SZ2B_H = $SZ2[0]['Start']['Hour'];
+            $SZ2B_M = $SZ2[0]['Start']['Minute'];    
+            $SZ2_T = $SZ2A_H.".".$SZ2A_M." - ".$SZ2B_H.".".$SZ2B_M;
+            setvalue(getvalue($this->GetIDForIdent("SZ_MoFr"), $SZ1_T);
+            setvalue(getvalue($this->GetIDForIdent("SZ_SaSo"), $SZ2_T);
         } 
        
     }
