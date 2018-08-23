@@ -324,6 +324,7 @@ class MyFS20_SC extends IPSModule
        Setvalue($this->GetIDForIdent("UpDown"),false);
        SetValue($this->GetIDForIdent("FSSC_Timer"),time());
        $this->SetTimerInterval("LaufzeitTimer", 35000);
+       $this->updateSunRise();
     }   
     //*****************************************************************************
     /* Function: SetRolloDown
@@ -342,7 +343,8 @@ class MyFS20_SC extends IPSModule
        FS20_SwitchDuration($this->ReadPropertyInteger("FS20RSU_ID"), false, $Tdown); 
        Setvalue($this->GetIDForIdent("UpDown"),true); 
        SetValue($this->GetIDForIdent("FSSC_Timer"),time());
-       $this->SetTimerInterval("LaufzeitTimer", 35000); 
+       $this->SetTimerInterval("LaufzeitTimer", 35000);
+       $this->updateSunRise();
     }   
     //*****************************************************************************
     /* Function: StepRolloStop
@@ -468,8 +470,33 @@ class MyFS20_SC extends IPSModule
         } 
     }
     
-
-
+    /* ---------------------------------------------------------------------------
+     Function: updateSunRise
+    ...............................................................................
+    
+    ...............................................................................
+    Parameters: 
+        none
+    --------------------------------------------------------------------------------
+    Returns:    
+        none
+    //////////////////////////////////////////////////////////////////////////////*/
+    private function updateSunRise(){
+        $SunRiseEventID = $this->GetIDForIdent("SunRiseEvent".$this->InstanceID);
+        // täglich, um x Uhr
+        $sunrise = getvalue(56145);
+        $sunrise_H = date("H", $sunrise); 
+        $sunrise_M = date("i", $sunrise); 
+        IPS_SetEventCyclicTimeFrom($SunRiseEventID, $sunrise_H, $sunrise_M, 0);
+                
+        $SunSetEventID = $this->GetIDForIdent("SunSetEvent".$this->InstanceID);
+        // täglich, um x Uhr
+        $sunset = getvalue(25305);
+        $sunset_H = date("H", $sunset); 
+        $sunset_M = date("i", $sunset); 
+        IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
+    }    
+        
     
     //*****************************************************************************
     /* Function: RegisterEvent
