@@ -14,7 +14,7 @@
                 },
                 "columns": [{
                     "caption": "InstanceID",
-                    "name": "InstanceID", 
+                    "name": "ID", 
                     "width": "75px",
                     "add": 0,
                     "edit": {
