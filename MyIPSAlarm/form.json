@@ -3,8 +3,8 @@
 	[
 {
     "type": "List",
-    "name": "Variable",
-    "caption": "Variable",
+    "name": "Device",
+    "caption": "Device ",
     "rowCount": 5,
     "add": true,
     "delete": true,
@@ -22,7 +22,7 @@
         }
     }, {
         "caption": "Name",
-        "name": "Object",
+        "name": "Name",
         "width": "auto",
         "add": ""
     }, {
