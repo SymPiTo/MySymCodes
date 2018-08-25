@@ -13,9 +13,9 @@
                     "direction": "ascending"
                 },
                 "columns": [{
-                    "caption": "ID",
-                    "name": "ID", 
-                    "width": "auto",
+                    "caption": "ObjectID",
+                    "name": "ObjectIDID", 
+                    "width": "250px",
                     "add": 0,
                     "edit": {
                         "type": "SelectObject"
@@ -23,7 +23,12 @@
                 }, {
                     "caption": "Name",
                     "name": "Name",
-                    "width": "auto",
+                    "width": "250px",
+                    "add": ""
+                 }, {
+                    "caption": "Wert",
+                    "name": "Value",
+                    "width": "250px",
                     "add": ""
                 }, {
                     "caption": "State",
