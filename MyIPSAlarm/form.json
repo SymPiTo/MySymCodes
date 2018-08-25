@@ -1,7 +1,7 @@
 {
 	"elements":
 	[
-      { "type": "Label", "label": "Add/Delete sensor variables, which activate the alarm" },
+      { "type": "Label", "label": "Add/Delete Battery sensor variables, which activate the alarm" },
       {
         "type": "List",
         "name": "Sensors",
@@ -15,7 +15,7 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "60px",
+          "width" : "460px",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
@@ -48,7 +48,7 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "60px",
+          "width" : "460px",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
