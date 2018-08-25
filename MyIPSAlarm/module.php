@@ -42,7 +42,7 @@ class MyAlarm extends IPSModule
         //$this->RegisterPropertyInteger(!IDENTNAME!, 0);
         //$this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
         //$this->RegisterPropertyBoolean(!IDENTNAME!, false);
-			$this->RegisterPropertyString("Sensors", "[]");
+			$this->RegisterPropertyString("Battery", "[]");
 			$this->RegisterPropertyString("Targets", "[]");
         
         //Integer Variable anlegen
@@ -146,8 +146,9 @@ class MyAlarm extends IPSModule
     Returns:    
         none
     ------------------------------------------------------------------------------  */
-    public function xxxx(){
-       
+    public function test(){
+       $sensors = json_decode($this->ReadPropertyString("Battery"));
+       return $sensors;
     }  
 
 
