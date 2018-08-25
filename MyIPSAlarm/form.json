@@ -1,52 +1,73 @@
 {
 	"elements":
 	[
-{
-    "type": "List",
-    "name": "Property",
-    "caption": "Properties ",
-    "rowCount": 5,
-    "add": true,
-    "delete": true,
-    "sort": {
-        "column": "Target",
-        "direction": "ascending"
+   {
+      "type": "Label",
+      "label": "Connect"
     },
-    "columns": [{
-        "caption": "InstanceID",
-        "name": "PropertyVariableID", 
-        "width": "75px",
-        "add": 0,
-        "edit": {
+    {
+      "type": "List",
+      "name": "Variables",
+      "caption": "Variables",
+      "rowCount": 10,
+      "add": true,
+      "delete": true,
+      "sort": {
+        "column": "Name",
+        "direction": "ascending"
+      },
+      "columns": [
+        {
+          "label": "ID",
+          "name": "ID",
+          "width": "50px",
+          "add": 0,
+          "visible": true,
+          "edit": {
             "type": "SelectVariable"
-        }
-    }, {
-        "caption": "Name",
-        "name": "Target",
-        "width": "auto",
-        "add": ""
-    }, {
-        "caption": "State",
-        "name": "State",
-        "width": "40px",
-        "add": "New!"
-    }, {
-        "caption": "Temperature",
-        "name": "Temperature",
-        "width": "75px",
-        "add": 20.0,
-        "edit": {
-            "type": "NumberSpinner",
-            "digits": 2
+          }
         },
-    "values": [{
-        "InstanceID": 12435,
-        "Name": "ABCD",
-        "State": "OK!",
-        "Temperature": 23.31,
-        "rowColor": "#ff0000"  
-    }]
-    }]
+        {
+          "label": "Device",
+          "name": "Device",
+          "width": "100px",
+          "add": ""
+        },
+        {
+          "label": "Name",
+          "name": "Name",
+          "width": "100px",
+          "add": "",
+          "edit": {
+            "type": "ValidationTextBox"
+          }
+        },
+        {
+          "label": "Type",
+          "name": "VariablesType",
+          "width": "75px",
+          "add": "",
+          "visible": false
+        },
+        {
+          "label": "State",
+          "name": "State",
+          "width": "75px",
+          "add": ""
+        },
+        {
+          "label": "amzID",
+          "name": "amzID",
+          "width": "75px",
+          "add": 0,
+          "visible": false,
+          "save": true
+        }
+      ],
+      "values": [
+      ]
+   
+     
 }
 	],
 	"actions":
