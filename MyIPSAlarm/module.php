@@ -43,7 +43,7 @@ class MyAlarm extends IPSModule
         //$this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
         //$this->RegisterPropertyBoolean(!IDENTNAME!, false);
         
-       
+       $this->RegisterPropertyString("Variables","[]");
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
