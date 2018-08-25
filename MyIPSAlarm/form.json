@@ -1,7 +1,38 @@
 {
 	"elements":
 	[
-
+            {
+                "type": "List",
+                "name": "Alarm",
+                "caption": "Battery Alarms",
+                "rowCount": 4,
+                "add": true,
+                "delete": true,
+                "sort": {
+                    "column": "Name",
+                    "direction": "ascending"
+                },
+                "columns": [{
+                    "caption": "InstanceID",
+                    "name": "InstanceID", 
+                    "width": "75px",
+                    "add": 0,
+                    "edit": {
+                        "type": "SelectObject"
+                    }
+                }, {
+                    "caption": "Name",
+                    "name": "Name",
+                    "width": "auto",
+                    "add": ""
+                }, {
+                    "caption": "State",
+                    "name": "State",
+                    "width": "40px",
+                    "add": "New!"
+                }]
+ 
+            }
 	],
 	"actions":
 	[
