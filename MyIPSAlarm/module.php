@@ -103,8 +103,8 @@ class MyAlarm extends IPSModule
         foreach($batteries as $sensor) {
             $Parent = $AlarmCatID;
             $Typ = 0;
-            $Ident = "AE".$sensor->id;
-            $Name = "AEvent".$sensor->id;
+            $Ident = "AE".$sensor->ID;
+            $Name = "AEvent".$sensor->ID;
             $this->RegisterEvent($Name, $Ident, $Typ, $Parent, 0);
         }       
     }
