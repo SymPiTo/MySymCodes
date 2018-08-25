@@ -38,7 +38,14 @@
         "edit": {
             "type": "NumberSpinner",
             "digits": 2
-        }
+        },
+    "values": [{
+        "InstanceID": 12435,
+        "Name": "ABCD",
+        "State": "OK!",
+        "Temperature": 23.31,
+        "rowColor": "#ff0000"  
+    }]
     }]
 }
 	],
