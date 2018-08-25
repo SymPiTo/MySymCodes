@@ -1,4 +1,4 @@
-7<?
+<?
 
 class MyModuleGenerator extends IPSModule
 {
