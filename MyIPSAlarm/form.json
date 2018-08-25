@@ -1,84 +1,71 @@
 {
 	"elements":
 	[
-   {
-      "type": "Label",
-      "label": "Connect"
-    },
-    {
-      "type": "List",
-      "name": "Variables",
-      "caption": "Variables",
-      "rowCount": 10,
-      "add": true,
-      "delete": true,
-      "sort": {
-        "column": "Name",
-        "direction": "ascending"
-      },
-      "columns": [
-        {
-          "label": "ID",
-          "name": "ID",
-          "width": "50px",
+      { "type": "Label", "label": "Add/Delete sensor variables, which activate the alarm" },
+      {
+        "type": "List",
+        "name": "Sensors",
+        "caption": "Sensorvariables",
+        "add": true,
+        "delete": true,
+        "sort": {
+          "column": "ID",
+          "direction": "ascending"
+        },
+        "columns": [{
+          "name" : "ID",
+          "label" : "ID",
+          "width" : "60px",
           "add": 0,
-          "visible": true,
           "edit": {
             "type": "SelectVariable"
           }
-        },
-        {
-          "label": "Device",
-          "name": "Device",
-          "width": "100px",
+        }, {
+          "name" : "Name",
+          "label" : "Name",
+          "width" : "auto",
+          "add": "Select variable"
+        }, {
+          "name" : "Status",
+          "label" : "Status",
+          "width" : "120",
           "add": ""
+        }],
+        "values": [
+        ]
+      },
+      { "type": "Label", "label": "Add/Delete target variables, which react on the alarm" },
+      {
+        "type": "List",
+        "name": "Targets",
+        "caption": "Targetvariables",
+        "add": true,
+        "delete": true,
+        "sort": {
+          "column": "ID",
+          "direction": "ascending"
         },
-        {
-          "label": "Name",
-          "name": "Name",
-          "width": "100px",
-          "add": "",
-          "edit": {
-            "type": "ValidationTextBox"
-          }
-        },
-        {
-          "label": "Type",
-          "name": "VariablesType",
-          "width": "75px",
-          "add": "",
-          "visible": false
-        },
-        {
-          "label": "State",
-          "name": "State",
-          "width": "75px",
-          "add": ""
-        },
-        {
-          "label": "amzID",
-          "name": "amzID",
-          "width": "75px",
+        "columns": [{
+          "name" : "ID",
+          "label" : "ID",
+          "width" : "60px",
           "add": 0,
-          "visible": false,
-          "save": true
-        }
-      ],
-      "values": [
-      ]
-   
-     
-}
-	],
-	"actions":
-	[
-
-        ],
-        
-	"status" : 
-        [
-
+          "edit": {
+            "type": "SelectVariable"
+          }
+        }, {
+          "name" : "Name",
+          "label" : "Name",
+          "width" : "auto",
+          "add": "Select variable"
+        }, {
+          "name" : "Status",
+          "label" : "Status",
+          "width" : "120",
+          "add": ""
+        }],
+        "values": [
+        ]
+      }
 	]
-        
-        
 }
