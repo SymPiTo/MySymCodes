@@ -1,4 +1,4 @@
-<?
+7<?
 
 class MyModuleGenerator extends IPSModule
 {
@@ -222,6 +222,7 @@ class MyModuleGenerator extends IPSModule
         $guids = array ("library_guid" => $library_guid, "io_guid" => $io_guid, "rx_guid" => $rx_guid, "tx_guid" => $tx_guid, "splitter_guid" => $splitter_guid, "splitterinterface_guid" => $splitterinterface_guid, "device_guid" => $device_guid, "deviceinterface_guid" => $deviceinterface_guid);
         $this->CreateLibraryJSON($guids);
         $this->CreateReadme($guids);
+        
         if($ownio == 1)
         {
             $this->CreateIO($guids);
@@ -272,8 +273,10 @@ class MyModuleGenerator extends IPSModule
         $device_guid = $guids["device_guid"];
         $deviceidentjson = $this->CreateGUIDIdent($device_guid, $type."JSON");
         $deviceidentphp = $this->CreateGUIDIdent($device_guid, $type."PHP");
+        $formidentjson = $this->CreateGUIDIdent($device_guid, $type."JSON");
         $this->CreateDeviceModuleJSONScript($guids, $deviceidentjson, $CategoryID);
         $this->CreateDeviceModulePHPScript($guids, $deviceidentphp, $CategoryID);
+        $this->CreateformJsonScript($guids, $formidentjson, $CategoryID);
     }
 
     protected function CreateCategory($ident, $type, $aliases)
@@ -484,6 +487,23 @@ GUID: `'.$device_guid.'` ';
         return $ScriptID;
     }
 
+    
+    protected function CreateformJSON($guids) {
+        $Scriptname = "form_php";
+        $ScriptID = @IPS_GetObjectIDByIdent($ioident, $CategoryID);
+
+        if ($ScriptID === false)
+        {
+            $ScriptID = IPS_CreateScript(0);
+            IPS_SetName($ScriptID, $Scriptname);
+            IPS_SetParent($ScriptID, $CategoryID);
+            IPS_SetIdent($ScriptID, $ioident);
+            $content = '<?';
+        }        
+            IPS_SetScriptContent($ScriptID, $content); 
+       
+    }
+    
     protected function CreateLibraryJSON($guids)
     {
         $library_guid = $guids["library_guid"];
@@ -760,6 +780,24 @@ class '.$modulename.'Splitter extends IPSModule
         return $ScriptID;
     }
 
+    
+    protected function CreateformJsonScript($guids, $formidentjson, $CategoryID)
+    {
+        $Scriptname = "form_json";
+        $ScriptID = @IPS_GetObjectIDByIdent($formidentjson, $CategoryID);
+
+        if ($ScriptID === false)
+        {
+            $ScriptID = IPS_CreateScript(0);
+            IPS_SetName($ScriptID, $Scriptname);
+            IPS_SetParent($ScriptID, $CategoryID);
+            IPS_SetIdent($ScriptID, $formidentjson);
+            
+        }
+        $content = 'xx';
+        IPS_SetScriptContent($ScriptID, $content);
+    }    
+    
     protected function CreateDeviceModuleJSONScript($guids, $deviceident, $CategoryID)
     {
 	$dataflowtype = $this->ReadPropertyInteger("dataflowtype");
