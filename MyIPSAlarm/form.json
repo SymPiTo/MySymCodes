@@ -5,7 +5,7 @@
                 "type": "List",
                 "name": "Alarm",
                 "caption": "Battery Alarms",
-                "rowCount": 4,
+                "rowCount": 3,
                 "add": true,
                 "delete": true,
                 "sort": {
@@ -13,9 +13,9 @@
                     "direction": "ascending"
                 },
                 "columns": [{
-                    "caption": "InstanceID",
+                    "caption": "ID",
                     "name": "ID", 
-                    "width": "75px",
+                    "width": "auto",
                     "add": 0,
                     "edit": {
                         "type": "SelectObject"
@@ -28,7 +28,7 @@
                 }, {
                     "caption": "State",
                     "name": "State",
-                    "width": "40px",
+                    "width": "auto",
                     "add": "New!"
                 }]
  
