@@ -3,8 +3,8 @@
 	[
 {
     "type": "List",
-    "name": "Device",
-    "caption": "Device ",
+    "name": "Property",
+    "caption": "Properties ",
     "rowCount": 5,
     "add": true,
     "delete": true,
@@ -14,7 +14,7 @@
     },
     "columns": [{
         "caption": "InstanceID",
-        "name": "InstanceID", 
+        "name": "PropertyVariableID", 
         "width": "75px",
         "add": 0,
         "edit": {
@@ -22,7 +22,7 @@
         }
     }, {
         "caption": "Name",
-        "name": "Name",
+        "name": "Target",
         "width": "auto",
         "add": ""
     }, {
