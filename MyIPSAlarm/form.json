@@ -14,7 +14,7 @@
                 },
                 "columns": [{
                     "caption": "ObjectID",
-                    "name": "ObjectIDID", 
+                    "name": "ObjectID", 
                     "width": "250px",
                     "add": 0,
                     "edit": {
