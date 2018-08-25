@@ -3,8 +3,8 @@
 	[
 {
     "type": "List",
-    "name": "Devices",
-    "caption": "Devices",
+    "name": "Variable",
+    "caption": "Variable",
     "rowCount": 5,
     "add": true,
     "delete": true,
@@ -18,7 +18,7 @@
         "width": "75px",
         "add": 0,
         "edit": {
-            "type": "SelectInstance"
+            "type": "SelectVariable"
         }
     }, {
         "caption": "Name",
