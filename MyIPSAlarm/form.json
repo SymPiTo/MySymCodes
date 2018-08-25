@@ -4,8 +4,8 @@
       { "type": "Label", "label": "Add/Delete Battery sensor variables, which activate the alarm" },
       {
         "type": "List",
-        "name": "Sensors",
-        "caption": "Sensorvariables",
+        "name": "Battery",
+        "caption": "Batteries",
         "add": true,
         "delete": true,
         "sort": {
