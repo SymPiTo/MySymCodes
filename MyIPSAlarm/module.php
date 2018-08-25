@@ -220,7 +220,7 @@ class MyAlarm extends IPSModule
             $eid = @$this->GetIDForIdent($Ident);
             if($eid === false) {
                     $eid = 0;
-            } elseif(IPS_GetEvent($eid)[!EventType!] <> $Typ) {
+            } elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
                     IPS_DeleteEvent($eid);
                     $eid = 0;
             }
