@@ -9,7 +9,7 @@
     "add": true,
     "delete": true,
     "sort": {
-        "column": "Name",
+        "column": "Target",
         "direction": "ascending"
     },
     "columns": [{
