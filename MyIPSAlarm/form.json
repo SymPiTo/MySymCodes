@@ -14,21 +14,21 @@
                 },
                 "columns": [{
                     "caption": "ObjectID",
-                    "name": "ObjectID", 
-                    "width": "250px",
+                    "name": "PropertyVariableID", 
+                    "width": "350px",
                     "add": 0,
                     "edit": {
-                        "type": "SelectObject"
+                        "type": "SelectVariable"
                     }
                 }, {
                     "caption": "Name",
                     "name": "Name",
-                    "width": "250px",
+                    "width": "350px",
                     "add": ""
                  }, {
                     "caption": "Wert",
                     "name": "Value",
-                    "width": "250px",
+                    "width": "350px",
                     "add": ""
                 }, {
                     "caption": "State",
