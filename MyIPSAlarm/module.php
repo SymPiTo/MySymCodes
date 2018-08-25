@@ -147,7 +147,7 @@ class MyAlarm extends IPSModule
         none
     ------------------------------------------------------------------------------  */
     public function test(){
-       $sensors = json_decode($this->ReadPropertyString("Battery"));
+       $sensors = $this->ReadPropertyString("Battery");
        return $sensors;
     }  
 
