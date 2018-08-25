@@ -42,8 +42,12 @@ class MyAlarm extends IPSModule
         //$this->RegisterPropertyInteger(!IDENTNAME!, 0);
         //$this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
         //$this->RegisterPropertyBoolean(!IDENTNAME!, false);
-			$this->RegisterPropertyString("Battery", "[]");
-			$this->RegisterPropertyString("Targets", "[]");
+        
+        //Listen Einträge als JSON regisrieren
+        // zum umwandeln in ein Array 
+        // $sensors = json_decode($this->ReadPropertyString("Battery"));
+            $this->RegisterPropertyString("Battery", "[]");
+            $this->RegisterPropertyString("Targets", "[]");
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
@@ -60,6 +64,10 @@ class MyAlarm extends IPSModule
          // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
          //$this->RegisterVariableString("SZ_MoFr", "SchaltZeiten Mo-Fr");
  
+          
+            
+            
+            
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         
         //§this->EnableAction(-IDENTNAME-);
@@ -87,7 +95,18 @@ class MyAlarm extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-       
+        
+        //Unterkategorie anlegen
+        $AlarmCatID = RegisterCategory("AlarmEvents");
+        // für jedes Liste ID ein Event anlegen
+        $batteries = json_decode($this->ReadPropertyString("Battery"));
+        foreach($batteries as $sensor) {
+            $Parent = $AlarmCatID;
+            $Typ = 0;
+            $Ident = "AE".$sensor->id;
+            $Name = "AEvent".$sensor->id;
+            RegisterEvent($Name, $Ident, $Typ, $Parent, 0);
+        }       
     }
     
    /* ------------------------------------------------------------ 
@@ -147,8 +166,9 @@ class MyAlarm extends IPSModule
         none
     ------------------------------------------------------------------------------  */
     public function test(){
-       $sensors = $this->ReadPropertyString("Battery");
-       return $sensors;
+       $Batteries = $this->ReadPropertyString("Battery");
+       
+        
     }  
 
 
@@ -259,7 +279,30 @@ class MyAlarm extends IPSModule
             IPS_SetEventScheduleAction($EventID, $ActionID, $Name, $Color, $Script);
     }
 
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: RegisterCategory
+    ...............................................................................
+     *  Legt ein Unterverzeichnis an
+     * Beispiel:
+     *  
+    ...............................................................................
+    Parameters: 
+ 
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
+    private function RegisterCategory($catName ) {
+        $KategorieID = @IPS_GetCategoryIDByName($catName, $this->InstanceID);
+        if ($KategorieID === false){
+            // Anlegen einer neuen Kategorie mit dem Namen $catName
+            $CatID = IPS_CreateCategory();       // Kategorie anlegen
+            IPS_SetName($CatID, $catName); // Kategorie benennen
 
+            IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unterhalb der der Instanz
+        }
+        return $KategorieID;
+    }
 
 		
 }
