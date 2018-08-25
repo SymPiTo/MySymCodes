@@ -436,36 +436,27 @@ class MyFS20_SC extends IPSModule
     }
 
     /* ---------------------------------------------------------------------------
-     Function: SetSPonMoFr
+     Function: SetSwitchPoint
     ...............................................................................
-    
+    setzt einen Schaltpunkt.
     ...............................................................................
     Parameters: 
-        none
+        $switchGroup    -   0 = Mo-Fr // 1 = Sa-So
+        $switchPoint    -   0 = Up // 1 = Down
+        $h              -   time - hour
+        $m              -   time - minute
+        $action         -   0 = Up  // 1 = Down
     ...............................................................................
     Returns:    
         none
     ------------------------------------------------------------------------------ */
-    public function SetSPonMoFr($value) 
-    {
+    public function SetSwitchPoint(int $switchGroup, int $switchPoint, int $h, int $m, int $action) {
+        $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);
+        IPS_SetEventScheduleGroupPoint($eid, $switchGroup, $switchPoint, $h, $m, 0, $UpDown);  
         
     }    
     
-     /* ---------------------------------------------------------------------------
-     Function: SetSPonSaSo
-    ...............................................................................
     
-    ...............................................................................
-    Parameters: 
-        none
-    ...............................................................................
-    Returns:    
-        none
-    ------------------------------------------------------------------------------ */
-    public function SetSPonSaSo() 
-    {
-        
-    }    
     
     
     

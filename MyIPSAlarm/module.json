@@ -1,0 +1,11 @@
+{
+	"id": "{CED40165-1834-EEDE-4B5D-9A5933B6EB2E}",
+	"name": "MyAlarm",
+	"type": 3,
+	"vendor": "PiTo",
+	"aliases": ["MyIPSAlarm"],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "A"
+}
