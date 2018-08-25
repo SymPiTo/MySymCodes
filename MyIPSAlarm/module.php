@@ -105,7 +105,7 @@ class MyAlarm extends IPSModule
             $Typ = 0;
             $Ident = "AE".$sensor->id;
             $Name = "AEvent".$sensor->id;
-            RegisterEvent($Name, $Ident, $Typ, $Parent, 0);
+            $this->RegisterEvent($Name, $Ident, $Typ, $Parent, 0);
         }       
     }
     
