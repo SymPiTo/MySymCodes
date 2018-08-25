@@ -1,40 +1,46 @@
 {
 	"elements":
 	[
-            {
-                "type": "List",
-                "name": "Alarm",
-                "caption": "Battery Alarms",
-                "rowCount": 3,
-                "add": true,
-                "delete": true,
-                "sort": {
-                    "column": "Name",
-                    "direction": "ascending"
-                },
-                "columns": [{
-                    "caption": "ObjectID",
-                    "name": "PropertyVariableID", 
-                    "width": "450px",
-                    "add": 0,
-                    "edit": {
-                        "type": "SelectVariable"
-                    }
-                }, {
-                    "caption": "Name",
-                    "name": "Name",
-                    "width": "450",
-                    "add": 0
-                    
-                }, {                     
-                     "caption": "State",
-                    "name": "State", 
-                    "width": "auto",
-                    "add": "New!"
-
-                }]
- 
-            }
+{
+    "type": "List",
+    "name": "Devices",
+    "caption": "Devices",
+    "rowCount": 5,
+    "add": true,
+    "delete": true,
+    "sort": {
+        "column": "Name",
+        "direction": "ascending"
+    },
+    "columns": [{
+        "caption": "InstanceID",
+        "name": "InstanceID", 
+        "width": "75px",
+        "add": 0,
+        "edit": {
+            "type": "SelectInstance"
+        }
+    }, {
+        "caption": "Name",
+        "name": "Name",
+        "width": "auto",
+        "add": ""
+    }, {
+        "caption": "State",
+        "name": "State",
+        "width": "40px",
+        "add": "New!"
+    }, {
+        "caption": "Temperature",
+        "name": "Temperature",
+        "width": "75px",
+        "add": 20.0,
+        "edit": {
+            "type": "NumberSpinner",
+            "digits": 2
+        }
+    }]
+}
 	],
 	"actions":
 	[
