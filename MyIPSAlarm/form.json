@@ -21,10 +21,17 @@
                         "type": "SelectVariable"
                     }
                 }, {
-                    "caption": "State",
-                    "name": "State",
+                    "caption": "Name",
+                    "name": "Name",
+                    "width": "450",
+                    "add": 0
+                    
+                }, {                     
+                     "caption": "State",
+                    "name": "State", 
                     "width": "auto",
                     "add": "New!"
+
                 }]
  
             }
