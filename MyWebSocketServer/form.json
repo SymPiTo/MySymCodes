@@ -11,7 +11,7 @@
                 }, 
                 {   "type": "SelectScript", 
                     "name": "IDcommand", 
-                    "caption": "Target Script" },
+                    "caption": "Target Script called by Client send data to server." },
                 {
                     "name": "Port",
                     "type": "NumberSpinner",

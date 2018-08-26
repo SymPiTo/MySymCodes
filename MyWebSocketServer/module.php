@@ -63,7 +63,7 @@ class MyWebsocketServer extends IPSModule
         $this->Multi_Clients = new WebSocket_ClientList();
         $this->NoNewClients = true;
         $this->RegisterPropertyBoolean("Open", false);
-        $this->RegisterPropertyInteger("IDcommand", 111111);
+        $this->RegisterPropertyInteger("IDcommand", 0);
         $this->RegisterPropertyInteger("Port", 8080);
         $this->RegisterPropertyInteger("Interval", 0);
         $this->RegisterPropertyString("URI", "/");
