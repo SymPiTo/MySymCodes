@@ -234,7 +234,7 @@ class MyAlarm extends IPSModule
       $Position    -   Position der Instanz
     ...............................................................................
     Returns:    
-        none
+        none 
     -------------------------------------------------------------------------------*/
     private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
     {
