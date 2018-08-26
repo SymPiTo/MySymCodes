@@ -157,9 +157,13 @@
                     "width" : "120",
                     "add": ""
                   }],
-                  "values": [
-                  ]
-                }
+                    "values": [{
+                        "ID": "ABCD",
+                        "Name": "OK!",
+                        "Status": "OK",
+                        "rowColor": "#ff0000"  
+                    }]
+             }
             ],
     "status":
             [
