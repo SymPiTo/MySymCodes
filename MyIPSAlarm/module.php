@@ -192,7 +192,7 @@ class MyAlarm extends IPSModule
             $batteries = json_decode($this->ReadPropertyString("Battery"));
             $ParentID =   @IPS_GetObjectIDByName("BatAlarmEvents", $this->InstanceID);
             $EreignisID = @IPS_GetEventIDByName("AEvent".$batteries[0]->ID, $ParentID);
-            $eventID = $this->GetIDForIdent("AE".$batteries[0]->ID);
+            $eventID = $this->GetIDForIdent($EreignisID);
             return $eventID;
             /*
             foreach($batteries as $sensor) {
