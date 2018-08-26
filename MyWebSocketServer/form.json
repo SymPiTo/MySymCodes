@@ -132,6 +132,7 @@
                   "type": "List",
                   "name": "IPSVars",
                   "caption": "IPS Variable",
+                  "rowCount": "10", 
                   "add": true,
                   "delete": true,
                   "sort": {
