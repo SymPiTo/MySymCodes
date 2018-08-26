@@ -238,12 +238,12 @@ class MyAlarm extends IPSModule
     -------------------------------------------------------------------------------*/
     private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
     {
-            $eid = $this->GetIDForIdent($Ident);
+            $eid = @$this->GetIDForIdent($Ident);
             if($eid == false) {
                 //we need to create one
                 $EventID = IPS_CreateEvent($Typ);
                 IPS_SetParent($EventID, $Parent);
-                IPS_SetIdent($EventID, $Ident);
+                @IPS_SetIdent($EventID, $Ident);
                 IPS_SetName($EventID, $Name);
                 IPS_SetPosition($EventID, $Position);
                 IPS_SetEventActive($EventID, false);
