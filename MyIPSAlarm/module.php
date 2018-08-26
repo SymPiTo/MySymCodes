@@ -51,18 +51,19 @@ class MyAlarm extends IPSModule
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-        //$this->RegisterVariableInteger(!FSSC_Position!, !Position!, !Rollo.Position!);
-      
+        // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
+        $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "");
+        $this->RegisterVariableInteger("A_Reset", "Reset Alarm", "");
+        
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-        //$this->RegisterVariableBoolean(!FSSC_Mode!, !Mode!);
+        //$this->RegisterVariableBoolean("A_Reset", "Reset Alarm");
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
-         // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-         //$this->RegisterVariableString("SZ_MoFr", "SchaltZeiten Mo-Fr");
+         // Aufruf dieser Variable mit $this->GetIDForIdent("IDENTNAME")
+        $this->RegisterVariableString("BatAlarm", "Battery Alarm");
  
           
             
@@ -70,8 +71,8 @@ class MyAlarm extends IPSModule
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         
-        //§this->EnableAction(-IDENTNAME-);
-        //IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
+        //$this->EnableAction("IDENTNAME");
+        IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
         
         //anlegen eines Timers
         //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
@@ -88,7 +89,7 @@ class MyAlarm extends IPSModule
       und nach dem unittelbaren Erstellen der Instanz.
      
     SYSTEM-VARIABLE:
-        InstanceID - $this->InstanceID.
+        InstanceID = $this->InstanceID.
 
     EVENTS:
         SwitchTimeEvent".$this->InstanceID   -   Wochenplan (Mo-Fr und Sa-So)
@@ -100,7 +101,7 @@ class MyAlarm extends IPSModule
         parent::ApplyChanges();
         
         //Unterkategorie anlegen
-        $AlarmCatID = $this->RegisterCategory("AlarmEvents");
+        $AlarmCatID = $this->RegisterCategory("BatAlarmEvents");
         // für jedes Liste ID ein Event anlegen
         $batteries = json_decode($this->ReadPropertyString("Battery"));
         foreach($batteries as $sensor) {
@@ -130,24 +131,15 @@ class MyAlarm extends IPSModule
       Mode             -   Switch für Automatik/Manual
      ------------------------------------------------------------- */
     public function RequestAction($Ident, $Value) {
-        /*
+            
          switch($Ident) {
-            case "UpDown":
-                SetValue($this->GetIDForIdent($Ident), $Value);
-                if(getvalue($this->GetIDForIdent($Ident))){
-                    $this->SetRolloDown();  
-                }
-                else{
-                    $this->SetRolloUp();
-                }
-                break;
-             case "Mode":
-                $this->SetMode($Value);  
+             case "A_Reset":
+                $this->ResetAlarm();  
                 break;
             default:
                 throw new Exception("Invalid Ident");
         }
-        */
+            
     }
 
   /* ______________________________________________________________________________________________________________________
@@ -168,21 +160,44 @@ class MyAlarm extends IPSModule
     Returns:    
         none
     ------------------------------------------------------------------------------  */
-    public function test(){
+    public function ResetAlarm(){
        $Batteries = $this->ReadPropertyString("Battery");
        
         
     }  
 
 
-   /* _______________________________________________________________________
+   /* ==========================================================================
     * Section: Private Funtions
     * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar
     *   Hilfsfunktionen
-    * _______________________________________________________________________
+    * ==========================================================================
     */  
 
-
+        /* ----------------------------------------------------------------------------
+         Function: GetIPSVersion
+        ...............................................................................
+        gibt die instalierte IPS Version zurück
+        ...............................................................................
+        Parameters: 
+            none
+        ..............................................................................
+        Returns:   
+            $ipsversion (floatint)
+        ------------------------------------------------------------------------------- */
+	public function BatAlarm(){
+            //überprüfen welches Ereignis ausgelöst hat
+            
+           
+            $batteries = json_decode($this->ReadPropertyString("Battery"));
+            foreach($batteries as $sensor) {
+                $EreignisInfo = IPS_GetEvent($sensor->ID);
+                $event[0]["variable"] = $EreignisInfo["TriggerValue"];
+                $event[0]["time"] = $EreignisInfo["LastRun"];
+            }
+            setvalue($this->GetIDForIdent("BatAlarm"), $event[0]["time"]);
+            
+        }    
 		
         /* ----------------------------------------------------------------------------
          Function: GetIPSVersion
@@ -249,7 +264,9 @@ class MyAlarm extends IPSModule
                 @IPS_SetIdent($EventID, $Ident);
                 IPS_SetName($EventID, $Name);
                 IPS_SetPosition($EventID, $Position);
-                IPS_SetEventTrigger($EventID, $trigger, $var);   //OnUpdate für Variable 12345
+                IPS_SetEventTrigger($EventID, $trigger, $var);   //OnChange für Variable $var
+                $cmd = "A_BatAlarm(".$this->InstanceID.");";
+                IPS_SetEventScript($EreignisID, $cmd );
                 IPS_SetEventActive($EventID, false);
             } 
             else{
