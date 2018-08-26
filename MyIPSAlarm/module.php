@@ -266,7 +266,7 @@ class MyAlarm extends IPSModule
                 IPS_SetPosition($EventID, $Position);
                 IPS_SetEventTrigger($EventID, $trigger, $var);   //OnChange für Variable $var
                 $cmd = "A_BatAlarm(".$this->InstanceID.");";
-                IPS_SetEventScript($EreignisID, $cmd );
+                IPS_SetEventScript($EventID, $cmd );
                 IPS_SetEventActive($EventID, false);
             } 
             else{
