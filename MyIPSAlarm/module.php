@@ -186,7 +186,7 @@ class MyAlarm extends IPSModule
             $ipsversion (floatint)
         ------------------------------------------------------------------------------- */
 	public function BatAlarm(){
-            //überprüfen welches Ereignis ausgelöst hat
+            //überprüfen welches Ereignis ausgelöst hat 
             
            
             $batteries = json_decode($this->ReadPropertyString("Battery"));
