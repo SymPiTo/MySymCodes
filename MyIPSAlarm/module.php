@@ -195,7 +195,7 @@ class MyAlarm extends IPSModule
                 $event[0]["variable"] = $EreignisInfo["TriggerValue"];
                 $event[0]["time"] = $EreignisInfo["LastRun"];
             }
-            setvalue($this->GetIDForIdent("BatAlarm"), $event[0]["time"]);
+            setvalue($this->GetIDForIdent("BatAlarm"),"hhhhhhh");
             
         }    
 		
@@ -267,7 +267,7 @@ class MyAlarm extends IPSModule
                 IPS_SetEventTrigger($EventID, $trigger, $var);   //OnChange für Variable $var
                 $cmd = "A_BatAlarm(".$this->InstanceID.");";
                 IPS_SetEventScript($EventID, $cmd );
-                IPS_SetEventActive($EventID, false);
+                IPS_SetEventActive($EventID, true);
             } 
             else{
             }
