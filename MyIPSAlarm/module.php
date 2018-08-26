@@ -245,7 +245,7 @@ class MyAlarm extends IPSModule
             if($eid === false) {
                 //we need to create one
                 $EventID = IPS_CreateEvent($Typ);
-                IPS_SetParent($EventID, $Parent);
+                IPS_SetParent($EventID, $ParentID);
                 @IPS_SetIdent($EventID, $Ident);
                 IPS_SetName($EventID, $Name);
                 IPS_SetPosition($EventID, $Position);
