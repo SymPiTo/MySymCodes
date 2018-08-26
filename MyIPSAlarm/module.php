@@ -104,11 +104,11 @@ class MyAlarm extends IPSModule
         // für jedes Liste ID ein Event anlegen
         $batteries = json_decode($this->ReadPropertyString("Battery"));
         foreach($batteries as $sensor) {
-            $Parent = $AlarmCatID;
+            $ParentID = $AlarmCatID;
             $Typ = 0;
             $Ident = "AE".$sensor->ID;
             $Name = "AEvent".$sensor->ID;
-            $this->RegisterVarEvent($Name, $Ident, $Typ, $Parent, 0, 1, $sensor->ID);
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID);
         }       
     }
     
@@ -239,10 +239,10 @@ class MyAlarm extends IPSModule
     Returns:    
         none 
     -------------------------------------------------------------------------------*/
-    private function RegisterVarEvent($Name, $Ident, $Typ, $Parent, $Position, $trigger, $var)
+    private function RegisterVarEvent($Name, $Ident, $Typ, $ParentID, $Position, $trigger, $var)
     {
-            $eid = @$this->GetIDForIdent($Ident);
-            if($eid == false) {
+            $eid =  @IPS_GetEventIDByName($Name, $ParentID);
+            if($eid === false) {
                 //we need to create one
                 $EventID = IPS_CreateEvent($Typ);
                 IPS_SetParent($EventID, $Parent);
