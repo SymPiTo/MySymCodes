@@ -180,7 +180,7 @@ class MyAlarm extends IPSModule
         gibt die instalierte IPS Version zurück
         ...............................................................................
         Parameters: 
-            none
+            none.
         ..............................................................................
         Returns:   
             $ipsversion (floatint)
