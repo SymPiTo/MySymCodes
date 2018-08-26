@@ -5,8 +5,9 @@
                     "type": "CheckBox",
                     "caption": "Activate WebSocketServer"
                 },
-                
-                { "type": "Label", "label": "Add/Delete variables, which shall be tranfered to client" },
+                { 
+                            "type": "Label", "label": "Add/Delete variables, which shall be tranfered to client" 
+                },
                 {
                   "type": "List",
                   "name": "IPSVars",
@@ -39,8 +40,10 @@
                   "values": [
                   ]
                 },
-
-
+                {
+                    "type": "Label",
+                    "label": "--------------------------------------------------"
+                }, 
                 {   "type": "SelectScript", 
                     "name": "IDcommand", 
                     "caption": "Target Script" },
@@ -53,14 +56,17 @@
                     "name": "URI",
                     "type": "ValidationTextBox",
                     "caption": "URI"
-                }, {
+                }, 
+                {
                     "name": "Interval",
                     "type": "NumberSpinner",
                     "caption": "Timeout"
-                }, {
+                }, 
+                {
                     "type": "Label",
                     "label": "Caution: Only use TLS with authentication if the port is accessible externally!"
-                }, {
+                }, 
+                {
                     "type": "Select",
                     "name": "Mode",
                     "caption": "Mode",
@@ -105,18 +111,22 @@
                             ]
                         }
                     ]
-                }, {
+                }, 
+                {
                     "type": "Label",
                     "label": "--------------------------------------------------"
-                }, {
+                }, 
+                {
                     "type": "Label",
                     "label": "Optional Certificate:"
-                }, {
+                }, 
+                {
                     "name": "CertFile",
                     "type": "SelectFile",
                     "extensions": ".pem,.crt,.cer",
                     "caption": "Certificate"
-                }, {
+                }, 
+                {
                     "name": "KeyFile",
                     "type": "SelectFile",
                     "extensions": ".pem,.key",
@@ -126,10 +136,12 @@
                     "name": "KeyPassword",
                     "type": "PasswordTextBox",
                     "caption": "Passphrase(optional)"
-                }, {
+                }, 
+                {
                     "type": "Label",
                     "label": "--------------------------------------------------"
-                }, {
+                }, 
+                {
                     "type": "Label",
                     "label": "Optional HTTP Basic-Authentication:"
                 },
