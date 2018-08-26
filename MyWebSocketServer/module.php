@@ -1245,6 +1245,30 @@ class MyWebsocketServer extends IPSModule
  
     }    
     
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: RegisterCategory
+    ...............................................................................
+     *  Legt ein Unterverzeichnis an
+     * Beispiel:
+     *  
+    ...............................................................................
+    Parameters: 
+ 
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
+    private function RegisterCategory($catName ) {
+        $KategorieID = @IPS_GetCategoryIDByName($catName, $this->InstanceID);
+        if ($KategorieID === false){
+            // Anlegen einer neuen Kategorie mit dem Namen $catName
+            $CatID = IPS_CreateCategory();       // Kategorie anlegen
+            IPS_SetName($CatID, $catName); // Kategorie benennen
+            IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unterhalb der der Instanz
+        }
+        return $KategorieID;
+    }
+    
     
         /* ----------------------------------------------------------------------------
          Function: getIPSVars
