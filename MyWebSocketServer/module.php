@@ -201,7 +201,7 @@ class MyWebsocketServer extends IPSModule
             $ParentID = $IPSVarsCatID;
             $Typ = 0;
             $Ident = "IPS".$IPSVariable->ID;
-            $Name = "VarEvent".$sensor->ID;
+            $Name = "VarEvent".$IPSVariable->ID;
             $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $IPSVariable->ID);
         } 
         
