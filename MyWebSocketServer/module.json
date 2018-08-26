@@ -2,7 +2,7 @@
 	"id": "{5ABADC59-874F-4F8C-B509-5CE1F07A8293}",
 	"name": "MyWebSocketServer",
 	"type": 3,
-	"vendor": "",
+	"vendor": "PiTo",
 	"aliases": 
 	[
 		"MyWebSocketServer"
