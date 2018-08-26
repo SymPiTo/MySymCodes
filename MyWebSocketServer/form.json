@@ -1,13 +1,45 @@
 {
     "elements":
-            [{
-                    "type": "Label",
-                    "label": "Caution: Only use TLS with authentication if the port is accessible externally!"
-                }, {
+            [ {
                     "name": "Open",
                     "type": "CheckBox",
-                    "caption": "Active"
+                    "caption": "Activate WebSocketServer"
                 },
+                
+                { "type": "Label", "label": "Add/Delete variables, which shall be tranfered to client" },
+                {
+                  "type": "List",
+                  "name": "IPSVars",
+                  "caption": "IPS Variable",
+                  "add": true,
+                  "delete": true,
+                  "sort": {
+                    "column": "ID",
+                    "direction": "ascending"
+                  },
+                  "columns": [{
+                    "name" : "ID",
+                    "label" : "ID",
+                    "width" : "460px",
+                    "add": 0,
+                    "edit": {
+                      "type": "SelectVariable"
+                    }
+                  }, {
+                    "name" : "Name",
+                    "label" : "Name",
+                    "width" : "auto",
+                    "add": "Select variable"
+                  }, {
+                    "name" : "Status",
+                    "label" : "Status",
+                    "width" : "120",
+                    "add": ""
+                  }],
+                  "values": [
+                  ]
+                },
+
 
                 {   "type": "SelectScript", 
                     "name": "IDcommand", 
@@ -25,6 +57,9 @@
                     "name": "Interval",
                     "type": "NumberSpinner",
                     "caption": "Timeout"
+                }, {
+                    "type": "Label",
+                    "label": "Caution: Only use TLS with authentication if the port is accessible externally!"
                 }, {
                     "type": "Select",
                     "name": "Mode",

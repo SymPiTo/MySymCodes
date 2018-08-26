@@ -81,7 +81,10 @@ class MyWebsocketServer extends IPSModule
         //Bei  Variablenänderung folgender Variable wird dieser Inhalt an alle Clients gesendet
         $this->RegisterVariableString("DataSendToClient", "DataSendToClient");
 
-
+        //Listen Einträge als JSON regisrieren
+        // zum umwandeln in ein Array 
+        // $IPSVars = json_decode($this->ReadPropertyString("IPSVars"));
+            $this->RegisterPropertyString("IPSVars", "[]");
     }
 
     /**
