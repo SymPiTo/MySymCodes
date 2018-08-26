@@ -76,8 +76,11 @@ class MyAlarm extends IPSModule
         //anlegen eines Timers
         //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
             
-
-
+        $alleEreignisse = IPS_GetEventList();
+        foreach ($alleEreignisse as $EreignisID) {
+            IPS_DeleteEvent($EreignisID);
+        }
+        
     }
    /* ------------------------------------------------------------ 
      Function: ApplyChanges 
@@ -105,7 +108,7 @@ class MyAlarm extends IPSModule
             $Typ = 0;
             $Ident = "AE".$sensor->ID;
             $Name = "AEvent".$sensor->ID;
-            $this->RegisterEvent($Name, $Ident, $Typ, $Parent, 0);
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $Parent, 0, 1, $sensor->ID);
         }       
     }
     
@@ -236,7 +239,7 @@ class MyAlarm extends IPSModule
     Returns:    
         none 
     -------------------------------------------------------------------------------*/
-    private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
+    private function RegisterVarEvent($Name, $Ident, $Typ, $Parent, $Position, $trigger, $var)
     {
             $eid = @$this->GetIDForIdent($Ident);
             if($eid == false) {
@@ -246,6 +249,7 @@ class MyAlarm extends IPSModule
                 @IPS_SetIdent($EventID, $Ident);
                 IPS_SetName($EventID, $Name);
                 IPS_SetPosition($EventID, $Position);
+                IPS_SetEventTrigger($eid, $trigger, $var);   //OnUpdate für Variable 12345
                 IPS_SetEventActive($EventID, false);
             } 
             else{
