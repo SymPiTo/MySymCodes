@@ -191,7 +191,7 @@ class MyAlarm extends IPSModule
            
             $batteries = json_decode($this->ReadPropertyString("Battery"));
             foreach($batteries as $sensor) {
-                $EreignisInfo = IPS_GetEvent($this->GetIDForIdent("AEvent".$sensor->ID));
+                $EreignisInfo = IPS_GetEvent($this->GetIDForIdent("AE".$sensor->ID));
                 $a = $EreignisInfo["TriggerValue"];
                 $x = $EreignisInfo["LastRun"];
                 alert($x);
