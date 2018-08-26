@@ -240,21 +240,18 @@ class MyAlarm extends IPSModule
     {
             $eid = @$this->GetIDForIdent($Ident);
             if($eid === false) {
-                    $eid = 0;
-            } elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-                    IPS_DeleteEvent($eid);
-                    $eid = 0;
+                //we need to create one
+                $EventID = IPS_CreateEvent($Typ);
+                IPS_SetParent($EventID, $Parent);
+                IPS_SetIdent($EventID, $Ident);
+                IPS_SetName($EventID, $Name);
+                IPS_SetPosition($EventID, $Position);
+                IPS_SetEventActive($EventID, false);
+            } 
+            else{
             }
-            //we need to create one
-            if ($eid == 0) {
-                    $EventID = IPS_CreateEvent($Typ);
-                    IPS_SetParent($EventID, $Parent);
-                    IPS_SetIdent($EventID, $Ident);
-                    IPS_SetName($EventID, $Name);
-                    //IPS_SetPosition($EventID, $Position);
-                    IPS_SetEventActive($EventID, false);  
-            }
-    }
+ 
+}
     
  
     /* ----------------------------------------------------------------------------------------------------- 
