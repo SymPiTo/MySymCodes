@@ -251,7 +251,7 @@ class MyAlarm extends IPSModule
                     IPS_SetParent($EventID, $Parent);
                     IPS_SetIdent($EventID, $Ident);
                     IPS_SetName($EventID, $Name);
-                    IPS_SetPosition($EventID, $Position);
+                    //IPS_SetPosition($EventID, $Position);
                     IPS_SetEventActive($EventID, false);  
             }
     }
