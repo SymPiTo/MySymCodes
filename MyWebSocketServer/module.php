@@ -80,18 +80,7 @@ class MyWebsocketServer extends IPSModule
         $this->RegisterVariableString("CommandSendToServer", "CommandSendToServer");
         //Bei  Variablenänderung folgender Variable wird dieser Inhalt an alle Clients gesendet
         $this->RegisterVariableString("DataSendToClient", "DataSendToClient");
-        $ID_DSTC = $this->GetIDForIdent("DataSendToClient");
-        // Trigger Event für Änderung der Variable "DataSendToClient" erstellen wenn nicht vorhanden
-        $ParentID = IPS_GetVariableIDByName("DataSendToClient", $this->InstanceID);
-        if (!IPS_EventExists(@IPS_GetEventIDByName("EventChangedIpsValues", $ParentID))){
-            $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
-            IPS_SetEventTrigger($eid, 1, $ID_DSTC);        //Bei Änderung von Variable mit ID 15754
-            IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
-            IPS_SetEventActive($eid, true);             //Ereignis aktivieren
-            IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($ID_DSTC),getvalue($ID_DSTC));"); 
-            IPS_SetParent($eid, $ID_DSTC);
-            IPS_SetName($eid, "EventChangedIpsValues");            
-        }
+
 
     }
 
@@ -199,6 +188,20 @@ class MyWebsocketServer extends IPSModule
 
         parent::ApplyChanges();
 
+         $ID_DSTC = $this->GetIDForIdent("DataSendToClient");
+        // Trigger Event für Änderung der Variable "DataSendToClient" erstellen wenn nicht vorhanden
+        $ParentID = IPS_GetVariableIDByName("DataSendToClient", $this->InstanceID);
+        if (!IPS_EventExists(@IPS_GetEventIDByName("EventChangedIpsValues", $ParentID))){
+            $eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
+            IPS_SetEventTrigger($eid, 1, $ID_DSTC);        //Bei Änderung von Variable mit ID 15754
+            IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
+            IPS_SetEventActive($eid, true);             //Ereignis aktivieren
+            IPS_SetEventScript($eid, "MyWSS_SendText(IPS_GetParent($ID_DSTC),getvalue($ID_DSTC));"); 
+            IPS_SetParent($eid, $ID_DSTC);
+            IPS_SetName($eid, "EventChangedIpsValues");            
+        }       
+        
+        
         $NewState = IS_ACTIVE;
         $this->UseTLS = $this->ReadPropertyBoolean('TLS');
         $this->UsePlain = $this->ReadPropertyBoolean('Plain');
