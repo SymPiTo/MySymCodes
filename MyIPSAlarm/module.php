@@ -52,7 +52,7 @@ class MyAlarm extends IPSModule
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
-        $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "");
+        $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
         $this->RegisterVariableInteger("A_Reset", "Reset Alarm", "");
         
         //Boolean Variable anlegen
@@ -63,7 +63,7 @@ class MyAlarm extends IPSModule
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
          // Aufruf dieser Variable mit $this->GetIDForIdent("IDENTNAME")
-        $this->RegisterVariableString("BatAlarm", "Battery Alarm");
+        $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
  
           
             
@@ -142,13 +142,14 @@ class MyAlarm extends IPSModule
             
     }
 
-  /* ______________________________________________________________________________________________________________________
+  /* ======================================================================================================================
      Section: Public Funtions
      Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
      Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
     
      FSSC_XYFunktion($Instance_id, ... );
-     ________________________________________________________________________________________________________________________ */
+     ======================================================================================================================= */
+    
     //-----------------------------------------------------------------------------
     /* Function: xxxx
     ...............................................................................
@@ -165,7 +166,42 @@ class MyAlarm extends IPSModule
        
         
     }  
-
+        /* ----------------------------------------------------------------------------
+         Function: BatAlarm
+        ...............................................................................
+        Erzeugt einen Alarm bei zu schwacher Batterie
+        ...............................................................................
+        Parameters: 
+            none.
+        ..............................................................................
+        Returns:   
+             none
+        ------------------------------------------------------------------------------- */
+	public function BatAlarm(){
+            //überprüfen welches Ereignis ausgelöst hat 
+            $batteries = json_decode($this->ReadPropertyString("Battery"));
+            $ParentID =   @IPS_GetObjectIDByName("BatAlarmEvents", $this->InstanceID);
+            $lastevent = 0;
+            foreach($batteries as $sensor) {
+                $EreignisID = @IPS_GetEventIDByName("AEvent".$sensor->ID, $ParentID);
+                $EreignisInfo = IPS_GetEvent($EreignisID);
+                $aktEvent = $EreignisInfo["LastRun"];
+                if($aktEvent > $lastEvent){
+                    $lastEvent = $aktEvent;
+                    $lastTriggerVarID = $EreignisInfo["TriggerVariableID"];
+                }
+            }
+            if(getvalue($lastTriggerVarID)){
+                // Batterie ist Low Alarm auslösen
+                setvalue($this->GetIDForIdent("A_BatAlarm"), $lastTriggerVarID);
+                //AlarmCode auf 1 setzen
+                setvalue($this->GetIDForIdent("A_AlarmCode"), 1);
+            } 
+            else{
+               setvalue($this->GetIDForIdent("A_BatAlarm"), ""); 
+               setvalue($this->GetIDForIdent("A_AlarmCode"), 0);
+            }
+        }  
 
    /* ==========================================================================
     * Section: Private Funtions
@@ -174,39 +210,7 @@ class MyAlarm extends IPSModule
     * ==========================================================================
     */  
 
-        /* ----------------------------------------------------------------------------
-         Function: GetIPSVersion
-        ...............................................................................
-        gibt die instalierte IPS Version zurück
-        ...............................................................................
-        Parameters: 
-            none.
-        ..............................................................................
-        Returns:   
-            $ipsversion (floatint)
-        ------------------------------------------------------------------------------- */
-	public function BatAlarm(){
-            //überprüfen welches Ereignis ausgelöst hat 
-            
-           
-            $batteries = json_decode($this->ReadPropertyString("Battery"));
-            
-            $ParentID =   @IPS_GetObjectIDByName("BatAlarmEvents", $this->InstanceID);
-            $lastevent = 0;
-            foreach($batteries as $sensor) {
-                $EreignisID = @IPS_GetEventIDByName("AEvent".$sensor->ID, $ParentID);
-                $EreignisInfo = IPS_GetEvent($EreignisID);
-             
-                $aktEvent = $EreignisInfo["LastRun"];
-                if($aktEvent > $lastEvent){
-                    $lastEvent = $aktEvent;
-                    $lastTriggerVar = $EreignisInfo["TriggerVariableID"];
-                }
-            }
-             
-            setvalue($this->GetIDForIdent("BatAlarm"), $lastTriggerVar);
-             
-        }    
+  
 		
         /* ----------------------------------------------------------------------------
          Function: GetIPSVersion
