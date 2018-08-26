@@ -84,7 +84,7 @@ class MyWebsocketServer extends IPSModule
         //Listen Einträge als JSON regisrieren
         // zum umwandeln in ein Array 
         // $IPSVars = json_decode($this->ReadPropertyString("IPSVars"));
-            $this->RegisterPropertyString("IPSVars", "[]");
+        $this->RegisterPropertyString("IPSVars", "[]");
     }
 
     /**
@@ -191,6 +191,21 @@ class MyWebsocketServer extends IPSModule
 
         parent::ApplyChanges();
 
+        
+        ///Für alle im Listen Konfigurationsfeld enthaltene Variable ein Event anlegen.
+        //Unterkategorie anlegen
+        $IPSVarsCatID = $this->RegisterCategory("IPSVarEvents");
+        // für jedes Liste ID ein Event anlegen
+        $IPSVariables = json_decode($this->ReadPropertyString("IPSVars"));
+        foreach($IPSVariables as $IPSVariable) {
+            $ParentID = $IPSVarsCatID;
+            $Typ = 0;
+            $Ident = "IPS".$IPSVariable->ID;
+            $Name = "VarEvent".$sensor->ID;
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $IPSVariable->ID);
+        } 
+        
+        /* nicht mehr benötigt"
          $ID_DSTC = $this->GetIDForIdent("DataSendToClient");
         // Trigger Event für Änderung der Variable "DataSendToClient" erstellen wenn nicht vorhanden
         $ParentID = IPS_GetVariableIDByName("DataSendToClient", $this->InstanceID);
@@ -203,7 +218,7 @@ class MyWebsocketServer extends IPSModule
             IPS_SetParent($eid, $ID_DSTC);
             IPS_SetName($eid, "EventChangedIpsValues");            
         }       
-        
+        */
         
         $NewState = IS_ACTIVE;
         $this->UseTLS = $this->ReadPropertyBoolean('TLS');
@@ -1190,9 +1205,94 @@ class MyWebsocketServer extends IPSModule
             return false;
         }
     } 
-    
 
     
+ 
+    /* --------------------------------------------------------------------------- 
+    Function: RegisterEvent
+    ...............................................................................
+    legt einen Event an wenn nicht schon vorhanden
+      Beispiel:
+      ("Wochenplan", "SwitchTimeEvent".$this->InstanceID, 2, $this->InstanceID, 20);  
+      ...............................................................................
+    Parameters: 
+      $Name        -   Name des Events
+      $Ident       -   Ident Name des Events
+      $Typ         -   Typ des Events (1=cyclic 2=Wochenplan)
+      $Parent      -   ID des Parents
+      $Position    -   Position der Instanz
+    ...............................................................................
+    Returns:    
+        none 
+    -------------------------------------------------------------------------------*/
+    private function RegisterVarEvent($Name, $Ident, $Typ, $ParentID, $Position, $trigger, $var)
+    {
+            $eid =  @IPS_GetEventIDByName($Name, $ParentID);
+            if($eid === false) {
+                //we need to create one
+                $EventID = IPS_CreateEvent($Typ);
+                IPS_SetParent($EventID, $ParentID);
+                @IPS_SetIdent($EventID, $Ident);
+                IPS_SetName($EventID, $Name);
+                IPS_SetPosition($EventID, $Position);
+                IPS_SetEventTrigger($EventID, $trigger, $var);   //OnChange für Variable $var
+                $cmd = "MyWSS_getIPSVars(".$this->InstanceID.");";
+                IPS_SetEventScript($EventID, $cmd );
+                IPS_SetEventActive($EventID, true);
+            } 
+            else{
+            }
+ 
+    }    
+    
+    
+        /* ----------------------------------------------------------------------------
+         Function: getIPSVars
+        ...............................................................................
+         
+        ...............................................................................
+        Parameters: 
+            none.
+        ..............................................................................
+        Returns:   
+             none
+        ------------------------------------------------------------------------------- */
+	public function getIPSVars(){
+            
+            $IPSVariables = json_decode($this->ReadPropertyString("IPSVars"));
+            foreach($IPSVariables as $IPSVariable) {
+                $varid = $IPSVariable->ID;
+                $data['ID'.$varid] = getvalue($varid);
+            }
+            
+            
+		
+			$a = getvalue(11938);
+			$b = date('m/d/Y H:i:s', $a);
+			$h = substr($b,11,2);
+			$m = substr($b,14,2);
+			$data['ID11938'] = $h.':'.$m;
+			
+			$a = getvalue(57942);
+			$b = date('m/d/Y H:i:s', $a);
+			$h = substr($b,11,2);
+			$m = substr($b,14,2);
+			$data['ID57942'] = $h.':'.$m;	
+ 
+
+
+	 
+            $reply = 	array();
+		 
+            $c =array($data, $reply);
+            //json_encode$c);
+            $xml = json_encode($c);
+            $this->SendText($xml);
+            //zum sichtbar machen
+            setvalue($this->GetIDForIdent("DataSendToClient"), $xml);
+        }  
+
+        
 }
 
 
