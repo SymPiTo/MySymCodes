@@ -249,7 +249,7 @@ class MyAlarm extends IPSModule
                 @IPS_SetIdent($EventID, $Ident);
                 IPS_SetName($EventID, $Name);
                 IPS_SetPosition($EventID, $Position);
-                IPS_SetEventTrigger($eid, $trigger, $var);   //OnUpdate für Variable 12345
+                IPS_SetEventTrigger($EventID, $trigger, $var);   //OnUpdate für Variable 12345
                 IPS_SetEventActive($EventID, false);
             } 
             else{
