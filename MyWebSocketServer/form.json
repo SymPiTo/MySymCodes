@@ -14,6 +14,7 @@
                   "caption": "IPS Variable",
                   "add": true,
                   "delete": true,
+                  "height": "200px",
                   "sort": {
                     "column": "ID",
                     "direction": "ascending"
