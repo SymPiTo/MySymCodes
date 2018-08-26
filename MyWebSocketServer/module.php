@@ -54,7 +54,7 @@ class MyWebsocketServer extends IPSModule
     /**
      * Interne Funktion des SDK.
      *
-     * @access public
+     * @access public 
      */
     public function Create()
     {
