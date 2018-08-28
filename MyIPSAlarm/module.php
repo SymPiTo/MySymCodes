@@ -193,7 +193,7 @@ class MyAlarm extends IPSModule
             }
             if(getvalue($lastTriggerVarID)){
                 // Batterie ist Low Alarm auslösen
-                setvalue($this->GetIDForIdent("A_BatAlarm"), $lastTriggerVarID);
+                setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery: ".$lastTriggerVarID)." Low";
                 //AlarmCode auf 1 setzen
                 setvalue($this->GetIDForIdent("A_AlarmCode"), 1);
             } 
