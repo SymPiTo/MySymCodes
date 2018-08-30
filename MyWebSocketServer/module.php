@@ -1185,16 +1185,16 @@ class MyWebsocketServer extends IPSModule
                 $ClientIP = $Client->ClientIP ;
                 $ClientPort = $Client->ClientPort;
                 if ($Client === false) {
-                    $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
+                    $this->SendDebug('Unknow Multi-client', $ClientIP . ':' . $ClientPort, 0);
                     trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
                     return false;
                 }
                 if ($Client->State != WebSocketState::Connected) {
-                    $this->SendDebug('Client not connected', $ClientIP . ':' . $ClientPort, 0);
+                    $this->SendDebug('Multi-Client not connected', $ClientIP . ':' . $ClientPort, 0);
                     trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
                     return false;
                 }
-                $this->SendDebug('Send Text Message to Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
+                $this->SendDebug('Send Text Message to Multi-Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
                 $this->Send($Text, WebSocketOPCode::text, $Client);
 
 
