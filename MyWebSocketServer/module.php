@@ -1307,7 +1307,7 @@ class MyWebsocketServer extends IPSModule
 
 	 
             $reply = 	array();
-		 
+            $this->SendDebug('updateIPSvalues', $data, 0);
             $c =array($data, $reply);
             //json_encode$c);
             $xml = json_encode($c);
