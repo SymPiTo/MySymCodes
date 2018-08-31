@@ -883,6 +883,7 @@ class MyWebsocketServer extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
+        $this->SendDebug('incoming Data mit DataID ', $data, 0);
         unset($data->DataID);
         $this->SendDebug('incoming Data ', $data, 0);
         $Data = utf8_decode($data->Buffer);
