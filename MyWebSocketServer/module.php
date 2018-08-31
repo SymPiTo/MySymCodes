@@ -884,8 +884,11 @@ class MyWebsocketServer extends IPSModule
     {
         $data = json_decode($JSONString);
         unset($data->DataID);
-        $this->SendDebug('incoming', $data, 0);
+        $this->SendDebug('incoming Data ', $data, 0);
         $Data = utf8_decode($data->Buffer);
+        $this->SendDebug("Erstes Data Byte", ord($Data[0]), 0);
+        $this->SendDebug("Zweites Data Byte", ord($Data[1]), 0);
+        $this->SendDebug("Fuenftes Data Byte", ord($Data[5]), 0);
         $Clients = $this->Multi_Clients;
         $Client = $Clients->GetByIpPort(new Websocket_Client($data->ClientIP, $data->ClientPort));
 //        if (($Client === false) or ( preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) or ( (ord($Data[0]) >= 0x14) && (ord($Data[0]) <= 0x18) && (ord($Data[1]) == 0x03) && (ord($Data[5]) == 0x01)))
