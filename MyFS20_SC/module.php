@@ -76,11 +76,7 @@ class MyFS20_SC extends IPSModule
         $this->RegisterVariableBoolean("Mode", "Mode");
         $this->RegisterVariableBoolean("SS", "SunSet-Rise");
         
-        $SSstate = $this->ReadPropertyBoolean('SunRise');
-        if ($SSstate){setvalue($this->GetIDForIdent("SS"), true);}
-        else {
-            setvalue($this->GetIDForIdent("SS"), false);
-        }
+
         
         //String Variable anlegen
         //RegisterVariableString (  $Ident,  $Name, $Profil, $Position )
@@ -197,10 +193,13 @@ class MyFS20_SC extends IPSModule
             IPS_SetDisabled($SunSetEventID, true);// Das Objekt wird inaktiv gesetzt.
             
             $this->GetWochenplanAction(); 
-            
-
         } 
-       
+
+        $SSstate = $this->ReadPropertyBoolean('SunRise');
+        if ($SSstate){setvalue($this->GetIDForIdent("SS"), true);}
+        else {
+            setvalue($this->GetIDForIdent("SS"), false);
+        }
     }
    /* ------------------------------------------------------------ 
       Function: RequestAction  
