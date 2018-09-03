@@ -76,6 +76,12 @@ class MyFS20_SC extends IPSModule
         $this->RegisterVariableBoolean("Mode", "Mode");
         $this->RegisterVariableBoolean("SS", "SunSet-Rise");
         
+        $SSstate = $this->ReadPropertyBoolean('SunRise');
+        if ($SSstate){setvalue($this->GetIDForIdent("SS"), true);}
+        else {
+            setvalue($this->GetIDForIdent("SS"), false);
+        }
+        
         //String Variable anlegen
         //RegisterVariableString (  $Ident,  $Name, $Profil, $Position )
         // Aufruf dieser Variable mit "$this->GetIDForIdent("IDENTNAME")"
