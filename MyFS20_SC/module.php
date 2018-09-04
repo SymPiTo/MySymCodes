@@ -54,8 +54,8 @@ class MyFS20_SC extends IPSModule
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
         // Aufruf dieser Form Variable mit $Tup = $this->ReadPropertyFloat('IDENTNAME'); 
         $this->RegisterPropertyInteger("FS20RSU_ID", 0);
-        $this->RegisterPropertyInteger("SunSet_ID", 0);
-        $this->RegisterPropertyInteger("SunRise_ID", 0);
+        $this->RegisterPropertyString("SunSet_ID", 0);
+        $this->RegisterPropertyString("SunRise_ID", 0);
         $this->RegisterPropertyFloat("Time_OU", 0.5);
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
@@ -152,7 +152,7 @@ class MyFS20_SC extends IPSModule
 	$this->RegisterEvent("SunRise", "SunRiseEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
         $SunRiseEventID = $this->GetIDForIdent("SunRiseEvent".$this->InstanceID);
         // täglich, um x Uhr
-        $sunrise = getvalue($this->ReadPropertyInteger('SunRise_ID'));
+        $sunrise = getvalue($this->ReadPropertyString('SunRise_ID'));
         $sunrise_H = date("H", $sunrise); 
         $sunrise_M = date("i", $sunrise); 
         IPS_SetEventCyclicTimeFrom($SunRiseEventID, $sunrise_H, $sunrise_M, 0);
@@ -161,7 +161,7 @@ class MyFS20_SC extends IPSModule
 	$this->RegisterEvent("SunSet", "SunSetEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
         $SunSetEventID = $this->GetIDForIdent("SunSetEvent".$this->InstanceID);
         // täglich, um x Uhr
-        $sunset = getvalue($this->ReadPropertyInteger('SunSet_ID'));
+        $sunset = getvalue($this->ReadPropertyString('SunSet_ID'));
         $sunset_H = date("H", $sunset); 
         $sunset_M = date("i", $sunset); 
         IPS_SetEventCyclicTimeFrom($SunSetEventID, $sunset_H, $sunset_M, 0);
