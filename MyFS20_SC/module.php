@@ -517,7 +517,7 @@ class MyFS20_SC extends IPSModule
             
             $this->GetWochenplanAction();   
         }
-            setvalue($this->GetIDForIdent("SS"), value);
+            setvalue($this->GetIDForIdent("SS"), $value);
     }     
     
     
