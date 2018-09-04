@@ -146,7 +146,7 @@ class MyFS20_SC extends IPSModule
         //$this->RegisterEvent("Laufzeit", "LaufzeitEvent".$this->InstanceID, 1, $this->InstanceID, 22);
         //$LaufzeitEventID = $this->GetIDForIdent("LaufzeitEvent".$this->InstanceID);
         //IPS_SetEventCyclic($LaufzeitEventID, 0, 0, 0, 0, 1, 35 /* Alle 35 Sekunden */);    
-        //IPS_SetEventScript($LaufzeitEventID, "FSSC_reset(\$_IPS['TARGET']);") ;
+        //IPS_SetEventScript($LaufzeitEventID, "FSSC_reset(\$_IPS['TARGET']);")  ;
         
     	// Anlegen des cyclic events SunRise mit ($Name, $Ident, $Typ, $Parent, $Position).
 	$this->RegisterEvent("SunRise", "SunRiseEvent".$this->InstanceID, 1, $this->InstanceID, 21); 
