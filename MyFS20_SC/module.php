@@ -54,8 +54,8 @@ class MyFS20_SC extends IPSModule
         // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
         // Aufruf dieser Form Variable mit $Tup = $this->ReadPropertyFloat('IDENTNAME'); 
         $this->RegisterPropertyInteger("FS20RSU_ID", 0);
-        $this->RegisterPropertyString("SunSet_ID","");
-        $this->RegisterPropertyString("SunRise_ID","");
+        $this->RegisterPropertyInteger ("SunSet_ID", 57942);
+        $this->RegisterPropertyInteger ("SunRise_ID", 11938);
         $this->RegisterPropertyFloat("Time_OU", 0.5);
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
