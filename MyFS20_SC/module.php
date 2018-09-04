@@ -480,7 +480,11 @@ class MyFS20_SC extends IPSModule
         none
     ------------------------------------------------------------------------------ */
     public function SetSunSet(bool $value){
-            $SunSetEventID = $this->GetIDForIdent("SunSetEvent".$this->InstanceID);
+            $idSS = "SunSetEvent".$this->InstanceID;
+            $SunSetEventID = $this->GetIDForIdent($idSS);
+            $idSR = "SunRiseEvent".$this->InstanceID;
+            $SunRiseEventID = $this->GetIDForIdent($idSR);
+            
             $SunRiseEventID = $this->GetIDForIdent("SunRiseEvent".$this->InstanceID);
             $eid = $this->GetIDForIdent("SwitchTimeEvent".$this->InstanceID);       
         if($value){
