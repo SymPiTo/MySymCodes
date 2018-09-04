@@ -7,6 +7,16 @@
 				"caption": "FS20_RSU Objekt selektieren."
 			},
 			{
+				"name": "SunSet_ID",
+				"type": "SelectObject",
+				"caption": "SunSet Objekt selektieren."
+			},
+			{
+				"name": "SunRise_ID",
+				"type": "SelectObject",
+				"caption": "SunRise Objekt selektieren."
+			},
+			{
 				"type" : "Label",
 				"label" : "Zeit Unten bis oben"
 			},
