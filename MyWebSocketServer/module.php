@@ -715,7 +715,7 @@ class MyWebsocketServer extends IPSModule
         return $ret;
     }
     public function RestartServer() {
-         RemoveAllClients();
+        $this->RemoveAllClients();
     }
     
     
