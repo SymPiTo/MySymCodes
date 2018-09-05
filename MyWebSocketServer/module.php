@@ -461,6 +461,7 @@ class MyWebsocketServer extends IPSModule
     {
         $this->SendDebug('Receive Handshake', $Data, 0);
         if (preg_match("/^GET ?([^?#]*) HTTP\/1.1\r\n/", $Data, $match)) {
+            $this->SendDebug('PREG MATCH 1', $match, 0);
             if (substr($Data, -4) != "\r\n\r\n") {
                 $this->SendDebug('WAIT', $Data, 0);
                 return false;
