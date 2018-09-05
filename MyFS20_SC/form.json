@@ -61,7 +61,7 @@
 				"label" : "Sonnen Auf/Untergangs Zeiten verwenden"
 			},
 			{ 
-				"name" : "SunRise",
+				"name" : "SunRiseActive",
 				"type" : "CheckBox",
 				"caption" : "SunRise / SunDown"
     

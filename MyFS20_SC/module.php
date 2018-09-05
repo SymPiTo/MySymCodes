@@ -60,7 +60,7 @@ class MyFS20_SC extends IPSModule
         $this->RegisterPropertyFloat("Time_UO", 0.5);
         $this->RegisterPropertyFloat("Time_OM", 0.5);
         $this->RegisterPropertyFloat("Time_UM", 0.5);
-        $this->RegisterPropertyBoolean("SunRise", false);
+        $this->RegisterPropertyBoolean("SunRiseActive", false);
         
             
         
@@ -168,7 +168,7 @@ class MyFS20_SC extends IPSModule
         IPS_SetEventScript($SunSetEventID, "FSSC_SetRolloDown(\$_IPS['TARGET']);");
 
             
-        if($this->ReadPropertyBoolean("SunRise")){
+        if($this->ReadPropertyBoolean("SunRiseActive")){
             IPS_SetEventActive($SunRiseEventID, true);             //Ereignis  aktivieren
             IPS_SetEventActive($SunSetEventID, true);             //Ereignis  aktivieren
             IPS_SetEventActive($eid, false);             //Ereignis  deaktivieren
