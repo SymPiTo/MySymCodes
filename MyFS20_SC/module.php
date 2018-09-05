@@ -197,7 +197,7 @@ class MyFS20_SC extends IPSModule
             $this->GetWochenplanAction(); 
         } 
 
-        $SSstate = $this->ReadPropertyBoolean('SunRise');
+        $SSstate = $this->ReadPropertyBoolean('SunRiseActive');
         if ($SSstate){setvalue($this->GetIDForIdent("SS"), true);}
         else {
             setvalue($this->GetIDForIdent("SS"), false);
