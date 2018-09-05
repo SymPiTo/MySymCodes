@@ -485,6 +485,7 @@ class MyWebsocketServer extends IPSModule
                 }
             }
             if (preg_match("/Connection: (.*)\r\n/", $Data, $match)) {
+                $this->SendDebug('PREG MATCH Connection', $match, 0);
                 if (strtolower($match[1]) != 'upgrade') {
                     $this->SendDebug('WRONG Connection:', $match[1], 0);
                     return HTTP_ERROR_CODES::Method_Not_Allowed;
