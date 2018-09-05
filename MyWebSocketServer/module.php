@@ -714,7 +714,11 @@ class MyWebsocketServer extends IPSModule
 
         return $ret;
     }
-
+    public function RestartServer() {
+         RemoveAllClients();
+    }
+    
+    
     /**
      * Leert die ClientListe und alle entsprechenden Buffer der Clients.
      *
