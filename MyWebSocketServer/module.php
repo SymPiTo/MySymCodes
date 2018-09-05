@@ -716,6 +716,12 @@ class MyWebsocketServer extends IPSModule
     }
     public function RestartServer() {
         $this->RemoveAllClients();
+        $id = $this->GetIDForIdent("Open");
+        IPS_SetProperty($id, "Open", false); //I/O Instanz soll aktiviert sein.
+        IPS_ApplyChanges($id); //Neue Konfiguration übernehmen
+        IPS_SetProperty($id, "Open", true); //I/O Instanz soll aktiviert sein.
+        IPS_ApplyChanges($id); //Neue Konfiguration übernehmen
+            
     }
     
     
