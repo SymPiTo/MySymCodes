@@ -181,7 +181,7 @@ class MyAlarm extends IPSModule
     Returns:    
         none
     ------------------------------------------------------------------------------  */
-    public function receiveCode(integer $key){
+    public function receiveCode(string $key){
         $code = getvalue($his->GetIDForIdent("A_SecCode"));
         setvalue($his->GetIDForIdent("A_SecCode"), $code.$key);    
     }  
