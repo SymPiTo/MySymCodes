@@ -183,9 +183,7 @@ class MyAlarm extends IPSModule
         none
     ------------------------------------------------------------------------------  */
     public function ResetAlarm(){
-       $Batteries = $this->ReadPropertyString("Battery");
-       
-        
+        setvalue($this->GetIDForIdent("A_AlarmCode"), 0);
     }  
              
     
