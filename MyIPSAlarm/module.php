@@ -48,23 +48,25 @@ class MyAlarm extends IPSModule
         // $sensors = json_decode($this->ReadPropertyString("Battery"));
             $this->RegisterPropertyString("Battery", "[]");
             $this->RegisterPropertyString("Targets", "[]");
-        
+           
+            
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
-        $this->RegisterVariableInteger("A_Reset", "Reset Alarm", "");
+        
+        
         
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-        //$this->RegisterVariableBoolean("A_Reset", "Reset Alarm");
+         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
          // Aufruf dieser Variable mit $this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
- 
+        $this->RegisterVariableString("A_SecCode", "Security Code");
           
             
             
@@ -76,12 +78,12 @@ class MyAlarm extends IPSModule
         
         //anlegen eines Timers
         //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
-            
+        /*    
         $alleEreignisse = IPS_GetEventList();
         foreach ($alleEreignisse as $EreignisID) {
             IPS_DeleteEvent($EreignisID);
         }
-        
+        */
     }
    /* ------------------------------------------------------------ 
      Function: ApplyChanges 
@@ -166,6 +168,62 @@ class MyAlarm extends IPSModule
        
         
     }  
+             
+    
+    //-----------------------------------------------------------------------------
+    /* Function: receiveCode
+    ...............................................................................
+    Beschreibung
+    ...............................................................................
+    Parameters: 
+         key = Zahlen Code
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------  */
+    public function receiveCode(integer $key){
+        $code = getvalue($his->GetIDForIdent("A_SecCode"));
+        setvalue($his->GetIDForIdent("A_SecCode"), $code.$key);    
+    }  
+    
+    //-----------------------------------------------------------------------------
+    /* Function: resetCode
+    ...............................................................................
+    Beschreibung
+        löscht den eingegebenen ZahlenCode.
+    ...............................................................................
+    Parameters: 
+         key = Zahlen Code
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------  */
+    public function resetCode(){
+        setvalue($his->GetIDForIdent("A_SecCode"), "");    
+    }  
+    
+    //-----------------------------------------------------------------------------
+    /* Function: checkCode
+    ...............................................................................
+    Beschreibung
+        
+    ...............................................................................
+    Parameters: 
+        none
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------  */
+    public function checkCode(){
+        $code = getvalue($his->GetIDForIdent("A_SecCode"));
+        if ($Code = "04826"){
+            setvalue($his->GetIDForIdent("A_SecActive"),false);
+        }  
+        else{
+             $his->resetCode();
+        }
+    }  
+    
         /* ----------------------------------------------------------------------------
          Function: BatAlarm
         ...............................................................................
