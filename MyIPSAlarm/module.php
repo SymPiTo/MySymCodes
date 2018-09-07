@@ -47,7 +47,7 @@ class MyAlarm extends IPSModule
         // zum umwandeln in ein Array 
         // $sensors = json_decode($this->ReadPropertyString("Battery"));
             $this->RegisterPropertyString("Battery", "[]");
-            $this->RegisterPropertyString("Targets", "[]");
+            $this->RegisterPropertyString("SecAlarms", "[]");
            
             
         //Integer Variable anlegen
@@ -102,7 +102,7 @@ class MyAlarm extends IPSModule
 	//Never delete this line!
         parent::ApplyChanges();
         
-        //Unterkategorie anlegen
+        //Unterkategorie Batterie Alarme anlegen
         $AlarmCatID = $this->RegisterCategory("BatAlarmEvents");
         // für jedes Liste ID ein Event anlegen
         $batteries = json_decode($this->ReadPropertyString("Battery"));
@@ -113,6 +113,18 @@ class MyAlarm extends IPSModule
             $Name = "AEvent".$sensor->ID;
             $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID);
         }       
+        
+         //Unterkategorie Sec  Alarme anlegen
+        $SecAlarmCatID = $this->RegisterCategory("SecAlarmEvents");
+        // für jedes Liste ID ein Event anlegen
+        $SecAlarms = json_decode($this->ReadPropertyString("SecAlarms"));
+        foreach($SecAlarms as $sensor) {
+            $ParentID = $SecAlarmCatID;
+            $Typ = 0;
+            $Ident = "SecAE".$sensor->ID;
+            $Name = "SecAEvent".$sensor->ID;
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID);
+        }        
     }
     
    /* ------------------------------------------------------------ 
@@ -281,6 +293,47 @@ class MyAlarm extends IPSModule
             }
         }  
 
+
+        /* ----------------------------------------------------------------------------
+         Function: SecurityAlarm
+        ...............................................................................
+        Erzeugt einen Alarm bei zu schwacher Batterie
+        ...............................................................................
+        Parameters: 
+            none.
+        ..............................................................................
+        Returns:   
+             none
+        ------------------------------------------------------------------------------- */
+	public function SecurityAlarm(){   
+            $AlarmAnlageActive = getvalue($this->GetIDForIdent("A_SecActive"));
+            if($AlarmAnlageActive){
+                //überprüfen welches Ereignis ausgelöst hat 
+                $SecAlarms = json_decode($this->ReadPropertyString("SecAlarms"));
+                $ParentID =   @IPS_GetObjectIDByName("SecAlarmEvents", $this->InstanceID);
+                $lastevent = 0;
+                foreach(SecAlarms as $sensor) {
+                    $EreignisID = @IPS_GetEventIDByName("SecAEvent".$sensor->ID, $ParentID);
+                    $EreignisInfo = IPS_GetEvent($EreignisID);
+                    $aktEvent = $EreignisInfo["LastRun"];
+                    if($aktEvent > $lastEvent){
+                        $lastEvent = $aktEvent;
+                        $lastTriggerVarID = $EreignisInfo["TriggerVariableID"];
+                    }
+                }
+                if(getvalue($lastTriggerVarID)){
+             
+                    //AlarmCode auf 2 setzen
+                    setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                } 
+                else{
+             
+                   setvalue($this->GetIDForIdent("A_AlarmCode"), 0);
+                } 
+            }
+        }     
+        
+        
    /* ==========================================================================
     * Section: Private Funtions
     * Die folgenden Funktionen sind nur zur internen Verwendung verfügbar

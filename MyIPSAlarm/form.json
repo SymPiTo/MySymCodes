@@ -37,8 +37,8 @@
       { "type": "Label", "label": "Add/Delete target variables, which react on the alarm" },
       {
         "type": "List",
-        "name": "Targets",
-        "caption": "Targetvariables",
+        "name": "SecAlarms",
+        "caption": "Security Alarms",
         "add": true,
         "delete": true,
         "sort": {
