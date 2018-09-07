@@ -216,13 +216,32 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------------------------  */
     public function checkCode(){
         $code = getvalue($this->GetIDForIdent("A_SecCode"));
-        if ($Code = "04826"){
+        if ($Code === "04826"){
             setvalue($this->GetIDForIdent("A_SecActive"),false);
+            $this->resetCode();
         }  
         else{
-             $this->resetCode();
+            $this->resetCode();
         }
     }  
+
+    
+    //-----------------------------------------------------------------------------
+    /* Function: activateSecAlarm
+    ...............................................................................
+    Beschreibung
+        
+    ...............................................................................
+    Parameters: 
+        none
+    ...............................................................................
+    Returns:    
+        none
+    ------------------------------------------------------------------------------  */
+    public function activateSecAlarm(){
+        //$state = getvalue($this->GetIDForIdent("A_SecActive"));
+        setvalue($this->GetIDForIdent("A_SecActive"),true);
+    } 
     
         /* ----------------------------------------------------------------------------
          Function: BatAlarm
