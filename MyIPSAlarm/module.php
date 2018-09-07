@@ -116,7 +116,7 @@ class MyAlarm extends IPSModule
             $Typ = 0;
             $Ident = "AE".$sensor->ID;
             $Name = "AEvent".$sensor->ID;
-            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID);
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd = "A_BatAlarm(".$this->InstanceID.");" );
         }       
         
          //Unterkategorie Sec  Alarme anlegen
@@ -128,7 +128,7 @@ class MyAlarm extends IPSModule
             $Typ = 0;
             $Ident = "SecAE".$sensor->ID;
             $Name = "SecAEvent".$sensor->ID;
-            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID);
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd = "A_SecurityAlarm(".$this->InstanceID.");" );
         }        
     }
     
@@ -407,7 +407,7 @@ class MyAlarm extends IPSModule
     Returns:    
         none 
     -------------------------------------------------------------------------------*/
-    private function RegisterVarEvent($Name, $Ident, $Typ, $ParentID, $Position, $trigger, $var)
+    private function RegisterVarEvent($Name, $Ident, $Typ, $ParentID, $Position, $trigger, $var, $cmd)
     {
             $eid =  @IPS_GetEventIDByName($Name, $ParentID);
             if($eid === false) {
@@ -418,7 +418,7 @@ class MyAlarm extends IPSModule
                 IPS_SetName($EventID, $Name);
                 IPS_SetPosition($EventID, $Position);
                 IPS_SetEventTrigger($EventID, $trigger, $var);   //OnChange für Variable $var
-                $cmd = "A_SecurityAlarm(".$this->InstanceID.");";
+                
                 IPS_SetEventScript($EventID, $cmd );
                 IPS_SetEventActive($EventID, true);
             } 
