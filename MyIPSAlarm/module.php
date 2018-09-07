@@ -289,9 +289,10 @@ class MyAlarm extends IPSModule
                     $lastTriggerVarID = $EreignisInfo["TriggerVariableID"];
                 }
             }
+            if($lastTriggerVarID){
             $ltv =  getvalue($lastTriggerVarID);
             $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
-            if($ltv){
+             
                 // Batterie ist Low Alarm auslösen
                 setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery: ".$lastTriggerVarID)." Low";
                 //AlarmCode auf 1 setzen
@@ -332,8 +333,8 @@ class MyAlarm extends IPSModule
                         $lastTriggerVarID = $EreignisInfo["TriggerVariableID"];
                     }
                 }
-                if(getvalue($lastTriggerVarID)){
-             
+                if($lastTriggerVarID){
+                $ltv = getvalue($lastTriggerVarID);
                     //AlarmCode auf 2 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
                 } 
