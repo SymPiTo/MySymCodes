@@ -116,7 +116,8 @@ class MyAlarm extends IPSModule
             $Typ = 0;
             $Ident = "AE".$sensor->ID;
             $Name = "AEvent".$sensor->ID;
-            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd = "A_BatAlarm(".$this->InstanceID.");" );
+            $cmd = "A_BatAlarm(".$this->InstanceID.");" ;
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd  );
         }       
         
          //Unterkategorie Sec  Alarme anlegen
@@ -128,7 +129,8 @@ class MyAlarm extends IPSModule
             $Typ = 0;
             $Ident = "SecAE".$sensor->ID;
             $Name = "SecAEvent".$sensor->ID;
-            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd = "A_SecurityAlarm(".$this->InstanceID.");" );
+            $cmd = "A_SecurityAlarm(".$this->InstanceID.");";
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd );
         }        
     }
     
