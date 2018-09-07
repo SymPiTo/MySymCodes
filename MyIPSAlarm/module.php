@@ -1,4 +1,6 @@
 <?
+require_once(__DIR__ . "/../libs/NetworkTraits.php");
+
 /** ============================================================================
  * Title: Alarm for MyIPS
  * author PiTo
@@ -10,6 +12,9 @@
 //Class: MyAlarm
 class MyAlarm extends IPSModule
 {
+   //externe Klasse einbinden - ueberlagern mit TRAIT.
+    use DebugHelper;
+    
     /* 
     _______________________________________________________________________ 
      Section: Internal Modul Funtions
