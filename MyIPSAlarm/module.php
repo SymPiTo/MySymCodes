@@ -277,7 +277,7 @@ class MyAlarm extends IPSModule
             $batteries = json_decode($this->ReadPropertyString("Battery"));
             $ParentID =   @IPS_GetObjectIDByName("BatAlarmEvents", $this->InstanceID);
             $lastEvent = 0;
-            $lastTriggerVarID = "";
+            $lastTriggerVarID = 0;
             foreach($batteries as $sensor) {
                 $EreignisID = @IPS_GetEventIDByName("AEvent".$sensor->ID, $ParentID);
                 $EreignisInfo = IPS_GetEvent($EreignisID);
@@ -288,7 +288,7 @@ class MyAlarm extends IPSModule
                 }
             }
             $this->SendDebug( "$lastTriggerVarID: ", $lastTriggerVarID, 0); 
-            if(getvalue($lastTriggerVarID) !== ""){
+            if(getvalue($lastTriggerVarID) > 0){
                 // Batterie ist Low Alarm auslösen
                 setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery: ".$lastTriggerVarID)." Low";
                 //AlarmCode auf 1 setzen
@@ -319,7 +319,7 @@ class MyAlarm extends IPSModule
                 $SecAlarms = json_decode($this->ReadPropertyString("SecAlarms"));
                 $ParentID =   @IPS_GetObjectIDByName("SecAlarmEvents", $this->InstanceID);
                 $lastEvent = 0;
-                $lastTriggerVarID = "";
+                $lastTriggerVarID = 0;
                 foreach(SecAlarms as $sensor) {
                     $EreignisID = @IPS_GetEventIDByName("SecAEvent".$sensor->ID, $ParentID);
                     $EreignisInfo = IPS_GetEvent($EreignisID);
@@ -329,7 +329,7 @@ class MyAlarm extends IPSModule
                         $lastTriggerVarID = $EreignisInfo["TriggerVariableID"];
                     }
                 }
-                if(getvalue($lastTriggerVarID)!== ""){
+                if(getvalue($lastTriggerVarID) > 0){
              
                     //AlarmCode auf 2 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
