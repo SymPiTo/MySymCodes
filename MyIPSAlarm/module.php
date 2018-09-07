@@ -258,6 +258,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------------------------  */
     public function activateSecAlarm(){
         //$state = getvalue($this->GetIDForIdent("A_SecActive"));
+        sleep(30);
         SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
     } 
     
