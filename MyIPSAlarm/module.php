@@ -279,7 +279,7 @@ class MyAlarm extends IPSModule
             $batteries = json_decode($this->ReadPropertyString("Battery"));
             $ParentID =   @IPS_GetObjectIDByName("BatAlarmEvents", $this->InstanceID);
             $lastEvent = 0;
-             
+            $lastTriggerVarID = false; 
             foreach($batteries as $sensor) {
                 $EreignisID = @IPS_GetEventIDByName("AEvent".$sensor->ID, $ParentID);
                 $EreignisInfo = IPS_GetEvent($EreignisID);
@@ -323,7 +323,7 @@ class MyAlarm extends IPSModule
                 $SecAlarms = json_decode($this->ReadPropertyString("SecAlarms"));
                 $ParentID =   @IPS_GetObjectIDByName("SecAlarmEvents", $this->InstanceID);
                 $lastEvent = 0;
-             
+                $lastTriggerVarID = false; 
                 foreach(SecAlarms as $sensor) {
                     $EreignisID = @IPS_GetEventIDByName("SecAEvent".$sensor->ID, $ParentID);
                     $EreignisInfo = IPS_GetEvent($EreignisID);
