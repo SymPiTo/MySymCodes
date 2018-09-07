@@ -77,7 +77,7 @@ class MyAlarm extends IPSModule
         IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
         
         //anlegen eines Timers
-        //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
+        //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!); 
         /*    
         $alleEreignisse = IPS_GetEventList();
         foreach ($alleEreignisse as $EreignisID) {
