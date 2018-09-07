@@ -219,6 +219,8 @@ class MyAlarm extends IPSModule
         if ($Code === "04826"){
             setvalue($this->GetIDForIdent("A_SecActive"),false);
             $this->resetCode();
+            //Alarm Anlage deaktivieren
+            setvalue($this->GetIDForIdent("A_SecActive"),false);
         }  
         else{
             $this->resetCode();
