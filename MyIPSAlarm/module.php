@@ -182,8 +182,8 @@ class MyAlarm extends IPSModule
         none
     ------------------------------------------------------------------------------  */
     public function receiveCode(string $key){
-        $code = getvalue($his->GetIDForIdent("A_SecCode"));
-        setvalue($his->GetIDForIdent("A_SecCode"), $code.$key);    
+        $code = getvalue($this->GetIDForIdent("A_SecCode"));
+        setvalue($this->GetIDForIdent("A_SecCode"), $code.$key);    
     }  
     
     //-----------------------------------------------------------------------------
@@ -199,7 +199,7 @@ class MyAlarm extends IPSModule
         none
     ------------------------------------------------------------------------------  */
     public function resetCode(){
-        setvalue($his->GetIDForIdent("A_SecCode"), "");    
+        setvalue($this->GetIDForIdent("A_SecCode"), "");    
     }  
     
     //-----------------------------------------------------------------------------
@@ -215,12 +215,12 @@ class MyAlarm extends IPSModule
         none
     ------------------------------------------------------------------------------  */
     public function checkCode(){
-        $code = getvalue($his->GetIDForIdent("A_SecCode"));
+        $code = getvalue($this->GetIDForIdent("A_SecCode"));
         if ($Code = "04826"){
-            setvalue($his->GetIDForIdent("A_SecActive"),false);
+            setvalue($this->GetIDForIdent("A_SecActive"),false);
         }  
         else{
-             $his->resetCode();
+             $this->resetCode();
         }
     }  
     
