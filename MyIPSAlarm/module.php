@@ -324,7 +324,7 @@ class MyAlarm extends IPSModule
                 $ParentID =   @IPS_GetObjectIDByName("SecAlarmEvents", $this->InstanceID);
                 $lastEvent = 0;
                 $lastTriggerVarID = false; 
-                foreach(SecAlarms as $sensor) {
+                foreach($SecAlarms as $sensor) {
                     $EreignisID = @IPS_GetEventIDByName("SecAEvent".$sensor->ID, $ParentID);
                     $EreignisInfo = IPS_GetEvent($EreignisID);
                     $aktEvent = $EreignisInfo["LastRun"];
