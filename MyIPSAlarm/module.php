@@ -216,7 +216,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------------------------  */
     public function checkCode(){
         $code = getvalue($this->GetIDForIdent("A_SecCode"));
-        if ($Code === "04826"){
+        if ($code === "04826"){
             $this->resetCode();
             //Alarm Anlage deaktivieren
             SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
