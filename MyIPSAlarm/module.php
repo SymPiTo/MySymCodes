@@ -233,7 +233,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------------------------  */
     public function checkCode(){
         $code = getvalue($this->GetIDForIdent("A_SecCode"));
-        if ($code === "04826"){
+        if ($code === "04826"){ 
             $this->resetCode();
             //Alarm Anlage deaktivieren
             SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
@@ -334,8 +334,10 @@ class MyAlarm extends IPSModule
                 }
                 if($lastTriggerVarID){
                 $ltv = getvalue($lastTriggerVarID);
-                    //AlarmCode auf 2 setzen
+                    //AlarmCode auf 2 setzen = Einbruch
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                    $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
+                    Telegram_SendText(22525, $message, "671095116" );
                 } 
                 else{
              
