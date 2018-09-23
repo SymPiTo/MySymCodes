@@ -2475,7 +2475,11 @@ trait SamsungUPNP {
 
                                                "uri"        => $uri,
 
-                                               "trace"      => true ));
+                                               "trace"      => true, 
+                                               
+                                               "identification" => "",
+                                                   
+                                               "password"       => "0812"));
 
 
       return $client->__soapCall($action,$parameter);
