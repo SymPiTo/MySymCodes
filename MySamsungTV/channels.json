@@ -1,0 +1,275 @@
+[
+    {
+        "NAME":         "ARD HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "1",
+        "MINORCH":      "65534",
+        "PTC":          "28",
+        "PROGNUM":      "11100",
+        "ICONURL":      "images/Sender/ard%20das%20erste%20hd.png"
+    },
+    {
+        "NAME":         "ZDF HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "2",
+        "MINORCH":      "65534",
+        "PTC":          "29",
+        "PROGNUM":      "11100",
+        "ICONURL":      "images/Sender/zdf%20hd.png"
+    },
+    {
+        "NAME":         "RTL",
+        "ChType":       "CDTV",
+        "MAJORCH":      "303",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12101",
+        "ICONURL":      "images/Sender/rtl.png"
+    },
+    {
+        "NAME":         "PRO7",
+        "ChType":       "CDTV",
+        "MAJORCH":      "305",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12103",
+        "ICONURL":      "images/Sender/pro%20sieben.png"
+    },
+    {
+        "NAME":         "KABEL1",
+        "ChType":       "CDTV",
+        "MAJORCH":      "307",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12106",
+        "ICONURL":      "images/Sender/kabel%20eins.png"
+    },
+    {
+        "NAME":         "RTL2",
+        "ChType":       "CDTV",
+        "MAJORCH":      "308",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12105",
+        "ICONURL":      "images/Sender/rtl2.png"
+    },
+    {
+        "NAME":         "SAT1",
+        "ChType":       "CDTV",
+        "MAJORCH":      "304",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12102",
+        "ICONURL":      "images/Sender/sat1.png"
+    },
+    {
+        "NAME":         "3SAT HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "9",
+        "MINORCH":      "65534",
+        "PTC":          "36",
+        "PROGNUM":      "41101",
+        "ICONURL":      "images/Sender/3sat.png"
+    },
+    {
+        "NAME":         "VOX",
+        "ChType":       "CDTV",
+        "MAJORCH":      "306",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/vox.png"
+    },
+    {
+        "NAME":         "TELE5",
+        "ChType":       "CDTV",
+        "MAJORCH":      "503",
+        "MINORCH":      "65534",
+        "PTC":          "43",
+        "PROGNUM":      "12111",
+        "ICONURL":      "images/Sender/tele5.png"
+    },
+    {
+        "NAME":         "ONE HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "208",
+        "MINORCH":      "65534",
+        "PTC":          "37",
+        "PROGNUM":      "41102",
+        "ICONURL":      "images/Sender/One%20HD.png"
+    },
+    {
+        "NAME":         "RTLPlus",
+        "ChType":       "CDTV",
+        "MAJORCH":      "507",
+        "MINORCH":      "65534",
+        "PTC":          "41",
+        "PROGNUM":      "20124",
+        "ICONURL":      "images/Sender/RTL Plus.png"
+    },
+    {
+        "NAME":         "PHOENIX HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "261",
+        "MINORCH":      "65534",
+        "PTC":          "42",
+        "PROGNUM":      "12115",
+        "ICONURL":      "images/Sender/phoenix%20hd.png"
+    },
+    {
+        "NAME":         "ARTE HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "10",
+        "MINORCH":      "65534",
+        "PTC":          "42",
+        "PROGNUM":      "17113",
+        "ICONURL":      "images/Sender/arte%20hd.png"
+    }, 
+    {
+        "NAME":         "SAT1GOLD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "502",
+        "MINORCH":      "65534",
+        "PTC":          "22",
+        "PROGNUM":      "29110",
+        "ICONURL":      "images/Sender/sat1%20gold.png"
+    }, 
+    {
+        "NAME":         "SIXX",
+        "ChType":       "CDTV",
+        "MAJORCH":      "505",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "20116",
+        "ICONURL":      "images/Sender/sixx.png"
+    }, 
+    {
+        "NAME":         "PRO7MAXX",
+        "ChType":       "CDTV",
+        "MAJORCH":      "506",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12113",
+        "ICONURL":      "images/Sender/pro%20sieben%20maxx.png"
+    }, 
+    {
+        "NAME":         "ZDF neo HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "200",
+        "MINORCH":      "65534",
+        "PTC":          "38",
+        "PROGNUM":      "41103",
+        "ICONURL":      "images/Sender/zdf%20neo%20hd.png"
+    },
+    {
+        "NAME":         "Disney SD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "504",
+        "MINORCH":      "65534",
+        "PTC":          "43",
+        "PROGNUM":      "11102",
+        "ICONURL":      "images/Sender/disney%20junior%20us.png"
+    },
+    {
+        "NAME":         "Servus TV HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "11",
+        "MINORCH":      "65534",
+        "PTC":          "38",
+        "PROGNUM":      "29109",
+        "ICONURL":      "images/Sender/servus%20tv%20hd.png"
+    },
+    {
+        "NAME":         "WDR Köln HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "20",
+        "MINORCH":      "65534",
+        "PTC":          "2",
+        "PROGNUM":      "11155",
+        "ICONURL":      "images/Sender/wdr%20koln.png"
+    },
+    {
+        "NAME":         "HR HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "31",
+        "MINORCH":      "65534",
+        "PTC":          "17",
+        "PROGNUM":      "56105",
+        "ICONURL":      "images/Sender/hr%20fernsehen%20hd.png"
+    },
+    {
+        "NAME":         "BR HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "32",
+        "MINORCH":      "65534",
+        "PTC":          "18",
+        "PROGNUM":      "55107",
+        "ICONURL":      "images/Sender/br%20bayerisches%20fernsehen%20hd.png"
+    },
+    {
+        "NAME":         "NDR HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "37",
+        "MINORCH":      "65534",
+        "PTC":          "18",
+        "PROGNUM":      "53107",
+        "ICONURL":      "images/Sender/ndr%20fernsehen%20hd.png"
+    }, 
+    {
+        "NAME":         "SWR BW HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "46",
+        "MINORCH":      "65534",
+        "PTC":          "17",
+        "PROGNUM":      "56106",
+        "ICONURL":      "images/Sender/swr%20fernsehen%20bw%20hd.png"
+    },  
+    {
+        "NAME":         "RNF HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "69",
+        "MINORCH":      "65534",
+        "PTC":          "3",
+        "PROGNUM":      "35631",
+        "ICONURL":      "images/Sender/rhein%20neckar%20fernsehen.png"
+    }, 
+    {
+        "NAME":         "KIKA HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "181",
+        "MINORCH":      "65534",
+        "PTC":          "2",
+        "PROGNUM":      "11153",
+        "ICONURL":      "images/Sender/kika%20hd.png"
+    }, 
+    {
+        "NAME":         "ZEEOne",
+        "ChType":       "CDTV",
+        "MAJORCH":      "509",
+        "MINORCH":      "65534",
+        "PTC":          "10",
+        "PROGNUM":      "20125",
+        "ICONURL":      "images/Sender/ZEE%20One.png"
+    }, 
+    {
+        "NAME":         "BBC HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "540",
+        "MINORCH":      "65534",
+        "PTC":          "43",
+        "PROGNUM":      "12108",
+        "ICONURL":      "images/Sender/sport1.png"
+    }, 
+    {
+        "NAME":         "SPORT1",
+        "ChType":       "CDTV",
+        "MAJORCH":      "271",
+        "MINORCH":      "65534",
+        "PTC":          "20",
+        "PROGNUM":      "41104",
+        "ICONURL":      "images/Sender/BBC%20%20HD.png"
+    }
+] 
+ 
+ 
+ 

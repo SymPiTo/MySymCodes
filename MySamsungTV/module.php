@@ -547,7 +547,7 @@ class MySamsungTV extends IPSModule
         $Channellist = base64_decode($this->ReadPropertyString("FileData"));
         $channel = explode("\n", $Channellist);
         $n =  0;
-        //auf Ferseh Kanal 1 schalten!
+        //auf Fernseh Kanal 1 schalten!
         $key = 'KEY_1';
         $result =   $this->sendKey($key);
         $key = 'KEY_ENTER';
@@ -675,4 +675,12 @@ class MySamsungTV extends IPSModule
            return "null" ;
         }
         
+        
+        public function readChannelFile() {
+            // Read JSON file
+            $json = file_get_contents('channels.json');
+            //Decode JSON
+            $json_data = json_decode($json,true);
+            return $json_data;
+        }    
 }
