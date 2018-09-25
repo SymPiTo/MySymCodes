@@ -475,7 +475,6 @@ trait SamsungUPNP {
     // ConnectionManager
     
     //*****************************************************************************
-    /* Function: GetCurrentConnectionIDs()
     ...............................................................................
     UPNP  
     ...............................................................................
@@ -485,7 +484,7 @@ trait SamsungUPNP {
     Returns:  
 
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  25.09.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
     public function GetCurrentConnectionIDs(){
 
@@ -505,7 +504,7 @@ trait SamsungUPNP {
     
     
     //*****************************************************************************
-    /* Function: GetCurrentConnectionInfoCM()
+    /* Function: GetCurrentConnectionInfo_CM()
     ...............................................................................
     UPNP  
     ...............................................................................
@@ -515,7 +514,7 @@ trait SamsungUPNP {
     Returns:  
 
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  25.09.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
     public function GetCurrentConnectionInfo_CM(){
         return (int)$this->processSoapCall("/upnp/control/ConnectionManager1",
@@ -544,7 +543,7 @@ trait SamsungUPNP {
      * Source
      * Sink
     --------------------------------------------------------------------------------
-    Status:  not tested
+    Status:  25.09.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
     public function GetProtocolInfo_CM(){
         return (int)$this->processSoapCall("/upnp/control/ConnectionManager1",
@@ -611,7 +610,7 @@ trait SamsungUPNP {
    --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetSharpness_RC(integer $Sharpness){
+    public function SetSharpness_RC($Sharpness){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -1007,7 +1006,7 @@ trait SamsungUPNP {
     Returns:  
      * <CurrentSharpness>   60
     --------------------------------------------------------------------------------
-    Status:  18.07.2018
+    Status:  25.09.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/   
      public function GetSharpness_RC(){
 
