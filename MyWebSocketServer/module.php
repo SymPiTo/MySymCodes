@@ -1366,7 +1366,7 @@ class MyWebsocketServer extends IPSModule
 			//	$Directory = IPS_GetLogDir();
 		}
 		
-		if(($FileHandle = fopen($File, "a")) === false) {
+		if(($FileHandle = fopen($Directory.$File, "a")) === false) {
 			//SetValue($ID_OutEnabled, false);
 			Exit;
 		}
