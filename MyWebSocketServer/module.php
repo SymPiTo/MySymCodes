@@ -1212,22 +1212,23 @@ $this->IPSLog("ClientListe abarbeiten", $Clients);
  $this->IPSLog("Client ist unbekannt", $Client->ClientIP);
                     $this->SendDebug('Unknow Multi-client', $ClientIP . ':' . $ClientPort, 0);
                     trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
-                    return false;
+                    //return false;
                 }
-                if ($Client->State != WebSocketState::Connected) {
+                else if ($Client->State != WebSocketState::Connected) {
  $this->IPSLog("Client ist bekannt aber nocht verbunden", $Client->ClientIP);
                     $this->SendDebug('Multi-Client not connected', $ClientIP . ':' . $ClientPort, 0);
                     trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
                     // Client ist nicht richtig verbunden IP OK aber Port hat sich geändert.
                     //$this->RemoveClient($Client);
                     //$this->RestartServer();
-                    return false;
+                    //return false;
                 }
+                else if ($Client->State == WebSocketState::Connected) {
                 $this->SendDebug('Send Text Message to Multi-Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
                 $this->Send($Text, WebSocketOPCode::text, $Client);
- $this->IPSLog("sende Text".$Text." an", $Client->ClientIP);
-
-               }
+ $this->IPSLog("sende Text"."$Text". " an", $Client->ClientIP);
+                }
+            }
             return true;
         }
         else{
