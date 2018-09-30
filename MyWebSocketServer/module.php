@@ -1203,9 +1203,9 @@ class MyWebsocketServer extends IPSModule
         $Clients = $this->Multi_Clients->GetClients();
         if ($Clients){
             $this->SendDebug('Client Liste =' , $Clients, 0);
- //$this->IPSLog("ClientListe", $Clients);
+$this->IPSLog("ClientListe abarbeiten", "Clients");
             foreach ($Clients as $Client) {
-  $this->IPSLog("sende Text ann Client", $Client->ClientIP);
+  $this->IPSLog("Client auswählen", $Client->ClientIP);
                 $ClientIP = $Client->ClientIP ;
                 $ClientPort = $Client->ClientPort;
                 if ($Client === false) {
@@ -1225,7 +1225,7 @@ class MyWebsocketServer extends IPSModule
                 }
                 $this->SendDebug('Send Text Message to Multi-Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
                 $this->Send($Text, WebSocketOPCode::text, $Client);
- $this->IPSLog("sende Text an", $Client->ClientIP);
+ $this->IPSLog("sende Text".$Text." an", $Client->ClientIP);
 
                }
             return true;
