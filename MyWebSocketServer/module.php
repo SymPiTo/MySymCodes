@@ -1360,7 +1360,7 @@ class MyWebsocketServer extends IPSModule
 			$File = 'IPSLog.log';
 		}
 		if ($Directory == "") {
-                        $Directory = "/var/lib/symcom/webfront/user/"
+                        $Directory = "/var/lib/symcom/webfront/user/";
                         //$Directory = "/home/pi/pi-share/";
 			//$Directory = IPS_GetKernelDir().'/';
 			//if (function_exists('IPS_GetLogDir'))
