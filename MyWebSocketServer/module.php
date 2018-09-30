@@ -1203,25 +1203,29 @@ class MyWebsocketServer extends IPSModule
         $Clients = $this->Multi_Clients->GetClients();
         if ($Clients){
             $this->SendDebug('Client Liste =' , $Clients, 0);
+ IPSLog("ClientListe", $Clients);
             foreach ($Clients as $Client) {
+ IPSLog("sende Text ann Client", $Client);
                 $ClientIP = $Client->ClientIP ;
                 $ClientPort = $Client->ClientPort;
                 if ($Client === false) {
+IPSLog("Client ist unbekannt", $Client);
                     $this->SendDebug('Unknow Multi-client', $ClientIP . ':' . $ClientPort, 0);
                     trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
                     return false;
                 }
                 if ($Client->State != WebSocketState::Connected) {
+IPSLog("Client ist bekannt aber nocht verbunden", $Client);
                     $this->SendDebug('Multi-Client not connected', $ClientIP . ':' . $ClientPort, 0);
                     trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
                     // Client ist nicht richtig verbunden IP OK aber Port hat sich geändert.
-                    $this->RemoveClient($Client);
+                    //$this->RemoveClient($Client);
                     //$this->RestartServer();
                     return false;
                 }
                 $this->SendDebug('Send Text Message to Multi-Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
                 $this->Send($Text, WebSocketOPCode::text, $Client);
-
+IPSLog("sende Text an", $Client);
 
                }
             return true;
@@ -1339,8 +1343,46 @@ class MyWebsocketServer extends IPSModule
             $this->SendText($xml);
             //zum sichtbar machen
             setvalue($this->GetIDForIdent("DataSendToClient"), $xml);
-        }  
-
+        } 
+        
+	Protected function IPSLog($Text, $array) {
+		$Directory=""; 
+		$File="";
+		
+		if (!$array){
+		
+			$array = '-';
+		}
+		
+		
+		if ($File == ""){
+		
+			$File = 'IPSLog.log';
+		}
+		if ($Directory == "") {
+			$Directory = "/home/pi/pi-share/";
+			//$Directory = IPS_GetKernelDir().'/';
+			//if (function_exists('IPS_GetLogDir'))
+			//	$Directory = IPS_GetLogDir();
+		}
+		
+		if(($FileHandle = fopen($Directory.$File, "a")) === false) {
+			//SetValue($ID_OutEnabled, false);
+			Exit;
+		}
+		if (is_array($array)){
+			//$comma_seperated=implode("\r\n",$array);
+			$comma_seperated=print_r($array, true);
+		}
+		else {
+			$comma_seperated=$array;
+		}
+		fwrite($FileHandle, $Text.": ");
+		fwrite($FileHandle, $comma_seperated."\r\n");
+		fclose($FileHandle);
+                
+        } 
+        
         
 }
 
