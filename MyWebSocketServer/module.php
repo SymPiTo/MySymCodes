@@ -1226,7 +1226,7 @@ $this->IPSLog("ClientListe abarbeiten", $Clients);
                 else if ($Client->State == WebSocketState::Connected) {
                 $this->SendDebug('Send Text Message to Multi-Client' . $Client->ClientIP . ':' . $Client->ClientPort, $Text, 0);
                 $this->Send($Text, WebSocketOPCode::text, $Client);
- $this->IPSLog("sende Text"."$Text". " an", $Client->ClientIP);
+ $this->IPSLog("sende Text an", $Client->ClientIP." - ".$Client->ClientPort );
                 }
             }
             return true;
