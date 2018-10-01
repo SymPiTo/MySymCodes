@@ -269,6 +269,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                             $art = strstr($artist, ' - ', true);
                             $size = 3;
                             $url = $this->getImageFromLastFM($art, $size);
+                            $this->SendDebug("GetImageFrom LastFM: ", $url, 0);
                             setvalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
                         break;	
                         case "MediaServer":
