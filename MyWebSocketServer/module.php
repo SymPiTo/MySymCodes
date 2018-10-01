@@ -1164,6 +1164,7 @@ class MyWebsocketServer extends IPSModule
         if ($Result === false) {
             $this->SendDebug('Timeout ' . $Client->ClientIP . ':' . $Client->ClientPort, "", 0);
             trigger_error($this->Translate('Timeout'), E_USER_NOTICE);
+ $this->IPSLog($Client->ClientIP . ':' . $Client->ClientPort." ist nicht errechbar. ", "entferne Client aus Liste.");
             $this->Multi_Clients->Remove($Client);
             return false;
         }
@@ -1171,6 +1172,7 @@ class MyWebsocketServer extends IPSModule
             $this->SendDebug('Error in Pong ' . $Client->ClientIP . ':' . $Client->ClientPort, $Result, 0);
             trigger_error($this->Translate('Wrong pong received'), E_USER_NOTICE);
             $this->Multi_Clients->Remove($Client);
+ $this->IPSLog($Client->ClientIP . ':' . $Client->ClientPort." Pong Antwort ist falsch. ", $Result);
             return false;
         }
         return true;
