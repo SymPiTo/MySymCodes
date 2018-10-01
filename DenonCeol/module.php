@@ -281,7 +281,15 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                             SetValueInteger($this->GetIDForIdent("CeolSource"), 5);
                         break;		
                 }
-                  
+                //ArtistPicture suchen
+                $source = getvalue($this->GetIDForIdent("CeolSource"));
+                if ($source === "IRadio"){
+                    $artist = getvalue($this->GetIDForIdent("CeolSZ2"));
+                    $art = strstr($artist, ' - ', true);
+                    $size = 3;
+                    $url = $this->getImageFromLastFM($art, $size);
+                    stevalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
+                }
             }
             else {
                 //Keine Netzwerk-Verbindung zun Client
