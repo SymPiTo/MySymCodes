@@ -266,11 +266,13 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                             SetValueInteger($this->GetIDForIdent("CeolSource"), 0);
                             //ArtistPicture suchen
                             $artist = getvalue($this->GetIDForIdent("CeolSZ2"));
-                            $art = strstr($artist, ' - ', true);
+                            $dispLine2 = split(" - ", $artist);
                             $size = 3;
-                            $url = $this->getImageFromLastFM($art, $size);
+                            $url = $this->getImageFromLastFM($dispLine2[0], $size);
                             $this->SendDebug("GetImageFrom LastFM: ", $url, 0);
                             setvalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
+                            setvalue($this->GetIDForIdent("Ceol_Artist"), $dispLine2[0]);
+                            setvalue($this->GetIDForIdent("Ceol_Title"), $dispLine2[1]);
                         break;	
                         case "MediaServer":
                             SetValueInteger($this->GetIDForIdent("CeolSource"), 1);
