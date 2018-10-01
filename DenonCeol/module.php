@@ -47,7 +47,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
             $this->RegisterVariableString("CeolSZ7", "Line7");
             $this->RegisterVariableString("CeolSZ8", "Line8"); 
             $this->RegisterVariableInteger("CeolFavChannel", "FavChannel", "");
-            
+            $this->RegisterVariableString("CeolArtPicUrl", "ArtPicUrl"); 
             
                 
             //UPNP Variable
@@ -1506,6 +1506,41 @@ o                    http://192.168.2.99/img/album%20art_S.png
             
         }     
         
+	/*//////////////////////////////////////////////////////////////////////////////
+	Befehl: getImageFromLastFM()
+	...............................................................................
+	 
+	...............................................................................
+	Parameter:   
+           $artist
+           $size
+              =  "small" => 0, "medium" => 1, "large" => 2, "extralarge" => 3, "mega" => 4 
+
+        
+	--------------------------------------------------------------------------------
+	SetVariable: 
+	--------------------------------------------------------------------------------
+	return:  
+	--------------------------------------------------------------------------------
+	Status: not implemented
+	//////////////////////////////////////////////////////////////////////////////*/ 
+        public function getImageFromLastFM($artist, $size){
+            $artisDec = urlencode($artist);
+            $url    = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={$artisDec}&api_key=91770645e54b138f5187003fcb830865";
+ 
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
+
+            $data = curl_exec($ch); // execute curl request
+            curl_close($ch);
+
+            $xml = simplexml_load_string($data); 
+            $json = json_encode($xml);
+            $array = json_decode($json,TRUE);
+            $imageUrl = $array["artist"]["image"][$size];
+            return $imageUrl;
+        } 
         
     } // Ende Klasse
 ?>
