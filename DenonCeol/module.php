@@ -266,7 +266,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                             SetValueInteger($this->GetIDForIdent("CeolSource"), 0);
                             //ArtistPicture suchen
                             $artist = getvalue($this->GetIDForIdent("CeolSZ2"));
-                            $dispLine2 = split(" - ", $artist);
+                            $dispLine2 = str_split (" - ", $artist);
                             $size = 3;
                             $url = $this->getImageFromLastFM($dispLine2[0], $size);
                             $this->SendDebug("GetImageFrom LastFM: ", $url, 0);
