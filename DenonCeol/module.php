@@ -260,7 +260,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 SetValueString($this->GetIDForIdent("CeolSZ8"), $sz8);
                 
                 $Source = $output['item']['NetFuncSelect']['value'];
-                
+                $this->SendDebug("get Source: ", $Source, 0);
                 switch ($Source){
                         case "IRadio":
                             SetValueInteger($this->GetIDForIdent("CeolSource"), 0);
