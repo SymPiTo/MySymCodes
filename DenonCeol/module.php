@@ -288,7 +288,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                     $art = strstr($artist, ' - ', true);
                     $size = 3;
                     $url = $this->getImageFromLastFM($art, $size);
-                    stevalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
+                    setvalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
                 }
             }
             else {
