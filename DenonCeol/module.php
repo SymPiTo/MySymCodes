@@ -262,7 +262,7 @@ require_once(__DIR__ . "/../libs/XML2Array.php");
                 $Source = $output['item']['NetFuncSelect']['value'];
                 $this->SendDebug("get Source: ", $Source, 0);
                 switch ($Source){
-                        case "IRadio":
+                        case "IRADIO":
                             SetValueInteger($this->GetIDForIdent("CeolSource"), 0);
                             //ArtistPicture suchen
                             $artist = getvalue($this->GetIDForIdent("CeolSZ2"));
