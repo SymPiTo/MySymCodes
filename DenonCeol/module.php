@@ -2,13 +2,14 @@
 //zugehoerige Unter-Klassen    
 require_once(__DIR__ . "/DenonCeol_Interface.php");
 require_once(__DIR__ . "/../libs/XML2Array.php");
+require_once(__DIR__ . "/../libs/NetworkTraits.php");
 
     // Klassendefinition
     class DenonCeol extends IPSModule {
         //externe Klasse einbinden - ueberlagern mit TRAIT
         use CEOLupnp;
         use XML2Array;
-        
+        use DebugHelper;
                         
         
         // Der Konstruktor des Moduls
