@@ -271,6 +271,9 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
                             $this->SendDebug("Line 2 array: ", $dispLine2, 0);
                             $size = 3;
                             $url = $this->getImageFromLastFM($dispLine2[0], $size);
+                            if ($url === ""){
+                                $url = "https://lastfm-img2.akamaized.net/i/u/300x300/6c05f3218947460ca79d7c0ff5cc3644.png";
+                            };
                             $this->SendDebug("GetImageFrom LastFM: ", $url, 0);
                             setvalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
                             setvalue($this->GetIDForIdent("Ceol_Artist"), $dispLine2[0]);
