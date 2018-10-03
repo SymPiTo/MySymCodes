@@ -1544,6 +1544,9 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $artisDec = urlencode($artist);
             $url    = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={$artisDec}&api_key=91770645e54b138f5187003fcb830865";
             $this->SendDebug("getImageFromLastFM: ", $url, 0);
+            if (!$url){
+                $url = "/var/lib/symcon/webfront/user/images/INetRadio1.png";
+            }
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
