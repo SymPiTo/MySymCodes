@@ -1539,7 +1539,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $artisDec = urlencode($artist);
             $url    = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={$artisDec}&api_key=91770645e54b138f5187003fcb830865";
             
-            if (!$url){
+            if ($url == ""){
                 $this->SendDebug("getImageFromLastFM: ", "URL für image not found.", 0);
                 $url = "/var/lib/symcon/webfront/user/images/INetRadio1.png";
             }
