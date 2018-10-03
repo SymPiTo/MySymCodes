@@ -1538,8 +1538,9 @@ o                    http://192.168.2.99/img/album%20art_S.png
         public function getImageFromLastFM($artist, $size){
             $artisDec = urlencode($artist);
             $url    = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={$artisDec}&api_key=91770645e54b138f5187003fcb830865";
-            $this->SendDebug("getImageFromLastFM: ", $url, 0);
+            
             if (!$url){
+                $this->SendDebug("getImageFromLastFM: ", "URL für image not found.", 0);
                 $url = "/var/lib/symcon/webfront/user/images/INetRadio1.png";
             }
             $ch = curl_init();
@@ -1553,6 +1554,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
             $json = json_encode($xml);
             $array = json_decode($json,TRUE);
             $imageUrl = $array["artist"]["image"][$size];
+            $this->SendDebug("getImageFromLastFM: ", $imageUrl, 0);
             return $imageUrl;
         } 
         
