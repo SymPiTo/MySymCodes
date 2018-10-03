@@ -1321,7 +1321,7 @@ $this->IPSLog("ClientListe abarbeiten", $Clients);
                 $data['ID'.$varid] = getvalue($varid);
             }
             
-            
+            $all = IPS_GetVariableList();
 		
 			$a = getvalue(11938);
 			$b = date('m/d/Y H:i:s', $a);
@@ -1340,7 +1340,7 @@ $this->IPSLog("ClientListe abarbeiten", $Clients);
 	 
             $reply = 	array();
             $this->SendDebug('updateIPSvalues', $data, 0);
-            $c =array($data, $reply);
+            $c =array($data, $reply, $all);
             //json_encode$c);
             $xml = json_encode($c);
             $this->SendText($xml);
