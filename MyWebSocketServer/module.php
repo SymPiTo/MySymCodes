@@ -1323,8 +1323,8 @@ $this->IPSLog("ClientListe abarbeiten", $Clients);
             
             $allIPSVars = IPS_GetVariableList();
             foreach($allIPSVars as $IPSVar) {
-                $Avarid = $IPSVar->ID;
-                $IPSdata['ID'.$Avarid] = getvalue($Avarid);
+            
+                $IPSdata['ID'.$IPSVar] = getvalue($IPSVar);
             }
             
 			$a = getvalue(11938);
