@@ -610,7 +610,7 @@ trait SamsungUPNP {
    --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetSharpness_RC($Sharpness){
+    public function SetSharpness_RC(integer $Sharpness){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -643,7 +643,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetContrast_RC(integer $Contrast){
+    public function SetContrast_RC(int $Contrast){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -673,7 +673,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status: 18.07.2018 - OK 
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetColorTemperature_RC(integer $ColorTemperature){
+    public function SetColorTemperature_RC(int $ColorTemperature){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -703,7 +703,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/   
-    public function SetBrightness_RC(integer $Brightness){
+    public function SetBrightness_RC(int $Brightness){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -733,7 +733,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function SetVolume_RC(integer $volume, $channel = 'Master'){
+    public function SetVolume_RC(int $volume, string $channel = 'Master'){
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
                                "urn:schemas-upnp-org:service:RenderingControl:1",
@@ -831,7 +831,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/      
-    public function SetMute_RC($mute) {
+    public function SetMute_RC(bool $mute) {
         if($mute){
           $mute = "1";
         }else{
@@ -948,7 +948,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-    public function GetVolume_RC($channel = 'Master'){
+    public function GetVolume_RC(string $channel = 'Master'){
 
         return (int)$this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -1139,7 +1139,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  17.7.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/ 
-    public function GetAllProgramInformationURL_MTVA(string $Channel, integer $AntennaMode){
+    public function GetAllProgramInformationURL_MTVA(string $Channel, int $AntennaMode){
         return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
@@ -2673,7 +2673,7 @@ trait SamsungUPNP {
     //KEY_REC
     //KEY_STOP
 	**************************************/
-    public function sendKey($key)
+    public function sendKey(string $key)
     {
             $port = 55000;
             $src = "192.168.178.28"; # ip des IPS Servers
