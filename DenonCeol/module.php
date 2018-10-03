@@ -273,6 +273,7 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
                             $url = $this->getImageFromLastFM($dispLine2[0], $size);
                             if ($url === ""){
                                 $url = "https://lastfm-img2.akamaized.net/i/u/300x300/6c05f3218947460ca79d7c0ff5cc3644.png";
+                               
                             };
                             $this->SendDebug("GetImageFrom LastFM: ", $url, 0);
                             setvalue($this->GetIDForIdent("CeolArtPicUrl"), $url);
@@ -1542,7 +1543,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
         public function getImageFromLastFM($artist, $size){
             $artisDec = urlencode($artist);
             $url    = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={$artisDec}&api_key=91770645e54b138f5187003fcb830865";
- 
+            $this->SendDebug("getImageFromLastFM: ", $url, 0);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
