@@ -1085,7 +1085,7 @@ class MyWebsocketServer extends IPSModule
     }
 
     ################## PUBLIC
-    public function CommandToServer($Data)
+    public function CommandToServer(string $Data)
     {
         $this->SendDebug('Received following Data from Client', $Data, 0); 
         if(substr($Data, 0, 8) == 'setvalue'){
