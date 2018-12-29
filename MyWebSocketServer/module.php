@@ -1132,7 +1132,7 @@ class MyWebsocketServer extends IPSModule
         $Client = true;
         
             $Clients = $this->Multi_Clients->GetClients();
-            $this->SendDebug('Multi-Client Liste: '  , $Clients, 0);
+            $this->SendDebug('Keep Alive: '  , $Clients, 0);
             //verbundene Client Adressen in Variale schreiben
             setValue($this->GetIDForIdent("Client1"),$Clients[0]->ClientIP . ':' . $Clients[0]->ClientPort);
             setValue($this->GetIDForIdent("Client2"),$Clients[1]->ClientIP . ':' . $Clients[1]->ClientPort);
