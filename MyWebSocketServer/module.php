@@ -1130,9 +1130,15 @@ class MyWebsocketServer extends IPSModule
         $this->SendDebug('KeepAlive', 'start', 0);
         $this->SetTimerInterval('KeepAlivePing', 0);
         $Client = true;
-
+        
+        $n = 1;
         while ($Client) {
             $Clients = $this->Multi_Clients;
+            
+            //verbundene Client Adressen in Variale schreiben
+            setValue($this->GetIDForIdent("Client".n),$Client->ClientIP . ':' . $Client->ClientPort);
+            $n = $n+1;
+            
             $Client = $Clients->GetNextTimeout(1);
             if ($Client === false) {
                 break;
