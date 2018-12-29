@@ -81,6 +81,12 @@ class MyWebsocketServer extends IPSModule
         //Bei  Variablenänderung folgender Variable wird dieser Inhalt an alle Clients gesendet
         $this->RegisterVariableString("DataSendToClient", "DataSendToClient");
 
+        //4 Variable der verbundenen Clients IP anlegen
+        $this->RegisterVariableString("Client1", "connected Client 1");        
+        $this->RegisterVariableString("Client2", "connected Client 2"); 
+        $this->RegisterVariableString("Client3", "connected Client 3"); 
+        $this->RegisterVariableString("Client4", "connected Client 4"); 
+        
         //Listen Einträge als JSON regisrieren
         // zum umwandeln in ein Array 
         // $IPSVars = json_decode($this->ReadPropertyString("IPSVars"));
@@ -828,7 +834,7 @@ class MyWebsocketServer extends IPSModule
     ################## DATAPOINTS CHILDS
 
     /**
-     * Interne Funktion des SDK. Nimmt Daten von Childs entgegen und sendet Diese weiter.
+     * Interne Funktion des SDK. Nimmt Daten von Childs (HTML Client) entgegen und sendet Diese weiter.
      *
      * @access public
      * @param string $JSONString
