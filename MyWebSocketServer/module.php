@@ -164,8 +164,9 @@ class MyWebsocketServer extends IPSModule
      */
     public function ApplyChanges()
     {
-        //Variable für Webfront ausblenden
+        //Variable für Webfront ausblenden.
         IPS_SetHidden ($this->GetIDForIdent("CommandSendToServer"), true );
+        
         IPS_SetHidden ($this->GetIDForIdent("DataSendToClient"), true );
         
         $this->NoNewClients = true;
