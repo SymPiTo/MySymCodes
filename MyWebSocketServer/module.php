@@ -1131,7 +1131,7 @@ class MyWebsocketServer extends IPSModule
         $this->SetTimerInterval('KeepAlivePing', 0);
         $Client = true;
         
-            $Clients = $this->Multi_Clients;
+            $Clients = $this->Multi_Clients->GetClients();
             //verbundene Client Adressen in Variale schreiben
             setValue($this->GetIDForIdent("Client1"),$Clients[0]->ClientIP . ':' . $Clients[0]->ClientPort);
             setValue($this->GetIDForIdent("Client2"),$Clients[1]->ClientIP . ':' . $Clients[1]->ClientPort);
