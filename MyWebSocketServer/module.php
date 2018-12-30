@@ -1500,8 +1500,7 @@ class MyWebsocketServer extends IPSModule
             //zum sichtbar machen
             setvalue($this->GetIDForIdent("DataSendToClient"), $xml);
         } 
-        
-       
+
 }
 
 
