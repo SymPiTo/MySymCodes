@@ -50,7 +50,7 @@ class MyWebsocketServer extends IPSModule
     //Traits verbinden
     use DebugHelper,
         InstanceStatus,
-        BufferHelper,
+        MyBufferHelper,
         MyLogger;
 
     /**
