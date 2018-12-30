@@ -1151,7 +1151,27 @@ class MyWebsocketServer extends IPSModule
                     setValue($this->GetIDForIdent("Client4"),$Client->ClientIP . ':' . $Client->ClientPort);
                 }
             }
-            
+            $i=$i+1;
+            switch ($i){
+                case 1:
+                setValue($this->GetIDForIdent("Client1"), getvalue($this->GetIDForIdent("Client1"))." disconnected.");
+                setValue($this->GetIDForIdent("Client2"), getvalue($this->GetIDForIdent("Client2"))." disconnected.");
+                setValue($this->GetIDForIdent("Client3"), getvalue($this->GetIDForIdent("Client3"))." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                    break;
+                case 2: 
+                setValue($this->GetIDForIdent("Client2"), getvalue($this->GetIDForIdent("Client2"))." disconnected.");
+                setValue($this->GetIDForIdent("Client3"), getvalue($this->GetIDForIdent("Client3"))." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                    break;
+                case 3:
+                setValue($this->GetIDForIdent("Client3"), getvalue($this->GetIDForIdent("Client3"))." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                    break;
+                case 4:
+                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+            }
+
         while ($Client) {
             $Clients = $this->Multi_Clients;
             
