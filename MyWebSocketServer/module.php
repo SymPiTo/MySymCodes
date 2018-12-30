@@ -957,6 +957,11 @@ class MyWebsocketServer extends IPSModule
                 }
             }
             // Client jetzt bekannt.
+            $text = "lalalalalalala";
+            $array = "hfsdjkghkjfdlhgjkhskjglsdhfgjkhgfdhshkljsghdf";
+            $this->ModErrorLog($ModName, $text, $array);
+            
+            
             if ($Client->UseTLS) { // TLS Daten
                 $Data = $this->{'BufferTLS' . $Client->ClientIP . $Client->ClientPort} .= $Data;
                 if (!isset($TLS)) {
