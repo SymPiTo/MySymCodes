@@ -48,7 +48,7 @@ use PTLS\Exceptions\TLSAlertException;
 class MyWebsocketServer extends IPSModule
 {
     //Traits verbinden
-    use DebugHelper,
+    use MyDebugHelper,
         InstanceStatus,
         MyBufferHelper,
         MyLogger;

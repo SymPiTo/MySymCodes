@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
         //externe Klasse einbinden - ueberlagern mit TRAIT
         use CEOLupnp;
         use XML2Array;
-        use DebugHelper;
+        use MyDebugHelper;
                         
         
         // Der Konstruktor des Moduls

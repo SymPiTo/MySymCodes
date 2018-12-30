@@ -185,7 +185,7 @@ if (!defined("vtBoolean")) { //Nur wenn Konstanten noch nicht bekannt sind.
  * DebugHelper ergänzt SendDebug um die Möglichkeit Array und Objekte auszugeben.
  *
  */
-trait DebugHelper
+trait MyDebugHelper
 {
 
     /**

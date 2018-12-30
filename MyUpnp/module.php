@@ -24,7 +24,7 @@ class MyUpnp extends IPSModule {
          */
     use upnp,
         UpnpDiscoveryClassTrait,
-        DebugHelper;
+        MyDebugHelper;
     
     /* Constructor: 
     Der Konstruktor des Moduls

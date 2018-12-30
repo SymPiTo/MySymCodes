@@ -15,7 +15,7 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
 class MyFS20_SC extends IPSModule
 {
     //externe Klasse einbinden - ueberlagern mit TRAIT.
-    use DebugHelper;
+    use MyDebugHelper;
     /* 
     _______________________________________________________________________ 
      Section: Internal Modul Funtions
