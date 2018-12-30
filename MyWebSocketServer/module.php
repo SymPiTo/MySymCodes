@@ -492,6 +492,7 @@ class MyWebsocketServer extends IPSModule
 
             if ($this->ReadPropertyBoolean("BasisAuth")) {
                 $realm = base64_encode($this->ReadPropertyString("Username") . ':' . $this->ReadPropertyString("Password"));
+                $this->SendDebug('Authentifizierung mit Daten: ', $Data, 0);
                 if (preg_match("/Authorization: Basic (.*)\r\n/", $Data, $match)) {
                     if ($match[1] != $realm) {
                         $this->SendDebug('Unauthorized Connection:', base64_decode($match[1]), 0);
@@ -784,7 +785,7 @@ class MyWebsocketServer extends IPSModule
 
         return $ret;
     }
-    public function RestartServer() {
+    public function  RestartServer() {
         $this->RemoveAllClients();
         $id = $this->InstanceID;
         IPS_SetProperty($id, "Open", false); //I/O Instanz soll aktiviert sein.
