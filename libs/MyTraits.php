@@ -14,7 +14,10 @@ trait MyLogger
         {
             $path = "/home/pi/pi-share/"; 
             $file=$ModName.".log";
-
+            
+            $datum = date("d.m.Y");
+            $uhrzeit = date("H:i");
+            $logtime = $datum." - ".$uhrzeit." Uhr";
             if (!$array){
 
                     $array = '-';
@@ -36,7 +39,7 @@ trait MyLogger
                     else {
                             $comma_seperated=$array;
                     }
-                    fwrite($FileHandle, $text.": ");
+                    fwrite($FileHandle, $logtime.": ".$text.": ");
                     fwrite($FileHandle, $comma_seperated."\r\n");
                     fclose($FileHandle);
            //}
