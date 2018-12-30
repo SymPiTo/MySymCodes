@@ -386,6 +386,8 @@ class WebSocket_ClientList
     {
         $list = array();
         foreach ($this->Items as $Client) {
+            //geändert von pito scheint Fehler zu sein ursrünglicher Code war
+            //$list[$Client->ClientPort . $Client->ClientPort] = $Client;
             $list[$Client->ClientIP . $Client->ClientPort] = $Client;
         }
         return $list;
