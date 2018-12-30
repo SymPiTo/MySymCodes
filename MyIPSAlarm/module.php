@@ -265,6 +265,8 @@ class MyAlarm extends IPSModule
         $text_to_speech = "Alarmanlage wird in 30Sekunden aktiv.";
         EchoRemote_TextToSpeech(11629, $text_to_speech);
         sleep(30);
+        $text_to_speech = "Alarmanlage ist aktiviert.";
+        EchoRemote_TextToSpeech(11629, $text_to_speech);
         SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
     } 
     
@@ -344,6 +346,8 @@ class MyAlarm extends IPSModule
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
                     $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
                     Telegram_SendText(22525, $message, "671095116" );
+                    $text_to_speech = "Alarm wurde ausgelöst.";
+                    EchoRemote_TextToSpeech(11629, $text_to_speech);
                 } 
                 else{
              
