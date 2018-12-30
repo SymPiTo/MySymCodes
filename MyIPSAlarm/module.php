@@ -13,7 +13,7 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
 class MyAlarm extends IPSModule
 {
    //externe Klasse einbinden - ueberlagern mit TRAIT.
-    use DebugHelper;
+    use MyDebugHelper;
     
     /* 
     _______________________________________________________________________ 
