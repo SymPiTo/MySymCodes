@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../libs/NetworkTraits.php");
 require_once(__DIR__ . "/../libs/WebsocketClass.php");  // diverse Klassen
+require_once(__DIR__ . "/../libs/MyTraits.php");
 
 use PTLS\TLSContext;
 use PTLS\Exceptions\TLSAlertException;
@@ -49,7 +50,8 @@ class MyWebsocketServer extends IPSModule
     //Traits verbinden
     use DebugHelper,
         InstanceStatus,
-        BufferHelper;
+        BufferHelper,
+        MyLogger;
 
     /**
      * Interne Funktion des SDK.
