@@ -1244,6 +1244,11 @@ class MyWebsocketServer extends IPSModule
             }
             if (@$this->SendPing($Client->ClientIP, $Client->ClientPort, "") === false) {
                 $this->SendDebug('TIMEOUT ' . $Client->ClientIP . ':' . $Client->ClientPort, "Ping timeout", 0);
+                //Fehler Ausgabe
+                   $text = "KeepAlive: Ping timeout. Client will beremoved.";
+                   $array =  $ClientIP . ':' . $ClientPort;
+                   $this->ModErrorLog("MyWebSocketSever", $text, $array);
+               //Fehler Ausgabe Ende 
                 $Clients->Remove($Client);
                 $this->Multi_Clients = $Clients;
             }
@@ -1265,11 +1270,21 @@ class MyWebsocketServer extends IPSModule
         $Client = $this->Multi_Clients->GetByIpPort(new Websocket_Client($ClientIP, $ClientPort));
         if ($Client === false) {
             $this->SendDebug('Unknow client', $ClientIP . ':' . $ClientPort, 0);
+            //Fehler Ausgabe
+                $text = "SendPing: Unknow client. ";
+                $array =  $ClientIP . ':' . $ClientPort;
+                $this->ModErrorLog("MyWebSocketSever", $text, $array);
+            //Fehler Ausgabe Ende 
             trigger_error($this->Translate('Unknow client') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
             return false;
         }
         if ($Client->State != WebSocketState::Connected) {
             $this->SendDebug('Client not connected', $ClientIP . ':' . $ClientPort, 0);
+            //Fehler Ausgabe
+                $text = "SendPing: Client not connected. ";
+                $array =  $ClientIP . ':' . $ClientPort;
+                $this->ModErrorLog("MyWebSocketSever", $text, $array);
+            //Fehler Ausgabe Ende 
             trigger_error($this->Translate('Client not connected') . ': ' . $ClientIP . ':' . $ClientPort, E_USER_NOTICE);
             return false;
         }
@@ -1279,17 +1294,25 @@ class MyWebsocketServer extends IPSModule
         $this->{'Pong' . $Client->ClientIP . $Client->ClientPort} = "";
         if ($Result === false) {
             $this->SendDebug('Timeout ' . $Client->ClientIP . ':' . $Client->ClientPort, "", 0);
+            //Fehler Ausgabe
+                $text = "SendPing: Timeout, no pong received. Client will beremoved.";
+                $array =  $ClientIP . ':' . $ClientPort;
+                $this->ModErrorLog("MyWebSocketSever", $text, $array);
+            //Fehler Ausgabe Ende 
             trigger_error($this->Translate('Timeout'), E_USER_NOTICE);
- $this->IPSLog($Client->ClientIP . ':' . $Client->ClientPort." ist nicht errechbar. ", "entferne Client aus Liste.");
             $this->Multi_Clients->Remove($Client);
             return false;
         }
         if ($Result !== $Text) {
             $this->SendDebug('Error in Pong ' . $Client->ClientIP . ':' . $Client->ClientPort, $Result, 0);
+            //Fehler Ausgabe
+                $text = "SendPing: Error in Pong. Client will beremoved.";
+                $array =  $ClientIP . ':' . $ClientPort;
+                $this->ModErrorLog("MyWebSocketSever", $text, $array);
+            //Fehler Ausgabe Ende 
             trigger_error($this->Translate('Wrong pong received'), E_USER_NOTICE);
             $this->Multi_Clients->Remove($Client);
- $this->IPSLog($Client->ClientIP . ':' . $Client->ClientPort." Pong Antwort ist falsch. ", $Result);
-            return false;
+             return false;
         }
         return true;
     }
@@ -1481,46 +1504,7 @@ class MyWebsocketServer extends IPSModule
             setvalue($this->GetIDForIdent("DataSendToClient"), $xml);
         } 
         
-	Protected function IPSLog($Text, $array) {
-		$Directory=""; 
-		$File="";
-		
-		if (!$array){
-		
-			$array = '-';
-		}
-		
-		
-		if ($File == ""){
-		
-			$File = 'IPSLog.log';
-		}
-		if ($Directory == "") {
-                  
-                        $Directory = "/home/pi/pi-share/";
-			//Directory = IPS_GetKernelDir().'/';
-			//if (function_exists('IPS_GetLogDir'))
-                          //  $Directory = IPS_GetLogDir();
-		}
-		
-		if(($FileHandle = fopen($Directory.$File, "a")) === false) {
-			//SetValue($ID_OutEnabled, false);
-			Exit;
-		}
-		if (is_array($array)){
-			//$comma_seperated=implode("\r\n",$array);
-			$comma_seperated=print_r($array, true);
-		}
-		else {
-			$comma_seperated=$array;
-		}
-		fwrite($FileHandle, $Text.": ");
-		fwrite($FileHandle, $comma_seperated."\r\n");
-		fclose($FileHandle);
-                
-        } 
-        
-        
+       
 }
 
 
