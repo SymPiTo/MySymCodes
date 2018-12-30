@@ -25,7 +25,7 @@ trait MyLogger
 
 
 
-                    if(($FileHandle = fopen($Directory.$file, "a")) === false) {
+                    if(($FileHandle = fopen($path.$file, "a")) === false) {
                             //SetValue($ID_OutEnabled, false);
                             Exit;
                     }
