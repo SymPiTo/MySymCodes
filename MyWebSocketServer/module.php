@@ -957,6 +957,7 @@ class MyWebsocketServer extends IPSModule
                 }
             }
             // Client jetzt bekannt.
+            $ModName = "MyWebSocketSever";
             $text = "lalalalalalala";
             $array = "hfsdjkghkjfdlhgjkhskjglsdhfgjkhgfdhshkljsghdf";
             $this->ModErrorLog($ModName, $text, $array);
