@@ -311,7 +311,7 @@ trait InstanceStatus
 /**
  * Trait welcher Objekt-Eigenschaften in den Instance-Buffer schreiben und lesen kann.
  */
-trait BufferHelper
+trait MyBufferHelper
 {
 
     /**
