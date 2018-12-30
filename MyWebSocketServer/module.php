@@ -1492,8 +1492,6 @@ class MyWebsocketServer extends IPSModule
 			$data['ID57942'] = $h.':'.$m;	
  
 
-
-	 
             $reply = 	array();
             $this->SendDebug('updateIPSvalues', $data, 0);
             $c =array($data, $reply);
