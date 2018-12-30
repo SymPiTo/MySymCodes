@@ -236,10 +236,14 @@ class MyAlarm extends IPSModule
         if ($code === "04826"){ 
             $this->resetCode();
             //Alarm Anlage deaktivieren
+            $text_to_speech = "Code wurde akzeptiert";
+            EchoRemote_TextToSpeech(11629, $text_to_speech);
             SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
         }  
         else{
             $this->resetCode();
+            $text_to_speech = "falscher code";
+            EchoRemote_TextToSpeech(11629, $text_to_speech);
         }
     }  
 
@@ -258,6 +262,8 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------------------------  */
     public function activateSecAlarm(){
         //$state = getvalue($this->GetIDForIdent("A_SecActive"));
+        $text_to_speech = "Alarmanlage wird in 30Sekunden aktiv.";
+        EchoRemote_TextToSpeech(11629, $text_to_speech);
         sleep(30);
         SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
     } 
