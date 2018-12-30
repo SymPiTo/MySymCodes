@@ -964,9 +964,9 @@ class MyWebsocketServer extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-            
+        $this->SendDebug('incoming Data ', $JSONString, 0);    
         unset($data->DataID);
-        $this->SendDebug('incoming Data ', $JSONString, 0);
+        
         //prüfen ob daten im Buffer vorhanden - nur dann weitergabe
         if($data->Buffer == false){
             $this->SendDebug('incoming Data ', "keine Daten im Buffer vorhanden.", 0);
