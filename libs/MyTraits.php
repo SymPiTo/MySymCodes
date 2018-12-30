@@ -10,10 +10,10 @@ trait MyLogger
      * @param WebSocketFrame|mixed $Data Daten für die Ausgabe.
      * @return int $Format Ausgabeformat für Strings.
      */
-        protected function ModErrorLog($ModName, $Text, $array){
+        protected function ModErrorLog($ModName, $text, $array){
         {
             $path = "/home/pi/pi-share/"; 
-            $file=$ModName.log;
+            $file=$ModName.".log";
 
             if (!$array){
 
@@ -36,7 +36,7 @@ trait MyLogger
                     else {
                             $comma_seperated=$array;
                     }
-                    fwrite($FileHandle, $Text.": ");
+                    fwrite($FileHandle, $text.": ");
                     fwrite($FileHandle, $comma_seperated."\r\n");
                     fclose($FileHandle);
            //}
