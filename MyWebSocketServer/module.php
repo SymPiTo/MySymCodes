@@ -1154,24 +1154,28 @@ class MyWebsocketServer extends IPSModule
                 }
             }
             $i=$i+1;
+            $a = strpos(getvalue($this->GetIDForIdent("Client1"))," ");
+            $b = strpos(getvalue($this->GetIDForIdent("Client2"))," ");
+            $c = strpos(getvalue($this->GetIDForIdent("Client3"))," ");
+            $d = strpos(getvalue($this->GetIDForIdent("Client4"))," ");
             switch ($i){
                 case 1:
-                setValue($this->GetIDForIdent("Client1"), getvalue($this->GetIDForIdent("Client1"))." disconnected.");
-                setValue($this->GetIDForIdent("Client2"), getvalue($this->GetIDForIdent("Client2"))." disconnected.");
-                setValue($this->GetIDForIdent("Client3"), getvalue($this->GetIDForIdent("Client3"))." disconnected.");
-                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                setValue($this->GetIDForIdent("Client1"), substr(getvalue($this->GetIDForIdent("Client1")),0,$a)." disconnected.");
+                setValue($this->GetIDForIdent("Client2"), substr(getvalue($this->GetIDForIdent("Client2")),0,$b)." disconnected.");
+                setValue($this->GetIDForIdent("Client3"), substr(getvalue($this->GetIDForIdent("Client3")),0,$c)." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), substr(getvalue($this->GetIDForIdent("Client4")),0,$d)." disconnected.");
                     break;
                 case 2: 
-                setValue($this->GetIDForIdent("Client2"), getvalue($this->GetIDForIdent("Client2"))." disconnected.");
-                setValue($this->GetIDForIdent("Client3"), getvalue($this->GetIDForIdent("Client3"))." disconnected.");
-                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                setValue($this->GetIDForIdent("Client2"), substr(getvalue($this->GetIDForIdent("Client2")),0,$b)." disconnected.");
+                setValue($this->GetIDForIdent("Client3"), substr(getvalue($this->GetIDForIdent("Client3")),0,$c)." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), substr(getvalue($this->GetIDForIdent("Client4")),0,$d)." disconnected.");
                     break;
                 case 3:
-                setValue($this->GetIDForIdent("Client3"), getvalue($this->GetIDForIdent("Client3"))." disconnected.");
-                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                setValue($this->GetIDForIdent("Client3"), substr(getvalue($this->GetIDForIdent("Client3")),0,$c)." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), substr(getvalue($this->GetIDForIdent("Client4")),0,$d)." disconnected.");
                     break;
                 case 4:
-                setValue($this->GetIDForIdent("Client4"), getvalue($this->GetIDForIdent("Client4"))." disconnected.");
+                setValue($this->GetIDForIdent("Client4"), substr(getvalue($this->GetIDForIdent("Client4")),0,$d)." disconnected.");
             }
 
         while ($Client) {
