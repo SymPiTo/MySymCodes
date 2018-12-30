@@ -1132,13 +1132,25 @@ class MyWebsocketServer extends IPSModule
         $Client = true;
         
             $Clients = $this->Multi_Clients->GetClients();
-            
+            $i=0;
             $this->SendDebug('Keep Alive: '  , $Clients, 0);
-            //verbundene Client Adressen in Variale schreiben
-             setValue($this->GetIDForIdent("Client1"),$Clients[0]->ClientIP . ':' . $Clients[0]->ClientPort);
-             setValue($this->GetIDForIdent("Client2"),$Clients[1]->ClientIP . ':' . $Clients[1]->ClientPort);
-             setValue($this->GetIDForIdent("Client3"),$Clients[2]->ClientIP . ':' . $Clients[2]->ClientPort);
-             setValue($this->GetIDForIdent("Client4"),$Clients[3]->ClientIP . ':' . $Clients[3]->ClientPort);
+            foreach ($Clients as $Client) {
+                $i=$i+1;
+                //verbundene Client Adressen in Variale schreiben
+                switch ($i){
+                    case 1:
+                    setValue($this->GetIDForIdent("Client1"),$Client->ClientIP . ':' . $Client->ClientPort);
+                        break;
+                    case 2: 
+                    setValue($this->GetIDForIdent("Client2"),$Client->ClientIP . ':' . $Client->ClientPort);
+                        break;
+                    case 3:
+                    setValue($this->GetIDForIdent("Client3"),$Client->ClientIP . ':' . $Client->ClientPort);
+                        break;
+                    case 4:
+                    setValue($this->GetIDForIdent("Client4"),$Client->ClientIP . ':' . $Client->ClientPort);
+                }
+            }
             
         while ($Client) {
             $Clients = $this->Multi_Clients;
