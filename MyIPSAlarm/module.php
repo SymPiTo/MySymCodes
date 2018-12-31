@@ -79,7 +79,7 @@ class MyAlarm extends IPSModule
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
         $this->EnableAction("A_Reset");
-        IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
+
         
         
         //anlegen eines Timers
@@ -113,6 +113,8 @@ class MyAlarm extends IPSModule
 		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
 		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
                 IPS_SetVariableProfileAssociation($Name, 1, "Reset", "Speaker", 0xFFFFFF);  
+                
+                IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
         }
         
    /* ------------------------------------------------------------ 
