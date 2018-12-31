@@ -74,9 +74,7 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
           
-        // Profile anlegen.    
-        IPS_CreateVariableProfile("Alarm.Reset", 0);   
-        IPS_SetVariableProfileAssociation("Alarm.Reset", 1, "Reset", "", 0xFFFFFF);
+
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
@@ -93,6 +91,30 @@ class MyAlarm extends IPSModule
         }
         */
     }
+    
+    
+
+	//Profile
+	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype){
+            $Name = "Alarm.Reset";
+            $Icon = "";
+                
+            $Vartype = 0;
+		if (!IPS_VariableProfileExists($Name)) {
+			IPS_CreateVariableProfile($Name, $Vartype); // 0 boolean, 1 int, 2 float, 3 string,
+		} else {
+			$profile = IPS_GetVariableProfile($Name);
+			if ($profile['ProfileType'] != $Vartype)
+				$this->SendDebug("Alarm.Reset:", "Variable profile type does not match for profile " . $Name, 0);
+		}
+
+		//IPS_SetVariableProfileIcon($Name, $Icon);
+		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
+		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
+                IPS_SetVariableProfileAssociation($Name, 1, "Reset", "Speaker", 0xFFFFFF);  
+        }
+        
    /* ------------------------------------------------------------ 
      Function: ApplyChanges 
       ApplyChanges() Wird ausgeführt, wenn auf der Konfigurationsseite "Übernehmen" gedrückt wird 
