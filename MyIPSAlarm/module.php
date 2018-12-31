@@ -152,10 +152,9 @@ class MyAlarm extends IPSModule
       $this->GetIDForIdent($Ident)     -   ID der von WebFront geschalteten Variable
       $Value                           -   Wert der von Webfront geänderten Variable
 
-   STANDARD-AKTIONEN:
-      FSSC_Position    -   Slider für Position
-      UpDown           -   Switch für up / Down
-      Mode             -   Switch für Automatik/Manual
+    STANDARD-AKTIONEN:
+        A_Activate    -   Alarm Anlage aktivieren
+ 
      ------------------------------------------------------------- */
     public function RequestAction($Ident, $Value) {
             
@@ -169,7 +168,10 @@ class MyAlarm extends IPSModule
             
     }
 
-    
+   /* ------------------------------------------------------------ 
+    Function: Destroy  
+      Destroy() Wird ausgeführt, wenn die Instance gelöscht wird.
+     ------------------------------------------------------------- */
     public function Destroy()
     {
         if (IPS_GetKernelRunlevel() <> KR_READY) {
@@ -185,7 +187,7 @@ class MyAlarm extends IPSModule
         parent::Destroy();
     }
     
-  /* ======================================================================================================================
+    /* ======================================================================================================================
      Section: Public Funtions
      Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
      Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wie folgt zur Verfügung gestellt:
@@ -193,105 +195,105 @@ class MyAlarm extends IPSModule
      FSSC_XYFunktion($Instance_id, ... );
      ======================================================================================================================= */
     
-    //-----------------------------------------------------------------------------
-    /* Function: xxxx
-    ...............................................................................
-    Beschreibung
-    ...............................................................................
-    Parameters: 
-        none
-    ...............................................................................
-    Returns:    
-        none
-    ------------------------------------------------------------------------------  */
-    public function ResetAlarm(){
-        setvalue($this->GetIDForIdent("A_AlarmCode"), 0);
-    }  
-             
-    
-    //-----------------------------------------------------------------------------
-    /* Function: receiveCode
-    ...............................................................................
-    Beschreibung
-    ...............................................................................
-    Parameters: 
-         key = Zahlen Code
-    ...............................................................................
-    Returns:    
-        none
-    ------------------------------------------------------------------------------  */
-    public function receiveCode(string $key){
-        $code = getvalue($this->GetIDForIdent("A_SecCode"));
-        setvalue($this->GetIDForIdent("A_SecCode"), $code.$key);    
-    }  
-    
-    //-----------------------------------------------------------------------------
-    /* Function: resetCode
-    ...............................................................................
-    Beschreibung
-        löscht den eingegebenen ZahlenCode.
-    ...............................................................................
-    Parameters: 
-         key = Zahlen Code
-    ...............................................................................
-    Returns:    
-        none
-    ------------------------------------------------------------------------------  */
-    public function resetCode(){
-        setvalue($this->GetIDForIdent("A_SecCode"), "");    
-    }  
-    
-    //-----------------------------------------------------------------------------
-    /* Function: checkCode
-    ...............................................................................
-    Beschreibung
-        
-    ...............................................................................
-    Parameters: 
-        none
-    ...............................................................................
-    Returns:    
-        none
-    ------------------------------------------------------------------------------  */
-    public function checkCode(){
-        $code = getvalue($this->GetIDForIdent("A_SecCode"));
-        if ($code === "04826"){ 
-            $this->resetCode();
-            //Alarm Anlage deaktivieren
-            $text_to_speech = "Code wurde akzeptiert";
-            EchoRemote_TextToSpeech(11629, $text_to_speech);
-            SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
+        //-----------------------------------------------------------------------------
+        /* Function: ResetAlarm
+        ...............................................................................
+        Beschreibung
+        ...............................................................................
+        Parameters: 
+            none
+        ...............................................................................
+        Returns:    
+            none
+        ------------------------------------------------------------------------------  */
+        public function ResetAlarm(){
+            setvalue($this->GetIDForIdent("A_AlarmCode"), 0);
         }  
-        else{
-            $this->resetCode();
-            $text_to_speech = "falscher code";
-            EchoRemote_TextToSpeech(11629, $text_to_speech);
-        }
-    }  
 
-    
-    //-----------------------------------------------------------------------------
-    /* Function: activateSecAlarm
-    ...............................................................................
-    Beschreibung
-        
-    ...............................................................................
-    Parameters: 
-        none
-    ...............................................................................
-    Returns:    
-        none
-    ------------------------------------------------------------------------------  */
-    public function activateSecAlarm(){
-        //$state = getvalue($this->GetIDForIdent("A_SecActive"));
-        $text_to_speech = "Alarmanlage wird in 30Sekunden aktiv.";
-        EchoRemote_TextToSpeech(11629, $text_to_speech);
-        sleep(30);
-        $text_to_speech = "Alarmanlage ist aktiviert.";
-        EchoRemote_TextToSpeech(11629, $text_to_speech);
-        SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
-    } 
-    
+
+        //-----------------------------------------------------------------------------
+        /* Function: receiveCode
+        ...............................................................................
+        Beschreibung
+        ...............................................................................
+        Parameters: 
+             key = Zahlen Code
+        ...............................................................................
+        Returns:    
+            none
+        ------------------------------------------------------------------------------  */
+        public function receiveCode(string $key){
+            $code = getvalue($this->GetIDForIdent("A_SecCode"));
+            setvalue($this->GetIDForIdent("A_SecCode"), $code.$key);    
+        }  
+
+        //-----------------------------------------------------------------------------
+        /* Function: resetCode
+        ...............................................................................
+        Beschreibung
+            löscht den eingegebenen ZahlenCode.
+        ...............................................................................
+        Parameters: 
+             key = Zahlen Code
+        ...............................................................................
+        Returns:    
+            none
+        ------------------------------------------------------------------------------  */
+        public function resetCode(){
+            setvalue($this->GetIDForIdent("A_SecCode"), "");    
+        }  
+
+        //-----------------------------------------------------------------------------
+        /* Function: checkCode
+        ...............................................................................
+        Beschreibung
+
+        ...............................................................................
+        Parameters: 
+            none
+        ...............................................................................
+        Returns:    
+            none
+        ------------------------------------------------------------------------------  */
+        public function checkCode(){
+            $code = getvalue($this->GetIDForIdent("A_SecCode"));
+            if ($code === "04826"){ 
+                $this->resetCode();
+                //Alarm Anlage deaktivieren
+                $text_to_speech = "Code wurde akzeptiert";
+                EchoRemote_TextToSpeech(11629, $text_to_speech);
+                SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
+            }  
+            else{
+                $this->resetCode();
+                $text_to_speech = "falscher code";
+                EchoRemote_TextToSpeech(11629, $text_to_speech);
+            }
+        }  
+
+
+        //-----------------------------------------------------------------------------
+        /* Function: activateSecAlarm
+        ...............................................................................
+        Beschreibung
+
+        ...............................................................................
+        Parameters: 
+            none
+        ...............................................................................
+        Returns:    
+            none
+        ------------------------------------------------------------------------------  */
+        public function activateSecAlarm(){
+            //$state = getvalue($this->GetIDForIdent("A_SecActive"));
+            $text_to_speech = "Alarmanlage wird in 30Sekunden aktiv.";
+            EchoRemote_TextToSpeech(11629, $text_to_speech);
+            sleep(30);
+            $text_to_speech = "Alarmanlage ist aktiviert.";
+            EchoRemote_TextToSpeech(11629, $text_to_speech);
+            SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
+        } 
+
         /* ----------------------------------------------------------------------------
          Function: BatAlarm
         ...............................................................................
@@ -363,12 +365,12 @@ class MyAlarm extends IPSModule
                     }
                 }
                 if($lastTriggerVarID){
-                $ltv = getvalue($lastTriggerVarID);
+                    $ltv = getvalue($lastTriggerVarID);
                     //AlarmCode auf 2 setzen = Einbruch
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
                     $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
                     Telegram_SendText(22525, $message, "671095116" );
-                    $text_to_speech = "Alarm wurde ausgel�st.";
+                    $text_to_speech = "Alarm wurde ausgelöst.";
                     EchoRemote_TextToSpeech(11629, $text_to_speech);
                 } 
                 else{
