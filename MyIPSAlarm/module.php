@@ -96,8 +96,7 @@ class MyAlarm extends IPSModule
 
 	//Profile
 	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype){
-            $Name = "Alarm.Reset";
-            $Icon = "";
+             
                 
             $Vartype = 0;
 		if (!IPS_VariableProfileExists($Name)) {
@@ -112,9 +111,9 @@ class MyAlarm extends IPSModule
 		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
 		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
 		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
-                IPS_SetVariableProfileAssociation($Name, 1, "Reset", "Speaker", 0xFFFFFF);  
+                IPS_SetVariableProfileAssociation($Name, 1, "Reset", $Icon, 0xFFFFFF);  
                 
-                IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
+                IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), $Name);
         }
         
    /* ------------------------------------------------------------ 
@@ -131,7 +130,8 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	//Never delete this line!
+	$zhis->RegisterProfile("Alarm.Reset", "","", "", "", "", "", "", 0);
+        //Never delete this line!
         parent::ApplyChanges();
         
         //Unterkategorie Batterie Alarme anlegen
