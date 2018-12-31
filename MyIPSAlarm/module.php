@@ -60,13 +60,13 @@ class MyAlarm extends IPSModule
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
-        
+        $this->RegisterVariableInteger("A_Reset", "Alarm Reset");
         
         
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
-        $this->RegisterVariableBoolean("A_Reset", "Alarm Reset");
+        
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
@@ -130,7 +130,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	$this->RegisterProfile("Alarm.Reset", "","", "", "", "", "", "", 0);
+	$this->RegisterProfile("Alarm.Reset", "","", "", "", "", "", "", 1);
         //Never delete this line!
         parent::ApplyChanges();
         
