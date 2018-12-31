@@ -98,7 +98,7 @@ class MyAlarm extends IPSModule
 	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype){
              
                 
-            $Vartype = 0;
+            
 		if (!IPS_VariableProfileExists($Name)) {
 			IPS_CreateVariableProfile($Name, $Vartype); // 0 boolean, 1 int, 2 float, 3 string,
 		} else {
@@ -111,7 +111,7 @@ class MyAlarm extends IPSModule
 		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
 		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
 		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
-                IPS_SetVariableProfileAssociation($Name, 1, "Reset", $Icon, 0xFFFFFF);  
+                //IPS_SetVariableProfileAssociation($Name, 1, "Reset", $Icon, 0xFFFFFF);  
                 
                 IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), $Name);
         }
