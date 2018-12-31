@@ -1,4 +1,5 @@
-<?
+<?php
+
 require_once(__DIR__ . "/../libs/NetworkTraits.php");
 
 /** ============================================================================
@@ -54,7 +55,7 @@ class MyAlarm extends IPSModule
             $this->RegisterPropertyString("Battery", "[]");
             $this->RegisterPropertyString("SecAlarms", "[]");
            
-            
+          
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
@@ -63,9 +64,8 @@ class MyAlarm extends IPSModule
         
         
         //Boolean Variable anlegen
-        //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
+        // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
+        $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
@@ -74,12 +74,12 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableString("A_SecCode", "Security Code");
           
             
-            
+             
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
-        
         //$this->EnableAction("IDENTNAME");
         IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
+        $this->EnableAction("A_Reset");
         
         //anlegen eines Timers
         //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!); 
@@ -346,7 +346,7 @@ class MyAlarm extends IPSModule
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
                     $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
                     Telegram_SendText(22525, $message, "671095116" );
-                    $text_to_speech = "Alarm wurde ausgel�st.";
+                    $text_to_speech = "Alarm wurde ausgel�st.";
                     EchoRemote_TextToSpeech(11629, $text_to_speech);
                 } 
                 else{
