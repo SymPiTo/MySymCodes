@@ -109,7 +109,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 1, "A_Activate");
+	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 1, "A_Activate", "Activate");
         //Never delete this line!
         parent::ApplyChanges();
         
@@ -169,6 +169,22 @@ class MyAlarm extends IPSModule
             
     }
 
+    
+    public function Destroy()
+    {
+        if (IPS_GetKernelRunlevel() <> KR_READY) {
+            return parent::Destroy();
+        }
+        if (!IPS_InstanceExists($this->InstanceID)) {
+             
+        //Profile löschen
+        $this->UnregisterProfile("Alarm.Activate");
+
+             
+        }
+        parent::Destroy();
+    }
+    
   /* ======================================================================================================================
      Section: Public Funtions
      Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
@@ -381,7 +397,7 @@ class MyAlarm extends IPSModule
         Returns:   
             none
         ------------------------------------------------------------------------------- */
-	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent){
+	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent, $Assoc0){
              
                 
             
@@ -397,7 +413,7 @@ class MyAlarm extends IPSModule
 		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
 		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
 		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
-                IPS_SetVariableProfileAssociation($Name, 0, "Reset", $Icon, 0xFFFFFF);  
+                IPS_SetVariableProfileAssociation($Name, 0, $Assoc0, $Icon, 0xFFFFFF);  
                 
                 IPS_SetVariableCustomProfile($this->GetIDForIdent($VarIdent), $Name);
         }
@@ -524,6 +540,10 @@ class MyAlarm extends IPSModule
         }
         return $KategorieID;
     }
-
-		
+    
+    protected function UnregisterProfile(string $Name){
+        if (IPS_VariableProfileExists($Name)) {
+           IPS_DeleteVariableProfile($Name);
+        }   
+    }	
 }
