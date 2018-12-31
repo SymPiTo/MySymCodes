@@ -130,7 +130,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	$zhis->RegisterProfile("Alarm.Reset", "","", "", "", "", "", "", 0);
+	$this->RegisterProfile("Alarm.Reset", "","", "", "", "", "", "", 0);
         //Never delete this line!
         parent::ApplyChanges();
         
