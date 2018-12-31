@@ -66,10 +66,11 @@ class MyAlarm extends IPSModule
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
+        $this->RegisterVariableBoolean("A_Reset", "Alarm Reset");
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
-         // Aufruf dieser Variable mit $this->GetIDForIdent("IDENTNAME")
+         // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
           
@@ -78,8 +79,9 @@ class MyAlarm extends IPSModule
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
-        IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
         $this->EnableAction("A_Reset");
+        IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), "Alarm.Reset");
+        
         
         //anlegen eines Timers
         //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!); 
