@@ -60,7 +60,7 @@ class MyAlarm extends IPSModule
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
-        $this->RegisterVariableInteger("A_Reset", "Alarm Reset");
+        $this->RegisterVariableInteger("A_Activate", "Alarm Activate");
         
         
         //Boolean Variable anlegen
@@ -78,7 +78,7 @@ class MyAlarm extends IPSModule
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
-        $this->EnableAction("A_Reset");
+        $this->EnableAction("A_Activate");
 
         
         
@@ -94,27 +94,6 @@ class MyAlarm extends IPSModule
     
     
 
-	//Profile
-	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype){
-             
-                
-            
-		if (!IPS_VariableProfileExists($Name)) {
-			IPS_CreateVariableProfile($Name, $Vartype); // 0 boolean, 1 int, 2 float, 3 string,
-		} else {
-			$profile = IPS_GetVariableProfile($Name);
-			if ($profile['ProfileType'] != $Vartype)
-				$this->SendDebug("Alarm.Reset:", "Variable profile type does not match for profile " . $Name, 0);
-		}
-
-		//IPS_SetVariableProfileIcon($Name, $Icon);
-		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
-		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
-		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
-                IPS_SetVariableProfileAssociation($Name, 0, "Reset", $Icon, 0xFFFFFF);  
-                
-                IPS_SetVariableCustomProfile($this->GetIDForIdent("A_Reset"), $Name);
-        }
         
    /* ------------------------------------------------------------ 
      Function: ApplyChanges 
@@ -130,7 +109,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	$this->RegisterProfile("Alarm.Reset", "","", "", "", "", "", "", 1);
+	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 1, "A_Activate");
         //Never delete this line!
         parent::ApplyChanges();
         
@@ -181,8 +160,8 @@ class MyAlarm extends IPSModule
     public function RequestAction($Ident, $Value) {
             
          switch($Ident) {
-             case "A_Reset":
-                $this->ResetAlarm();  
+             case "A_Activate":
+                $this->activateSecAlarm();  
                 break;
             default:
                 throw new Exception("Invalid Ident");
@@ -391,7 +370,37 @@ class MyAlarm extends IPSModule
     * ==========================================================================
     */  
 
-  
+        /* ----------------------------------------------------------------------------
+         Function: RegisterProfile
+        ...............................................................................
+        Erstellt ein neues Profil und ordnet es einer Variablen zu.
+        ...............................................................................
+        Parameters: 
+            $Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype
+        ..............................................................................
+        Returns:   
+            none
+        ------------------------------------------------------------------------------- */
+	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent){
+             
+                
+            
+		if (!IPS_VariableProfileExists($Name)) {
+			IPS_CreateVariableProfile($Name, $Vartype); // 0 boolean, 1 int, 2 float, 3 string,
+		} else {
+			$profile = IPS_GetVariableProfile($Name);
+			if ($profile['ProfileType'] != $Vartype)
+				$this->SendDebug("Alarm.Reset:", "Variable profile type does not match for profile " . $Name, 0);
+		}
+
+		//IPS_SetVariableProfileIcon($Name, $Icon);
+		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
+		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
+                IPS_SetVariableProfileAssociation($Name, 0, "Reset", $Icon, 0xFFFFFF);  
+                
+                IPS_SetVariableCustomProfile($this->GetIDForIdent($VarIdent), $Name);
+        }
 		
         /* ----------------------------------------------------------------------------
          Function: GetIPSVersion
