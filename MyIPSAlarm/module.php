@@ -74,8 +74,9 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
           
-            
-             
+        // Profile anlegen.    
+        IPS_CreateVariableProfile("Alarm.Reset", 0);   
+        IPS_SetVariableProfileAssociation("Alarm.Reset", 1, "Reset", "", 0xFFFFFF);
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
