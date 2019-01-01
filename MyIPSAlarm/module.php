@@ -163,7 +163,7 @@ class MyAlarm extends IPSModule
                 $this->activateSecAlarm();  
                 break;
              case "A_SecCode":
-                setvalue($this->GetIDForIdent("A_SecCode"),$Value);
+                setvalue($this->GetIDForIdent("A_SecCode"),"$Value");
                 $this->checkCode();  
                 break;
             default:
