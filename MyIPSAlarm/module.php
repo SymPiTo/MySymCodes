@@ -162,6 +162,9 @@ class MyAlarm extends IPSModule
              case "A_Activate":
                 $this->activateSecAlarm();  
                 break;
+             case "A_SecCode":
+                $this->checkCode();  
+                break;
             default:
                 throw new Exception("Invalid Ident");
         }
