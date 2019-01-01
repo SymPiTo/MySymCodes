@@ -79,7 +79,7 @@ class MyAlarm extends IPSModule
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
         $this->EnableAction("A_Activate");
-
+        $this->EnableAction("A_SecCode");
         
         
         //anlegen eines Timers
