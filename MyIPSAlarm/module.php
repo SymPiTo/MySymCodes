@@ -66,7 +66,7 @@ class MyAlarm extends IPSModule
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
-        
+        $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage Activate");
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
@@ -80,7 +80,7 @@ class MyAlarm extends IPSModule
         //$this->EnableAction("IDENTNAME");
         $this->EnableAction("A_Activate");
         $this->EnableAction("A_SecCode");
-        
+        $this->EnableAction("Alexa_SecActivate");
         
         //anlegen eines Timers
         //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!); 
@@ -162,7 +162,10 @@ class MyAlarm extends IPSModule
              case "A_Activate":
                 $this->activateSecAlarm();  
                 break;
-             case "A_SecCode":
+             case "Alexa_SecActivate":
+                $this->activateSecAlarm();  
+                break;
+              case "A_SecCode":
                 setvalue($this->GetIDForIdent("A_SecCode"),"$Value");
                 $this->checkCode();  
                 break;
