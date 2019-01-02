@@ -1,6 +1,16 @@
 {
 	"elements":
 	[
+            {
+                "type" : "Label",
+                "label" : "ALexa Text To Speech verwenden."
+            },
+            { 
+                "name" : "AlexaTTS",
+                "type" : "CheckBox",
+                "caption" : "Alexa TTS"
+
+            },
       { "type": "Label", "label": "Add/Delete Battery sensor variables, which activate the alarm" },
       {
         "type": "List",
