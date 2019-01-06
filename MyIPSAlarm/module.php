@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../libs/NetworkTraits.php");
+require_once(__DIR__ . "/../libs/MyTraits.php");
 
 /** ============================================================================
  * Title: Alarm for MyIPS
@@ -14,7 +15,8 @@ require_once(__DIR__ . "/../libs/NetworkTraits.php");
 class MyAlarm extends IPSModule
 {
    //externe Klasse einbinden - ueberlagern mit TRAIT.
-    use MyDebugHelper;
+    use MyDebugHelper,
+        MyLogger;
     
     /* 
     _______________________________________________________________________ 
@@ -387,6 +389,11 @@ class MyAlarm extends IPSModule
                     $ltv = getvalue($lastTriggerVarID);
                     //AlarmCode auf 2 setzen = Einbruch
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                    //Meldung in Log File schreiben
+                    $text = "Unbefugter Zugang zur Wohnung. ";
+                    $array = "wurde erkannt.";
+                    $this->ModErrorLog("MyIPSAlarm", $text, $array);
+                    
                     $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
                     Telegram_SendText(22525, $message, "671095116" );
                     //Sprachausgabe
