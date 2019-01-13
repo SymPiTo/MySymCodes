@@ -1,5 +1,5 @@
 <?php
-
+require_once(__DIR__ . "/../libs/SymconLib.php");
 require_once(__DIR__ . "/../libs/NetworkTraits.php");
 require_once(__DIR__ . "/../libs/MyTraits.php");
 
@@ -57,7 +57,7 @@ class MyAlarm extends IPSModule
             $this->RegisterPropertyString("Battery", "[]");
             $this->RegisterPropertyString("SecAlarms", "[]");
             
-            $this->RegisterPropertyBoolean("AlexaTTS", false);
+            
           
         //Integer Variable anlegen
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
@@ -70,6 +70,7 @@ class MyAlarm extends IPSModule
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
         $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage Activate");
+        $this->RegisterPropertyBoolean("AlexaTTS", false);
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
@@ -409,7 +410,21 @@ class MyAlarm extends IPSModule
                 } 
             }
         }     
-        
+        /* ----------------------------------------------------------------------------
+         Function: A_sendAlarmList
+        ...............................................................................
+         
+        ...............................................................................
+        Parameters: 
+            none.
+        ..............................................................................
+        Returns:   
+             none
+        ------------------------------------------------------------------------------- */
+	public function sendAlarmList(){
+            $ListData = "Test";
+            $this->SendText($ListData);
+        }
         
    /* ==========================================================================
     * Section: Private Funtions
