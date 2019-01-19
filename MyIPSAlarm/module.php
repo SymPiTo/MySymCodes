@@ -100,20 +100,7 @@ class MyAlarm extends IPSModule
             IPS_DeleteEvent($EreignisID);
         }
         */
-        //Unterkategorie für Webfront anlegen wenn ausgewählt
-             
-            $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
-            $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
-            $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
 
-            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );  
-            //HTML Box anlegen
-            $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
-            //HTML Box Profil zuordnen und befüllen
-            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
-            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
-             
-            
              
     }
     
@@ -143,9 +130,21 @@ class MyAlarm extends IPSModule
         parent::ApplyChanges();        
         
  
+        if (IPS_CategoryExists($this->GetIDForIdent("WebFrontIdent")) == false)  { 
+            //Unterkategorie für Webfront anlegen 
              
-             
+            $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
+            $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
+            $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
 
+            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );  
+            //HTML Box anlegen
+            $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
+            //HTML Box Profil zuordnen und befüllen
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
+            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
+             
+        }   
 
 
      
