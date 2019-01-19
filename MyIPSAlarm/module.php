@@ -154,8 +154,8 @@ class MyAlarm extends IPSModule
             $WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
             
            //IPS_DeleteCategory($KeyboardCatID);
-            IPS_DeleteCategory($SecCatID);
-            IPS_DeleteCategory($WFCatID);
+            //IPS_DeleteCategory($SecCatID);
+           // IPS_DeleteCategory($WFCatID);
         }
         
         //Unterkategorie Batterie Alarme anlegen
