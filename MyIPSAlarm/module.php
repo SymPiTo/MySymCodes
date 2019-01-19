@@ -145,8 +145,9 @@ class MyAlarm extends IPSModule
             $KeyboardCatID = $this->RegisterCategory("Keyboard");
             parent::ApplyChanges();
             IPS_SetParent($SecCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
+            parent::ApplyChanges();
             IPS_SetParent($KeyboardCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            
+            parent::ApplyChanges();
             IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
         }
         else {
