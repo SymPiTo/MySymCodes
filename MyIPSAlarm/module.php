@@ -106,6 +106,8 @@ class MyAlarm extends IPSModule
         }
         */
 
+        
+        
              
     }
     
@@ -139,12 +141,12 @@ class MyAlarm extends IPSModule
             //Unterkategorie für Webfront anlegen 
              
             $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
-            $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
+            $secID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
             $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
             @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
             
 
-
+            CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
           
 
 
@@ -650,6 +652,24 @@ class MyAlarm extends IPSModule
         }   
     }	
     
-
-    
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: Create Link
+    ...............................................................................
+     *  Legt ein Link zu einem Object an
+     * Beispiel:
+     *  
+    ...............................................................................
+    Parameters: 
+ 
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
+    protected function CreateLink(string $Name, integer $ParentID, integer $LinkedVariableID){
+        // Anlegen eines neuen Links mit dem Namen "Regenerfassung"
+        $LinkID = IPS_CreateLink();             // Link anlegen
+        IPS_SetName($LinkID, $Name); // Link benennen
+        IPS_SetParent($LinkID, $ParentID); // Link einsortieren unter dem Objekt mit der ID "12345"
+        IPS_SetLinkTargetID($LinkID, $LinkedVariableID);    // Link verknüpfen
+    }
 }
