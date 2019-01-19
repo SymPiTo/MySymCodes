@@ -125,9 +125,14 @@ class MyAlarm extends IPSModule
         $assoc[1] = "aus";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
         
-        //HTML Box erzeugen und befüllen
-        IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
-        setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
+        if($this->ReadPropertyBoolean("A_Webfront")){
+            //HTML Box erzeugen und befüllen
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
+            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
+        }
+        else {
+             
+        }
         
         //Never delete this line!
         parent::ApplyChanges();
@@ -139,6 +144,14 @@ class MyAlarm extends IPSModule
             IPS_SetParent($SecCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
             $KeyboardCatID = $this->RegisterCategory("Keyboard");
             IPS_SetParent($KeyboardCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
+            
+            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
+        }
+        else {
+            IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
+            IPS_DeleteCategory($KeyboardCatID);
+            IPS_DeleteCategory($SecCatID);
+            IPS_DeleteCategory($WFCatID);
         }
         
         //Unterkategorie Batterie Alarme anlegen
