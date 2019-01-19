@@ -141,14 +141,15 @@ class MyAlarm extends IPSModule
             IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
             setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
             IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );
-            }
             parent::ApplyChanges(); 
+        }
         else {
             //if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
                 IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$this->InstanceID );
                 $VariablenID = $this->GetIDForIdent("A_SecKeyboard");
                 IPS_DeleteVariable($VariablenID);
             //}
+            //
             //if (IPS_CategoryExists(@IPS_GetCategoryIDByName("Webfront", $this->InstanceID))){
                  $KeyboardCatID = @IPS_GetCategoryIDByName("Keyboard", $this->InstanceID);
                  $SecCatID = @IPS_GetCategoryIDByName("Security", $this->InstanceID);
