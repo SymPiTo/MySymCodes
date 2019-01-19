@@ -74,6 +74,8 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage activieren");
         //TTS Trigger
         $this->RegisterPropertyBoolean("AlexaTTS", false);
+        //Webfront anlegen
+        $this->RegisterPropertyBoolean("A_Webfront", false);
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
@@ -81,7 +83,9 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
         $this->RegisterVariableString("A_SecWarning", "Security Meldung");  
-
+        
+        //HTML Box anlegen
+        $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
@@ -116,11 +120,23 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-        $assoc[0] = "deaktiviert";
-        $assoc[1] = "aktiviert";  
+        //Profil anlegen
+        $assoc[0] = "ein";
+        $assoc[1] = "aus";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_Activate", $assoc);
+        
+        IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
+        setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
+        
         //Never delete this line!
         parent::ApplyChanges();
+
+        //Unterkategorie für Webfront anlegen wenn ausgewählt
+        if($this->ReadPropertyBoolean("A_Webfront")){
+            $WFCatID = $this->RegisterCategory("Webfront");
+            $SecCatID = $this->RegisterCategory("Security");
+            $KeyboardCatID = $this->RegisterCategory("Keyboard");
+        }
         
         //Unterkategorie Batterie Alarme anlegen
         $AlarmCatID = $this->RegisterCategory("BatAlarmEvents");
