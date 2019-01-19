@@ -665,7 +665,7 @@ class MyAlarm extends IPSModule
     Returns:    
         none
     -------------------------------------------------------------------------------------------------------- */
-    protected function CreateLink(string $Name, integer $ParentID, integer $LinkedVariableID){
+    protected function CreateLink(string $Name,  $ParentID,  $LinkedVariableID){
         // Anlegen eines neuen Links mit dem Namen "Regenerfassung"
         $LinkID = IPS_CreateLink();             // Link anlegen
         IPS_SetName($LinkID, $Name); // Link benennen
