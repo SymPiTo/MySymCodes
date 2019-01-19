@@ -86,7 +86,9 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableString("A_SecWarning", "Security Meldung");  
         
             //HTML Box anlegen
+                    if (IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard")) == false){
             $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
+                    }
             //HTML Box Profil zuordnen und befüllen
             IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
             
@@ -131,8 +133,8 @@ class MyAlarm extends IPSModule
     public function ApplyChanges()
     {
         //Profil anlegen
-        $assoc[0] = "ein";
-        $assoc[1] = "aus";  
+        $assoc[0] = "aus";
+        $assoc[1] = "ein";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
         
         //Never delete this line!        
@@ -145,8 +147,9 @@ class MyAlarm extends IPSModule
             $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
             $secID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
             $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
-            @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
-            
+
+                @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
+       
 
             $this->CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
             $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
