@@ -142,6 +142,7 @@ class MyAlarm extends IPSModule
             setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
             IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );
             }
+            parent::ApplyChanges(); 
         else {
             //if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
                 IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$this->InstanceID );
