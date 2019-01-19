@@ -137,8 +137,8 @@ class MyAlarm extends IPSModule
         $assoc[1] = "ein";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
 
-        $assoc[0] = "deaktiv";
-        $assoc[1] = "aktiv";  
+        $assoc[0] = "deaktiviert";
+        $assoc[1] = "aktiviert";  
 	$this->RegisterProfile("Alarm.Active", "","", "", "", "", "", "", 0, "A_SecActive", $assoc);
         
         //Never delete this line!        
