@@ -154,7 +154,7 @@ class MyAlarm extends IPSModule
             $this->CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
             $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
 
-            if (IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
+            if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
                @IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard")); 
             }
      
