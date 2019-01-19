@@ -11,16 +11,6 @@
                 "caption" : "Alexa TTS"
 
             },
-            {
-                "type" : "Label",
-                "label" : "Webfront erstellen."
-            },
-            { 
-                "name" : "A_Webfront",
-                "type" : "CheckBox",
-                "caption" : "Webfront"
-
-            },  
       { "type": "Label", "label": "Add/Delete Battery sensor variables, which activate the alarm" },
       {
         "type": "List",

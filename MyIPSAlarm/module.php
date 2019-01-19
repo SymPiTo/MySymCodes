@@ -132,7 +132,7 @@ class MyAlarm extends IPSModule
         parent::ApplyChanges();        
         
         //Unterkategorie für Webfront anlegen wenn ausgewählt
-        if($this->ReadPropertyBoolean("A_Webfront")){
+             
             $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
             $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
             $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
@@ -141,31 +141,8 @@ class MyAlarm extends IPSModule
             IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
             setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
             IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );
-            parent::ApplyChanges(); 
-        }
-        else {
-            //if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
-                IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$this->InstanceID );
-                $VariablenID = $this->GetIDForIdent("A_SecKeyboard");
-                IPS_DeleteVariable($VariablenID);
-                
-            //}
-            //
-            //if (IPS_CategoryExists(@IPS_GetCategoryIDByName("Webfront", $this->InstanceID))){
-                 $KeyboardCatID = @IPS_GetCategoryIDByName("Keyboard", $this->InstanceID);
-                 $SecCatID = @IPS_GetCategoryIDByName("Security", $this->InstanceID);
-                 $WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
-            //}
-           //IPS_DeleteCategory($KeyboardCatID);
-             //IPS_DeleteCategory($SecCatID);
-           // IPS_DeleteCategory($WFCatID);
-        } 
-        if($this->ReadPropertyBoolean("A_Webfront")){
-
-         }
-        else {
              
-        }
+             
 
 
 
