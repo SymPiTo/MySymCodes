@@ -632,10 +632,10 @@ class MyAlarm extends IPSModule
     }
 
     protected function CreateCategoryByIdent($Parentid, $ident, $name) {
-             $cid = @IPS_GetObjectIDByIdent($ident, $id);
+             $cid = @IPS_GetObjectIDByIdent($ident, $Parentid);
              if($cid === false) {
                      $cid = IPS_CreateCategory();
-                     IPS_SetParent($cid, $id);
+                     IPS_SetParent($cid, $Parentid);
                      IPS_SetName($cid, $name);
                      IPS_SetIdent($cid, $ident);
              }
