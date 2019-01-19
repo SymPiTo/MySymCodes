@@ -153,7 +153,7 @@ class MyAlarm extends IPSModule
             $SecCatID = @IPS_GetCategoryIDByName("Security", $this->InstanceID);
             $WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
             
-            IPS_DeleteCategory($KeyboardCatID);
+           //IPS_DeleteCategory($KeyboardCatID);
             IPS_DeleteCategory($SecCatID);
             IPS_DeleteCategory($WFCatID);
         }
