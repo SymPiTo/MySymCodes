@@ -69,9 +69,9 @@ class MyAlarm extends IPSModule
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableBoolean("A_SecActivate", "Alarmanlage aktivieren");
-        $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
+        $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage");
         //Alexa Sprachbefehl Trigger
-        $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage activieren");
+        $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage aktivieren");
         //TTS Trigger
         $this->RegisterPropertyBoolean("AlexaTTS", false);
         //Webfront anlegen
@@ -136,6 +136,10 @@ class MyAlarm extends IPSModule
         $assoc[0] = "aus";
         $assoc[1] = "ein";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
+
+        $assoc[0] = "deaktiv";
+        $assoc[1] = "aktiv";  
+	$this->RegisterProfile("Alarm.Active", "","", "", "", "", "", "", 0, "A_SecActive", $assoc);
         
         //Never delete this line!        
         parent::ApplyChanges();        
@@ -320,16 +324,20 @@ class MyAlarm extends IPSModule
             $code = getvalue($this->GetIDForIdent("A_SecCode"));
             if ($code === "04826"){ 
                 $this->resetCode();
+                setvalue($this->GetIDForIdent("A_SecWarning"),"Code wurde akzeptiert."); 
+                
                 if($this->ReadPropertyBoolean("AlexaTTS")){
                     //Sprachausgabe
                     $text_to_speech = "Code wurde akzeptiert";
                     SetValueBoolean($this->GetIDForIdent("A_SecActivate"),false);
                     SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
+                    
                     EchoRemote_TextToSpeech(26188, $text_to_speech);
                 }
             }  
             else{
                 $this->resetCode();
+                setvalue($this->GetIDForIdent("A_SecWarning"),"Falscher Code."); 
                     //Sprachausgabe
                 if($this->ReadPropertyBoolean("AlexaTTS")){
                     $text_to_speech = "falscher code";
@@ -359,6 +367,7 @@ class MyAlarm extends IPSModule
             }
             sleep(30);
             SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
+            setvalue($this->GetIDForIdent("A_SecWarning"),"Alarm Anlage is aktiv."); 
             //Sprachausgabe
             if($this->ReadPropertyBoolean("AlexaTTS")){
                 $text_to_speech = "Alarmanlage ist aktiviert.";
@@ -446,7 +455,7 @@ class MyAlarm extends IPSModule
                     $text = "Unbefugter Zugang zur Wohnung. ";
                     $array = "wurde erkannt.";
                     $this->ModErrorLog("MyIPSAlarm", $text, $array);
-                    
+                    setvalue($this->GetIDForIdent("A_SecWarning"),"Alarm ausgelöst."); 
                     $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
                     Telegram_SendText(22525, $message, "671095116" );
                     //Sprachausgabe
