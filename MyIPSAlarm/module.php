@@ -666,10 +666,13 @@ class MyAlarm extends IPSModule
         none
     -------------------------------------------------------------------------------------------------------- */
     protected function CreateLink(string $Name,  $ParentID,  $LinkedVariableID){
-        // Anlegen eines neuen Links mit dem Namen "Regenerfassung"
-        $LinkID = IPS_CreateLink();             // Link anlegen
-        IPS_SetName($LinkID, $Name); // Link benennen
-        IPS_SetParent($LinkID, $ParentID); // Link einsortieren unter dem Objekt mit der ID "12345"
-        IPS_SetLinkTargetID($LinkID, $LinkedVariableID);    // Link verknüpfen
+        $LinkID = @IPS_GetLinkIDByName($Name, $ParentID);
+        if ($LinkID === false){
+            // Anlegen eines neuen Links mit dem Namen "Regenerfassung"
+            $LinkID = IPS_CreateLink();             // Link anlegen
+            IPS_SetName($LinkID, $Name); // Link benennen
+            IPS_SetParent($LinkID, $ParentID); // Link einsortieren unter dem Objekt mit der ID "12345"
+            IPS_SetLinkTargetID($LinkID, $LinkedVariableID);    // Link verknüpfen
+        }
     }
 }
