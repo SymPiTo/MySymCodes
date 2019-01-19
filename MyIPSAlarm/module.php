@@ -124,19 +124,7 @@ class MyAlarm extends IPSModule
         $assoc[1] = "aus";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
         
-        if($this->ReadPropertyBoolean("A_Webfront")){
-            //HTML Box anlegen
-            $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
-            //HTML Box Profil zuordnen und befüllen
-            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
-            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
-        }
-        else {
-             
-        }
         
-        parent::ApplyChanges();
-
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
             $WFCatID = $this->RegisterCategory("Webfront");
@@ -161,9 +149,23 @@ class MyAlarm extends IPSModule
            //IPS_DeleteCategory($KeyboardCatID);
             //IPS_DeleteCategory($SecCatID);
            // IPS_DeleteCategory($WFCatID);
+        } 
+        if($this->ReadPropertyBoolean("A_Webfront")){
+            //HTML Box anlegen
+            $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
+            //HTML Box Profil zuordnen und befüllen
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
+            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
         }
+        else {
+             
+        }
+        //Never delete this line!        
+        parent::ApplyChanges();
+
+
         
-        //Never delete this line!
+
     
         
         
