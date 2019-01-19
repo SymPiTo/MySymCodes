@@ -75,7 +75,7 @@ class MyAlarm extends IPSModule
         //TTS Trigger
         $this->RegisterPropertyBoolean("AlexaTTS", false);
         //Webfront anlegen
-        $this->RegisterPropertyBoolean("A_Webfront", false);
+        $this->RegisterPropertyBoolean("A_Webfront", true);
         
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
@@ -135,7 +135,7 @@ class MyAlarm extends IPSModule
              
         }
         
-
+        parent::ApplyChanges();
 
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
@@ -164,7 +164,7 @@ class MyAlarm extends IPSModule
         }
         
         //Never delete this line!
-        parent::ApplyChanges();    
+    
         
         
         //Unterkategorie Batterie Alarme anlegen
