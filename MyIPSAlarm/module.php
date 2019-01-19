@@ -167,7 +167,7 @@ class MyAlarm extends IPSModule
         
         
         //Unterkategorie Batterie Alarme anlegen
-        $AlarmCatID = $this->RegisterCategory("BatAlarmEvents");
+        $AlarmCatID = $this->RegisterCategory("BatEvntIdent", "BatAlarmEvents");
         // für jedes Liste ID ein Event anlegen
         $batteries = json_decode($this->ReadPropertyString("Battery"));
         foreach($batteries as $sensor) {
@@ -180,7 +180,7 @@ class MyAlarm extends IPSModule
         }       
         
          //Unterkategorie Sec  Alarme anlegen
-        $SecAlarmCatID = $this->RegisterCategory("SecAlarmEvents");
+        $SecAlarmCatID = $this->RegisterCategory("AlarmEvntIdent","SecAlarmEvents");
         // für jedes Liste ID ein Event anlegen
         $SecAlarms = json_decode($this->ReadPropertyString("SecAlarms"));
         foreach($SecAlarms as $sensor) {
