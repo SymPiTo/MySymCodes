@@ -92,7 +92,7 @@ class MyAlarm extends IPSModule
             
             setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue="'.$this->GetIDForIdent("A_SecCode").' &ipsModid='.$this->InstanceID.'" frameborder=0 height=300px width=180px></iframe></center>'); 
               
-            
+   
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
         $this->EnableAction("A_SecActivate");
