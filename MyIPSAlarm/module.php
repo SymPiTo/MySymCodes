@@ -214,6 +214,7 @@ class MyAlarm extends IPSModule
              case "A_SecActivate":
                 if ($Value == true){ 
                     $this->activateSecAlarm();  
+                    setvalue($this->GetIDForIdent("A_SecActivate"),true);
                 }
                 else {
                    setvalue($this->GetIDForIdent("A_SecWarning"),"Sicherheits Code eingeben."); 
@@ -367,6 +368,7 @@ class MyAlarm extends IPSModule
             }
             sleep(30);
             SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
+            SetValueBoolean($this->GetIDForIdent("A_SecActivate"),true);
             setvalue($this->GetIDForIdent("A_SecWarning"),"Alarm Anlage is aktiv."); 
             //Sprachausgabe
             if($this->ReadPropertyBoolean("AlexaTTS")){
