@@ -154,7 +154,7 @@ class MyAlarm extends IPSModule
 
             @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
        
-
+            $this->CreateLink("Status", $secID, $this->GetIDForIdent("A_SecActive"));    
             $this->CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
             $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
 
