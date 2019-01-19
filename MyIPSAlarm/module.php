@@ -462,7 +462,6 @@ class MyAlarm extends IPSModule
 
              
                 foreach ($Assoc as $key => $value) {
-                    $value = $value * 2;
                     IPS_SetVariableProfileAssociation($Name, $key, $value, $Icon, 0xFFFFFF);  
                 }
                 IPS_SetVariableCustomProfile($this->GetIDForIdent($VarIdent), $Name);
