@@ -131,12 +131,8 @@ class MyAlarm extends IPSModule
             $SecCatID = $this->RegisterCategory("Security");
             $KeyboardCatID = $this->RegisterCategory("Keyboard");
             
-            IPS_SetParent($SecCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            
-            IPS_SetParent($KeyboardCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            
-            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
-        }
+
+            }
         else {
             if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
                 IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
@@ -164,7 +160,12 @@ class MyAlarm extends IPSModule
         parent::ApplyChanges();
 
 
-        
+                    IPS_SetParent($SecCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
+            
+            IPS_SetParent($KeyboardCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
+            
+            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
+
 
     
         
