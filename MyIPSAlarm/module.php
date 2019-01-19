@@ -127,9 +127,10 @@ class MyAlarm extends IPSModule
         
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
-            $this->CreateCategoryByIdent($this->InstanceID, "WebfrontIdent", "Webfront"); // Kategorie unterhalb der Instanz anlegen.
-            $this->CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
-            $this->CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
+            $WebFrontCatID = $this->RegisterCategory("Webfront");// Kategorie unterhalb der Instanz anlegen.
+             
+            $this->CreateCategoryByIdent($WebFrontCatID, "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
+            $this->CreateCategoryByIdent($WebFrontCatID, "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
             }
         else {
             if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
@@ -158,13 +159,7 @@ class MyAlarm extends IPSModule
         parent::ApplyChanges();
 
 
-                    IPS_SetParent($SecCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            
-            IPS_SetParent($KeyboardCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            
-            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
-
-
+     
     
         
         
