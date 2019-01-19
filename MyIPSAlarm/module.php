@@ -135,8 +135,7 @@ class MyAlarm extends IPSModule
              
         }
         
-        //Never delete this line!
-        parent::ApplyChanges();
+
 
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
@@ -145,9 +144,9 @@ class MyAlarm extends IPSModule
             $KeyboardCatID = $this->RegisterCategory("Keyboard");
             
             IPS_SetParent($SecCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            parent::ApplyChanges();
+            
             IPS_SetParent($KeyboardCatID, $WFCatID); // Kategorie einsortieren unter dem Objekt mit der ID "$WFCatID"
-            parent::ApplyChanges();
+            
             IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
         }
         else {
@@ -163,6 +162,10 @@ class MyAlarm extends IPSModule
             //IPS_DeleteCategory($SecCatID);
            // IPS_DeleteCategory($WFCatID);
         }
+        
+        //Never delete this line!
+        parent::ApplyChanges();    
+        
         
         //Unterkategorie Batterie Alarme anlegen
         $AlarmCatID = $this->RegisterCategory("BatAlarmEvents");
