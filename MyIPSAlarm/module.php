@@ -148,7 +148,9 @@ class MyAlarm extends IPSModule
             IPS_SetParent($this->GetIDForIdent("A_SecKeyboard") , $KeyboardCatID); // Variable einsortieren unter dem Objekt mit der ID "$KeyboardCatID"
         }
         else {
-            IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
+            if (IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
+                IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
+            }
             $KeyboardCatID = @IPS_GetCategoryIDByName("Keyboard", $this->InstanceID);
             $SecCatID = @IPS_GetCategoryIDByName("Security", $this->InstanceID);
             $WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
