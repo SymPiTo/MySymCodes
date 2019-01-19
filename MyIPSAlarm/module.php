@@ -127,6 +127,8 @@ class MyAlarm extends IPSModule
         $assoc[1] = "aus";  
 	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
         
+        //Never delete this line!        
+        parent::ApplyChanges();        
         
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
@@ -159,8 +161,7 @@ class MyAlarm extends IPSModule
         else {
              
         }
-        //Never delete this line!        
-        parent::ApplyChanges();
+
 
 
      
