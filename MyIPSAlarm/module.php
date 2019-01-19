@@ -127,9 +127,9 @@ class MyAlarm extends IPSModule
         
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
-            CreateCategoryByIdent($this->InstanceID, "WebfrontIdent", "Webfront"); // Kategorie unterhalb der Instanz anlegen.
-            CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
-            CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
+            $this->CreateCategoryByIdent($this->InstanceID, "WebfrontIdent", "Webfront"); // Kategorie unterhalb der Instanz anlegen.
+            $this->CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
+            $this->CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
             }
         else {
             if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
