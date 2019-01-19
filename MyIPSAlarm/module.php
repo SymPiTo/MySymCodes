@@ -628,7 +628,7 @@ class MyAlarm extends IPSModule
             // Anlegen einer neuen Kategorie mit dem Namen $catName
             $CatID = IPS_CreateCategory();       // Kategorie anlegen
             IPS_SetName($CatID, $catName); // Kategorie benennen
-             IPS_SetIdent($cid, $ident);
+             IPS_SetIdent($CatID, $ident);
             IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unterhalb der der Instanz
         }
         return $KategorieID;
