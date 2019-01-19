@@ -86,6 +86,10 @@ class MyAlarm extends IPSModule
         
             //HTML Box anlegen
             $this->RegisterVariableString("A_SecKeyboard", "Security Keyboard"); 
+            //HTML Box Profil zuordnen und befüllen
+            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
+            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
+            @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );   
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
@@ -140,10 +144,7 @@ class MyAlarm extends IPSModule
 
             
 
-            //HTML Box Profil zuordnen und befüllen
-            IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
-            setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
-            @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );   
+
           
 
 
