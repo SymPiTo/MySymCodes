@@ -131,10 +131,9 @@ class MyAlarm extends IPSModule
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
             $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
-            
             $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
-             $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
-            }
+            $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
+        }
         else {
             if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
                 IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
@@ -154,7 +153,8 @@ class MyAlarm extends IPSModule
             //HTML Box Profil zuordnen und befüllen
             IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
             setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
-        }
+            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"), $this->GetIDForIdent("KeyboardIdent"));
+         }
         else {
              
         }
