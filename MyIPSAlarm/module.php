@@ -123,7 +123,7 @@ class MyAlarm extends IPSModule
         //Profil anlegen
         $assoc[0] = "ein";
         $assoc[1] = "aus";  
-	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_Activate", $assoc);
+	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_SecActivate", $assoc);
         
         //HTML Box erzeugen und befüllen
         IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
