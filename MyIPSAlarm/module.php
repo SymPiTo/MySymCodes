@@ -116,7 +116,9 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_Activate", "Activate");
+        $assoc[0] = "deaktiviert";
+        $assoc[1] = "aktiviert";  
+	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_Activate", $assoc);
         //Never delete this line!
         parent::ApplyChanges();
         
@@ -160,7 +162,7 @@ class MyAlarm extends IPSModule
       $Value                           -   Wert der von Webfront geänderten Variable
 
     STANDARD-AKTIONEN:
-        A_Activate    -   Alarm Anlage aktivieren
+        A_SecActivate    -   Alarm Anlage aktivieren
  
      ------------------------------------------------------------- */
     public function RequestAction($Ident, $Value) {
@@ -435,13 +437,14 @@ class MyAlarm extends IPSModule
         Erstellt ein neues Profil und ordnet es einer Variablen zu.
         ...............................................................................
         Parameters: 
-            $Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype
+            $Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent, $Assoc
          * $Vartype: 0 boolean, 1 int, 2 float, 3 string,
+         * $Assoc: array mit statustexte
         ..............................................................................
         Returns:   
             none
         ------------------------------------------------------------------------------- */
-	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent, $Assoc0){
+	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent, $Assoc){
 
             
 		if (!IPS_VariableProfileExists($Name)) {
@@ -456,8 +459,12 @@ class MyAlarm extends IPSModule
 		//IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
 		//IPS_SetVariableProfileDigits($Name, $Digits); //  Nachkommastellen
 		//IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize); // string $ProfilName, float $Minimalwert, float $Maximalwert, float $Schrittweite
-                IPS_SetVariableProfileAssociation($Name, 0, $Assoc0, $Icon, 0xFFFFFF);  
-                
+
+             
+                foreach ($Assoc as $key => $value) {
+                    $value = $value * 2;
+                    IPS_SetVariableProfileAssociation($Name, $key, $value, $Icon, 0xFFFFFF);  
+                }
                 IPS_SetVariableCustomProfile($this->GetIDForIdent($VarIdent), $Name);
         }
 		
