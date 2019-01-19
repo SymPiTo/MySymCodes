@@ -441,8 +441,7 @@ class MyAlarm extends IPSModule
             none
         ------------------------------------------------------------------------------- */
 	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype, $VarIdent, $Assoc0){
-             
-                
+
             
 		if (!IPS_VariableProfileExists($Name)) {
 			IPS_CreateVariableProfile($Name, $Vartype); // 0 boolean, 1 int, 2 float, 3 string,
