@@ -63,13 +63,16 @@ class MyAlarm extends IPSModule
         //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
-        $this->RegisterVariableInteger("A_Activate", "Alarm Activate");
+        //$this->RegisterVariableInteger("A_Activate", "Alarm Activate");
         
         
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
+        $this->RegisterVariableBoolean("A_SecActivate", "Alarmanlage aktivieren");
         $this->RegisterVariableBoolean("A_SecActive", "Alarmanlage Aktiv");
-        $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage Activate");
+        //Alexa Sprachbefehl Trigger
+        $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage activieren");
+        //TTS Trigger
         $this->RegisterPropertyBoolean("AlexaTTS", false);
         
         //String Variable anlegen
@@ -77,12 +80,12 @@ class MyAlarm extends IPSModule
          // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
-          
+        $this->RegisterVariableString("A_SecWarning", "Security Meldung");  
 
             
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction("IDENTNAME");
-        $this->EnableAction("A_Activate");
+        $this->EnableAction("A_SecActivate");
         $this->EnableAction("A_SecCode");
         $this->EnableAction("Alexa_SecActivate");
         
@@ -113,7 +116,7 @@ class MyAlarm extends IPSModule
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
-	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 1, "A_Activate", "Activate");
+	$this->RegisterProfile("Alarm.Activate", "","", "", "", "", "", "", 0, "A_Activate", "Activate");
         //Never delete this line!
         parent::ApplyChanges();
         
@@ -163,8 +166,14 @@ class MyAlarm extends IPSModule
     public function RequestAction($Ident, $Value) {
             
          switch($Ident) {
-             case "A_Activate":
-                $this->activateSecAlarm();  
+             case "A_SecActivate":
+                if (value == true){ 
+                    $this->activateSecAlarm();  
+                }
+                else {
+                   setvalue($this->GetIDForIdent("A_SecWarning"),"Sicherheits Code eingeben."); 
+                   setvalue($this->GetIDForIdent("A_SecActivate"),true); 
+                }
                 break;
              case "Alexa_SecActivate":
                 $this->activateSecAlarm();  
@@ -273,6 +282,7 @@ class MyAlarm extends IPSModule
                 if($this->ReadPropertyBoolean("AlexaTTS")){
                     //Sprachausgabe
                     $text_to_speech = "Code wurde akzeptiert";
+                    SetValueBoolean($this->GetIDForIdent("A_SecActivate"),false);
                     SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
                     EchoRemote_TextToSpeech(26188, $text_to_speech);
                 }
