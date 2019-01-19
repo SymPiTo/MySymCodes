@@ -148,6 +148,7 @@ class MyAlarm extends IPSModule
                 IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$this->InstanceID );
                 $VariablenID = $this->GetIDForIdent("A_SecKeyboard");
                 IPS_DeleteVariable($VariablenID);
+                
             //}
             //
             //if (IPS_CategoryExists(@IPS_GetCategoryIDByName("Webfront", $this->InstanceID))){
