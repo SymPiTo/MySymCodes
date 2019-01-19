@@ -144,7 +144,8 @@ class MyAlarm extends IPSModule
             }
         else {
             //if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
-                IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
+                $id = IPS_GetObjectIDByIdent("A_SecKeyboard", $this->InstanceID);
+                IPS_DeleteVariable($id);
             //}
             //if (IPS_CategoryExists(@IPS_GetCategoryIDByName("Webfront", $this->InstanceID))){
                  $KeyboardCatID = @IPS_GetCategoryIDByName("Keyboard", $this->InstanceID);
@@ -152,7 +153,7 @@ class MyAlarm extends IPSModule
                  $WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
             //}
            //IPS_DeleteCategory($KeyboardCatID);
-             IPS_DeleteCategory($SecCatID);
+             //IPS_DeleteCategory($SecCatID);
            // IPS_DeleteCategory($WFCatID);
         } 
         if($this->ReadPropertyBoolean("A_Webfront")){
