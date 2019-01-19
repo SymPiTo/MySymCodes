@@ -127,20 +127,18 @@ class MyAlarm extends IPSModule
         
         //Unterkategorie für Webfront anlegen wenn ausgewählt
         if($this->ReadPropertyBoolean("A_Webfront")){
-            $WFCatID = $this->RegisterCategory("Webfront");
-            $SecCatID = $this->RegisterCategory("Security");
-            $KeyboardCatID = $this->RegisterCategory("Keyboard");
-            
-
+            CreateCategoryByIdent($this->InstanceID, "WebfrontIdent", "Webfront"); // Kategorie unterhalb der Instanz anlegen.
+            CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
+            CreateCategoryByIdent($this->GetIDForIdent("WebfrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
             }
         else {
             if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
                 IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard"));
             }
             if (IPS_CategoryExists(@IPS_GetCategoryIDByName("Webfront", $this->InstanceID))){
-                $KeyboardCatID = @IPS_GetCategoryIDByName("Keyboard", $this->InstanceID);
-                $SecCatID = @IPS_GetCategoryIDByName("Security", $this->InstanceID);
-                $WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
+               // $KeyboardCatID = @IPS_GetCategoryIDByName("Keyboard", $this->InstanceID);
+                //$SecCatID = @IPS_GetCategoryIDByName("Security", $this->InstanceID);
+                //$WFCatID = @IPS_GetCategoryIDByName("Webfront", $this->InstanceID);
             }
            //IPS_DeleteCategory($KeyboardCatID);
             //IPS_DeleteCategory($SecCatID);
@@ -637,10 +635,37 @@ class MyAlarm extends IPSModule
         }
         return $KategorieID;
     }
+
+    protected function CreateCategoryByIdent($Parentid, $ident, $name) {
+             $cid = @IPS_GetObjectIDByIdent($ident, $id);
+             if($cid === false) {
+                     $cid = IPS_CreateCategory();
+                     IPS_SetParent($cid, $id);
+                     IPS_SetName($cid, $name);
+                     IPS_SetIdent($cid, $ident);
+             }
+             return $cid;
+    } 
     
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: UnregisterProfile
+    ...............................................................................
+     *  Legt ein Unterverzeichnis an
+     * Beispiel:
+     *  
+    ...............................................................................
+    Parameters: 
+ 
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
     protected function UnregisterProfile(string $Name){
         if (IPS_VariableProfileExists($Name)) {
            IPS_DeleteVariableProfile($Name);
         }   
     }	
+    
+
+    
 }
