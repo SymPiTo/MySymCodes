@@ -77,6 +77,7 @@ class MyAlarm extends IPSModule
         //Webfront anlegen
         $this->RegisterPropertyBoolean("A_Webfront", true);
         
+        
         //String Variable anlegen
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
          // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
