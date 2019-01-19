@@ -436,6 +436,7 @@ class MyAlarm extends IPSModule
         ...............................................................................
         Parameters: 
             $Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype
+         * $Vartype: 0 boolean, 1 int, 2 float, 3 string,
         ..............................................................................
         Returns:   
             none
