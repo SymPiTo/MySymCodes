@@ -203,7 +203,7 @@ class MyAlarm extends IPSModule
             
          switch($Ident) {
              case "A_SecActivate":
-                if (value == true){ 
+                if ($Value == true){ 
                     $this->activateSecAlarm();  
                 }
                 else {
