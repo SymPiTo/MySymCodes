@@ -143,7 +143,7 @@ class MyAlarm extends IPSModule
             //HTML Box Profil zuordnen und befüllen
             IPS_SetVariableCustomProfile($this->GetIDForIdent("A_SecKeyboard"), "~HTMLBox");
             setvalue($this->GetIDForIdent("A_SecKeyboard"),'<center><iframe src="user/keyboard/index.html?ipsValue=11699" frameborder=0 height=300px width=180px></iframe></center>'); 
-            IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );   
+            @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID );   
           
 
 
