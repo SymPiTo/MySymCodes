@@ -21,7 +21,14 @@
         * This function will be called by the hook control. Visibility should be protected!
         */
         protected function ProcessHookData() { 
-            
+            $root = realpath(__DIR__ . "/www");
+
+            //reduce any relative paths. this also checks for file existance
+            $path = realpath($root . "/" . substr($_SERVER['SCRIPT_NAME'], strlen("/hook/myipshook/")));
+            if($path === false) {
+                    http_response_code(404);
+                    die("File not found!");
+            }
         }  
         
         private function RegisterHook($WebHook) {
