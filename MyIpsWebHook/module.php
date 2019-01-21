@@ -17,7 +17,12 @@
 
         }
 
-        
+        /**
+        * This function will be called by the hook control. Visibility should be protected!
+        */
+        protected function ProcessHookData() { 
+            
+        }  
         
         private function RegisterHook($WebHook) {
                 $ids = IPS_GetInstanceListByModuleID("{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}");
