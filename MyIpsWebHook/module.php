@@ -50,6 +50,10 @@
                         IPS_SetProperty($ids[0], "Hooks", json_encode($hooks));
                         IPS_ApplyChanges($ids[0]);
                 }
+                if(substr($path, 0, strlen($root)) != $root) {
+                        http_response_code(403);
+                        die("Security issue. Cannot leave root folder!");
+                }
         }
         
         private function GetMimeType($extension) {
