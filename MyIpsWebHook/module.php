@@ -62,7 +62,15 @@
                         return;
                     }
                 }   
-                
+                //append index
+                if(substr($_SERVER['SCRIPT_NAME'], -1) == "/") {
+                    if(file_exists($path . "/index.html")) {
+                        $path .= "/index.html";
+                    } 
+                    else if(file_exists($path . "/index.php")) {
+                        $path .= "/index.php";
+                    }
+                }
         }
         
         private function GetMimeType($extension) {
