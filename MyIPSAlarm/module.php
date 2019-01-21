@@ -56,7 +56,7 @@ class MyAlarm extends IPSModule
         // $sensors = json_decode($this->ReadPropertyString("Battery"));
             $this->RegisterPropertyString("Battery", "[]");
             $this->RegisterPropertyString("SecAlarms", "[]");
-            
+            $this->RegisterPropertyString("Password", "");
             
           
         //Integer Variable anlegen

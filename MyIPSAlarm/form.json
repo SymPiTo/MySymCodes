@@ -1,6 +1,11 @@
 {
 	"elements":
 	[
+            { 
+                "name": "Password", 
+                "type": "PasswordTextBox", 
+                "caption": "Password" 
+            },
             {
                 "type" : "Label",
                 "label" : "ALexa Text To Speech verwenden."
