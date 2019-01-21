@@ -29,27 +29,6 @@
                     http_response_code(404);
                     die("File not found!");
             }
-        }  
-        
-        private function RegisterHook($WebHook) {
-                $ids = IPS_GetInstanceListByModuleID("{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}");
-                if(sizeof($ids) > 0) {
-                        $hooks = json_decode(IPS_GetProperty($ids[0], "Hooks"), true);
-                        $found = false;
-                        foreach($hooks as $index => $hook) {
-                                if($hook['Hook'] == $WebHook) {
-                                        if($hook['TargetID'] == $this->InstanceID)
-                                                return;
-                                        $hooks[$index]['TargetID'] = $this->InstanceID;
-                                        $found = true;
-                                }
-                        }
-                        if(!$found) {
-                                $hooks[] = Array("Hook" => $WebHook, "TargetID" => $this->InstanceID);
-                        }
-                        IPS_SetProperty($ids[0], "Hooks", json_encode($hooks));
-                        IPS_ApplyChanges($ids[0]);
-                }
                 if(substr($path, 0, strlen($root)) != $root) {
                         http_response_code(403);
                         die("Security issue. Cannot leave root folder!");
@@ -81,6 +60,28 @@
                     readfile($path);
                 }
                 
+        }  
+        
+        private function RegisterHook($WebHook) {
+                $ids = IPS_GetInstanceListByModuleID("{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}");
+                if(sizeof($ids) > 0) {
+                        $hooks = json_decode(IPS_GetProperty($ids[0], "Hooks"), true);
+                        $found = false;
+                        foreach($hooks as $index => $hook) {
+                                if($hook['Hook'] == $WebHook) {
+                                        if($hook['TargetID'] == $this->InstanceID)
+                                                return;
+                                        $hooks[$index]['TargetID'] = $this->InstanceID;
+                                        $found = true;
+                                }
+                        }
+                        if(!$found) {
+                                $hooks[] = Array("Hook" => $WebHook, "TargetID" => $this->InstanceID);
+                        }
+                        IPS_SetProperty($ids[0], "Hooks", json_encode($hooks));
+                        IPS_ApplyChanges($ids[0]);
+                }
+
         }
         
         private function GetMimeType($extension) {
