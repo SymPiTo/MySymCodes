@@ -1,0 +1,11 @@
+{
+	"id": "{F44BD161-3694-CB76-7217-05BA3CBEAE7A}",
+	"name": "MyIpsWebHook",
+	"type": 0,
+	"vendor": "PiTo",
+	"aliases": ["MyIPSWebHook"],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "MIWH"
+}
