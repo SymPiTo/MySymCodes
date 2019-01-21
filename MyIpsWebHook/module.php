@@ -14,7 +14,7 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			$this->RegisterHook("/hook/myipswebhook");
+			
 		}
 		
 		private function RegisterHook($WebHook) {
