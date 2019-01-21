@@ -13,7 +13,7 @@
         public function ApplyChanges() {
                 //Never delete this line!
                 parent::ApplyChanges();
-
+            $this->RegisterHook("/hook/hookserve");
 
         }
 
