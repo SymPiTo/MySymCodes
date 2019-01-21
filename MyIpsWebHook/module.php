@@ -71,6 +71,16 @@
                         $path .= "/index.php";
                     }
                 }
+                
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+                if($extension == "php") {
+                        include_once($path);
+                } else {
+                    header("Content-Type: ".$this->GetMimeType($extension));
+                    readfile($path);
+                }
+                
         }
         
         private function GetMimeType($extension) {
