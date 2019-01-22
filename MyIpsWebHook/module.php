@@ -64,6 +64,7 @@ echo "Willkommen im geschützten Bereich";
                     } 
                     else if(file_exists($path . "/index.php")) {
                         $path .= "/index.php";
+                        echo $path;
                     }
                 }
                 
