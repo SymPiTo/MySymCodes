@@ -53,7 +53,8 @@ echo $root;
                 if(substr($_SERVER['SCRIPT_NAME'], -1) != "/") {
                     if(is_dir($path)) {
                         http_response_code(301);
-                        //header("Location: " . $_SERVER['SCRIPT_NAME'] . "/\r\n\r\n");
+                        echo "301". $_SERVER['SCRIPT_NAME'];
+                        header("Location: " . $_SERVER['SCRIPT_NAME'] . "/\r\n\r\n");
                         return;
                     }
                 }   
