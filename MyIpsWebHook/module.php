@@ -37,10 +37,10 @@ if(($_SERVER['PHP_AUTH_USER'] != "Symcon") || ($_SERVER['PHP_AUTH_PW'] != "passw
 echo "Willkommen im geschützten Bereich";
             
             $root = realpath(__DIR__ . "/www");
-echo $root;
+//echo $root;
             //reduce any relative paths. this also checks for file existance
             $path = realpath($root . "/" . substr($_SERVER['SCRIPT_NAME'], strlen("/hook/myipshook/")));
-          echo $path;
+          //echo $path;
             if($path === false) {
                     http_response_code(404);
                     die("File not found!");
@@ -53,7 +53,7 @@ echo $root;
                 if(substr($_SERVER['SCRIPT_NAME'], -1) != "/") {
                     if(is_dir($path)) {
                         http_response_code(301);
-                        echo "301". $_SERVER['SCRIPT_NAME'];
+                       // echo "301". $_SERVER['SCRIPT_NAME'];
                         header("Location: " . $_SERVER['SCRIPT_NAME'] . "/\r\n\r\n");
                         return;
                     }
@@ -75,7 +75,7 @@ echo $root;
                 if($extension == "php") {
                         include_once($path);
                 } else {
-                    header("Content-Type: ".$this->GetMimeType($extension));
+                   // header("Content-Type: ".$this->GetMimeType($extension));
                     readfile($path);
                 }
                 
