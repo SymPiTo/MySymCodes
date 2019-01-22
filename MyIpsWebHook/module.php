@@ -62,7 +62,7 @@ echo "Willkommen im geschützten Bereich";
                 if(substr($_SERVER['SCRIPT_NAME'], -1) == "/") {
                     if(file_exists($path . "/index.html")) {
                         $path .= "/index.html";
-                        echo $path;
+                        //echo $path;
                     } 
                     else if(file_exists($path . "/index.php")) {
                         $path .= "/index.php";
@@ -76,7 +76,7 @@ echo "Willkommen im geschützten Bereich";
                         include_once($path);
                 } else {
                    // header("Content-Type: ".$this->GetMimeType($extension));
-                    readfile($path);
+                   // readfile($path);
                 }
                 
         }  
