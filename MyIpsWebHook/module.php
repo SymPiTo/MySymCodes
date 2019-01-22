@@ -76,7 +76,7 @@ echo "Willkommen im geschützten Bereich";
                         include_once($path);
                 } else {
                    // header("Content-Type: ".$this->GetMimeType($extension));
-                   // readfile($path);
+                    readfile($path);
                 }
                 
         }  
