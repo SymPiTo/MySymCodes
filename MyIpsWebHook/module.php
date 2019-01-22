@@ -37,9 +37,10 @@ if(($_SERVER['PHP_AUTH_USER'] != "Symcon") || ($_SERVER['PHP_AUTH_PW'] != "passw
 echo "Willkommen im geschützten Bereich";
             
             $root = realpath(__DIR__ . "/www");
-
+echo $root;
             //reduce any relative paths. this also checks for file existance
             $path = realpath($root . "/" . substr($_SERVER['SCRIPT_NAME'], strlen("/hook/myipshook/")));
+          echo $path;
             if($path === false) {
                     http_response_code(404);
                     die("File not found!");
