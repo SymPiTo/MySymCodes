@@ -34,7 +34,7 @@ if(($_SERVER['PHP_AUTH_USER'] != "Symcon") || ($_SERVER['PHP_AUTH_PW'] != "passw
     echo "Authorization required";
     return;
 }
-echo "Willkommen im geschützten Bereich";
+//echo "Willkommen im geschützten Bereich";
             
             $root = realpath(__DIR__ . "/www");
 //echo $root;
