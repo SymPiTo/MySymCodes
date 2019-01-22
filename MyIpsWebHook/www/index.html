@@ -1,16 +1,2028 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>MyIPS</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="myGlides.js"></script>
+        <script src="myCommands.js"></script>
+        <script src="myVars.js"></script>
+        <script src="myLib.js"></script>
+        <script src="data.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="myGlides.css">
+        
+        <link href="http://allfont.net/allfont.css?fonts=dot-matrix" rel="stylesheet" type="text/css" /> 
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+       <!-- <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css"> -->
+        <link rel="stylesheet" href="line-awesome/css/line-awesome.min.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+
+        <!--  ..............................................................  -->
+        <!--   WEBSOCKET FUNKTIONEN                                           --> 
+        <!--  ..............................................................  -->
+        <script type='text/javascript'>
+            var socket;
+            var client = 'CEOL';
+            var albumpic = 'CDs/0001.jpg';
+            var albumno = '0001';
+            var symvar = []; 
+
+                function init() {
+                        // var host = 'ws://ylgsiletvcrasj6i.myfritz.net:9000'; // SET THIS TO YOUR SERVER
+                        var host = 'ws://192.168.178.28:9000'; // SET THIS TO YOUR SERVER
+                        try {
+                                socket = new WebSocket(host);
+                                state('WebSocket: '+socket.readyState);
+                                socket.onopen    = function(msg) { 
+                                                                           if(this.readyState === 1){ var a = 'connected';}
+                                                                           else if (this.readyState === 2){var a = 'connecting';}
+                                                                           else if (this.readyState === 0){var a = 'not connecting';}
+                                                                           else {var a = 'Connection closed';}
+                                                                           state(' WebSocket: '+ a); 
+                                                                           
+                                                                   };
+
+                                socket.onmessage = function(msg) { 
+                                                                        var jsontext = msg.data;
+                                                                        if(jsontext.substring(0, 6) == "REPLY:"){
+                                                                            
+                                                                            var feedback = jsontext.substr(6,jsontext.length-6) ;
+                                                                            reply(feedback);
+                                                                        }
+                                                                        else if(jsontext.substring(0, 6) == "AList:"){
+                                                                            
+                                                                            var text = jsontext.substr(6,jsontext.length-6) ;
+                                                                            showAList(text);
+                                                                        }
+                                                                        else{
+                                                                            
+                                                                            ips = JSON.parse(jsontext); 
+                                                                            symvar = ips[0];
+                                                                             //
+                                                                              log(ips[0]);
+                                                                            checkUsedVars(ips);
+                                                                             /////Media(ips);
+                                                                            Heizung(ips);
+                                                                            Security(ips);
+                                                                            Klima(ips); 
+                                                                            updateValues(ips);
+
+                                                                            
+                                                                        }
+
+                                                              };
+                                socket.onclose  = function(msg) { 
+                                                                           state('Client disconnected - status '+ this.readyState);
+                                                                           //send('Client' + '*' + 'status' + '*' + 'close connection');
+                                                                   };
+                                socket.onerror = function(err) {
+                                                                        fehler('Client' + '*' + 'status' + '*' + 'err');									 
+                                                                   };
+                        }
+                        catch(ex){  
+                                state(ex); 
+                        }
+                        //$('msg').focus();	
+                }
+
+
+                function send(msg){
+                        var msg;
+
+                        if(!msg) { 
+                                alert('Message can not be empty'); 
+                                return; 
+                        }
+
+                        try { 
+                                socket.send(msg); 
+                                //cmd('Sent: '+msg); 
+                        } catch(ex) { 
+                                state(ex); 
+                        }
+                }
+
+                function quit(){
+                        if (socket !== null) {
+                                state('Client quit!');
+                                socket.close();
+                                socket=null;
+                        }
+                }
+
+                function reconnect() {
+                        quit();
+                        init();
+                }
+
+
+                var timerID =0;
+                function keepAlive(){
+                        var timeout = 30000;
+                        if (socket.readyState == socket.OPEN) {
+                                socket.send('Client' + '*' + 'status' + '*' + 'keep Alive');
+                        }
+                        timerID = setTimeout(keepAlive, timeout); 
+                        fehler("TimeOut");
+                }
+
+                function cancelKeepAlive(){
+                        if (timerID) {
+                                clearTimeout(timerID);
+                        }
+                }
+
+
+                function fehler(msg){
+                         $('fehler').innerHTML =  msg; 
+                }
+
+
+			// Utilities
+			function $(id){ return document.getElementById(id); }
+
+			function state(msg){ $('state').innerHTML =  msg; }
+			
+			function cmd(msg){ $('cmd').innerHTML =  msg; }
+			
+
+			
+			function close(msg){
+				if (msg === doclose) {
+					quit();
+				}
+				else{
+				}	
+			}
+			
+                        var z = 0;
+			function log(msga){ 
+                            z = z + 1;
+                            $('log').innerHTML =  z.toString(); 
+                        } 
+                        
+                        
+			function log15(msg){ $('prog').innerHTML =  msg; }
+                        
+
+  function read_json() {
+            $.getJSON("/TVchalles.json", function(data) {
+                alert("My data: " + data["mydata"]);
+                $.each(data["prime"], function(idx,prime) {
+                    alert("Prime number: " + prime);
+                });
+            });
+        }
+
+                
+			function HzWZan(){
+	 			document.getElementById("test").classList.toggle('cyan');
+	 			document.getElementById("test").classList.toggle('cyanA');
+
+			 
+			}
+		
+			function tvZ(ips){
+				$('z1').innerHTML =  ips[0].ID44830  ;
+				$('z2').innerHTML =  ips[0].ID48196  ;
+				$('z3').innerHTML =  ips[0].ID23484  ;
+				$('z4').innerHTML =  ips[0].ID52167  ;
+				$('z5').innerHTML =  ips[0].ID13568  ;
+				$('z6').innerHTML =  ips[0].ID53293  ;
+				$('z7').innerHTML =  ips[0].ID48145  ;
+				$('z8').innerHTML =  ips[0].ID21638  ;
+				$('z9').innerHTML =  ips[0].ID57713  ;
+				$('z10').innerHTML = ips[0].ID36393  ;
+			}
+			
+			function VarsNetwork(ips){
+	 				$('ws1').innerHTML = ips[0].WS0001 + ' connected: ' + ips[0].WS0011 ;
+					$('ws2').innerHTML = ips[0].WS0002 + ' connected: ' + ips[0].WS0021 ;
+					$('ws3').innerHTML = ips[0].WS0003 + ' connected: ' + ips[0].WS0031 ;
+					document.getElementById('servericon').src = ips[0].ID10960;
+					document.getElementById('clienticon').src = ips[0].ID12017;
+			}
+			
+			
+			
+                     
+ 
+
+
+
+
+
+
+	
+		</script>
+ 
+
     </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+
+    <body onload='init();'>
+        
+<!-- .................................. Gesamt Container ...............................  -->
+	<div id="Container" class="Container">
+	
+		<div class="Top">
+			<div id='state' style='z-index: 6; text-align: left; background-color: transparent'>
+			</div>  
+			<div id="TopTitle">
+				M Y I P S
+			</div>
+			<div id="fehler" style="z-index: 6; text-align: right;   background-color: transparent">
+			</div>
+ 			<div id="log" style="z-index: 6; text-align: right;   background-color: transparent">
+			</div>
+
+                    	
+		</div>
+
+<!-- ****************************** Main Menue ********************************************  -->
+	<div id="MainMenu" class="Left">
+            
+        </div>
+
+	<script>	
+            var MenuHome = new GlideButton();
+            MenuHome.create("MainMenu", "MenuHome", "grey", "Home", "_Home_BW.png", "", "StartScreen","MM" );  
+            var LeftMenuFP = new GlideButton();
+            LeftMenuFP.create("MainMenu", "LeftMenuFF", "pink", "Floorplan", "_Floorplan_BW.png", "", "floorplan","MM" ); 
+            var LeftMenuSec = new GlideButton();
+            LeftMenuSec.create("MainMenu", "LeftSec", "red", "Alarmanlage", "AlarmAnlage.png", "MenuSec", "", "MM" ); 
+            var LeftMenuWZ = new GlideButton();
+            LeftMenuWZ.create("MainMenu", "LeftWZ", "cyan", "Wohnzimmer", "_Wohnzimmer_BW.png", "MenuWZ", "", "MM" );  
+            var LeftMenuKZ = new GlideButton();
+            LeftMenuKZ.create("MainMenu", "LeftKZ", "olive", "Kinderzimmer", "_Kinderzimmer_BW.png", "MenuKZ","","MM" );  
+            var LeftMenuSZ = new GlideButton();
+            LeftMenuSZ.create("MainMenu", "LeftSZ", "sandy", "Schlafzimmer", "_Schlafzimmer_BW.png", "MenuSZ","","MM" ); 
+            var LeftMenuK = new GlideButton();
+            LeftMenuK.create("MainMenu", "LeftK", "midgreen", "Kueche", "_Kueche_BW.png", "MenuK","","MM" ); 
+            var LeftMenuB = new GlideButton();
+            LeftMenuB.create("MainMenu", "LeftB", "blue", "Balkon", "_Balkon_BW.png", "MenuB","","MM" ); 
+            var LeftMenuMM = new GlideButton();
+            LeftMenuMM.create("MainMenu", "LeftMM", "purple", "Multimedia", "_Multimedia_BW.png", "MenuMultimedia" ,"","MM"); 
+            var LeftMenuHz = new GlideButton();
+            LeftMenuHz.create("MainMenu", "LeftHz", "yellow", "Heizung", "_Heizung_BW.png", "MenuHz","","MM" ); 
+            var LeftMenuRollo = new GlideButton();
+            LeftMenuRollo.create("MainMenu", "LeftRollo", "brown", "Rolladen", "_Rolladen_BW.png", "MenuRollo","","MM" );  
+            var LeftMenuNet = new GlideButton();
+            LeftMenuNet.create("MainMenu", "LeftNet", "green", "Netzwerk", "_Network_BW.png", "MenuNet","","MM" );  
+            
+
+            
+            var MenuSecurity1 = new GlideButton();
+            MenuSecurity1.create("MainMenu","xxxx", "cyan", "Security", "_GuestroomBW.jpg", "",  "", "MM" );  
+        </script>    
+            
+<!-- ********************************************* Unter Menus ***********************************************************  -->
+
+    
+	<!-- *********************** Security  **************************  -->
+	<subMenu id="SubMenuSec" class="MenuSec"></subMenu>
+ 		
+        <script>    
+             var SubMenuSecCode = new GlideButton();
+            SubMenuSecCode.create("SubMenuSec","SubMenuSeCode", "red", "Alarmanlage", "AlarmKey.png", "MainSecCode","", "SM" ); 
+            var SubMenuWaterAlarm = new GlideButton();
+            SubMenuWaterAlarm.create("SubMenuSec","SubMenuWaterAlarm", "red", "Meldungen", "FeuchteWasserMelder.png", "MainWaterAlarm","", "SM" ); 
+        </script>
+        
+        <!-- ************************* SubMenu - Wohnzimmer **************************  -->
+        <subMenu id= "SubMenuWZ" class="MenuWZ">        </subMenu>  
+ 
+            
+        <script> 
+            var SubMenuHzWZ = new GlideButton();
+            SubMenuHzWZ.create("SubMenuWZ","SubMenuHzWZ", "cyan", "Heizung Wohnzimmer", "_Heizung_BW2.png", "MainHeizungWZ","", "SM" );  
+            var SubMenuRolloWZ = new GlideButton();
+            SubMenuRolloWZ.create("SubMenuWZ","SubMenuRolloWZ", "cyan", "Rolladen Wohnzimmer", "_Rolladen_BW.png", "MainRolloWZ","", "SM" ); 
+            
+             var SubMenuRolloWZ = new GlideButton();
+            SubMenuRolloWZ.create("SubMenuWZ","SubMenuCEOLWZ", "cyan", "Ceol Anlage", "DenonCeolIcon.jpg", "MainCeolWZ","", "SM" ); 
+            var SubMenuRolloWZ = new GlideButton();
+            SubMenuRolloWZ.create("SubMenuWZ","SubMenuTVWZ", "cyan", "Fernseher", "_TV_BW.png", "MainTVWZ","", "SM" ); 
+            var SubMenuRolloWZ = new GlideButton();
+            SubMenuRolloWZ.create("SubMenuWZ","SubMenuBlueRayWZ", "cyan", "BlueRayPlayer", "BlueRay.png", "MainBlueRayWZ","", "SM" ); 
+        </script>  
+ 
+
+    
+	<!-- *********************** Kinderzimmer  **************************  -->
+	<subMenu id="SubMenuKZ" class="MenuKZ"></subMenu>
+ 		
+        <script>    
+             var SubMenuHzKZ = new GlideButton();
+            SubMenuHzKZ.create("SubMenuKZ","SubMenuHzKZ", "olive", "Heizung Kinderzimmer", "_Heizung_BW2.png", "MainHzKZ","", "SM" ); 
+            var SubMenuRolloKZ = new GlideButton();
+            SubMenuRolloKZ.create("SubMenuKZ","SubMenuRolloKZ", "olive", "Rolladen Kinderzimmer", "_Rolladen_BW.png", "MainRolloKZ","", "SM" ); 
+        </script>  
+        
+	<!-- ************************ Schlafzimmer  ************************  -->
+	<subMenu id="SubMenuSZ" class="MenuSZ"></subMenu>
+  		
+        <script>    
+            var SubMenuHzSZ = new GlideButton();
+            SubMenuHzSZ.create("SubMenuSZ","SubMenuHzSZ", "sandy", "Heizung Schlafzimmer", "_Heizung_BW2.png", "MainHzSZ","", "SM" ); 
+            var SubMenuRolloSZ = new GlideButton();
+            SubMenuRolloSZ.create("SubMenuSZ","SubMenuRolloSZ", "sandy", "Rolladen Schlafzimmer", "_Rolladen_BW.png", "MainRolloSZ","", "SM" ); 
+        </script>  
+        
+	<!-- ************************ Kueche  ************************  -->
+	<subMenu id="SubMenuK" class="MenuK"></subMenu>
+  		
+        <script>    
+            var SubMenuHzK = new GlideButton();
+            SubMenuHzK.create("SubMenuK","SubMenuHzK", "midgreen", "Heizung Kueche", "_Heizung_BW2.png", "MainHzK","", "SM" ); 
+            var SubMenuRolloK = new GlideButton();
+            SubMenuRolloK.create("SubMenuK","SubMenuRolloK", "midgreen", "Rolladen Kueche", "_Rolladen_BW.png", "MainRolloK","", "SM" ); 
+        </script> 
+        
+	<!-- ************************ Menu Balkon  ************************  -->
+	<subMenu id="SubMenuB" class="MenuB"></subMenu>
+  		
+        <script>   
+            var SubMenuHzB = new GlideButton();
+            SubMenuHzB.create("SubMenuB","SubMenuHzB", "blue", "Heizung Balkon", "_Heizung_BW2.png", "MainHzB","", "SM" ); 
+            var SubMenuRolloB = new GlideButton();
+            SubMenuRolloB.create("SubMenuB","SubMenuRolloB", "blue", "Rolladen Balkon", "_Rolladen_BW.png", "MainRolloB","", "SM" ); 
+        </script> 
+        
+	<!-- ************************ Multimedia  ************************  -->
+	<subMenu id="SubMenuMedia" class="MenuMultimedia"></subMenu>	
+         <script>   
+            var SubMenuTV = new GlideButton();
+            SubMenuTV.create("SubMenuMedia","SubMenuTV", "purple", "Samsung TV", "_TV_BW.png", "MainTV","", "SM" ); 
+            var SubMenuIRadio = new GlideButton();
+            SubMenuIRadio.create("SubMenuMedia","SubMenuIRadio", "purple", "Internet Radio", "_IRadio_BW2a.png", "MainIRadio","", "SM" ); 
+            var SubMenuCD = new GlideButton();
+            SubMenuCD.create("SubMenuMedia","SubMenuCD", "purple", "Musik CDs", "CD1_BW.png", "MainCD","", "SM" ); 
+            var SubMenuUPNP = new GlideButton();
+            SubMenuUPNP.create("SubMenuMedia","SubMenuUPNP", "purple", "UPnP", "upnp1.png", "MainUpnp","", "SM" );    
+            var SubMenuAudio = new GlideButton();
+            SubMenuAudio.create("SubMenuMedia","SubMenuAudio", "purple", "Audio Books", "AudioBookLib.png", "MainAudio","", "SM" );
+            var SubMenuCEOL = new GlideButton();
+            SubMenuCEOL.create("SubMenuMedia","SubMenuCEOL", "purple", "Denon CEOL", "DenonCeolIcon.jpg", "MainCeol","", "SM" );
+            var SubMenuBlueRay = new GlideButton();
+            SubMenuBlueRay.create("SubMenuMedia","SubMenuBlueRay", "purple", "BlueRay Player", "BlueRay.png", "MainBlueRay","", "SM" );
+        </script>   
+            
+
+			
+		 
+
+
+		<!-- ************************ Menue  Heizung  ************************  -->
+		<subMenu id="SubMenuHz" class="MenuHz">
+			<div class="buttonglide" onclick="HeizungAll()" style="background:-webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%));">
+					<div>
+						<img class="icon" src="images/_Heizung_BW2.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class="room">
+							<a >Heizung Uebersicht</a>
+						</div>
+					</div>	
+			</div>
+			<div class="buttonglide" onclick="HeizungWZ()" style="background:-webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%));">
+					<div>
+						<img class="icon" src="images/_Heizung_BW2.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class="room">
+							<a >Heizung Wohnzimmer</a>
+						</div>
+					</div>	
+			</div>
+			<div class="buttonglide" onclick="HeizungKZ()" style="background:-webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%));">
+					<div>
+						<img class="icon" src="images/_Heizung_BW2.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class="room">
+							<a >Heizung Kinderzimmer</a>
+						</div>
+					</div>	
+			</div>
+			<div class="buttonglide" onclick="HeizungSZ()" style="background:-webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%));">
+					<div>
+						<img class="icon" src="images/_Heizung_BW2.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class="room">
+							<a >Heizung Schlafzimmer</a>
+						</div>
+					</div>	
+			</div>
+			<div class="buttonglide" onclick="HeizungK()" style="background:-webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%));">
+					<div class="icon">
+						<img id="icon" src="images/_Heizung_BW2.png"  alt="image not found"/>
+					</div>
+					<div class="col">
+						<div class="room">
+							Heizung . Kueche
+						</div>
+					</div>	
+			</div>
+ 		</subMenu>
+		<!-- ************************Menu  Rolladen  ************************  -->
+		<subMenu id="SubMenuRollo" class="MenuRollo">
+			<div class="GlideButton brown" onclick="RolladenAll()" >
+					<div class=icon>
+						<img id="icon" src="images/_Rolladen_BW.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class=room>
+							<a >Rolladen Uebersicht</a>
+						</div>
+					</div>	
+			</div>
+			<div class="GlideButton blue" onclick="RolloB()" >
+					<div class=icon>
+						<img id="icon" src="images/_Rolladen_BW.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class=room>
+							<a >Rolladen Balkon</a>
+						</div>
+					</div>	
+			</div>
+			<div class="GlideButton cyan" onclick="RolloWZ()" >
+					<div class=icon>
+						<img id="icon" src="images/_Rolladen_BW.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class=room>
+							<a >Rolladen Wohnzimmer</a>
+						</div>
+					</div>	
+			</div>
+			<div class="GlideButton red" onclick="RolloK()" >
+					<div class=icon>
+						<img id="icon" src="images/_Rolladen_BW.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class=room>
+							<a >Rolladen Kueche</a>
+						</div>
+					</div>	
+			</div>
+			<div class="GlideButton olive" onclick="RolloKZ()" >
+					<div class=icon>
+						<img id="icon" src="images/_Rolladen_BW.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class=room>
+							<a >Rolladen Kinderzimmer</a>
+						</div>
+					</div>	
+			</div>
+			<div class="GlideButton sandy" onclick="" >
+					<div class=icon>
+						<img id="icon" src="images/_Rolladen_BW.png"  alt="image not found"/>
+					</div>
+					<div>
+						<div class=room>
+							<a >Rolladen Schlafzimmer</a>
+						</div>
+					</div>	
+			</div>
+
+ 		</subMenu>
+                
+	<!-- ************************ Sub Menu Netzwerk  ************************  -->
+	<subMenu id="SubMenuNet" class="MenuNet"></subMenu>
+  		
+        <script>   
+            var SubMenuWSS = new GlideButton();
+            SubMenuWSS.create("SubMenuNet","SubMenuWSS", "midgreen", "WSS Server", "WSS.png", "","MainWSS", "SM" ); 
+            var SubMenuWSS = new GlideButton();
+            SubMenuWSS.create("SubMenuNet","SubMenuWSS", "midgreen", "WSS Server", "WSS.png", "MainNet","", "SM" ); 
+        </script>
+  
+ 	 
+                
+                
+		<div class="StartScreen">
+			<img src="images/MyHomeControl.png"  alt="image not found" style="width: 400px; padding-top:50px" />
+		</div>
+<!-- ************************ Container  ************************  -->
+
+
+		<!-- ************************ Heizung Uebersicht ************************  -->
+		<Main class="HeizungAll">	
+			<div class="reihe"  style="margin-right: 50px; margin-left: 50px">	
+				<div class="spalte" style="height: 45vh">
+		 			<div class="IconButton small cyan" onclick="HeizungWZAll()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Heizung_BW2.png"  />
+						<span id="tempwohnzimmer4" style="font-size: 22px; padding-top: 5px;">Wohnzimmer </span>
+					</div>
+					<div class="ctrlbutton cyan"  onclick="send('Heizung' + '*' + 'WZ' + '*' + '22.5')">
+		 				Heizen
+				    </div>
+					<div class="ctrlbutton cyan"  onclick="send('Heizung' + '*' + 'WZ' + '*' + '18.0')">
+		 				Standby
+				    </div>
+				</div>
+
+				<div class="spalte" style="height: 45vh">
+		 			<div class="IconButton small olive" onclick="HeizungKZAll()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Heizung_BW2.png"  />
+						<span id="tempkinderzimmer4"  style="font-size: 22px; padding-top: 5px;">Kinderzimmer </span>
+					</div>
+					<div class="ctrlbutton olive"  onclick="send('Heizung' + '*' + 'KZ' + '*' + '22.5')">
+		 				Heizen
+				    </div>
+					<div class="ctrlbutton olive"  onclick="send('Heizung' + '*' + 'KZ' + '*' + '18.0')">
+		 				Standby
+				    </div>
+				</div>
+	 		</div>
+	 		
+			<div class="reihe"  style="margin-right: 50px; margin-left: 50px">	
+				<div class="spalte" style="height: 45vh">
+		 			<div class="IconButton small sandy" onclick="HeizungSZAll()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Heizung_BW2.png"  />
+						<span id="tempschlafzimmer4"  style="font-size: 22px; padding-top: 5px;">Schlafzimmer </span>
+					</div>
+					<div class="ctrlbutton sandy"  onclick="send('Heizung' + '*' + 'SZ' + '*' + '22.5')">
+		 				Heizen
+				    </div>
+					<div class="ctrlbutton sandy"  onclick="send('Heizung' + '*' + 'SZ' + '*' + '18.0')">
+		 				Standby
+				    </div>
+				</div>
+
+				<div class="spalte" style="height: 45vh">
+		 			<div class="IconButton small red" onclick="HeizungKAll()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Heizung_BW2.png"  />
+						<span id="tempkueche4"  style="font-size: 22px; padding-left: 20px; padding-top: 5px;">  KÃ¼che<br> </span>
+					</div>
+					<div class="ctrlbutton red"  onclick="send('Heizung' + '*' + 'K' + '*' + '22.5')">
+		 				Heizen
+				    </div>
+					<div class="ctrlbutton red"  onclick="send('Heizung' + '*' + 'K' + '*' + '18.0')">
+		 				Standby
+				    </div>
+				</div>
+	 		</div>
+	 	</Main>
+
+		<!-- ************************ Heizung Wohnzimmer ************************  -->
+		<Main id="MainHeizungWZ" class="HeizungWZ">	</Main>
+ 
+   <script>
+ 
+        
+        MainTempVHzWZ = Object.create(VarDisplay);
+        MainTempVHzWZ.create("MainHeizungWZ", "TempVorHzWZ1", "cyan","50px", "350px", "normal", "°C");
+        MainTempRHzWZ = Object.create(VarDisplay);
+        MainTempRHzWZ.create("MainHeizungWZ", "TempRueckHzWZ1", "cyan", "190px", "350px", "normal", "°C");
+        
+        MainTempHzWZ = Object.create(VarDisplay);
+        MainTempHzWZ.create("MainHeizungWZ", "TempHzWZ1", "cyan","20px", "100px", "normal", "°C");
+        MainPosHzWZ = Object.create(VarDisplay);
+        MainPosHzWZ.create("MainHeizungWZ", "PosHzWZ11", "cyan","20px", "200px", "normal", "%");
+        
+ 
+        var iHzWZ = new Image("iconHzWZ1","heizkoerper","bin");
+        iHzWZ.create("MainHeizungWZ", "40px", "70px", "wide"); 
+        addTitle("MainHeizungWZ", "240px", "120px", "18px", "white", "Mode");
+        addCtrlButton("MainHeizungWZ", "btnHzWZauto", "300px", "50px", "normal", "cyan", "Automatik", "send('command(Heizung,WZ,auto)') ");
+        addCtrlButton("MainHeizungWZ", "btnHzWZman", "360px", "50px", "normal", "cyan", "Manual", "send('command(Heizung,WZ,man)') ");
+        addCtrlButton("MainHeizungWZ", "btn3", "420px", "50px", "normal", "cyan", "Urlaub", "send('command(Heizung,WZ,urlaub)') ");
+        addCtrlButton("MainHeizungWZ", "btn4", "480px", "50px", "normal", "cyan", "Party", "send('command(Heizung,WZ,party)') ");
+        addTitle("MainHeizungWZ", "240px", "400px", "18px", "white", "Presets");
+        addCtrlButton("MainHeizungWZ", "btn5", "300px", "350px", "normal", "cyan", "Heizen", "{send('command(Heizung,WZ,heizen)'); document.getElementById('AdjTempHzWZ1').innerHTML='22.5';} ");
+        addCtrlButton("MainHeizungWZ", "btn6", "360px", "350px", "normal", "cyan", "Absenken", "{send('command(Heizung,WZ,absenken)'); document.getElementById('AdjTempHzWZ1').innerHTML='16.0';}");
+        addCtrlButton("MainHeizungWZ", "btn7", "420px", "350px", "normal", "cyan", "Aus", "{send('command(Heizung,WZ,aus)'); document.getElementById('AdjTempHzWZ1').innerHTML='6.0';} ");
+        addCtrlButton("MainHeizungWZ", "btn8", "480px", "350px", "normal", "cyan", "Auf", "{send('command(Heizung,WZ,auf)'); document.getElementById('AdjTempHzWZ1').innerHTML='30.0';}");
+  </script>
+ 		
+ 
+		<!-- ************************ Heizung Ctrl Wohnzimmer ************************  -->
+
+		<Ctrl id="MainHeizungWZCtrl"  class="HeizungCtrlWZ"></Ctrl>
+
+                
+   <script>
+       addStatus("MainHeizungWZCtrl", "BatHzWZ1", "cyan", "5px", "30px", "Battery");      
+       addTempCtrl("MainHeizungWZCtrl", "TempCtrl1", "cyan", "260px", "30px", "Soll Temperatur", "AdjTempHzWZ1", "SollTempAusHzWZ1", "SollTempHzWZ1", "sollTempWZ");
+        
+        
+        DisModeHzWZ=Object.create(Display);
+        DisModeHzWZ.create("MainHeizungWZCtrl", "ModeHzWZ1", "cyan", "", "50px", "30px", "Mode", "Auto", "Man", "Urlaub", "Party", "");
+         DisTempHzWZ=Object.create(Display);
+        DisTempHzWZ.create("MainHeizungWZCtrl", "TempHzWZ2", "cyan", "°C", "120px", "30px",  "Temperatur", "Number", "", "", "", "");
+ 
+        DisPosHzWZCtrl=Object.create(Display);
+        DisPosHzWZCtrl.create("MainHeizungWZCtrl", "PosHzWZCtrl", "cyan", "%", "190px", "30px", "Position", "Number", "", "", "", "");
+        
+  
+
+  </script>
+		
+
+		<!-- ************************ Heizung Kinderzimmer ************************  -->
+		<Main id="MainHzKZ"  class="HeizungKZ">	
+
+ 		</Main>
+   <script>
+ 
+        
+        
+        MainTempVHzKZ = Object.create(VarDisplay);
+        MainTempVHzKZ.create("MainHzKZ", "TempVorHzKZ1", "olive", "50px", "350px", "normal", "°C");
+        MainTempRHzKZ = Object.create(VarDisplay);
+        MainTempRHzKZ.create("MainHzKZ", "TempRueckHzKZ1", "olive", "190px", "350px", "normal", "°C");
+
+        MainTempHzKZ = Object.create(VarDisplay);
+        MainTempHzKZ.create("MainHzKZ", "TempHzKZ1", "olive","20px", "100px", "normal", "°C");
+        MainPosHzKZ = Object.create(VarDisplay);
+        MainPosHzKZ.create("MainHzKZ", "PosHzKZ1", "olive","20px", "200px", "normal", "%");        
+        
+        var iHzKZ = new Image("iconHzKZ1","heizkoerper","bin");
+        iHzKZ.create("MainHzKZ", "40px", "70px", "wide"); 
+        addTitle("MainHzKZ", "240px", "120px", "18px", "white", "Mode");
+        addCtrlButton("MainHzKZ", "btn9", "300px", "50px", "normal", "olive", "Automatik", "send('command(Heizung,KZ,auto)') ");
+        addCtrlButton("MainHzKZ", "btn10", "360px", "50px", "normal", "olive", "Manual", "send('command(Heizung,KZ,man)') ");
+        addCtrlButton("MainHzKZ", "btn11", "420px", "50px", "normal", "olive", "Urlaub", "send('command(Heizung,KZ,urlaub)') ");
+        addCtrlButton("MainHzKZ", "btn12", "480px", "50px", "normal", "olive", "Party", "send('command(Heizung,KZ,party)') ");
+        addTitle("MainHzKZ", "240px", "400px", "18px", "white", "Presets");
+        addCtrlButton("MainHzKZ", "btn13", "300px", "350px", "normal", "olive", "Heizen", "{send('command(Heizung,KZ,heizen)'); document.getElementById('AdjTempHzKZ1').innerHTML='22.5';} ");
+        addCtrlButton("MainHzKZ", "btn14", "360px", "350px", "normal", "olive", "Absenken", "{send('command(Heizung,KZ,absenken)');  document.getElementById('AdjTempHzKZ1').innerHTML='16.0';} ");
+        addCtrlButton("MainHzKZ", "btn15", "420px", "350px", "normal", "olive", "Aus", "{send('command(Heizung,KZ,aus)'); document.getElementById('AdjTempHzKZ1').innerHTML='6.0';} ");
+        addCtrlButton("MainHzKZ", "btn16", "480px", "350px", "normal", "olive", "Auf", "{send('command(Heizung,KZ,auf)'); document.getElementById('AdjTempHzKZ1').innerHTML='30.0';}");
+  </script>
+		<!-- ************************ Heizung Ctrl Kinderzimmer ************************ -->
+
+		<Ctrl id="MainHzKZCtrl"  class="HeizungCtrlKZ"></Ctrl>
+		
+
+   <script>
+       addStatus("MainHzKZCtrl", "BatHzKZ1", "olive", "5px", "30px", "Battery");      
+       addTempCtrl("MainHzKZCtrl", "TempCtrl2", "olive", "260px", "30px", "Soll Temperatur", "AdjTempHzKZ1", "SollTempAusHzKZ1", "SollTempHzKZ1", "sollTempKZ");
+        DisModeHzKZCtrl=Object.create(Display);
+        DisModeHzKZCtrl.create("MainHzKZCtrl", "ModeHzKZCtrl", "olive", "", "50px", "30px", "Mode", "Auto", "Man", "Urlaub", "Party", "");
+        
+        DisTempHzKZCtrl=Object.create(Display);
+        DisTempHzKZCtrl.create("MainHzKZCtrl", "TempHzKZCtrl", "olive", "°C", "120px", "30px",  "Temperatur", "Number", "", "", "", "");
+ 
+        DisPosHzKZCtrl=Object.create(Display);
+        DisPosHzKZCtrl.create("MainHzKZCtrl", "PosHzKZCtrl", "olive", "%", "190px", "30px", "Position", "Number", "", "", "", "");
+ 
+ 
+
+  </script>
+		<!-- ************************ Heizung Schlafzimmer ************************  -->
+		<Main id="MainHzSZ"   class="HeizungSZ">	</Main>
+                
+   <script>
+ 
+        
+        MainTempVHzSZ = Object.create(VarDisplay);
+        MainTempVHzSZ.create("MainHzSZ", "TempVorHzSZ1", "sandy", "50px", "350px", "normal", "°C");
+        MainTempRHzSZ = Object.create(VarDisplay);
+        MainTempRHzSZ.create("MainHzSZ", "TempRueckHzSZ1", "sandy", "190px", "350px", "normal", "°C");
+
+        MainTempHzSZ = Object.create(VarDisplay);
+        MainTempHzSZ.create("MainHzSZ", "TempHzSZ1", "sandy","20px", "100px", "normal", "°C");
+        MainPosHzSZ = Object.create(VarDisplay);
+        MainPosHzSZ.create("MainHzSZ", "PosHzSZ1", "sandy","20px", "200px", "normal", "%");     
+        
+        var iHzSZ = new Image("iconHzSZ1","heizkoerper","bin");
+        iHzSZ.create("MainHzSZ", "40px", "70px", "wide"); 
+        addTitle("MainHzSZ", "240px", "120px", "18px", "white", "Mode");
+        addCtrlButton("MainHzSZ", "btn17", "300px", "50px", "normal", "sandy", "Automatik", "send('command(Heizung,SZ,auto)') ");
+        addCtrlButton("MainHzSZ", "btn18", "360px", "50px", "normal", "sandy", "Manual", "send('command(Heizung,SZ,man)') ");
+        addCtrlButton("MainHzSZ", "btn19", "420px", "50px", "normal", "sandy", "Urlaub", "send('command(Heizung,SZ,urlaub)') ");
+        addCtrlButton("MainHzSZ", "btn20", "480px", "50px", "normal", "sandy", "Party", "send('command(Heizung,SZ,party)') ");
+        addTitle("MainHzSZ", "240px", "400px", "18px", "white", "Presets");
+        addCtrlButton("MainHzSZ", "btn21", "300px", "350px", "normal", "sandy", "Heizen", "{send('command(Heizung,SZ,heizen)'); document.getElementById('AdjTempHzSZ1').innerHTML='22.5';} ");
+        addCtrlButton("MainHzSZ", "btn22", "360px", "350px", "normal", "sandy", "Absenken", "{send('command(Heizung,SZ,absenken)'); document.getElementById('AdjTempHzSZ1').innerHTML='16.0';} ");
+        addCtrlButton("MainHzSZ", "btn23", "420px", "350px", "normal", "sandy", "Aus", "{send('command(Heizung,SZ,aus)'); document.getElementById('AdjTempHzSZ1').innerHTML='6.0';} ");
+        addCtrlButton("MainHzSZ", "btn24", "480px", "350px", "normal", "sandy", "Auf", "{send('command(Heizung,SZ,auf)'); document.getElementById('AdjTempHzSZ1').innerHTML='30.0';}");
+  </script>
+		<!-- ************************ Heizung Ctrl Schlafzimmer ************************  -->
+		<Ctrl id="MainHzSZCtrl" class="HeizungCtrlSZ">  </Ctrl>
+
+   <script>
+       addStatus("MainHzSZCtrl", "BatHzSZ1", "sandy", "5px", "30px", "Battery");      
+       addTempCtrl("MainHzSZCtrl", "TempCtrl3", "sandy", "260px", "30px", "Soll Temperatur", "AdjTempHzSZ1", "SollTempAusHzSZ1", "SollTempHzSZ1", "sollTempSZ");
+        DisModeHzSZCtrl=Object.create(Display);
+        DisModeHzSZCtrl.create("MainHzSZCtrl", "ModeHzSZCtrl", "sandy", "", "50px", "30px", "Mode", "Auto", "Man", "Urlaub", "Party", "");
+        
+        DisTempHzSZCtrl=Object.create(Display);
+        DisTempHzSZCtrl.create("MainHzSZCtrl", "TempHzSZCtrl", "sandy", "°C", "120px", "30px",  "Temperatur", "Number", "", "", "", "");
+ 
+        DisPosHzSZCtrl=Object.create(Display);
+        DisPosHzSZCtrl.create("MainHzSZCtrl", "PosHzSZCtrl", "sandy", "%", "190px", "30px", "Position", "Number", "", "", "", "");
+        
+
+
+  </script>
+
+		<!-- ************************ Heizung Kueche ************************ -->
+		<Main  id="MainHzK"   class="HeizungK">   </Main>	
+
+
+ 	 
+   <script>
+ 
+        
+        MainTempVHzK = Object.create(VarDisplay);
+        MainTempVHzK.create("MainHzK", "TempVorHzK1", "midgreen", "50px", "350px", "normal", "°C");
+        MainTempRHzK = Object.create(VarDisplay);
+        MainTempRHzK.create("MainHzK", "TempRueckHzK1", "midgreen", "190px", "350px", "normal", "°C");
+
+        MainTempHzK = Object.create(VarDisplay);
+        MainTempHzK.create("MainHzK", "TempHzK1", "midgreen","20px", "100px", "normal", "°C");
+        MainPosHzK = Object.create(VarDisplay);
+        MainPosHzK.create("MainHzK", "PosHzK1", "midgreen","20px", "200px", "normal", "%");
+        
+        var iHzK = new Image("iconHzK1","heizkoerper","bin");
+        iHzK.create("MainHzK", "40px", "70px", "wide");
+        addTitle("MainHzK", "240px", "120px", "18px", "white", "Mode");
+        addCtrlButton("MainHzK", "btnHzKauto", "300px", "50px", "normal", "midgreen", "Automatik", "send('command(Heizung,K,auto)') ");
+        addCtrlButton("MainHzK", "btn26", "360px", "50px", "normal", "midgreen", "Manual", "send('command(Heizung,K,man)') ");
+        addCtrlButton("MainHzK", "btn27", "420px", "50px", "normal", "midgreen", "Urlaub", "send('command(Heizung,K,urlaub)') ");
+        addCtrlButton("MainHzK", "btn28", "480px", "50px", "normal", "midgreen", "Party", "send('command(Heizung,K,party)') ");
+        addTitle("MainHzK", "240px", "400px", "18px", "white", "Presets");
+        addCtrlButton("MainHzK", "btn29", "300px", "350px", "normal", "midgreen", "Heizen", "{send('command(Heizung,K,heizen)'); document.getElementById('AdjTempHzK1').innerHTML='22.5';} ");
+        addCtrlButton("MainHzK", "btn30", "360px", "350px", "normal", "midgreen", "Absenken", "{send('command(Heizung,K,absenken)'); document.getElementById('AdjTempHzK1').innerHTML='16.0';} ");
+        addCtrlButton("MainHzK", "btn31", "420px", "350px", "normal", "midgreen", "Aus", "{send('command(Heizung,K,aus)'); document.getElementById('AdjTempHzK1').innerHTML='6.0';} ");
+        addCtrlButton("MainHzK", "btn32", "480px", "350px", "normal", "midgreen", "Auf", "{send('command(Heizung,K,auf)'); document.getElementById('AdjTempHzK1').innerHTML='30.0';}");
+  </script>
+		<!-- ************************ Heizung Ctrl Kueche ************************  -->
+		<Ctrl  id="MainHzKCtrl"  class="HeizungCtrlK">
+
+		</Ctrl>
+   <script>
+       addStatus("MainHzKCtrl", "BatHzK1", "midgreen", "5px", "30px", "Battery");      
+       addTempCtrl("MainHzKCtrl", "TempCtrl4", "midgreen", "260px", "30px", "Soll Temperatur", "AdjTempHzK1", "SollTempAusHzK1", "SollTempHzK1", "sollTempK");
+        DisModeHzKCtrl = Object.create(Display);
+        DisModeHzKCtrl.create("MainHzKCtrl", "ModeHzKCtrl", "midgreen", "", "50px", "30px", "Mode", "Auto", "Man", "Urlaub", "Party", "");
+        
+        DisTempHzKCtrl=Object.create(Display);
+        DisTempHzKCtrl.create("MainHzKCtrl", "TempHzKCtrl", "midgreen", "°C", "120px", "30px",  "Temperatur", "Number", "", "", "", "");
+ 
+        DisPosHzKCtrl=Object.create(Display);
+        DisPosHzKCtrl.create("MainHzKCtrl", "PosHzKCtrl", "midgreen", "%", "190px", "30px", "Position", "Number", "", "", "", "");
+ 
+     
+
+  </script>
+		<!-- ************************ Rolladen  Wohnzimmer ************************ -->
+		<Main id="MainRolloWZ"   class="RolloWZ"> </Main>
+
+    <script>     
+        var iRolloWZ = new Image("imageRolloWZ1","rollo","ana");
+        iRolloWZ.create("MainRolloWZ", "30px", "170px", "normal"); 
+        addTitle("MainRolloWZ", "200px", "100px", "18px", "white", "Presets");
+        addCtrlButton("MainRolloWZ", "btn33", "260px", "50px", "normal", "cyan", "Automatik", "send('command(Rollo,WZ,Auto)') ");
+        addCtrlButton("MainRolloWZ", "btn34", "320px", "50px", "normal", "cyan", "Manual", "send('command(Rollo,WZ,Man)') ");     
+        addCtrlButton("MainRolloWZ", "btn35", "380px", "50px", "normal", "cyan", "75%", "send('command(Rollo,WZ,dark)') ");
+        addCtrlButton("MainRolloWZ", "btn36", "440px", "50px", "normal", "cyan", "50%", "send('command(Rollo,WZ,mid)') ");
+        addCtrlButton("MainRolloWZ", "btn37", "500px", "50px", "normal", "cyan", "25%", "send('command(Rollo,WZ,bright)') ");
+        addTitle("MainRolloWZ", "210px", "400px", "18px", "white", "Control");
+        addCtrlButton("MainRolloWZ", "btn38", "260px", "350px", "normal", "cyan", "Hoch", "send('command(Rollo,WZ,up)') ");
+        addCtrlButton("MainRolloWZ", "btn39", "320px", "350px", "normal", "cyan", "Stop", "send('command(Rollo,WZ,stop)') ");     
+        addCtrlButton("MainRolloWZ", "btn40", "380px", "350px", "normal", "cyan", "Runter", "send('command(Rollo,WZ,down)') ");
+        addCtrlButton("MainRolloWZ", "btn41", "440px", "350px", "normal", "cyan", "Step Up", "send('command(Rollo,WZ,StepUp)') ");
+        addCtrlButton("MainRolloWZ", "btn42", "500px", "350px", "normal", "cyan", "Step Down", "send('command(Rollo,WZ,StepDown)') ");
+    </script>
+ 		<!-- ************************ Rolladen  BalkonTuer ************************  -->
+		<Main id="MainRolloB"  class="RolloB">	</Main>
+
+     <script>    
+        var iRolloB = new Image("imageRolloB1","rollo","ana");
+        iRolloB.create("MainRolloB", "30px", "170px", "normal");   
+        addTitle("MainRolloB", "200px", "100px", "24px", "white", "Presets");
+        addCtrlButton("MainRolloB", "btn73", "260px", "50px", "normal", "blue", "Automatik", "send('command(Rollo,B,Auto)') ");
+        addCtrlButton("MainRolloB", "btn74", "320px", "50px", "normal", "blue", "Manual", "send('command(Rollo,B,Man)') ");     
+        addCtrlButton("MainRolloB", "btn75", "380px", "50px", "normal", "blue", "75%", "send('command(Rollo,B,dark)') ");
+        addCtrlButton("MainRolloB", "btn76", "440px", "50px", "normal", "blue", "50%", "send('command(Rollo,B,mid)') ");
+        addCtrlButton("MainRolloB", "btn77", "500px", "50px", "normal", "blue", "25%", "send('command(Rollo,B,bright)') ");
+        addTitle("MainRolloB", "200px", "400px", "24px", "white", "Control");
+        addCtrlButton("MainRolloB", "btn78", "260px", "350px", "normal", "blue", "Hoch", "send('command(Rollo,B,up)') ");
+        addCtrlButton("MainRolloB", "btn79", "320px", "350px", "normal", "blue", "Stop", "send('command(Rollo,B,stop)') ");     
+        addCtrlButton("MainRolloB", "btn80", "380px", "350px", "normal", "blue", "Runter", "send('command(Rollo,B,down)') ");
+        addCtrlButton("MainRolloB", "btn81", "440px", "350px", "normal", "blue", "Step Up", "send('command(Rollo,B,StepUp)') ");
+        addCtrlButton("MainRolloB", "btn82", "500px", "350px", "normal", "blue", "Step Down", "send('command(Rollo,B,StepDown)') ");
+        
+
+    </script>
+ 		<!-- ************************ Rolladen  Kinderzimmer ************************  -->
+		<Main id="MainRolloKZ"  class="RolloKZ">	</Main>
+
+    <script>      
+        var iRolloKZ = new Image("imageRolloKZ1","rollo","ana");
+        iRolloKZ.create("MainRolloKZ", "30px", "170px", "normal");         
+        addTitle("MainRolloKZ", "210px", "100px", "18px", "white", "Presets");
+        addCtrlButton("MainRolloKZ", "btn43", "260px", "50px", "normal", "olive", "Automatik", "send('command(Rollo,KZ,Auto)') ");
+        addCtrlButton("MainRolloKZ", "btn44", "320px", "50px", "normal", "olive", "Manual", "send('command(Rollo,KZ,Man)') ");     
+        addCtrlButton("MainRolloKZ", "btn45", "380px", "50px", "normal", "olive", "75%", "send('command(Rollo,KZ,dark)') ");
+        addCtrlButton("MainRolloKZ", "btn46", "440px", "50px", "normal", "olive", "50%", "send('command(Rollo,KZ,mid)') ");
+        addCtrlButton("MainRolloKZ", "btn47", "500px", "50px", "normal", "olive", "25%", "send('command(Rollo,KZ,bright)') ");
+        addTitle("MainRolloKZ", "210px", "400px", "18px", "white", "Control");
+        addCtrlButton("MainRolloKZ", "btn48", "260px", "350px", "normal", "olive", "Hoch", "send('command(Rollo,KZ,up)') ");
+        addCtrlButton("MainRolloKZ", "btn49", "320px", "350px", "normal", "olive", "Stop", "send('command(Rollo,KZ,stop)') ");     
+        addCtrlButton("MainRolloKZ", "btn50", "380px", "350px", "normal", "olive", "Runter", "send('command(Rollo,KZ,down)') ");
+        addCtrlButton("MainRolloKZ", "btn51", "440px", "350px", "normal", "olive", "Step Up", "send('command(Rollo,KZ,StepUp)') ");
+        addCtrlButton("MainRolloKZ", "btn52", "500px", "350px", "normal", "olive", "Step Down", "send('command(Rollo,KZ,StepDown)') ");
+    </script>
+ 		<!-- ************************ Rolladen  Kueche ************************ -->
+		<Main id="MainRolloK"  class="RolloK">	</Main>
+ 		
+    <script>     
+        var iRolloK = new Image("imageRolloK1","rollo","ana");
+        iRolloK.create("MainRolloK", "30px", "170px", "normal");    
+        addTitle("MainRolloK", "210px", "100px", "18px", "white", "Presets");
+        addCtrlButton("MainRolloK", "btn53", "260px", "50px", "normal", "midgreen", "Automatik", "send('command(Rollo,K,Auto)') ");
+        addCtrlButton("MainRolloK", "btn54", "320px", "50px", "normal", "midgreen", "Manual", "send('command(Rollo,K,Man)') ");     
+        addCtrlButton("MainRolloK", "btn55", "380px", "50px", "normal", "midgreen", "75%", "send('command(Rollo,K,dark)') ");
+        addCtrlButton("MainRolloK", "btn56", "440px", "50px", "normal", "midgreen", "50%", "send('command(Rollo,K,mid)') ");
+        addCtrlButton("MainRolloK", "btn57", "500px", "50px", "normal", "midgreen", "25%", "send('command(Rollo,K,bright)') ");
+        addTitle("MainRolloK", "210px", "400px", "18px", "white", "Control");
+        addCtrlButton("MainRolloK", "btn58", "260px", "350px", "normal", "midgreen", "Hoch", "send('command(Rollo,K,up)') ");
+        addCtrlButton("MainRolloK", "btn59", "320px", "350px", "normal", "midgreen", "Stop", "send('command(Rollo,K,stop)') ");     
+        addCtrlButton("MainRolloK", "btn60", "380px", "350px", "normal", "midgreen", "Runter", "send('command(Rollo,K,down)') ");
+        addCtrlButton("MainRolloK", "btn61", "440px", "350px", "normal", "midgreen", "Step Up", "send('command(Rollo,K,StepUp)') ");
+        addCtrlButton("MainRolloK", "btn62", "500px", "350px", "normal", "midgreen", "Step Down", "send('command(Rollo,K,StepDown)') ");
+    </script>
+
+        <!-- ***********************************************************************************      -->
+	<!--  ************************          INDEX S - Security    ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Main id ="MainSecCode" class="SecurityCode"></Main>
+		
+    <script>
+        var KeyPadSecKey = new KeyPad();
+        KeyPadSecKey.create("MainSecCode", "KeyCode", "security" , "grey", "1", "10vh" , "120px" );  
+        
+        var AList = new TextScrollBox();
+        AList.create("MainSecCode", "5vh" , "50px");
+        
+        
+        var CtrlBtnAlarmActive = new CtrlButton();
+        CtrlBtnAlarmActive.create("MainSecCode", "500px", "10px",  "normal", "red", "activate Alarm", "command",  "send('command(security,AA,activate)') ");
+        
+        var CtrlBtnShowAlarmList = new CtrlButton();
+        CtrlBtnShowAlarmList.create("MainSecCode", "500px", "200px",  "normal", "red", "Alarm List", "command",  "showAlarmList()");
+
+        var CtrlBtnShowkeypad = new CtrlButton()
+        CtrlBtnShowkeypad.create("MainSecCode", "500px", "390px",  "normal", "red", "KeyPad", "command",  "showkeypad()");
+        
+    </script>
+   
+   
+        <!-- ***********************************************************************************      -->
+	<!--  ************************    Security Ctrl                 ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Ctrl id ="MainSecCodeCtrl" class="SecCodeCtrl"></Ctrl>  
+    <script>
+
+        var ABox = new AlarmBox();
+        ABox.create("MainSecCodeCtrl", "AlarmMeldung", "yellow", "10px" , "20px" ); 
+            
+        DisAlarmActiveSec=Object.create(Display);
+        DisAlarmActiveSec.create("MainSecCodeCtrl", "AlarmActiveSec", "red", "", "60px", "20px", "Alarm Anlage", "aktiviert", "deaktiviert", "", "", "");
+        DisDoorOpen=Object.create(Display);
+        DisDoorOpen.create("MainSecCodeCtrl", "DoorOpen", "red", "", "240px", "20px", "Eingangstür", "offen", "geschlossen", "", "", "");
+        DisBalkonDoorOpen=Object.create(Display);
+        DisBalkonDoorOpen.create("MainSecCodeCtrl", "BalkonDoorOpen", "red", "", "320px", "20px", "Balkon Tür", "offen", "geschlossen", "", "", "");
+
+        DisFloorPD=Object.create(Display);
+        DisFloorPD.create("MainSecCodeCtrl", "FloorPF", "red", "", "500px", "20px", "Diele", "Person erkannt", "keine Person", "", "", "");
+
+
+    </script>
+   
+    
+        <!-- ***********************************************************************************      -->
+	<!--  ************************          Water Alarm   ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Main id ="MainWaterAlarm" class="WaterAlarm">
+                <img  src="images/BadewanneW.png" alt="no image found"  style="padding-left:4px; height:250px; width:270px">
+                <img  src="images/WaschmaschineW.png" alt="no image found"  style="padding-left:4px; height:250px; width:270px">
+                </Main>
+        <script>
+        </script>
+    
+        <!-- ***********************************************************************************      -->
+	<!--  ************************    Water Alarm Ctrl                 ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Ctrl id ="MainWaterAlarmCtrl" class="WaterAlarmCtrl"></Ctrl>  
+ 
+        <script>
+        </script>  
+                
+        <!-- ***********************************************************************************      -->
+	<!--  ************************          INDEX E - Floorplan    ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Main id ="Grundriss" class="floorplan"></Main>
+		
+   <script>
+        VarDisTempK_E = Object.create(VarDisplay);
+        VarDisTempK_E.create("Grundriss", "tempK_E", "cyan","55vh", "15vw", "normal", "°C");
+        VarDisTempWZ_E = Object.create(VarDisplay);
+        VarDisTempWZ_E.create("Grundriss", "tempWZ_E", "cyan","60vH", "60vw", "normal", "°C");        
+        VarDisTempSZ_E = Object.create(VarDisplay);
+        VarDisTempSZ_E.create("Grundriss", "tempSZ_E", "cyan","150px", "20vw", "normal", "°C");
+        VarDisTempKZ_E = Object.create(VarDisplay);
+        VarDisTempKZ_E.create("Grundriss", "tempKZ_E", "cyan","100px", "65vw", "normal", "°C"); 
+    
+        VarDisHumidSZ_E = Object.create(VarDisplay);
+        VarDisHumidSZ_E.create("Grundriss", "FeuchteSZ_E", "cyan","70px", "9vw", "normal", "%");
+        VarDisHumidKZ_E = Object.create(VarDisplay);
+        VarDisHumidKZ_E.create("Grundriss", "FeuchteKZ_E", "cyan","70px", "65vw", "normal", "%");        
+ 
+        VarDisTempOutside = Object.create(VarDisplay);
+        VarDisTempOutside.create("Grundriss", "TempOut", "cyan","10vh", "80vw", "normal", "°C");
+        VarDisHumOutside = Object.create(VarDisplay);
+        VarDisHumOutside.create("Grundriss", "HumidOut", "cyan","15vH", "80vw", "normal", "%");
+        
+        VarDisMainDoor = Object.create(VarDisplay);
+        VarDisMainDoor.create("Grundriss", "door_E", "cyan","90vh", "24vw", "normal", "", "close", "open");
+   </script>
+   
+        <!-- ***********************************************************************************   -->
+	<!--  ************************          Main - Samsung TV    ************************      -->   
+        <!-- ***********************************************************************************   -->
+		 
+        <Main id="MainTV" class="TV">  </Main>
+             
+         <script>   
+            var LedDisplayTV = new LEDdisplay();
+            LedDisplayTV.create("MainTV", "LedDisplayTV", "1vh" , "20%", "40px", "70%" );
+            var KeyPadTVChannel = new KeyPad();
+            KeyPadTVChannel.create("MainTV", "KeyTVChannel", "TV", "purple", "0.8", "10vh" , "5%" );  
+            var NavPadSecKey = new NavPad();
+            NavPadSecKey.create("MainTV", "NavPad", "purple", "12vh" , "60%", ["fa fa-square","fa fa-caret-up","fa fa-square","fa fa-caret-left","fa fa-thumbs-up","fa fa-caret-right","fa fa-square","fa fa-caret-down","fa fa-square"] ); 
+            var CtrlBtnTVup = new CtrlButton();
+            CtrlBtnTVup.create("MainTV", "52vh", "51%",  "normal", "purple", "Chanel Up", "command",   "send('command(TV,key,KEY_CHUP)') ");
+            var CtrlBtnTVdown = new CtrlButton();
+            CtrlBtnTVdown.create("MainTV", "52vh", "20%",  "normal", "purple", "Chanel Down", "command",   "send('command(TV,key,KEY_CHDOWN)') ");
+            var CtrlBtnTVList = new CtrlButton();
+            CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Sender", "command",   "send('command(TV,AA,activate)') ");
+            var CtrlBtnTVCh = new CtrlButton();
+            CtrlBtnTVCh.create("MainTV", "63vh", "34.5%",  "normal", "purple", "Programm", "command",   "send('command(TV,AA,activate)') ");
+            var CtrlBtnTVx = new CtrlButton();
+            CtrlBtnTVx.create("MainTV", "63vh", "66%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
+            var CtrlBtnTVa = new CtrlButton();
+            CtrlBtnTVa.create("MainTV",  "73vh", "3%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
+            var CtrlBtnTVb = new CtrlButton();
+            CtrlBtnTVb.create("MainTV", "73vh", "34.5%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
+            var CtrlBtnTVc = new CtrlButton();
+            CtrlBtnTVc.create("MainTV", "73vh", "66%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
+           
+            var FontBtnA = new FontButtonNew();
+            FontBtnA.create("MainTV", "purple", "mid", "83vh", "3%", "fa fa-backward", "send('command(TV,key,KEY_REWIND)')");
+            var FontBtnB = new FontButtonNew();
+            FontBtnB.create("MainTV", "purple", "mid", "83vh", "13%", "fa fa-pause", "send('command(TV,key,KEY_PAUSE)')");
+            var FontBtnC = new FontButtonNew();
+            FontBtnC.create("MainTV", "purple", "mid", "83vh", "23%", "fa fa-play", "send('command(TV,key,KEY_PLAY)')");
+            var FontBtnD = new FontButtonNew();
+            FontBtnD.create("MainTV", "purple", "mid", "83vh", "33%", "fa fa-volume-down", "send('command(TV,key,KEY_VOLDOWN)')");  
+            var FontBtnH = new FontButtonNew();
+            FontBtnH.create("MainTV", "purple", "mid", "83vh", "43%", "fa fa-volume-down", "send('command(TV,key,KEY_MUTE)')");
+            var FontBtnI = new FontButtonNew();
+            FontBtnI.create("MainTV", "purple", "mid", "83vh", "53%", "fa fa-volume-down", "send('command(TV,key,KEY_VOLUP)')");
+            var FontBtnE = new FontButtonNew();
+            FontBtnE.create("MainTV", "purple", "mid", "83vh", "63%", "fa fa-stop", "send('command(TV,key,KEY_STOP)')");
+            var FontBtnF = new FontButtonNew();
+            FontBtnF.create("MainTV", "purple", "mid", "83vh", "73%", "fa fa-circle", "send('command(TV,key,KEY_REC)')");
+            var FontBtnG = new FontButtonNew();
+            FontBtnG.create("MainTV", "purple", "mid", "83vh", "83%", "fa fa-forward", "send('command(TV,key,KEY_FF)')");
+         </script>
+        
+        <!-- ***********************************************************************************   -->
+	<!--  ************************          Main - Denon Ceol - IRadio    ************************      -->   
+        <!-- ***********************************************************************************   -->
+		 
+        <Main id="MainIRadio" class="IRadio">  </Main>
+
+        <script>  
+            
+            var iDisArtist = new ImageDisplay();
+            iDisArtist.create("MainIRadio", "0px", "20px", "normal");        
+
+            var IconVarDisVol = new IconVarDisplay();
+            IconVarDisVol.create("MainIRadio", "cyan", "60vh", "10%", "fa fa-volume-off", "dB", "", "");
+            var IconVarDisSource = new IconVarDisplay();
+            IconVarDisSource.create("MainIRadio", "cyan", "60vh", "40%", "fa fa-code-fork", "", "IRadio", "MediaServer", "USB", "IPod", "AuxA", "AuxD");
+
+            var FontBtnIRadioVolDwn = new FontButtonNew();
+            FontBtnIRadioVolDwn.create("MainIRadio", "purple", "normal", "73vh", "5%", "fa fa-volume-down", "send('command(DenonCeol,vol,dec)')");  
+            var FontBtnIRadioMute = new FontButtonNew();
+            FontBtnIRadioMute.create("MainIRadio", "purple", "normal", "73vh", "25%", "fa fa-volume-off", "send('command(DenonCeol,mute,toggle)')");
+            var FontBtnIRadioVolUp = new FontButtonNew();
+            FontBtnIRadioVolUp.create("MainIRadio", "purple", "normal", "73vh", "45%", "fa fa-volume-up", "send('command(DenonCeol,vol,inc)')");
+            var FontBtnIRadioPower = new FontButtonNew();
+            FontBtnIRadioPower.create("MainIRadio", "purple", "normal", "73vh", "75%", "fa fa-power-off", "send('command(DenonCeol,power,toggle)')");
+        </script>     
+			
+        <!-- ***********************************************************************************   -->
+	<!--  ************************          Main - WebSocketServer    ************************      -->   
+        <!-- ***********************************************************************************   -->
+		 
+        <Main id="MainWSS" class="WSS">  </Main>
+
+        <script>  
+	     
+        
+        </script>    	
+		  
+        <!-- ***********************************************************************************      -->
+	<!--  ************************ INDEX C - UPNP ************************ -->   
+        <!-- ***********************************************************************************      -->
+		  
+		<Main class="upnp">
+	 
+					<div class="reihe" >
+							<div class="status cyan" style="width: 150px  ">
+						 		<span class="fa fa-music" style="font-size:24px; color: #00FF00;  ">   
+								<span style="margin-left: 20px" id="ClientName8">Client</span> </span>	
+						 	</div>
+						 	<div class="status cyan" style="width: 150px">
+						 		<span class="fa fa-server" style="font-size:24px; color: #00FF00;  ">   
+								<span style="margin-left: 20px" id="ServerName8">Server</span> </span>	
+						 	</div>
+						 	<div class="status cyan" style="width: 150px">
+						 		<span class="fa fa-server" style="font-size:24px; color: #00FF00;  ">   
+								<span style="margin-left: 20px">Server</span> </span>	
+						 	</div>
+
+					</div>
+
+ 
+				<div id="Bradioselector" style="border: thin solid #808080; position: relative; left: 100px; top:60px; ">
+					<label class="purple">
+						<input type="radio" name="toggle2" id="RadioSel21" onclick="send('command(upnp,setClient,CEOL)') ;"> 
+						<span>
+						<span class="reihe">
+							<img  src="images/DenonCeolAnlage.png" alt="no image found"  style="padding-left:4px; height:50px; width:70px">
+							Denon Ceol
+						</span>	
+						</span>					 
+					</label>
+					<label class="purple">
+						<input type="radio" name="toggle2" id="RadioSel22" onclick="send('command(upnp,setClient,MusicPal)') ;">
+						<span>
+						<span class="reihe">
+							<img  src="images/musikpal.png" alt="no image found"  style="padding-left: 4px; height:50px; width:70px">
+							Music Pal
+						</span>	
+						</span>				  
+					</label>
+					<label class="purple">
+						<input type="radio" name="toggle2" id="RadioSel23" onclick="send('command(upnp,setClient,[TV]UE40D8)') ;">
+						<span>
+						<span class="reihe">
+							<img  src="images/samsungtv.png" alt="no image found" style="padding-left: 4px; width:70px; height:50px">
+							TV
+						</span>	
+						</span>	
+					</label>
+					<label class="purple">
+						<input type="radio" name="toggle2" id="RadioSel24" onclick="send('command(upnp,setClient,SonosSZ)') ;">
+						<span>
+						<span class="reihe">
+							<img  src="images/SonosS.png" alt="no image found"  style="padding-left: 4px; height:50px; width:40px">
+							Sonos SZ
+						</span>	
+						</span>					</label>
+					<label class="purple">
+					  <input type="radio" name="toggle2" id="RadioSel25" onclick="send('command(upnp,setClient,SonosK)') ;"> 
+						<span>
+						<span class="reihe">
+							<img  src="images/SonosK.png" alt="no image found"  style="padding-left: 4px; height:50px; width:60px">
+							Sonos K
+						</span>	
+						</span>	 
+					</label>
+				</div>
+ 	
+ 
+	
+			<div id="Bradioselector" style="border: thin solid #808080; position: relative; left: 100px; top:60px; ">
+				<label class="purple">
+					<input type="radio" name="toggle3" id="RadioSel31" onclick="send('UPNP' + '*' + 'setServer' + '*' +'AVM')">  
+					<span>
+					<span class="reihe">
+						<img  src="images/FrizNas.png" alt="no image found" style="padding-left: 4px; height:50px; width:70px">
+						Fritz NAS
+					</span>	
+					</span>					 
+				</label>
+				<label class="purple">
+					<input type="radio" name="toggle3" id="RadioSel32" onclick="send('UPNP' + '*' + 'setServer' + '*' +'Plex')">
+					<span>
+					<span class="reihe">
+						<img  src="images/SynNas.png" alt="no image found" style="padding-left: 4px; height:50px; width:70px">
+						PLEX
+					</span>	
+					</span>				  
+				</label>
+			</div>
+		</Main>
+
+ 		
+        <!-- *********************************************************************************** -->
+	<!--  ************************** INDEX B - UPNP CD Musik ******************************* -->   
+        <!-- *********************************************************************************** -->	
+        <Main class="UpnpCD">
+            <div class="col"> 
+                <!-- **************************  Anzeige 1 ************************** -->
+                                 
+                <div class="DenonAnzeige" >
+                    <img  id="CDimg" src='CDs/0001.jpg' style=" position:absolute; top:60px; left: 45px; width:  100px; height: 100px;"/>
+                    <div style="padding-left:125px">                 
+                        <div id="DDILAlbum_B" style="text-align:center"  >. . . . </div >
+                        <hr />
+                        <div id="DIDLArtist_B" style="font-size:large" >. . . .</div >
+                        <div id="DIDLTitle_B" style="font-size:large" >. . . .</div >
+                    </div>
+                </div>
+
+                <!-- ************************** Player Status Anzeige  **************************  -->	
+                <div class="reihe" style="padding: 5px; border: thin solid #000000; width: 560px; background-color: #000000; color: #000000;    position: absolute; top: 38vh">
+                    <div class="status cyan" style="width: 100px  ">
+                        <span class="fa fa-volume-up" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="vol_B" style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-server" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="Playlist_B" style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px" >
+                    <!--    <span class="fa fa-music" style="font-size:14px; color: #00CC00;  ">    -->
+                    <!--    <span id="playmode" style="margin-left: 10px" >- - -</span>  </span> -->
+                        <select style="font-size:15px; color: #00CC00; background-color: black  ">
+                        <option id="playmode" value="0">---</option>
+                        <option value="0">Normal</option>
+                        <option value="1">RANDOM</option>
+                        <option value="2">REP_ONE</option>
+                        <option value="3">REP_ALL</option>
+                        </select>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-server" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="activeServer_B" style="margin-left: 10px">- -  -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-music" style="font-size:14px; color: #00CC00;  ">   
+                        <span  id="activeClient_B" style="margin-left: 10px">- - -</span> </span>	
+                    </div>
+
+                </div>
+                <!-- ************************** Progressbar  **************************  -->	                                   
+                <div style="border: 1px solid #FFFFFF; padding:2px; width: 560px; height: 10px; position: absolute; top: 46vh">
+                    <div id="progressbar_B">
+                            <span id="progressbar_B" class="expand"></span>
+                    </div>
+                </div>                        
+                <!-- ************************** Client Switch  Panels  **************************  -->
+                <div  style="padding: 1px; border: thin solid #000000; width: 560px; background-color: #666666; color: #000000;position: absolute; top: 49vh">
+                        Clients
+                    <div   class="ScrollReihe" style="padding: 2px; width: 545px;">  
+                        <div id="1" class="ctrlbutton xsmall grey" onclick="send('command(upnp,setClient,CEOL)') ;">
+                                    Ceol
+                        </div>
+                            <div id="1" class="ctrlbutton xsmall grey" onclick="send('command(upnp,setClient,SonosK)') ;">
+                                    Sonos K
+                        </div>
+                            <div id="1" class="ctrlbutton xsmall grey" onclick="send('command(upnp,setClient,SonosSZ)') ;">
+                                    Sonos SZ
+                        </div>
+                            <div id="1" class="ctrlbutton xsmall grey" onclick="send('command(upnp,setClient,[TV]UE40D8)') ;">
+                                    TV
+                        </div>
+                            <div id="1" class="ctrlbutton xsmall grey" onclick="send('command(upnp,setClient,MusicPal)') ;">
+                                    MusicPal
+                        </div>
+                    </div>
+		</div>	
+                    
+                    <!-- ************************** CD Library  Switch  Panels  **************************  -->
+               
+                <div  id="CDSwitchPanel" class="reihe" style="padding:5px; border: 1px solid #FFFFFF; background-color: black; width: 560px; position:absolute; top:60vh ">   
+                    <div class="col">   
+                         
+                        <div  class="reihe" >
+                            <div id="1" class="ctrlbutton XS purple" onclick="CDctrl()">
+				<img class="iconXS" src="images/Control_BW.png" />
+                            </div>
+                                <div id="1" class="ctrlbutton XS purple" onclick="CDLib()">
+				<img class="iconXS" src="images/CDLib2_BW.png" />
+                            </div>
+                            <div id="1" class="ctrlbutton XS purple" onclick="send('command(upnp,setClient,SonosSZ)') ;">
+				<img class="iconXS" src="images/AudioBookLib.png" />
+                            </div>
+                            <div id="1" class="ctrlbutton XS purple" onclick="send('command(upnp,setClient,[TV]UE40D8)') ;">
+                                 
+                            </div>
+                                <div id="1" class="ctrlbutton XS purple" onclick="UpnpServer()">
+                                    <img class="iconXS" src="images/Server_BW.png" />
+                            </div>
+
+                        </div>
+                    </div> 
+                </div>
+                <!-- ************************** Control Panel  ************************** -->	
+                <div style="position:absolute; top:75vh">
+                        <div class="reihe" >
+                            <div class="reihe" style="border: thin solid #808080;   width: 240px; height:80px; margin-top: 20px;" >
+                                <div class="fontbutton big purple" onclick="send('command(UpnpPlayer,vol,dec)')">
+                                    <span class="fa fa-volume-down" style="padding: 20px; font-size:24px;  "></span>	
+                                </div>
+
+                                <div class="fontbutton big purple" onclick="send('command(upnp,mute,toggle)')">
+                                    <span class="fa fa-volume-off" style="padding: 20px; font-size:24px;  "></span>	
+                                </div>
+
+                                <div class="fontbutton big purple" onclick="send('command(UpnpPlayer,vol,inc)')">
+                                    <span class="fa fa-volume-up" style="padding: 20px; font-size:24px;  "></span>	
+                                </div>
+                            </div>
+
+                            <div style="position: relative; top:20px; left: 60px"  >
+                                <div id="power" class="fontbutton big purple" onclick="send('command(UpnpPlayer,power,toggle)')">
+                                    <span  class="fa fa-power-off" style="padding: 20px; font-size:24px;  "></span>	
+                                </div>
+                            </div>
+                        </div>	
+                </div>
+            </div>                               
+        </Main>
+                
+        <!-- ***********************************************************************************      -->
+	<!--  *******************  MAIN - Wohnzimmer - Anlage Denon Ceol Piccolo  **************      -->   
+        <!-- ***********************************************************************************      -->
+        <Main id="MainCeolWZ" class="Ceol">         </Main> 
+        
+        <script>  
+            
+            var iDisArtistWZ = new ImageDisplay();
+            iDisArtistWZ.create("MainCeolWZ", "0px", "20px", "normal");        
+
+
+
+
+            var IconVarDisVolWZ = new IconVarDisplay();
+            IconVarDisVolWZ.create("MainCeolWZ", "cyan", "50vh", "10%", "fa fa-volume-off", "dB", "", "");
+            var IconVarDisSourceWZ = new IconVarDisplay();
+            IconVarDisSourceWZ.create("MainCeolWZ", "cyan", "50vh", "40%", "fa fa-code-fork", "", "IRadio", "MediaServer", "USB", "IPod", "AuxA", "AuxD");
+
+            var CtrlBtnIRadioWZ = new CtrlButton();
+            CtrlBtnIRadioWZ.create("MainCeolWZ", "63vh", "3%",  "normal", "purple", "IRadio", "ctrlWindow", "RadioStation");
+            var CtrlBtnCDWZ = new CtrlButton();
+            CtrlBtnCDWZ.create("MainCeolWZ",  "63vh", "35%",  "normal", "purple", "CD", "ctrlWindow", "CoverCD");
+            var CtrlBtnAudioWZ = new CtrlButton();
+            CtrlBtnAudioWZ.create("MainCeolWZ",  "63vh", "67%",  "normal", "purple", "AudioBook", "ctrlWindow",   "send('command(TV,AA,activate)') ");
+            
+            var FontBtnIRadioVolDwnWZ = new FontButtonNew();
+            FontBtnIRadioVolDwnWZ.create("MainCeolWZ", "purple", "normal", "83vh", "5%", "fa fa-volume-down", "send('command(DenonCeol,vol,dec)')");  
+            var FontBtnIRadioMuteWZ = new FontButtonNew();
+            FontBtnIRadioMuteWZ.create("MainCeolWZ", "purple", "normal", "83vh", "25%", "fa fa-volume-off", "send('command(DenonCeol,mute,toggle)')");
+            var FontBtnIRadioVolUpWZ = new FontButtonNew();
+            FontBtnIRadioVolUpWZ.create("MainCeolWZ", "purple", "normal", "83vh", "45%", "fa fa-volume-up", "send('command(DenonCeol,vol,inc)')");
+            var FontBtnIRadioPowerWZ = new FontButtonNew();
+            FontBtnIRadioPowerWZ.create("MainCeolWZ", "purple", "normal", "83vh", "75%", "fa fa-power-off", "send('command(DenonCeol,power,toggle)')");
+        </script>  
+            
+ <!--           
+            <div class="col"> 
+                
+                <div class="DenonAnzeige" >
+                    <img  id="CDimg_A" src='CDs/0001.jpg' style="background-color: grey; position:absolute; top:50px; left: 55px; width:  100px; height: 100px;"/>
+                    <div style="padding-left:125px">
+                        <div id="sz3_A" style="text-align:center"  >. . . . </div >
+                        <hr />
+                        <div id="sz2_A" style="font-size:large" >. . . .</div >
+                    </div>
+                </div>
+                 	
+                <div class="reihe" style="padding: 5px; border: thin solid #000000; width: 560px; background-color: #000000; color: #000000;   position: absolute; top: 31.5vh;">
+                    <div class="status cyan" style="width: 100px  ">
+                        <span class="fa fa-volume-up" style="font-size:14px; color: #00CC00;  ">   
+                        <span  style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-server" style="font-size:14px; color: #00CC00;  ">   
+                        <span  style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-music" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="playmode_A" style="margin-left: 10px">- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-server" style="font-size:14px; color: #00CC00;  ">   
+                        <span   style="margin-left: 10px" >- -  -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-music" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="CD_A" style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+
+                </div>
+                 	
+                <div class="reihe" style="padding: 5px; border: thin solid #000000; width: 560px; background-color: #000000; color: #000000; margin-bottom: 5px;   position: absolute; top: 37vh;">
+                    <div class="status cyan" style="width: 100px  ">
+                        <span class="fa fa-volume-up" style="font-size:14px; color: #00CC00;  ">   
+                        <span style="margin-left: 10px" id="vol_A">- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-server" style="font-size:14px; color: #00CC00;  ">   
+                        <span style="margin-left: 10px" id="FAV_A">- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-music" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="source_A" style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-server" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="activeServer_A" style="margin-left: 10px" >- -  -</span> </span>	
+                    </div>
+                    <div class="status cyan" style="width: 100px">
+                        <span class="fa fa-music" style="font-size:14px; color: #00CC00;  ">   
+                        <span id="trackNo_A" style="margin-left: 10px" >- - -</span> </span>	
+                    </div>
+
+                </div>
+              	
+                <div style="border: thin solid #000000;  width: 560px; background-color: #666666; position: absolute; top: 43vh;">
+                        <div id="progressbar">
+                                <span id="progressbar_A" class="expand"></span>
+                        </div>	   
+                </div>	                    
+                
+ 
+                <div  style="padding: 1px; border: thin solid #000000; width: 560px; background-color: #666666; color: #000000;">
+                    Source
+                    <div   class="ScrollReihe" style="padding: 2px; width: 545px;">
+                         <div id="1" class="ctrlbutton xsmall grey" onclick="setCEOLSource('Radio')">
+                                    IRADIO
+                        </div>
+                        <div id="1" class="ctrlbutton xsmall grey" onclick="setCEOLSource('Server')">
+                                    Server
+                        </div>
+                        <div id="1" class="ctrlbutton xsmall grey" onclick="setCEOLSource('USB')" >
+                                    USB
+                        </div>
+                        <div id="1" class="ctrlbutton xsmall grey" onclick="setCEOLSource('IPOD')">
+                                    IPOD
+                        </div>
+                        <div id="1" class="ctrlbutton xsmall grey" onclick="setCEOLSource('AUX_A')">
+                                    AUX A
+                        </div>
+                        <div id="1" class="ctrlbutton xsmall grey" onclick="setCEOLSource('AUX_D')">
+                                    AUX D
+                        </div>
+                    </div>
+                </div>
+ 
+                <div  id="SwitchPanel" class="reihe" style="padding:5px; border: 1px solid #FFFFFF; background-color: black; width: 560px; position:absolute; top:46vh ">   
+                    <div class="col">   
+                         
+                        <div  class="reihe" >
+                            <div  class="ctrlbutton XSS purple" onclick="setCEOLSource('Radio')">
+				<img class="iconXSS" src="images/radio_BW.png" alt="image not found" />
+                            </div>
+                                <div  class="ctrlbutton XSS purple" onclick="setCEOLSource('Server')">
+				<img class="iconXSS" src="images/mediaserver_BW.png" alt="image not found" />
+                            </div>
+                            <div class="ctrlbutton XSS purple" onclick="setCEOLSource('USB')" >
+				<img class="iconXSS" src="images/usb_BW.png" alt="image not found" />
+                            </div>
+                            <div  class="ctrlbutton XSS purple" onclick="setCEOLSource('IPOD')">
+                                 <img class="iconXSS" src="images/ipod_BW.png" alt="image not found" />
+                            </div>
+                                <div  class="ctrlbutton XSS purple" onclick="setCEOLSource('AUX_A')">
+                                    <img class="iconXSS" src="images/auxA_BW.png" alt="image not found" />
+                            </div>
+                                <div class="ctrlbutton XSS purple" onclick="setCEOLSource('AUX_D')">
+                                    <img class="iconXSS" src="images/auxD_BW.png" alt="image not found" />
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+
+                 
+       
+                <div  id="CDSwitchPanel" class="reihe" style="padding:5px; border: 1px solid #FFFFFF; background-color: black; width: 560px; position:absolute; top:60vh ">   
+                    <div class="col">   
+                         
+                        <div  class="reihe" >
+                            <div  class="ctrlbutton XS purple" onclick="DenonCEOLCDctrl()">
+				<img class="iconXS" src="images/CDcontrolBW.png" alt="image not found" />
+                            </div>
+                                <div  class="ctrlbutton XS purple" onclick="DenonCeolCDLib()">
+				<img class="iconXS" src="images/CDLib2_BW.png" alt="image not found" />
+                            </div>
+                            <div  class="ctrlbutton XS purple" onclick=" ">
+				<img class="iconXS" src="images/AudioBookLib.png" alt="image not found" />
+                            </div>
+                            <div  class="ctrlbutton XS purple" onclick=" ">
+                                 <img class="iconXS" src="images/Control_BW.png" alt="image not found" />
+                            </div>
+                                <div  class="ctrlbutton XS purple" onclick="send('command(DenonCeol,setClock,on)') ;">
+                                    <img class="iconXS" src="images/Zeit_BW.png" alt="image not found" />
+                            </div>
+
+                        </div>
+                    </div> 
+                </div>
+
+                 
+                <div  style="position:absolute; top:75vh">
+                    <div class="reihe" >
+                        <div class="reihe" style="border: thin solid #808080;   width: 280px; height:65px; margin-top: 20px;" >
+                            <div class="fontbutton wide purple" onclick="send('command(DenonCeol,vol,dec)')">
+                                <span class="fa fa-volume-down" style="padding: 20px; font-size:24px;  "></span>	
+                            </div>
+
+                            <div class="fontbutton wide purple" onclick="send('command(DenonCeol,mute,toggle)')">
+                                <span class="fa fa-volume-off" style="padding: 20px; font-size:24px;  "></span>	
+                            </div>
+
+                            <div class="fontbutton wide purple" onclick="send('command(DenonCeol,vol,inc)')">
+                                <span class="fa fa-volume-up" style="padding: 20px; font-size:24px;  "></span>	
+                            </div>
+                        </div>
+
+                        <div style="position: relative; top:20px; left: 60px"  >
+                            <div id="power_A" class="fontbutton wide purple" onclick="send('command(DenonCeol,power,toggle)')">
+                                <span  class="fa fa-power-off" style="padding: 20px; font-size:24px;  "></span>	
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+ -->
+
+
+		<!-- ************************** Rolladen Uebersicht ************************** -->
+		<Main class="RolladenAll" >
+ 			<div class="spalte"  style="margin-right: 50px; margin-left: 40px">
+ 				<div class="RowLeft">
+		 			<div class="IconButton small cyan" onclick="RolloCtrlWZ()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Rolladen_BW.png" alt="image not found" />
+						<a>Rolladen Wohnzimmer</a>
+					</div>
+					<div class="fontbutton big cyan" onclick="send('command(Rollo,WZ,up)') "> 
+						<span class="fa fa-chevron-up" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big cyan" onclick="send('command(Rollo,WZ,stop)') "> 
+						<span class="fa fa-stop" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big cyan" onclick="send('command(Rollo,WZ,down)') "> 
+						<span class="fa fa-chevron-down" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+				</div>
+ 				<div class="RowLeft">
+		 			<div class="IconButton small blue" onclick="RolloCtrlB()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Rolladen_BW.png"  />
+						<a>Rolladen Balkon</a>
+					</div>
+					<div class="fontbutton big blue" onclick="send('command(Rollo,B,up)') "> 
+						<span class="fa fa-chevron-up" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big blue" onclick="send('command(Rollo,B,stop)') "> 
+						<span class="fa fa-stop" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big blue" onclick="send('command(Rollo,B,down)') "> 
+						<span class="fa fa-chevron-down" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+				</div>
+ 				<div class="RowLeft">
+		 			<div class="IconButton small olive" onclick="RolloCtrlKZ()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Rolladen_BW.png" alt="image not found" />
+						<a>Rolladen Kinderzimmer</a>
+					</div>
+					<div class="fontbutton big olive" onclick="send('command(Rollo,KZ,up)') "> 
+						<span class="fa fa-chevron-up" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big olive" onclick="send('command(Rollo,KZ,stop)') "> 
+						<span class="fa fa-stop" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big olive" onclick="send('command(Rollo,KZ,down)') "> 
+						<span class="fa fa-chevron-down" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+				</div>
+ 				<div class="RowLeft">
+		 			<div class="IconButton small red" onclick="RolloCtrlK()" style="margin-right: 40px" >
+						<img id="xx" class="IconS" src="images/_Rolladen_BW.png"  />
+						<a>Rolladen Kueche</a>
+					</div>
+					<div class="fontbutton big red" onclick="send('command(Rollo,K,up)') "> 
+						<span class="fa fa-chevron-up" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big red" onclick="send('command(Rollo,K,stop)') "> 
+						<span class="fa fa-stop" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+					<div class="fontbutton big red" onclick="send('command(Rollo,K,down)') "> 
+						<span class="fa fa-chevron-down" style="padding: 5px; font-size:30px; position: relative; left:  0px; top:15px">
+						 </span>	
+					</div>
+				</div>
+        		</div>
+		</Main>
+
+
+
+<!-- **************************                                  RECHTE Fenster                                        ************************** -->      
+        <!-- ************************** TV Guide  **************************  -->
+        <Ctrl  id="MainTVGuideCtrl" class = "TVGuide">
+                <div style=" text-align: center;">TV Programm</div >
+                <hr />
+                <div id="TVz1">z1</div >
+                <div id="TVz2">z2</div >
+                <div id="TVz3">z3</div >
+                <hr>
+                <div id="TVz4">z4</div >
+                <div id="TVz5">z5</div >
+                <div id="TVz6">z6</div >
+                <hr>
+                <div id="TVz7">z7</div >
+                <div id="TVz8">z8</div >
+                <div id="TVz9">z9</div >
+                <hr>
+                <div id="TVz10">z10</div >
+                <div id="TVz11">z8</div >
+                <div id="TVz12">z9</div >
+                <hr>
+                <div id="TVz13">z4</div >
+                <div id="TVz14">z5</div >
+                <div id="TVz15">z6</div >
+                <hr>
+                <div id="TVz16">z7</div >
+                <div id="TVz17">z8</div >
+                <div id="TVz18">z9</div >
+                <hr>
+                <div id="TVz19">z10</div >
+                <div id="TVz20">z8</div >
+                <div id="TVz21">z9</div >
+                <hr>
+                <div id="TVz22">z1</div >
+                <div id="TVz23">z2</div >
+                <div id="TVz24">z3</div >
+                <hr>
+                <div id="TVz25">z4</div >
+                <div id="TVz26">z5</div >
+                <div id="TVz27">z6</div >
+                <hr>
+                <div id="TVz28">z7</div >
+                <div id="TVz29">z8</div >
+                <div id="TVz30">z9</div >
+                <hr>
+                <div id="TVz31">z10</div >
+                <div id="TVz32">z8</div >
+                <div id="TVz33">z9</div >
+                <hr>
+                <div id="TVz34">z4</div >
+                <div id="TVz35">z5</div >
+                <div id="TVz36">z6</div >
+        </Ctrl>
+
+
+		
+		<!-- ************************** Right PNP CONFIG  ************************** -->
+
+
+		<Ctrl class="UPNPConfig">
+                         
+                         <div id="message">Meldungen</div>    
+			<div class="col">
+		 			<div class="IconButton small sandy" onclick="send('command(upnp,playlist,Musik)')" style="position: relative; top: 100px"  >
+						<img id="xx" class="IconS" src="images/PlaylistMusicBW.png"  />
+						<span style="font-size: 18px; padding-top: 5px;">create all Music Playlists</span>
+					</div>
+		 			<div class="IconButton small sandy" onclick="" style="position: relative; top: 100px"  >
+						<img id="xx" class="IconS" src="images/upnp.png"  />
+						<span style="font-size: 22px; padding-top: 5px;">-  Audio  -             read-Server</span>
+					</div>
+		 			<div class="IconButton small sandy" onclick="" style="position: relative; top: 100px"  >
+						<img id="xx" class="IconS" src="images/upnp.png"  />
+						<span style="font-size: 22px; padding-top: 5px;">-  Foto  -             read-Server</span>
+					</div>
+		 			<div class="IconButton small sandy" onclick="" style="position: relative; top: 100px"  >
+						<img id="xx" class="IconS" src="images/upnp.png"  />
+						<span style="font-size: 22px; padding-top: 5px;">-  Video  -             read-Server</span>
+					</div>
+			</div>
+                            <div class="col" style="padding-top:100px">
+                                <div class="IconButton small sandy" onclick="send('command(upnp,discover,client)')">
+                                        <img id="xx" class="IconS" src="images/devices.png"  />
+                                        <span style="font-size: 22px; margin-top:5px; margin-left: 20px;">search Client</span>
+                                </div>
+                                <div class="IconButton small sandy" onclick="send('command(upnp,discover,server)')">
+                                        <img id="xx" class="IconS" src="images/server.jpg"  />
+                                        <span style="font-size: 22px; margin-top:5px; margin-left: 20px;">search Server</span>
+                                </div>
+                            </div>
+		</Ctrl>
+
+		<!-- ************************** Denon Ceol Navigation  **************************  -->
+		<Ctrl id="MainCeolWZCtrl" class="Navigation">
+                    <div class="reihe">
+                        <div class="nav">
+                            <div class="reihe" style="margin-top: 7px;"  >
+                                    <div id="power" class="fontbutton big purple" onclick="send('command(DenonCeol,navigate,up)')" style="margin-left: 81px; margin-right: 81px">
+                                            <span  class="fa fa-caret-up" style="padding: 20px; font-size:30px;  "></span>	
+                                    </div>
+                            </div>	
+                            <div class="reihe" >
+                                    <div class="fontbutton big purple" onclick="send('command(DenonCeol,navigate,left)')">
+                                            <span class="fa fa-caret-left" style="padding: 20px; font-size:30px;  "></span>	
+                                    </div>
+
+                                    <div class="fontbutton big purple" onclick="send('command(DenonCeol,navigate,ok)')">
+                                            <span class="fa fa-square" style="padding: 20px; font-size:30px;  "></span>	
+                                    </div>
+
+                                    <div class="fontbutton big purple" onclick="send('command(DenonCeol,navigate,right)')">
+                                            <span class="fa fa-caret-right" style="padding: 20px; font-size:30px;  "></span>	
+                                    </div>
+                            </div>
+
+                            <div class="reihe"  >
+                                    <div id="power" class="fontbutton big purple" onclick="send('command(DenonCeol,navigate,down)')" style="margin-left: 81px; margin-right: 81px">
+                                            <span  class="fa fa-caret-down" style="padding: 20px; font-size:30px;  "></span>	
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div> 
+                </Ctrl>
+		
+
+                <!-- ************************** Denon Ceol Server Control  **************************  -->
+		<Ctrl class="CEOLServerCtrl">
+                    <div class="col" >
+                        <div class="IconButton small sandy" onclick="send('command(DenonCeol,setServer,AVM)')"   style="margin-top:50px">
+                                <img id="xx" class="IconMid" src="images/FrizNas.png"  />
+                                <span style="font-size: 22px; margin-top:20px; margin-left: 20px;">AVM Server</span>
+                        </div>
+                        <div class="IconButton small sandy" onclick="send('command(DenonCeol,setServer,Plex)')"  >
+                                <img id="xx" class="IconSmall" src="images/Plex.png"  />
+                                <span style="font-size: 22px; margin-top:20px; margin-left: 20px;">Plex Server</span>
+                        </div>
+                        <div style="padding-top:100px">
+                            <div class="IconButton small sandy" onclick="DenonCeolCDLib()"  >
+                                    <img id="xx" class="IconS" src="images/cd.png"  />
+                                    <span style="font-size: 22px; margin-top:20px; margin-left: 20px;">Musik CD</span>
+                            </div>
+                            <div class="IconButton small sandy" onclick=""  >
+                                    <img id="xx" class="IconS" src="images/classics.png"  />
+                                    <span style="font-size: 22px; margin-top:20px; margin-left: 20px;">Audibook</span>
+                            </div>
+                        </div>
+                    </div>    
+                </Ctrl>
+
+
+
+
+
+
+		  <!-- ************************** CEOL Player Control  **************************  -->
+		<Ctrl class="CEOLctrl">
+				<img id="RadioCover" src='images/RadioStation/0000.png' style="margin-top: 20px; margin-bottom: 20px; width: 200px; height: 200px;"/>
+			 <div class="reihe" style="border: thin solid #FFFFFF">
+		  		<div class="col" style="border: thin solid #808080; width: 60px; font-size: 18px;" >
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-up" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+					<div>Bass</div>
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-down" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+				</div>
+		  		<div class="col" style="border: thin solid #808080; width: 70px; font-size: 18px;" >
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-up" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+					<div>Treble</div>
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-down" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+				</div>
+		  		<div class="col" style="border: thin solid #808080; width: 70px; font-size: 18px;" >
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-up" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+					<div>Balance</div>
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-down" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+				</div>
+		  		<div class="col" style="border: thin solid #808080; width: 70px; font-size: 18px;" >
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-up" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+					<div>Timer</div>
+			  		<div class="fontbutton mid purple">
+						<span class="fa fa-angle-down" style="padding: 10px; font-size:24px;  "></span>	
+					</div>
+				</div>
+
+			</div>
+			  <!-- ************************** Client Image **************************  -->
+			<div id="ClientImage">
+				<div style=" margin: 20px; font-size: x-large;   ">Denon Ceol</div>
+				<img  id="CEOLclientimg" src='images/DenonCeolAnlage.png' style="margin-top: 10px; margin-bottom: 20px; width: 200px; height: 100px;"/>
+	
+			</div>
+
+		</Ctrl>
+		  <!-- ************************** Denon CEOL CD Player Control  **************************  -->
+		<Ctrl class="CEOLCDctrl">
+			<img id="CDCover_A" src='CDs/0001.jpg' style="margin-top: 20px; margin-bottom: 20px; "/>
+			 <div style="border: thin solid #FFFFFF">
+		  		<div class="reihe" >
+			  		<div class="fontbutton big purple" onclick="send('command(DenonCeol,seek,backward)')">
+						<span class="fa fa-backward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton big purple" onclick="send('command(DenonCeol,play,first)')">
+						<span class="fa fa-play" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton big purple" onclick="send('command(DenonCeol,seek,forward)')">
+						<span class="fa fa-forward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+				</div>
+		  		<div class="reihe" >
+			  		<div class="fontbutton small purple" onclick="send('command(DenonCeol,play,previous)')">
+						<span class="fa fa-step-backward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton small purple" onclick="send('command(DenonCeol,pause,all)')">
+						<span class="fa fa-pause" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton small purple" onclick="send('command(DenonCeol,stop,all)')">
+						<span class="fa fa-stop" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton small purple" onclick="send('command(DenonCeol,play,next)')">
+						<span class="fa fa-step-forward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+				</div>
+			</div>
+			
+			<div style=" margin: 10px; font-size: x-large;   ">Denon Ceol</div>
+			<img  id="CDclientimg" src='images/DenonCeolAnlage.png' style=" width: 200px; height: 100px;"/>
+	
+
+
+		</Ctrl>
+                <!-- ************************** Server Control  ************************** -->
+		<Ctrl class="UpnpServerCtrl">
+                    <div class="col" >
+                        <div class="IconButton small sandy" onclick="send('command(upnp,setServer,AVM)')"   style="margin-top:50px">
+                                <img id="xx" class="IconMid" src="images/FrizNas.png"  />
+                                <span style="font-size: 22px; margin-top:20px; margin-left: 20px;">AVM Server</span>
+                        </div>
+                        <div class="IconButton small sandy" onclick="send('command(upnp,setServer,Plex)')"  >
+                                <img id="xx" class="IconSmall" src="images/Plex.png"  />
+                                <span style="font-size: 22px; margin-top:20px; margin-left: 20px;">Plex Server</span>
+                        </div>
+                    </div>
+                </Ctrl>
+
+		  <!-- ************************** CD Player Control  **************************  -->
+		<Ctrl class="CDctrl">
+			<img id="iconCover" src='CDs/0001.jpg' style="margin-top: 20px; margin-bottom: 20px; "/>
+			 <div style="border: thin solid #FFFFFF">
+		  		<div class="reihe" >
+			  		<div class="fontbutton big purple" onclick="send('command(upnp,seek,backward)')">
+						<span class="fa fa-backward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton big purple" onclick="send('command(upnp,play,first)')">
+						<span class="fa fa-play" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton big purple" onclick="send('command(upnp,seek,forward)')">
+						<span class="fa fa-forward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+				</div>
+		  		<div class="reihe" >
+			  		<div class="fontbutton small purple" onclick="send('command(upnp,play,previous)')">
+						<span class="fa fa-step-backward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton small purple" onclick="send('command(upnp,pause,all)')">
+						<span class="fa fa-pause" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton small purple" onclick="send('command(upnp,stop,all)')">
+						<span class="fa fa-stop" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+			  		<div class="fontbutton small purple" onclick="send('command(upnp,play,next)')">
+						<span class="fa fa-step-forward" style="padding: 20px; font-size:24px;  "></span>	
+					</div>
+				</div>
+			</div>
+			
+			<div style=" margin: 10px; font-size: x-large;   ">Denon Ceol</div>
+			<img  id="CDclientimg" src='images/DenonCeolAnlage.png' style=" width: 200px; height: 100px;"/>
+		</Ctrl>
+
+		<!-- **************************  Rolladen Ctrl Wohnzimmer **************************  -->
+		<Ctrl id = "MainRolloWZCtrl" class="RolloCtrlWZ"></Ctrl>
+			 			
+    <script>
+        DisPosRolloWZCtrl=Object.create(Display);
+        DisPosRolloWZCtrl.create("MainRolloWZCtrl", "PosRolloWZCtrCtrl", "cyan", "%", "40px", "30px", "Position", "Number", "", "", "", "");
+        
+        DisModeRolloWZCtrl=Object.create(Display);
+        DisModeRolloWZCtrl.create("MainRolloWZCtrl", "ModeRolloWZCtrl", "cyan", "", "110px", "30px", "Mode", "Auto", "Man", "", "", "");
+        
+        DisST1RolloWZCtrl=Object.create(Display);
+        DisST1RolloWZCtrl.create("MainRolloWZCtrl", "MoFrRolloWZCtrl", "cyan", "", "180px", "30px", "Schaltzeiten Mo-Fr", "String", "", "", "", "");
+        
+        DisST2RolloWZCtrl=Object.create(Display);
+        DisST2RolloWZCtrl.create("MainRolloWZCtrl", "SaSoRolloWZCtrl", "cyan", "", "250px", "30px", "Schaltzeiten Sa-so", "String", "", "", "", "");
+       
+        addFontButton("MainRolloWZCtrl", "cyan", "big", "340px", "10px", "fa fa-chevron-up", "send('command(Rollo,WZ,up)')");
+        addFontButton("MainRolloWZCtrl", "cyan", "big", "340px", "90px", "fa fa-stop", "send('command(Rollo,WZ,stop)')");
+        addFontButton("MainRolloWZCtrl", "cyan", "big", "340px", "170px", "fa fa-chevron-up", "send('command(Rollo,WZ,down)')");
+        addFontButton("MainRolloWZCtrl", "cyan", "big", "420px", "10px", "fa fa-plus", "send('command(Rollo,WZ,StepUp)')");
+        addFontButton("MainRolloWZCtrl", "cyan", "big", "420px", "170px", "fa fa-minus", "send('command(Rollo,WZ,StepDown)')");
+        CbSSrolloWZ = Object.create(CheckBox);
+        CbSSrolloWZ.create("MainRolloWZCtrl", "SSRolloWZ", "cyan" ,"520px", "10px",  "SunRise-SunSet", "command(Rollo,WZ,SSXX");  
+    </script>    
+		<!-- ************************** Rolladen Ctrl Kinderzimmer **************************  -->
+		<Ctrl id = MainRolloKZCtrl  class="RolloCtrlKZ"> </Ctrl>
+		
+    <script>
+        DisPosRolloKZ=Object.create(Display);
+        DisPosRolloKZ.create("MainRolloKZCtrl", "PosRolloKZ1", "olive", "%", "50px", "30px", "Position", "Number", "", "", "", "");
+        
+        DisModeRolloKZ=Object.create(Display);
+        DisModeRolloKZ.create("MainRolloKZCtrl", "ModeRolloKZ1", "olive", "", "120px", "30px", "Mode", "Auto", "Man", "", "", "");
+        
+        DisST1RolloKZ=Object.create(Display);
+        DisST1RolloKZ.create("MainRolloKZCtrl", "MoFrRolloKZ1", "olive", "", "190px", "30px", "Schaltzeiten Mo-Fr", "String", "", "", "", "");
+        
+        DisST2RolloKZ=Object.create(Display);
+        DisST2RolloKZ.create("MainRolloKZCtrl", "SaSoRolloKZ1", "olive", "", "260px", "30px", "Schaltzeiten Sa-so", "String", "", "", "", "");
+        
+   
+        addFontButton("MainRolloKZCtrl", "olive", "big", "350px", "10px", "fa fa-chevron-up", "send('command(Rollo,KZ,up)')");
+        addFontButton("MainRolloKZCtrl", "olive", "big", "350px", "90px", "fa fa-stop", "send('command(Rollo,KZ,stop)')");
+        addFontButton("MainRolloKZCtrl", "olive", "big", "350px", "170px", "fa fa-chevron-up", "send('command(Rollo,KZ,down)')");
+        addFontButton("MainRolloKZCtrl", "olive", "big", "430px", "10px", "fa fa-plus", "send('command(Rollo,KZ,StepUp)')");
+        addFontButton("MainRolloKZCtrl", "olive", "big", "430px", "170px", "fa fa-minus", "send('command(Rollo,KZ,StepDown)')");
+    </script>   
+		<!-- ************************** Rolladen Ctrl BalkontTuer **************************  -->
+		<Ctrl id = MainRolloBCtrl  class="RolloCtrlB">  </Ctrl> 
+
+               
+    <script>
+        DisPosRolloB=Object.create(Display);
+        DisPosRolloB.create("MainRolloBCtrl", "PosRolloB1", "blue", "%", "40px", "30px", "Position", "Number", "", "", "", "");
+        
+        DisModeRolloB=Object.create(Display);
+        DisModeRolloB.create("MainRolloBCtrl", "ModeRolloB1", "blue", "", "110px", "30px", "Mode", "Auto", "Man", "", "", "");
+        DisST1RolloB=Object.create(Display);
+        DisST1RolloB.create("MainRolloBCtrl", "MoFrRolloB1", "blue", "", "180px", "30px", "Schaltzeiten Mo-Fr", "String", "", "", "", "");
+        
+        DisST2RolloB=Object.create(Display);
+        DisST2RolloB.create("MainRolloBCtrl", "SaSoRolloB1", "blue", "", "250px", "30px", "Schaltzeiten Sa-so", "String", "", "", "", "");
+
+        addFontButton("MainRolloBCtrl", "blue", "big", "340px", "10px", "fa fa-chevron-up", "send('command(Rollo,B,up)')");
+        addFontButton("MainRolloBCtrl", "blue", "big", "340px", "90px", "fa fa-stop", "send('command(Rollo,B,stop)')");
+        addFontButton("MainRolloBCtrl", "blue", "big", "340px", "170px", "fa fa-chevron-up", "send('command(Rollo,B,down)')");
+        addFontButton("MainRolloBCtrl", "blue", "big", "420px", "10px", "fa fa-plus", "send('command(Rollo,B,StepUp)')");
+        addFontButton("MainRolloBCtrl", "blue", "big", "420px", "170px", "fa fa-minus", "send('command(Rollo,B,StepDown)')");
+        
+        CbSSrolloB = Object.create(CheckBox);
+        CbSSrolloB.create("MainRolloBCtrl", "SSRolloB", "blue",  "520px", "10px",  "SunRise-SunSet", "command(Rollo,B,SSXX");  
+    </script>   
+		<!-- ************************** Rolladen Ctrl Kueche ************************** -->
+		<Ctrl id = MainRolloKCtrl  class="RolloCtrlK"></Ctrl>
+    <script>
+        DisPosRolloK=Object.create(Display);
+        DisPosRolloK.create("MainRolloKCtrl", "PosRolloK1", "midgreen", "%", "50px", "30px", "Position", "Number", "", "", "", "");
+        DisModeRolloK=Object.create(Display);
+        DisModeRolloK.create("MainRolloKCtrl", "ModeRolloK1", "midgreen", "", "120px", "30px", "Mode", "Auto", "Man", "", "", "");
+        
+        DisST1RolloK=Object.create(Display);
+        DisST1RolloK.create("MainRolloKCtrl", "MoFrRolloK1", "midgreen", "", "190px", "30px", "Schaltzeiten Mo-Fr", "String", "", "", "", "");
+        DisST2RolloK=Object.create(Display);
+        DisST2RolloK.create("MainRolloKCtrl", "SaSoRolloK1", "midgreen", "", "260px", "30px", "Schaltzeiten Sa-so", "String", "", "", "", "");
+
+        addFontButton("MainRolloKCtrl", "midgreen", "big", "350px", "10px", "fa fa-chevron-up", "send('command(Rollo,K,up)')");
+        addFontButton("MainRolloKCtrl", "midgreen", "big", "350px", "90px", "fa fa-stop", "send('command(Rollo,K,stop)')");
+        addFontButton("MainRolloKCtrl", "midgreen", "big", "350px", "170px", "fa fa-chevron-up", "send('command(Rollo,K,down)')");
+        addFontButton("MainRolloKCtrl", "midgreen", "big", "430px", "10px", "fa fa-plus", "send('command(Rollo,K,StepUp)')");
+        addFontButton("MainRolloKCtrl", "midgreen", "big", "430px", "170px", "fa fa-minus", "send('command(Rollo,K,StepDown)')");
+        CbSSrolloK = Object.create(CheckBox);
+        CbSSrolloK.create("MainRolloKCtrl", "SSRolloK", "midgreen",  "520px", "10px",  "SunRise-SunSet", "command(Rollo,K,SSXX");  
+    </script>   
+		<!-- **************************Time Picker  ************************** -->
+                <Ctrl class="TimePickerX" >
+
+    
+                </Ctrl> 
+
+
+        <!-- **************************Time Picker Rollo Class ************************** 
+                rechtes Seitenfenster nur einmal vorhanden Weret werden in Klasse überschrieben -->
+        <Ctrl id="TimePickerl" class="TimePicker" >    </Ctrl> 
+        
+        <script>  
+            var Timer1 = new TimePicker("WZ","MoFr","up");
+            var Timer2 = new TimePicker("WZ","MoFr","up");
+            Timer1.create("TimePickerl", "Timer1", "10px", "5px",  "Hochfahren" );    
+            Timer2.create("TimePickerl", "Timer2", "300px", "5px", "Runterfahren");         
+        </script>     
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        <!-- ************************** Right - TV Internet Links **************************  -->
+        <Ctrl  class = "TVINet">
+            <div class="col">
+                <div class="IconButton small sandy" onclick="wwwLink('https://www.twitch.tv/summonersinnlive')" style="position: relative; top: 100px"  >
+                        <img  class="IconS" src="images/www.png"  />
+                        <span style="font-size: 22px; padding-top: 5px;">Summoners InnLive</span>
+                </div>
+                <div class="IconButton small sandy" onclick="" style="position: relative; top: 100px"  >
+                        <img  class="IconS" src="images/www.png"  />
+                        <span style="font-size: 22px; padding-top: 5px;">-    -             </span>
+                </div>
+                <div class="IconButton small sandy" onclick="" style="position: relative; top: 100px"  >
+                        <img class="IconS" src="images/www.png"  />
+                        <span style="font-size: 22px; padding-top: 5px;">-    -             r</span>
+                </div>
+                <div class="IconButton small sandy" onclick="" style="position: relative; top: 100px"  >
+                        <img class="IconS" src="images/www.png"  />
+                        <span style="font-size: 22px; padding-top: 5px;">-    -             </span>
+                </div>
+            </div>
+        </Ctrl>	
+
+        <!-- ************************** Right - TV Sender **************************  -->
+        <Ctrl id = "MainTVCtrl" class="TVChannel">  </Ctrl>
+ 
+
+        <script> 
+            var CtrlTVchannels = new IconList();
+            CtrlTVchannels.create("MainTVCtrl", "TV"  );  
+        </script> 
+        
+	<!-- ************************** Internet Radio Stationen  **************************  -->
+	<Ctrl id = MainIRadioCtrl class="RadioStation"></Ctrl>
+        
+        <script> 
+            var CtrlIRadiochannels = new IconList();
+            CtrlIRadiochannels.create("MainIRadioCtrl", "IRadio"  );  
+        </script> 
+
+		
+
+
+	<!-- ************************** Right CD Player **************************  -->
+        <Ctrl id="MainCDCtrl" class="CoverCD" ></Ctrl>
+
+        <script> 
+            var CtrlCDList = new IconList();
+            CtrlCDList.create("MainCDCtrl", "CD"  );  
+        </script>
+		  
+                  
+ 
+	<!-- ************************** Container Ende  ************************** -->
+
+	</div>
+	
+<!--  **************************  ************************** -->
+        <script> 
+ 
+
+        </script> 
+   </body>
 </html>
