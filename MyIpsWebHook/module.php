@@ -60,6 +60,7 @@ echo "Willkommen im geschützten Bereich";
                 if(substr($_SERVER['SCRIPT_NAME'], -1) == "/") {
                     if(file_exists($path . "/index.html")) {
                         $path .= "/index.html";
+                        echo $path;
                     } 
                     else if(file_exists($path . "/index.php")) {
                         $path .= "/index.php";
