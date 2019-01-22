@@ -1,0 +1,2766 @@
+/*I love me some border-box*/
+* {
+	box-sizing: border-box;
+	text-align: center;
+}
+/*This just stops me getting horizontal scrolling if anything overflows the width*/
+body {
+    overflow-x: hidden;
+
+	
+}
+/*Just removing default browser padding/margin*/
+html,
+body {
+	color: #ebebeb;
+	background-color: #000000;
+}
+
+button {
+	 
+	
+}
+button :hover {
+ color:black;
+ 
+
+}
+button :active {
+ color:black;
+ opacity:0.1; 
+
+}
+
+
+/*Flexbox gives us the flexiness we need. The top just stays put as there is no scrolling on the body due to the page never exceeding viewport height*/
+.Top {
+	display:flex; 
+	align-items: center;
+	justify-content: space-between;
+	background-color: darkgreen;
+	font-size: x-large;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+ 	z-index:10;
+	width: 100%;
+	height: 5vh;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+	color: #FFFF00;
+}
+/*This is our main wrapping element, it's made 100vh high to ensure it is always the correct size and then moved into place and padded with negative margin and padding*/
+.Container {
+	display: flex;
+	overflow: hidden;
+	height: 100vh;
+	position: fixed;
+	width: 100vw;
+	backface-visibility: hidden;
+	will-change: overflow;
+	-webkit-transition: All 0.5s ease;
+	-moz-transition: All 0.5s ease;
+	-o-transition: All 0.5s ease;
+	-ms-transition: All 0.5s ease;
+	transition: All 0.5s ease;
+	left: 0;
+	top: 0vh;
+	background-color: #8BDAF7;
+}
+
+
+ 
+
+/*All the scrollable sections should overflow and be whatever height they need to be. As they are flex-items (due to being inside a flex container) they could be made to stretch full height at all times if needed.
+WebKit inertia scrolling is being added here for any present/future devices that are able to make use of it.
+*/
+.StartScreen,
+.Left,
+.MenuWZ,
+.MenuSZ,
+.MenuKZ,
+.MenuK,
+.MenuB,
+.MenuMultimedia,
+.MenuHz,
+.MenuRollo,
+.MenuNet,
+.HeizungAll,
+.HeizungWZ,
+.HeizungCtrlWZ,
+.HeizungKZ,
+.HeizungCtrlKZ,
+.HeizungSZ,
+.HeizungCtrlSZ,
+.HeizungK,
+.HeizungCtrlK,
+.RolloWZ,
+.RolloCtrlWZ,
+.RolloKZ,
+.RolloCtrlKZ,
+.RolloSZ,
+.RolloCtrlSZ,
+.RolloK,
+.RolloCtrlK,
+.RolloB,
+.RolloCtrlB,
+.floorplan,
+.RadioStation,
+.RolladenAll,
+.Network,
+.TVGuide,
+.TVChannel,
+.TVINet,
+.LibList,
+.upnp,
+.CoverCD,
+.CDctrl,
+.Ceol,
+.CEOLctrl,
+.CEOLCDctrl,
+.Navigation,
+.UPNPConfig,
+.CDLib,
+.AudioBookLib,
+.UpnpCD,
+.CEOLServerCtrl,
+.UpnpServerCtrl,
+.ScrollReihe,
+.TimePicker,
+.TimePickerX,
+.Wetter,
+.SecurityCode,
+.SecCodeCtrl,
+.WaterAlarm,
+.WaterAlarmCtrl,
+.IRadio,
+.WSS,
+.TV
+{
+    overflow: auto;
+    padding: .0rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+	
+	   /*Transition*/
+  -webkit-transition: All 0.5s ease;
+  -moz-transition: All 0.5s ease;
+  -o-transition: All 0.5s ease;
+  -ms-transition: All 0.5s ease;
+  transition: All 0.5s ease;
+	
+}
+/*Entirely optional â€“ just wanted to remove the scrollbar on WebKit browsers as I find them ugly*/
+.StartScreen::-webkit-scrollbar,
+.Left::-webkit-scrollbar,
+.floorplan::-webkit-scrollbar,
+.MenuWZ::-webkit-scrollbar,
+.MenuSZ::-webkit-scrollbar,
+.MenuKZ::-webkit-scrollbar,
+.MenuK::-webkit-scrollbar,
+.MenuB::-webkit-scrollbar,
+.MenuMultimedia::-webkit-scrollbar,
+.MenuHz::-webkit-scrollbar,
+.MenuRollo::-webkit-scrollbar,
+.MenuNet::-webkit-scrollbar,
+.HeizungAll::-webkit-scrollbar,
+.RadioStation::-webkit-scrollbar,
+.RolladenAll::-webkit-scrollbar,
+.Network::-webkit-scrollbar,
+.TVGuide::-webkit-scrollbar,
+.TVChannel::-webkit-scrollbar,
+.TVINet::-webkit-scrollbar,
+.LibList::-webkit-scrollbar,
+.upnp::-webkit-scrollbar,
+.CoverCD::-webkit-scrollbar,
+.CDctrl::-webkit-scrollbar,
+.CEOLctrl::-webkit-scrollbar,
+.CEOLCDctrl::-webkit-scrollbar,
+.Ceol::-webkit-scrollbar,
+.Navigation::-webkit-scrollbar,
+.UPNPConfig::-webkit-scrollbar,
+.CDLib::-webkit-scrollbar,
+.AudioBookLib::-webkit-scrollbar,
+.UpnpCD::-webkit-scrollbar,
+.CEOLServerCtrl::-webkit-scrollbar,
+.UpnpServerCtrl::-webkit-scrollbar,
+.Wetter::-webkit-scrollbar,
+.ScrollReihe::-webkit-scrollbar,
+.TimePicker::-webkit-scrollbar,
+.TimePickerX::-webkit-scrollbar,
+.IRadio::-webkit-scrollbar,
+.WSS::-webkit-scrollbar,
+.TV::-webkit-scrollbar {
+    display: none;
+}
+/*  Left and Right are set sizes while the Middle is set to flex one so it occupies all remaining space. This could be set as a width too if prefereable, perhaps using calc.*/
+.StartScreen {
+	position: absolute;
+	top: 5vh;
+        left: 28vw;
+	width: 72vw;
+        height:95vh;
+	background: -webkit-linear-gradient(hsl(750, 100%, 85%), hsl(450, 100%, 65%), hsl(750, 100%, 85%)); /* CHROME */
+	background-repeat: no-repeat;
+}
+.Left {
+	position: relative;
+	top: 5vh;
+	width: 28vw;
+	background-color: black;
+	margin-bottom: 1px;
+	margin-right: 1px;
+        
+}
+
+.HeizungAll{
+	position:absolute;
+	top: 5vh;
+        left:8.6vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(174, 100%, 10%);
+	/*border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.HeizungWZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:16.2vw;
+	background: hsl(174, 100%, 10%);
+	/*border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.HeizungCtrlWZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:74vw;
+	background: hsl(174, 100%, 10%);
+}
+
+.HeizungKZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(82, 100%, 10%);
+	/*border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.HeizungCtrlKZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:74vw;
+	background: hsl(82, 100%, 10%);
+}
+.HeizungSZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:16.2vw;
+	background: hsl(28, 100%, 10%);
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.HeizungCtrlSZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:74vw;
+	background: hsl(28, 100%, 10%);
+}
+.HeizungK{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:16.2vw;
+background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.HeizungCtrlK{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:74vw;
+background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
+}
+/* MID */
+.RolloWZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:16.2vw;
+	background: hsl(174, 100%, 10%);
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+/* MID */
+.RolloCtrlWZ{
+	position:absolute;
+	top: 5vh;
+        left:74vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(174, 100%, 10%);
+}
+
+.RolloKZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(82, 100%, 10%);
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.RolloCtrlKZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(82, 100%, 10%);
+}
+.RolloSZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(28, 100%, 10%);
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.RolloCtrlSZ{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(28, 100%, 10%);
+}
+.RolloK{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.RolloCtrlK{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:74vw;
+background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
+}
+.RolloB{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(200, 100%, 10%);
+	/* border-right-color: #FFFFFF;
+	border-right-style: solid;
+	border-right-width: 1px; */
+}
+
+.RolloCtrlB{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(200, 100%, 10%);
+}
+.TimePicker {
+	position:relative;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 58vw;
+	background: hsl(300, 100%, 10%);
+	/*border-left-style: solid;
+	border-left-width: thin; */
+}
+.TimePickerX {
+	position:relative;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 58vw;
+	background: hsl(300, 100%, 10%);
+	/*border-left-style: solid;
+	border-left-width: thin; */
+}
+
+.CDctrl {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	 background: hsl(300, 100%, 10%);
+	/*border-left-style: solid;
+	border-left-width: thin; */
+}
+.CEOLCDctrl {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(300, 100%, 10%);
+        background-color: darkslategray;
+	/* border-left-style: solid;
+	border-left-width: thin; */
+}
+.CEOLctrl {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+	background-color: darkslategray
+       
+       
+	/* border-left-style: solid;
+	border-left-width: thin; */
+}
+
+.UPNPConfig{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(300, 100%, 10%);
+	/* border-left-style: solid;
+	border-left-width: thin; */
+}
+
+.CDLib {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+	background-color: darkslategray
+             
+      
+	/* border-left-style: solid;
+	border-left-width: thin; */
+}
+.LibList {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(300, 100%, 10%);
+	/* border-left-style: solid;
+	border-left-width: thin; */
+}
+
+.AudioBookLib{
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(900, 100%, 10%);
+}
+
+
+.UpnpCD {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(300, 100%, 10%);
+}
+
+.Ceol {
+	position:absolute;
+	top: 5vh;
+        left:16.2vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(300, 100%, 10%);
+}
+.Wetter {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:16.2vw;
+	background: hsl(300, 100%, 10%);
+}
+.floorplan {
+	position:absolute;
+	top: 5vh;
+        left:8.1vw;
+	width: 0px;
+        height:95vh;
+	background-color: #FFFFFF;
+	background-image: url('images/Wohnung_Grundriss.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+
+
+
+
+.MenuWZ{
+	position:relative;
+	top: 5vh;
+    width: 0px;
+	height: 95vh;
+
+}
+
+.MenuSZ{
+	position:relative;
+	top: 5vh;
+    width: 0px;
+	height: 95vh;
+	
+}
+
+.MenuKZ{
+	position:relative;
+	top: 5vh;
+    width: 0px;
+	height: 95vh;
+
+}
+
+.MenuK{
+	position:relative;
+	top: 5vh;
+    width: 0px;
+	height: 95vh;
+
+ }
+.MenuSec{
+	position:relative;
+	top: 5vh;
+        width: 0px;
+	height: 95vh;
+
+ }
+
+.MenuB{
+	position:relative;
+	top: 5vh;
+    width: 0px;
+	height: 95vh;
+
+ }
+
+.MenuMultimedia{
+    position:relative;
+    top: 5vh;
+    width: 0px;
+    height: 95vh;
+
+}
+
+.MenuHz{
+	position:relative;
+	top: 5vh;
+
+    width: 0px;
+	height: 450px;
+	 
+}
+
+.MenuRollo{
+    position:relative;
+    top: 5vh;
+    width: 0px;
+    height: 530px;
+
+}
+
+.MenuNet{
+    position:relative;
+    top: 5vh;
+    width: 0px;
+    height: 450px;
+
+}
+
+
+.RadioStation {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	flex-direction: column;
+	width: 0px;
+	height: 95vh;
+	background-color: darkslategray;
+}
+
+
+
+
+.CoverCD {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	height: 95vh;
+	
+	padding-bottom:5px;
+	width: 0px;
+	background-color: darkslategray
+	/* border-left-style: solid;
+	border-left-width: thin; */
+}
+
+
+
+.RolladenAll{
+	position:absolute;
+	top: 5vh;
+        left: 16.2vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(174, 100%, 10%);
+	/*border-right-color: #FFFFFF;*/
+	/* border-right-style: solid;
+	border-right-width: 1px;
+  	background: hsl(30, 56%, 25%); */
+}
+
+.SecurityCode{
+	position:absolute;
+	top: 5vh;
+        left: 16vw;
+        width: 0vw;
+	height: 95vh;	
+	background-color: maroon;
+        color: white;
+}
+ 
+
+.WaterAlarm{
+	position:absolute;
+	top: 5vh;
+        left: 16vw;
+        width: 0vw;
+	height: 95vh;	
+	background-color: maroon;
+        color: white;
+}
+
+.Network{
+	position:absolute;
+	top: 5vh;
+        left: 16.2vw;
+        width: 0px;
+	height: 95vh;	
+	background-color: black;
+}
+.IRadio {
+	position:absolute;
+	top: 5vh;
+        left: 16.2vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(300, 100%, 10%);
+	color: #FFFFFF;
+}
+.WSS{
+	position:absolute;
+	top: 5vh;
+        left: 16.2vw;
+        width: 0px;
+	height: 95vh;	
+	background-color: black;
+}
+.TV {
+	position:absolute;
+	top: 5vh;
+        left: 16.2vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(300, 100%, 10%);
+	color: #FFFFFF;
+} 
+
+
+.TVChannel {
+	position:absolute;
+	top: 5vh;
+        left: 74vw;
+	flex-direction: column;
+	width: 0px;
+	height: 95vh;
+         
+	background: hsl(300, 1%, 10%);
+} 
+
+.TVINet {
+	position:absolute;
+	top: 5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+	background: hsl(300,  1%, 10%);
+} 
+
+.CEOLServerCtrl {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background-color: darkslategray
+}
+
+.UpnpServerCtrl {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(300, 100%, 10%);
+}
+
+.Navigation {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(300, 100%, 10%);
+}
+
+.TVGuide {
+	position:absolute;
+	top: 5vh;
+        left: 74vw;
+	flex-direction: column;
+	width: 0px;
+	height: 95vh;
+	background-color: darkslategray;
+
+	padding-top:2%;
+	font-size: medium;
+	color: #FFFFFF;
+}
+
+.upnp{
+	position:absolute;
+	top: 5vh;
+        left: 16.2vw;
+ 	height: 95vh;
+	width: 0px;
+	background: hsl(300, 100%, 10%);
+}
+ 
+
+
+/*LEFT - GLIDE BUTTON*/
+.GlideButton {
+  border: 0px solid #eee;
+  height: 90px;
+  width: max-width;
+  padding-left: 5px;
+  padding-right: 50px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  line-height: 40px;
+  font-size:2.0em;
+  color:white;
+  margin-bottom:0px;
+
+   /*Transition*/
+  -webkit-transition: All 0.5s ease;
+  -moz-transition: All 0.5s ease;
+  -o-transition: All 0.5s ease;
+  -ms-transition: All 0.5s ease;
+  transition: All 0.5s ease;
+}
+.GlideButton.cyan {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(174, 100%, 25%), hsl(174, 100%, 45%),hsl(174, 100%, 25%)); /* CHROME
+	  background: linear-gradient(0deg, hsl(174, 100%, 25%) 5%, hsl(174, 100%, 45%) 70%)); /* Standard syntax (must be last) */
+}
+.GlideButton.olive {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 45%), hsl(82, 100%, 25%)); /* CHROME */
+}
+.GlideButton.sandy {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%), hsl(28, 100%, 25%)); /* CHROME */
+}
+.GlideButton.red {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 45%), hsl(0, 100%, 25%)); /* CHROME */
+}
+.GlideButton.yellow {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%), hsl(51, 100%, 25%)); /* CHROME */
+}
+.GlideButton.purple {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%), hsl(300, 100%, 25%)); /* CHROME */
+}
+.GlideButton.grey {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%)); /* CHROME */
+}
+.GlideButton.pink {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(350, 100%, 65%), hsl(350, 100%, 85%), hsl(350, 100%, 65%)); /* CHROME */
+}
+.GlideButton.blue{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(200, 100%, 25%), hsl(200, 100%, 45%), hsl(200, 100%, 25%)); /* CHROME */
+}
+.GlideButton.brown{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(30, 56%, 25%), hsl(30, 56%, 45%), hsl(30, 56%, 25%)); /* CHROME */
+}
+.GlideButton.green{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(120, 56%, 25%), hsl(120, 56%, 45%), hsl(120, 56%, 25%)); /* CHROME */
+}
+.GlideButton.midgreen{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%), hsl(152, 70%, 25%)); /* CHROME */
+}
+
+.GlideButton:hover {
+}	 
+
+.GlideButton.cyan:hover {
+	background: -webkit-linear-gradient(hsl(174, 100%, 15%), hsl(174, 100%, 25%));
+}
+.GlideButton.olive:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(82, 100%, 15%), hsl(82, 100%, 25%)); /* CHROME */
+}
+.GlideButton.sandy:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(28, 100%, 15%), hsl(28, 100%, 25%)); /* CHROME */
+}
+.GlideButton.red:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(0, 100%, 15%), hsl(0, 100%, 25%)); /* CHROME */
+}
+.GlideButton.yellow:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(51, 100%, 15%), hsl(51, 100%, 25%)); /* CHROME */
+}
+.GlideButton.purple:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(300, 100%, 15%), hsl(300, 100%, 25%),hsl(300, 100%, 15%)); /* CHROME */
+}
+.GlideButton.grey:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%)); /* CHROME */
+}
+.GlideButton.pink:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(350, 100%, 75%), hsl(350, 100%, 85%)); /* CHROME */
+}
+.GlideButton.blue:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(200, 100%, 15%), hsl(200, 100%, 25%)); /* CHROME */
+}
+.GlideButton.brown:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(30, 56%, 15%), hsl(30, 56%, 25%)); /* CHROME */
+}
+.GlideButton.green:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(120, 56%, 15%), hsl(120, 56%, 25%)); /* CHROME */
+}
+.GlideButton.midgreen:hover{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
+}
+
+.GlideButton:active {
+	 
+}
+.GlideButton.cyan:active {
+	background: -webkit-linear-gradient(hsl(174, 100%, 5%), hsl(174, 100%, 15%));
+}
+
+.GlideButton.olive:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%)); /* CHROME */
+}
+.GlideButton.sandy:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%)); /* CHROME */
+}
+.GlideButton.red:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%)); /* CHROME */
+}
+.GlideButton.yellow:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(51, 100%, 5%), hsl(51, 100%, 15%)); /* CHROME */
+}
+.GlideButton.purple:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%),hsl(300, 100%, 5%)); /* CHROME */
+}
+.GlideButton.grey:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(205, 10%, 25%), hsl(205, 10%, 35%)); /* CHROME */
+}
+.GlideButton.pink:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(350, 100%, 45%), hsl(350, 100%, 55%)); /* CHROME */
+}
+.GlideButton.blue:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(200, 100%, 5%), hsl(200, 100%, 15%)); /* CHROME */
+}
+.GlideButton.brown:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(30, 56%, 5%), hsl(30, 56%, 15%)); /* CHROME */
+}
+.GlideButton.green:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(120, 56%, 5%), hsl(120, 56%, 15%)); /* CHROME */
+}
+.GlideButton.midgreen:active{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(152, 70%, 5%), hsl(152,70%,15%),hsl(152, 70%, 5%)); /* CHROME */
+}
+
+
+
+
+
+
+/*UnterMenubutton*/
+.buttonglide {
+  border: 0px solid #eee;
+  height: 90px;
+  width: max-width;
+  padding-left: 5px;
+  padding-right: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  line-height: 40px;
+  font-size:2.0em;
+  color:white;
+
+  /*Gradient*/
+   /* Standard syntax (must be last) */
+
+   /*Transition*/
+  -webkit-transition: All 0.5s ease;
+  -moz-transition: All 0.5s ease;
+  -o-transition: All 0.5s ease;
+  -ms-transition: All 0.5s ease;
+  transition: All 0.5s ease;
+}
+.buttonglide.mid {
+	width: 250px;
+	margin: 5px 10px 5px 10px;
+}
+.buttonglide.small {
+	width:200px;
+	height: 70px;
+}
+ 
+
+.buttonglide:hover {
+	opacity: .5; 
+	color:black;
+}
+.buttonglide:active {
+	opacity: .35; 
+	color:black;
+}
+
+
+
+
+
+.room {
+  
+	color: white;
+	font-size: x-large;
+	font-family: Arial;
+        text-align: center;
+        padding-left: 20px;
+}
+.Wert {
+	width: 60px;
+	height: 18px;
+	position: relative;
+	background-color: #00FFFF;
+	color: black;
+	font-size: medium;
+	font-family: Arial;
+	font-weight: bold;
+	font-family: helvetica;
+	z-index: 2;
+}
+
+.Wert1 {
+	width: 160px;
+	height: 20px;
+	position: relative;
+	background-color: #00FFFF;
+	color: black;
+	font-size: small;
+	font-family: Arial;
+	font-weight: bold;
+	font-family: helvetica;
+	z-index: 2;
+}
+ 
+
+
+#plan{
+	z-index: 1;
+	width: 100%;
+	height: 99vh;
+overflow: hidden;
+}
+
+
+
+
+
+#coverbild{
+	margin-top: 10px;
+	width: 270px;
+	height: 270px;
+	padding: 20px;
+ 
+
+
+}
+
+ 
+.iconTV{
+	margin-top: 5px;
+	width: 110px;
+	height: 110px;
+        opacity: 0.25;
+}
+.iconTV:hover {
+    opacity: 0.8;
+}
+.iconTVToggle {
+	margin-top: 5px;
+	width: 110px;
+	height: 110px;
+    opacity: 1;
+}
+
+#icon{
+	margin-top: 10px;
+	width: 70px;
+	height: 70px;
+	
+}
+
+.icon{
+	margin-top: 10px;
+	width: 70px;
+	height: 70px;
+}
+
+.icon.wide{
+	margin-top: 10px;
+	width: 450px;
+	height: 170px;
+}
+.icon.normal{
+	margin-top: 10px;
+	width: 250px;
+	height: 170px;
+}
+
+.iconRadio{
+	margin-top: 10px;
+	width: 95px;
+	height: 95px;
+	
+}
+.iconRadio:active {
+    opacity: 0.3;
+}
+
+.iconXS{
+	width: 60px;
+	height: 60px;
+}
+.iconXSS{
+        margin-top: 5px;
+	width: 50px;
+	height: 50px;
+}
+#iconsmall{
+	width: 105px;
+	height: 105px;
+}
+
+#iconmid{
+	width: 125px;
+	height: 125px;
+}
+
+
+#iconBig{
+	
+	width: 125px;
+	height: 125px;
+	
+}
+
+#CDCover_A{
+	width: 220px;
+	height: 220px;
+}
+
+
+
+#stattext{
+	font-size: xx-large;
+	position: relative;
+	left: 50px;
+	color:lime;
+}
+
+
+.container3 {
+	font-size: 1.0rem;
+	display: flex;
+	justify-content: space-between;
+	width: 200px;
+	padding-left: 10px;
+}
+ 
+ 
+ .containerTV {
+  display: flex; /* or inline-flex */
+	justify-content: center;
+	 
+
+
+}
+.nav {
+border-radius: 80px; 
+border: thin solid #808080; 
+margin-top: 10px; 
+width: 240px; 
+height:240px; 
+display: block; 
+margin-left: auto; 
+margin-right: auto;       
+} 
+
+ .spalte {
+	display: flex; /* or inline-flex */;
+	flex-direction: column;
+	justify-content: center;
+  	align-items: center;
+	height: 95vh;
+}
+ .spalteLeft {
+	display: flex; /* or inline-flex */;
+	flex-direction: column;
+ 
+	}
+ .col {
+	display: flex; /* or inline-flex */;
+	flex-direction: column;
+	justify-content: center;
+  	align-items: center;
+}
+ 
+ .reihe {
+	display: flex; /* or inline-flex */;
+	flex-direction: row;
+	justify-content: space-between;
+ 
+}
+ .DenonDisplay {
+	display: flex; /* or inline-flex */;
+	flex-direction: row;
+	align-items: center;
+ 	margin:20px;
+	border: 1px #C0C0C0 inset;
+	border-color: #777777;
+	 
+	background-color: hsl(174, 100%, 5%);
+}
+
+ .ScrollReihe {
+	display: flex; /* or inline-flex */;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-right: 0px;
+}
+
+
+ .reihe1 {
+	display: flex; /* or inline-flex */;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 50px;
+}
+ .reihe2 {
+	display: flex; /* or inline-flex */;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 0px;
+	position:relative;
+	top:4px;
+}
+
+ .reiheM {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+
+
+.TVAnzeige {
+    position: absolute;
+    left: 10vw;
+    top: 0vh;
+    border: 1px #C0C0C0 inset;
+    border-color: #777777;
+    font-family: 'dot matrix', arial;
+    font-size: 30px;
+    background-color: hsl(174, 100%, 5%);
+    padding: 5px;
+    color: #00FF00;
+    border-width: thin;
+    width: 400px;
+    height: 80px;
+}
+
+
+.DenonAnzeige {
+	
+	border: 1px #C0C0C0 inset;
+	border-color: #777777;
+	font-family: 'dot matrix', arial;
+	font-size: 30px;
+	background-color: hsl(174, 100%, 5%);
+	 
+	color: #00FF00;
+	border-width: thin;
+
+}
+
+.CDAnzeige {
+	display: none;
+	border: 1px #C0C0C0 solid;
+	border-color: yellow;
+	font-family: 'dot matrix', arial;
+	font-size: 30px;
+	background-color: transparent;
+	padding: 10px;
+	color: #FFFF00;
+	border-width: thin;
+	position: relative;
+	left: 5%;
+	width: 50vw;
+}
+
+.leiste {
+	position: relative;
+	top: 120px;
+	height: 90px;
+	width: 100%;
+	background-image: url('images/textures/metal-silber brushed.jpg');
+	
+} 
+
+.panel {
+	height: 90px;
+	width: 100%;
+	background-image: url('images/textures/metal-silber brushed.jpg');
+}
+ 
+ 
+ 
+
+.CDscreen{
+	height: 0px;
+	width: 100%;
+	background-color: #FF0000;
+} 
+
+
+#power_A {
+	color:black;
+}
+
+
+
+.flex1{
+flex: initial;	
+width: 20%;	
+}
+
+.flex2{
+	
+width:40%;	
+}
+
+.flex3{
+flex:1 ;	
+width:40%;	
+}
+
+
+ 
+
+ #inlay {
+	 
+	background-color: navajowhite;
+	height: 200px;
+	width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-top: 0px;
+	text-align: center;
+	line-height: 300%;
+	font-size: 16px;
+	color: black;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 150px; 
+		position: relative;
+	left: 25px;
+	top: 20px;
+ }
+ 
+ #pushbutton1 {
+	height: 50px;
+	width: 50px;
+	position: relative;
+	left: 15px;
+	top: 15px;
+ }
+ #container_button {
+    background-color: #252525;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0%;
+    margin-top: 0px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    -webkit-box-shadow: inset 0px 0.5% 0px #585858, 0.25% 0.25% 0px #000, 0.5% 0.5% 1.25% #000;
+    -moz-box-shadow: inset 0px 0.5% 0px #585858, 0.25% 0.25% 0px #000, 0.5% 0.5% 1.25% #000;
+    box-shadow: inset 0px 0.5% 0px #585858, 0.25% 0.25% 0px #000, 0.5% 0.5% 1.25% #000;
+}
+#hole {
+    background-color: #151515;
+    width: 77.5%;
+    height: 77.5%;
+    margin-left: auto;
+    margin-right: auto;
+    top: 12.5%;
+    position: relative;
+    -webkit-border-radius: 51.66%;
+    -moz-border-radius: 51.66%;
+    border-radius: 51.66%;
+    -webkit-box-shadow: 0.25% 0.25% 0px #5d5d5d;
+    -moz-box-shadow: 0.25% 0.25% 0px #5d5d5d;
+    box-shadow: 0.25% 0.25% 0px #5d5d5d;
+}
+#button {
+    width: 96.77%;
+    height: 96.77%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    cursor: pointer;
+    top: -1.6%;
+    position: relative;
+    background-image: linear-gradient(bottom, rgb(82,79,82) 0%, rgb(134,134,134) 57%);
+    background-image: -o-linear-gradient(bottom, rgb(82,79,82) 0%, rgb(134,134,134) 57%);
+    background-image: -moz-linear-gradient(bottom, rgb(82,79,82) 0%, rgb(134,134,134) 57%);
+    background-image: -webkit-linear-gradient(bottom, rgb(82,79,82) 0%, rgb(134,134,134) 57%);
+    background-image: -ms-linear-gradient(bottom, rgb(82,79,82) 0%, rgb(134,134,134) 57%);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 0px 0.5% 0px #a8a8a8, 0px 0.5% 0px #2a2a2a, 0px 0.75% 0px #2a2a2a, 0px 1% 0px #2a2a2a, 0px 1.25% 0px #2a2a2a, 0px 1.5% 0px #2a2a2a, 0px 1.75% 0px #2a2a2a, 0px 2% 0px #2a2a2a, 0px 2.25% 0px #2a2a2a, 0px 2.5% 0px #2a2a2a, 2.5% 5% 2.5% #000;
+    -moz-box-shadow: inset 0px 0.5% 0px #a8a8a8, 0px 0.5% 0px #2a2a2a, 0px 0.75% 0px #2a2a2a, 0px 1% 0px #2a2a2a, 0px 1.25% 0px #2a2a2a, 0px 1.5% 0px #2a2a2a, 0px 1.75% 0px #2a2a2a, 0px 2% 0px #2a2a2a, 0px 2.25% 0px #2a2a2a, 0px 2.5% 0px #2a2a2a, 2.5% 5% 2.5% #000;
+    box-shadow: inset 0px 0.5% 0px #a8a8a8, 0px 0.5% 0px #2a2a2a, 0px 0.75% 0px #2a2a2a, 0px 1% 0px #2a2a2a, 0px 1.25% 0px #2a2a2a, 0px 1.5% 0px #2a2a2a, 0px 1.75% 0px #2a2a2a, 0px 2% 0px #2a2a2a, 0px 2.25% 0px #2a2a2a, 0px 2.5% 0px #2a2a2a, 2.5% 5% 2.5% #000;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+#button:active {
+    top: 1.25%;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: inset 0px 0.5% 0px #a8a8a8;
+}
+#triangle {
+    width: 0px;
+    height: 0px;
+    margin-left: 50%;
+    margin-top: 50%;
+    left: -27px;
+    top: -50px;
+    position: relative;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid #22a9db;
+    z-index: 2;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+#button:hover #triangle { border-bottom: 80px solid #45bde9 }
+#button:active #triangle { border-bottom: 80px solid #e94545 }
+#lighter_triangle {
+    width: 0px;
+    height: 0px;
+    margin-left: 50%;
+    margin-top: 50%;
+    left: -27px;
+    top: -48px;
+    position: absolute;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid #43c0ee;
+    z-index: 1;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+#button:hover #lighter_triangle { border-bottom: 80px solid #8bdaf7 }
+#button:active #lighter_triangle { border-bottom: 80px solid #f78b8b }
+#darker_triangle {
+    width: 0px;
+    height: 0px;
+    margin-left: 50%;
+    margin-top: 50%;
+    left: -28px;
+    top: -53px;
+    position: absolute;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid #0a7da7;
+    z-index: 1;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+#button:hover #darker_triangle { border-bottom: 80px solid #1d98c5 }
+#button:active #darker_triangle { border-bottom: 80px solid #c51d1d }
+
+
+ 
+#plus{
+    background: #22a9db;
+    width: 10%;
+    height: 50%;
+    margin-left: 50%;
+    margin-top: 50%;
+    left:  33.3%;
+    top: -25%;
+    position: relative;
+    margin-left: 11%;
+	z-index: 2;
+ 
+}
+#plus:before{
+    background: #22a9db;
+    content: "";
+    width: 500%;
+    height: 25%;
+    position: absolute;
+    top: 33%;
+    left: -200%;
+} 
+#button:hover #plus { background:  #45bde9 }
+#button:active #plus { background:  #e94545 }
+#button:hover #plus:before { background:  #45bde9 }
+#button:active #plus:before { background:  #e94545 }
+
+
+#minus{
+    background: #22a9db;
+    width: 50%;
+    height: 10%;
+    margin-left: 50%;
+    margin-top: 50%;
+    left:  13.3%;
+    top: -5%;
+    position: relative;
+    margin-left: 11%;
+	z-index: 2;
+} 
+#button:hover #minus { background:  #45bde9 }
+#button:active #minus { background:  #e94545 }
+ 
+
+ 
+ 
+ 
+#pushbutton2 {
+  width: 80px;
+  height: 100px;  
+  border-bottom: 1px solid #eee;
+  
+  background-image: -webkit-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -moz-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -ms-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -o-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: linear-gradient(top, #999, #d0d0d0 80% );
+  
+  -moz-border-radius: 100px;  
+  -webkit-border-radius: 100px;  
+  border-radius: 0px;
+  
+  box-shadow: inset rgba(0,0,0,0.2) 0px 5px 6px ;
+  
+ 
+  padding-left: 10px;
+  padding-top:  10px;
+ 
+}
+
+.butt {
+  width: 64px;
+  height: 80px;
+ 
+  cursor: touch;
+  font-family: "Lucida Sans";
+  font-weight: bold;
+  font-size: 46px;
+  color: #888;
+  text-shadow: 0px 1px 0px #fff;
+  text-align: center;
+  line-height: 80px;
+  
+  -moz-border-radius: 100px;  
+  -webkit-border-radius: 100px;  
+  border-radius: 0px;  
+  
+  background-image: -webkit-linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% );
+  background-image: -moz-linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% );
+  background-image: -ms-linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% );
+  background-image: -o-linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% );
+  background-image: linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% );
+  
+  background-position: 0 6px;
+  background-color: #eee;
+  background-repeat: no-repeat;
+  
+  -webkit-box-shadow: rgba(0,0,0,.4) 0 3px 6px;  
+  -moz-box-shadow: rgba(0,0,0,.4) 0 3px 6px;  
+  box-shadow: rgba(0,0,0,.4) 0 3px 6px;
+  
+  -webkit-transition: all .1s ease-in;
+  -moz-transition: all .1s ease-in;
+  -ms-transition: all .1s ease-in;
+  -o-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+}
+
+.butt:hover {
+  background-position: 0 0px;
+  
+  -webkit-box-shadow: rgba(0,0,0,.4) 0 3px 8px;  
+  -moz-box-shadow: rgba(0,0,0,.4) 0 3px 8px;  
+  box-shadow: rgba(0,0,0,.4) 0 3px 8px;
+}
+
+.butt:active {
+  width: 58px;
+  height: 76px;
+  margin: 2px 0 0 2px;   
+  border-bottom: 1px solid #fff;
+  font-size: 42px;
+  color: #777;
+
+  -webkit-box-shadow: inset rgba(0,0,0,.5) 0px 5px 10px;
+  -moz-box-shadow: inset rgba(0,0,0,.5) 0px 5px 10px;
+  box-shadow: inset rgba(0,0,0,.5) 0px 5px 10px;
+}
+
+ 
+#cover {
+  width: 80px;
+  height: 50px;  
+  border-bottom: 2px solid #eee;
+  
+  background-image: -webkit-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -moz-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -ms-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -o-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: linear-gradient(top, #999, #d0d0d0 80% );
+  
+  -moz-border-radius: 100px;  
+  -webkit-border-radius: 100px;  
+  border-radius: 0px;
+  
+  box-shadow: inset rgba(0,0,0,0.2) 0px 5px 6px ;
+  
+  font-family: "Lucida Sans";
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  text-shadow: 0px 1px 0px #fff;
+  text-align: center;
+  line-height: 50px;
+  
+}
+
+
+
+ 
+#pushbutton3 {
+  width: 80px;
+  height: 60px;  
+  border-bottom: 2px solid #eee;
+  
+  background-image: -webkit-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -moz-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -ms-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: -o-linear-gradient(top, #999, #d0d0d0 80% );
+  background-image: linear-gradient(top, #999, #d0d0d0 80% );
+  
+  -moz-border-radius: 100px;  
+  -webkit-border-radius: 100px;  
+  border-radius: 0px;
+  
+  box-shadow: inset rgba(0,0,0,0.2) 0px 5px 6px ;
+  
+ 
+  padding-left: 10px;
+  padding-top:  10px;
+ 
+}
+
+.butt3 {
+	width: 60px;
+	height: 40px;
+	cursor: touch;
+	font-family: "Lucida Sans";
+	font-weight: bold;
+	font-size: 16px;
+	color: #FF0000;
+	text-shadow: 0px 1px 0px #fff;
+	text-align: center;
+	line-height: 40px;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 0px;
+	background-image: linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% );
+	background-position: 0 6px;
+	background-color: #eee;
+	background-repeat: no-repeat;
+	-webkit-box-shadow: rgba(0,0,0,.4) 0 3px 6px;
+	-moz-box-shadow: rgba(0,0,0,.4) 0 3px 6px;
+	box-shadow: rgba(0,0,0,.4) 0 3px 6px;
+	-webkit-transition: all .1s ease-in;
+	-moz-transition: all .1s ease-in;
+	-ms-transition: all .1s ease-in;
+	-o-transition: all .1s ease-in;
+	transition: all .1s ease-in;
+}
+
+.butt3:hover {
+  background-position: 0 0px;
+  
+  -webkit-box-shadow: rgba(0,0,0,.4) 0 3px 8px;  
+  -moz-box-shadow: rgba(0,0,0,.4) 0 3px 8px;  
+  box-shadow: rgba(0,0,0,.4) 0 3px 8px;
+}
+
+.butt3:active {
+  width: 60px;
+  height: 38px;
+  margin: 2px 0 0 2px;   
+  border-bottom: 1px solid #fff;
+  font-size: 16px;
+  color: #777;
+  -webkit-box-shadow: inset rgba(0,0,0,.5) 0px 5px 10px;
+  -moz-box-shadow: inset rgba(0,0,0,.5) 0px 5px 10px;
+  box-shadow: inset rgba(0,0,0,.5) 0px 5px 10px;
+}
+
+.ZahlenContainer {
+	border: thin black solid;
+
+        display: flex;
+        flex-wrap: Wrap ;
+        justify-content: space-evenly;
+        color: white;
+}
+
+
+.NavContainer {
+	 
+        border-radius: 80px;
+     
+        display: flex;
+        flex-wrap: Wrap ;
+        justify-content: center;
+      
+}
+
+.fontbutton{
+	border: thin #000000 solid;
+	height: 70px;
+	width: 100px;
+	-webkit-transition: All 0.5s ease;
+	-moz-transition: All 0.5s ease;
+	-o-transition: All 0.5s ease;
+	-ms-transition: All 0.5s ease;
+	transition: All 0.5s ease;
+	
+}
+.fontbutton.normal{
+    width: 100px;
+    height: 50px;
+    
+    margin:1px;
+}
+.fontbutton.normal>span{
+    position: relative;
+    top: 5%;
+}
+.fontbutton.small{
+	width: 60px;
+	margin:2px;
+}
+.fontbutton.mid{
+	width: 60px;
+	height:60px;
+	margin:1px;
+}
+.fontbutton.mid>span{
+    position: relative;
+    top: 15%;
+}
+.fontbutton.big{
+	width: 80px;
+	margin:2px;
+}
+.fontbutton.wide{
+	width: 130px;
+        height: 60px;
+	margin:2px;
+}
+.fontbutton.xxl{
+	width: 200px;
+	margin:2px;
+}
+
+
+.fontbutton.cyan{
+	background: -webkit-linear-gradient(hsl(174, 100%, 25%), hsl(174, 100%, 45%));
+}
+.fontbutton.olive{
+	background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 45%));
+}
+.fontbutton.sandy{
+	background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%));
+}
+.fontbutton.red{
+	background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 45%));
+}
+.fontbutton.purple{
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%),hsl(300, 100%, 25%));
+}
+.fontbutton.blue{
+	background:-webkit-linear-gradient(hsl(200, 100%, 25%), hsl(200, 100%, 45%)); /* CHROME */
+}
+.fontbutton.grey {
+    background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%),hsl(200, 0%, 25%));
+}
+
+.fontbutton.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+}   
+.fontbutton:hover {
+}
+.fontbutton.cyan:active {
+	background: -webkit-linear-gradient(hsl(174, 100%, 5%), hsl(174, 100%, 15%));
+}
+.fontbutton.olive:active {
+	background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%));
+}
+.fontbutton.sandy:active {
+	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%));
+}
+.fontbutton.red:active {
+	background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%));
+}
+.fontbutton.purple:active {
+	background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%),hsl(300, 100%, 5%));
+}
+.fontbutton.blue:active {
+	background: -webkit-linear-gradient(hsl(200, 100%, 5%), hsl(200, 100%, 15%));
+}
+.fontbutton.grey:active {
+    background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 0%, 5%));
+}
+.fontbutton.midgreen:active {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+.ctrlbutton{
+	border: thin #000000 solid;
+	height: 80px;
+	width: 202px;
+	color: white;
+	background: -webkit-linear-gradient(hsl(274, 100%, 25%), hsl(274, 100%, 45%));
+	background: linear-gradient(0deg, hsl(274, 100%, 25%) 5%, hsl(274, 100%, 45%) 70%); 
+	-webkit-transition: All 0.5s ease;
+	-moz-transition: All 0.5s ease;
+	-o-transition: All 0.5s ease;
+	-ms-transition: All 0.5s ease;
+	transition: All 0.5s ease;
+	font-size: xx-large;
+	padding-top: 20px;
+       
+	 
+}
+.ctrlbutton.xsmall {
+	font-size: 18px;
+	height: 35px;
+	min-width: 80px;
+	padding-top: 7px;
+	color: #C0C0C0;
+}
+.ctrlbutton.XS {
+	font-size: 20px;
+	height: 70px;
+	width: 110px;
+	padding-top: 2px;
+	color: white;
+}
+.ctrlbutton.XSS {
+	font-size: 20px;
+	height: 70px;
+	width: 91px;
+	padding-top: 2px;
+	color: white;
+}
+.ctrlbutton.small {
+	height: 50px;
+	width: 120px;
+	font-size: 24px;
+	padding-top: 10px;
+}
+.ctrlbutton.smaller {
+	height: 50px;
+	width: 100px;
+	font-size: 20px;
+	padding-top: 10px;
+}
+.ctrlbutton.normal {
+	height: 50px;
+	width: 175px;
+	font-size: 20px;
+        margin-bottom: 2px;
+	padding-top: 10px;
+}
+.ctrlbutton.smallwide {
+	height: 40px;
+	width: 225px;
+	font-size: 18px;
+        margin-bottom: 2px;
+	padding-top: 10px;
+}
+.ctrlbutton.cyan {
+	background: -webkit-linear-gradient(hsl(174, 100%, 25%), hsl(174, 100%, 45%), hsl(174, 100%, 25%));
+}
+.ctrlbutton.olive {
+	background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 45%));
+}
+.ctrlbutton.sandy {
+	background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%));
+}
+.ctrlbutton.red {
+	background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 45%), hsl(0, 100%, 25%));
+}
+.ctrlbutton.purple {
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%), hsl(300, 100%, 25%));
+	padding-bottom: 20px;
+}
+
+.ctrlbutton.blue {
+	background: -webkit-linear-gradient(hsl(200, 100%, 25%), hsl(200, 100%, 35%), hsl(200, 100%, 45%), hsl(200, 100%, 35%),hsl(200, 100%, 25%));
+}
+.ctrlbutton.blueToggle {
+	background: -webkit-linear-gradient(hsl(200, 100%, 20%), hsl(200, 100%, 15%),hsl(200, 100%, 10%),  hsl(200, 100%, 15%), hsl(200, 100%, 20%));
+}
+.ctrlbutton.grey {
+	background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%), hsl(200, 100%, 25%));
+}
+.ctrlbutton.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+.ctrlbutton:hover {
+ 
+}
+.ctrlbutton:active {
+	background: -webkit-linear-gradient(hsl(274, 100%, 5%), hsl(274, 100%, 15%));
+}
+.ctrlbutton.cyan:active {
+	background: -webkit-linear-gradient(hsl(174, 100%, 5%), hsl(174, 100%, 15%),hsl(174, 100%, 5%));
+}
+.ctrlbutton.olive:active {
+	background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%));
+}
+.ctrlbutton.sandy:active {
+	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%));
+}
+.ctrlbutton.red:active {
+	background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%));
+}
+.ctrlbutton.purple:active {
+	background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%), hsl(300, 100%, 5%));
+}
+.ctrlbutton.blue:active {
+	background: -webkit-linear-gradient(hsl(200, 100%, 5%), hsl(200, 100%, 15%), hsl(200, 100%, 5%));
+}
+
+.ctrlbutton.grey:active {
+	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%));
+}
+.ctrlbutton.midgreen:active {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+.ctrlbutton.cyanA {
+	background: -webkit-linear-gradient(hsl(174, 100%, 5%), hsl(174, 100%, 15%));
+}
+
+.ctrlbutton.oliveA {
+	background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%));
+}
+.ctrlbutton.sandyA {
+	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%));
+}
+.ctrlbutton.redA {
+	background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%));
+}
+
+.var{
+	border-color: #666666;
+	border-style: solid;
+	border-width: 1px;
+    
+}
+.var.cyan{
+	background-color: hsl(174, 100%, 5%);	
+}
+.var.normal{
+    width: 75px;
+    height: 25px;
+    font-size: 14px;
+    padding-top: 5px;
+    z-index: 10;
+}
+
+.anzeige{
+	border-color: #666666;
+	border-style: solid;
+	border-width: 1px;
+	display: flex;
+	flex-direction: column;
+ 
+	width: 202px;
+	height: 60px;
+	margin: 1px;
+	font-size: small;
+	padding: 5px;
+        
+}
+.anzeige.cyan{
+	background-color: hsl(174, 100%, 5%);	
+}
+
+.anzeige.olive{
+	background-color: hsl(82, 100%, 5%);	
+}
+.anzeige.sandy{
+	background-color: hsl(28, 100%, 5%);	
+}
+.anzeige.red{
+	background-color: hsl(0, 100%, 5%);	
+}
+.anzeige.blue{
+	background-color: hsl(200, 100%, 5%); 
+}
+.anzeige.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+.anzeige.midgreen:active{
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+.anzeige.blueA{
+        background: -webkit-linear-gradient(hsl(200, 100%, 25%), hsl(200, 100%, 45%), hsl(200, 100%, 25%));
+}
+.anzeige.blueA:active {
+	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 100%, 5%));
+}
+
+.status{
+	border-color:#666666;
+	border-style: solid;
+	border-width: 1px;
+ 	width: 202px;
+	height: 25px;
+	padding: 2px;
+	margin: 2px;
+    float: end;
+}
+.status.Bat{
+	height: 30px;
+}
+.status.cyan{
+	background-color: hsl(174, 100%, 5%);	
+}
+
+.status.olive{
+	background-color: hsl(82, 100%, 5%);	
+}
+
+.status.sandy{
+	background-color: hsl(28, 100%, 5%);	
+}
+.status.red{
+	background-color: hsl(0, 100%, 5%);	
+}
+.status.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+
+.blackground{
+	display:flex;
+	flex-direction: row;
+ 	width:200px;
+}
+
+
+.tempcontrol{
+	border-color: #888888;
+	border-style: solid;
+	border-width: thin;
+	display: flex;
+	flex-direction: column;
+	background-color: hsl(174, 100%, 5%);
+	width: 202px;
+	height: 190px;
+	margin: 0px;
+}
+.tempcontrol.cyan{
+	background-color: hsl(178, 100%, 5%);	
+}
+.tempcontrol.olive{
+	background-color: hsl(82, 100%, 5%);	
+}
+.tempcontrol.sandy{
+	background-color: hsl(28, 100%, 5%);	
+}
+.tempcontrol.red{
+	background-color: hsl(0, 100%, 5%);	
+}
+.tempcontrol.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+
+#awesomeIcon{
+    position: relative;
+    z-index: 1;
+    left: -60px;
+    top: 40px;
+    color: #7B7B7B;
+
+    width: 0;
+}
+
+
+
+
+
+/* The switch - the box around the slider */
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 200px;
+	height: 70px;
+
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%));
+	-webkit-transition: .4s;
+	transition: .4s;
+	font-size: x-large;
+	padding-top: 20px;
+}
+
+input:checked + .slider {
+	background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%));
+	color:lime;
+}
+
+
+
+/* The radio button Selector */
+#radioselector{
+	 
+	margin: 4px;
+	float: left;
+ 	height:50px;
+ 	overflow-y:auto;
+	 }
+#radioselector label {
+	float: left;
+	 
+	width:100px;
+	height:40px;
+	margin: 4px;
+	overflow: auto;
+	
+}
+#radioselector label span{
+	text-align: center;
+	font-size: 22px;
+	 
+	padding-top:10px;
+	display: block;
+	color:white;
+}
+#radioselector label input{
+	position:absolute;
+	top: 10px;
+	width:30px;
+	height:30px;
+	display:none; 
+}
+#radioselector input:checked + span {
+background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%));
+height:40px;
+color:lime;
+}
+#radioselector .yellow {
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%));	
+}
+#radioselector .blue {
+background-color: blue;
+}
+#radioselector .pink {
+background-color: pink;
+}
+#radioselector .green {
+background-color: green;
+}
+#radioselector .purple {
+background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%),hsl(300, 100%, 25%));	
+}
+
+
+
+/* The radio button Selector big*/
+#Bradioselector{
+	margin: 4px;
+	width:200px;
+	float: left;
+	 }
+#Bradioselector label {
+	float: left;
+	width:190px;
+	height:60px;
+	margin: 4px;
+	overflow: auto;
+}
+#Bradioselector label span{
+	text-align: right;
+	font-size: 22px;
+	padding-right:4px; 
+	padding-top:10px;
+	display: block;
+	color:white;
+}
+#Bradioselector label input{
+	position:absolute;
+	top: -20px;
+	display:none;
+}
+#Bradioselector input:checked + span {
+background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%));
+height:60px;
+color:lime;
+}
+#Bradioselector .yellow {
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%));	
+}
+#Bradioselector .blue {
+background-color: blue;
+}
+#Bradioselector .pink {
+background-color: pink;
+}
+#Bradioselector .green {
+background-color: green;
+}
+#Bradioselector .purple {
+background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%),hsl(300, 100%, 25%));	
+}
+
+
+
+/* The radio button Selector */
+#radioselectorA{
+	margin: 2px;
+	float: left;
+ 	height:50px;
+ 	overflow-y:auto;
+	 }
+#radioselectorA label {
+	float: left;
+	width:85px;
+	height:35px;
+	margin: 1px;
+/*	//overflow: auto;*/
+	
+}
+#radioselectorA label span{
+	text-align: center;
+	font-size: 18px;
+	padding-top:10px;
+	display: block;
+	color:white;
+}
+#radioselectorA label input{
+	position:absolute;
+	top: 30px;
+	width:20px;
+	height:20px;
+
+	display:none; 
+}
+#radioselectorA input:checked + span {
+background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%));
+height:35px;
+color:lime;
+}
+#radioselectorA .yellow {
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%));	
+}
+#radioselectorA .blue {
+background-color: blue;
+}
+#radioselectorA .pink {
+background-color: pink;
+}
+#radioselectorA .green {
+background-color: green;
+}
+#radioselectorA .purple {
+background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%),hsl(300, 100%, 25%));	
+}
+
+
+
+
+
+.IconS {
+    width:60px;
+    height:60px;
+}
+
+.IconMid {
+    width:50px;
+    height:50px;
+    margin-top:5px;
+}
+
+.IconSmall {
+    width:60px;
+    height:40px;
+    margin-top:10px;
+}
+/*LEFT - GLIDE BUTTON*/
+.IconButton {
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+	text-align: center;
+	font-size: 1.2em;
+	color: white;
+	margin:2px;
+}
+.IconButton.small {
+  height: 70px;
+  width: 200px;
+}
+
+.IconButton.smaller {
+  height: 50px;
+  width: 180px;
+}
+
+.IconButton.cyan {
+	/*Gradient*/
+	  background: -webkit-linear-gradient(hsl(174, 100%, 25%), hsl(174, 100%, 45%));
+}
+.IconButton.olive {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 45%)); /* CHROME */
+}
+.IconButton.sandy {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%)); /* CHROME */
+}
+.IconButton.red {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 45%)); /* CHROME */
+}
+.IconButton.yellow {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(51, 100%, 25%), hsl(51, 100%, 45%)); /* CHROME */
+}
+.IconButton.purple {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%),hsl(300, 100%, 25%)); /* CHROME */
+}
+.IconButton.grey {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%)); /* CHROME */
+}
+.IconButton .pink {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(350, 100%, 65%), hsl(350, 100%, 85%)); /* CHROME */
+}
+.IconButton.blue{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(200, 100%, 25%), hsl(200, 100%, 45%)); /* CHROME */
+}
+.IconButton.brown{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(30, 56%, 25%), hsl(30, 56%, 45%)); /* CHROME */
+}
+.IconButton.green{
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(120, 56%, 25%), hsl(120, 56%, 45%)); /* CHROME */
+}
+.IconButton.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+.IconButton:hover {
+}	 
+
+.IconButton.cyan:hover {
+	background: -webkit-linear-gradient(hsl(174, 100%, 15%), hsl(174, 100%, 25%));
+}
+.IconButton.olive:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(82, 100%, 15%), hsl(82, 100%, 25%)); /* CHROME */
+}
+.IconButton.sandy:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(28, 100%, 15%), hsl(28, 100%, 25%)); /* CHROME */
+}
+.IconButton.red:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(0, 100%, 15%), hsl(0, 100%, 25%)); /* CHROME */
+}
+.IconButton.yellow:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(51, 100%, 15%), hsl(51, 100%, 25%)); /* CHROME */
+}
+.IconButton.purple:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(300, 100%, 15%), hsl(300, 100%, 25%),hsl(300, 100%, 15%)); /* CHROME */
+}
+.IconButton.grey:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%)); /* CHROME */
+}
+.IconButton.pink:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(350, 100%, 75%), hsl(350, 100%, 85%)); /* CHROME */
+}
+.IconButton.blue:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(200, 100%, 15%), hsl(200, 100%, 25%)); /* CHROME */
+}
+.IconButton.brown:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(30, 56%, 15%), hsl(30, 56%, 25%)); /* CHROME */
+}
+.IconButton.green:hover {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(120, 56%, 15%), hsl(120, 56%, 25%)); /* CHROME */
+}
+.IconButton.midgreen:hover {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+.IconButton:active {
+	 
+}
+.IconButton.cyan:active {
+	background: -webkit-linear-gradient(hsl(174, 100%, 5%), hsl(174, 100%, 15%));
+}
+
+.IconButton.olive:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%)); /* CHROME */
+}
+.IconButton.sandy:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%)); /* CHROME */
+}
+.IconButton.red:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%)); /* CHROME */
+}
+.IconButton.yellow:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(51, 100%, 5%), hsl(51, 100%, 15%)); /* CHROME */
+}
+.IconButton.purple:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(300, 100%, 5%), hsl(300, 100%, 15%),hsl(300, 100%, 5%)); /* CHROME */
+}
+.IconButton.grey:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(205, 10%, 25%), hsl(205, 10%, 35%)); /* CHROME */
+}
+.IconButton.pink:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(350, 100%, 45%), hsl(350, 100%, 55%)); /* CHROME */
+}
+.IconButton.blue:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(200, 100%, 5%), hsl(200, 100%, 15%)); /* CHROME */
+}
+.IconButton.brown:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(30, 56%, 5%), hsl(30, 56%, 15%)); /* CHROME */
+}
+.IconButton.green:active {
+	  /*Gradient*/
+	  background: -webkit-linear-gradient(hsl(120, 56%, 5%), hsl(120, 56%, 15%)); /* CHROME */
+}
+.IconButton.midgreen:active {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+
+
+
+
+
+#progressbar {
+    width: 98%;
+    /* Full Width */
+	height: 5px;
+    margin: 5px ;
+    background: #000;
+}
+
+.expand {
+	width: 50%;
+	height: 1px;
+	margin: 2px 0;
+	background: #2187e7;
+	position: absolute;
+	box-shadow: 0px 0px 10px 1px rgba(0,198,255,0.7);
+	left: 6px;
+}
+
+
+.auswahl{
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	border: none;
+	width: 500px;
+	height: 1500px;
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	border: solid grey 1px;
+	font-size: x-large;
+}
+
+/*This is our main wrapping element, it's made 100vh high to ensure it is always the correct size and then moved into place and padded with negative margin and padding*/
+.timeContainer {
+    display: flex;
+    overflow: hidden;
+    height: 225px;
+    margin-top: -20px;
+    padding-top: 20px;
+    margin-bottom: -20px;
+    padding-bottom: 20px;    
+    position: relative;
+    top:10px;
+    width: 225px;
+    left:20px;
+    backface-visibility: hidden;
+    will-change: overflow;
+    margin-left: 5px;
+    margin-bottom: 5px;
+
+}
+/*All the scrollable sections should overflow and be whatever height they need to be. As they are flex-items (due to being inside a flex container) they could be made to stretch full height at all times if needed.
+WebKit inertia scrolling is being added here for any present/future devices that are able to make use of it.
+*/
+.timeLeft,
+.Middle,
+.timeRight {
+    overflow: auto;
+    height: auto;
+    padding: .5rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+}
+/*Entirely optional – just wanted to remove the scrollbar on WebKit browsers as I find them ugly*/
+.timeLeft::-webkit-scrollbar,
+.timeMiddle::-webkit-scrollbar,
+.timeRight::-webkit-scrollbar {
+    display: none;
+}
+/*  Left and Right are set sizes while the Middle is set to flex one so it occupies all remaining space. This could be set as a width too if prefereable, perhaps using calc.*/
+.timeLeft {
+    width: 12.5rem;
+    background: green;
+    font-size: 32px;
+	-webkit-mask-image: -webkit-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5)25%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0.1) 100%);
+	 background: -webkit-linear-gradient(hsl(120, 56%, 0%), hsl(120, 56%, 15%),hsl(120, 56%, 75%), hsl(120, 56%, 15%),hsl(120, 56%, 0%));
+}
+.timeMiddle {
+    flex: 1;
+    
+}
+
+.timeRight {
+    width: 12.5rem;
+    
+    font-size: 32px;
+	-webkit-mask-image: -webkit-linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5)25%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0.1) 100%);
+	 background: -webkit-linear-gradient(hsl(120, 56%, 0%), hsl(120, 56%, 15%),hsl(120, 56%, 75%), hsl(120, 56%, 15%),hsl(120, 56%, 0%));
+
+}
+
+
+/* Check Box 
+ /* The container */
+.CBcontainer {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    padding-top: 7px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+ 
+    width: 240px;
+    height: 40px;
+}
+.CBcontainer.blue {
+    background: -webkit-linear-gradient(hsl(200, 100%, 25%), hsl(200, 100%, 35%), hsl(200, 100%, 45%), hsl(200, 100%, 35%),hsl(200, 100%, 25%));
+}
+.CBcontainer.cyan {
+	background: -webkit-linear-gradient(hsl(174, 100%, 25%),hsl(174, 100%, 35%), hsl(174, 100%, 45%), hsl(174, 100%, 35%), hsl(174, 100%, 25%));
+}
+.CBcontainer.olive {
+	background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 35%), hsl(82, 100%, 45%), hsl(82, 100%, 35%), hsl(82, 100%, 25%));
+}
+.CBcontainer.sandy {
+	background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 35%), hsl(28, 100%, 45%),  hsl(28, 100%, 35%), hsl(28, 100%, 25%));
+}
+.CBcontainer.red {
+	background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 35%), hsl(0, 100%, 45%),hsl(0, 100%, 35%), hsl(0, 100%, 25%));
+}
+.CBcontainer.purple {
+	background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 35%), hsl(300, 100%, 45%), hsl(300, 100%, 35%) , hsl(300, 100%, 25%));
+	padding-bottom: 20px;
+}
+.CBcontainer.midgreen {
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
+} 
+/* Hide the browser's default checkbox */
+.CBcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+}
+
+ 
+/* When the checkbox is checked, add a blue background */
+.CBcontainer input:checked ~ .checkmark {
+    background-color: transparent;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.CBcontainer input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.CBcontainer .checkmark:after {
+    left: 10px;
+    top: 3px;
+    width: 5px;
+    height: 20px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/* ****************** blinkendes Text Feld ***************************************** */
+.AlarmBox {
+     
+  -webkit-border-radius: 10px;
+  cursor: pointer;
+  background-color: #004A7F; 
+   text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+ }
+ @-webkit-keyframes glowing {
+  0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+}
+@-moz-keyframes glowing {
+  0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+}
+@-o-keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+@keyframes glowing {
+  0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+  100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+}
+ 
+
+/* ****************** Controls ***************************************** */
+.SecCodeCtrl {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+        background-color: maroon;
+       
+}
+
+.WaterAlarmCtrl {
+	position:absolute;
+	top:  5vh;
+        left: 74vw;
+	width: 0px;
+	height: 95vh;
+        background-color: maroon;
+       
+}
+
+img { border: 0; }
+img.highlight { border: 5px solid blue; }
