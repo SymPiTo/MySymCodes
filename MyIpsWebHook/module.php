@@ -29,7 +29,7 @@ if(!isset($_SERVER['PHP_AUTH_PW']))
     $_SERVER['PHP_AUTH_PW'] = "";
  
 if(($_SERVER['PHP_AUTH_USER'] != "Symcon") || ($_SERVER['PHP_AUTH_PW'] != "passwort")) {
-    header('WWW-Authenticate: Basic Realm="Geofency WebHook"');
+    header('WWW-Authenticate: Basic Realm="MyIpsHomeCOntrol"');
     header('HTTP/1.0 401 Unauthorized');
     echo "Authorization required";
     return;
@@ -52,7 +52,7 @@ echo "Willkommen im geschützten Bereich";
                 if(substr($_SERVER['SCRIPT_NAME'], -1) != "/") {
                     if(is_dir($path)) {
                         http_response_code(301);
-                        header("Location: " . $_SERVER['SCRIPT_NAME'] . "/\r\n\r\n");
+                        //header("Location: " . $_SERVER['SCRIPT_NAME'] . "/\r\n\r\n");
                         return;
                     }
                 }   
