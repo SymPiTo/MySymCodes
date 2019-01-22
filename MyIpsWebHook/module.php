@@ -75,7 +75,7 @@ if(($_SERVER['PHP_AUTH_USER'] != "Symcon") || ($_SERVER['PHP_AUTH_PW'] != "passw
                 if($extension == "php") {
                         include_once($path);
                 } else {
-                   // header("Content-Type: ".$this->GetMimeType($extension));
+                   header("Content-Type: ".$this->GetMimeType($extension));
                     readfile($path);
                 }
                 
