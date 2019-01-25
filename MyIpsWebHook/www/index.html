@@ -127,18 +127,19 @@
 
                 var timerID =0;
                 function keepAlive(){
-                        var timeout = 30000;
+                        var timeout = 20000;
                         if (socket.readyState == socket.OPEN) {
                                 send('Client' + '*' + 'status' + '*' + 'keep Alive');
                         }
                         timerID = setTimeout(keepAlive, timeout); 
-                        fehler("TimeOut");
+                        
                 }
                 
 
                 function cancelKeepAlive(){
                         if (timerID) {
                                 clearTimeout(timerID);
+                                 
                         }
                 }
 
