@@ -7,7 +7,7 @@
         getTVchannels(){
             var TVchannels = new Array (
                 {  No: 0, selected: false,  Sender: "Das Erste HD",   icon: "Das Erste HD.png" },
-                {  No: 1, selected: false,   Sender: "ZDF HD",   icon: "ZDF HD.png" }, 
+                {  No: 1, selected: false,   Sender: "ZDF HD",   icon: "zdf hd.png" }, 
                 {  No: 2, selected: false,   Sender: "RTL Television",   icon: "RTL Television.png" },
                 {  No: 3, selected: false,   Sender: "ProSieben",   icon: "ProSieben.png" },  
                 {  No: 4, selected: false,   Sender: "kabel eins",   icon: "kabel eins.png" },
@@ -18,10 +18,10 @@
                 {  No: 9,  selected: false, Sender: "Tele 5",   icon: "Tele 5.png" }, 
                 {  No: 10, selected: false,   Sender: "ONE HD)",   icon: "One%20HD.png" },
                 {  No: 11, selected: false,   Sender: "RTLplus",   icon: "RTLplus.png" },  
-                {  No: 12, selected: false,   Sender: "Phoenix HD",   icon: "phoenix HD.png" },
-                {  No: 13, selected: false,   Sender: "arte HD",   icon: "arte HD.png" }, 
+                {  No: 12, selected: false,   Sender: "Phoenix HD",   icon: "phoenix hd.png" },
+                {  No: 13, selected: false,   Sender: "arte HD",   icon: "arte hd.png" }, 
                 {  No: 14, selected: false,   Sender: "Sat.1 Gold",   icon: "Sat.1 Gold.png" },
-                {  No: 15, selected: false,   Sender: "sixx",   icon: "SIXX.png" },
+                {  No: 15, selected: false,   Sender: "SIXX",   icon: "sixx.png" },
                 {  No: 16, selected: false,   Sender: "ProSieben MAXX",   icon: "ProSieben MAXX.png" },  
                 {  No: 17, selected: false,   Sender: "ZDF_neo HD",   icon: "ZDF_neo HD.png" },  
                 {  No: 18, selected: false,   Sender: "Disney Junior",   icon: "Disney Junior.png" },  
@@ -34,7 +34,7 @@
                 {  No: 25, selected: false,   Sender: "das erste hd",   icon: "rhein%20neckar%20fernsehen.png" },  
                 {  No: 26, selected: false,   Sender: "PHOENIX",   icon: "phoenix.png" },  
                 {  No: 27, selected: false,   Sender: "zee.ONE",   icon: "ZEE.ONE.png" }, 
-                {  No: 28, selected: false,   Sender: "sport1",   icon: "SPORT1.png" },  
+                {  No: 28, selected: false,   Sender: "SPORT1",   icon: "sport1.png" },  
                 {  No: 29, selected: false,   Sender: "bbc hd",   icon: "BBC HD.png" } 
             ) 
             return TVchannels;
