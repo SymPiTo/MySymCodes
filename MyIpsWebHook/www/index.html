@@ -40,7 +40,8 @@
                         try {
                                 socket = new WebSocket(host);
                                 state('WebSocket: '+socket.readyState);
-                                socket.onopen    = function(msg) { 
+                                socket.onopen    = function(msg)    {      
+                                                                        var a = 0;
                                                                            if(this.readyState === 1){ a = 'connected';}
                                                                            else if (this.readyState === 2){a = 'connecting';}
                                                                            else if (this.readyState === 0){a = 'not connecting';}
