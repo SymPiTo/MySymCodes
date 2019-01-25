@@ -46,7 +46,7 @@
                                                                            else if (this.readyState === 0){var a = 'not connecting';}
                                                                            else {var a = 'Connection closed';}
                                                                            state(' WebSocket: '+ a); 
-                                                                           
+                                                                           keepAlive();
                                                                    };
 
                                 socket.onmessage = function(msg) { 
@@ -81,6 +81,7 @@
                                 socket.onclose  = function(msg) { 
                                                                            state('Client disconnected - status '+ this.readyState);
                                                                            //send('Client' + '*' + 'status' + '*' + 'close connection');
+                                                                           cancelKeepAlive();
                                                                    };
                                 socket.onerror = function(err) {
                                                                         fehler('Client' + '*' + 'status' + '*' + 'err');									 
