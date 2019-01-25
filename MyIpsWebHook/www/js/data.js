@@ -11,17 +11,17 @@
                 {  No: 2, selected: false,   Sender: "RTL Television",   icon: "RTL Television.png" },
                 {  No: 3, selected: false,   Sender: "ProSieben",   icon: "ProSieben.png" },  
                 {  No: 4, selected: false,   Sender: "kabel eins",   icon: "kabel eins.png" },
-                {  No: 5, selected: false,   Sender: "RTL2",   icon: "RTL2.png" }, 
+                {  No: 5, selected: false,   Sender: "RTL2",   icon: "rtl2.png" }, 
                 {  No: 6, selected: false,   Sender: "SAT.1",   icon: "SAT.1.png" },
                 {  No: 7, selected: false,   Sender: "3sat",   icon: "3sat.png" },
-                {  No: 8, selected: false,   Sender: "VOX",   icon: "VOX.png" },
+                {  No: 8, selected: false,   Sender: "VOX",   icon: "vox.png" },
                 {  No: 9,  selected: false, Sender: "Tele 5",   icon: "Tele 5.png" }, 
                 {  No: 10, selected: false,   Sender: "ONE HD)",   icon: "One%20HD.png" },
                 {  No: 11, selected: false,   Sender: "RTLplus",   icon: "RTLplus.png" },  
-                {  No: 12, selected: false,   Sender: "Phoenix HD",   icon: "Phoenix HD.png" },
+                {  No: 12, selected: false,   Sender: "Phoenix HD",   icon: "phoenix HD.png" },
                 {  No: 13, selected: false,   Sender: "arte HD",   icon: "arte HD.png" }, 
                 {  No: 14, selected: false,   Sender: "Sat.1 Gold",   icon: "Sat.1 Gold.png" },
-                {  No: 15, selected: false,   Sender: "SIXX",   icon: "SIXX.png" },
+                {  No: 15, selected: false,   Sender: "sixx",   icon: "SIXX.png" },
                 {  No: 16, selected: false,   Sender: "ProSieben MAXX",   icon: "ProSieben MAXX.png" },  
                 {  No: 17, selected: false,   Sender: "ZDF_neo HD",   icon: "ZDF_neo HD.png" },  
                 {  No: 18, selected: false,   Sender: "Disney Junior",   icon: "Disney Junior.png" },  
@@ -31,11 +31,11 @@
                 {  No: 22, selected: false,   Sender: "BR Fernsehen Süd HD",   icon: "BR Fernsehen Süd HD.png" },  
                 {  No: 23, selected: false,   Sender: "NDR Niedersachsen HD",   icon: "NDR Niedersachsen HD.png" }, 
                 {  No: 24, selected: false,   Sender: "SWR BW HD",   icon: "SWR BW HD.png" },  
-                {  No: 25, selected: false,   Sender: "as Erste HD",   icon: "rhein%20neckar%20fernsehen.png" },  
-                {  No: 26, selected: false,   Sender: "PHOENIX",   icon: "PHOENIX.png" },  
-                {  No: 27, selected: false,   Sender: "ZEE.ONE",   icon: "ZEE.ONE.png" }, 
-                {  No: 28, selected: false,   Sender: "SPORT1",   icon: "SPORT1.png" },  
-                {  No: 29, selected: false,   Sender: "BBC HD",   icon: "BBC HD.png" } 
+                {  No: 25, selected: false,   Sender: "das erste hd",   icon: "rhein%20neckar%20fernsehen.png" },  
+                {  No: 26, selected: false,   Sender: "PHOENIX",   icon: "phoenix.png" },  
+                {  No: 27, selected: false,   Sender: "zee.ONE",   icon: "ZEE.ONE.png" }, 
+                {  No: 28, selected: false,   Sender: "sport1",   icon: "SPORT1.png" },  
+                {  No: 29, selected: false,   Sender: "bbc hd",   icon: "BBC HD.png" } 
             ) 
             return TVchannels;
         } 
