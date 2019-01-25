@@ -41,10 +41,10 @@
                                 socket = new WebSocket(host);
                                 state('WebSocket: '+socket.readyState);
                                 socket.onopen    = function(msg) { 
-                                                                           if(this.readyState === 1){ var a = 'connected';}
-                                                                           else if (this.readyState === 2){var a = 'connecting';}
-                                                                           else if (this.readyState === 0){var a = 'not connecting';}
-                                                                           else {var a = 'Connection closed';}
+                                                                           if(this.readyState === 1){ a = 'connected';}
+                                                                           else if (this.readyState === 2){a = 'connecting';}
+                                                                           else if (this.readyState === 0){a = 'not connecting';}
+                                                                           else {a = 'Connection closed';}
                                                                            state(' WebSocket: '+ a); 
                                                                            keepAlive();
                                                                    };
