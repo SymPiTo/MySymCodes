@@ -540,7 +540,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	width: 0px;
         height:95vh;
 	background-color: #FFFFFF;
-	background-image: url('images/Wohnung_Grundriss.png');
+	background-image: url('www/images/Wohnung_Grundriss.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
