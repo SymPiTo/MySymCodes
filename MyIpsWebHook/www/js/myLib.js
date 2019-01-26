@@ -416,7 +416,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         var elem = document.createElement("img");
         elem.className = "icon";
         elem.classList.add(size);
-        elem.src = "images/" + this.ImageBaseName +"1.png";
+        elem.src = "images/" + this.ImageBaseName +"0.png";
         elem.id = this.Ident; 
         elem.style.position = "absolute";
         elem.style.left = posLeft;
@@ -467,7 +467,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         }
        if(this.typ === "bin"){
             if((value == 0 || value == "false")){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
+                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
             }
             else {
                 document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
