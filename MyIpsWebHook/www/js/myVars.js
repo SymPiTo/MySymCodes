@@ -149,6 +149,11 @@
             check(ips[0].ID31822, 61);  //Line3 - Denon
             check(ips[0].ID22520, 62);  //Power - Denon
             check(ips[0].ID19185, 59);  //Volume - Denon
+            
+            check(ips[0].ID30280, 63);  //Bad Fenster Aktor
+            check(ips[0].ID49846, 64);  //Bad Taster-Fenster
+            
+            
      }
     function check(value, n){
         if (typeof value === "undefined") {$('fehler').innerHTML =  "Variable  wrong ID:" + n;} else {return value;}
@@ -515,6 +520,11 @@
             FontBtnIRadioPowerWZ.update(ips[0].ID22520);
             IconVarDisVolWZ.update(ips[0].ID19185,0);
             IconVarDisSourceWZ.update(ips[0].ID46852,"state");
+            
+            //Dynamisches Bild Battery
+            iBat01.update(ips(0).ID30280);
+            iBat02.update(ips(0).ID49846);
+            
             
         } catch (error) {
            // alert (error);
