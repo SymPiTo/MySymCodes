@@ -482,6 +482,21 @@
         try {
             iBat01.update(ips[0].ID30280);
             iBat02.update(ips[0].ID49846);
+            iBat03.update(ips[0].ID33304);
+            /*
+            iBat04.update(ips[0].ID00000);
+            iBat05.update(ips[0].ID00000);
+            iBat06.update(ips[0].ID00000);
+            iBat07.update(ips[0].ID00000);
+            iBat11.update(ips[0].ID00000);
+            iBat12.update(ips[0].ID00000);
+            iBat13.update(ips[0].ID00000);
+            iBat14.update(ips[0].ID00000);
+            iBat15.update(ips[0].ID00000);
+            iBat16.update(ips[0].ID00000);
+            iBat17.update(ips[0].ID00000);
+            */
+           
             //Dynamisches Bild Rolladen
             iRolloB.update(ips[0].ID46035);
             iRolloWZ.update(ips[0].ID39896);

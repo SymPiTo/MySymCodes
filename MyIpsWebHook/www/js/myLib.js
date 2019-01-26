@@ -313,6 +313,26 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     document.getElementById(TitleID).appendChild(elem);			 
 }
 
+/* --------------------- class Label ---------------------------------------- */
+ class label {
+    
+    
+    constructor() {
+ 
+    }
+    create(ParentID, posTop, posLeft, fontsize, fontcolor, text){
+    var elem = document.createElement("p");
+    elem.style.color = fontcolor;
+    elem.style.fontSize = fontsize;
+    elem.innerHTML = text;
+    elem.style.position = "absolute";
+    elem.style.left = posLeft;
+    elem.style.top = posTop;
+    
+    document.getElementById(ParentID).appendChild(elem); 
+    }
+ }
+
 /* --------------------- class Dynamic ImageDisplay ---------------------------------------- */
  class ImageDisplay {
     
