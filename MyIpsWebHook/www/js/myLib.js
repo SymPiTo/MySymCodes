@@ -469,11 +469,11 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
             value = value + 0;
             if(value === 0){
                 document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
-                return "images/" + this.ImageBaseName +"0.png"
+                 
             }
             else {
                 document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
-                return "images/" + this.ImageBaseName +"1.png"
+                 
             } 
        }
     }
