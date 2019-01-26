@@ -6,6 +6,10 @@
                 "type": "PasswordTextBox", 
                 "caption": "Password" 
             },
+            {   "type": "Button", 
+                "caption": "An", 
+                "onClick": "this->cryptPW();" 
+            },
             {
                 "type" : "Label",
                 "label" : "ALexa Text To Speech verwenden."
