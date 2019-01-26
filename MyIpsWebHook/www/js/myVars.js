@@ -508,9 +508,9 @@
             VarDisTempOutside.update(ips[0].ID16709);
             VarDisHumOutside.update(ips[0].ID27502);
             
-             DisAlarmActiveSec.update(ips[0].ID20483); 
-             ABox.update(ips[0].ID54653);
-             
+            DisAlarmActiveSec.update(ips[0].ID20483); 
+            ABox.update(ips[0].ID54653);
+          
             iDisArtist.update(ips[0].ID34292, ips[0].ID31822, ips[0].ID30505, ips[0].ID17922);
             FontBtnIRadioPower.update(ips[0].ID22520);
             IconVarDisVol.update(ips[0].ID19185,0);
@@ -522,9 +522,9 @@
             IconVarDisSourceWZ.update(ips[0].ID46852,"state");
             
             //Dynamisches Bild Battery
-
-            iBat01.update(ips(0).ID30280);
-            iBat02.update(ips(0).ID49846);
+            batbild1 = iBat01.update(ID30280);
+             
+            batbild2 = iBat02.update(ips(0).ID49846);
             
             
         } catch (error) {
