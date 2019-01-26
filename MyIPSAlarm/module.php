@@ -485,7 +485,8 @@ class MyAlarm extends IPSModule
              none
         ------------------------------------------------------------------------------- */
 	public function cryptPW($password){   
-           
+           $this->SendDebug("Password", "data", 0);
+ 
         }
         
         
