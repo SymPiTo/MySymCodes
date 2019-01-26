@@ -480,6 +480,8 @@
         
  
         try {
+            var batbild1 = iBat01.update(ips(0).ID30280);
+            var batbild2 = iBat02.update(ips(0).ID49846);
             //Dynamisches Bild Rolladen
             iRolloB.update(ips[0].ID46035);
             iRolloWZ.update(ips[0].ID39896);
@@ -521,10 +523,8 @@
             IconVarDisVolWZ.update(ips[0].ID19185,0);
             IconVarDisSourceWZ.update(ips[0].ID46852,"state");
             
-            //Dynamisches Bild Battery
-            var batbild1 = iBat01.update(ips(0).ID30280);
-             
-            var batbild2 = iBat02.update(ips(0).ID49846);
+      
+
             
             
         } catch (error) {
