@@ -301,7 +301,7 @@
             var SubMenuWaterAlarm = new GlideButton();
             SubMenuWaterAlarm.create("SubMenuSec","SubMenuWaterAlarm", "red", "Meldungen", "FeuchteWasserMelder.png", "MainWaterAlarm","", "SM" ); 
             var SubMenuBatAlarm = new GlideButton();
-            SubMenuBatAlarm.create("SubMenuSec","SubMenuBatAlarm", "red", "Batery Alarm", "BatAlarm.png", "MainBatAlarm","", "SM" ); 
+            SubMenuBatAlarm.create("SubMenuSec","SubMenuBatAlarm", "red", "Battery Alarm", "BatAlarm.png", "MainBatAlarm","", "SM" ); 
         </script>
         
         <!-- ************************* SubMenu - Wohnzimmer **************************  -->
@@ -958,20 +958,24 @@
             var iBat07 = new Image("imageBat07","BatStat","ana"); 
             iBat07.create("MainBatAlarm", "450px", "10px", "small");
             
+            var label01 = new label();
+            label01.create("MainBatAlarm", "30px", "100px", "12px", "red", "text");
+             
+            
             var iBat11 = new Image("imageBat11","BatStat","ana"); 
-            iBat11.create("MainBatAlarm", "30px", "100px", "small"); 
+            iBat11.create("MainBatAlarm", "30px", "300px", "small"); 
             var iBat12 = new Image("imageBat12","BatStat","ana"); 
-            iBat12.create("MainBatAlarm", "100px", "100px", "small"); 
+            iBat12.create("MainBatAlarm", "100px", "300px", "small"); 
             var iBat13 = new Image("imageBat13","BatStat","ana"); 
-            iBat13.create("MainBatAlarm", "170px", "100px", "small"); 
+            iBat13.create("MainBatAlarm", "170px", "300px", "small"); 
             var iBat14 = new Image("imageBat14","BatStat","ana"); 
-            iBat14.create("MainBatAlarm", "240px", "100px", "small");
+            iBat14.create("MainBatAlarm", "240px", "300px", "small");
             var iBat15 = new Image("imageBat15","BatStat","ana"); 
-            iBat15.create("MainBatAlarm", "310px", "10px", "small"); 
+            iBat15.create("MainBatAlarm", "310px", "30px", "small"); 
             var iBat16 = new Image("imageBat16","BatStat","ana"); 
-            iBat16.create("MainBatAlarm", "380px", "100px", "small"); 
+            iBat16.create("MainBatAlarm", "380px", "300px", "small"); 
             var iBat17 = new Image("imageBat17","BatStat","ana"); 
-            iBat17.create("MainBatAlarm", "450px", "100px", "small");
+            iBat17.create("MainBatAlarm", "450px", "300px", "small");
         </script>
     
         <!-- ***********************************************************************************      -->
