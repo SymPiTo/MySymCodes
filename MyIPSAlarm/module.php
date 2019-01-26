@@ -84,6 +84,7 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
         $this->RegisterVariableString("A_SecWarning", "Security Meldung");  
+             
         
             //HTML Box anlegen
                    
@@ -144,8 +145,8 @@ class MyAlarm extends IPSModule
         //Never delete this line!        
         parent::ApplyChanges();        
         
-        //Passwort verschlüsseln
-        $this->cryptPW($this->ReadPropertyString("Password"));
+
+        
              
         //Unterkategorie für Webfront anlegen 
 
@@ -324,7 +325,9 @@ class MyAlarm extends IPSModule
         ------------------------------------------------------------------------------  */
         public function checkCode(){
             $password = getvalue($this->GetIDForIdent("A_SecCode"));
-            $hash = $this->ReadPropertyString("Password");
+            //Passwort verschlüsseln
+            $hash = $this->cryptPW($this->ReadPropertyString("Password"));
+             
             $this->SendDebug("Password hash", $hash, 0);
             if (password_verify($password, $hash)) {
                 $this->resetCode();
@@ -489,7 +492,7 @@ class MyAlarm extends IPSModule
 	public function cryptPW($password){  
            $hash = password_hash($password, PASSWORD_DEFAULT); 
            $this->SendDebug("Password", $hash, 0);
- 
+           return $hash;
         }
         
         
