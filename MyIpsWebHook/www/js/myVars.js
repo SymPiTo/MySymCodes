@@ -522,6 +522,7 @@
             IconVarDisSourceWZ.update(ips[0].ID46852,"state");
             
             //Dynamisches Bild Battery
+
             iBat01.update(ips(0).ID30280);
             iBat02.update(ips(0).ID49846);
             
