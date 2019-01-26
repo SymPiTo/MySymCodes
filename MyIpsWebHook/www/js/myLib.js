@@ -466,7 +466,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
             else{}
         }
        if(this.typ === "bin"){
-            if(value === 0){
+            if((value == 0 || value == "false")){
                 document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
             }
             else {
