@@ -323,8 +323,9 @@ class MyAlarm extends IPSModule
             none
         ------------------------------------------------------------------------------  */
         public function checkCode(){
-            $code = getvalue($this->GetIDForIdent("A_SecCode"));
-            if ($code === "04826"){ 
+            $password = getvalue($this->GetIDForIdent("A_SecCode"));
+            $hash = $this->ReadPropertyString("Password");
+            if (password_verify($password, $hash)) {
                 $this->resetCode();
                 setvalue($this->GetIDForIdent("A_SecWarning"),"Code wurde akzeptiert."); 
                 
@@ -484,8 +485,9 @@ class MyAlarm extends IPSModule
         Returns:   
              none
         ------------------------------------------------------------------------------- */
-	public function cryptPW($password){   
-           $this->SendDebug("Password", "data", 0);
+	public function cryptPW($password){  
+           $hash = password_hash($password, PASSWORD_DEFAULT); 
+           $this->SendDebug("Password", $hash, 0);
  
         }
         
