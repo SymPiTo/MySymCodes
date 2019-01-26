@@ -300,6 +300,8 @@
             SubMenuSecCode.create("SubMenuSec","SubMenuSeCode", "red", "Alarmanlage", "AlarmKey.png", "MainSecCode","", "SM" ); 
             var SubMenuWaterAlarm = new GlideButton();
             SubMenuWaterAlarm.create("SubMenuSec","SubMenuWaterAlarm", "red", "Meldungen", "FeuchteWasserMelder.png", "MainWaterAlarm","", "SM" ); 
+            var SubMenuBatAlarm = new GlideButton();
+            SubMenuBatAlarm.create("SubMenuSec","SubMenuBatAlarm", "red", "Batery Alarm", "BatAlarm.png", "MainBatAlarm","", "SM" ); 
         </script>
         
         <!-- ************************* SubMenu - Wohnzimmer **************************  -->
@@ -930,7 +932,27 @@
  
         <script>
         </script>  
+
+        
+        <!-- ***********************************************************************************      -->
+	<!--  ************************          Battery Alarm   ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Main id ="MainBatAlarm" class="BatAlarm"></Main>
+                 
+                 
                 
+        <script>
+        </script>
+    
+        <!-- ***********************************************************************************      -->
+	<!--  ************************    Battery Alarm Ctrl                 ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Ctrl id ="MainBatAlarmCtrl" class="BatAlarmCtrl"></Ctrl>  
+ 
+        <script>
+        </script>    
+        
+        
         <!-- ***********************************************************************************      -->
 	<!--  ************************          INDEX E - Floorplan    ************************      -->   
         <!-- ***********************************************************************************      -->
