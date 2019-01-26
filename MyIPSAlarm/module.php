@@ -325,6 +325,7 @@ class MyAlarm extends IPSModule
         public function checkCode(){
             $password = getvalue($this->GetIDForIdent("A_SecCode"));
             $hash = $this->ReadPropertyString("Password");
+            $this->SendDebug("Password hash", $hash, 0);
             if (password_verify($password, $hash)) {
                 $this->resetCode();
                 setvalue($this->GetIDForIdent("A_SecWarning"),"Code wurde akzeptiert."); 
