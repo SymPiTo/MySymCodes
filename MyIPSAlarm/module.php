@@ -144,23 +144,24 @@ class MyAlarm extends IPSModule
         //Never delete this line!        
         parent::ApplyChanges();        
         
- 
+        //Passwort verschlüsseln
+        $this->cryptPW($this->ReadPropertyString("Password"));
              
-            //Unterkategorie für Webfront anlegen 
-             
-            $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
-            $secID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
-            $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
+        //Unterkategorie für Webfront anlegen 
 
-            @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
-       
-            $this->CreateLink("Status", $secID, $this->GetIDForIdent("A_SecActive"));    
-            $this->CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
-            $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
+        $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
+        $secID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
+        $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
 
-            if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
-               @IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard")); 
-            }
+        @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
+
+        $this->CreateLink("Status", $secID, $this->GetIDForIdent("A_SecActive"));    
+        $this->CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
+        $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
+
+        if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
+           @IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard")); 
+        }
      
 
         
