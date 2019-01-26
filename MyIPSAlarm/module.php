@@ -485,7 +485,7 @@ class MyAlarm extends IPSModule
              none
         ------------------------------------------------------------------------------- */
 	public function cryptPW($password){   
-           echo "Hallo"; 
+           
         }
         
         
