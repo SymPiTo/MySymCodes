@@ -152,8 +152,18 @@
             
             check(ips[0].ID30280, 63);  //Bad Fenster Aktor
             check(ips[0].ID49846, 64);  //Bad Taster-Fenster
+            check(ips[0].ID33304, 65);  //Balkon Temp Feuchte Sensor
             
-            
+            check(ips[0].ID26399, 66);  //Diele Präsenzmelder
+            check(ips[0].ID25322, 67);  //Haustür Kontakt
+            check(ips[0].ID52085, 68);  //Kinderzimmer Heizregler 
+            check(ips[0].ID38784, 69);  //Kinderzimmer Temp-Feuchte Sensor
+            check(ips[0].ID22083, 70);  //Küche Heizregler
+            check(ips[0].ID16681, 71);  //Küche Wassermelder
+            check(ips[0].ID57118, 72);  //Schlafzimmer Heizregler
+            check(ips[0].ID18803, 73);  //Schlafzimmer Feuchte Sensor
+            check(ips[0].ID23472, 74);  //Wohnzimmer Heizregler
+           
      }
     function check(value, n){
         if (typeof value === "undefined") {$('fehler').innerHTML =  "Variable  wrong ID:" + n;} else {return value;}
@@ -477,25 +487,20 @@
     
     
     function updateValues(ips){
-        
- 
         try {
             iBat01.update(ips[0].ID30280);
             iBat02.update(ips[0].ID49846);
             iBat03.update(ips[0].ID33304);
-            /*
-            iBat04.update(ips[0].ID00000);
-            iBat05.update(ips[0].ID00000);
-            iBat06.update(ips[0].ID00000);
-            iBat07.update(ips[0].ID00000);
-            iBat11.update(ips[0].ID00000);
-            iBat12.update(ips[0].ID00000);
-            iBat13.update(ips[0].ID00000);
-            iBat14.update(ips[0].ID00000);
-            iBat15.update(ips[0].ID00000);
-            iBat16.update(ips[0].ID00000);
-            iBat17.update(ips[0].ID00000);
-            */
+            iBat04.update(ips[0].ID26399);
+            iBat05.update(ips[0].ID25322);
+            iBat06.update(ips[0].ID52085);
+            iBat07.update(ips[0].ID38784);
+            iBat11.update(ips[0].ID22083);
+            iBat12.update(ips[0].ID16681);
+            iBat13.update(ips[0].ID57118);
+            iBat14.update(ips[0].ID18803);
+            iBat15.update(ips[0].ID23472);
+
            
             //Dynamisches Bild Rolladen
             iRolloB.update(ips[0].ID46035);
