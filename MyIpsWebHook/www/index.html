@@ -245,9 +245,10 @@
 			</div>
  			<div id="log" style="z-index: 6; text-align: right;   background-color: transparent">
 			</div>
-	<div class="led-box">
-    <div class="led-yellow"></div>
-    
+                <div>
+                    <div class="led-box">
+                    <div class="led-yellow"></div>
+                </div>        
   </div>
                     	
 		</div>
@@ -904,7 +905,7 @@
         DisAlarmActiveSec=Object.create(Display);
         DisAlarmActiveSec.create("MainSecCodeCtrl", "AlarmActiveSec", "red", "", "60px", "20px", "Alarm Anlage", "aktiviert", "deaktiviert", "", "", "");
         var DisSabAlarm = new StateDisplay();
-        DisSabAlarm.create("MainSecCodeCtrl", "red", "", "140px", "20px", "Sabotage", "ok", "manipuliert");
+        DisSabAlarm.create("MainSecCodeCtrl", "red", "", "140px", "20px", "Sabotage", "manipuliert", "ok");
         DisDoorOpen=Object.create(Display);
         DisDoorOpen.create("MainSecCodeCtrl", "DoorOpen", "red", "", "240px", "20px", "Eingangstür", "offen", "geschlossen", "", "", "");
         DisBalkonDoorOpen=Object.create(Display);
