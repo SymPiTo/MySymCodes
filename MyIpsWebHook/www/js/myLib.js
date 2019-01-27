@@ -1726,6 +1726,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             
             var elem1 =  document.createElement("div");
             elem1.className = "led-yellow";
+            elem1.style.animationIterationCount = "infinite";
+            elem1.style.animationDelay="1s";
             elem.append(elem1);
             this.ID = elem1;
         
