@@ -233,26 +233,31 @@
     <body onload='init();'>
         
 <!-- .................................. Gesamt Container ...............................  -->
-	<div id="Container" class="Container">
+    <div id="Container" class="Container">
 	
-		<div class="Top">
-			<div id='state' style='z-index: 6; text-align: left; background-color: transparent'>
-			</div>  
-			<div id="TopTitle">
-				M Y I P S
-			</div>
-			<div id="fehler" style="z-index: 6; text-align: right;   background-color: transparent">
-			</div>
- 			<div id="log" style="z-index: 6; text-align: right;   background-color: transparent">
-			</div>
-                <div>
-                    <div class="led-box">
-                    <div class="led-yellow"></div>
-                </div>        
-  </div>
-                    	
-		</div>
+        <div class="Top">
+                <div id='state' style='z-index: 6; text-align: left; background-color: transparent'>
+                </div>  
+                <div id="TopTitle">
+                        M Y I P S
+                </div>
+                <div id="fehler" style="z-index: 6; text-align: right;   background-color: transparent">
+                </div>
+                <div id="log" style="z-index: 6; text-align: right;   background-color: transparent">
+                </div>
+         <!--
+            <div class="led-box">
+            <div class="led-yellow"></div>
+            </div>        
+        -->
 
+        </div>
+	<script>
+           var led = new flashLed();
+           led.create("Top", "yellow", "10px", "500px");
+            
+        </script> 
+            
 <!-- ****************************** Main Menue ********************************************  -->
 	<div id="MainMenu" class="Left">
             

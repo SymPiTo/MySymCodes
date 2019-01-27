@@ -1703,6 +1703,50 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         }
         
      }
-  }  ; 
+  }  
   
-  
+    /* --------------------- Klasse flashing led ---------------------------------------- */
+    class flashLed {
+        constructor() {
+            this.ID = ""; 
+            this.color = "yellow"
+           
+        }
+
+        create (ParentID, ObjektFarbe, posTop, posLeft){  
+            
+            
+            
+        this.color = ObjektFarbe;
+
+        
+        
+            var elem = document.createElement("div");
+            elem.className = "led-box";  
+            
+            var elem1 =  document.createElement("div");
+            elem1.className = "led-yellow";
+            elem.append(elem1);
+            this.ID = elem1;
+        
+            document.getElementById(ParentID).appendChild(elem); 
+ 
+        
+        
+
+ 
+        
+ 
+     
+
+        
+        
+        
+        
+        }
+        
+        update(state){
+
+        }
+    }
+             

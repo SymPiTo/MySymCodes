@@ -2795,9 +2795,9 @@ img.highlight { border: 5px solid blue; }
 
 /* ****************** Flashing LED ***************************************** */
 .led-box {
-  height: 24px;
-  width: 24px;
-  margin: 0px ;
+  height: 30px;
+  width: 25%;
+  margin: 10px 0;
   float: left;
 }
 
