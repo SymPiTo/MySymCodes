@@ -1727,7 +1727,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             var elem1 =  document.createElement("div");
             elem1.className = "led-yellow";
             elem1.style.WebkitAnimationIterationCount = "infinite";
-            elem1.style.WebkitAnimationDuration = "10000000s";
+            elem1.style.WebkitAnimationDuration = "0s";
             elem1.style.WebkitAnimationName = "blinkYellow";
             elem.append(elem1);
             this.ID = elem1;
@@ -1742,7 +1742,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                this.ID.style.WebkitAnimationDuration = "1s";
             }
             else {
-                this.ID.style.WebkitAnimationDuration = "100000s";
+                this.ID.style.WebkitAnimationDuration = "0s";
             }
         }
     }

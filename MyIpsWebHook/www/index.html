@@ -84,6 +84,7 @@
                                                                            state('Client disconnected - status '+ this.readyState);
                                                                            //send('Client' + '*' + 'status' + '*' + 'close connection');
                                                                            cancelKeepAlive();
+                                                                           led.update(false);
                                                                    };
                                 socket.onerror = function(err) {
                                                                         fehler('Client' + '*' + 'status' + '*' + 'err');									 
