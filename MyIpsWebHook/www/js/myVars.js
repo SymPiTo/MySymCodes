@@ -163,6 +163,9 @@
             check(ips[0].ID57118, 72);  //Schlafzimmer Heizregler
             check(ips[0].ID18803, 73);  //Schlafzimmer Feuchte Sensor
             check(ips[0].ID23472, 74);  //Wohnzimmer Heizregler
+            
+            check(ips[0].ID48221, 75);  //Battery Alarm Text
+            
            
      }
     function check(value, n){
@@ -500,8 +503,10 @@
             iBat13.update(ips[0].ID57118);
             iBat14.update(ips[0].ID18803);
             iBat15.update(ips[0].ID23472);
-
-           
+            
+            
+            BatDis.update(ips[0].ID48221);
+            
             //Dynamisches Bild Rolladen
             iRolloB.update(ips[0].ID46035);
             iRolloWZ.update(ips[0].ID39896);

@@ -589,7 +589,102 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     
  };
 
+
+
+
+/* --------------------- class Display status of Variable ---------------------------------------- */
+class StateDisplay {
+    constructor() {
+        this.ID = "";
+        this.unit = "";
+        this.textColor = "white";
+        this.state0 = "";
+        this.state1 = "";
+        this.state2 = "";
+        this.state3 = "";
+    }
  
+    create(ParentID, color, einheit,  posTop, posLeft, titel, zus0, zus1, zus2, zus3, command){
+        this.unit = einheit, 
+         
+        this.state0 = zus0;
+        this.state1 = zus1;
+        this.state2 = zus2;
+        this.state3 = zus3;
+        var elem1 = document.createElement("div");
+        elem1.className = "anzeige";  
+        elem1.classList.add(color);
+        elem1.style.color = "lime";
+        elem1.style.position = "absolute";
+        elem1.style.left = posLeft;
+        elem1.style.top = posTop;
+        elem1.innerHTML = titel;
+        elem1.setAttribute("onclick", command);
+        var elem3 = document.createElement("div");
+        
+        elem3.innerHTML = "----" + this.unit;
+        elem3.style.fontSize = "28px";
+        elem3.style.paddingTop = "5px";
+        elem3.style.color = "white";
+        this.ID = elem1;
+        elem1.append(elem3);
+        document.getElementById(ParentID).appendChild(elem1);		 
+    }
+
+    update(value, n=0){
+         try {
+            this.ID.style.color = this.textColor;
+            if (this.state0 === "Number"){
+                 var wert = value.toFixed(n);
+                this.ID.innerHTML =  (wert.toString() + this.unit);
+            }
+            else if(this.state0 === "String"){
+                 this.ID.innerHTML =  (value.toString() + this.unit);
+            }
+            else{
+                switch(value){
+                    case 0:
+                       this.ID.innerHTML =  this.state0;
+                        break;
+                    case 1:
+                       this.ID.innerHTML =  this.state1;
+                        break;  
+                     case 2:
+                        this.ID.innerHTML =  this.state2;
+                        break;
+                    case 3:
+                       this.ID.innerHTML =  this.state3;
+                        break;  
+                    case true:
+                        this.ID.innerHTML =  this.state0;
+                        break;
+                    case false:
+                        this.ID.innerHTML =  this.state1;
+                        break;
+                }    
+            }    
+        } catch (error) {
+             alert("value in Display error" + this.ID);
+          }
+    }
+    
+    setTextColor(farbe){
+        this.ID.style.color = farbe;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* --------------------- ProtoType Klasse VarDisplay ---------------------------------------- */
  var VarDisplay = {
