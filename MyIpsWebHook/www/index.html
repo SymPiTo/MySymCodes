@@ -48,6 +48,7 @@
                                                                            else {a = 'Connection closed';}
                                                                            state(' WebSocket: '+ a); 
                                                                            keepAlive();
+                                                                           led.update(true);
                                                                    };
 
                                 socket.onmessage = function(msg) { 
