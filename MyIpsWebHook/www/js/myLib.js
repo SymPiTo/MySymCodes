@@ -626,7 +626,7 @@ class StateDisplay {
         elem3.style.fontSize = "28px";
         elem3.style.paddingTop = "5px";
         elem3.style.color = "white";
-        this.ID = elem1;
+        this.ID = elem3;
         elem1.append(elem3);
         document.getElementById(ParentID).appendChild(elem1);		 
     }
