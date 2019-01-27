@@ -1728,6 +1728,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             elem1.className = "led-yellow";
             elem1.style.animationIterationCount = "infinite";
             elem1.style.animationDelay="1s";
+            elem1.style.animationName="blinkYellow";
             elem.append(elem1);
             this.ID = elem1;
         
