@@ -166,7 +166,7 @@
             
             check(ips[0].ID48221, 75);  //Battery Alarm Text
             
-            check(ips[0].ID50294, 765);  //Sabotage Alarm Bewegungsmelder Diele
+            check(ips[0].ID50294,765);  //Sabotage Alarm Bewegungsmelder Diele
      }
     function check(value, n){
         if (typeof value === "undefined") {$('fehler').innerHTML =  "Variable  wrong ID:" + n;} else {return value;}

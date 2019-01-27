@@ -665,7 +665,7 @@ class StateDisplay {
             }    
         } catch (error) {
              alert("value in Display error" + this.ID);
-          }
+        }
     }
     
     setTextColor(farbe){
