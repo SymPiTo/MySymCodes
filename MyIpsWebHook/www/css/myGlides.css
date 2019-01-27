@@ -2797,7 +2797,7 @@ img.highlight { border: 5px solid blue; }
 .led-box {
   height: 24px;
   width: 24px;
-  margin: 5px ;
+  margin: 0px ;
   float: left;
 }
 
