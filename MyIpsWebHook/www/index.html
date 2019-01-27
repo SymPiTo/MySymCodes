@@ -601,7 +601,7 @@
         MainPosHzWZ.create("MainHeizungWZ", "PosHzWZ11", "cyan","20px", "200px", "normal", "%");
         
  
-        var iHzWZ = new Image("iconHzWZ1","heizkoerper","bin");
+        var iHzWZ = new Image("iconHzWZ1","heizkoerper","bin",false);
         iHzWZ.create("MainHeizungWZ", "40px", "70px", "wide"); 
         addTitle("MainHeizungWZ", "240px", "120px", "18px", "white", "Mode");
         addCtrlButton("MainHeizungWZ", "btnHzWZauto", "300px", "50px", "normal", "cyan", "Automatik", "send('command(Heizung,WZ,auto)') ");
@@ -657,7 +657,7 @@
         MainPosHzKZ = Object.create(VarDisplay);
         MainPosHzKZ.create("MainHzKZ", "PosHzKZ1", "olive","20px", "200px", "normal", "%");        
         
-        var iHzKZ = new Image("iconHzKZ1","heizkoerper","bin");
+        var iHzKZ = new Image("iconHzKZ1","heizkoerper","bin",false);
         iHzKZ.create("MainHzKZ", "40px", "70px", "wide"); 
         addTitle("MainHzKZ", "240px", "120px", "18px", "white", "Mode");
         addCtrlButton("MainHzKZ", "btn9", "300px", "50px", "normal", "olive", "Automatik", "send('command(Heizung,KZ,auto)') ");
@@ -706,7 +706,7 @@
         MainPosHzSZ = Object.create(VarDisplay);
         MainPosHzSZ.create("MainHzSZ", "PosHzSZ1", "sandy","20px", "200px", "normal", "%");     
         
-        var iHzSZ = new Image("iconHzSZ1","heizkoerper","bin");
+        var iHzSZ = new Image("iconHzSZ1","heizkoerper","bin",false);
         iHzSZ.create("MainHzSZ", "40px", "70px", "wide"); 
         addTitle("MainHzSZ", "240px", "120px", "18px", "white", "Mode");
         addCtrlButton("MainHzSZ", "btn17", "300px", "50px", "normal", "sandy", "Automatik", "send('command(Heizung,SZ,auto)') ");
@@ -756,7 +756,7 @@
         MainPosHzK = Object.create(VarDisplay);
         MainPosHzK.create("MainHzK", "PosHzK1", "midgreen","20px", "200px", "normal", "%");
         
-        var iHzK = new Image("iconHzK1","heizkoerper","bin");
+        var iHzK = new Image("iconHzK1","heizkoerper","bin",false);
         iHzK.create("MainHzK", "40px", "70px", "wide");
         addTitle("MainHzK", "240px", "120px", "18px", "white", "Mode");
         addCtrlButton("MainHzK", "btnHzKauto", "300px", "50px", "normal", "midgreen", "Automatik", "send('command(Heizung,K,auto)') ");
@@ -792,7 +792,7 @@
 		<Main id="MainRolloWZ"   class="RolloWZ"> </Main>
 
     <script>     
-        var iRolloWZ = new Image("imageRolloWZ1","rollo","ana");
+        var iRolloWZ = new Image("imageRolloWZ1","rollo","ana",false);
         iRolloWZ.create("MainRolloWZ", "30px", "170px", "normal"); 
         addTitle("MainRolloWZ", "200px", "100px", "18px", "white", "Presets");
         addCtrlButton("MainRolloWZ", "btn33", "260px", "50px", "normal", "cyan", "Automatik", "send('command(Rollo,WZ,Auto)') ");
@@ -811,7 +811,7 @@
 		<Main id="MainRolloB"  class="RolloB">	</Main>
 
      <script>    
-        var iRolloB = new Image("imageRolloB1","rollo","ana");
+        var iRolloB = new Image("imageRolloB1","rollo","ana",false);
         iRolloB.create("MainRolloB", "30px", "170px", "normal");   
         addTitle("MainRolloB", "200px", "100px", "24px", "white", "Presets");
         addCtrlButton("MainRolloB", "btn73", "260px", "50px", "normal", "blue", "Automatik", "send('command(Rollo,B,Auto)') ");
@@ -832,7 +832,7 @@
 		<Main id="MainRolloKZ"  class="RolloKZ">	</Main>
 
     <script>      
-        var iRolloKZ = new Image("imageRolloKZ1","rollo","ana");
+        var iRolloKZ = new Image("imageRolloKZ1","rollo","ana",false);
         iRolloKZ.create("MainRolloKZ", "30px", "170px", "normal");         
         addTitle("MainRolloKZ", "210px", "100px", "18px", "white", "Presets");
         addCtrlButton("MainRolloKZ", "btn43", "260px", "50px", "normal", "olive", "Automatik", "send('command(Rollo,KZ,Auto)') ");
@@ -851,7 +851,7 @@
 		<Main id="MainRolloK"  class="RolloK">	</Main>
  		
     <script>     
-        var iRolloK = new Image("imageRolloK1","rollo","ana");
+        var iRolloK = new Image("imageRolloK1","rollo","ana",false);
         iRolloK.create("MainRolloK", "30px", "170px", "normal");    
         addTitle("MainRolloK", "210px", "100px", "18px", "white", "Presets");
         addCtrlButton("MainRolloK", "btn53", "260px", "50px", "normal", "midgreen", "Automatik", "send('command(Rollo,K,Auto)') ");
@@ -943,19 +943,19 @@
                  
                 
         <script>
-            var iBat01 = new Image("imageBat01","BatStat","bin"); 
+            var iBat01 = new Image("imageBat01","BatStat","bin",false); 
             iBat01.create("MainBatAlarm", "30px", "10px", "small"); 
-            var iBat02 = new Image("imageBat02","BatStat","bin"); 
+            var iBat02 = new Image("imageBat02","BatStat","bin",false); 
             iBat02.create("MainBatAlarm", "100px", "10px", "small"); 
-            var iBat03 = new Image("imageBat03","BatStat","bin"); 
+            var iBat03 = new Image("imageBat03","BatStat","bin",false); 
             iBat03.create("MainBatAlarm", "170px", "10px", "small"); 
-            var iBat04 = new Image("imageBat04","BatStat","bin"); 
+            var iBat04 = new Image("imageBat04","BatStat","bin",false); 
             iBat04.create("MainBatAlarm", "240px", "10px", "small");
-            var iBat05 = new Image("imageBat05","BatStat","bin"); 
+            var iBat05 = new Image("imageBat05","BatStat","bin",false); 
             iBat05.create("MainBatAlarm", "310px", "10px", "small"); 
-            var iBat06 = new Image("imageBat06","BatStat","bin"); 
+            var iBat06 = new Image("imageBat06","BatStat","bin",false); 
             iBat06.create("MainBatAlarm", "380px", "10px", "small"); 
-            var iBat07 = new Image("imageBat07","BatStat","bin"); 
+            var iBat07 = new Image("imageBat07","BatStat","bin",false); 
             iBat07.create("MainBatAlarm", "450px", "10px", "small");
             
             var label01 = new label();
@@ -973,19 +973,19 @@
             var label07 = new label();
             label07.create("MainBatAlarm", "450px", "70px", "18px", "white", "Kinderzimmer Temp-Feuchte Sensor");
 
-            var iBat11 = new Image("imageBat11","BatStat","bin"); 
+            var iBat11 = new Image("imageBat11","BatStat","bin",false); 
             iBat11.create("MainBatAlarm", "30px", "350px", "small"); 
-            var iBat12 = new Image("imageBat12","BatStat","bin"); 
+            var iBat12 = new Image("imageBat12","BatStat","bin",false); 
             iBat12.create("MainBatAlarm", "100px", "350px", "small"); 
-            var iBat13 = new Image("imageBat13","BatStat","bin"); 
+            var iBat13 = new Image("imageBat13","BatStat","bin",false); 
             iBat13.create("MainBatAlarm", "170px", "350px", "small"); 
-            var iBat14 = new Image("imageBat14","BatStat","bin"); 
+            var iBat14 = new Image("imageBat14","BatStat","bin",false); 
             iBat14.create("MainBatAlarm", "240px", "350px", "small");
-            var iBat15 = new Image("imageBat15","BatStat","bin"); 
+            var iBat15 = new Image("imageBat15","BatStat","bin",false); 
             iBat15.create("MainBatAlarm", "310px", "350px", "small"); 
-            var iBat16 = new Image("imageBat16","BatStat","bin"); 
+            var iBat16 = new Image("imageBat16","BatStat","bin",false); 
             iBat16.create("MainBatAlarm", "380px", "350px", "small"); 
-            var iBat17 = new Image("imageBat17","BatStat","bin"); 
+            var iBat17 = new Image("imageBat17","BatStat","bin",false); 
             iBat17.create("MainBatAlarm", "450px", "350px", "small");
             
             var label11 = new label();

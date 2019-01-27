@@ -408,10 +408,11 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
 
 /* --------------------- class Dynamic Image ---------------------------------------- */
  class Image {
-    constructor(ID, IBaseName,type) {
+    constructor(ID, IBaseName,type,revers) {
         this.Ident = ID;
         this.ImageBaseName = IBaseName;
         this.typ = type;
+        this.revers = revers;
     }
     get Ident(){
         return this._Ident;
@@ -487,14 +488,24 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         }
         if(this.typ === "bin"){
             value = value + 0;
-            if(value === 0){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
-                 
+            if (this.revers){
+                if(value === 0){
+                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
+                }
+                else {
+                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
+                }   
             }
             else {
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
-                 
-            } 
+                if(value === 0){
+                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
+                }
+                else {
+                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
+                }    
+            }
+
+
        }
     }
 }
