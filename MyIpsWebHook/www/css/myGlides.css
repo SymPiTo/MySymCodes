@@ -2808,13 +2808,7 @@ img.highlight { border: 5px solid blue; }
   background-color: #FF0;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 12px;
-/*  
-  -webkit-animation: blinkYellow 1s infinite;
-  -moz-animation: blinkYellow 1s infinite;
-  -ms-animation: blinkYellow 1s infinite;
-  -o-animation: blinkYellow 1s infinite;
-  animation: blinkYellow 1s infinite;
- */ 
+
 }
 
 @-webkit-keyframes blinkYellow {
