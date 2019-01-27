@@ -153,12 +153,17 @@ class MyAlarm extends IPSModule
         $WebFrontCatID = $this->RegisterCategory("WebFrontIdent", "Alarm_Webfront");// Kategorie unterhalb der Instanz anlegen.
         $secID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "SecurityIdent", "Security"); // Kategorie unterhalb der Instanz anlegen.
         $kbID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "KeyboardIdent", "Keyboard"); // Kategorie unterhalb der Instanz anlegen.
+        $MeldID = $this->CreateCategoryByIdent($this->GetIDForIdent("WebFrontIdent"), "MeldungIdent", "Meldungen"); // Kategorie unterhalb der Instanz anlegen.
 
+        
         @IPS_SetParent($this->GetIDForIdent("A_SecKeyboard"),$kbID ); 
+        
 
         $this->CreateLink("Status", $secID, $this->GetIDForIdent("A_SecActive"));    
         $this->CreateLink("Alarm Meldung", $secID, $this->GetIDForIdent("A_SecWarning"));
         $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
+        
+        $this->CreateLink("Meldung", $MeldID, $this->GetIDForIdent("A_BatAlarm")); 
 
         if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
            @IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard")); 
