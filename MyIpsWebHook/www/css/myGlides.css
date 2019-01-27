@@ -2797,17 +2797,17 @@ img.highlight { border: 5px solid blue; }
 .led-box {
   height: 28px;
   width: 25%;
-  margin: 5px 0;
+  margin: 3px 0;
   float: left;
 }
 
 .led-yellow {
   margin: 0 auto;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background-color: #FF0;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 12px; 
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 3px 1px, inset #808002 0 -1px 6px, #FF0 0 2px 9px; 
   -webkit-animation: blinkYellow 1s infinite;
   -moz-animation: blinkYellow 1s infinite;
   -ms-animation: blinkYellow 1s infinite;
