@@ -1729,7 +1729,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             elem1.style.margin = "0 auto";
             elem1.style.width = "24px";
             elem1.style.height = "24px";
-            elem1.style.backgroundColor = "#FF0";
+            elem1.style.backgroundColor = this.color;
             elem1.style.WebkitAnimationIterationCount = "infinite";
             elem1.style.WebkitAnimationDuration = "0s";
             elem1.style.WebkitAnimationName = "blinkYellow";
@@ -1739,6 +1739,14 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             document.getElementById(ParentID).appendChild(elem); 
     
         
+        }
+        
+        flashBlue(){
+            this.ID.style.backgroundColor = "blue";
+        }
+        
+        flashRed(){
+            this.ID.style.backgroundColor = "red";
         }
         
         update(state){

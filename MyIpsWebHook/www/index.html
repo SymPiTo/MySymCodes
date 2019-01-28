@@ -49,6 +49,7 @@
                                                                            state(' WebSocket: '+ a); 
                                                                            keepAlive();
                                                                            led.update(true);
+                                                                           led.flashBlue();
                                                                    };
 
                                 socket.onmessage = function(msg) { 
@@ -75,7 +76,7 @@
                                                                             Security(ips);
                                                                             Klima(ips); 
                                                                             updateValues(ips);
-
+                                                                            led.flashRed();
                                                                             
                                                                         }
 

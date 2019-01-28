@@ -2825,6 +2825,17 @@ img.highlight { border: 5px solid blue; }
     to { background-color: #FF0; }
 }
 
+@-webkit-keyframes blinkred {
+    from { background-color: red; }
+    50% { background-color: #AA0; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
+    to { background-color: red; }
+}
+
+@-webkit-keyframes blinkblue {
+    from { background-color: blue; }
+    50% { background-color: #AA0; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
+    to { background-color: blue; }
+}
 
 @keyframes blinkYellow {
     from { background-color: #FF0; }
