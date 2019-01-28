@@ -1709,7 +1709,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     class flashLed {
         constructor() {
             this.ID = ""; 
-            this.color = "yellow"
+            this.color = "blue"
            
         }
 
