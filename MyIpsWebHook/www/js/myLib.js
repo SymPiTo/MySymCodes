@@ -1726,6 +1726,10 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             
             var elem1 =  document.createElement("div");
             elem1.className = "led-yellow";
+            elem1.style.margin = "0 auto";
+            elem1.style.width = "24px";
+            elem1.style.height = "24px";
+            elem1.style.backgroundColor = "#FF0";
             elem1.style.WebkitAnimationIterationCount = "infinite";
             elem1.style.WebkitAnimationDuration = "0s";
             elem1.style.WebkitAnimationName = "blinkYellow";
