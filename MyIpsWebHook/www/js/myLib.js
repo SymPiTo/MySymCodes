@@ -1743,10 +1743,12 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         
         flashBlue(){
             this.ID.style.backgroundColor = "blue";
+            this.ID.style.WebkitAnimationName = "blinkBlue";
         }
         
         flashRed(){
             this.ID.style.backgroundColor = "red";
+             this.ID.style.WebkitAnimationName = "blinkRed";
         }
         
         update(state){
