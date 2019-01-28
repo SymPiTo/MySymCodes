@@ -1726,27 +1726,6 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             
             var elem1 =  document.createElement("div");
             elem1.className = "led-yellow";
-            elem1.style.width = "24px";
-            elem1.style.height = "24px";
-            elem1.style.backgroundColor = "yellow";
-            elem1.style.margin = "0 auto";
-              
-            var keyFramePrefixes = ["-webkit-", "-o-", "-moz-", ""];
-var keyFrames = [];
-var textNode = null;
-
-for (var i in keyFramePrefixes){
-
-keyFrames = '@'+keyFramePrefixes[i]+'keyframes blinkYellow {'+
-'from {'+keyFramePrefixes[i]+'background-color: #FF0;}'+
-'50% { background-color: #AA0; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }' +
-'to {'+keyFramePrefixes[i]+'background-color: #FF0;}}';
-
-textNode = document.createTextNode(keyFrames);
-elem1.appendChild(textNode);
-}  
-  
-   
             elem1.style.WebkitAnimationIterationCount = "infinite";
             elem1.style.WebkitAnimationDuration = "0s";
             elem1.style.WebkitAnimationName = "blinkYellow";
