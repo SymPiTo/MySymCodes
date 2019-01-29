@@ -1127,7 +1127,11 @@ overflow: hidden;
 	width: 70px;
 	height: 70px;
 }
-
+.icon.big{
+	margin-top: 10px;
+	width: 450px;
+	height: 450px;
+}
 .icon.wide{
 	margin-top: 10px;
 	width: 450px;
