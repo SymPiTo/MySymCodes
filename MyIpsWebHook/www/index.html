@@ -934,6 +934,10 @@
             iBath.create("MainWaterAlarm", "40px", "70px", "big"); 
             var iWashM = new Image("WashMachineWaterAlarm","WaschmaschineW","bin",false);
             iWashM.create("MainWaterAlarm", "340px", "70px", "big"); 
+            var ilabel1 = new label();
+            label01.create("MainWaterAlarm", "50px", "150px", "18px", "white", "Badewanne Überlauf");
+            var ilabel2 = new label();
+            label02.create("MainWaterAlarm", "400px", "150px", "18px", "white", "Waschmaschine Überlauf");
         </script>
     
         <!-- ***********************************************************************************      -->
@@ -943,6 +947,10 @@
                 
  
         <script>
+            var BathDis = new StateDisplay();
+            BatDis.create("MainWaterAlarmCtrl", "red", "", "50px", "20px", "Water Alarm", "String");
+            var WashMDis = new StateDisplay();
+            BatDis.create("MainWaterAlarmCtrl", "red", "", "50px", "20px", "Water Alarm", "String");
         </script>  
 
         
