@@ -1705,7 +1705,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
      }
   }  
   
-    /* --------------------- Klasse flashing led ---------------------------------------- */
+    /* --------------------- Klasse flashing Led ---------------------------------------- */
     class flashLed {
         constructor() {
             this.ID = ""; 

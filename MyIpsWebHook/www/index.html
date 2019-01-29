@@ -926,11 +926,14 @@
         <!-- ***********************************************************************************      -->
 	<!--  ************************          Water Alarm             ************************      -->   
         <!-- ***********************************************************************************      -->
-		<Main id ="MainWaterAlarm" class="WaterAlarm">
-                <img  src="images/BadewanneW.png" alt="no image found"  style="padding-left:4px; height:250px; width:270px">
-                <img  src="images/WaschmaschineW.png" alt="no image found"  style="padding-left:4px; height:250px; width:270px">
-                </Main>
+		<Main id ="MainWaterAlarm" class="WaterAlarm"></Main>
+
+                
         <script>
+            var iBath = new Image("MBathWaterAlarm","BadewanneW","bin",false);
+            iBath.create("MainWaterAlarm", "40px", "70px", "wide"); 
+            var iWashM = new Image("WashMachineWaterAlarm","WaschmaschineW","bin",false);
+            iWashM.create("MainWaterAlarm", "340px", "70px", "wide"); 
         </script>
     
         <!-- ***********************************************************************************      -->
