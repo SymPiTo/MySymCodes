@@ -437,7 +437,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         var elem = document.createElement("img");
         elem.className = "icon";
         elem.classList.add(size);
-        elem.src = "images/" + this.ImageBaseName +"50.png";
+        elem.src = "images/" + this.ImageBaseName +"0.png";
         elem.id = this.Ident; 
         elem.style.position = "absolute";
         elem.style.left = posLeft;
