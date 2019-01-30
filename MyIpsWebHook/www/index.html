@@ -305,7 +305,7 @@
              var SubMenuSecCode = new GlideButton();
             SubMenuSecCode.create("SubMenuSec","SubMenuSeCode", "red", "Alarmanlage", "AlarmKey.png", "MainSecCode","", "SM" ); 
             var SubMenuWaterAlarm = new GlideButton();
-            SubMenuWaterAlarm.create("SubMenuSec","SubMenuWaterAlarm", "red", "Meldungen", "FeuchteWasserMelder.png", "MainWaterAlarm","", "SM" ); 
+            SubMenuWaterAlarm.create("SubMenuSec","SubMenuWaterAlarm", "red", "Wasser Alarm", "FeuchteWasserMelder.png", "MainWaterAlarm","", "SM" ); 
             var SubMenuBatAlarm = new GlideButton();
             SubMenuBatAlarm.create("SubMenuSec","SubMenuBatAlarm", "red", "Battery Alarm", "BatAlarm.png", "MainBatAlarm","", "SM" ); 
         </script>
@@ -931,13 +931,13 @@
                 
         <script>
             var iBath = new Image("MBathWaterAlarm","BadewanneW","bin",false);
-            iBath.create("MainWaterAlarm", "40px", "70px", "big"); 
+            iBath.create("MainWaterAlarm", "20px", "70px", "big"); 
             var iWashM = new Image("WashMachineWaterAlarm","WaschmaschineW","bin",false);
-            iWashM.create("MainWaterAlarm", "340px", "70px", "big"); 
+            iWashM.create("MainWaterAlarm", "300px", "70px", "big"); 
             var ilabel1 = new label();
-            ilabel1.create("MainWaterAlarm", "40px", "350px", "18px", "white", "Badewanne Überlauf");
+            ilabel1.create("MainWaterAlarm", "20px", "350px", "18px", "white", "Badewanne Überlauf");
             var ilabel2 = new label();
-            ilabel2.create("MainWaterAlarm", "340px", "350px", "18px", "white", "Waschmaschine Überlauf");
+            ilabel2.create("MainWaterAlarm", "300px", "350px", "18px", "white", "Waschmaschine Überlauf");
         </script>
     
         <!-- ***********************************************************************************      -->
@@ -947,10 +947,20 @@
                 
  
         <script>
-            var BathDis = new StateDisplay();
-            BathDis.create("MainWaterAlarmCtrl", "red", "", "50px", "20px", "Water Alarm", "String");
-            var WashMDis = new StateDisplay();
-            WashMDis.create("MainWaterAlarmCtrl", "red", "", "50px", "20px", "Water Alarm", "String");
+            var BathDisAlarm = new StateDisplay();
+            BathDisAlarm.create("MainWaterAlarmCtrl", "red", "", "20px", "20px", "Alarm", "String");
+            var BathDisFeuchte = new StateDisplay();
+            BathDisFeuchte.create("MainWaterAlarmCtrl", "red", "", "80px", "20px", "Feuchte", "String");
+            var BathDisWater = new StateDisplay();
+            BathDisWater.create("MainWaterAlarmCtrl", "red", "", "140px", "20px", "Wasserstand", "String");
+            
+            var WashMDisAlarm = new StateDisplay();
+            WashMDisAlarm.create("MainWaterAlarmCtrl", "red", "", "300px", "20px", "Alarm", "String");
+            var WashMDisFeuchte = new StateDisplay();
+            WashMDisFeuchte.create("MainWaterAlarmCtrl", "red", "", "360px", "20px", "Feuchte", "String");
+            var WashMDisWater = new StateDisplay();
+            WashMDisWater.create("MainWaterAlarmCtrl", "red", "", "420px", "20px", "Wasserstand", "String");
+            
         </script>  
 
         
