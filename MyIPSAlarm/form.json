@@ -21,6 +21,7 @@
         "type": "List",
         "name": "WaterSensor",
         "caption": "Water Sensor",
+        "height": "200px",
         "add": true,
         "delete": true,
         "sort": {
