@@ -56,6 +56,7 @@ class MyAlarm extends IPSModule
         // $sensors = json_decode($this->ReadPropertyString("Battery"));
             $this->RegisterPropertyString("Battery", "[]");
             $this->RegisterPropertyString("SecAlarms", "[]");
+            $this->RegisterPropertyString("WaterSensor", "[]");
             $this->RegisterPropertyString("Password", "");
             
           
@@ -82,6 +83,7 @@ class MyAlarm extends IPSModule
         //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
          // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
         $this->RegisterVariableString("A_BatAlarm", "Battery Alarm");
+        $this->RegisterVariableString("A_WaterAlarm", "Water Alarm");
         $this->RegisterVariableString("A_SecCode", "Security Code");
         $this->RegisterVariableString("A_SecWarning", "Security Meldung");  
              

@@ -16,6 +16,39 @@
                 "caption" : "Alexa TTS"
 
             },
+      { "type": "Label", "label": "Add/Delete Water sensor variables, which activate the alarm" },
+      {
+        "type": "List",
+        "name": "WaterSensor",
+        "caption": "Water Sensor",
+        "add": true,
+        "delete": true,
+        "sort": {
+          "column": "ID",
+          "direction": "ascending"
+        },
+        "columns": [{
+          "name" : "ID",
+          "label" : "ID",
+          "width" : "460px",
+          "add": 0,
+          "edit": {
+            "type": "SelectVariable"
+          }
+        }, {
+          "name" : "Name",
+          "label" : "Name",
+          "width" : "auto",
+          "add": "Select variable"
+        }, {
+          "name" : "Status",
+          "label" : "Status",
+          "width" : "120",
+          "add": ""
+        }],
+        "values": [
+        ]
+      },
       { "type": "Label", "label": "Add/Delete Battery sensor variables, which activate the alarm" },
       {
         "type": "List",
