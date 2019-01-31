@@ -56,7 +56,7 @@ class MyAlarm extends IPSModule
         // $sensors = json_decode($this->ReadPropertyString("Battery"));
             $this->RegisterPropertyString("Battery", "[]");
             $this->RegisterPropertyString("SecAlarms", "[]");
-            $this->RegisterPropertyString("WaterSensor", "[]");
+            $this->RegisterPropertyString("WaterSensors", "[]");
             $this->RegisterPropertyString("Password", "");
             
           
@@ -166,13 +166,25 @@ class MyAlarm extends IPSModule
         $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
         
         $this->CreateLink("Battery", $MeldID, $this->GetIDForIdent("A_BatAlarm")); 
-
+        $this->CreateLink("Battery", $MeldID, $this->GetIDForIdent("A_WaterAlarm")); 
+        
         if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
            @IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard")); 
         }
      
 
-        
+        //Unterkategorie Water Alarme anlegen
+        $WaterAlarmCatID = $this->RegisterCategory("WaterEvntIdent", "WaterAlarmEvents");
+        // für jedes Liste ID ein Event anlegen
+        $waterSensors = json_decode($this->ReadPropertyString("WaterSensors"));
+        foreach($waterSensors as $sensor) {
+            $ParentID = $WaterAlarmCatID;
+            $Typ = 0;
+            $Ident = "WAE".$sensor->ID;
+            $Name = "WAEvent".$sensor->ID;
+            $cmd = "A_WaterAlarm(".$this->InstanceID.");" ;
+            $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd  );
+        }    
         
         //Unterkategorie Batterie Alarme anlegen
         $AlarmCatID = $this->RegisterCategory("BatEvntIdent", "BatAlarmEvents");

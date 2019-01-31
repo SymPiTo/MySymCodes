@@ -19,9 +19,8 @@
       { "type": "Label", "label": "Add/Delete Water sensor variables, which activate the alarm" },
       {
         "type": "List",
-        "name": "WaterSensor",
-        "caption": "Water Sensor",
-        "height": "200px",
+        "name": "WaterSensors",
+        "caption": "Water Sensors",
         "add": true,
         "delete": true,
         "sort": {
