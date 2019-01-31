@@ -172,6 +172,10 @@
             check(ips[0].ID23685,78);  //Wasser Sensor Küche Feuchte
             check(ips[0].ID27499,79);  //Wasser Sensor Küche Wasserstand
             
+            check(ips[0].ID20350,80);  //Wasser Sensor Bad Batterie
+            check(ips[0].ID58710,81);  //Wasser Sensor Bad Alarm
+            check(ips[0].ID17453,82);  //Wasser Sensor Bad Feuchte
+            check(ips[0].ID6414,83);  //Wasser Sensor Bad Wasserstand
             
      }
     function check(value, n){
@@ -509,18 +513,20 @@
             iBat13.update(ips[0].ID57118);
             iBat14.update(ips[0].ID18803);
             iBat15.update(ips[0].ID23472);
-            
+            iBat16.update(ips[0].ID20350);
             
             BatDis.update(ips[0].ID48221);
             
             DisSabAlarm.update(ips[0].ID50294);
         
             
-            BathDisAlarm.update(ips[0].ID54473); 
-            BathDisFeuchte.update(ips[0].ID23685); 
-            BathDisWater.update(ips[0].ID27499); 
+            WashMDisAlarm.update(ips[0].ID54473); 
+            WashMDisFeuchte.update(ips[0].ID23685); 
+            WashMDisWater.update(ips[0].ID27499); 
             
-   
+            BathDisAlarm.update(ips[0].ID58710); 
+            BathDisFeuchte.update(ips[0].ID17453); 
+            BathDisWater.update(ips[0].ID36414);
             
             
             //Dynamisches Bild Rolladen
