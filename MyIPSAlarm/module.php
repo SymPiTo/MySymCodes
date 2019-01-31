@@ -166,7 +166,7 @@ class MyAlarm extends IPSModule
         $this->CreateLink("Alarmanlage aktivieren", $secID, $this->GetIDForIdent("A_SecActivate"));  
         
         $this->CreateLink("Battery", $MeldID, $this->GetIDForIdent("A_BatAlarm")); 
-        $this->CreateLink("Battery", $MeldID, $this->GetIDForIdent("A_WaterAlarm")); 
+        $this->CreateLink("WaterSensor", $MeldID, $this->GetIDForIdent("A_WaterAlarm")); 
         
         if (@IPS_VariableExists($this->GetIDForIdent("A_SecKeyboard"))){
            @IPS_DeleteVariable($this->GetIDForIdent("A_SecKeyboard")); 
