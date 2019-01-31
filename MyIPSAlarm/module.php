@@ -404,6 +404,53 @@ class MyAlarm extends IPSModule
         } 
 
         /* ----------------------------------------------------------------------------
+         Function: WaterAlarm
+        ...............................................................................
+        Erzeugt einen Alarm bei Wasser oder Feuchte
+        ...............................................................................
+        Parameters: 
+            none.
+        ..............................................................................
+        Returns:   
+             none
+        ------------------------------------------------------------------------------- */
+	public function WaterAlarm(){
+            //überprüfen welches Ereignis ausgelöst hat 
+            $WaterSensors = json_decode($this->ReadPropertyString("WaterSensors"));
+            $ParentID =   @IPS_GetObjectIDByName("WaterAlarmEvents", $this->InstanceID);
+            $lastEvent = 0;
+            $lastTriggerVarID = false; 
+            foreach($WaterSensors as $sensor) {
+                $EreignisID = @IPS_GetEventIDByName("WAEvent".$sensor->ID, $ParentID);
+                $EreignisInfo = IPS_GetEvent($EreignisID);
+                $aktEvent = $EreignisInfo["LastRun"];
+                if($aktEvent > $lastEvent){
+                    $lastEvent = $aktEvent;
+                    $lastTriggerVarID = $EreignisInfo["TriggerVariableID"];
+                }
+            }
+            if($lastTriggerVarID){
+                $ltv =  getvalue($lastTriggerVarID);
+                $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
+                if($ltv == 1){
+                    // Wasser erkannt, Alarm auslösen
+                    setvalue($this->GetIDForIdent("A_WaterAlarm"), "WaterSensor: ".$lastTriggerVarID)." Alarm";
+                    //AlarmCode auf 2 setzen
+                    setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                }
+                else{
+                    setvalue($this->GetIDForIdent("A_WaterAlarm"), ""); 
+                    setvalue($this->GetIDForIdent("A_AlarmCode"), 0);   
+                }
+            } 
+            else{
+               setvalue($this->GetIDForIdent("A_WaterAlarm"), ""); 
+               setvalue($this->GetIDForIdent("A_AlarmCode"), 0);
+            }
+        }          
+        
+        
+        /* ----------------------------------------------------------------------------
          Function: BatAlarm
         ...............................................................................
         Erzeugt einen Alarm bei zu schwacher Batterie
