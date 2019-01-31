@@ -175,7 +175,7 @@
             check(ips[0].ID20350,80);  //Wasser Sensor Bad Batterie
             check(ips[0].ID58710,81);  //Wasser Sensor Bad Alarm
             check(ips[0].ID17453,82);  //Wasser Sensor Bad Feuchte
-            check(ips[0].ID6414,83);  //Wasser Sensor Bad Wasserstand
+            check(ips[0].ID36414,83);  //Wasser Sensor Bad Wasserstand
             
      }
     function check(value, n){
