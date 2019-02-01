@@ -38,6 +38,7 @@ class MyAlarm extends IPSModule
      
     STANDARD-AKTIONEN:
       FSSC_Position    -   Position (integer)
+     * 
 
     ------------------------------------------------------------- */
     public function Create()
