@@ -66,7 +66,7 @@ class MyAlarm extends IPSModule
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
         //$this->RegisterVariableInteger("A_Activate", "Alarm Activate");
-         $this->RegisterPropertyInteger("EchoID", "");
+         $this->RegisterPropertyInteger("EchoID", 0);
         
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
