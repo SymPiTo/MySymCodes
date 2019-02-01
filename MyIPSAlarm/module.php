@@ -65,7 +65,7 @@ class MyAlarm extends IPSModule
         // Aufruf dieser Variable mit $his->GetIDForIdent("IDENTNAME)
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
         //$this->RegisterVariableInteger("A_Activate", "Alarm Activate");
-        
+         $this->RegisterPropertyInteger("EchoID", "");
         
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
@@ -147,7 +147,7 @@ class MyAlarm extends IPSModule
         //Never delete this line!        
         parent::ApplyChanges();        
         
-
+            
         
              
         //Unterkategorie für Webfront anlegen 
@@ -211,6 +211,14 @@ class MyAlarm extends IPSModule
             $cmd = "A_SecurityAlarm(".$this->InstanceID.");";
             $this->RegisterVarEvent($Name, $Ident, $Typ, $ParentID, 0, 1, $sensor->ID, $cmd );
         }        
+        
+        //check if Modul Alexa - Echo Remote installiert ist.
+        if (!IPS_ModuleExists("{496AB8B5-396A-40E4-AF41-32F4C48AC90D}")){
+            setvalue($this->ReadPropertyBoolean("AlexaTTS"),false); 
+        }
+        else{
+            $EchoRemoteID = $this->ReadPropertyString("EchoID");
+        }
     }
     
    /* ------------------------------------------------------------ 
@@ -358,7 +366,7 @@ class MyAlarm extends IPSModule
                     SetValueBoolean($this->GetIDForIdent("A_SecActivate"),false);
                     SetValueBoolean($this->GetIDForIdent("A_SecActive"),false);
                     
-                    EchoRemote_TextToSpeech(26188, $text_to_speech);
+                    EchoRemote_TextToSpeech($this->ReadPropertyString("EchoID"), $text_to_speech);
                 }
             }  
             else{
@@ -367,7 +375,7 @@ class MyAlarm extends IPSModule
                     //Sprachausgabe
                 if($this->ReadPropertyBoolean("AlexaTTS")){
                     $text_to_speech = "falscher code";
-                    EchoRemote_TextToSpeech(26188, $text_to_speech);
+                    EchoRemote_TextToSpeech($this->ReadPropertyString("EchoID"), $text_to_speech);
                 }
             }
         }  
@@ -389,7 +397,7 @@ class MyAlarm extends IPSModule
             //Sprachausgabe
             if($this->ReadPropertyBoolean("AlexaTTS")){
                 $text_to_speech = "Alarmanlage wird in 30Sekunden aktiv.";
-                EchoRemote_TextToSpeech(26188, $text_to_speech);
+                EchoRemote_TextToSpeech($this->ReadPropertyString("EchoID"), $text_to_speech);
             }
             sleep(30);
             SetValueBoolean($this->GetIDForIdent("A_SecActive"),true);
@@ -398,7 +406,7 @@ class MyAlarm extends IPSModule
             //Sprachausgabe
             if($this->ReadPropertyBoolean("AlexaTTS")){
                 $text_to_speech = "Alarmanlage ist aktiviert.";
-                EchoRemote_TextToSpeech(26188, $text_to_speech);
+                EchoRemote_TextToSpeech($this->ReadPropertyString("EchoID"), $text_to_speech);
             }
             
         } 
@@ -437,6 +445,11 @@ class MyAlarm extends IPSModule
                     setvalue($this->GetIDForIdent("A_WaterAlarm"), "WaterSensor: ".$lastTriggerVarID)." Alarm";
                     //AlarmCode auf 2 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                    //Sprachausgabe                    
+                    if($this->ReadPropertyBoolean("AlexaTTS")){
+                        $text_to_speech = "Wasser Überlauf wurde erkannt.";
+                        EchoRemote_TextToSpeech($this->ReadPropertyString("EchoID"), $text_to_speech);
+                    }
                 }
                 else{
                     setvalue($this->GetIDForIdent("A_WaterAlarm"), ""); 
