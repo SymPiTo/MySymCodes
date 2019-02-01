@@ -16,7 +16,10 @@
                 "caption" : "Alexa TTS"
 
             },
-            { "type": "SelectInstance", "name": "EchoID", "caption": "Alexa Echo Gerät" },
+            {   "type": "SelectInstance", 
+                "name": "EchoID", 
+                "caption": "Alexa Echo Gerät" 
+            },
       { "type": "Label", "label": "Add/Delete Water sensor variables, which activate the alarm" },
       {
         "type": "List",
