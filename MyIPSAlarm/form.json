@@ -55,7 +55,7 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "560px",
+          "width" : "auto",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
@@ -82,16 +82,11 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "560px",
+          "width" : "auto",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
           }
-        }, {
-          "name" : "Name",
-          "label" : "Name",
-          "width" : "auto",
-          "add": ""
         }],
         "values": [
             {
@@ -114,16 +109,11 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "560px",
+          "width" : "auto",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
           }
-        }, {
-          "name" : "Name",
-          "label" : "Name",
-          "width" : "auto",
-          "add": ""
         }],
         "values": [
         ]
