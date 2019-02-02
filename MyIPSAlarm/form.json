@@ -146,12 +146,12 @@
     "status":
     [
         { 
-            "code": 204, 
+            "code": 20004, 
             "icon": "error", 
             "caption": "Error!" 
         },
         { 
-            "code": 205, 
+            "code": 20005, 
             "icon": "error", 
             "caption": "Error!" 
         } 
