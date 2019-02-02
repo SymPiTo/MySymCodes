@@ -49,8 +49,8 @@
         "add": true,
         "delete": true,
         "sort": {
-          "column": "ID",
-          "direction": "ascending"
+            "column": "ID",
+            "direction": "ascending"
         },
         "columns": [{
           "name" : "ID",
@@ -64,7 +64,7 @@
           "name" : "Name",
           "label" : "Name",
           "width" : "auto",
-          "add": "Select variable"
+          "add": "new"
         }, {
           "name" : "Status",
           "label" : "Status",
@@ -98,7 +98,7 @@
           "name" : "Name",
           "label" : "Name",
           "width" : "auto",
-          "add": "Select variable"
+          "add": "new"
         }, {
           "name" : "Status",
           "label" : "Status",
@@ -132,7 +132,7 @@
           "name" : "Name",
           "label" : "Name",
           "width" : "auto",
-          "add": "Select variable"
+          "add": "new"
         }, {
           "name" : "Status",
           "label" : "Status",
