@@ -219,7 +219,7 @@ class MyAlarm extends IPSModule
         
         //check if Modul Alexa - Echo Remote installiert ist.
         if (!IPS_ModuleExists("{496AB8B5-396A-40E4-AF41-32F4C48AC90D}")){
-            $this->SetStatus(204);
+            $this->SetStatus(20004);
              
         }
         else{
