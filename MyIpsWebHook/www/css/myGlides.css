@@ -2049,7 +2049,7 @@ width:40%;
 	flex-direction: column;
  
 	width: 202px;
-	height: 60px;
+	
 	margin: 1px;
 	font-size: small;
 	padding: 5px;
@@ -2084,18 +2084,10 @@ width:40%;
 	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 100%, 5%));
 }
 .anzeige.long{
-    width: 75px;
     height: 225px;
-    font-size: 14px;
-    padding-top: 5px;
-    z-index: 10;
 }
 .anzeige.normal{
-    width: 75px;
-    height: 25px;
-    font-size: 14px;
-    padding-top: 5px;
-    z-index: 10;
+    height: 60px;
 }
 .status{
 	border-color:#666666;
