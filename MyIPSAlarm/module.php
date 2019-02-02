@@ -226,7 +226,7 @@ class MyAlarm extends IPSModule
         }
         //check if Modul Telegram Messenger -  installiert ist.
         if (!IPS_ModuleExists("{eaf404e1-7a2a-40a5-bb4a-e34ca5ac72e}")){
-            setvalue($this->ReadPropertyBoolean("Telegram"),false); 
+          //  setvalue($this->ReadPropertyBoolean("Telegram"),false); 
         }
         else{
             
