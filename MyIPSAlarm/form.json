@@ -148,12 +148,12 @@
         { 
             "code": 204, 
             "icon": "error", 
-            "caption": "Module not installed!" 
+            "caption": "Error!" 
         },
         { 
             "code": 205, 
             "icon": "error", 
-            "caption": "Module not installed!!" 
+            "caption": "Error!" 
         } 
     ]
 }
