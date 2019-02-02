@@ -135,6 +135,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .WaterAlarmCtrl,
 .BatAlarm,
 .BatAlarmCtrl,
+.Rezepte,
 .IRadio,
 .WSS,
 .TV
@@ -410,6 +411,16 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
         left: 74vw;
 	background: hsl(200, 100%, 10%);
 }
+
+.Rezepte{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(200, 100%, 10%);
+}
+
 .TimePicker {
 	position:relative;
 	top: 5vh;

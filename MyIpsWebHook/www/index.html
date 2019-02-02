@@ -358,6 +358,8 @@
             SubMenuHzK.create("SubMenuK","SubMenuHzK", "midgreen", "Heizung Kueche", "_Heizung_BW2.png", "MainHzK","", "SM" ); 
             var SubMenuRolloK = new GlideButton();
             SubMenuRolloK.create("SubMenuK","SubMenuRolloK", "midgreen", "Rolladen Kueche", "_Rolladen_BW.png", "MainRolloK","", "SM" ); 
+            var SubMenuRezepte = new GlideButton();
+            SubMenuRezepte.create("SubMenuK","SubMenuRezepte", "midgreen", "Rezeptee", "_Rolladen_BW.png", "MainRezepte","", "SM" ); 
         </script> 
         
 	<!-- ************************ Menu Balkon  ************************  -->
@@ -1068,6 +1070,17 @@
         VarDisMainDoor = Object.create(VarDisplay);
         VarDisMainDoor.create("Grundriss", "door_E", "cyan","90vh", "24vw", "normal", "", "close", "open");
    </script>
+   
+   
+        <!-- ***********************************************************************************   -->
+	<!--  ************************          Main - Rezepte    ************************      -->   
+        <!-- ***********************************************************************************   -->
+		 
+        <Main id="MainRezepte" class="Rezepte">  </Main>
+             
+         <script> 
+        </script>
+   
    
         <!-- ***********************************************************************************   -->
 	<!--  ************************          Main - Samsung TV    ************************      -->   
@@ -2051,7 +2064,12 @@
         CbSSrolloK = Object.create(CheckBox);
         CbSSrolloK.create("MainRolloKCtrl", "SSRolloK", "midgreen",  "520px", "10px",  "SunRise-SunSet", "command(Rollo,K,SSXX");  
     </script>   
-		<!-- **************************Time Picker  ************************** -->
+
+    
+
+    
+    
+    <!-- **************************Time Picker  ************************** -->
                 <Ctrl class="TimePickerX" >
 
     
