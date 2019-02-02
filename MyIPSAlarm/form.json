@@ -1,6 +1,6 @@
 {
-	"elements":
-	[
+    "elements":
+    [
             { 
                 "name": "Password", 
                 "type": "PasswordTextBox", 
@@ -142,5 +142,18 @@
         "values": [
         ]
       }
-	]
+    ],
+    "status":
+    [
+        { 
+            "code": 204, 
+            "icon": "error", 
+            "caption": "Module not installed!" 
+        },
+        { 
+            "code": 205, 
+            "icon": "error", 
+            "caption": "Module not installed!!" 
+        } 
+    ]
 }
