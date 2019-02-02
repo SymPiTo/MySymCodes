@@ -72,6 +72,9 @@
           "add": ""
         }],
         "values": [
+            {
+                "InstanceID": 12435
+            }
         ]
       },
       { "type": "Label", "label": "Add/Delete Battery sensor variables, which activate the alarm" },
@@ -107,7 +110,7 @@
         }],
         "values": [
             {
-             "InstanceID": 12435
+
             }        
         ]
       },
