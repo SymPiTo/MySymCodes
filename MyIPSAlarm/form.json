@@ -61,8 +61,8 @@
             "type": "SelectVariable"
           }
         }, {
-          "name" : "Name",
-          "label" : "Name",
+          "name" : "InstanceID",
+          "label" : "InstanceID",
           "width" : "auto",
           "add": "new"
         }, {
@@ -106,6 +106,9 @@
           "add": ""
         }],
         "values": [
+            {
+             "InstanceID": 12435
+            }        
         ]
       },
       { "type": "Label", "label": "Add/Delete target variables, which react on the alarm" },
