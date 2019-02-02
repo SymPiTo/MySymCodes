@@ -148,12 +148,12 @@
         { 
             "code": 20004, 
             "icon": "error", 
-            "caption": "Error!" 
+            "caption": "Alexa Remote Module nicht installiert!!" 
         },
         { 
             "code": 20005, 
             "icon": "error", 
-            "caption": "Error!" 
+            "caption": "Telegram Messenger Module nicht installiert!" 
         } 
     ]
 }
