@@ -509,7 +509,7 @@ class MyAlarm extends IPSModule
             }
             if($lastTriggerVarID){
                 $ltv =  getvalue($lastTriggerVarID);
-                $VarBatName = IPS_GetName($ltv);
+                $VarBatName = IPS_GetName($lastTriggerVarID);
                 $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
                 if($ltv == 1){
                     // Batterie ist Low Alarm auslösen
