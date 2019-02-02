@@ -55,7 +55,7 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "460px",
+          "width" : "560px",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
@@ -64,11 +64,6 @@
           "name" : "Name",
           "label" : "Name",
           "width" : "auto",
-          "add": ""
-        }, {
-          "name" : "Status",
-          "label" : "Status",
-          "width" : "120",
           "add": ""
         }],
         "values": [
@@ -92,7 +87,7 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "460px",
+          "width" : "560px",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
@@ -101,11 +96,6 @@
           "name" : "Name",
           "label" : "Name",
           "width" : "auto",
-          "add": ""
-        }, {
-          "name" : "Status",
-          "label" : "Status",
-          "width" : "120",
           "add": ""
         }],
         "values": [
@@ -129,7 +119,7 @@
         "columns": [{
           "name" : "ID",
           "label" : "ID",
-          "width" : "460px",
+          "width" : "560px",
           "add": 0,
           "edit": {
             "type": "SelectVariable"
@@ -138,11 +128,6 @@
           "name" : "Name",
           "label" : "Name",
           "width" : "auto",
-          "add": ""
-        }, {
-          "name" : "Status",
-          "label" : "Status",
-          "width" : "120",
           "add": ""
         }],
         "values": [
