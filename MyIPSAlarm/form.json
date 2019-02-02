@@ -60,11 +60,6 @@
           "edit": {
             "type": "SelectVariable"
           }
-        }, {
-          "name" : "Name",
-          "label" : "Name",
-          "width" : "auto",
-          "add": ""
         }],
         "values": [
             {
