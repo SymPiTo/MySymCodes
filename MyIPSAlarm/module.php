@@ -451,20 +451,21 @@ class MyAlarm extends IPSModule
             }
             if($lastTriggerVarID){
                 $ltv =  getvalue($lastTriggerVarID);
+                $VarWaterName = IPS_GetName($ltv);
                 $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
                 if($ltv == 1){
                     // Wasser erkannt, Alarm auslösen
-                    setvalue($this->GetIDForIdent("A_WaterAlarm"), "WaterSensor: ".$lastTriggerVarID)." Alarm";
+                    setvalue($this->GetIDForIdent("A_WaterAlarm"), "WaterSensor: ".$VarWaterName." Alarm");
                     //AlarmCode auf 2 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
                     //Telegram message senden
                     if($this->ReadPropertyBoolean("Telegram")){
-                        $message = "Achtung Wasser Überlauf erkannt!";
+                        $message = "Achtung Wassersensor ".$VarWaterName." hat angesprochen!";
                         Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, "671095116" );
                     }
                     //Sprachausgabe                    
                     if($this->ReadPropertyBoolean("AlexaTTS")){
-                        $text_to_speech = "Wasser Überlauf wurde erkannt.";
+                        $text_to_speech = "Achtung Wassersensor ".$VarWaterName." hat angesprochen!";
                         EchoRemote_TextToSpeech($this->ReadPropertyInteger("EchoID"), $text_to_speech);
                     }
                 }
@@ -508,10 +509,11 @@ class MyAlarm extends IPSModule
             }
             if($lastTriggerVarID){
                 $ltv =  getvalue($lastTriggerVarID);
+                $VarBatName = IPS_GetName($ltv);
                 $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
                 if($ltv == 1){
                     // Batterie ist Low Alarm auslösen
-                    setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery: ".$lastTriggerVarID)." Low";
+                    setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery: ".$VarBatName." Low");
                     //AlarmCode auf 1 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 1);
                 }
