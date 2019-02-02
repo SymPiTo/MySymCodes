@@ -2085,6 +2085,7 @@ width:40%;
 }
 .anzeige.long{
     height: 225px;
+    word-wrap:break-word;
 }
 .anzeige.normal{
     height: 60px;
