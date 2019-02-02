@@ -451,7 +451,7 @@ class MyAlarm extends IPSModule
             }
             if($lastTriggerVarID){
                 $ltv =  getvalue($lastTriggerVarID);
-                $VarWaterName = IPS_GetName($ltv);
+                $VarWaterName = IPS_GetLocation($lastTriggerVarID);
                 $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
                 if($ltv == 1){
                     // Wasser erkannt, Alarm auslösen
@@ -509,11 +509,11 @@ class MyAlarm extends IPSModule
             }
             if($lastTriggerVarID){
                 $ltv =  getvalue($lastTriggerVarID);
-                $VarBatName = IPS_GetName($lastTriggerVarID);
+                $VarBatName = IPS_GetLocation($lastTriggerVarID);
                 $this->SendDebug( "$lastTriggerVarID: ", $ltv, 0); 
                 if($ltv == 1){
                     // Batterie ist Low Alarm auslösen
-                    setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery: ".$VarBatName." Low");
+                    setvalue($this->GetIDForIdent("A_BatAlarm"), "Battery Low: ".$VarBatName);
                     //AlarmCode auf 1 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 1);
                 }
