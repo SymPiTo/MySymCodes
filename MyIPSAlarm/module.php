@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../libs/MyTraits.php");
  * 
  * GITHUB = <https://github.com/SymPiTo/MySymCodes/tree/master/MyIPSAlarm>
  * 
- * Version:1.0.2018.08.25
+ * Version:1.0.2019.02.02
  =============================================================================== */
 //Class: MyAlarm
 class MyAlarm extends IPSModule
@@ -33,12 +33,29 @@ class MyAlarm extends IPSModule
     Variable können hier nicht verwendet werden nur statische Werte.
     Überschreibt die interne IPS_Create(§id)  Funktion
    
-     CONFIG-VARIABLE:
-      FS20RSU_ID   -   ID des FS20RSU Modules (selektierbar).
-     
-    STANDARD-AKTIONEN:
-      FSSC_Position    -   Position (integer)
-     * 
+    CONFIG-Properties:
+     * Battery         -   list json array of Battery Sensors
+     * SecAlarms       -   list json array of Alarm Sensors
+     * WaterSensors    -   list json array of Water Sensors
+     * Password        -   String password for Alarm Code
+     * EchoID          -   ID des Moduls Echo Remote
+     * TelegramID      -   ID des Moduls Telegram Messenger
+     * SenderID        -   Sender ID für Telegram Bot
+     * AlexaTTS        -   Modul Echo Remote verwenden ja/nein (bool)
+     * Telegram        -   Modul Telegram Messenger verwenden ja/nein (bool)
+     * A_Webfront      -   WebFront Links anlegen ja/nein (bool)
+     * A_BatAlarm      -   Meldetext (string)
+     * A_WaterAlarm    -   Meldetext (string)
+     * A_SecCode       -   Meldetext (string)
+     * A_SecWarning    -   Meldetext (string)
+    
+    IPS Variable:
+     * A_SecActive          -   Status Alermanlage aktiv (Bool)
+     *  
+    IPS Action Variable:
+     * A_AlarmCode          -   Alarm.Code (integer)
+     * A_SecActivate        -   Action Variable activate Alarmanlage (Bool)
+     * Alexa_SecActivate    -   Alexa Trigger "aktiviere"Alexa schalte Alarmanlage ein" (bool)
 
     ------------------------------------------------------------- */
     public function Create()
@@ -134,9 +151,22 @@ class MyAlarm extends IPSModule
     SYSTEM-VARIABLE:
         InstanceID = $this->InstanceID.
 
+    Profiles:
+    * Alarm.Activate
+    * Alarm.Active
+    * 
+    Categories:
+    * Security                  (webfront)
+    * Keyboard                  (webfront)
+    * Meldungen                 (webfront)
+    * WaterAlarmEvents
+    * BatAlarmEvents
+    * SecAlarmEvents
+    
     EVENTS:
-        SwitchTimeEvent".$this->InstanceID   -   Wochenplan (Mo-Fr und Sa-So)
-        SunRiseEvent".$this->InstanceID       -   cyclice Time Event jeden Tag at SunRise
+    * "WAE".$sensor->ID;    -   für alle Wasser Sensoren
+    * "AE".$sensor->ID;     -   für alle Batterie Sensoren
+    * "SecAE".$sensor->ID;  -   für alle Alarm Sensoren
     ------------------------------------------------------------- */
     public function ApplyChanges()
     {
@@ -246,8 +276,9 @@ class MyAlarm extends IPSModule
       $Value                           -   Wert der von Webfront geänderten Variable
 
     STANDARD-AKTIONEN:
-        A_SecActivate    -   Alarm Anlage aktivieren
- 
+        A_SecActivate       -   Alarm Anlage aktivieren
+        Alexa_SecActivate   -   Alexa Alarmanlage aktivieren
+        A_SecCode           -   Code Eingabe
      ------------------------------------------------------------- */
     public function RequestAction($Ident, $Value) {
             
@@ -305,7 +336,8 @@ class MyAlarm extends IPSModule
         //-----------------------------------------------------------------------------
         /* Function: ResetAlarm
         ...............................................................................
-        Beschreibung
+        Beschreibung:
+         * setzt den ausgelösten Alarm der Alarmanlge zurück
         ...............................................................................
         Parameters: 
             none
@@ -321,7 +353,8 @@ class MyAlarm extends IPSModule
         //-----------------------------------------------------------------------------
         /* Function: receiveCode
         ...............................................................................
-        Beschreibung
+        Beschreibung:
+         * empfängt zeichen und schribt sie in Variable 
         ...............................................................................
         Parameters: 
              key = Zahlen Code
@@ -341,7 +374,7 @@ class MyAlarm extends IPSModule
             löscht den eingegebenen ZahlenCode.
         ...............................................................................
         Parameters: 
-             key = Zahlen Code
+            none
         ...............................................................................
         Returns:    
             none
@@ -354,7 +387,7 @@ class MyAlarm extends IPSModule
         /* Function: checkCode
         ...............................................................................
         Beschreibung
-
+            überprüft den hash Code des eingegeben Codes mit dem Passwort
         ...............................................................................
         Parameters: 
             none
@@ -397,7 +430,7 @@ class MyAlarm extends IPSModule
         /* Function: activateSecAlarm
         ...............................................................................
         Beschreibung
-
+            aktiviert die Alarmanlage
         ...............................................................................
         Parameters: 
             none
@@ -457,11 +490,11 @@ class MyAlarm extends IPSModule
                     // Wasser erkannt, Alarm auslösen
                     setvalue($this->GetIDForIdent("A_WaterAlarm"), "WaterSensor: ".$VarWaterName." Alarm");
                     //AlarmCode auf 2 setzen
-                    setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                    setvalue($this->GetIDForIdent("A_AlarmCode"), 3);
                     //Telegram message senden
                     if($this->ReadPropertyBoolean("Telegram")){
                         $message = "Achtung Wassersensor ".$VarWaterName." hat angesprochen!";
-                        Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, "671095116" );
+                        Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, string($this->ReadPropertyInteger("EchoID")) );
                     }
                     //Sprachausgabe                    
                     if($this->ReadPropertyBoolean("AlexaTTS")){
@@ -532,7 +565,7 @@ class MyAlarm extends IPSModule
         /* ----------------------------------------------------------------------------
          Function: SecurityAlarm
         ...............................................................................
-        Erzeugt einen Alarm bei zu schwacher Batterie
+        Erzeugt einen Alarm bei ansprechen von Alarm Sensoren
         ...............................................................................
         Parameters: 
             none.
