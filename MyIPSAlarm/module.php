@@ -67,7 +67,9 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableInteger("A_AlarmCode", "AlarmCode", "Alarm.Code");
         //$this->RegisterVariableInteger("A_Activate", "Alarm Activate");
          $this->RegisterPropertyInteger("EchoID", 0);
-        
+         $this->RegisterPropertyInteger("TelegramID", 0);
+         $this->RegisterPropertyInteger("SenderID", 671095116);
+         
         //Boolean Variable anlegen
         // Aufruf dieser Variable mit §this->GetIDForIdent("IDENTNAME")
         $this->RegisterVariableBoolean("A_SecActivate", "Alarmanlage aktivieren");
@@ -76,6 +78,8 @@ class MyAlarm extends IPSModule
         $this->RegisterVariableBoolean("Alexa_SecActivate", "Alexa Alarmanlage aktivieren");
         //TTS Trigger
         $this->RegisterPropertyBoolean("AlexaTTS", false);
+        //Telegram Messenger
+        $this->RegisterPropertyBoolean("Telegram", false);
         //Webfront anlegen
         $this->RegisterPropertyBoolean("A_Webfront", true);
         
@@ -218,7 +222,14 @@ class MyAlarm extends IPSModule
             setvalue($this->ReadPropertyBoolean("AlexaTTS"),false); 
         }
         else{
-            $EchoRemoteID = $this->ReadPropertyInteger("EchoID");
+            
+        }
+        //check if Modul Telegram Messenger -  installiert ist.
+        if (!IPS_ModuleExists("{eaf404e1-7a2a-40a5-bb4a-e34ca5ac72e}")){
+            setvalue($this->ReadPropertyBoolean("Telegram"),false); 
+        }
+        else{
+            
         }
     }
     
@@ -446,6 +457,11 @@ class MyAlarm extends IPSModule
                     setvalue($this->GetIDForIdent("A_WaterAlarm"), "WaterSensor: ".$lastTriggerVarID)." Alarm";
                     //AlarmCode auf 2 setzen
                     setvalue($this->GetIDForIdent("A_AlarmCode"), 2);
+                    //Telegram message senden
+                    if($this->ReadPropertyBoolean("Telegram")){
+                        $message = "Achtung Wasser Überlauf erkannt!";
+                        Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, "671095116" );
+                    }
                     //Sprachausgabe                    
                     if($this->ReadPropertyBoolean("AlexaTTS")){
                         $text_to_speech = "Wasser Überlauf wurde erkannt.";
@@ -549,12 +565,15 @@ class MyAlarm extends IPSModule
                     $array = "wurde erkannt.";
                     $this->ModErrorLog("MyIPSAlarm", $text, $array);
                     setvalue($this->GetIDForIdent("A_SecWarning"),"Alarm ausgelöst."); 
-                    $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
-                    Telegram_SendText(22525, $message, "671095116" );
+                    //Telegram Message senden
+                    if($this->ReadPropertyBoolean("Telegram")){
+                        $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
+                        Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, string($this->ReadPropertyInteger("EchoID")));
+                    }
                     //Sprachausgabe
                     if($this->ReadPropertyBoolean("AlexaTTS")){
                         $text_to_speech = "Alarm wurde ausgelöst.";
-                        EchoRemote_TextToSpeech(11629, $text_to_speech);
+                        EchoRemote_TextToSpeech($this->ReadPropertyInteger("EchoID"), $text_to_speech);
                     }
                 } 
                 else{

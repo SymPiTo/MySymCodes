@@ -8,6 +8,30 @@
             },
             {
                 "type" : "Label",
+                "label" : "Modul Telegram verwenden."
+            },
+            { 
+                "name" : "Telegram",
+                "type" : "CheckBox",
+                "caption" : "Telegram Modul"
+
+            },
+            {   "type": "SelectInstance", 
+                "name": "TelegramID", 
+                "caption": "Modul Telegram" 
+            },
+            {
+                "type" : "Label",
+                "label" : "Sender ID:"
+            },
+            { 
+                "type": "NumberSpinner", 
+                "name": "SenderID", 
+                "caption": "Telegram Sender ID", 
+                "digits": 0
+            },
+            {
+                "type" : "Label",
                 "label" : "Alexa Text To Speech verwenden."
             },
             { 
