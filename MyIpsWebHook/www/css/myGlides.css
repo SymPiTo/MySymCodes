@@ -2083,7 +2083,20 @@ width:40%;
 .anzeige.blueA:active {
 	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 100%, 5%));
 }
-
+.anzeige.long{
+    width: 75px;
+    height: 225px;
+    font-size: 14px;
+    padding-top: 5px;
+    z-index: 10;
+}
+.anzeige.normal{
+    width: 75px;
+    height: 25px;
+    font-size: 14px;
+    padding-top: 5px;
+    z-index: 10;
+}
 .status{
 	border-color:#666666;
 	border-style: solid;

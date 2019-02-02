@@ -604,7 +604,7 @@ class StateDisplay {
         this.state3 = "";
     }
  
-    create(ParentID, color, einheit,  posTop, posLeft, titel, zus0, zus1, zus2, zus3, command){
+    create(ParentID, color, einheit,  posTop, posLeft, size, SchriftGr, titel, zus0, zus1, zus2, zus3, command){
         this.unit = einheit, 
          
         this.state0 = zus0;
@@ -613,7 +613,7 @@ class StateDisplay {
         this.state3 = zus3;
         var elem1 = document.createElement("div");
         elem1.className = "anzeige";  
-        elem1.classList.add(color);
+        elem1.classList.add(color, size);
         elem1.style.color = "lime";
         elem1.style.position = "absolute";
         elem1.style.left = posLeft;
@@ -623,7 +623,7 @@ class StateDisplay {
         var elem3 = document.createElement("div");
         
         elem3.innerHTML = "----" + this.unit;
-        elem3.style.fontSize = "28px";
+        elem3.style.fontSize = SchriftGr;
         elem3.style.paddingTop = "5px";
         elem3.style.color = "white";
         this.ID = elem3;

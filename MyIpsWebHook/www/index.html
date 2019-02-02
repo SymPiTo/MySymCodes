@@ -910,7 +910,7 @@
         DisAlarmActiveSec=Object.create(Display);
         DisAlarmActiveSec.create("MainSecCodeCtrl", "AlarmActiveSec", "red", "", "60px", "20px", "Alarm Anlage", "aktiviert", "deaktiviert", "", "", "");
         var DisSabAlarm = new StateDisplay();
-        DisSabAlarm.create("MainSecCodeCtrl", "red", "", "140px", "20px", "Sabotage", "manipuliert", "ok");
+        DisSabAlarm.create("MainSecCodeCtrl", "red", "", "140px", "20px",  "normal", "20px", "Sabotage", "manipuliert", "ok");
         DisDoorOpen=Object.create(Display);
         DisDoorOpen.create("MainSecCodeCtrl", "DoorOpen", "red", "", "240px", "20px", "Eingangstür", "offen", "geschlossen", "", "", "");
         DisBalkonDoorOpen=Object.create(Display);
@@ -948,18 +948,18 @@
  
         <script>
             var BathDisAlarm = new StateDisplay();
-            BathDisAlarm.create("MainWaterAlarmCtrl", "red", "", "20px", "20px", "Alarm", "Warnung", "");
+            BathDisAlarm.create("MainWaterAlarmCtrl", "red", "", "20px", "20px", "normal", "20px",  "Alarm", "Warnung", "");
             var BathDisFeuchte = new StateDisplay();
-            BathDisFeuchte.create("MainWaterAlarmCtrl", "red", "", "90px", "20px", "Feuchte", "Warnung", "");
+            BathDisFeuchte.create("MainWaterAlarmCtrl", "red", "", "90px", "20px", "normal", "20px",  "Feuchte", "Warnung", "");
             var BathDisWater = new StateDisplay();
-            BathDisWater.create("MainWaterAlarmCtrl", "red", "", "160px", "20px", "Wasserstand", "Warnung", "");
+            BathDisWater.create("MainWaterAlarmCtrl", "red", "", "160px", "20px", "normal", "20px", "Wasserstand", "Warnung", "");
             
             var WashMDisAlarm = new StateDisplay();
-            WashMDisAlarm.create("MainWaterAlarmCtrl", "red", "", "300px", "20px", "Alarm", "Warnung", "");
+            WashMDisAlarm.create("MainWaterAlarmCtrl", "red", "", "300px", "20px", "normal", "20px", "Alarm", "Warnung", "");
             var WashMDisFeuchte = new StateDisplay();
-            WashMDisFeuchte.create("MainWaterAlarmCtrl", "red", "", "370px", "20px", "Feuchte", "Warnung", "");
+            WashMDisFeuchte.create("MainWaterAlarmCtrl", "red", "", "370px", "20px", "normal", "20px", "Feuchte", "Warnung", "");
             var WashMDisWater = new StateDisplay();
-            WashMDisWater.create("MainWaterAlarmCtrl", "red", "", "440px", "20px", "Wasserstand", "Warnung", "");
+            WashMDisWater.create("MainWaterAlarmCtrl", "red", "", "440px", "20px", "normal", "20px", "Wasserstand", "Warnung", "");
             
         </script>  
 
@@ -1036,7 +1036,7 @@
  
         <script>
             var BatDis = new StateDisplay();
-            BatDis.create("MainBatAlarmCtrl", "red", "", "50px", "20px", "Battery Alarm", "String");
+            BatDis.create("MainBatAlarmCtrl", "red", "", "50px", "20px", "long", "20px", Battery Alarm", "String");
         </script>    
         
         
