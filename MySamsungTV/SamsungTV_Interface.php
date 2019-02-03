@@ -1304,12 +1304,30 @@ trait SamsungUPNP {
     ...............................................................................
     ...............................................................................
     Parameters: 
+     * <Channel><ChType>CDTV</ChType><MajorCh>1</MajorCh><MinorCh>65534</MinorCh><PTC>28</PTC><ProgNum>11100</ProgNum></Channel>
+     * $AntennaMode = 2
     --------------------------------------------------------------------------------
-    Returns:  
+    Returns:  strin Lock = Disable
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/ 
+    public function GetChannelLockInformation_MTVA(string $channel, int $AntennaMode = 2) {
+        return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "GetChannelLockInformation",
+
+                               array(
+
+                                        new SoapParam($channel     ,"Channel"),
+
+                                        new SoapParam($AntennaMode ,"AntennaMode")
+
+                                    ));
+    }  
+    
+    
     
     //*****************************************************************************
     /* Function: GetDetailChannelInformation()
@@ -2042,7 +2060,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Returns:  (array)
      * [Result] (string)            => OK
-     * [CurrentProgInfoURL] (xml)   => http://192.168.178.35:9090/BinaryBlob/0/CurrentProgInfo.dat
+     * [CurrentProgInfoURL] (xml)   => http://192.168.178.135:9090/BinaryBlob/1/CurrentProgInfo.dat
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/    
