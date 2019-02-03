@@ -26,7 +26,7 @@ class MySamsungTV extends IPSModule
         //These lines are parsed on Symcon Startup or Instance creation   
         // Variable aus dem Instanz Formular registrieren (um zugänglich zu machen)
         $this->RegisterPropertyBoolean("aktiv", false);
-        $this->RegisterPropertyString("ip", "192.168.178.7");
+        $this->RegisterPropertyString("ip", "192.168.178.135");
         $this->RegisterPropertyInteger("updateInterval", 10000);	
         $this->RegisterPropertyInteger("devicetype", 1);
         $this->RegisterPropertyString("FileData", "");
