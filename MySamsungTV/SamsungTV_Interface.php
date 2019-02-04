@@ -1307,9 +1307,11 @@ trait SamsungUPNP {
      * <Channel><ChType>CDTV</ChType><MajorCh>1</MajorCh><MinorCh>65534</MinorCh><PTC>28</PTC><ProgNum>11100</ProgNum></Channel>
      * $AntennaMode = 2
     --------------------------------------------------------------------------------
-    Returns:  strin Lock = Disable
+    Returns:  Array
+                    [Result] => OK
+                    [Lock] => Disable    
     --------------------------------------------------------------------------------
-    Status:  
+    Status:  3.2.2019 - OK
     //////////////////////////////////////////////////////////////////////////////*/ 
     public function GetChannelLockInformation_MTVA(string $channel, int $AntennaMode = 2) {
         return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2329,6 +2331,14 @@ trait SamsungUPNP {
     Returns:  
      * <Result>OK
      * <SourceList
+     * <SourceType>
+     * TV
+     * SCART1
+     * SCART2
+     * PC
+     * USB
+     * DLNA 
+     * HDMI3
     --------------------------------------------------------------------------------
     Status:  3.2.2019 - OK
     //////////////////////////////////////////////////////////////////////////////*/  
@@ -2695,7 +2705,9 @@ trait SamsungUPNP {
     {
             $port = 55000;
             $src = "192.168.178.28"; # ip des IPS Servers
-            $mac = "B8:27:EB:80:C2:C7"; # mac des IPS Servers
+            //$mac = "B8:27:EB:80:C2:C7"; # mac des IPS Servers
+            $mac = "dhcpcd-6.11.5:Linux-4.14.79-v7+:armv7l:BCM2835
+B8:27:EB:80:C2:C7";
             $remote = "php Samsung Remote";
             $dst =  $this->ReadPropertyString('ip');
             $app = "iphone..iapp.samsung";
