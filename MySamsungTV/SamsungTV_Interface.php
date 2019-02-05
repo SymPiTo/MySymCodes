@@ -2706,8 +2706,7 @@ trait SamsungUPNP {
             $port = 55000;
             $src = "192.168.178.28"; # ip des IPS Servers
             //$mac = "B8:27:EB:80:C2:C7"; # mac des IPS Servers
-            $mac = "dhcpcd-6.11.5:Linux-4.14.79-v7+:armv7l:BCM2835
-B8:27:EB:80:C2:C7";
+            $mac = "B8:27:EB:9D:78:B5"; # mac des Kodi Servers
             $remote = "php Samsung Remote";
             $dst =  $this->ReadPropertyString('ip');
             $app = "iphone..iapp.samsung";
