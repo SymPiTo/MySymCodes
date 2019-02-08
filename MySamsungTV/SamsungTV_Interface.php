@@ -2364,7 +2364,7 @@ trait SamsungUPNP {
         $output['CURRENTSOURCETYPE'] = $vals[1]['value'];    
         $output['ID'] = $vals[2]['value'];  
         $anzahl = count($vals);
-        $n = ($anzahl-3)/8;
+        $n = ($anzahl-4)/8;
             
         for ($index1 = 0; $index1 < $n; $index1++) {
             
