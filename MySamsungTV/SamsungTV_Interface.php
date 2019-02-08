@@ -2426,11 +2426,11 @@ trait SamsungUPNP {
     Status:  OK - 3.2.1019   funktioniert nicht Raspi
     //////////////////////////////////////////////////////////////////////////////*/   
     public function GetWatchingInformation_MTVA(){
-        $result = $this->processSoapCall("/maintvserver2/control/maintvagent2",
+        $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
-                               "urn:samsung.com:service:maintvagent2:1",
+                               "urn:samsung.com:service:MainTVAgent2:1",
 
-                               "getwatchinginformation",
+                               "GetWatchingInformation",
 
                                array(
 
@@ -2498,7 +2498,7 @@ trait SamsungUPNP {
 
     try{
 
-      $client     = new SoapClient(null, array( "location"   => "http://"."192.168.178.7:52235".$path,
+      $client     = new SoapClient(null, array( "location"   => "http://"."192.168.178.135:52235".$path,
 
                                                "uri"        => $uri,
 
