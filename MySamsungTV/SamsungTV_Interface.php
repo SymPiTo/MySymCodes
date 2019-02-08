@@ -2352,7 +2352,7 @@ trait SamsungUPNP {
                                array(
 
                                     ));
-    /*    
+       
         //Ausgabe: array [Result] und [SourceList].
         $xml = $result['SourceList'];
                 $xmlParser = xml_parser_create("UTF-8");
@@ -2373,9 +2373,9 @@ trait SamsungUPNP {
         $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8*$index1]['value'];    
         $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9*$index1]['value'];
         }
-    */    
+       
         
-         return $result;    
+         return $output;    
     }       
     
     
@@ -2392,7 +2392,7 @@ trait SamsungUPNP {
      * [Result] => OK
      * [Volume] => 8
     --------------------------------------------------------------------------------
-    Status:  25.07.2018 - OK  funktioniert nicht Raspi
+    Status:  25.07.2018 - OK   Raspi: OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetVolume_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2423,7 +2423,7 @@ trait SamsungUPNP {
      * ['WatchingInformation'] = Hilf mir! Jung, pleite, verzweifelt... on RTL2 (01:0PM~02:00PM)
      * 
     --------------------------------------------------------------------------------
-    Status:  OK - 3.2.1019   funktioniert nicht Raspi
+    Status:  OK - 3.2.1019   Raspi-OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/   
     public function GetWatchingInformation_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2704,9 +2704,9 @@ trait SamsungUPNP {
     public function sendKey(string $key)
     {
             $port = 55000;
-            $src = "192.168.178.30"; # ip des IPS Servers
-            $mac = "B8:27:EB:80:C2:C7"; # mac des IPS Servers
-            //$mac = "B8:27:EB:9D:78:B5"; # mac des Kodi Servers
+            $src = "192.168.178.28"; # ip des IPS Servers
+            //$mac = "B8:27:EB:80:C2:C7"; # mac des Kodi Servers
+            $mac = "B8:27:EB:9D:78:B5"; # mac des IPS Servers
             $remote = "My IPS Raspi";
             $dst =  $this->ReadPropertyString('ip');
             $app = "iphone..iapp.samsung";
