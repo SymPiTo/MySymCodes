@@ -2359,10 +2359,13 @@ trait SamsungUPNP {
                 xml_parser_set_option($xmlParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
                 xml_parse_into_struct($xmlParser, $xml, $vals, $index);
                 xml_parser_free($xmlParser);
+                
         $output['Result'] = $result['Result'] ;
         $output['CURRENTSOURCETYPE'] = $vals[1]['value'];    
         $output['ID'] = $vals[2]['value'];  
         $anzahl = count($vals);
+        
+        /*
         for ($index1 = 0; $index1 < count($vals); $index1++) {
             
 
@@ -2373,7 +2376,7 @@ trait SamsungUPNP {
         $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8*$index1]['value'];    
         $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9*$index1]['value'];
         }
-       
+       */
         
          return $output;    
     }       
