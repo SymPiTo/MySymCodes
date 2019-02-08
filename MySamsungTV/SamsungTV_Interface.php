@@ -2365,7 +2365,7 @@ trait SamsungUPNP {
         $output['ID'] = $vals[2]['value'];  
         $anzahl = count($vals);
         
-            
+     /*       
         for ($index1 = 1; $index1 < count($vals); $index1++) {
             
 
@@ -2376,9 +2376,9 @@ trait SamsungUPNP {
         $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8*$index1]['value'];    
         $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9*$index1]['value'];
         }
-            
+       */     
         
-         return $output;    
+         return $vals;    
     }       
     
     
