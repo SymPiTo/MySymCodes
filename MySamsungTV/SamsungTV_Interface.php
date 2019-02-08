@@ -2364,21 +2364,21 @@ trait SamsungUPNP {
         $output['CURRENTSOURCETYPE'] = $vals[1]['value'];    
         $output['ID'] = $vals[2]['value'];  
         $anzahl = count($vals);
-        
-     /*       
-        for ($index1 = 1; $index1 < count($vals); $index1++) {
+        $n = ($anzahl-3)/8;
+            
+        for ($index1 = 0; $index1 < $n; $index1++) {
             
 
-        $output['SOURCE1'][$index1]['SOURCETYPE'] = $vals[4*$index1]['value'];    
-        $output['SOURCE1'][$index1]['ID'] = $vals[5*$index1]['value'];  
-        $output['SOURCE1'][$index1]['EDITABLE'] = $vals[6*$index1]['value'];    
-        $output['SOURCE1'][$index1]['DEVICENAME'] = $vals[7*$index1]['value'];    
-        $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8*$index1]['value'];    
-        $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9*$index1]['value'];
+        $output['SOURCE1'][$index1]['SOURCETYPE'] = $vals[4+$index1*8]['value'];    
+        $output['SOURCE1'][$index1]['ID'] = $vals[5+$index1*8]['value'];  
+        $output['SOURCE1'][$index1]['EDITABLE'] = $vals[6+$index1*8]['value'];    
+        $output['SOURCE1'][$index1]['DEVICENAME'] = $vals[7+$index1*8]['level'];    
+        $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8+$index1*8]['value'];    
+        $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9+$index1*8]['value'];
         }
-       */     
+            
         
-         return $vals;    
+         return $output;    
     }       
     
     
