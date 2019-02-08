@@ -2378,7 +2378,7 @@ trait SamsungUPNP {
         }
        */
         
-         return $output;    
+         return $vals;    
     }       
     
     
