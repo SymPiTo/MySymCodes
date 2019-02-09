@@ -176,7 +176,8 @@
             check(ips[0].ID58710,81);  //Wasser Sensor Bad Alarm
             check(ips[0].ID17453,82);  //Wasser Sensor Bad Feuchte
             check(ips[0].ID36414,83);  //Wasser Sensor Bad Wasserstand
-            
+            check(ips[0].ID37104,84);  //TV Volume
+            check(ips[0].ID49306,85);  //TV Power
      }
     function check(value, n){
         if (typeof value === "undefined") {$('fehler').innerHTML =  "Variable  wrong ID:" + n;} else {return value;}
@@ -501,6 +502,10 @@
     
     function updateValues(ips){
         try {
+            
+            transVarPower.update(ips[0].ID49306,"state");
+            transVarVol.update(ips[0].ID37104,"state");
+            
             iBat01.update(ips[0].ID30280);
             iBat02.update(ips[0].ID49846);
             iBat03.update(ips[0].ID33304);
