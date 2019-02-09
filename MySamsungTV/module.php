@@ -29,7 +29,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterPropertyString("ip", "192.168.178.135");
         $this->RegisterPropertyInteger("updateInterval", 10000);	
         $this->RegisterPropertyInteger("devicetype", 1);
-        $this->RegisterPropertyString("FileData", "");
+        
         
         //Variable anlegen.
         $this->RegisterVariableString("TVchList", "ChannelList");
@@ -37,8 +37,10 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableInteger("TVChannel", "Channel", "");
         $this->RegisterVariableString("TVchLName", "ChannelName");
         $this->RegisterVariableString("TVGuide", "Guide");
-        
-	
+        $this->RegisterVariableBoolean("TVPower", "Power");
+
+        //Switch Profil zuordnen 
+        IPS_SetVariableCustomProfile($this->GetIDForIdent("TVPower"), "~Switch");
       
         // Timer erstellen
         $this->RegisterTimer("update", $this->ReadPropertyInteger("updateInterval"), 'STV_update($_IPS[\'TARGET\']);');
@@ -203,6 +205,7 @@ class MySamsungTV extends IPSModule
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
+                setvalue($this->GetIDForIdent("TVPower"), true);
                 $vol = $this->getVolume();    
                  
                 $channel = $this->getChannel();
@@ -210,6 +213,7 @@ class MySamsungTV extends IPSModule
             }
             else{
                 $this->SetTimerInterval("update", 0);
+                setvalue($this->GetIDForIdent("TVPower"), false);
             }
         }
 
@@ -549,7 +553,7 @@ class MySamsungTV extends IPSModule
         $input = file_get_contents($url);
         $len = strlen($input);
         $offset = 124;
-        $anzahl = floor($len / 124);
+        $anzahl = floor($len / 124)-1;
         $chlist = array();
 
         for ($i = 0; $i <= $anzahl; $i++) {
@@ -603,7 +607,7 @@ class MySamsungTV extends IPSModule
         } 
         $chListSer = serialize($chlist);
         setvalue($this->GetIDForIdent("TVchList"), $chListSer);
-        file_put_contents("channelsx.json",json_encode($chlist));
+        file_put_contents("/var/lib/symcon/media/channels.json",json_encode($chlist));
         return  $chlist;
     }    
         
