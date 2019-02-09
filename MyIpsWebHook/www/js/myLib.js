@@ -1737,7 +1737,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem1.innerHTML = title;
         elem1.style.color = "white";
         elem1.style.fontSize = "18px";
-        elem1.style.paddingBottom = "50px"
+        elem1.style.justifyContent = "center";
+        elem1.style.paddingBottom = "25px"
         elem.append(elem1);
 ;        
         var elem2 =  document.createElement("div");
