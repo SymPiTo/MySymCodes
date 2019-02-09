@@ -553,8 +553,8 @@ class MySamsungTV extends IPSModule
         $anzahl = floor($anzahl);
 
         for ($i = 0; $i <= $anzahl; $i++) {
-            $chlist[$i]['Kanal'] = rtrim(substr($input,16 + $i*$offset, 3))."\n\r";
-            $chlist[$i]['Name'] = rtrim(substr($input,28 + $i*$offset, 20))."\n\r";
+            $chlist[$i]['Kanal'] = rtrim(substr($input,16 + $i*$offset, 3));
+            $chlist[$i]['Name'] = rtrim(substr($input,28 + $i*$offset, 20));
          }
          
         $n = 0;
