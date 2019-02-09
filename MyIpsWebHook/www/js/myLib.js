@@ -1736,8 +1736,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         
         var elem1 =  document.createElement("div");
         elem1.innerHTML = title;
-        elem1.style.color = textcolor;
-        elem1.style.fontSize = "24px";
+        elem1.style.color = "grey";
+        elem1.style.fontSize = "18px";
         elem.append(elem1);
         
         var elem2 =  document.createElement("div");
@@ -1747,7 +1747,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem4.style.fontSize = this.textsize;
         elem4.style.color = this.textcolor;
          
-        elem4.innerHTML = "99";
+        elem4.innerHTML = "99" + " " + this.unit;
         this.ID = elem4;
         elem2.append(elem4);
      
