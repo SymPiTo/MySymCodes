@@ -343,7 +343,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     }
  
 
-    create(ParentID, posTop, posLeft, h, w){
+    create(ParentID, posTop, posLeft, h, w, color){
         var elem = document.createElement("div");
 
         elem.style.position = "absolute";
@@ -356,7 +356,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         elem.style.border= "1px #C0C0C0 inset";
 	elem.style.borderColor = "#777777";
 	 
-	elem.style.backgroundColor = "transparent";
+	elem.style.backgroundColor = color;
         
         document.getElementById(ParentID).appendChild(elem);
     }
