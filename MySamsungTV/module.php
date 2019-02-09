@@ -526,8 +526,8 @@ class MySamsungTV extends IPSModule
     /* Function: buildChannelList() 
     ...............................................................................
      * erzeugt ein Array aller Channels
-     * Vorraussetzung: es muss eine channellist.txt erzeugt werden mit ChanSort.exe
-     * (siehe Manuals)
+     * 
+     *  
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
@@ -544,21 +544,28 @@ class MySamsungTV extends IPSModule
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/  
     public function buildChannelList() {
-        $Channellist = base64_decode($this->ReadPropertyString("FileData"));
-        $channel = explode("\n", $Channellist);
-        $n =  0;
+        $chURL =  $this->GetChannelListURL_MTVA();
+        $url = $chURL["ChannelListURL"];
+        $input = file_get_contents($url);
+        $len = strlen($input);
+        $offset = 124;
+        $anzahl = $len / 124;
+        $anzahl = floor($anzahl);
+
+        for ($i = 0; $i <= $anzahl; $i++) {
+            $chlist[$i]['Kanal'] = rtrim(substr($input,16 + $i*$offset, 3))."\n\r";
+            $chlist[$i]['Name'] = rtrim(substr($input,28 + $i*$offset, 20))."\n\r";
+         }
+         
+        
         //auf Fernseh Kanal 1 schalten!
         $key = 'KEY_1';
         $result =   $this->sendKey($key);
         $key = 'KEY_ENTER';
         $result =   $this->sendKey($key);
-        foreach($channel as $ch) {
-                $kanal = explode("\t", $ch);
-                if ($kanal[0] == 'List'){
-                        $head = $kanal;
-                }else{
-                    $chlist[$n]['Pr#'] = $kanal[1];
-                    $chlist[$n]['ChannelName'] = $kanal[2];
+        foreach($chlist as $ch) {
+            $kanal = $ch["Kanal"];
+            $n = int($kanal);
                     // auf Kanal schalten und MainChannel XML auslesen
                     $key = 'KEY_CHUP'; 
                     $mc = $this->GetCurrentMainTVChannel_MTVA();
@@ -570,8 +577,8 @@ class MySamsungTV extends IPSModule
                     $chlist[$n]['channelXml'] = "<Channel><ChType>".$chlist[$n]['ChType']."</ChType><MajorCh>".$chlist[$n]['MAJORCH']."</MajorCh><MinorCh>".$chlist[$n]['MINORCH']."</MinorCh><PTC>".$chlist[$n]['PTC']."</PTC><ProgNum>".$chlist[$n]['PROGNUM']."</ProgNum></Channel>" ;
                     $this->SendDebug("ChannelList ", $chlist[$n], 0);
                     $this->sendKey($key);
-                    $n = $n + 1;
-                }
+                     
+                
                 
         } 
         $chListSer = serialize($chlist);
