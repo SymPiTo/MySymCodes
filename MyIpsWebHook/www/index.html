@@ -1108,14 +1108,10 @@
          <script>   
             var LedDisplayTV = new LEDdisplay();
             LedDisplayTV.create("MainTV", "LedDisplayTV", "1vh" , "20%", "40px", "70%" );
-            var KeyPadTVChannel = new KeyPad();
-            KeyPadTVChannel.create("MainTV", "KeyTVChannel", "TV", "purple", "0.8", "10vh" , "5%" );  
+
             var NavPadSecKey = new NavPad();
-            NavPadSecKey.create("MainTV", "NavPad", "purple", "12vh" , "60%", ["fa fa-square","fa fa-caret-up","fa fa-square","fa fa-caret-left","fa fa-thumbs-up","fa fa-caret-right","fa fa-square","fa fa-caret-down","fa fa-square"] ); 
-            var CtrlBtnTVup = new CtrlButton();
-            CtrlBtnTVup.create("MainTV", "52vh", "51%",  "normal", "purple", "Chanel Up", "command",   "send('command(TV,key,KEY_CHUP)') ");
-            var CtrlBtnTVdown = new CtrlButton();
-            CtrlBtnTVdown.create("MainTV", "52vh", "20%",  "normal", "purple", "Chanel Down", "command",   "send('command(TV,key,KEY_CHDOWN)') ");
+            NavPadSecKey.create("MainTV", "NavPad", "purple", "12vh" , "40%", ["fa fa-square","fa fa-caret-up","fa fa-square","fa fa-caret-left","fa fa-thumbs-up","fa fa-caret-right","fa fa-square","fa fa-caret-down","fa fa-square"] ); 
+
             var CtrlBtnTVList = new CtrlButton();
             CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Sender", "command",   "send('command(TV,AA,activate)') ");
             var CtrlBtnTVCh = new CtrlButton();
