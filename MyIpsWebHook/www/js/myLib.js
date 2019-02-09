@@ -1709,7 +1709,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     class TransVarDisplay {
         constructor() {
             this.ID = ""; 
-            this.color = "white",
+             
             this.textcolor = "white",
             this.textsize = "34px";
             this.unit = "°C",
@@ -1718,8 +1718,9 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         }
 
     
-    create (ParentID, ObjektFarbe, posTop, posLeft, symbol, title, einheit, ...status){  
-        this.color = ObjektFarbe;
+    create (ParentID, posTop, posLeft, textcolor, textsize,  title, einheit, ...status){  
+        this.textcolor = textcolor;
+        this.textsize = textsize;
         this.unit = einheit;
         this.state = status;
         
@@ -1735,21 +1736,17 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         
         var elem1 =  document.createElement("div");
         elem1.innerHTML = title;
+        elem1.style.color = textcolor;
+        elem1.style.fontSize = "24px";
         elem.append(elem1);
         
         var elem2 =  document.createElement("div");
         elem.append(elem2);
         
- 
- 
-
-        
- 
-
         var elem4 =  document.createElement("span");
         elem4.style.fontSize = this.textsize;
         elem4.style.color = this.textcolor;
-        elem4.style.marginLeft = "25px";
+         
         elem4.innerHTML = "99";
         this.ID = elem4;
         elem2.append(elem4);
