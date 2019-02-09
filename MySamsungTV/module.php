@@ -565,7 +565,7 @@ class MySamsungTV extends IPSModule
         $result =   $this->sendKey($key);
         foreach($chlist as $ch) {
             $kanal = $ch["Kanal"];
-            $n = int($kanal);
+            $n = intval($kanal);
                     // auf Kanal schalten und MainChannel XML auslesen
                     $key = 'KEY_CHUP'; 
                     $mc = $this->GetCurrentMainTVChannel_MTVA();
