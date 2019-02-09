@@ -549,8 +549,8 @@ class MySamsungTV extends IPSModule
         $input = file_get_contents($url);
         $len = strlen($input);
         $offset = 124;
-        $anzahl = $len / 124;
-        $anzahl = floor($anzahl);
+        $anzahl = floor($len / 124);
+        $chlist = array();
 
         for ($i = 0; $i <= $anzahl; $i++) {
             $chlist[$i]['Kanal'] = rtrim(substr($input,16 + $i*$offset, 3));
