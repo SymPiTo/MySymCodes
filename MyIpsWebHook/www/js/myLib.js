@@ -1711,7 +1711,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             this.ID = ""; 
             this.color = "white",
             this.textcolor = "white",
-            this.textsize = "14px";
+            this.textsize = "34px";
             this.unit = "°C",
             this.state =  ""
              
