@@ -1725,8 +1725,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         
         
         var elem = document.createElement("div");
-        elem.className = "status";  
-        elem.classList.add(this.color);
+        elem.className = "transStat";  
+         
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
@@ -1748,8 +1748,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem2.append(elem3);
 
         var elem4 =  document.createElement("span");
-        elem4.style.marginLeft = "15px";
-        elem4.innerHTML = "- - -";
+        elem4.style.marginLeft = "25px";
+        elem4.innerHTML = "99";
         this.ID = elem4;
         elem2.append(elem4);
      

@@ -2110,6 +2110,13 @@ width:40%;
 .anzeige.normal{
     height: 60px;
 }
+
+.transStat{
+ 	width: 202px;
+	height: 125px;
+        background-color:transparent;
+}
+
 .status{
 	border-color:#666666;
 	border-style: solid;
