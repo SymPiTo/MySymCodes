@@ -356,7 +356,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         elem.style.border= "1px #C0C0C0 inset";
 	elem.style.borderColor = "#777777";
 	 
-	elem.backgroundColor = "hsl(174, 100%, 5%)";
+	elem.backgroundColor = "hsl(74, 100%, 5%)";
         
         document.getElementById(ParentID).appendChild(elem);
     }
