@@ -333,6 +333,35 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     }
  }
 
+
+/* --------------------- class Dynamic ImageDisplay ---------------------------------------- */
+ class Rahmen {
+    
+    
+    constructor() {
+
+    }
+ 
+
+    create(ParentID, posTop, posLeft, h, w){
+        var elem = document.createElement("div");
+
+        elem.style.position = "absolute";
+        elem.style.left = posLeft;
+        elem.style.top = posTop;
+        
+        elem.style.height = h;
+        elem.style.width = w;
+        
+        elem.style.border= "1px #C0C0C0 inset";
+	elem.style.borderColor = "#777777";
+	 
+	elem.backgroundColor = "hsl(174, 100%, 5%)";
+        
+        document.getElementById(ParentID).appendChild(elem);
+    }
+}
+
 /* --------------------- class Dynamic ImageDisplay ---------------------------------------- */
  class ImageDisplay {
     
