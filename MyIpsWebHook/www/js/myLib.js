@@ -1733,7 +1733,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem.style.hight = "150px";
         elem.style.flexDirection = "column";
         elem.style.justifyContent = "center";
-        elem.style.border = "thick solid #0000FF";
+        elem.style.border = "tin double grey";
         
         var elem1 =  document.createElement("div");
         elem1.innerHTML = title;
