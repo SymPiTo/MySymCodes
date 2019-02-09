@@ -1759,7 +1759,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     update(value, n){
         try { 
             if(n === "state"){ 
-                 
+                if (value === "false"){value = 0}
+                if (value === "true"){value = 1}
                 this.ID.innerHTML = this.state[value]; 
             }
  
