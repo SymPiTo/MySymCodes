@@ -549,7 +549,7 @@ class MySamsungTV extends IPSModule
         $input = file_get_contents($url);
         $len = strlen($input);
         $offset = 124;
-        $anzahl = floor($len / 124)-400;
+        $anzahl = floor($len / 124);
         $chlist = array();
 
         for ($i = 0; $i <= $anzahl; $i++) {
@@ -558,15 +558,11 @@ class MySamsungTV extends IPSModule
          }
          
         $n = 0;
-        //auf Fernseh Kanal 1 schalten!
-        $key = 'KEY_1';
-        $result =   $this->sendKey($key);
-            $key = 'KEY_ENTER';
-            $result =   $this->sendKey($key);
+ 
             
         foreach($chlist as $ch) {
             $kanal = $ch["Kanal"];
-            
+            $name = $ch["Name"];
             // auf Kanal schalten und MainChannel XML auslesen
             if(intval($kanal)<10){
                 $key = 'KEY_'.$kanal; 
@@ -592,26 +588,22 @@ class MySamsungTV extends IPSModule
                 $key = 'KEY_ENTER';
                 $result =   $this->sendKey($key);   
             }
-
-            
-      
-            
-
-                    $mc = $this->GetCurrentMainTVChannel_MTVA();
-                    $chlist[$n]['ChType'] = $mc['ChType'];
-                    $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
-                    $chlist[$n]['MINORCH'] = $mc['MINORCH'];
-                    $chlist[$n]['PTC'] = $mc['PTC'];
-                    $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
-                    $chlist[$n]['channelXml'] = "<Channel><ChType>".$chlist[$n]['ChType']."</ChType><MajorCh>".$chlist[$n]['MAJORCH']."</MajorCh><MinorCh>".$chlist[$n]['MINORCH']."</MinorCh><PTC>".$chlist[$n]['PTC']."</PTC><ProgNum>".$chlist[$n]['PROGNUM']."</ProgNum></Channel>" ;
-                    $this->SendDebug("ChannelList ", $chlist[$n], 0);
+            $mc = $this->GetCurrentMainTVChannel_MTVA();
+            $chlist[$n]['ChType'] = $mc['ChType'];
+            $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
+            $chlist[$n]['MINORCH'] = $mc['MINORCH'];
+            $chlist[$n]['PTC'] = $mc['PTC'];
+            $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
+            $chlist[$n]['channelXml'] = "<Channel><ChType>".$chlist[$n]['ChType']."</ChType><MajorCh>".$chlist[$n]['MAJORCH']."</MajorCh><MinorCh>".$chlist[$n]['MINORCH']."</MinorCh><PTC>".$chlist[$n]['PTC']."</PTC><ProgNum>".$chlist[$n]['PROGNUM']."</ProgNum></Channel>" ;
+            // search for icon
+            $chlist[$n]['ICONURL'] = "images/Sender/".$name.".png";
+            $this->SendDebug("ChannelList ", $chlist[$n], 0);
             $n = $n + 1;        
-                     
-                
-                
+            
         } 
         $chListSer = serialize($chlist);
         setvalue($this->GetIDForIdent("TVchList"), $chListSer);
+        file_put_contents("channelsx.json",json_encode($chlist));
         return  $chlist;
     }    
         

@@ -2021,7 +2021,7 @@ trait SamsungUPNP {
             $output['PTC']      = 1
             $output['PROGNUM']  = 12103
     --------------------------------------------------------------------------------
-    Status:  17.07.2018 - OK   RASPI - geht nicht
+    Status:  17.07.2018 - OK   RASPI - OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetCurrentMainTVChannel_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2247,7 +2247,7 @@ trait SamsungUPNP {
      * [Result] => OK
      * [[NetworkInformation] ] => BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxOTIuMTY4LjE3OC4xAAAAAAAAAAA=
     --------------------------------------------------------------------------------
-    Status:  17.07.2018 - OK  
+    Status:  17.07.2018 - OK   RASPI: OK  8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetNetworkInformation_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2274,7 +2274,7 @@ trait SamsungUPNP {
     Returns:  (array)
      * [Result] => NOTOK
     --------------------------------------------------------------------------------
-    Status:  17.07.2018 - OK  
+    Status:  17.07.2018 - OK   RASPI: OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetRecordChannel_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2295,7 +2295,7 @@ trait SamsungUPNP {
      //*****************************************************************************
     /* Function: GetScheduleListURL_MTVA ()
     ...............................................................................
-     *  
+     *  gibt die URL der Liste der Schedule zurück
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
@@ -2303,7 +2303,7 @@ trait SamsungUPNP {
      * [Result] => OK
      * [GetScheduleListURL] =>  http://192.168.178.35:9090/BinaryBlob/2/ScheduleList.dat
     --------------------------------------------------------------------------------
-    Status:  17.07.2018 - OK  
+    Status:  17.07.2018 - OK   RASP: OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/    
     public function GetScheduleListURL_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
@@ -2323,24 +2323,28 @@ trait SamsungUPNP {
      //*****************************************************************************
     /* Function: GetSourceList_MTVA()
     ...............................................................................
-	 
+	 *  Gibt den aktuellen Source zurück und eine Liste aller Source als Array
     ...............................................................................
     Parameters: 
-    
+        none
     --------------------------------------------------------------------------------
     Returns:  
-     * <Result>OK
-     * <SourceList
-     * <SourceType>
-     * TV
-     * SCART1
-     * SCART2
-     * PC
-     * USB
-     * DLNA 
-     * HDMI3
+    *    [Result] => OK
+    *    [CURRENTSOURCETYPE] => TV
+    *    [ID] => 0
+    *    [SOURCE1] => Array
+    *        (
+    *            [0] => Array
+    *                (
+    *                    [SOURCETYPE] => TV
+    *                    [ID] => 0
+    *                    [EDITABLE] => No
+    *                    [DEVICENAME] => 3
+    *                    [CONNECTED] => Yes
+    *                    [SUPPORTVIEW] => Yes
+    *                )
     --------------------------------------------------------------------------------
-    Status:  3.2.2019 - OK
+    Status:  3.2.2019 - OK   RASPI: OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/  
     public function GetSourceList_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
