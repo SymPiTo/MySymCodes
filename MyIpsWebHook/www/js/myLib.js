@@ -1704,7 +1704,80 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         
      }
   }  
-  
+
+    /* --------------------- Klasse TransVarDisplay ---------------------------------------- */
+    class TransVarDisplay {
+        constructor() {
+            this.ID = ""; 
+            this.color = "white",
+            this.textcolor = "white",
+            this.textsize = "14px";
+            this.unit = "°C",
+            this.state =  ""
+             
+        }
+
+    
+    create (ParentID, ObjektFarbe, posTop, posLeft, symbol, title, einheit, ...status){  
+        this.color = ObjektFarbe;
+        this.unit = einheit;
+        this.state = status;
+        
+        
+        var elem = document.createElement("div");
+        elem.className = "status";  
+        elem.classList.add(this.color);
+        elem.style.position = "absolute";
+        elem.style.left = posLeft;
+        elem.style.top = posTop;
+        elem.style.width = "100px";
+        elem.style.flexDirection = "column";
+        
+        var elem1 =  document.createElement("div");
+        elem1.innerHTML = title;
+        elem.append(elem1);
+        
+        var elem2 =  document.createElement("div");
+        elem.append(elem2);
+        
+        var elem3 =  document.createElement("span");
+        elem3.className = symbol;
+        elem3.style.fontSize = this.textsize;
+        elem3.style.color = this.textcolor;
+        
+        elem2.append(elem3);
+
+        var elem4 =  document.createElement("span");
+        elem4.style.marginLeft = "15px";
+        elem4.innerHTML = "- - -";
+        this.ID = elem4;
+        elem2.append(elem4);
+     
+        document.getElementById(ParentID).appendChild(elem);   
+    };
+    update(value, n){
+        try { 
+            if(n === "state"){ 
+                this.ID.innerHTML = this.state[value]; 
+            }
+ 
+            else if (n === 0 || n > 0){
+                //var wert = Math.round(value).toFixed(n);
+                var wert = value.toFixed(n);
+                this.ID.innerHTML = wert + this.unit;
+            }
+            else {
+                this.ID.innerHTML = value + this.unit;
+            }
+        } catch (error) {
+           // alert("error");
+        }
+        
+     }
+  }  
+
+
+
     /* --------------------- Klasse flashing Led ---------------------------------------- */
     class flashLed {
         constructor() {

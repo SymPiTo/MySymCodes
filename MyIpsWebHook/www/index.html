@@ -1161,10 +1161,13 @@
             iDisArtist.create("MainIRadio", "0px", "20px", "normal");        
 
             var IconVarDisVol = new IconVarDisplay();
-            IconVarDisVol.create("MainIRadio", "cyan", "60vh", "10%", "fa fa-volume-off", "dB", "", "");
+            IconVarDisVol.create("MainIRadio", "cyan", "60vh", "10%", "fa fa-volume-off", "Volume", "dB", "", "");
             var IconVarDisSource = new IconVarDisplay();
             IconVarDisSource.create("MainIRadio", "cyan", "60vh", "40%", "fa fa-code-fork", "", "IRadio", "MediaServer", "USB", "IPod", "AuxA", "AuxD");
-
+            var transVartest = new TransVarDisplay();
+            transVartest.create("MainIRadio", "cyan", "60vh", "10%", "fa fa-volume-off", "dB", "", "");
+            
+            
             var FontBtnIRadioVolDwn = new FontButtonNew();
             FontBtnIRadioVolDwn.create("MainIRadio", "purple", "normal", "73vh", "5%", "fa fa-volume-down", "send('command(DenonCeol,vol,dec)')");  
             var FontBtnIRadioMute = new FontButtonNew();
