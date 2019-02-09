@@ -1112,6 +1112,9 @@
             var NavPadSecKey = new NavPad();
             NavPadSecKey.create("MainTV", "NavPad", "purple", "15vh" , "30%", ["fa fa-square","fa fa-caret-up","fa fa-square","fa fa-caret-left","fa fa-thumbs-up","fa fa-caret-right","fa fa-square","fa fa-caret-down","fa fa-square"] ); 
 
+            var transVarPower = new TransVarDisplay();
+            transVarPower.create("MainCeolWZ", "50vh", "20%", "lime", "28px", "Power", "", "", "");
+
             var CtrlBtnTVList = new CtrlButton();
             CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Sender", "command",   "send('command(TV,AA,activate)') ");
             var CtrlBtnTVCh = new CtrlButton();
