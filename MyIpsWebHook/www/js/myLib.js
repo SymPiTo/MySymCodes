@@ -1732,6 +1732,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem.style.width = "200px";
         elem.style.hight = "150px";
         elem.style.flexDirection = "column";
+        elem.style.justifyContent = "center";
         
         var elem1 =  document.createElement("div");
         elem1.innerHTML = title;
@@ -1748,7 +1749,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem4.style.fontSize = this.textsize;
         elem4.style.color = this.textcolor;
         elem4.style.fontFamily = "dot matrix, arial";
-        elem4.innerHTML = "99" + " " + this.unit;
+        elem4.innerHTML = "99" +  this.unit;
         this.ID = elem4;
         elem2.append(elem4);
      
