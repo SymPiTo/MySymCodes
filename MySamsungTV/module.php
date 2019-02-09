@@ -561,7 +561,7 @@ class MySamsungTV extends IPSModule
         //auf Fernseh Kanal 1 schalten!
         $key = 'KEY_1';
         $result =   $this->sendKey($key);
-;
+
         foreach($chlist as $ch) {
             $kanal = $ch["Kanal"];
             
