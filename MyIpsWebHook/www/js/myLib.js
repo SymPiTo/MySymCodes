@@ -1726,20 +1726,20 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         
         
         var elem = document.createElement("div");
-        elem.className = "transStat";  
-         
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
-        elem.style.width = "100px";
+        elem.style.width = "200px";
+        elem.style.hight = "150px";
         elem.style.flexDirection = "column";
         
         var elem1 =  document.createElement("div");
         elem1.innerHTML = title;
-        elem1.style.color = "grey";
+        elem1.style.color = "white";
         elem1.style.fontSize = "18px";
+        elem1.style.maginBottom = "10px"
         elem.append(elem1);
-        
+;        
         var elem2 =  document.createElement("div");
         elem.append(elem2);
         
