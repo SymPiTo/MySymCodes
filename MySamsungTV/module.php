@@ -557,17 +557,17 @@ class MySamsungTV extends IPSModule
             $chlist[$i]['Name'] = rtrim(substr($input,28 + $i*$offset, 20))."\n\r";
          }
          
-        
-        //auf Fernseh Kanal 1 schalten!
-        $key = 'KEY_1';
-        $result =   $this->sendKey($key);
-        $key = 'KEY_ENTER';
-        $result =   $this->sendKey($key);
+        $n = 0;
+      
+ 
         foreach($chlist as $ch) {
             $kanal = $ch["Kanal"];
-            $n = intval($kanal);
-                    // auf Kanal schalten und MainChannel XML auslesen
-                    $key = 'KEY_CHUP'; 
+            
+                // auf Kanal schalten und MainChannel XML auslesen
+            $key = 'KEY_'.$kanal; 
+            $this->sendKey($key);
+            $key = 'KEY_ENTER';
+            $result =   $this->sendKey($key);
                     $mc = $this->GetCurrentMainTVChannel_MTVA();
                     $chlist[$n]['ChType'] = $mc['ChType'];
                     $chlist[$n]['MAJORCH'] = $mc['MAJORCH'];
@@ -576,7 +576,7 @@ class MySamsungTV extends IPSModule
                     $chlist[$n]['PROGNUM'] = $mc['PROGNUM'];
                     $chlist[$n]['channelXml'] = "<Channel><ChType>".$chlist[$n]['ChType']."</ChType><MajorCh>".$chlist[$n]['MAJORCH']."</MajorCh><MinorCh>".$chlist[$n]['MINORCH']."</MinorCh><PTC>".$chlist[$n]['PTC']."</PTC><ProgNum>".$chlist[$n]['PROGNUM']."</ProgNum></Channel>" ;
                     $this->SendDebug("ChannelList ", $chlist[$n], 0);
-                    $this->sendKey($key);
+            $n = $n + 1;        
                      
                 
                 
