@@ -504,7 +504,7 @@
         try {
             
             transVarPower.update(ips[0].ID49306,"state");
-            transVarVol.update(ips[0].ID37104,"state");
+            transVarVol.update(ips[0].ID37104,"");
             
             iBat01.update(ips[0].ID30280);
             iBat02.update(ips[0].ID49846);

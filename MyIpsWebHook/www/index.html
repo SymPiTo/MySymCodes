@@ -1113,12 +1113,12 @@
             NavPadSecKey.create("MainTV", "NavPad", "purple", "10vh" , "30%", ["fa fa-square","fa fa-caret-up","fa fa-square","fa fa-caret-left","fa fa-thumbs-up","fa fa-caret-right","fa fa-square","fa fa-caret-down","fa fa-square"] ); 
 
             var rahm = new Rahmen();
-            rahm.create("MainTV", "49vh", "3%", "70px", "527px", "grey");
+            rahm.create("MainTV", "49vh", "3%", "70px", "527px", "transparent");
 
             var transVarPower = new TransVarDisplay(); 
             transVarPower.create("MainTV", "50vh", "0%", "lime", "28px", "Power", "", "aus", "ein", "" , "");
             var transVarVol = new TransVarDisplay();
-            transVarVol.create("MainTV", "50vh", "20%", "lime", "28px", "Volume", "", "aus", "ein", "" , "");
+            transVarVol.create("MainTV", "50vh", "20%", "lime", "28px", "Volume", "", );
             
             var CtrlBtnTVList = new CtrlButton();
             CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Sender", "command",   "send('command(TV,AA,activate)') ");
