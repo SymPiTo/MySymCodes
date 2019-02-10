@@ -353,7 +353,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         elem.style.height = h;
         elem.style.width = w;
         
-        elem.style.border= "1px #C0C0C0 groove";
+        elem.style.border= "1px #C0C0C0 outset";
 	elem.style.borderColor = "#777777";
 	 
 	elem.style.backgroundColor = color;
