@@ -1603,7 +1603,10 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             document.getElementById(ParentID).appendChild(elem);
         }
         
-        update() {
+        update(value) {
+                
+            this.ID.innerHTML = value;
+            
             
         }
     }    

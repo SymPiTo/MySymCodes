@@ -1119,7 +1119,11 @@
             transVarPower.create("MainTV", "50vh", "0%", "lime", "28px", "Power", "", "aus", "ein", "" , "");
             var transVarVol = new TransVarDisplay();
             transVarVol.create("MainTV", "50vh", "20%", "lime", "28px", "Volume", "", );
-            
+            var transVarCh = new TransVarDisplay();
+            transVarCh.create("MainTV", "50vh", "40%", "lime", "28px", "Channel", "", );
+
+
+
             var CtrlBtnTVList = new CtrlButton();
             CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Sender", "command",   "send('command(TV,AA,activate)') ");
             var CtrlBtnTVCh = new CtrlButton();
