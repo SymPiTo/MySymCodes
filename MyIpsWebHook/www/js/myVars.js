@@ -513,7 +513,7 @@
             transVarVol.update(ips[0].ID37104,"");
             transVarCh.update(ips[0].ID37005,"");
             LedDisplayTV.update(ips[0].ID43536);
-            transVarSource.update(ips[0].ID43536);
+            transVarSource.update(ips[0].ID44004);
             
             
             iBat01.update(ips[0].ID30280);
