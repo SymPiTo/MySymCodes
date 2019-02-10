@@ -353,7 +353,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         elem.style.height = h;
         elem.style.width = w;
         
-        elem.style.border= "1px #C0C0C0 inset";
+        elem.style.border= "1px #C0C0C0 groove";
 	elem.style.borderColor = "#777777";
 	 
 	elem.style.backgroundColor = color;
@@ -1758,7 +1758,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
-        elem.style.width = "200px";
+        elem.style.width = "175px";
         elem.style.hight = "150px";
         elem.style.flexDirection = "column";
         elem.style.justifyContent = "center";
