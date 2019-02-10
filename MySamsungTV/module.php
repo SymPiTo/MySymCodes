@@ -37,6 +37,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableInteger("TVChannel", "Channel", "");
         $this->RegisterVariableString("TVchLName", "ChannelName");
         $this->RegisterVariableString("TVGuide", "Guide");
+        $this->RegisterVariableString("TVSource", "Source");
         $this->RegisterVariableBoolean("TVPower", "Power");
 
         //Switch Profil zuordnen 
@@ -208,8 +209,8 @@ class MySamsungTV extends IPSModule
                 setvalue($this->GetIDForIdent("TVPower"), true);
                 $vol = $this->getVolume();    
                 $channel = $this->getChannel();                 
-
                 $chName = $this->getCurrentChannelName();
+                $source = $this->getCurrentSource();
             }
             else{
                 $this->SetTimerInterval("update", 0);
@@ -421,8 +422,28 @@ class MySamsungTV extends IPSModule
              
         }
     }
+
+    //*****************************************************************************
+    /* Function: getCurrentSource() 
+    ...............................................................................
+     * liest die aktuell angewählte source Kanal aus
+     *  
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     *  Source
+    --------------------------------------------------------------------------------
+    Status:   
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getCurrentSource()  {
+        $result = $this->GetCurrentExternalSource_MTVA();
+        $source = $result['CurrentExternalSource'];
+        setvalue($this->GetIDForIdent("TVSource"),$source);
+        return $source;
+    }      
     
-       //*****************************************************************************
+    //*****************************************************************************
     /* Function: sendWWW(string $URL) 
     ...............................................................................
      * startet browser mit www Seite
