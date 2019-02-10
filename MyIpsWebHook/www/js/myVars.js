@@ -179,7 +179,7 @@
             check(ips[0].ID37104,84);  //TV Volume
             check(ips[0].ID49306,85);  //TV Power
             check(ips[0].ID37005,86);  //TV Channel
-            check(ips[0].ID43536,876);  //TV Channel Name
+            check(ips[0].ID43536,87);  //TV Channel Name
             
      }
     function check(value, n){
