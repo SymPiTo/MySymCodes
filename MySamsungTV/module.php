@@ -297,7 +297,10 @@ class MySamsungTV extends IPSModule
        
         $chName = substr($chN,1,strlen($chN)-2);
         SetValue($this->GetIDForIdent("TVchLName"),(string)$chN );  
-        SetValue($this->GetIDForIdent("TVChIcon"), $chList[$key]['ICONURL']);  
+        
+        $file = '<img src="user/'.$chList[$key]['ICONURL'].' "/>';
+        SetValue($this->GetIDForIdent("TVChIcon"), $file);  
+        
         return  $chList[$key]['$chName'];
     }   
     
