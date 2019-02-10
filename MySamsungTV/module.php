@@ -704,8 +704,8 @@ class MySamsungTV extends IPSModule
        
         protected function searcharray($value, $key, $array) {
            foreach ($array as $k => $val) {
-               $this->SendDebug("searcharray vergleiche: ", $val[$key]." mit ". $value , 0);
-               if ($val[$key] == $value) {
+               $this->SendDebug("searcharray vergleiche: ", $val[$key]." mit ". strval($value) , 0);
+               if ($val[$key] == strval($value)) {
                    return $k;
                }
            }
