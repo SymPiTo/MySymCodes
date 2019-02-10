@@ -16,7 +16,7 @@
                 {  No: 7, selected: false,   Sender: "3sat",   icon: "3sat.png" },
                 {  No: 8, selected: false,   Sender: "VOX",   icon: "vox.png" },
                 {  No: 9,  selected: false, Sender: "Tele 5",   icon: "Tele 5.png" }, 
-                {  No: 10, selected: false,   Sender: "ONE HD)",   icon: "One%20HD.png" },
+                {  No: 10, selected: false,   Sender: "ONE HD",   icon: "One%20HD.png" },
                 {  No: 11, selected: false,   Sender: "RTLplus",   icon: "RTLplus.png" },  
                 {  No: 12, selected: false,   Sender: "Phoenix HD",   icon: "phoenix hd.png" },
                 {  No: 13, selected: false,   Sender: "arte HD",   icon: "arte hd.png" }, 
