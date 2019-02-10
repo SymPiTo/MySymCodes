@@ -33,9 +33,9 @@
                 {  No: 24, selected: false,   Sender: "SWR BW HD",   icon: "SWR BW HD.png" },  
                 {  No: 25, selected: false,   Sender: "das erste hd",   icon: "rhein%20neckar%20fernsehen.png" },  
                 {  No: 26, selected: false,   Sender: "PHOENIX",   icon: "phoenix.png" },  
-                {  No: 27, selected: false,   Sender: "zee.ONE",   icon: "ZEE.ONE.png" }, 
+                {  No: 27, selected: false,   Sender: "ZEE.ONE",   icon: "ZEE.ONE.png" }, 
                 {  No: 28, selected: false,   Sender: "SPORT1",   icon: "sport1.png" },  
-                {  No: 29, selected: false,   Sender: "bbc hd",   icon: "BBC HD.png" } 
+                {  No: 29, selected: false,   Sender: "BBC HD",   icon: "BBC HD.png" } 
             ) 
             return TVchannels;
         } 
