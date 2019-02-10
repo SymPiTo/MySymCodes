@@ -180,6 +180,9 @@
             check(ips[0].ID49306,85);  //TV Power
             check(ips[0].ID37005,86);  //TV Channel
             check(ips[0].ID43536,87);  //TV Channel Name
+            check(ips[0].ID44004,89);  //TV Channel Name
+            
+            
             
      }
     function check(value, n){
@@ -510,6 +513,7 @@
             transVarVol.update(ips[0].ID37104,"");
             transVarCh.update(ips[0].ID37005,"");
             LedDisplayTV.update(ips[0].ID43536);
+            transVarSource.update(ips[0].ID43536);
             
             
             iBat01.update(ips[0].ID30280);
