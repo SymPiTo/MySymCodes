@@ -38,6 +38,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableString("TVchLName", "ChannelName");
         $this->RegisterVariableString("TVGuide", "Guide");
         $this->RegisterVariableString("TVSource", "Source");
+        $this->RegisterVariableString("TVChIcon", "ChIcon");
         $this->RegisterVariableBoolean("TVPower", "Power");
 
         //Switch Profil zuordnen 
@@ -296,6 +297,7 @@ class MySamsungTV extends IPSModule
        
         $chName = substr($chN,1,strlen($chN)-2);
         SetValue($this->GetIDForIdent("TVchLName"),(string)$chN );  
+        SetValue($this->GetIDForIdent("TVChIcon"), $chList[$key]['ICONURL']);  
         return  $chList[$key]['$chName'];
     }   
     
