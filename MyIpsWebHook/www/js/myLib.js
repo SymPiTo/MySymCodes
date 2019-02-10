@@ -1586,7 +1586,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
        /* --------------------- Klasse Navigation Pad ---------------------------------------- */
     class LEDdisplay { 
         constructor(  ) {
-             
+            this.ID = ""; 
         }
  
         create(ParentID, ObjID,  posTop, posLeft, hoehe, breite ){
@@ -1599,7 +1599,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             elem.style.height = hoehe;
             elem.style.width = breite; 
             elem.innerHTML = "TEST Sender"
-            
+            this.ID = elem;
             document.getElementById(ParentID).appendChild(elem);
         }
         
