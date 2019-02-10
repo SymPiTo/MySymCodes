@@ -207,9 +207,9 @@ class MySamsungTV extends IPSModule
             if ($alive){
                 setvalue($this->GetIDForIdent("TVPower"), true);
                 $vol = $this->getVolume();    
-                 
-                $channel = $this->getChannel();
-                $chName = $this->getChannelName();
+                $channel = $this->getChannel();                 
+
+                $chName = $this->getCurrentChannelName();
             }
             else{
                 $this->SetTimerInterval("update", 0);
@@ -268,7 +268,6 @@ class MySamsungTV extends IPSModule
         $ProgNum    = $ch['PROGNUM'];      
         $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
         return $channel;
-       
     } 
 
      //*****************************************************************************
@@ -284,7 +283,7 @@ class MySamsungTV extends IPSModule
     --------------------------------------------------------------------------------
     Status:  17.07.2018 - OK  
     //////////////////////////////////////////////////////////////////////////////*/  
-    public function getChannelName() {
+    public function getCurrentChannelName() {
         $ch = $this->GetCurrentMainTVChannel_MTVA();
         $such = $ch['MAJORCH'];
         $prop = "MAJORCH";
@@ -558,7 +557,7 @@ class MySamsungTV extends IPSModule
 
         for ($i = 0; $i <= $anzahl; $i++) {
             $chlist[$i]['Kanal'] = rtrim(substr($input,16 + $i*$offset, 3));
-            $chlist[$i]['Name'] = rtrim(substr($input,28 + $i*$offset, 20));
+            $chlist[$i]['ChannelName'] = rtrim(substr($input,28 + $i*$offset, 20));
          }
          
         $n = 0;
@@ -566,7 +565,7 @@ class MySamsungTV extends IPSModule
             
         foreach($chlist as $ch) {
             $kanal = $ch["Kanal"];
-            $name = $ch["Name"];
+            $name = $ch["ChannelName"];
             // auf Kanal schalten und MainChannel XML auslesen
             if(intval($kanal)<10){
                 $key = 'KEY_'.$kanal; 
