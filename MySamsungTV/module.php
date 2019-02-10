@@ -323,17 +323,22 @@ class MySamsungTV extends IPSModule
         $array = $chList;
 
         $result = $this->searcharray($searchvalue, $key, $array);
-        
-         $ch =  $chList[(int)$result];
-        $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
-        $ChType     = $ch['ChType'];
-        $MajorCh    = $ch['MAJORCH'];        
-        $MinorCh    = $ch['MINORCH'];       
-        $PTC        = $ch['PTC'];  
-        $ProgNum    = $ch['PROGNUM'];      
-        $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
-        $this->SendDebug("setChannelbyName ", $channel, 0);
-        $this->SetMainTVChannel_MTVA($channel,  2,  '0x01',  0);
+        if($result){
+           $ch =  $chList[(int)$result];
+           $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
+           $ChType     = $ch['ChType'];
+           $MajorCh    = $ch['MAJORCH'];        
+           $MinorCh    = $ch['MINORCH'];       
+           $PTC        = $ch['PTC'];  
+           $ProgNum    = $ch['PROGNUM'];      
+           $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
+           $this->SendDebug("setChannelbyName ", $channel, 0);
+           $this->SetMainTVChannel_MTVA($channel,  2,  '0x01',  0);
+        }
+        else {
+           $this->SendDebug("setChannelbyName ",  $searchvalue." not found", 0);  
+        }
+            
     }   
     
     
