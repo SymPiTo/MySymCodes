@@ -414,13 +414,13 @@ class MySamsungTV extends IPSModule
                             $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
                             $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
                             $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
-                            $Guide = $Guide.$TVGuide[$i]['DispChName'].";".$TVGuide[$i]['Time'].";".$TVGuide[$i]['ProgTitle'].";";
+                            //$Guide = $Guide.$TVGuide[$i]['DispChName'].";".$TVGuide[$i]['Time'].";".$TVGuide[$i]['ProgTitle'].";";
                             $i=$i+1;
                     }
                 }
 
             }
-            setvalue($this->GetIDForIdent("TVGuide"), $Guide);
+            setvalue($this->GetIDForIdent("TVGuide"), json_encode($TVGuide));
 
              
         }
