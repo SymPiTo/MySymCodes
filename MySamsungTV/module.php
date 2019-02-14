@@ -297,7 +297,7 @@ class MySamsungTV extends IPSModule
        
         $chName = substr($chN,1,strlen($chN)-2);
         SetValue($this->GetIDForIdent("TVchLName"),(string)$chN );  
-        
+        //HTMLBox Variable beschreiben
         $file = '<img src="user/'.$chList[$key]['ICONURL'].' "/>';
         SetValue($this->GetIDForIdent("TVChIcon"), $file);  
         
@@ -398,16 +398,8 @@ class MySamsungTV extends IPSModule
             $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
             fwrite($handle, $dataxml);       
 
-
-
-
             //xml laden
             //$xml = simplexml_load_file($dataxml);
-
-
-
-
-
 
             //$file = file_get_contents('programmliste.dat');
             $xml = simplexml_load_file('programmliste.xml');
@@ -428,7 +420,7 @@ class MySamsungTV extends IPSModule
                 }
 
             }
-            setvalue($this->GetIDForIdent("TVGuide"), $Guide);
+            setvalue($this->GetIDForIdent("TVGuide"), serialize($Guide));
 
              
         }
