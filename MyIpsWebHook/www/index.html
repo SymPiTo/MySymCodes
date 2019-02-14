@@ -1124,13 +1124,15 @@
             var transVarSource = new TransVarDisplay();
             transVarSource.create("MainTV", "50vh", "60%", "lime", "28px", "Source", "", );
 
-
+            var CtrlBtnIRadioWZ = new CtrlButton();
+            CtrlBtnIRadioWZ.create("MainCeolWZ", "63vh", "3%",  "normal", "purple", "IRadio", "ctrlWindow", "RadioStation");
+            
             var CtrlBtnTVList = new CtrlButton();
-            CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Sender", "command",   "send('command(TV,AA,activate)') ");
+            CtrlBtnTVList.create("MainTV", "63vh", "3%",  "normal", "purple", "Channel", "ctrlWindow", "TVChannel");
             var CtrlBtnTVCh = new CtrlButton();
-            CtrlBtnTVCh.create("MainTV", "63vh", "34.5%",  "normal", "purple", "Programm", "command",   "send('command(TV,AA,activate)') ");
+            CtrlBtnTVCh.create("MainTV", "63vh", "34.5%",  "normal", "purple", "Program", "ctrlWindow", "TVGuide");
             var CtrlBtnTVx = new CtrlButton();
-            CtrlBtnTVx.create("MainTV", "63vh", "66%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
+            CtrlBtnTVx.create("MainTV", "63vh", "66%",  "normal", "purple", "Source", "command",   "send('command(TV,AA,activate)') ");
             var CtrlBtnTVa = new CtrlButton();
             CtrlBtnTVa.create("MainTV",  "73vh", "3%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
             var CtrlBtnTVb = new CtrlButton();
