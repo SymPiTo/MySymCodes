@@ -820,6 +820,15 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	color: #FFFFFF;
 }
 
+.TVSourceCtrl {
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(300, 100%, 10%);
+}
+
 .upnp{
 	position:absolute;
 	top: 5vh;
