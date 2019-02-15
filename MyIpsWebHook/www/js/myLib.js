@@ -1870,3 +1870,52 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         }
     }
              
+
+    /* --------------------- Klasse TVGuide ---------------------------------------- */
+    class TVguide {
+        constructor() {
+            this.ID = ""; 
+            this.TVchannel = Array(12);
+            this.TVtime = Array(12);
+            this.TVprog = Array(12);
+             
+        }
+
+    
+    create (ParentID){  
+       
+        var elem = document.createElement("div");
+        elem.innerHTML = "TV Programm";
+        elem.style.textAlign = "center";
+        
+
+        
+        for (var i = 0; i < 13; i++) {
+            var elem1 =  document.createElement("hr");
+            elem.append(elem1);
+            this.TVchannel[i] =  document.createElement("div");
+            elem.append(TVchannel[i]);
+            this.TVtime[i] =  document.createElement("div");
+            elem.append(TVtime[i]);
+            this.TVprog[i] =  document.createElement("div");
+            elem.append(TVprog[i]);
+        }
+        
+        document.getElementById(ParentID).appendChild(elem);   
+    };
+    
+    update(text){
+        try { 
+            TVarray = JSON.parse(text);
+            for (var i = 0; i < 13; i++) {
+                this.TVchannel[i].innerHTML = TVarray.DispChName[i];
+                this.TVtime[i].innerHTML = TVarray.Time[i];
+                this.TVprog[i].innerHTML = TVarray.ProgTitle[i];
+            }
+        } catch (error) {
+           // alert("error");
+        }
+        
+     }
+  } 
+  

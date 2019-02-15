@@ -181,7 +181,7 @@
             check(ips[0].ID37005,86);  //TV Channel
             check(ips[0].ID43536,87);  //TV Channel Name
             check(ips[0].ID44004,89);  //TV Channel Name
-            
+            check(ips[0].ID25544,89);  //TV Guide
             
             
      }
@@ -508,6 +508,7 @@
     
     function updateValues(ips){
         try {
+            ProgGuide.update(ips[0].ID25544);
             
             transVarPower.update(ips[0].ID49306,"state");
             transVarVol.update(ips[0].ID37104,"");
