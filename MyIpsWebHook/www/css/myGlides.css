@@ -767,8 +767,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	flex-direction: column;
 	width: 0px;
 	height: 95vh;
-         
-	background: hsl(300, 1%, 10%);
+        background: hsl(300, 100%, 10%);
 } 
 
 .TVINet {
