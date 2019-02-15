@@ -1906,8 +1906,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     
     update(text){
         try { 
-            var TVarray = Array(12);
-            TVarray = JSON.parse(text);
+            var TVarray = JSON.parse(text);
             for (var i = 0; i < 13; i++) {
                 this.TVchannel[i].innerHTML = TVarray.DispChName[i];
                 this.TVtime[i].innerHTML = TVarray.Time[i];
