@@ -1894,11 +1894,11 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             var elem1 =  document.createElement("hr");
             elem.append(elem1);
             this.TVchannel[i] =  document.createElement("div");
-            elem.append(TVchannel[i]);
+            elem.append(this.TVchannel[i]);
             this.TVtime[i] =  document.createElement("div");
-            elem.append(TVtime[i]);
+            elem.append(this.TVtime[i]);
             this.TVprog[i] =  document.createElement("div");
-            elem.append(TVprog[i]);
+            elem.append(this.TVprog[i]);
         }
         
         document.getElementById(ParentID).appendChild(elem);   
