@@ -1909,10 +1909,10 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             var TVarray = Array(12);
             TVarray = JSON.parse(text);
             for (var i = 0; i < 13; i++) {
-                var texta = TVarray.DispChName[i].value;
-                this.TVchannel[i].innerHTML = TVarray.DispChName[i].value;
-                this.TVtime[i].innerHTML = TVarray.Time[i].value;
-                this.TVprog[i].innerHTML = TVarray.ProgTitle[i].value;
+                var texta = TVarray[i].DispChName;
+                this.TVchannel[i].innerHTML = TVarray[i].DispChName;
+                this.TVtime[i].innerHTML = TVarray[i].Time;
+                this.TVprog[i].innerHTML = TVarray[i].ProgTitle[i];
             }
         } catch (error) {
            // alert("error");
