@@ -110,6 +110,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .Network,
 .TVGuide,
 .TVChannel,
+.TVSource
 .TVINet,
 .LibList,
 .upnp,
@@ -172,6 +173,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .RolladenAll::-webkit-scrollbar,
 .Network::-webkit-scrollbar,
 .TVGuide::-webkit-scrollbar,
+.TVSource::-webkit-scrollbar,
 .TVChannel::-webkit-scrollbar,
 .TVINet::-webkit-scrollbar,
 .LibList::-webkit-scrollbar,
