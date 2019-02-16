@@ -1901,7 +1901,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     create (ParentID){  
        
         var elem = document.createElement("div");
-         
+        elem.innerHTML = "Program Guide" 
         elem.style.paddingTop = "30px";
          
 
