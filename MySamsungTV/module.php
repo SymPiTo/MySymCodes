@@ -389,7 +389,7 @@ class MySamsungTV extends IPSModule
         if ($TVGuideURL == false){
             $this->SendDebug("getTVGuide ", "TV ausgeschaltet", 0);
         }else{    
-            $this->SendDebug("getTVGuide URL-Pfad:", $TVGuideURL, 0);
+            $this->SendDebug("getTVGuide ", $TVGuideURL, 0);
 
             $url = $TVGuideURL['CurrentProgInfoURL'];
             //TV Guide file auslesen
@@ -412,36 +412,24 @@ class MySamsungTV extends IPSModule
 
             //$file = file_get_contents('programmliste.dat');
             $xml = simplexml_load_file('programmliste.xml');
-            //xml in Array umwandeln
-            $json = json_encode($xml);
-            $xmlArray = json_decode($json, TRUE);
 
-            //$this->SendDebug("getTVGuide XML ARRAY:  ", $xmlArray, 0);
 
-            $channels= array("Das Erste", "ZDF", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
-            
+            $channels= array("Das Erste", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
             $i=0;
-            $TVGuide = array(    
-                "DispChName"  => "",
-                "Time" => "",
-                "ProgTitle" => ""
-            );
+            $TVGuide = "";
             foreach($channels as $ch){
-                 
-                foreach($xmlArray["ProgramInfo"] as $elem){
-                $this->SendDebug("getTVGuide=Vergleich", $ch."   mit   ".$elem["DispChName"], 0);    
-                    if($elem["DispChName"] === $ch){
-                        $this->SendDebug("getTVGuide-suche Sender  ", "gefunden", 0);
-                            $TVGuide[$i]['DispChName'] = (string)($elem["DispChName"] );
-                            $TVGuide[$i]['Time'] = $elem["StartTime"]." - ".$elem["EndTime"];
-                            $TVGuide[$i]['ProgTitle'] = (string) $elem["ProgTitle"];
+                foreach($xml->ProgramInfo as $elem){
+                    if($elem->DispChName == $ch){
+                            $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
+                            $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
+                            $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
                             //$Guide = $Guide.$TVGuide[$i]['DispChName'].";".$TVGuide[$i]['Time'].";".$TVGuide[$i]['ProgTitle'].";";
                             $i=$i+1;
                     }
                 }
 
             }
-            $this->SendDebug("getTVGuide- schrebe Guide in Variable ", $TVGuide, 0);
+            
             setvalue($this->GetIDForIdent("TVGuide"), json_encode($TVGuide));
             return $TVGuide;
              
