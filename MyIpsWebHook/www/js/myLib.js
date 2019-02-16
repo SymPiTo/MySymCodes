@@ -1957,13 +1957,14 @@ class CtrlStatButton {
             elem.setAttribute("onclick", command);
         }
         
-       var elem1 = document.createElement("span");
+       var elem1 = document.createElement("div");
        elem1.className = "fa fa-circle"; 
        elem1.style.color = "red";
        elem1.style.fontSize = "20px";
        elem1.style.padding = "5px";
        elem1.style.position = "relative";
        elem1.style.left = "5px";
+       elem1.style.top = "2px";
        elem.append(elem1); 
 
        var elem2 = document.createElement("span");
