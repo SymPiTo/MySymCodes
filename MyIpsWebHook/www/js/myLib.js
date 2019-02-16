@@ -197,7 +197,7 @@ class CtrlButton {
             elem.setAttribute("onclick", command);
         }
         else {
-                elem.onclick = function(){
+                elem.onclick = command; function(){
  
                 // alle Ctrl auf 0px verkleinern 
                 var Ctrl = document.getElementsByTagName("Ctrl");
@@ -209,7 +209,8 @@ class CtrlButton {
                 );
                 // ctrlWindow umschalten
                 document.getElementsByClassName(ctrlWindow)[0].style.width = "26vw";  
-                 command;
+                
+                
             }
         }
         
