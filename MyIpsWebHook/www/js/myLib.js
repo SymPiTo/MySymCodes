@@ -1962,7 +1962,7 @@ class CtrlStatButton {
        elem1.style.color = "red";
        elem1.style.fontSize = "20px";
        elem1.style.paddingLeft = "5px";
-       elem1.style.paddingRight = "50px";
+       elem1.style.cssFloat = "left";
  
        elem.append(elem1); 
 
@@ -1977,7 +1977,7 @@ class CtrlStatButton {
        elem3.className = "fa fa-circle"; 
        elem3.style.fontSize = "20px";
        elem3.style.color = "red";
-       elem3.style.paddingLeft = "50px";
+       elem3.style.cssFloat = "right";
        elem3.style.paddingRight = "5px"; 
        elem.append(elem3); 
        
