@@ -429,6 +429,7 @@ class MySamsungTV extends IPSModule
                 }
 
             }
+            $this->SendDebug("getTVGuide- schrebe Guide in Variable ", $TVGuide, 0);
             setvalue($this->GetIDForIdent("TVGuide"), json_encode($TVGuide));
 
              
