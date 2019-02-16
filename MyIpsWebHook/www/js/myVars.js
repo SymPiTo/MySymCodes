@@ -510,6 +510,7 @@
     function updateValues(ips){
  
             var sourceList = new Array(); 
+        try{
             sourceList = JSON.parse(ips[0].ID48854);
             sourceList.forEach(function(item) {
                 stat1 = item.CONNECTED;
@@ -532,7 +533,7 @@
                       break;
                 }
             });            
-            
+        } catch(error){console.log(error.message);}
             
             ProgGuide.update(ips[0].ID25544);
             
