@@ -1717,6 +1717,8 @@
         <Ctrl  id="MainTVGuideCtrl" class = "TVGuide"> </Ctrl>
 
         <script> 
+            var CtrlBtnupdateTVList = new CtrlButton();
+            CtrlBtnupdateTVList.create("MainTVGuideCtrl", "1vh", "2%",  "normal", "purple", "Channel", "command", "TVChannel");
             var ProgGuide = new TVguide();
             ProgGuide.create("MainTVGuideCtrl");    
         </script>

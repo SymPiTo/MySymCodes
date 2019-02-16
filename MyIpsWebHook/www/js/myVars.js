@@ -533,7 +533,10 @@
                       break;
                 }
             });            
-        } catch(error){console.log(error.message);}
+        } catch(error){
+            console.log(error.message);
+            console.log("Array Variable ist leer.");
+        }
             
             ProgGuide.update(ips[0].ID25544);
             
