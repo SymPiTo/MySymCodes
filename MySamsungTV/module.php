@@ -38,6 +38,7 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableString("TVchLName", "ChannelName");
         $this->RegisterVariableString("TVGuide", "Guide");
         $this->RegisterVariableString("TVSource", "Source");
+        $this->RegisterVariableString("TVSourceList", "SourceList");
         $this->RegisterVariableString("TVChIcon", "ChannelIcon");
         $this->RegisterVariableBoolean("TVPower", "Power");
 
@@ -427,6 +428,55 @@ class MySamsungTV extends IPSModule
         }
     }
 
+    
+    //*****************************************************************************
+    /* Function: getSourceList() 
+    ...............................................................................
+     * liest die vorhandenen Sources aus und welcher aktiv ist
+     *  
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     *  SourceList
+     *      => Array
+            (
+                [SOURCETYPE] => TV
+                [ID] => 0
+                [EDITABLE] => No
+                [DEVICENAME] => 3
+                [CONNECTED] => Yes
+                [SUPPORTVIEW] => Yes
+                [active] => Yes
+            )
+     
+    --------------------------------------------------------------------------------
+    Status:   
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getSourceList()  {
+        $result = $this->GetSourceList_MTVA();
+ 
+        $i = 0; 
+        foreach ($result["SOURCE1"] as $source) {
+            $sourceList[$i]["SOURCETYPE"] = $source["SOURCETYPE"];
+            $sourceList[$i]["ID"] = $source["ID"];
+            $sourceList[$i]["EDITABLE"] = $source["EDITABLE"];
+            $sourceList[$i]["DEVICENAME"] = $source["DEVICENAME"];
+            $sourceList[$i]["CONNECTED"] = $source["CONNECTED"];
+            $sourceList[$i]["SUPPORTVIEW"] = $source["SUPPORTVIEW"];
+            if($source["SOURCETYPE"] = $result["CURRENTSOURCETYPE"]){
+                $sourceList[$i]["active"] = "yes";
+            }
+            else {
+                $sourceList[$i]["active"] = "no";
+            }
+            $i = $i +1;
+        }
+        setvalue($this->GetIDForIdent("TVSourceList"),json_encode($sourceList));
+        return $sourceList;
+    }
+    
+    
     //*****************************************************************************
     /* Function: getCurrentSource() 
     ...............................................................................
