@@ -415,7 +415,7 @@ class MySamsungTV extends IPSModule
             $this->SendDebug("getTVGuide- XML  ", $xml, 0);
 
             $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
-            $this->SendDebug("getTVGuide- $channels  ", $channels, 0);
+            $this->SendDebug("getTVGuide- $channels  ", json_encode($channels), 0);
             $i=0;
  
             foreach($channels as $ch){
@@ -432,9 +432,9 @@ class MySamsungTV extends IPSModule
                 }
 
             }
-            $this->SendDebug("getTVGuide- schrebe Guide in Variable ", $TVGuide, 0);
+            $this->SendDebug("getTVGuide- schrebe Guide in Variable ", json_encode($TVGuide), 0);
             setvalue($this->GetIDForIdent("TVGuide"), json_encode($TVGuide));
-            return $TVGuide;
+            return json_encode($TVGuide);
              
         }
     }
