@@ -1993,9 +1993,10 @@ class CtrlStatButton {
     }
     
     update(label, stat1, stat2){
+ 
         this.label = label;
         this.id2.innerHTML = this.label;
-        if(stat1){
+        if(stat1 === true || stat1 === "yes"){
             this.statcolor = "lime";
             this.id1.style.color = this.statcolor;
         } 
@@ -2003,7 +2004,7 @@ class CtrlStatButton {
             this.statcolor = "red";
             this.id1.style.color =  this.statcolor;
         }
-        if(stat2){
+        if(stat2 === true || stat1 === "yes"){
             this.statcolor = "lime";
             this.id3.style.color =  this.statcolor;
         } 
