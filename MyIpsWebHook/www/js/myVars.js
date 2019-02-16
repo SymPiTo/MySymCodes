@@ -509,33 +509,25 @@
     
     function updateValues(ips){
         try {
-            var stat1, stat2;
+             
             sourceList = JSON.parse(ips[0].ID48854);
             sourceList.forEach(function(item) {
+                var stat1 = sourceList.CONNECTED   ? true : false;
+                var stat2 = sourceList.active   ? true : false;
                 switch (item.SOURCETYPE) {
                     case "TV":
-                      stat1 = sourceList.CONNECTED;
-                      stat2 = sourceList.active;
                       CtrlBtnStv.update("TV", stat1, stat2);
                       break;
                     case "HDMI1":
-                      stat1 = sourceList.CONNECTED;
-                      stat2 = sourceList.active;
                       CtrlBtnSHDMI1.update("HDMI1", stat1, stat2);
                       break;
                     case "HDMI2":
-                      stat1 = sourceList.CONNECTED;
-                      stat2 = sourceList.active;
                       CtrlBtnSHDMI2.update("HDMI2", stat1, stat2);
                       break;
                     case "HDMI3":
-                      stat1 = sourceList.CONNECTED;
-                      stat2 = sourceList.active;
                       CtrlBtnSHDMI3.update("HDMI3", stat1, stat2);
                       break;
                     case "HDMI4":
-                      stat1 = sourceList.CONNECTED;
-                      stat2 = sourceList.active;
                       CtrlBtnSHDMI4.update("HDMI4", stat1, stat2);
                       break;
                 }
