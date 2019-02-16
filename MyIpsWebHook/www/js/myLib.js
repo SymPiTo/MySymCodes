@@ -1927,13 +1927,16 @@ class CtrlStatButton {
         this.label = "";
         this.stat1 = false;
         this.stat2 = false;
+        this.statcolor = "transparent";
     }
 
-    create(ParentID, posTop, posLeft, size, color, cmdType, command){
+    create(ParentID, posTop, posLeft, size, label, color, cmdType, command){
         var elem = document.createElement("div");
         elem.className = "ctrlbutton";
         elem.classList.add(size, color);
+        this.label = label;
         this.ID = elem;
+        
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
@@ -1959,15 +1962,15 @@ class CtrlStatButton {
         
        var elem1 = document.createElement("span");
        elem1.className = "fa fa-circle"; 
-       elem1.style.color = "red";
+       elem1.style.color = this.statcolor;
        elem1.style.fontSize = "20px";
-       elem1.style.paddingLeft = "5px";
+       elem1.style.padding = "5px";
        elem1.style.cssFloat = "left";
  
        elem.append(elem1); 
 
        var elem2 = document.createElement("span");
-       elem2.innerHTML = "text";
+       elem2.innerHTML = this.label;
        elem2.style.fontSize = "20px";
        elem2.style.padding = "5px";
        elem2.style.textAlign = "center";
@@ -1976,16 +1979,33 @@ class CtrlStatButton {
        var elem3 = document.createElement("span");
        elem3.className = "fa fa-circle"; 
        elem3.style.fontSize = "20px";
-       elem3.style.color = "red";
+       elem3.style.color = this.statcolor;
        elem3.style.cssFloat = "right";
-       elem3.style.paddingRight = "5px"; 
+       elem3.style.padding = "5px"; 
        elem.append(elem3); 
        
         document.getElementById(ParentID).appendChild(elem);
     }
     
-    update(){
-        
+    update(label, stat1, stat2){
+        this.label = label;
+        elem2.innerHTML = this.label;
+        if(stat1){
+            this.statcolor = "lime";
+            elem1.style.color = this.statcolor;
+        } 
+        else{
+            this.statcolor = "red";
+            elem1.style.color =  this.statcolor;
+        }
+        if(stat2){
+            this.statcolor = "lime";
+            elem3.style.color =  this.statcolor;
+        } 
+        else{
+            this.statcolor = "red";
+            elem3.style.color =  this.statcolor;
+        }
     }
  }
  
