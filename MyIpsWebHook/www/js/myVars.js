@@ -509,7 +509,7 @@
     
     function updateValues(ips){
  
-            var sourceList = array(); 
+            var sourceList = new Array(); 
             sourceList = JSON.parse(ips[0].ID48854);
             sourceList.forEach(function(item) {
                 stat1 = item.CONNECTED;
