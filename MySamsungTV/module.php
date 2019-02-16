@@ -412,7 +412,10 @@ class MySamsungTV extends IPSModule
 
             //$file = file_get_contents('programmliste.dat');
             $xml = simplexml_load_file('programmliste.xml');
-            $this->SendDebug("getTVGuide XML ARRAY:  ", $xml->ProgramInfo, 0);
+            $json = json_encode($xml);
+            $xmlArray = json_decode($json, TRUE);
+
+            $this->SendDebug("getTVGuide XML ARRAY:  ", $xmlArray, 0);
 
             $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
             
