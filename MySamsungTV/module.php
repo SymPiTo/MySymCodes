@@ -419,7 +419,7 @@ class MySamsungTV extends IPSModule
             $TVGuide = "";
             foreach($channels as $ch){
                 foreach($xml->ProgramInfo as $elem){
-                    if($elem->DispChName == $ch){
+                    if($elem->DispChName === $ch){
                             $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
                             $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
                             $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
@@ -431,7 +431,7 @@ class MySamsungTV extends IPSModule
             }
             $this->SendDebug("getTVGuide- schrebe Guide in Variable ", $TVGuide, 0);
             setvalue($this->GetIDForIdent("TVGuide"), json_encode($TVGuide));
-            return $xml;
+            return $TVGuide;
              
         }
     }
