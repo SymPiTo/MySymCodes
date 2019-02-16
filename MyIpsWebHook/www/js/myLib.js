@@ -1996,19 +1996,19 @@ class CtrlStatButton {
  
         this.label = label;
         this.id2.innerHTML = this.label;
-        if(stat1 === true || stat1 === "yes"){
+        if(stat1 === true || stat1 === "Yes"){
             this.statcolor = "lime";
             this.id1.style.color = this.statcolor;
         } 
-        else if(stat1 === false || stat1 === "no"){
+        else if(stat1 === false || stat1 === "No"){
             this.statcolor = "red";
             this.id1.style.color =  this.statcolor;
         }
-        if(stat2 === true || stat1 === "yes"){
+        if(stat2 === true || stat1 === "Yes"){
             this.statcolor = "lime";
             this.id3.style.color =  this.statcolor;
         } 
-        else if(stat2 === false || stat2 === "no"){
+        else if(stat2 === false || stat2 === "No"){
             this.statcolor = "red";
             this.id3.style.color =  this.statcolor;
         }

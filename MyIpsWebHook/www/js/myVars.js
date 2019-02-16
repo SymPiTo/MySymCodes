@@ -512,8 +512,8 @@
              
             sourceList = JSON.parse(ips[0].ID48854);
             sourceList.forEach(function(item) {
-                var stat1 = sourceList.CONNECTED;
-                var stat2 = sourceList.active;
+                stat1 = sourceList.CONNECTED;
+                stat2 = sourceList.active;
                 switch (item.SOURCETYPE) {
                     case "TV":
                       CtrlBtnStv.update("TV", stat1, stat2);
