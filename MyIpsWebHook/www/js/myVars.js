@@ -520,7 +520,7 @@
                       CtrlBtnStv.update("TV", stat1, stat2);
                       break;
                     case "HDMI1":
-                      CtrlBtnSHDMI1.update("HDMI1/DVI", stat1, stat2);
+                      CtrlBtnSHDMI1.update("HDMI1\DVI", stat1, stat2);
                       break;
                     case "HDMI2":
                       CtrlBtnSHDMI2.update("HDMI2", stat1, stat2);
