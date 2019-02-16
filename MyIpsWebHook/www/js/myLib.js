@@ -178,7 +178,7 @@ class CtrlButton {
         elem.style.left = posLeft;
         elem.style.top = posTop;
         
-        if(ctrlWindow !== ""){
+        if(ctrlWindow !== "" & command === ""){
                     elem.onclick = function(){
  
                 // alle Ctrl auf 0px verkleinern 
@@ -193,10 +193,24 @@ class CtrlButton {
                 document.getElementsByClassName(ctrlWindow)[0].style.width = "26vw"; 
             };
         }
-        if(command !== ""){
+        else if(command !== ""  & ctrlWindow === ""){
             elem.setAttribute("onclick", command);
         }
+        else {
+                elem.onclick = function(){
  
+                // alle Ctrl auf 0px verkleinern 
+                var Ctrl = document.getElementsByTagName("Ctrl");
+                var MCtrlWindow = Array.from(Ctrl);
+                MCtrlWindow.forEach(function(element){
+                                        var a = element.className;
+                                        document.getElementsByClassName(a)[0].style.width = "0px";   
+                                    } 
+                );
+                // ctrlWindow umschalten
+                document.getElementsByClassName(ctrlWindow)[0].style.width = "26vw";  
+                command;
+        }
         
         
         document.getElementById(ParentID).appendChild(elem);
