@@ -389,7 +389,7 @@ class MySamsungTV extends IPSModule
         if ($TVGuideURL == false){
             $this->SendDebug("getTVGuide ", "TV ausgeschaltet", 0);
         }else{    
-            $this->SendDebug("getTVGuide ", $TVGuideURL, 0);
+            $this->SendDebug("getTVGuide URL-Pfad:", $TVGuideURL, 0);
 
             $url = $TVGuideURL['CurrentProgInfoURL'];
             //TV Guide file auslesen
@@ -423,9 +423,9 @@ class MySamsungTV extends IPSModule
                 "ProgTitle" => ""
             );
             foreach($channels as $ch){
-                $this->SendDebug("getTVGuide- $channels  ", $ch, 0);
+                $this->SendDebug("getTVGuide-channels  ", $ch, 0);
                 foreach($xml->ProgramInfo as $elem){
-                    $this->SendDebug("getTVGuide- Proginfo  ", $elem, 0);
+                    $this->SendDebug("getTVGuide-Proginfo  ", $elem, 0);
                     if($elem->DispChName === $ch){
                         $this->SendDebug("getTVGuide- $TVGuide  ", $ch, 0);
                             $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
