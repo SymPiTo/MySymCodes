@@ -465,7 +465,7 @@ class MySamsungTV extends IPSModule
             $sourceList[$i]["CONNECTED"] = $source["CONNECTED"];
             $sourceList[$i]["SUPPORTVIEW"] = $source["SUPPORTVIEW"];
             if($source["SOURCETYPE"] === $result["CURRENTSOURCETYPE"]){
-                $sourceList[$i]["active"] = $result["CURRENTSOURCETYPE"];
+                $sourceList[$i]["active"] = "yes";
             }
             else {
                 $sourceList[$i]["active"] = "no";
