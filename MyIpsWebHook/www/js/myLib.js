@@ -1923,7 +1923,9 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
  /* --------------------- Klasse Ctrl Status Button ---------------------------------------- */
 class CtrlStatButton { 
     constructor() {
-        this.ID = "";
+        this.id1 = "";
+        this.id2 = "";
+        this.id3 = "";
         this.label = "";
         this.stat1 = false;
         this.stat2 = false;
@@ -1966,6 +1968,7 @@ class CtrlStatButton {
        elem1.style.fontSize = "20px";
        elem1.style.padding = "5px";
        elem1.style.cssFloat = "left";
+       this.id1 = elem1;
  
        elem.append(elem1); 
 
@@ -1974,6 +1977,7 @@ class CtrlStatButton {
        elem2.style.fontSize = "20px";
        elem2.style.padding = "5px";
        elem2.style.textAlign = "center";
+       this.id2 = elem2;
        elem.append(elem2); 
        
        var elem3 = document.createElement("span");
@@ -1981,7 +1985,8 @@ class CtrlStatButton {
        elem3.style.fontSize = "20px";
        elem3.style.color = this.statcolor;
        elem3.style.cssFloat = "right";
-       elem3.style.padding = "5px"; 
+       elem3.style.padding = "5px";
+       this.id3 = elem3;
        elem.append(elem3); 
        
         document.getElementById(ParentID).appendChild(elem);
@@ -1989,22 +1994,22 @@ class CtrlStatButton {
     
     update(label, stat1, stat2){
         this.label = label;
-        elem2.innerHTML = this.label;
+        this.id2.innerHTML = this.label;
         if(stat1){
             this.statcolor = "lime";
-            elem1.style.color = this.statcolor;
+            this.id1.style.color = this.statcolor;
         } 
         else{
             this.statcolor = "red";
-            elem1.style.color =  this.statcolor;
+            this.id1.style.color =  this.statcolor;
         }
         if(stat2){
             this.statcolor = "lime";
-            elem3.style.color =  this.statcolor;
+            this.id3.style.color =  this.statcolor;
         } 
         else{
             this.statcolor = "red";
-            elem3.style.color =  this.statcolor;
+            this.id3.style.color =  this.statcolor;
         }
     }
  }
