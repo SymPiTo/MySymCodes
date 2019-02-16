@@ -1963,12 +1963,14 @@ class CtrlStatButton {
        elem1.style.color = "red";
        elem1.style.fontSize = "20px";
        elem1.style.padding = "5px";
+       elem1.style.textAlign = "left";
        elem.append(elem1); 
 
        var elem2 = document.createElement("span");
        elem2.innerHTML = "text";
        elem2.style.fontSize = "20px";
        elem2.style.padding = "5px";
+       elem2.style.textAlign = "center";
        elem.append(elem2); 
        
        var elem3 = document.createElement("span");
@@ -1976,6 +1978,7 @@ class CtrlStatButton {
        elem3.style.fontSize = "20px";
        elem3.style.color = "red";
        elem3.style.padding = "5px";
+       elem3.style.textAlign = "right";
        elem.append(elem3); 
        
         document.getElementById(ParentID).appendChild(elem);
