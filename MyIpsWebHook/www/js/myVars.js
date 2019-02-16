@@ -509,7 +509,7 @@
     
     function updateValues(ips){
         try {
-            
+            var stat1, stat2;
             sourceList = JSON.parse(ips[0].ID48854);
             sourceList.forEach(function(item) {
                 switch (item.SOURCETYPE) {
