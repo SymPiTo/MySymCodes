@@ -2000,7 +2000,7 @@ class CtrlStatButton {
             this.statcolor = "lime";
             this.id1.style.color = this.statcolor;
         } 
-        else{
+        else if(stat1 === false || stat1 === "no"){
             this.statcolor = "red";
             this.id1.style.color =  this.statcolor;
         }
@@ -2008,7 +2008,7 @@ class CtrlStatButton {
             this.statcolor = "lime";
             this.id3.style.color =  this.statcolor;
         } 
-        else{
+        else if(stat2 === false || stat2 === "no"){
             this.statcolor = "red";
             this.id3.style.color =  this.statcolor;
         }
