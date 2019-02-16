@@ -423,7 +423,7 @@ class MySamsungTV extends IPSModule
                 "ProgTitle" => ""
             );
             foreach($channels as $ch){
-                $this->SendDebug("getTVGuide- $channels  ", $channels, 0);
+                $this->SendDebug("getTVGuide- $channels  ", $ch, 0);
                 foreach($xml->ProgramInfo as $elem){
                     $this->SendDebug("getTVGuide- Proginfo  ", $elem, 0);
                     if($elem->DispChName === $ch){
