@@ -431,7 +431,7 @@ class MySamsungTV extends IPSModule
                 foreach($xmlArray["ProgramInfo"] as $elem){
                     $this->SendDebug("getTVGuide-Proginfo  ", $elem, 0);
                     if($elem["DispChName"] === $ch){
-                        $this->SendDebug("getTVGuide- $TVGuide  ", $ch, 0);
+                        
                             $TVGuide[$i]['DispChName'] = (string)($elem["DispChName"] );
                             $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem["EndTime"];
                             $TVGuide[$i]['ProgTitle'] = (string) $elem["ProgTitle"];
