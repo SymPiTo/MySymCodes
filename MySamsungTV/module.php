@@ -218,6 +218,13 @@ class MySamsungTV extends IPSModule
             else{
                 $this->SetTimerInterval("update", 0);
                 setvalue($this->GetIDForIdent("TVPower"), false);
+                setvalue($this->GetIDForIdent("TVGuide"),"");
+                $SourceList = json_decode(getvalue($this->GetIDForIdent("TVSourceList")));
+                foreach ($SourceList as $key => $value) {
+                    $SourceList[$key]["CONNECTED"] = "No";
+                    $SourceList[$key]["active"] = "No";
+                }
+                setvalue($this->GetIDForIdent("TVSourceList"), json_encode($SourceList));
             }
         }
 
