@@ -213,7 +213,7 @@ class MySamsungTV extends IPSModule
                 $channel = $this->getChannel();                 
                 $chName = $this->getCurrentChannelName();
                 $source = $this->getCurrentSource();
-                
+                $sourceList = $this->getSourceList();
             }
             else{
                 $this->SetTimerInterval("update", 0);
