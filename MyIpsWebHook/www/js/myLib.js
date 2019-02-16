@@ -1934,7 +1934,7 @@ class CtrlStatButton {
         elem.className = "ctrlbutton";
         elem.classList.add(size, color);
         this.ID = elem;
-        elem.innerHTML = "text";
+        
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
@@ -1963,7 +1963,19 @@ class CtrlStatButton {
        elem1.style.fontSize = "20px";
        elem1.style.padding = "5px";
        elem.append(elem1); 
-        
+
+       var elem2 = document.createElement("span");
+       elem2.innerHTML = "text";
+       elem1.style.fontSize = "20px";
+       elem1.style.padding = "5px";
+       elem.append(elem2); 
+       
+       var elem3 = document.createElement("span");
+       elem1.className = "fa fa-circle"; 
+       elem1.style.fontSize = "20px";
+       elem1.style.padding = "5px";
+       elem.append(elem3); 
+       
         document.getElementById(ParentID).appendChild(elem);
     }
     
