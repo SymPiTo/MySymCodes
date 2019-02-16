@@ -197,7 +197,7 @@ class CtrlButton {
             elem.setAttribute("onclick", command);
         }
         else {
-                elem.onclick = command; function(){
+                elem.onclick = function(){
  
                 // alle Ctrl auf 0px verkleinern 
                 var Ctrl = document.getElementsByTagName("Ctrl");
