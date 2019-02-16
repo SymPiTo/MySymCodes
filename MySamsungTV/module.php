@@ -418,7 +418,7 @@ class MySamsungTV extends IPSModule
 
             //$this->SendDebug("getTVGuide XML ARRAY:  ", $xmlArray, 0);
 
-            $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
+            $channels= array("Das Erste", "ZDF", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
             
             $i=0;
             $TVGuide = array(    
