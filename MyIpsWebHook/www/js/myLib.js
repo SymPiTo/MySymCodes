@@ -1934,7 +1934,7 @@ class CtrlStatButton {
         elem.className = "ctrlbutton";
         elem.classList.add(size, color);
         this.ID = elem;
-        
+        elem.style.justifyContent = "space-between";
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
