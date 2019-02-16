@@ -1920,3 +1920,55 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
      }
   } 
   
+ /* --------------------- Klasse Ctrl Status Button ---------------------------------------- */
+class CtrlStatButton { 
+    constructor() {
+        this.ID = "";
+        this.label = "";
+        this.stat1 = false;
+        this.stat2 = false;
+    }
+
+    create(ParentID, posTop, posLeft, size, color, cmdType, command){
+        var elem = document.createElement("div");
+        elem.className = "ctrlbutton";
+        elem.classList.add(size, color);
+        this.ID = elem;
+        elem.innerHTML = text;
+        elem.style.position = "absolute";
+        elem.style.left = posLeft;
+        elem.style.top = posTop;
+        
+        if(cmdType == "ctrlWindow"){
+                    elem.onclick = function(){
+ 
+                // alle Ctrl auf 0px verkleinern 
+                var Ctrl = document.getElementsByTagName("Ctrl");
+                var MCtrlWindow = Array.from(Ctrl);
+                MCtrlWindow.forEach(function(element){
+                                        var a = element.className;
+                                        document.getElementsByClassName(a)[0].style.width = "0px";   
+                                    } 
+                );
+                // ctrlWindow umschalten
+                document.getElementsByClassName(command)[0].style.width = "26vw"; 
+            }
+        }
+        else if(cmdType == "command"){
+            elem.setAttribute("onclick", command);
+        }
+        
+       var elem1 = document.createElement("span");
+       elem1.className = "fa fa-circle"; 
+       elem1.style.fontSize = "20px";
+       elem1.style.padding = "5px";
+       elem.append(elem1); 
+        
+        document.getElementById(ParentID).appendChild(elem);
+    }
+    
+    update(){
+        
+    }
+ }
+ 

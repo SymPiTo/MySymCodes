@@ -181,7 +181,8 @@
             check(ips[0].ID37005,86);  //TV Channel
             check(ips[0].ID43536,87);  //TV Channel Name
             check(ips[0].ID44004,89);  //TV Channel Name
-            check(ips[0].ID25544,89);  //TV Guide
+            check(ips[0].ID25544,90);  //TV Guide
+            check(ips[0].ID48854,91);  //TV SourceList
             
             
      }
