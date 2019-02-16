@@ -1960,20 +1960,22 @@ class CtrlStatButton {
         
        var elem1 = document.createElement("span");
        elem1.className = "fa fa-circle"; 
+       elem1.style.color = "red";
        elem1.style.fontSize = "20px";
        elem1.style.padding = "5px";
        elem.append(elem1); 
 
        var elem2 = document.createElement("span");
        elem2.innerHTML = "text";
-       elem1.style.fontSize = "20px";
-       elem1.style.padding = "5px";
+       elem2.style.fontSize = "20px";
+       elem2.style.padding = "5px";
        elem.append(elem2); 
        
        var elem3 = document.createElement("span");
-       elem1.className = "fa fa-circle"; 
-       elem1.style.fontSize = "20px";
-       elem1.style.padding = "5px";
+       elem3.className = "fa fa-circle"; 
+       elem3.style.fontSize = "20px";
+       elem3.style.color = "red";
+       elem3.style.padding = "5px";
        elem.append(elem3); 
        
         document.getElementById(ParentID).appendChild(elem);
