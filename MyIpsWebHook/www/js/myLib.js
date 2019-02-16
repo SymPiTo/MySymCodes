@@ -1934,6 +1934,7 @@ class CtrlStatButton {
         elem.className = "ctrlbutton";
         elem.classList.add(size, color);
         this.ID = elem;
+        elem.display = "flex";
         elem.style.flexDirection = "row";
         elem.style.justifyContent = "space-between";
         elem.style.position = "absolute";
