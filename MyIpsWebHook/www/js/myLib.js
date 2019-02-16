@@ -1885,11 +1885,10 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     create (ParentID){  
        
         var elem = document.createElement("div");
-        elem.innerHTML = "TV Programm";
-        elem.style.textAlign = "center";
-        
+         
+        elem.style.paddingTop = "30px";
+         
 
-        
         for (var i = 0; i < 13; i++) {
             var elem1 =  document.createElement("hr");
             elem.append(elem1);
