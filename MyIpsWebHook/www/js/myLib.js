@@ -1934,9 +1934,6 @@ class CtrlStatButton {
         elem.className = "ctrlbutton";
         elem.classList.add(size, color);
         this.ID = elem;
-        elem.display = "flex";
-        elem.style.flexDirection = "row";
-        elem.style.justifyContent = "space-between";
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
@@ -1960,22 +1957,23 @@ class CtrlStatButton {
             elem.setAttribute("onclick", command);
         }
         
-       var elem1 = document.createElement("div");
+       var elem1 = document.createElement("span");
        elem1.className = "fa fa-circle"; 
        elem1.style.color = "red";
        elem1.style.fontSize = "20px";
        elem1.style.padding = "5px";
-       elem1.style.textAlign = "left";
+       elem1.style.position = "relative";
+       elem1.style.left = "5px";
        elem.append(elem1); 
 
-       var elem2 = document.createElement("div");
+       var elem2 = document.createElement("span");
        elem2.innerHTML = "text";
        elem2.style.fontSize = "20px";
        elem2.style.padding = "5px";
        elem2.style.textAlign = "center";
        elem.append(elem2); 
        
-       var elem3 = document.createElement("div");
+       var elem3 = document.createElement("span");
        elem3.className = "fa fa-circle"; 
        elem3.style.fontSize = "20px";
        elem3.style.color = "red";
