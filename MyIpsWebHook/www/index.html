@@ -1136,7 +1136,7 @@
             var CtrlBtnTVb = new CtrlButton();
             CtrlBtnTVb.create("MainTV", "73vh", "34%",  "normal", "purple", "", "command",   "send('command(TV,AA,activate)') ");
             var CtrlBtnTVc = new CtrlButton();
-            CtrlBtnTVc.create("MainTV", "73vh", "66%",  "normal", "purple", "update", "command",   "updateTVguide('TVSourceCtrl')");
+            CtrlBtnTVc.create("MainTV", "73vh", "66%",  "normal", "purple", "update", "TVGuide", "send('command(TV,AA,activate)')");
            
             var FontBtnA = new FontButtonNew();
             FontBtnA.create("MainTV", "purple", "mid", "83vh", "2%", "fa fa-backward", "send('command(TV,key,KEY_REWIND)')");
