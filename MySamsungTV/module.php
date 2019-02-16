@@ -416,7 +416,7 @@ class MySamsungTV extends IPSModule
 
             $channels= array("Das Erste HD", "ZDF HD", "RTL Television", "ProSieben", "kabel eins", "RTL2", "SAT.1", "3sat", "VOX", "Tele 5", "ONE HD", "RTLplus" );
             $i=0;
-            $TVGuide = "";
+            $TVGuide = array();
             foreach($channels as $ch){
                 foreach($xml->ProgramInfo as $elem){
                     if($elem->DispChName === $ch){
