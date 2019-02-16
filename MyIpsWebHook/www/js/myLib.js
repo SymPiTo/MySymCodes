@@ -1977,8 +1977,8 @@ class CtrlStatButton {
        elem3.className = "fa fa-circle"; 
        elem3.style.fontSize = "20px";
        elem3.style.color = "red";
-       elem3.style.padding = "5px";
-       elem3.style.textAlign = "right";
+       elem3.style.paddingLeft = "50px";
+       elem3.style.paddingRight = "5px"; 
        elem.append(elem3); 
        
         document.getElementById(ParentID).appendChild(elem);
