@@ -430,11 +430,11 @@ class MySamsungTV extends IPSModule
                 $this->SendDebug("getTVGuide-channels  ", $ch, 0);
                 foreach($xmlArray["ProgramInfo"] as $elem){
                     $this->SendDebug("getTVGuide-Proginfo  ", $elem, 0);
-                    if($elem->DispChName === $ch){
+                    if($elem["DispChName"] === $ch){
                         $this->SendDebug("getTVGuide- $TVGuide  ", $ch, 0);
-                            $TVGuide[$i]['DispChName'] = (string)($elem->DispChName);
-                            $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem->EndTime;
-                            $TVGuide[$i]['ProgTitle'] = (string) $elem->ProgTitle;
+                            $TVGuide[$i]['DispChName'] = (string)($elem["DispChName"] );
+                            $TVGuide[$i]['Time'] = $elem->StartTime." - ".$elem["EndTime"];
+                            $TVGuide[$i]['ProgTitle'] = (string) $elem["ProgTitle"];
                             //$Guide = $Guide.$TVGuide[$i]['DispChName'].";".$TVGuide[$i]['Time'].";".$TVGuide[$i]['ProgTitle'].";";
                             $i=$i+1;
                     }
