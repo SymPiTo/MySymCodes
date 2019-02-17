@@ -2055,7 +2055,7 @@ class CtrlStatButton {
             elem1.style.display = "flex";
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
-    
+            elem.append(elem1);
     
             elem2  = document.createElement("div");
             elem2.className = "fontbutton";  
