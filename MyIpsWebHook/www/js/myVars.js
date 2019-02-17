@@ -519,8 +519,8 @@
                     case "TV":
                       CtrlBtnStv.update("TV", stat1, stat2);
                       break;
-                    case "HDMI1":
-                      CtrlBtnSHDMI1.update("HDMI1\DVI", stat1, stat2);
+                    case "HDMI1/DVI":
+                      CtrlBtnSHDMI1.update("HDMI1/DVI", stat1, stat2);
                       break;
                     case "HDMI2":
                       CtrlBtnSHDMI2.update("HDMI2", stat1, stat2);
@@ -530,6 +530,27 @@
                       break;
                     case "HDMI4":
                       CtrlBtnSHDMI4.update("HDMI4", stat1, stat2);
+                      break;
+                    case "SCART1":
+                      CtrlBtnSCART1.update("SCART1", stat1, stat2);
+                      break;
+                    case "SCART2":
+                      CtrlBtnSCART2.update("SCART2", stat1, stat2);
+                      break;
+                    case "USB":
+                      CtrlBtnSUSB.update("USB", stat1, stat2);
+                      break;
+                    case "DLNA":
+                      CtrlBtnSDLNA.update("DLNA", stat1, stat2);
+                      break;
+                    case "AV":
+                      CtrlBtnSAV.update("AV", stat1, stat2);
+                      break;
+                    case "COMPONENT":
+                      CtrlBtnSComp.update("COMPONENT", stat1, stat2);
+                      break;
+                    case "PC":
+                      CtrlBtnSPC.update("PC", stat1, stat2);
                       break;
                 }
             });            
