@@ -1902,7 +1902,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
        
         var elem = document.createElement("div");
         elem.innerHTML = "Program Guide" 
-        elem.style.paddingTop = "30px";
+        elem.style.paddingTop = "3px";
          
 
         for (var i = 0; i < 13; i++) {
