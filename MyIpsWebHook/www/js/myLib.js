@@ -2059,7 +2059,7 @@ class CtrlStatButton {
             elem1.style.justifyContent = "space-between";
             elem.append(elem1);
     
-            elem2  = document.createElement("div");
+            var elem2  = document.createElement("div");
             elem2.className = "ctrlbutton";
             elem2.classList.add(size, this.color);
  
