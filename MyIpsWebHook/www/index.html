@@ -348,6 +348,8 @@
             SubMenuHzSZ.create("SubMenuSZ","SubMenuHzSZ", "sandy", "Heizung Schlafzimmer", "_Heizung_BW2.png", "MainHzSZ","", "SM" ); 
             var SubMenuRolloSZ = new GlideButton();
             SubMenuRolloSZ.create("SubMenuSZ","SubMenuRolloSZ", "sandy", "Rolladen Schlafzimmer", "_Rolladen_BW_web.png", "MainRolloSZ","", "SM" ); 
+            var SubMenuLightSZ = new GlideButton();
+            SubMenuLightSZ.create("SubMenuSZ","SubMenuRolloSZ", "sandy", "Licht Schlafzimmer", "Light_BW_web.png", "MainLightSZ","", "SM" ); 
         </script>  
         
 	<!-- ************************ Kueche  ************************  -->
@@ -875,6 +877,13 @@
         addCtrlButton("MainRolloK", "btn62", "500px", "350px", "normal", "midgreen", "Step Down", "send('command(Rollo,K,StepDown)') ");
     </script>
 
+ 		<!-- ************************ Light  Schlafzimmer ************************ -->
+		<Main id="MainLightSZ"  class="LightSZ">	</Main>
+ 		
+    <script>       
+    </script>
+    
+    
         <!-- ***********************************************************************************      -->
 	<!--  ************************          INDEX S - Security    ************************      -->   
         <!-- ***********************************************************************************      -->
