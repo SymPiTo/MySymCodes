@@ -1601,7 +1601,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/     
-     protected function SetMainTVSource_MTVA(string $Source, integer $ID) {
+     protected function SetMainTVSource_MTVA(string $Source, $ID) {
         return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
