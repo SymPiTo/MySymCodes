@@ -2038,6 +2038,8 @@ class CtrlStatButton {
         }
 
         create(ParentID, posTop, posLeft, label){
+            color = "lime";
+            
             var elem = document.createElement("div");
             elem.className = "Tile";
             //elem.classList.add(size, color);
@@ -2065,7 +2067,7 @@ class CtrlStatButton {
             elem3.style.fontSize = "24px";
             elem3.style.padding = "12px";
             elem3.innerHTML = "on";
-            var cmd1 = "incTemp('" + valueID + "')";
+            var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
             elem2.append(elem3);
             elem1.append(elem2);
@@ -2079,7 +2081,7 @@ class CtrlStatButton {
             elem5.style.fontSize = "24px";
             elem5.style.padding = "12px";
             elem5.innerHTML = "on";
-            var cmd2 = "decTemp('" + valueID + "')";
+            var cmd2 = " ";
             elem4.setAttribute("onclick", cmd2);
             elem4.append(elem5);
             elem1.append(elem4); 
