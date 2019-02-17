@@ -2078,8 +2078,11 @@ width:40%;
    height: 200px;
    color: black;
    font-size: 24px;
-   background: -webkit-linear-gradient(hsl(28, 100%, 55%), hsl(28, 100%, 45%), hsl(28, 100%, 35%)); /* CHROME */
-   box-shadow: 2px 2px 5px black;
+   /*background: -webkit-linear-gradient(hsl(28, 100%, 55%), hsl(28, 100%, 45%), hsl(28, 100%, 35%)); /* CHROME */
+   background: #f5f5f5;
+   border: 1px solid #FFF;
+   border-radius: 5px;
+   box-shadow: 1px 2px 4px rgba(0,0,0);
 }
  
 
