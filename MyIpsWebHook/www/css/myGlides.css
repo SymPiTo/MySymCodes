@@ -2076,6 +2076,8 @@ width:40%;
 .Tile {
    width: 200px;
    height: 200px;
+   color: red;
+   font-size: 24px;
    background: -webkit-linear-gradient(hsl(28, 100%, 55%), hsl(28, 100%, 45%), hsl(28, 100%, 35%)); /* CHROME */
    box-shadow: 5px 5px 5px grey;
 }
