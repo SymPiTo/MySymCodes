@@ -2004,7 +2004,7 @@ class CtrlStatButton {
        this.id3 = elem3;
        elem.append(elem3); 
        
-        document.getElementById(ParentID).appendChild(elem);
+       document.getElementById(ParentID).appendChild(elem);
     }
     
     update(label, stat1, stat2){
@@ -2030,3 +2030,25 @@ class CtrlStatButton {
     }
  }
  
+  /* --------------------- Klasse CtrlTile ---------------------------------------- */
+    class CtrlTile { 
+        constructor() {
+            this.ID = "";
+            
+        }
+
+        create(ParentID, posTop, posLeft, label){
+            var elem = document.createElement("div");
+            elem.className = "Tile";
+            //elem.classList.add(size, color);
+            elem.style.position = "absolute";
+            elem.style.left = posLeft;
+            elem.style.top = posTop;
+
+            elem.style.backgroundColor = "grey";
+            elem.innerHTML = label; 
+            this.ID = elem; 
+            
+            document.getElementById(ParentID).appendChild(elem);
+        }
+    }

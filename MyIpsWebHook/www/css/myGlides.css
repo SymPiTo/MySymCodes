@@ -2073,6 +2073,13 @@ width:40%;
 	background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%));
 }
 
+.Tile {
+   width: 200px;
+   height: 300px;
+}
+ 
+
+
 .var{
 	border-color: #666666;
 	border-style: solid;
