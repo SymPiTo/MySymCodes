@@ -2049,7 +2049,7 @@ class CtrlStatButton {
             elem.innerHTML = label; 
             this.ID = elem; 
             
-            document.getElementById(ParentID).appendChild(elem);
+            
             
             elem1  = document.createElement("div");
             elem1.style.display = "flex";
@@ -2084,6 +2084,6 @@ class CtrlStatButton {
             elem4.append(elem5);
             elem1.append(elem4); 
             
-            
+            document.getElementById(ParentID).appendChild(elem);
         }
     }
