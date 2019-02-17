@@ -2034,11 +2034,11 @@ class CtrlStatButton {
     class CtrlTile { 
         constructor() {
             this.ID = "";
-            
+            this.color = "cyan";
         }
 
         create(ParentID, posTop, posLeft, label){
-            color = "cyan";
+            this.color = "cyan";
             
             var elem = document.createElement("div");
             elem.className = "Tile";
@@ -2061,7 +2061,7 @@ class CtrlStatButton {
     
             elem2  = document.createElement("div");
             elem2.className = "ctrlbutton";
-            elem2.classList.add(size, color);
+            elem2.classList.add(size, this.color);
  
  
             elem2.innerHTML = "on";
@@ -2073,7 +2073,7 @@ class CtrlStatButton {
     
             elem4  = document.createElement("div");
             elem4.className = "ctrlbutton";
-            elem4.classList.add(size, color);
+            elem4.classList.add(size, this.color);
     
  
  
