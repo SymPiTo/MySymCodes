@@ -2075,8 +2075,8 @@ width:40%;
 
 .Tile {
    width: 200px;
-   height: 300px;
-   background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%), hsl(28, 100%, 25%)); /* CHROME */
+   height: 200px;
+   background: -webkit-linear-gradient(hsl(28, 100%, 45%), hsl(28, 100%, 45%), hsl(28, 100%, 25%)); /* CHROME */
 }
  
 
