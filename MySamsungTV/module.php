@@ -627,7 +627,6 @@ class MySamsungTV extends IPSModule
                 throw new NotConnectedException();
             }
             $this->SetMainTVSource_MTVA($source, $ID);
-            
         }
         catch (NotFoundException $ex) {
             //code to handle the exception
