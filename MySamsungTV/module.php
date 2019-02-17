@@ -621,7 +621,7 @@ class MySamsungTV extends IPSModule
             if ($i === NULL){
                 throw new NotFoundException();
             }
-            $ID = $SourceList[$i]["ID"];
+            $ID = intval($SourceList[$i]["ID"]);
             $this->SetMainTVSource_MTVA($source, $ID);
             
         }
