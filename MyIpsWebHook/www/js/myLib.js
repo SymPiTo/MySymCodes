@@ -2038,7 +2038,7 @@ class CtrlStatButton {
         }
 
         create(ParentID, posTop, posLeft, label){
-            color = "lime";
+            color = "cyan";
             
             var elem = document.createElement("div");
             elem.className = "Tile";
@@ -2063,7 +2063,7 @@ class CtrlStatButton {
             elem2.className = "fontbutton";  
             elem2.classList.add(color,  "normal");
             elem3  = document.createElement("span");
-            //elem3.className = "fa fa-plus"; 
+            elem3.className = "fa fa-plus"; 
             elem3.style.fontSize = "24px";
             elem3.style.padding = "12px";
             elem3.innerHTML = "on";
@@ -2077,7 +2077,7 @@ class CtrlStatButton {
             elem4.className = "fontbutton";  
             elem4.classList.add(color, "normal");
             elem5  = document.createElement("span");
-            //elem5.className = "fa fa-minus"; 
+            elem5.className = "fa fa-minus"; 
             elem5.style.fontSize = "24px";
             elem5.style.padding = "12px";
             elem5.innerHTML = "on";
