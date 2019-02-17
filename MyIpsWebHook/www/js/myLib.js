@@ -2050,5 +2050,40 @@ class CtrlStatButton {
             this.ID = elem; 
             
             document.getElementById(ParentID).appendChild(elem);
+            
+            elem1  = document.createElement("div");
+            elem1.style.display = "flex";
+            elem1.style.flexDirection = "row";
+            elem1.style.justifyContent = "space-between";
+    
+    
+            elem2  = document.createElement("div");
+            elem2.className = "fontbutton";  
+            elem2.classList.add(color,  "normal");
+            elem3  = document.createElement("span");
+            //elem3.className = "fa fa-plus"; 
+            elem3.style.fontSize = "24px";
+            elem3.style.padding = "12px";
+            elem3.innerHTML = "on";
+            var cmd1 = "incTemp('" + valueID + "')";
+            elem2.setAttribute("onclick", cmd1);
+            elem2.append(elem3);
+            elem1.append(elem2);
+    
+    
+            elem4  = document.createElement("div");
+            elem4.className = "fontbutton";  
+            elem4.classList.add(color, "normal");
+            elem5  = document.createElement("span");
+            //elem5.className = "fa fa-minus"; 
+            elem5.style.fontSize = "24px";
+            elem5.style.padding = "12px";
+            elem5.innerHTML = "on";
+            var cmd2 = "decTemp('" + valueID + "')";
+            elem4.setAttribute("onclick", cmd2);
+            elem4.append(elem5);
+            elem1.append(elem4); 
+            
+            
         }
     }
