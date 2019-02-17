@@ -608,7 +608,7 @@ class MySamsungTV extends IPSModule
     --------------------------------------------------------------------------------
     Status:      
     //////////////////////////////////////////////////////////////////////////////*/  
-    public function setSource(string $source) { 
+    public function setSource($source) { 
         // read sourcelist, if avaible as variable otherwise read from TV
         $SourceList = json_decode(getvalue(getvalue($this->GetIDForIdent("TVSourceList"))));
         if (empty($SourceList)){
