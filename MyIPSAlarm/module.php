@@ -603,7 +603,7 @@ class MyAlarm extends IPSModule
                     //Telegram Message senden
                     if($this->ReadPropertyBoolean("Telegram")){
                         $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
-                        Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, string($this->ReadPropertyInteger("EchoID")));
+                        Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, strval($this->ReadPropertyInteger("EchoID")));
                     }
                     //Sprachausgabe
                     if($this->ReadPropertyBoolean("AlexaTTS")){
