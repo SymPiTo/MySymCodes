@@ -602,11 +602,13 @@ class MyAlarm extends IPSModule
                     setvalue($this->GetIDForIdent("A_SecWarning"),"Alarm ausgelöst."); 
                     //Telegram Message senden
                     if($this->ReadPropertyBoolean("Telegram")){
+                        $this->SendDebug("ALARM:", "Eine Telegram wird verschickt.", 0);
                         $message = "Achtung ein unbefugter Zugang zur Wohnung wurde erkannt!";
                         Telegram_SendText($this->ReadPropertyInteger("TelegramID"), $message, $this->ReadPropertyInteger("SenderID"));
                     }
                     //Sprachausgabe
                     if($this->ReadPropertyBoolean("AlexaTTS")){
+                        $this->SendDebug("ALARM:", "Eine Sprachausgabe über Echo wird ausgegeben.", 0);
                         $text_to_speech = "Alarm wurde ausgelöst.";
                         EchoRemote_TextToSpeech($this->ReadPropertyInteger("EchoID"), $text_to_speech);
                     }
