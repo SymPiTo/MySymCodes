@@ -628,8 +628,9 @@ class MySamsungTV extends IPSModule
             }
             $this->SetMainTVSource_MTVA($source, $ID);
         }
-        catch (customException $e) {
+        catch (customException $ex) {
             //code to handle the exception
+             echo 'Message: ' .$ex->getMessage();
             $this->SendDebug("setSource ", $source."could not be found. Please check correct SOurce name!", 0);
             return false;
         }
