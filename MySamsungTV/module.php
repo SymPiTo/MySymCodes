@@ -619,28 +619,22 @@ class MySamsungTV extends IPSModule
             // run your code here
             $i = $this->searcharray($source, "SOURCETYPE", $SourceList);
             if ($i === NULL){
-                throw new customException("Source could not be found!");
+                throw new Exception("Source could not be found!");
             }
             $ID = intval($SourceList[$i]["ID"]);
             $connected = $SourceList[$i]["CONNECTED"];
             if ($connected === "No"){
-                throw new Exception();
+                throw new Exception("Source is not connected!");
             }
             $this->SetMainTVSource_MTVA($source, $ID);
         }
 
-        catch (customException $ex) {
-            //code to handle the exception
-             echo 'Message: ' .$ex->getMessage();
-            $this->SendDebug("setSource ", $source."could not be found. Please check correct SOurce name!", 0);
-            return false;
-        }
         catch (Exception $ex) {
             //code to handle the exception
-            $this->SendDebug("setSource ", $source." is not connected!", 0);
+            $this->SendDebug("setSource ", $source."  - ".$ex->getMessage(), 0);
             return false;
         }
-       
+ 
         return true;  
     }     
     
