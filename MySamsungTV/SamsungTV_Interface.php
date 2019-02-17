@@ -2364,7 +2364,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  3.2.2019 - OK   RASPI: OK 8.2.2019
     //////////////////////////////////////////////////////////////////////////////*/  
-    public function GetSourceList_MTVA(){
+    protected function GetSourceList_MTVA(){
         $result = $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
                                "urn:samsung.com:service:MainTVAgent2:1",
@@ -2389,17 +2389,13 @@ trait SamsungUPNP {
         $n = ($anzahl-4)/8;
             
         for ($index1 = 0; $index1 < $n; $index1++) {
-            
-
-        $output['SOURCE1'][$index1]['SOURCETYPE'] = $vals[4+$index1*8]['value'];    
-        $output['SOURCE1'][$index1]['ID'] = $vals[5+$index1*8]['value'];  
-        $output['SOURCE1'][$index1]['EDITABLE'] = $vals[6+$index1*8]['value'];    
-        $output['SOURCE1'][$index1]['DEVICENAME'] = $vals[7+$index1*8]['level'];    
-        $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8+$index1*8]['value'];    
-        $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9+$index1*8]['value'];
+            $output['SOURCE1'][$index1]['SOURCETYPE'] = $vals[4+$index1*8]['value'];    
+            $output['SOURCE1'][$index1]['ID'] = $vals[5+$index1*8]['value'];  
+            $output['SOURCE1'][$index1]['EDITABLE'] = $vals[6+$index1*8]['value'];    
+            $output['SOURCE1'][$index1]['DEVICENAME'] = $vals[7+$index1*8]['level'];    
+            $output['SOURCE1'][$index1]['CONNECTED'] = $vals[8+$index1*8]['value'];    
+            $output['SOURCE1'][$index1]['SUPPORTVIEW'] = $vals[9+$index1*8]['value'];
         }
-            
-        
          return $output;    
     }       
     

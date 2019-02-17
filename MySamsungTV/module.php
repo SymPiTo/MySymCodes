@@ -604,15 +604,33 @@ class MySamsungTV extends IPSModule
     Parameters: $source , $ID
     --------------------------------------------------------------------------------
     Returns:  
-     *
+     * true, false
     --------------------------------------------------------------------------------
     Status:      
     //////////////////////////////////////////////////////////////////////////////*/  
-    public function setSource(string $source, integer $ID) { 
+    public function setSource(string $source) { 
         // read sourcelist, if avaible as variable otherwise read from TV
         $SourceList = json_decode(getvalue(getvalue($this->GetIDForIdent("TVSourceList"))));
-        
-        
+        if (empty($SourceList)){
+            $SourceList = getSourceList();
+        }
+        try {
+            // run your code here
+            $i = searcharray($source, "SOURCETYPE", $SourceList);
+            if ($i === NULL)
+            {
+                throw new NotFoundException();
+            }
+            $ID = $SourceList[$i]["ID"];
+            SetMainTVSource_MTVA($source, $ID);
+            
+        }
+        catch (NotFoundException $ex) {
+            //code to handle the exception
+            $this->SendDebug("setSource ", $source."could not be found. Please check correct SOurce name!", 0);
+            return false;
+        }
+        return true;
     }     
     
     
