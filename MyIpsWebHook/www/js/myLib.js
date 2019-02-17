@@ -2060,30 +2060,27 @@ class CtrlStatButton {
             elem.append(elem1);
     
             elem2  = document.createElement("div");
-            elem2.className = "fontbutton";  
-            elem2.classList.add(color,  "normal");
-            elem3  = document.createElement("span");
-            elem3.className = "fa fa-plus"; 
-            elem3.style.fontSize = "24px";
-            elem3.style.padding = "12px";
-            elem3.innerHTML = "on";
+            elem2.className = "ctrlbutton";
+            elem2.classList.add(size, color);
+ 
+ 
+            elem2.innerHTML = "on";
             var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
-            elem2.append(elem3);
+           
             elem1.append(elem2);
     
     
             elem4  = document.createElement("div");
-            elem4.className = "fontbutton";  
-            elem4.classList.add(color, "normal");
-            elem5  = document.createElement("span");
-            elem5.className = "fa fa-minus"; 
-            elem5.style.fontSize = "24px";
-            elem5.style.padding = "12px";
-            elem5.innerHTML = "on";
+            elem4.className = "ctrlbutton";
+            elem4.classList.add(size, color);
+    
+ 
+ 
+            elem4.innerHTML = "on";
             var cmd2 = " ";
             elem4.setAttribute("onclick", cmd2);
-            elem4.append(elem5);
+        
             elem1.append(elem4); 
             
             document.getElementById(ParentID).appendChild(elem);
