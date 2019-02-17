@@ -596,12 +596,12 @@ class MySamsungTV extends IPSModule
     
     
      //*****************************************************************************
-    /* Function: setSource()
+    /* Function: setSource
     ...............................................................................
      *  
      *  
     ...............................................................................
-    Parameters: $source , $ID
+    Parameters: $source
     --------------------------------------------------------------------------------
     Returns:  
      * true, false
@@ -609,7 +609,7 @@ class MySamsungTV extends IPSModule
     Status:      
     //////////////////////////////////////////////////////////////////////////////*/  
     public function setSource($source) { 
-        // read sourcelist, if avaible as variable otherwise read from TV
+        // read sourcelist, if available as variable otherwise read from TV
         $SourceList = json_decode(getvalue(getvalue($this->GetIDForIdent("TVSourceList"))));
         if (empty($SourceList)){
             $SourceList = getSourceList();
@@ -617,8 +617,7 @@ class MySamsungTV extends IPSModule
         try {
             // run your code here
             $i = searcharray($source, "SOURCETYPE", $SourceList);
-            if ($i === NULL)
-            {
+            if ($i === NULL){
                 throw new NotFoundException();
             }
             $ID = $SourceList[$i]["ID"];
