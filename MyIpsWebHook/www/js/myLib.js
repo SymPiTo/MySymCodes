@@ -2053,7 +2053,7 @@ class CtrlStatButton {
             
             
             
-            elem1  = document.createElement("div");
+            var elem1  = document.createElement("div");
             elem1.style.display = "flex";
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
@@ -2071,7 +2071,7 @@ class CtrlStatButton {
             elem1.append(elem2);
     
     
-            elem4  = document.createElement("div");
+            var elem4  = document.createElement("div");
             elem4.className = "ctrlbutton";
             elem4.classList.add(size, this.color);
     
