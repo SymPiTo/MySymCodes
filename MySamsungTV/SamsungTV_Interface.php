@@ -1592,16 +1592,34 @@ trait SamsungUPNP {
     /* Function: SetMainTVSource_MTVA()
     ...............................................................................
     ...............................................................................
-    Parameters: 
+    Parameters:  
+     * Source: TV, SCART1, SCART2, PC, HDMI1/DVI, HDMI2, HDMI3, HDMI4, AV, COMPONENT, USB, DLNA
+     *   
+     * ID:     0,   75,     76,    67,   71,       72,    73,     74,  55,     63,     -1,  -1
     --------------------------------------------------------------------------------
     Returns:  
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/     
-     public function SetMainTVSource_MTVA() {
-        
+     protected function SetMainTVSource_MTVA(string $Source, integer $ID) {
+        return $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
+
+                               "urn:samsung.com:service:MainTVAgent2:1",
+
+                               "SetMainTVSource",
+
+                               array(
+
+                                      new SoapParam($Source, "Source"),
+                                   
+                                      new SoapParam($ID, "ID"),
+
+                                      new SoapParam("-1", "UiID")
+
+                                    ));
     }
-     
+    
+    
     //*****************************************************************************
     /* Function: SetMute_MTVA($mute)
     ...............................................................................
