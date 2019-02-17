@@ -628,6 +628,7 @@ class MySamsungTV extends IPSModule
             }
             $this->SetMainTVSource_MTVA($source, $ID);
         }
+
         catch (customException $ex) {
             //code to handle the exception
              echo 'Message: ' .$ex->getMessage();
@@ -639,7 +640,8 @@ class MySamsungTV extends IPSModule
             $this->SendDebug("setSource ", $source." is not connected!", 0);
             return false;
         }
-        return true;
+       
+        return true;  
     }     
     
     
