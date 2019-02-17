@@ -2034,7 +2034,7 @@ class CtrlStatButton {
     class CtrlTile { 
         constructor() {
             this.ID = "";
-            this.color = "cyan";
+            this.color = "sandy<";
             this.size = "normal";
         }
 
@@ -2065,7 +2065,7 @@ class CtrlStatButton {
             elem2.classList.add(this.size, this.color);
  
  
-            elem2.innerHTML = "on";
+            elem2.innerHTML = "off";
             var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
            
