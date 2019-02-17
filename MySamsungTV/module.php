@@ -616,7 +616,7 @@ class MySamsungTV extends IPSModule
         }
         try {
             // run your code here
-            $i = searcharray($source, "SOURCETYPE", $SourceList);
+            $i = $this->searcharray($source, "SOURCETYPE", $SourceList);
             if ($i === NULL){
                 throw new NotFoundException();
             }
