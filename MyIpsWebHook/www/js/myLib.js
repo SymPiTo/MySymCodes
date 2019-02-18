@@ -2034,12 +2034,12 @@ class CtrlStatButton {
     class CtrlTile { 
         constructor() {
             this.ID = "";
-            this.color = "sandy";
+            this.color = "cyan";
             this.size = "normal";
         }
 
-        create(ParentID, posTop, posLeft, label, icon){
-            this.color = "cyan";
+        create(ParentID, posTop, posLeft, label, color, icon){
+            this.color = color;
             
             var elem = document.createElement("div");
             elem.className = "Tile";
