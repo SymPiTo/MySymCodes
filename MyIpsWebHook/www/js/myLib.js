@@ -2053,9 +2053,9 @@ class CtrlStatButton {
             elem.innerHTML = label; 
             this.ID = elem; 
             
-            let image = new Image();
-            image.src = "images/" + this.icon;
-            elem.append(image);
+            var x = document.createElement("IMG");
+            x.src = "images/" + this.icon;
+            elem.append(x);
             
             var elem1  = document.createElement("div");
             elem1.style.display = "flex";
