@@ -2059,15 +2059,15 @@ class CtrlStatButton {
             x.style.height = "100px";
             x.style.position = "relative";
             x.style.left = "50%x";
-            x.style.paddingTop = "50px";
+            x.style.paddingTop = "5px";
             elem.append(x);
             
             var elem1  = document.createElement("div");
             elem1.style.display = "flex";
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
-            elem1.style.position = "absoöute";
-            elem1.style.top = "90%";
+            elem1.style.position = "relative";
+            elem1.style.top = "20%";
             elem.append(elem1);
     
             var elem2  = document.createElement("div");
