@@ -2058,8 +2058,8 @@ class CtrlStatButton {
             x.style.width = "100px";
             x.style.height = "100px";
             x.style.position = "relative";
-            x.style.left = "25px";
-            x.style.top = "50px";
+            x.style.left = "50%x";
+            x.style.top = "30px";
             elem.append(x);
             
             var elem1  = document.createElement("div");
@@ -2073,7 +2073,7 @@ class CtrlStatButton {
             elem2.classList.add(this.size, this.color);
             elem2.innerHTML = "off";
             elem2.style.position = "relative";
-            elem2.style.top = "110px";
+            elem2.style.top = "60px";
             var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
            
@@ -2085,7 +2085,7 @@ class CtrlStatButton {
             elem4.classList.add(this.size, this.color);
             elem4.innerHTML = "on";
             elem4.style.position = "relative";
-            elem4.style.top = "110px";
+            elem4.style.top = "60px";
             var cmd2 = " ";
             elem4.setAttribute("onclick", cmd2);
         
