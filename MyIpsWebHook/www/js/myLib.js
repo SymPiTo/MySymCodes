@@ -2034,7 +2034,7 @@ class CtrlStatButton {
     class CtrlTile { 
         constructor() {
             this.ID = "";
-            this.color = "sandy<";
+            this.color = "sandy";
             this.size = "normal";
         }
 
