@@ -2066,6 +2066,8 @@ class CtrlStatButton {
             elem2.className = "ctrlbutton";
             elem2.classList.add(this.size, this.color);
             elem2.innerHTML = "off";
+            elem2.style.position = "relative";
+            elem2.style.top = "50px";
             var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
            
