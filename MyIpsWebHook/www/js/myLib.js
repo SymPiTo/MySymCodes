@@ -2068,7 +2068,7 @@ class CtrlStatButton {
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "relative";
             elem1.style.top = "8%";
-            elem.style.left = "2px";
+            elem.style.left = "5px";
             elem.append(elem1);
     
             var elem2  = document.createElement("div");
