@@ -2053,8 +2053,8 @@ class CtrlStatButton {
             elem.innerHTML = label; 
             this.ID = elem; 
             
-           
-            elem.src = "images/" + this.icon;
+            let image = new Image();
+            image.src = "images/" + this.icon;
              
             
             var elem1  = document.createElement("div");
