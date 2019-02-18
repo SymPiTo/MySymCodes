@@ -2066,13 +2066,14 @@ class CtrlStatButton {
             elem1.style.display = "flex";
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
+            elem1.style.position = "relative";
+            elem1.style.top = "80%";
             elem.append(elem1);
     
             var elem2  = document.createElement("div");
             elem2.className = "ctrlbutton";
             elem2.classList.add(this.size, this.color);
             elem2.innerHTML = "off";
-            elem2.style.paddingTop = "20px";
 
             var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
@@ -2084,7 +2085,7 @@ class CtrlStatButton {
             elem4.className = "ctrlbutton";
             elem4.classList.add(this.size, this.color);
             elem4.innerHTML = "on";
-            elem4.style.paddingTop = "20px";
+
 
             var cmd2 = " ";
             elem4.setAttribute("onclick", cmd2);
