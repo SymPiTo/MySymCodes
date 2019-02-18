@@ -2055,8 +2055,8 @@ class CtrlStatButton {
             
             var x = document.createElement("IMG");
             x.src = "images/" + this.icon;
-            x.style.width = 30px;
-            x.style.height = 30px;
+            x.style.width = "30px";
+            x.style.height = "30px";
             elem.append(x);
             
             var elem1  = document.createElement("div");
