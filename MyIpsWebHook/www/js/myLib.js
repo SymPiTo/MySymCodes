@@ -2063,15 +2063,31 @@ class CtrlStatButton {
             x.style.paddingTop = "5px";
             elem.append(x);
             
+            var elemTC  = document.createElement("div");
+            elem1.style.display = "flex";
+            elem1.style.flexDirection = "row";
+            elem1.style.justifyContent = "space-between";
+            elem.append(elemTC);
+            
+            var elemTL  = document.createElement("div");
+            elemTL.innerHTML = "left";
+            elemTC.append(elemTL);
+            
+            var elemTR  = document.createElement("div");
+            elemTL.innerHTML = "right";
+            elemTC.append(elemTR);
+            
             var elem1  = document.createElement("div");
             elem1.style.display = "flex";
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "relative";
-                elem1.style.top = "18%";
+            elem1.style.top = "18%";
              
             elem.append(elem1);
     
+
+            
             var elem2  = document.createElement("div");
             elem2.className = "ctrlbutton";
             elem2.classList.add(this.size, this.color);
