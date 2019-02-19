@@ -183,7 +183,7 @@
             check(ips[0].ID44004,89);  //TV Channel Name
             check(ips[0].ID25544,90);  //TV Guide
             check(ips[0].ID48854,91);  //TV SourceList
-            
+            check(ips[0].ID10567,92);  //SZ Lampe
             
      }
     function check(value, n){
@@ -508,6 +508,7 @@
     
     
     function updateValues(ips){
+         LightSZ.update(ips[0].ID10567, "", ""); 
  
             var sourceList = new Array(); 
         try{

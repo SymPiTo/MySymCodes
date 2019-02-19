@@ -2037,11 +2037,16 @@ class CtrlStatButton {
             this.color = "cyan";
             this.size = "normal";
             this.icon = "";
+            this.id1 = "";
+            this.id2 = "";
+            this.id3 = "";
+            this.id4 = "";
+            this.id5 = "";
         }
 
-        create(ParentID, posTop, posLeft, label, color, icon){
+        create(ParentID, posTop, posLeft, label, color, BaseIcon){
             this.color = color;
-            this.icon = icon;
+            this.icon = BaseIcon + "0" + ".png";
             var elem = document.createElement("div");
             elem.className = "Tile";
             elem.classList.add(color);
@@ -2054,14 +2059,15 @@ class CtrlStatButton {
             elem.innerHTML = label; 
             this.ID = elem; 
             
-            var x = document.createElement("IMG");
-            x.src = "images/" + this.icon;
-            x.style.width = "100px";
-            x.style.height = "100px";
-            x.style.position = "relative";
-            x.style.left = "50%x";
-            x.style.paddingTop = "5px";
-            elem.append(x);
+            var Bild = document.createElement("IMG");
+            Bild.src = "images/" + this.icon;
+            Bild.style.width = "100px";
+            Bild.style.height = "100px";
+            Bild.style.position = "relative";
+            Bild.style.left = "50%x";
+            Bild.style.paddingTop = "5px";
+            this.id1 = Bild;
+            elem.append(Bild);
             
             var elemTC  = document.createElement("div");
             elemTC.style.display = "flex";
@@ -2072,11 +2078,13 @@ class CtrlStatButton {
             var elemTL  = document.createElement("span");
             elemTL.innerHTML = "left";
             elemTL.style.paddingLeft = "5px"; 
+            this.id2 = elemTL;
             elemTC.append(elemTL);
             
             var elemTR  = document.createElement("span");
             elemTR.innerHTML = "right";
             elemTR.style.paddingRight = "5px";  
+            this.id3 = elemTR;
             elemTC.append(elemTR);
             
             var elem1  = document.createElement("div");
@@ -2094,7 +2102,7 @@ class CtrlStatButton {
             elem2.className = "ctrlbutton";
             elem2.classList.add(this.size, this.color);
             elem2.innerHTML = "off";
-
+            this.id4 = elem2;
             var cmd1 = " ";
             elem2.setAttribute("onclick", cmd1);
            
@@ -2105,7 +2113,7 @@ class CtrlStatButton {
             elem4.className = "ctrlbutton";
             elem4.classList.add(this.size, this.color);
             elem4.innerHTML = "on";
-
+            this.id5 = elem4;
 
             var cmd2 = " ";
             elem4.setAttribute("onclick", cmd2);
@@ -2113,5 +2121,21 @@ class CtrlStatButton {
             elem1.append(elem4); 
             
             document.getElementById(ParentID).appendChild(elem);
+        }
+        
+        update(value, valueLeft, valueRight){
+            
+            if(value === true){ 
+                this.id1.src = "images/" + this.icon + "On" + ".png";   
+                this.id4.style.color = "white";
+                this.id5.style.color = "lime"
+            }
+            else {
+                this.id1.src = "images/" + this.icon + "Off" + ".png";
+                this.id4.style.color = "lime";
+                this.id5.style.color = "white"
+            }
+            this.id2.innerHTML = valueLeft;
+            this.id3.innerHTML = valueRight;
         }
     }
