@@ -2082,7 +2082,7 @@ width:40%;
     
     
    
-   box-shadow: 5px 5px 5px black;
+   //box-shadow: 5px 5px 5px black;
 }
 .sandy {
     background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%))
