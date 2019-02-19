@@ -2048,7 +2048,7 @@ class CtrlStatButton {
             elem.style.position = "absolute";
             elem.style.left = posLeft;
             elem.style.top = posTop;
-            elem.color = "lime";
+            elem.style.color = "lime";
              
             elem.innerHTML = label; 
             this.ID = elem; 
