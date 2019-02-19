@@ -2064,17 +2064,16 @@ class CtrlStatButton {
             elem.append(x);
             
             var elemTC  = document.createElement("div");
-            elemTC.style.display = "flex";
-            elemTC.style.flexDirection = "row";
-            elemTC.style.justifyContent = "space-between";
+
+          
             elem.append(elemTC);
             
-            var elemTL  = document.createElement("div");
+            var elemTL  = document.createElement("span");
             elemTL.innerHTML = "left";
             elemTL.textAlign = "left";
             elemTC.append(elemTL);
             
-            var elemTR  = document.createElement("div");
+            var elemTR  = document.createElement("span");
             elemTL.innerHTML = "right";
             elemTL.textAlign = "right";
             elemTC.append(elemTR);
