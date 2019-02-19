@@ -2057,7 +2057,7 @@ class CtrlStatButton {
             var x = document.createElement("IMG");
             x.src = "images/" + this.icon;
             x.style.width = "100px";
-            x.style.height = "80px";
+            x.style.height = "100px";
             x.style.position = "relative";
             x.style.left = "50%x";
             x.style.paddingTop = "5px";
@@ -2068,7 +2068,7 @@ class CtrlStatButton {
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "relative";
-            elem1.style.top = "8%";
+                elem1.style.top = "15%";
              
             elem.append(elem1);
     
