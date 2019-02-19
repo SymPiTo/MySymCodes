@@ -2068,7 +2068,7 @@ class CtrlStatButton {
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "relative";
-                elem1.style.top = "20%";
+                elem1.style.top = "18%";
              
             elem.append(elem1);
     
