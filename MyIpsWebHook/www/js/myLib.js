@@ -2071,12 +2071,12 @@ class CtrlStatButton {
             
             var elemTL  = document.createElement("span");
             elemTL.innerHTML = "left";
-             
+            elemTL.style.paddingLeft = "5px"; 
             elemTC.append(elemTL);
             
             var elemTR  = document.createElement("span");
             elemTR.innerHTML = "right";
-             
+            elemTR.style.paddingRight = "5px";  
             elemTC.append(elemTR);
             
             var elem1  = document.createElement("div");
@@ -2084,7 +2084,7 @@ class CtrlStatButton {
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "relative";
-            elem1.style.top = "4%";
+            elem1.style.top = "5%";
              
             elem.append(elem1);
     
