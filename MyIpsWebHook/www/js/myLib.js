@@ -2043,12 +2043,12 @@ class CtrlStatButton {
             this.color = color;
             this.icon = icon;
             var elem = document.createElement("div");
-            elem.className = "Tile";
+            elem.className = "Tile" , color;
             //elem.classList.add(size, color);
             elem.style.position = "absolute";
             elem.style.left = posLeft;
             elem.style.top = posTop;
-            elem.style.color = "lime";
+             
 
              
             elem.innerHTML = label; 
