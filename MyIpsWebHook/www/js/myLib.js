@@ -2071,10 +2071,12 @@ class CtrlStatButton {
             
             var elemTL  = document.createElement("div");
             elemTL.innerHTML = "left";
+            elemTL.textAlign = "left";
             elemTC.append(elemTL);
             
             var elemTR  = document.createElement("div");
             elemTL.innerHTML = "right";
+            elemTL.textAlign = "right";
             elemTC.append(elemTR);
             
             var elem1  = document.createElement("div");
