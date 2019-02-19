@@ -2046,7 +2046,7 @@ class CtrlStatButton {
 
         create(ParentID, posTop, posLeft, label, color, BaseIcon){
             this.color = color;
-            this.icon = BaseIcon + "0" + ".png";
+            this.icon = BaseIcon ;
             var elem = document.createElement("div");
             elem.className = "Tile";
             elem.classList.add(color);
@@ -2060,7 +2060,7 @@ class CtrlStatButton {
             this.ID = elem; 
             
             var Bild = document.createElement("IMG");
-            Bild.src = "images/" + this.icon;
+            Bild.src = "images/" + this.icon + "Off" + ".png";
             Bild.style.width = "100px";
             Bild.style.height = "100px";
             Bild.style.position = "relative";
