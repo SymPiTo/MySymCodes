@@ -2048,7 +2048,7 @@ class CtrlStatButton {
             elem.style.position = "absolute";
             elem.style.left = posLeft;
             elem.style.top = posTop;
-
+            elem.color = "lime";
              
             elem.innerHTML = label; 
             this.ID = elem; 
@@ -2056,7 +2056,7 @@ class CtrlStatButton {
             var x = document.createElement("IMG");
             x.src = "images/" + this.icon;
             x.style.width = "100px";
-            x.style.height = "100px";
+            x.style.height = "120px";
             x.style.position = "relative";
             x.style.left = "50%x";
             x.style.paddingTop = "5px";
@@ -2068,7 +2068,7 @@ class CtrlStatButton {
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "relative";
             elem1.style.top = "8%";
-            elem.style.left = "5px";
+             
             elem.append(elem1);
     
             var elem2  = document.createElement("div");

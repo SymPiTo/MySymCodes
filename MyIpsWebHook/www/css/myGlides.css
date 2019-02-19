@@ -2078,14 +2078,13 @@ width:40%;
    height: 200px;
    color: black;
    font-size: 24px;
-   background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%)); /* CHROME */
-    
-    
+   
    border-radius: 5px;
    box-shadow: 1px 2px 4px lightgray;
 }
  
-
+.sandyDark {background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%)); /* CHROME */}
+.sandy {background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%)}
 
 .var{
 	border-color: #666666;
