@@ -2078,14 +2078,14 @@ width:40%;
    height: 200px;
    color: black;
    font-size: 24px;
-   
+   background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%)); /* CHROME */
     
     
    border-radius: 5px;
    box-shadow: 1px 2px 4px lightgray;
 }
  
-.Tile.sandy {background: -webkit-linear-gradient(hsl(48, 50%, 25%), hsl(48, 50%, 45%), (48, 50%, 25%))};
+
 
 .var{
 	border-color: #666666;
