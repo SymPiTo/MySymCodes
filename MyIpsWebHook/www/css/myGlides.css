@@ -2082,9 +2082,9 @@ width:40%;
 .size5{
     width: 100px;
     height: 50px;
-    font-size: 14px;
-    padding-top: 5px;
-    z-index: 10;
+    font-size: 24px;
+    padding-top: 15px;
+    z-index: 2;
 }   
 
 
