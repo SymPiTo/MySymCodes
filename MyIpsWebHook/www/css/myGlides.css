@@ -2078,7 +2078,7 @@ width:40%;
    height: 220px;
    color: black;
    font-size: 24px;
-   
+}   
  .size5{
     width: 45px;
     height: 25px;
@@ -2086,10 +2086,8 @@ width:40%;
     padding-top: 5px;
     z-index: 10;
 }   
-    
-   
-   //box-shadow: 5px 5px 5px black;
-}
+
+
 .sandy {
     background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%))
 }
