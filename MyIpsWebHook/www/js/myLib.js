@@ -2035,7 +2035,7 @@ class CtrlStatButton {
         constructor() {
             this.ID = "";
             this.color = "cyan";
-            this.size = "normal";
+            this.size = "size5";
             this.icon = "";
             this.id1 = "";
             this.id2 = "";
@@ -2092,7 +2092,7 @@ class CtrlStatButton {
             elem1.style.flexDirection = "row";
             elem1.style.justifyContent = "space-between";
             elem1.style.position = "absolute";
-            elem1.style.top = "85%";
+            elem1.style.top = "75%";
              
             elem.append(elem1);
     
