@@ -2051,7 +2051,7 @@ class CtrlStatButton {
             this.icon = BaseIcon ;
             var elem = document.createElement("div");
             elem.className = "Tile";
-            elem.classList.add(color);
+            elem.classList.add(color + "Light");
             elem.style.position = "absolute";
             elem.style.left = posLeft;
             elem.style.top = posTop;

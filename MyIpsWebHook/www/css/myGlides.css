@@ -2088,9 +2088,16 @@ width:40%;
 }   
 
 
-.sandy {
+.sandyLight {
     background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%))
 }
+.sandy {
+    background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%), hsl(28, 100%, 25%));
+}
+.sandy:active {
+	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%), hsl(28, 100%, 5%));
+}
+
 
 
 .var{
