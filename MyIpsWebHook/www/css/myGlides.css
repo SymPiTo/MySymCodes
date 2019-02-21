@@ -2003,9 +2003,11 @@ width:40%;
 .ctrlbutton.olive {
 	background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 45%));
 }
+/*
 .ctrlbutton.sandy {
 	background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%));
 }
+*/
 .ctrlbutton.red {
 	background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 45%), hsl(0, 100%, 25%));
 }
@@ -2039,9 +2041,11 @@ width:40%;
 .ctrlbutton.olive:active {
 	background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%));
 }
+/*
 .ctrlbutton.sandy:active {
 	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%));
 }
+*/
 .ctrlbutton.red:active {
 	background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%));
 }
