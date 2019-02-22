@@ -350,6 +350,8 @@
             SubMenuRolloSZ.create("SubMenuSZ","SubMenuRolloSZ", "sandy", "Rolladen Schlafzimmer", "_Rolladen_BW_web.png", "MainRolloSZ","", "SM" ); 
             var SubMenuLightSZ = new GlideButton();
             SubMenuLightSZ.create("SubMenuSZ","SubMenuRolloSZ", "sandy", "Licht Schlafzimmer", "Light_BW_web.png", "MainLightSZ","", "SM" ); 
+            var SubMenuSonosZ = new GlideButton();
+            SubMenuSonosZ.create("SubMenuSZ","SubMenuSonosSZ", "sandy", "Sonos", "Sonos_BW_web.png", "MainSonosSZ","", "SM" );   
         </script>  
         
 	<!-- ************************ Kueche  ************************  -->
@@ -878,18 +880,27 @@
     </script>
 
  		<!-- ************************ Light  Schlafzimmer ************************ -->
-		<Main id="MainLightSZ"  class="LightSZ">	</Main>
+		<Main id="MainLightSZ"  class="LightSZ"></Main>
  		
     <script>  
         var LightSZ = new CtrlTile();
         LightSZ.create("MainLightSZ", "10px", "10px", "Schlafzimmer", "sandy", "Light", "send('command(Light,SZ,false)')", "send('command(Light,SZ,true)')");
     </script>
  		<!-- ************************ Light Ctrl  Schlafzimmer ************************ -->
-		<Main id="MainLightSZCtrl"  class="LightSZCtrl">	</Main>
- 		
+		<Ctrl id="MainLightSZCtrl"  class="LightSZCtrl">	</Ctrl>
     <script>  
+   </script> 
 
+ 		<!-- ************************ Sonos  Schlafzimmer ************************ -->
+		<Main id="MainSonosSZ"  class="SonosSZ"></Main>
+     <script>
+    </script>
+ 		<!-- ************************ Sonos Ctrl  Schlafzimmer ************************ -->
+		<Ctrl id="MainSonosSZCtrl"  class="SonosSZCtrl"></Ctrl>
+     <script>  
     </script> 
+    
+    
     
         <!-- ***********************************************************************************      -->
 	<!--  ************************          INDEX S - Security    ************************      -->   

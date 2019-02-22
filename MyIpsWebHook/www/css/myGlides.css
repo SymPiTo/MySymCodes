@@ -106,6 +106,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .RolloCtrlB,
 .LightSZ,
 .LightCtrlSZ,
+.SonosSZ,
+.SonosCtrlSZ,
 .floorplan,
 .RadioStation,
 .RolladenAll,
@@ -417,7 +419,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	background: hsl(200, 100%, 10%);
 }
 
-.LightSZ{
+.LightSZ, SonosSZ{
 	position:absolute;
 	top: 5vh;
 	width: 0px;
@@ -425,7 +427,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
         left: 16.2vw;
 	background: hsl(28, 100%, 10%);
 }
-.LightCtrlSZ{
+.LightCtrlSZ, SonosCtrlSZ{
 	position:absolute;
 	top: 5vh;
 	width: 0px;
