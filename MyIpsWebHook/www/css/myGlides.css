@@ -419,6 +419,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	background: hsl(200, 100%, 10%);
 }
 
+/* Schlafzimmer Main and Ctrl window color = sandy*/
 .LightSZ, .SonosSZ{
 	position:absolute;
 	top: 5vh;
