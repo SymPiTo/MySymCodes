@@ -603,10 +603,10 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 }
 
 .MenuSZ{
-	position:relative;
-	top: 5vh;
+    position:relative;
+    top: 5vh;
     width: 0px;
-	height: 95vh;
+    height: 125vh;
 	
 }
 
