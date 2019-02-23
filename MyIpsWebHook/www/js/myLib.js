@@ -168,7 +168,7 @@ class CtrlButton {
         this.ID = "";
     }
 
-    create(ParentID, posTop, posLeft, size, color, text, ctrltype, ctrlcmd, command){
+    create(ParentID, posTop, posLeft, size, color, text, ctrltype, ctrlWin, command){
         var elem = document.createElement("div");
         elem.className = "ctrlbutton";
         elem.classList.add(size, color);
@@ -190,11 +190,11 @@ class CtrlButton {
                                     } 
                 );
                 // ctrlWindow umschalten
-                document.getElementsByClassName(ctrlcmd)[0].style.width = "26vw"; 
+                document.getElementsByClassName(ctrlWin)[0].style.width = "26vw"; 
             };
         }
         else if(ctrltype === "command"){
-            elem.setAttribute("onclick", ctrlcmd);
+            elem.setAttribute("onclick", ctrlWin);
         }
         else if(ctrltype === "CtrlCmd"){
                 elem.onclick = function(){
@@ -208,7 +208,7 @@ class CtrlButton {
                                     } 
                 );
                 // ctrlWindow umschalten
-                document.getElementsByClassName(ctrlcmd)[0].style.width = "26vw";  
+                document.getElementsByClassName(ctrlWin)[0].style.width = "26vw";  
                 
                 send(command);
                 
