@@ -1338,7 +1338,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
              
         }
 
-        create(ParentID, source ){ 
+        create(ParentID, source, device ){ 
             if (source == "CD"){
                 var SourceList = [];
                 for (var i=1; i<99; i++) {
