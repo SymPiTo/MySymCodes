@@ -1335,10 +1335,11 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     /* --------------------- Klasse IconSelectList ---------------------------------------- */
     class IconList { 
         constructor() {
-             
+             this.device = "";
         }
 
-        create(ParentID, source, device ){ 
+        create(ParentID, source, dev ){ 
+            this.device = dev;
             if (source == "CD"){
                 var SourceList = [];
                 for (var i=1; i<99; i++) {
