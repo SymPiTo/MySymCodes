@@ -897,15 +897,19 @@
         var CtrlBtnIRadioSZ = new CtrlButton();
         CtrlBtnIRadioSZ.create("MainSonosSZ", "63vh", "3%",  "normal", "sandy", "IRadio", "ctrlWindow", "RadioStation");
         var CtrlBtnCDSZ = new CtrlButton();
-        CtrlBtnCDSZ.create("MainSonosSZ",  "63vh", "35%",  "normal", "sandy", "CD", "command", "IconList('CD', 'Sonos')");
+        CtrlBtnCDSZ.create("MainSonosSZ",  "63vh", "35%",  "normal", "sandy", "CD", "ctrlWindow", "SonosSZCtrl");
         var CtrlBtnAudioSZ = new CtrlButton();
         CtrlBtnAudioSZ.create("MainSonosSZ",  "63vh", "67%",  "normal", "sandy", "AudioBook", "ctrlWindow",   "send('command(TV,AA,activate)') ");
     </script>
  		<!-- ************************ Sonos Ctrl  Schlafzimmer ************************ -->
 		<Ctrl id="MainSonosSZCtrl"  class="SonosSZCtrl"></Ctrl>
      <script>  
-    </script> 
-    
+ 
+ 
+  
+            var CtrlSonosCD = new IconList();
+            CtrlSonosCD.create("MainSonosSZCtrl", "CD","Sonos");  
+        </script> 
     
     
         <!-- ***********************************************************************************      -->
@@ -2177,7 +2181,7 @@
 
         <script> 
             var CtrlTVchannels = new IconList();
-            CtrlTVchannels.create("MainTVCtrl", "TV"  );  
+            CtrlTVchannels.create("MainTVCtrl", "TV",""  );  
         </script> 
         
 	<!-- ************************** Internet Radio Stationen  **************************  -->
@@ -2185,7 +2189,7 @@
         
         <script> 
             var CtrlIRadiochannels = new IconList();
-            CtrlIRadiochannels.create("MainIRadioCtrl", "IRadio"  );  
+            CtrlIRadiochannels.create("MainIRadioCtrl", "IRadio","" );  
         </script> 
 
 		
@@ -2196,7 +2200,7 @@
 
         <script> 
             var CtrlCDList = new IconList();
-            CtrlCDList.create("MainCDCtrl", "CD"  );  
+            CtrlCDList.create("MainCDCtrl", "CD",""  );  
         </script>
 		  
                   
