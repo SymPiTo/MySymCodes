@@ -893,7 +893,13 @@
 
  		<!-- ************************ Sonos  Schlafzimmer ************************ -->
 		<Main id="MainSonosSZ"  class="SonosSZ"></Main>
-     <script>
+    <script>
+        var CtrlBtnIRadioWZ = new CtrlButton();
+        CtrlBtnIRadioWZ.create("MainSonosSZ", "63vh", "3%",  "normal", "sandy", "IRadio", "ctrlWindow", "RadioStation");
+        var CtrlBtnCDWZ = new CtrlButton();
+        CtrlBtnCDWZ.create("MainSonosSZ",  "63vh", "35%",  "normal", "sandy", "CD", "ctrlWindow", "CoverCD");
+        var CtrlBtnAudioWZ = new CtrlButton();
+        CtrlBtnAudioWZ.create("MainSonosSZ",  "63vh", "67%",  "normal", "sandy", "AudioBook", "ctrlWindow",   "send('command(TV,AA,activate)') ");
     </script>
  		<!-- ************************ Sonos Ctrl  Schlafzimmer ************************ -->
 		<Ctrl id="MainSonosSZCtrl"  class="SonosSZCtrl"></Ctrl>
