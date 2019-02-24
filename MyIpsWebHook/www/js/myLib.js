@@ -1441,7 +1441,95 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                
       
     }
+  
+
+
+
+    /* --------------------- Klasse CDLib SelectList ---------------------------------------- */
+    class CDLib { 
+        constructor() {
+             
+        }
+
+        create(ParentID, device ){ 
+            var SourceList = [];
+            for (var i=1; i<99; i++) {
+                SourceList[i] = {
+                    No:   i-1,
+                    selected: false,
+                    icon:   i
+                };
+            } 
+
+            SourceList.forEach ( function(item){
+                var elem = document.createElement("img");
+                var n = item["icon"];
+                var laenge = n.toString().length;
+                if (laenge == 1) {
+                        n = "000" + n.toString();
+                }	
+                if (laenge == 2) {
+                        n = "00" + n.toString();
+                }	
+                if (laenge == 3) {
+                        n = "0" + n.toString();
+                }
+                if (laenge == 4) {
+                        n = n.toString();
+                }
+                elem.className = "iconTV";
+                elem.id = source + item["No"];
+                elem.style.padding = "2px";
+                elem.src = "CDs/" + n + ".jpg";
+                elem.onclick = function(){
+                    var index = SourceList.findIndex((item) => item.selected === true);
+                    if (index !== -1){
+                        SourceList[index]['selected'] = false;
+                        var ObjID = source + index;
+                        var elem0 = document.getElementById(ObjID);
+                        elem0.classList.add("iconTV");
+                        elem0.classList.remove("iconTVToggle");
+                    }
+                    elem.classList.add("iconTVToggle");
+                    elem.classList.remove("iconTV");
+                    item['selected'] = true;
+                        var wert = item;
+                        cmd("command(" + wert.substring(4, wert.length) + ",loadCDPlaylist," + wert.substring(0, 4) + ")") ;
+                    send(cmd);
+                }  
+       
+                document.getElementById(ParentID).appendChild(elem);
+                }
+            )            
+        }
+   
+               
+      
+    }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    /* ---------------------  Klasse FontButton (Rest noch austauschen ---------------------------------------- */
     class FontButtonNew {
            constructor(  ) {
