@@ -1454,7 +1454,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         create(ParentID, device ){ 
             // Liste einlesen
             var Liste = new data();
-            var SourceList = Liste.CDLib();
+            var SourceList = Liste.getCDLib();
             
              
             SourceList.forEach ( function(item){
