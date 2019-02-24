@@ -1448,7 +1448,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     /* --------------------- Klasse CDLib SelectList ---------------------------------------- */
     class CDLibrary { 
         constructor() {
-            this.SourceList =[];
+            
         }
 
         create(ParentID, device ){ 
@@ -1477,8 +1477,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     elem.classList.add("iconTVToggle");
                     elem.classList.remove("iconTV");
                     item['selected'] = true;
-                        var wert = item;
-                        cmd("command(" + wert.substring(4, wert.length) + ",loadCDPlaylist," + wert.substring(0, 4) + ")") ;
+                         
+                        cmd("command(" + device + ",loadCDPlaylist," + item['FV'] + ")") ;
                     send(cmd);
                 }  
        
