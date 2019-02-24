@@ -1448,20 +1448,20 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     /* --------------------- Klasse CDLib SelectList ---------------------------------------- */
     class CDLibrary { 
         constructor() {
-            this.SourceList =[99];
+            this.SourceList =[];
         }
 
         create(ParentID, device ){ 
-            var list =  [];
+            var List =  [];
             for (var i=1; i<99; i++) {
-                list[i] = {
+                List[i] = {
                     No:   i-1,
                     selected: false,
                     icon:   i
                 };
             } 
-            this.SourceList = list;
-            list.forEach ( function(item){
+
+             List.forEach ( function(item){
                 var elem = document.createElement("img");
                 var n = item["icon"];
                 var laenge = n.toString().length;
@@ -1481,9 +1481,10 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                 elem.id = device + item["No"];
                 elem.style.padding = "2px";
                 elem.src = "CDs/" + n + ".jpg";
-                elem.onclick = list.findIndex((item) => item.selected === true);
+                elem.onclick = function(){
+                    var index = List.findIndex((item) => item.selected === true);
                     if (index !== -1){
-                        list[index]['selected'] = false;
+                        List[index]['selected'] = false;
                         var ObjID = device + index;
                         var elem0 = document.getElementById(ObjID);
                         elem0.classList.add("iconTV");
