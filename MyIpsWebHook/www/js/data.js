@@ -63,7 +63,7 @@
                 {  No: 4, FV: "0005", selected: false,   Album: "5",            icon: "0005.jpg" },
                 {  No: 5, FV: "0006", selected: false,   Album: "6",            icon: "0006.jpg" }, 
                 {  No: 6, FV: "0007", selected: false,   Album: "7",            icon: "0007.jpg" },
-                {  No: 0, FV: "0008", selected: false,   Album: "1",            icon: "00081.jpg"},
+                {  No: 0, FV: "0008", selected: false,   Album: "1",            icon: "0008.jpg"},
                 {  No: 1, FV: "0009", selected: false,   Album: "2",            icon: "0009.jpg" }, 
                 {  No: 2, FV: "0010", selected: false,   Album: "3",            icon: "0010.jpg" },
                 {  No: 3, FV: "0011", selected: false,   Album: "4",            icon: "0011.jpg" },  
@@ -156,6 +156,8 @@
                 {  No: 6, FV: "0098", selected: false,   Album: "7",            icon: "0098.jpg" }, 
                 {  No: 5, FV: "0099", selected: false,   Album: "6",            icon: "0099.jpg" }, 
                 {  No: 6, FV: "0100", selected: false,   Album: "7",            icon: "0100.jpg" }, 
+                {  No: 6, FV: "0101", selected: false,   Album: "7",            icon: "0101.jpg" }, 
+                {  No: 6, FV: "0102", selected: false,   Album: "7",            icon: "0102.jpg" },  
             ) 
             return CD;
         }
