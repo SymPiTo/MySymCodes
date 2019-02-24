@@ -1463,7 +1463,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                 elem.className = "iconTV";
                 elem.id = device + item["No"];
                 elem.style.padding = "2px";
-                elem.src = "CDs/" + item["icon"] + ".jpg";
+                elem.src = "CDs/" + item["icon"];
                 elem.onclick = function(){
                     
                     var index = SourceList.findIndex((item) => item.selected === true);
