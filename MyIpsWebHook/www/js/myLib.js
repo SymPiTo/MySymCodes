@@ -1440,17 +1440,16 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                             cmd("command(" + wert.substring(4, wert.length) + ",loadCDPlaylist," + wert.substring(0, 4) + ")") ;
                         }
                         send(cmd);
-                    } ; 
+                    }  
                          
                 document.getElementById(ParentID).appendChild(elem);
-            });
+            }
             
-         }
+    }
    
                
       
-    }
-    
+       
    /* ---------------------  Klasse FontButton (Rest noch austauschen ---------------------------------------- */
     class FontButtonNew {
            constructor(  ) {
