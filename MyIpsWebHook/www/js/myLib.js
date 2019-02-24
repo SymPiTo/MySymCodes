@@ -1478,14 +1478,14 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                         n = n.toString();
                 }
                 elem.className = "iconTV";
-                elem.id = source + item["No"];
+                elem.id = device + item["No"];
                 elem.style.padding = "2px";
                 elem.src = "CDs/" + n + ".jpg";
                 elem.onclick = function(){
                     var index = SourceList.findIndex((item) => item.selected === true);
                     if (index !== -1){
                         SourceList[index]['selected'] = false;
-                        var ObjID = source + index;
+                        var ObjID = device + index;
                         var elem0 = document.getElementById(ObjID);
                         elem0.classList.add("iconTV");
                         elem0.classList.remove("iconTVToggle");
