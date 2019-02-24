@@ -194,7 +194,7 @@ class CtrlButton {
             };
         }
         else if(ctrltype === "command"){
-            elem.setAttribute("onclick", ctrlWin);
+            elem.setAttribute("onclick", command);
         }
         else if(ctrltype === "CtrlCmd"){
                 elem.onclick = function(){
