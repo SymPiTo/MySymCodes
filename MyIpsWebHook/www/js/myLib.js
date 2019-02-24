@@ -1481,10 +1481,9 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                 elem.id = device + item["No"];
                 elem.style.padding = "2px";
                 elem.src = "CDs/" + n + ".jpg";
-                elem.onclick = function(){
-                    var index = this.SourceList.findIndex((item) => item.selected === true);
+                elem.onclick = list.findIndex((item) => item.selected === true);
                     if (index !== -1){
-                        this.SourceList[index]['selected'] = false;
+                        list[index]['selected'] = false;
                         var ObjID = device + index;
                         var elem0 = document.getElementById(ObjID);
                         elem0.classList.add("iconTV");
