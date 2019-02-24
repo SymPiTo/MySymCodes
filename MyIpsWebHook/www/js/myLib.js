@@ -1368,7 +1368,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                    default:
                 }
             }
-            this.Mediaist.forEach ( function(item){
+            this.MediaList.forEach ( function(item){
                 var elem = document.createElement("img");
                              
                 switch(source) {
