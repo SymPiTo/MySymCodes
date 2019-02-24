@@ -1446,7 +1446,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
 
 
     /* --------------------- Klasse CDLib SelectList ---------------------------------------- */
-    class CDLib { 
+    class CDLibrary { 
         constructor() {
              
         }
