@@ -1351,7 +1351,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                         icon:   i
                     };
                 } 
-                this.Mediaist = SourceList;
+                this.MediaList = SourceList;
             }
             else{
                 // Liste einlesen
@@ -1359,11 +1359,11 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                 switch(source) {
                    case "TV":
                        var SourceList = Liste.getTVchannels();
-                       this.Mediaist = SourceList;
+                       this.MediaList = SourceList;
                        break;
                    case "IRadio":
                        var SourceList = Liste.getIRadiochannels();
-                       this.Mediaist = SourceList;
+                       this.MediaList = SourceList;
                        break;
                    default:
                 }
@@ -1413,7 +1413,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     elem.src = "CDs/" + n + ".jpg";
                 }
                 elem.onclick = function(){
-                        var index = this.Mediaist.findIndex((item) => item.selected === true);
+                        var index = this.MediaList.findIndex((item) => item.selected === true);
                         if (index !== -1){
                             SourceList[index]['selected'] = false;
                             var ObjID = source + index;
