@@ -54,6 +54,19 @@
             ) 
             return IRadiocahnnels;
         } 
+        getCDLib(){
+            var CD = new Array (
+                {  No: 0, FV: "0001", selected: false,   Album: "1",       icon: "0000.png" },
+                {  No: 1, FV: "0002", selected: false,   Album: "2",            icon: "0001.png" }, 
+                {  No: 2, FV: "0003", selected: false,   Album: "3",   icon: "0002.png" },
+                {  No: 3, FV: "0004", selected: false,   Album: "4",               icon: "0003.png" },  
+                {  No: 4, FV: "0005", selected: false,   Album: "5",         icon: "0004.png" },
+                {  No: 5, FV: "0006", selected: false,   Album: "6",            icon: "0005.png" }, 
+                {  No: 6, FV: "0007", selected: false,   Album: "7",             icon: "0006.png" },
+ 
+            ) 
+            return CD;
+        }
     }    
 
 

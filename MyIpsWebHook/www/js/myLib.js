@@ -1452,40 +1452,23 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         }
 
         create(ParentID, device ){ 
-            var List =  [];
-            for (var i=1; i<99; i++) {
-                List[i] = {
-                    No:   i-1,
-                    selected: false,
-                    icon:   i
-                };
-            } 
-            this.SourceList = List;
-             List.forEach ( function(item){
+            // Liste einlesen
+            var Liste = new data();
+            var SourceList = Liste.CDLib();
+            
+             
+            SourceList.forEach ( function(item){
                 var elem = document.createElement("img");
-                var n = item["icon"];
-                var laenge = n.toString().length;
-                if (laenge == 1) {
-                        n = "000" + n.toString();
-                }	
-                if (laenge == 2) {
-                        n = "00" + n.toString();
-                }	
-                if (laenge == 3) {
-                        n = "0" + n.toString();
-                }
-                if (laenge == 4) {
-                        n = n.toString();
-                }
+ 
                 elem.className = "iconTV";
                 elem.id = device + item["No"];
                 elem.style.padding = "2px";
-                elem.src = "CDs/" + n + ".jpg";
+                elem.src = "CDs/" + item["icon"] + ".jpg";
                 elem.onclick = function(){
-                    List = this.SourceList;
-                    var index = List.findIndex((item) => item.selected === true);
+                    
+                    var index = SourceList.findIndex((item) => item.selected === true);
                     if (index !== -1){
-                        List[index]['selected'] = false;
+                        SourceList[index]['selected'] = false;
                         var ObjID = device + index;
                         var elem0 = document.getElementById(ObjID);
                         elem0.classList.add("iconTV");
