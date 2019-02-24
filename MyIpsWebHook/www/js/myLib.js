@@ -1336,6 +1336,8 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     class IconList { 
         constructor() {
              this.device = "";
+             this.MediaList = array();
+ 
         }
 
         create(ParentID, source, dev ){ 
@@ -1349,7 +1351,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                         icon:   i
                     };
                 } 
-
+                this.Mediaist = SourceList;
             }
             else{
                 // Liste einlesen
@@ -1357,14 +1359,16 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                 switch(source) {
                    case "TV":
                        var SourceList = Liste.getTVchannels();
+                       this.Mediaist = SourceList;
                        break;
                    case "IRadio":
                        var SourceList = Liste.getIRadiochannels();
+                       this.Mediaist = SourceList;
                        break;
                    default:
                 }
             }
-            SourceList.forEach ( function(item){
+            this.Mediaist.forEach ( function(item){
                 var elem = document.createElement("img");
                              
                 switch(source) {
@@ -1409,7 +1413,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     elem.src = "CDs/" + n + ".jpg";
                 }
                 elem.onclick = function(){
-                        var index = SourceList.findIndex((item) => item.selected === true);
+                        var index = this.Mediaist.findIndex((item) => item.selected === true);
                         if (index !== -1){
                             SourceList[index]['selected'] = false;
                             var ObjID = source + index;
