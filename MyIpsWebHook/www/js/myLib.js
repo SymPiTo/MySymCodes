@@ -1460,7 +1460,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     icon:   i
                 };
             } 
-
+            this.SourceList = List;
              List.forEach ( function(item){
                 var elem = document.createElement("img");
                 var n = item["icon"];
@@ -1482,12 +1482,17 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                 elem.style.padding = "2px";
                 elem.src = "CDs/" + n + ".jpg";
                 elem.onclick = function(){
- 
-                       
-                         
-                        elem.classList.add("iconTV");
-                        elem.classList.remove("iconTVToggle");
-
+                    List = this.SourceList;
+                    var index = List.findIndex((item) => item.selected === true);
+                    if (index !== -1){
+                        List[index]['selected'] = false;
+                        var ObjID = device + index;
+                        var elem0 = document.getElementById(ObjID);
+                        elem0.classList.add("iconTV");
+                        elem0.classList.remove("iconTVToggle");
+                    }
+                    elem.classList.add("iconTVToggle");
+                    elem.classList.remove("iconTV");
                     item['selected'] = true;
                         var wert = item;
                         cmd("command(" + wert.substring(4, wert.length) + ",loadCDPlaylist," + wert.substring(0, 4) + ")") ;
