@@ -1336,7 +1336,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     class IconList { 
         constructor() {
              this.device = "";
-             this.MediaList = array();
+             this.MediaList = "";
  
         }
 
