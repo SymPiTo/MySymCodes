@@ -1448,7 +1448,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     /* --------------------- Klasse CDLib SelectList ---------------------------------------- */
     class CDLibrary { 
         constructor() {
-            this.SourceList =[];
+            this.SourceList =[99];
         }
 
         create(ParentID, device ){ 
