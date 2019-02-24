@@ -1336,75 +1336,66 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     class IconList { 
         constructor() {
              
-             
- 
         }
 
-        create(ParentID, source, dev ){ 
-        
+        create(ParentID, source ){ 
+             
             if (source == "CD"){
-                var CDList = [];
+                var SourceList = [];
                 for (var i=1; i<99; i++) {
-                    CDList[i] = {
+                    SourceList[i] = {
                         No:   i-1,
                         selected: false,
                         icon:   i
                     };
                 } 
-                
+
             }
             else{
                 // Liste einlesen
                 var Liste = new data();
                 switch(source) {
                    case "TV":
-                       var TVList = Liste.getTVchannels();
-                        
+                       var SourceList = Liste.getTVchannels();
                        break;
                    case "IRadio":
-                       var IRadioList = Liste.getIRadiochannels();
-                        
+                       var SourceList = Liste.getIRadiochannels();
                        break;
                    default:
                 }
             }
-            
-            switch(source) {
-                case "TV":            
-                    TVList.forEach (function(item){
-                        var elem = document.createElement("img");
+            SourceList.forEach ( function(item){
+                var elem = document.createElement("img");
+                             
+                switch(source) {
+                    case "TV":
                         var icon = item["icon"];
-                    })
-                    break;
-                case "IRadio":
-                    var elem = document.createElement("img");    
-                    var icon = item["icon"];
-                    break;   
-                case "CD":
-                    CDList.forEach ( function(item){
-                    var elem = document.createElement("img");                        
-                        var n = item["icon"];
-                        var laenge = n.toString().length;
+                        break;
+                    case "IRadio":
+                        var icon = item["icon"];
+                        break;
+                    case "CD":
+                         
+                            var n = item["icon"];
+                            var laenge = n.toString().length;
 
-                        if (laenge == 1) {
-                                n = "000" + n.toString();
-                        }	
-                        if (laenge == 2) {
-                                n = "00" + n.toString();
-                        }	
-                        if (laenge == 3) {
-                                n = "0" + n.toString();
-                        }
-                        if (laenge == 4) {
-                                n = n.toString();
-                        }
-                    }  )  
-                    break;
+                            if (laenge == 1) {
+                                    n = "000" + n.toString();
+                            }	
+                            if (laenge == 2) {
+                                    n = "00" + n.toString();
+                            }	
+                            if (laenge == 3) {
+                                    n = "0" + n.toString();
+                            }
+                            if (laenge == 4) {
+                                    n = n.toString();
+                            }
+                        break;
                         
-                    default:                    
-                    
-            }            
-      
+                    default:
+                }
+                
                 elem.className = "iconTV";
                 elem.id = source + item["No"];
                 elem.style.padding = "2px";
@@ -1418,7 +1409,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     elem.src = "CDs/" + n + ".jpg";
                 }
                 elem.onclick = function(){
-                        var index = this.MediaList.findIndex((item) => item.selected === true);
+                        var index = SourceList.findIndex((item) => item.selected === true);
                         if (index !== -1){
                             SourceList[index]['selected'] = false;
                             var ObjID = source + index;
@@ -1440,16 +1431,17 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                             cmd("command(" + wert.substring(4, wert.length) + ",loadCDPlaylist," + wert.substring(0, 4) + ")") ;
                         }
                         send(cmd);
-                    }  
+                    } ; 
                          
                 document.getElementById(ParentID).appendChild(elem);
-            }
+            });
             
-    }
+         }
    
                
       
-       
+    }
+    
    /* ---------------------  Klasse FontButton (Rest noch austauschen ---------------------------------------- */
     class FontButtonNew {
            constructor(  ) {
