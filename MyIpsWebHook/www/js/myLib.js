@@ -1478,7 +1478,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     elem.classList.remove("iconTV");
                     item['selected'] = true;
                          
-                        cmd("command(" + device + ",loadCDPlaylist," + item['FV'] + ")") ;
+                    cmd = ("command(" + device + ",loadCDPlaylist," + item['FV'] + ")") ;
                     send(cmd);
                 }  
        
