@@ -1335,71 +1335,76 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     /* --------------------- Klasse IconSelectList ---------------------------------------- */
     class IconList { 
         constructor() {
-             this.device = "";
-             this.MediaList = "";
+             
+             
  
         }
 
         create(ParentID, source, dev ){ 
-            this.device = dev;
+        
             if (source == "CD"){
                 var SourceList = [];
                 for (var i=1; i<99; i++) {
-                    SourceList[i] = {
+                    CDList[i] = {
                         No:   i-1,
                         selected: false,
                         icon:   i
                     };
                 } 
-                this.MediaList = SourceList;
+                
             }
             else{
                 // Liste einlesen
                 var Liste = new data();
                 switch(source) {
                    case "TV":
-                       var SourceList = Liste.getTVchannels();
-                       this.MediaList = SourceList;
+                       var TVList = Liste.getTVchannels();
+                        
                        break;
                    case "IRadio":
-                       var SourceList = Liste.getIRadiochannels();
-                       this.MediaList = SourceList;
+                       var IRadioList = Liste.getIRadiochannels();
+                        
                        break;
                    default:
                 }
             }
-            this.MediaList.forEach ( function(item){
-                var elem = document.createElement("img");
-                             
-                switch(source) {
-                    case "TV":
+            
+            switch(source) {
+                case "TV":            
+                    TVList.forEach (function(item){
+                        var elem = document.createElement("img");
                         var icon = item["icon"];
-                        break;
-                    case "IRadio":
-                        var icon = item["icon"];
-                        break;
-                    case "CD":
-                         
-                            var n = item["icon"];
-                            var laenge = n.toString().length;
+                    })
+                    break;
+                case "IRadio":
+                    var elem = document.createElement("img");    
+                    var icon = item["icon"];
+                    break;   
+                case "CD":
+                    CDList.forEach ( function(item){
+                    var elem = document.createElement("img");                        
+                        var n = item["icon"];
+                        var laenge = n.toString().length;
 
-                            if (laenge == 1) {
-                                    n = "000" + n.toString();
-                            }	
-                            if (laenge == 2) {
-                                    n = "00" + n.toString();
-                            }	
-                            if (laenge == 3) {
-                                    n = "0" + n.toString();
-                            }
-                            if (laenge == 4) {
-                                    n = n.toString();
-                            }
-                        break;
+                        if (laenge == 1) {
+                                n = "000" + n.toString();
+                        }	
+                        if (laenge == 2) {
+                                n = "00" + n.toString();
+                        }	
+                        if (laenge == 3) {
+                                n = "0" + n.toString();
+                        }
+                        if (laenge == 4) {
+                                n = n.toString();
+                        }
+                    }  )  
+                    break;
                         
-                    default:
-                }
-                
+                    default:                    
+                    
+            }            
+      
                 elem.className = "iconTV";
                 elem.id = source + item["No"];
                 elem.style.padding = "2px";
