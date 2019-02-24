@@ -1448,20 +1448,20 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
     /* --------------------- Klasse CDLib SelectList ---------------------------------------- */
     class CDLibrary { 
         constructor() {
-             this.SourceList =[];
+            this.SourceList =[];
         }
 
         create(ParentID, device ){ 
-             
+            var list =  [];
             for (var i=1; i<99; i++) {
-                this.SourceList[i] = {
+                list[i] = {
                     No:   i-1,
                     selected: false,
                     icon:   i
                 };
             } 
-
-            this.SourceList.forEach ( function(item){
+            this.SourceList = list;
+            list.forEach ( function(item){
                 var elem = document.createElement("img");
                 var n = item["icon"];
                 var laenge = n.toString().length;
