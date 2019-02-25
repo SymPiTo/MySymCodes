@@ -1891,9 +1891,7 @@ width:40%;
 .fontbutton.olive{
 	background: -webkit-linear-gradient(hsl(82, 100%, 25%), hsl(82, 100%, 45%));
 }
-.fontbutton.sandy{
-	background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%));
-}
+
 .fontbutton.red{
 	background: -webkit-linear-gradient(hsl(0, 100%, 25%), hsl(0, 100%, 45%));
 }
@@ -1918,9 +1916,8 @@ width:40%;
 .fontbutton.olive:active {
 	background: -webkit-linear-gradient(hsl(82, 100%, 5%), hsl(82, 100%, 15%));
 }
-.fontbutton.sandy:active {
-	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%));
-}
+
+
 .fontbutton.red:active {
 	background: -webkit-linear-gradient(hsl(0, 100%, 5%), hsl(0, 100%, 15%));
 }
@@ -2104,7 +2101,7 @@ width:40%;
 .sandy:active {
 	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%), hsl(28, 100%, 5%));
 }
-
+ 
 
 
 .var{
