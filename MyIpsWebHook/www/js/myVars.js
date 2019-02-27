@@ -194,6 +194,7 @@
             check(ips[0].ID55859,99);  //SZ Sonos Bass
             check(ips[0].ID29767,100);  //SZ Sonos Treble
             check(ips[0].ID57771,101);  //SZ Sonos Playmode
+            check(ips[0].ID35731,102);  //SZ Sonos Cover image
      }
     function check(value, n){
         if (typeof value === "undefined") {$('fehler').innerHTML =  "Variable  wrong ID:" + n;} else {return value;}
@@ -517,6 +518,7 @@
     
     
     function updateValues(ips){
+        iDisArtistSsz.update(ips[0].ID35731, ips[0].ID38320, ips[0].ID32160, ips[0].ID23875);
         transVarVolSsz.update(ips[0].ID36157,"");
         var bassCalc = Math.round(5*(ips[0].ID55859 +10));
         transVarBassSsz.update(bassCalc,"");
