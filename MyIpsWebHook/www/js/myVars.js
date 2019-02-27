@@ -522,14 +522,34 @@
         transVarBassSsz.update(bassCalc,"");
         var trebleCalc = Math.round(5*(ips[0].ID29767 +10));
         transVarTrebleSsz.update(trebleCalc,"");
-        transVarPlayModeSsz.update(ips[0].ID57771,"");
+                switch (ips[0].ID57771) {
+                    case "0":
+                      PM = "NORMAL";
+                      break;
+                    case "1":
+                      PM = "REPEAT_ALL";
+                      break;
+                    case "2":
+                      PM = "REPEAT_ONE";
+                      break;
+                    case "3":
+                      PM = "SHUFFLE_NOREPEAT";
+                      break;
+                    case "4":
+                      PM = "SHUFFLE";
+                      break;
+                    case "5":
+                      PM = "SHUFFLE_REPEAT_ONE";
+                      break; 
+              }
+        transVarPlayModeSsz.update(PM, "");
         
          LightSZ.update(ips[0].ID10567, "", ""); 
  
             var sourceList = new Array(); 
         try{
             sourceList = JSON.parse(ips[0].ID48854);
-            sourceList.forEach(function(item) {
+            sourceList.forEach(function(item) { 
                 stat1 = item.CONNECTED;
                 stat2 = item.active;
                 switch (item.SOURCETYPE) {
