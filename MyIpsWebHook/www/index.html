@@ -900,8 +900,14 @@
         var rahmSsz = new Rahmen();
         rahmSsz.create("MainSonosSZ", "49vh", "3%", "70px", "527px", "black");
 
-        var transVarPowerSsz = new TransVarDisplay(); 
-        transVarPowerSsz.create("MainSonosSZ", "50vh", "0%", "lime", "28px", "Power", "", "aus", "ein", "" , "");
+        var transVarVolSsz = new TransVarDisplay(); 
+        transVarVolSsz.create("MainSonosSZ", "50vh", "0%", "lime", "28px", "Volume", "", "", "", "" , "");
+        var transVarPlayModeSsz = new TransVarDisplay(); 
+        transVarPlayModeSsz.create("MainSonosSZ", "50vh", "20%", "lime", "28px", "PlayMode", "", "", "", "" , "");
+        var transVarBassSsz = new TransVarDisplay(); 
+        transVarBassSsz.create("MainSonosSZ", "50vh", "40%", "lime", "28px", "Bass", "", "", "", "" , "");
+        var transVarTrebleSsz = new TransVarDisplay(); 
+        transVarTrebleSsz.create("MainSonosSZ", "50vh", "60%", "lime", "28px", "Trebble", "", "", "", "" , "");
         
         var CtrlBtnIRadioSZ = new CtrlButton();
         CtrlBtnIRadioSZ.create("MainSonosSZ", "63vh", "3%",  "normal", "sandy", "IRadio", "ctrlWindow", "RadioStation","");
@@ -911,11 +917,11 @@
         CtrlBtnAudioSZ.create("MainSonosSZ",  "63vh", "67%",  "normal", "sandy", "AudioBook", "ctrlWindow", "SonosSZCtrl",  "");
         
         var FontBtnASsz = new FontButtonNew();
-        FontBtnASsz.create("MainSonosSZ", "sandy", "mid", "83vh", "2%", "fa fa-backward", "send('command(SonosSZ,Key,KEY_REWIND)')");
+        FontBtnASsz.create("MainSonosSZ", "sandy", "mid", "83vh", "2%", "fa fa-backward", "send('command(SonosSZ,Key,PREVIOUS)')");
         var FontBtnBSsz = new FontButtonNew();
-        FontBtnBSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "12%", "fa fa-pause", "send('command(SonosSZ,Key,KEY_PAUSE)')");
+        FontBtnBSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "12%", "fa fa-pause", "send('command(SonosSZ,Key,PAUSE)')");
         var FontBtnCSsz = new FontButtonNew();
-        FontBtnCSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "22%", "fa fa-play", "send('command(SonosSZ,Key,KEY_PLAY)')");
+        FontBtnCSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "22%", "fa fa-play", "send('command(SonosSZ,Key,PLAY)')");
         var FontBtnDSsz = new FontButtonNew();
         FontBtnDSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "34%", "fa fa-volume-down", "send('command(SonosSZ,Key,VOLDOWN)')");  
         var FontBtnHSsz = new FontButtonNew();
@@ -927,7 +933,7 @@
         var FontBtnFSsz = new FontButtonNew();
         FontBtnFSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "76%", "fa fa-circle", "send('command(SonosSZ,Key,KEY_REC)')");
         var FontBtnGSsz = new FontButtonNew();
-        FontBtnGSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "86%", "fa fa-forward", "send('command(SonosSZ,Key,KEY_FF)')");
+        FontBtnGSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "86%", "fa fa-forward", "send('command(SonosSZ,Key,NEXT)')");
     </script>
  		<!-- ************************ Sonos Ctrl  Schlafzimmer ************************ -->
 		<Ctrl id="MainSonosSZCtrl"  class="SonosSZCtrl"></Ctrl>

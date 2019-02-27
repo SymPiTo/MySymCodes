@@ -185,6 +185,15 @@
             check(ips[0].ID48854,91);  //TV SourceList
             check(ips[0].ID10567,92);  //SZ Lampe
             
+            check(ips[0].ID32160,93);  //SZ Sonos Artist
+            check(ips[0].ID23875,94);  //SZ Sonos Title
+            check(ips[0].ID38320,95);  //SZ Sonos Album
+            check(ips[0].ID36157,96);  //SZ Sonos Volume
+            check(ips[0].ID24061,97);  //SZ Sonos Mute
+            check(ips[0].ID44467,98);  //SZ Sonos Loudnes
+            check(ips[0].ID55859,99);  //SZ Sonos Bass
+            check(ips[0].ID29767,100);  //SZ Sonos Treble
+            check(ips[0].ID57771,101);  //SZ Sonos Playmode
      }
     function check(value, n){
         if (typeof value === "undefined") {$('fehler').innerHTML =  "Variable  wrong ID:" + n;} else {return value;}
@@ -508,6 +517,11 @@
     
     
     function updateValues(ips){
+        transVarVolSsz.update(ips[0].ID36157,"");
+        transVarBassSsz.update(ips[0].ID55859,"");
+        transVarTrebleSsz.update(ips[0].ID29767,"");
+        transVarPlayModeSsz.update(ips[0].ID57771,"");
+        
          LightSZ.update(ips[0].ID10567, "", ""); 
  
             var sourceList = new Array(); 
