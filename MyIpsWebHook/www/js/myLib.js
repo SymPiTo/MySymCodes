@@ -1872,6 +1872,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
         elem4.style.fontSize = this.textsize;
         elem4.style.color = this.textcolor;
         elem4.style.fontFamily = "dot matrix, arial";
+        elem4.style.wordWrap = "break-word";
         elem4.innerHTML = "99" +  this.unit;
         this.ID = elem4;
         elem2.append(elem4);
