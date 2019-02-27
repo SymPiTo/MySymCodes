@@ -522,6 +522,7 @@
         transVarBassSsz.update(bassCalc,"");
         var trebleCalc = Math.round(5*(ips[0].ID29767 +10));
         transVarTrebleSsz.update(trebleCalc,"");
+        var PM = "";
                 switch (ips[0].ID57771) {
                     case "0":
                       PM = "NORMAL";
