@@ -518,9 +518,9 @@
     
     function updateValues(ips){
         transVarVolSsz.update(ips[0].ID36157,"");
-        var bassCalc = Math.round((5/(ips[0].ID55859 +10))*100);
+        var bassCalc = Math.round(5*(ips[0].ID55859 +10)));
         transVarBassSsz.update(bassCalc,"");
-        var trebleCalc = Math.round((5/(ips[0].ID29767 +10))*100);
+        var trebleCalc = Math.round(5*(ips[0].ID29767 +10));
         transVarTrebleSsz.update(trebleCalc,"");
         transVarPlayModeSsz.update(ips[0].ID57771,"");
         
