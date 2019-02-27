@@ -524,22 +524,22 @@
         transVarTrebleSsz.update(trebleCalc,"");
         var PM = "";
                 switch (ips[0].ID57771) {
-                    case "0":
+                    case 0:
                       PM = "NORMAL";
                       break;
-                    case "1":
+                    case 1:
                       PM = "REPEAT_ALL";
                       break;
-                    case "2":
+                    case 2:
                       PM = "REPEAT_ONE";
                       break;
-                    case "3":
+                    case 3:
                       PM = "SHUFFLE_NOREPEAT";
                       break;
-                    case "4":
+                    case 4:
                       PM = "SHUFFLE";
                       break;
-                    case "5":
+                    case 5:
                       PM = "SHUFFLE_REPEAT_ONE";
                       break; 
               }
