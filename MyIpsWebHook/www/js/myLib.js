@@ -1451,7 +1451,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
             
         }
 
-        create(ParentID, device ){ 
+        create(ParentID, device, action ){ 
             // Liste einlesen
             var Liste = new data();
             var SourceList = Liste.getCDLib();
@@ -1477,9 +1477,10 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                     elem.classList.add("iconTVToggle");
                     elem.classList.remove("iconTV");
                     item['selected'] = true;
-                         
-                    cmd = ("command(" + device + ",loadCDPlaylist," + item['FV'] + ")") ;
-                    send(cmd);
+                    if(action == "play"){   
+                        cmd = ("command(" + device + ",playAlbum," + item['FV'] + ")") ;
+                        send(cmd);
+                    }
                 }  
        
                 document.getElementById(ParentID).appendChild(elem);
