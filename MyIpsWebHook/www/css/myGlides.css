@@ -2949,9 +2949,9 @@ img.highlight { border: 5px solid blue; }
 .grey {
     background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%)); /* CHROME */
 } 
+.grey:hover {
+    background: -webkit-linear-gradient(hsl(205, 10%, 25%), hsl(204, 10%, 45%), hsl(205, 10%, 25%));  
+}
 .grey:active {
     background: -webkit-linear-gradient(hsl(205, 10%, 5%), hsl(205, 10%, 15%), hsl(205, 10%, 5%));
-}
-.grey:hover {
-    background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%), hsl(205, 10%, 15%));  
 }
