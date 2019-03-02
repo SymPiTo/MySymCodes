@@ -647,7 +647,14 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	height: 95vh;
 
  }
-
+ 
+.MenuStart{
+	position:relative;
+	top: 5vh;
+        width: 0px;
+	height: 95vh;
+ }
+ 
 .MenuB{
 	position:relative;
 	top: 5vh;
