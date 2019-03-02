@@ -967,8 +967,8 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 }
 /*
 .GlideButton.grey:hover {
-	  /*Gradient*/
-	  background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%)); /* CHROME */
+	
+	  background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%)); 
 }
 */
 .GlideButton.pink:hover {

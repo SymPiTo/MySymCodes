@@ -12,7 +12,10 @@
    function goodNight(){
        var x = "ghjgh";
    }
-
+   
+   function Bye(){
+       var x = "ghjgh";
+   }
 
     function SetCDCover(player){
             var x = document.getElementById("placeCDLibhere").childElementCount;
