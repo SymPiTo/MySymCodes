@@ -530,10 +530,15 @@
   
  	 
                 
-                
-		<div class="StartScreen">
+
+		<div id=MainStarScreen class="StartScreen">
 			<img src="images/MyHomeControl.png"  alt="image not found" style="width: 400px; padding-top:50px" />
 		</div>
+  
+        <script>             
+            var CtrlBtnTVList = new CtrlButton();
+            CtrlBtnTVList.create("MainStarScreen", "63vh", "2%",  "normal", "purple", "Good Night", "ctrlWindow", "TVChannel");
+        </script>
 <!-- ************************ Container  ************************  -->
 
 
@@ -919,7 +924,7 @@
         var FontBtnASsz = new FontButtonNew();
         FontBtnASsz.create("MainSonosSZ", "sandy", "mid", "83vh", "2%", "fa fa-backward", "send('command(SonosSZ,Key,PREVIOUS)')");
         var FontBtnBSsz = new FontButtonNew();
-        FontBtnBSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "12%", "fa fa-pause", "send('command(SonosSZ,Key,PAUSE)')");
+        FontBtnBSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "12%", "fa fa-pause", "send('command(SonosSZ,Key,PAUS E)')");
         var FontBtnCSsz = new FontButtonNew();
         FontBtnCSsz.create("MainSonosSZ", "sandy", "mid", "83vh", "22%", "fa fa-play", "send('command(SonosSZ,Key,PLAY)')");
         var FontBtnDSsz = new FontButtonNew();
