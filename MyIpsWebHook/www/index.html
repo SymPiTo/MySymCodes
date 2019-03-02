@@ -270,6 +270,8 @@
             LeftMenuFP.create("MainMenu", "LeftMenuFF", "pink", "Floorplan", "_Floorplan_BW_web.png", "", "floorplan","MM" ); 
             var LeftMenuSec = new GlideButton();
             LeftMenuSec.create("MainMenu", "LeftSec", "red", "Alarmanlage", "_AlarmAnlage_BW_web.png", "MenuSec", "", "MM" ); 
+            var LeftMenuWetter = new GlideButton();
+            LeftMenuWetter.create("MainMenu", "LeftWetter", "red", "Wetter", "_AlarmAnlage_BW_web.png", "MenuWetter", "", "MM" ); 
             var LeftMenuWZ = new GlideButton();
             LeftMenuWZ.create("MainMenu", "LeftWZ", "cyan", "Wohnzimmer", "_Wohnzimmer_BW_web.png", "MenuWZ", "", "MM" );  
             var LeftMenuKZ = new GlideButton();
@@ -1115,9 +1117,22 @@
         <script>
             var BatDis = new StateDisplay();
             BatDis.create("MainBatAlarmCtrl", "red", "", "50px", "20px", "long", "20px", "Battery Alarm", "String");
-        </script>    
+        </script> 
         
-        
+        <!-- ***********************************************************************************      -->
+	<!--  ************************          Wetter     ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Main id ="MainWetter" class="Wetter"></Main>
+     <script>
+     </script>
+     
+        <!-- ***********************************************************************************      -->
+	<!--  ************************          WetterCtrl     ************************      -->   
+        <!-- ***********************************************************************************      -->
+		<Ctrl id ="MainWetterCtrl" class="WetterCtrl"></Ctrl>
+     <script>
+     </script> 
+     
         <!-- ***********************************************************************************      -->
 	<!--  ************************          INDEX E - Floorplan     ************************      -->   
         <!-- ***********************************************************************************      -->

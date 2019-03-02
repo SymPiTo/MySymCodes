@@ -86,6 +86,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .MenuRollo,
 .MenuNet,
 .HeizungAll,
+.Wetter,
+.WetterCtrl,
 .HeizungWZ,
 .HeizungCtrlWZ,
 .HeizungKZ,
@@ -133,7 +135,6 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .ScrollReihe,
 .TimePicker,
 .TimePickerX,
-.Wetter,
 .SecurityCode,
 .SecCodeCtrl,
 .WaterAlarm,
@@ -436,6 +437,26 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
         left: 74vw;
 	background: hsl(28, 100%, 10%);
 }
+/* Wetter Main and Ctrl window color =  */
+.Wetter{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(28, 100%, 10%);
+}
+.WetterCtrl{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(28, 100%, 10%);
+}
+
+
+
 
 .Rezepte{
 	position:absolute;
@@ -571,14 +592,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	height: 95vh;
 	background: hsl(300, 100%, 10%);
 }
-.Wetter {
-	position:absolute;
-	top: 5vh;
-	width: 0px;
-	height: 95vh;
-        left:16.2vw;
-	background: hsl(300, 100%, 10%);
-}
+ 
 .floorplan {
 	position:absolute;
 	top: 5vh;
