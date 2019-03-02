@@ -9,7 +9,9 @@
     }
     
 
-
+   function goodNight(){
+       
+   }
 
 
     function SetCDCover(player){
