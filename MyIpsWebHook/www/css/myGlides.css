@@ -2022,9 +2022,10 @@ width:40%;
 .ctrlbutton.blueToggle {
 	background: -webkit-linear-gradient(hsl(200, 100%, 20%), hsl(200, 100%, 15%),hsl(200, 100%, 10%),  hsl(200, 100%, 15%), hsl(200, 100%, 20%));
 }
-.ctrlbutton.grey {
+/*.ctrlbutton.grey {
 	background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%), hsl(200, 100%, 25%));
 }
+*/
 .ctrlbutton.midgreen {
     background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
 } 
@@ -2055,10 +2056,11 @@ width:40%;
 .ctrlbutton.blue:active {
 	background: -webkit-linear-gradient(hsl(200, 100%, 5%), hsl(200, 100%, 15%), hsl(200, 100%, 5%));
 }
-
+/*
 .ctrlbutton.grey:active {
 	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%));
 }
+*/
 .ctrlbutton.midgreen:active {
     background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
 } 
@@ -2092,16 +2094,6 @@ width:40%;
 }   
 
 
-.sandyLight {
-    background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%))
-}
-.sandy {
-    background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%), hsl(28, 100%, 25%));
-}
-.sandy:active {
-	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%), hsl(28, 100%, 5%));
-}
- 
 
 
 .var{
@@ -2936,3 +2928,24 @@ img.highlight { border: 5px solid blue; }
     to { background-color: #FF0; }
 }
 /* ****************************************************************************** */
+
+
+
+/* *********************  COLORS ********************************** */
+.sandyLight {
+    background: -webkit-linear-gradient(hsl(28, 100%, 75%), hsl(28, 100%, 95%), hsl(28, 100%, 75%))
+}
+.sandy {
+    background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%), hsl(28, 100%, 25%));
+}
+.sandy:active {
+	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%), hsl(28, 100%, 5%));
+}
+ 
+
+.grey {
+	background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%), hsl(200, 100%, 25%));
+}
+.grey:active {
+	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 0%, 5%));
+}
