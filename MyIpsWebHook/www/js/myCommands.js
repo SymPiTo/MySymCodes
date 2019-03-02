@@ -10,7 +10,7 @@
     
 
    function goodNight(){
-       
+       var x = "ghjgh";
    }
 
 
