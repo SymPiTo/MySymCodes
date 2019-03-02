@@ -2943,7 +2943,7 @@ img.highlight { border: 5px solid blue; }
     background: -webkit-linear-gradient(hsl(28, 100%, 25%), hsl(28, 100%, 45%), hsl(28, 100%, 25%));
 }
 .sandy:active {
-	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%), hsl(28, 100%, 5%));
+	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 25%), hsl(28, 100%, 5%));
 }
  
 .grey {
@@ -2953,5 +2953,5 @@ img.highlight { border: 5px solid blue; }
     background: -webkit-linear-gradient(hsl(205, 10%, 25%), hsl(204, 10%, 45%), hsl(205, 10%, 25%));  
 }
 .grey:active {
-    background: -webkit-linear-gradient(hsl(205, 10%, 5%), hsl(205, 10%, 15%), hsl(205, 10%, 5%));
+    background: -webkit-linear-gradient(hsl(205, 10%, 5%), hsl(205, 10%, 25%), hsl(205, 10%, 5%));
 }
