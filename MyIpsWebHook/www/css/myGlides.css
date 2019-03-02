@@ -912,10 +912,12 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	  /*Gradient*/
 	  background: -webkit-linear-gradient(hsl(300, 100%, 25%), hsl(300, 100%, 45%), hsl(300, 100%, 25%)); /* CHROME */
 }
+/*
 .GlideButton.grey {
-	  /*Gradient*/
-	  background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%)); /* CHROME */
+	   
+	  background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));  
 }
+*/
 .GlideButton.pink {
 	  /*Gradient*/
 	  background: -webkit-linear-gradient(hsl(350, 100%, 65%), hsl(350, 100%, 85%), hsl(350, 100%, 65%)); /* CHROME */
@@ -963,10 +965,12 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	  /*Gradient*/
 	  background: -webkit-linear-gradient(hsl(300, 100%, 15%), hsl(300, 100%, 25%),hsl(300, 100%, 15%)); /* CHROME */
 }
+/*
 .GlideButton.grey:hover {
 	  /*Gradient*/
 	  background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%)); /* CHROME */
 }
+*/
 .GlideButton.pink:hover {
 	  /*Gradient*/
 	  background: -webkit-linear-gradient(hsl(350, 100%, 75%), hsl(350, 100%, 85%)); /* CHROME */
@@ -2942,10 +2946,12 @@ img.highlight { border: 5px solid blue; }
 	background: -webkit-linear-gradient(hsl(28, 100%, 5%), hsl(28, 100%, 15%), hsl(28, 100%, 5%));
 }
  
-
 .grey {
-	background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%), hsl(200, 0%, 25%));
-}
+    background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%)); /* CHROME */
+} 
 .grey:active {
-	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 0%, 5%));
+    background: -webkit-linear-gradient(hsl(205, 10%, 5%), hsl(205, 10%, 15%), hsl(205, 10%, 5%));
+}
+.grey:hover {
+    background: -webkit-linear-gradient(hsl(205, 10%, 15%), hsl(204, 10%, 25%), hsl(205, 10%, 15%));  
 }
