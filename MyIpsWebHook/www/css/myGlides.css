@@ -209,7 +209,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 	position: absolute;
 	top: 5vh;
         left: 28vw;
-	width: 72vw;
+	width: 0vw;
         height:95vh;
 	background: -webkit-linear-gradient(hsl(750, 100%, 85%), hsl(450, 100%, 65%), hsl(750, 100%, 85%)); /* CHROME */
 	background-repeat: no-repeat;
