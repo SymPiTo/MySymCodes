@@ -611,57 +611,52 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 
 
 .MenuWZ{
-	position:relative;
-	top: 5vh;
+    position:relative;
+    top: 5vh;
     width: 0px;
-	height: 95vh;
-
+    height: 95vh;
 }
 
 .MenuSZ{
     position:relative;
     top: 5vh;
     width: 0px;
-    height: 125vh;
-	
+    height: 125vh;	
 }
 
 .MenuKZ{
-	position:relative;
-	top: 5vh;
+    position:relative;
+    top: 5vh;
     width: 0px;
-	height: 95vh;
-
+    height: 95vh;
 }
 
 .MenuK{
-	position:relative;
-	top: 5vh;
+    position:relative;
+    top: 5vh;
     width: 0px;
-	height: 95vh;
-
+    height: 95vh;
  }
+ 
 .MenuSec{
-	position:relative;
-	top: 5vh;
-        width: 0px;
-	height: 95vh;
-
+    position:relative;
+    top: 5vh;
+    width: 0px;
+    height: 95vh;
  }
  
 .MenuStart{
-	position:relative;
-	top: 5vh;
-        width: 0px;
-	height: 95vh;
+    position:relative;
+    top: 5vh;
+    width: 0px;
+    height: 450px;
  }
  
 .MenuB{
-	position:relative;
-	top: 5vh;
+    position:relative;
+    top: 5vh;
     width: 0px;
-	height: 95vh;
-
+    height: 95vh;
  }
 
 .MenuMultimedia{
@@ -669,16 +664,13 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
     top: 5vh;
     width: 0px;
     height: 95vh;
-
 }
 
 .MenuHz{
-	position:relative;
-	top: 5vh;
-
+    position:relative;
+    top: 5vh;
     width: 0px;
-	height: 450px;
-	 
+    height: 450px;	 
 }
 
 .MenuRollo{
