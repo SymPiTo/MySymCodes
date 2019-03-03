@@ -88,6 +88,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .HeizungAll,
 .Wetter,
 .WetterCtrl,
+.Clock,
+.ClockCtrl,
 .HeizungWZ,
 .HeizungCtrlWZ,
 .HeizungKZ,
@@ -196,6 +198,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .CEOLServerCtrl::-webkit-scrollbar,
 .UpnpServerCtrl::-webkit-scrollbar,
 .Wetter::-webkit-scrollbar,
+.Clock::-webkit-scrollbar,
 .ScrollReihe::-webkit-scrollbar,
 .TimePicker::-webkit-scrollbar,
 .TimePickerX::-webkit-scrollbar,
@@ -456,7 +459,22 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	background: hsl(38, 100%, 10%);
 }
 
-
+.Clock{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 16.2vw;
+	background: hsl(38, 100%, 10%);
+}
+.ClockCtrl{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left: 74vw;
+	background: hsl(38, 100%, 10%);
+}
 
 
 .Rezepte{
@@ -2946,6 +2964,35 @@ img.highlight { border: 5px solid blue; }
     to { background-color: #FF0; }
 }
 /* ****************************************************************************** */
+
+
+ 
+ 
+#clock {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ffffff;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+    .time {
+        letter-spacing: 0.05em;
+        font-size: 80px;
+        padding: 5px 0;
+    }
+    .date {
+        letter-spacing: 0.1em;
+        font-size: 24px;
+    }
+    .text {
+        letter-spacing: 0.1em;
+        font-size: 12px;
+        padding: 20px 0 0;
+    }
+}
 
 
 
