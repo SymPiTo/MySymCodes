@@ -15,7 +15,7 @@
         <script src="js/data.js"></script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
 
         
         <link href="http://allfont.net/allfont.css?fonts=dot-matrix" rel="stylesheet" type="text/css" /> 
@@ -1142,13 +1142,13 @@
             </div>
         </Main>
      <script>
-                var clock = new Vue({
+        var clock = new Vue({
            el: '#clock',
            data: {
                time: '',
                date: ''
            }
-       });
+        });
 
        var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
        var timerID = setInterval(updateTime, 1000);
