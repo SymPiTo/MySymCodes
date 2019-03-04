@@ -467,7 +467,9 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	width: 0px;
 	height: 95vh;
         left: 16.2vw;
-	 
+    background: #0f3854;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+    background-size: 100%; 
 }
 .ClockCtrl{
 	position:absolute;
@@ -475,7 +477,9 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	width: 0px;
 	height: 95vh;
         left: 74vw;
-	
+    background: #0f3854;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+    background-size: 100%;
 }
 
 
