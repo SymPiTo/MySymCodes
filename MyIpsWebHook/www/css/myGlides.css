@@ -3013,17 +3013,53 @@ p {
     }
 }
 /*Timer */
-#message {
-  color: #DDD;
-  font-size: 50px;
-  margin-bottom: 20px;
-}
+  html {
+		box-sizing:border-box;
+  }
 
-#timer {
-  font-size: 200px;
-  line-height: 1;
-  margin-bottom: 40px;
-}
+  *, *::before, *::after {
+		box-sizing: inherit;
+  }
+
+  #app {
+		text-align: center;
+  }
+
+  body {
+		font-family: sans-serif;
+		padding: 0;
+		margin: 0;
+  }
+  #app {
+		padding: 10px;
+		margin: 0 auto;
+		max-width: 1000px;
+  }
+
+  input[type=number] {
+		padding: 10px;
+		font-size: 20px;
+		width:100%;
+  }
+
+  button {
+		padding:20px;
+  }
+
+  [v-cloak] {
+		opacity:0;
+  }
+
+  label {
+		width:20%;
+		padding:10px 0;
+		display:inline-block;
+  }
+
+  .timer {
+		font-size: 4em;
+		margin: 20px;
+  }
 
 /* *********************  COLORS ********************************** */
 .sandyLight {

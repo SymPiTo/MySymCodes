@@ -1171,106 +1171,120 @@
 	<!--  ************************          ClockCtrl     ************************      -->   
         <!-- ***********************************************************************************      -->
         <Ctrl id ="MainClockCtrl" class="ClockCtrl">
-            <!-- our template -->
-            <section id="app" class="hero is-info is-fullheight is-bold">
-            <div class="hero-body">
-            <div class="container has-text-centered">
-
-              <h2 class="title is-6">{{title}}</h2>
-
-              <div id="timer">
-                <span id="minutes">{{ minutes }}</span>
-                <span id="middle">:</span>
-                <span id="seconds">{{ seconds }}</span>
-              </div>
-
-              <div id="buttons">
-            <!--     Start TImer -->
-                <button 
-                  id="start" 
-                  class="button is-dark is-large" 
-                  v-if="!timer"
-                  @click="startTimer">
-                    <i class="far fa-play-circle"></i>
-                </button>
-            <!--     Pause Timer -->
-                <button 
-                  id="stop" 
-                  class="button is-dark is-large" 
-                  v-if="timer"
-                  @click="stopTimer">
-                    <i class="far fa-pause-circle"></i>
-                </button>
-            <!--     Restart Timer -->
-                <button 
-                  id="reset" 
-                  class="button is-dark is-large" 
-                  v-if="resetButton"
-                  @click="resetTimer">
-                    <i class="fas fa-undo"></i>
-                </button>
-              </div>
-
-            </div>
-            </div>
-            </section> 
+                <div id="app" v-cloak>
+                       <h1>Timer</h1>
+                       <timer-setup v-if="!time" @set-time="setTime"></timer-setup>
+                        <div v-else>
+                                <timer :time="prettyTime"></timer>
+                                <div>
+                                         <button v-if="!isRunning" @click="start">Start</button>
+                                         <button v-if="isRunning" @click="stop">Stop</button>
+                                         <button @click="reset">Reset</button>
+                                </div>
+                       </div>       
+               </div>
             
             
         </Ctrl>
      <script>
-                    const app = new Vue({
-             el: '#app',
-             // ========================
-             data: {
-               timer: null,
-               totalTime: (25 * 60),
-               resetButton: false,
-               title: "Let the countdown begin!!"
-             },
-             // ========================
-             methods: {
-               startTimer: function() {
-                 this.timer = setInterval(() => this.countdown(), 1000);
-                 this.resetButton = true;
-                 this.title = "Greatness is within sight!!"
-               },
-               stopTimer: function() {
-                 clearInterval(this.timer);
-                 this.timer = null;
-                 this.resetButton = true;
-                 this.title = "Never quit, keep going!!"
-               },
-               resetTimer: function() {
-                 this.totalTime = (25 * 60);
-                 clearInterval(this.timer);
-                 this.timer = null;
-                 this.resetButton = false;
-                 this.title = "Let the countdown begin!!"
-               },
-               padTime: function(time) {
-                 return (time < 10 ? '0' : '') + time;
-               },
-               countdown: function() {
-                 if(this.totalTime >= 1){
-                   this.totalTime--;
-                 } else{
-                   this.totalTime = 0;
-                   this.resetTimer()
-                 }
-               }
-             },
-             // ========================
-             computed: {
-               minutes: function() {
-                 const minutes = Math.floor(this.totalTime / 60);
-                 return this.padTime(minutes);
-               },
-               seconds: function() {
-                 const seconds = this.totalTime - (this.minutes * 60);
-                 return this.padTime(seconds);
-               }
-             }
-           })
+let timerSetup = {
+	template:`
+	<form>
+		 <label for="min">Minutes<br />
+		 <input type="number" v-model="minutes" name="time_m" id="min" min="0" max="59">
+		 </label>
+		 <label for="sec">Secondes<br />
+			  <input type="number" v-model="secondes" name="time_s" id="sec" max="59" min="0">
+		 </label>
+		 <button type="button" @click="sendTime">Set time</button>
+	</form>`,
+	data () {
+		 return {
+			  minutes:0,
+			  secondes:0
+		 }
+	},
+	methods: {
+		 sendTime() {
+			  this.$emit('set-time', {minutes:this.minutes, secondes:this.secondes})
+		 }
+	}
+}
+
+let Timer = {
+	template: `
+		 <div class="timer">{{ time | prettify }}</div>
+	`,
+	props:['time'],
+	filters: {
+		 prettify : function(value) {
+			  let data = value.split(':')
+			  let minutes = data[0]
+			  let secondes = data[1]
+			  if (minutes < 10) {
+					minutes = "0"+minutes
+			  }
+			  if (secondes < 10) {
+					secondes = "0"+secondes
+			  }
+			  return minutes+":"+secondes
+		 }
+	}
+}
+
+let app = new Vue({
+	el:"#app",
+	components: {
+		 'timer-setup':timerSetup,
+		 'timer':Timer
+	},
+	data: {
+		 isRunning: false,
+		 minutes:0,
+		 secondes:0,
+		 time:0,
+		 timer:null,
+		 sound:new Audio("http://s1download-universal-soundbank.com/wav/nudge.wav")
+	},
+	computed: {
+		prettyTime () {
+			 let time = this.time / 60
+			 let minutes = parseInt(time)
+			 let secondes = Math.round((time - minutes) * 60)
+			 return minutes+":"+secondes
+		}
+	},
+	methods: {
+		 start () {
+			 this.isRunning = true
+			 if (!this.timer) {
+				  this.timer = setInterval( () => {
+						if (this.time > 0) {
+							 this.time--
+						} else {
+							 clearInterval(this.timer)
+							 this.sound.play()
+							 this.reset()
+						}
+				  }, 1000 )
+			 }
+		 },
+		 stop () {
+			 this.isRunning = false
+			 clearInterval(this.timer)
+			 this.timer = null
+		 },
+		 reset () {
+			  this.stop()
+			  this.time = 0
+			  this.secondes = 0
+			  this.minutes = 0
+		 },
+		 setTime (payload) {
+			 this.time = (payload.minutes * 60 + payload.secondes)
+		 }
+	}
+})
      </script> 
 
         
