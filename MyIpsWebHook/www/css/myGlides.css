@@ -3005,10 +3005,6 @@ img.highlight { border: 5px solid blue; }
 /*Timer */
  
 
-  *, *::before, *::after {
-		box-sizing: inherit;
-  }
-
   #app {
 		text-align: center;
   }
