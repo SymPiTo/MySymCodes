@@ -3003,9 +3003,7 @@ img.highlight { border: 5px solid blue; }
     }
 }
 /*Timer */
-  html {
-		box-sizing:border-box;
-  }
+ 
 
   *, *::before, *::after {
 		box-sizing: inherit;
