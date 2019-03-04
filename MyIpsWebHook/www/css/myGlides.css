@@ -10,11 +10,13 @@ body {
 	
 }
 /*Just removing default browser padding/margin*/
+/*
 html,
 body {
 	color: #ebebeb;
 	background-color: #000000;
 }
+*/
 
 button {
 	 
