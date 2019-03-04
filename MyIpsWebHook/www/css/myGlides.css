@@ -467,7 +467,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	width: 0px;
 	height: 95vh;
         left: 16.2vw;
-	background: hsl(38, 100%, 10%);
+	 
 }
 .ClockCtrl{
 	position:absolute;
@@ -475,7 +475,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	width: 0px;
 	height: 95vh;
         left: 74vw;
-	background: hsl(38, 100%, 10%);
+	
 }
 
 
