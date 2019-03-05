@@ -3009,7 +3009,7 @@ img.highlight { border: 5px solid blue; }
 		text-align: center;
   }
 
- 
+,
   #app {
 		padding: 10px;
 		margin: 0 auto;
@@ -3025,7 +3025,7 @@ img.highlight { border: 5px solid blue; }
   }
 
   button {
-		padding:40px;
+		padding:20px;
                 background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
   }
 
@@ -3043,7 +3043,7 @@ img.highlight { border: 5px solid blue; }
 		font-size: 4em;
                 
                 color: white;
-		margin: 40px;
+		margin: 60px;
   }
 
 /* *********************  COLORS ********************************** */
