@@ -1144,29 +1144,7 @@
 
             <button class="start">Start Clock</button>
         </Main>
-        <script>
-		var clock;
-		
-		$(document).ready(function() {
-			
-			clock = $('.clock').FlipClock(10, {
-		        clockFace: 'MinuteCounter',
-		        countdown: true,
-		        autoStart: false,
-		        callbacks: {
-		        	start: function() {
-		        		$('.message').html('The clock has started!');
-		        	}
-		        }
-		    });
 
-		    $('.start').click(function(e) {
-
-		    	clock.start();
-		    });
-
-		});
-        </script>
      
         <!-- ***********************************************************************************      -->
 	<!--  ************************          ClockCtrl     ************************      -->   
@@ -2328,5 +2306,30 @@
  
 
         </script> 
+        
+        <script>
+		var clock;
+		
+		$(document).ready(function() {
+			
+			clock = $('.clock').FlipClock(10, {
+		        clockFace: 'MinuteCounter',
+		        countdown: true,
+		        autoStart: false,
+		        callbacks: {
+		        	start: function() {
+		        		$('.message').html('The clock has started!');
+		        	}
+		        }
+		    });
+
+		    $('.start').click(function(e) {
+
+		    	clock.start();
+		    });
+
+		});
+        </script>
+        
    </body>
 </html>
