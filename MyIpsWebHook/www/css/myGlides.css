@@ -3018,7 +3018,7 @@ img.highlight { border: 5px solid blue; }
 
   input[type=number] {
 		padding: 10px;
-		font-size: 30px;
+		font-size: 40px;
                 color:white;
                 background-color: transparent;
 		width:100%;
@@ -3027,9 +3027,6 @@ img.highlight { border: 5px solid blue; }
   button {
 		padding:20px;
                 background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
-                position:absolute;
-                top:200px;
-                left: 100px;
   }
 
   [v-cloak] {
@@ -3037,8 +3034,8 @@ img.highlight { border: 5px solid blue; }
   }
 
   label {
-		width:40%;
-		padding:1px 0;
+		width:20%;
+		padding:10px 0;
 		display:inline-block;
   }
 
@@ -3046,7 +3043,7 @@ img.highlight { border: 5px solid blue; }
 		font-size: 4em;
                 
                 color: white;
-		margin: 10px;
+		margin: 40px;
   }
 
 /* *********************  COLORS ********************************** */
