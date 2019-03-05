@@ -1180,11 +1180,11 @@
 	<button class="start">Start Clock</button>
         </Ctrl>
      <script>
-		var clock;
+		var clock1;
 		
 		$(document).ready(function() {
 			
-			clock = $('.clock').FlipClock(10, {
+			clock1 = $('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
@@ -1197,7 +1197,7 @@
 
 		    $('.start').click(function(e) {
 
-		    	clock.start();
+		    	clock1.start();
 		    });
 
 		});
