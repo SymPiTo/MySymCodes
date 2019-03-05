@@ -90,8 +90,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .HeizungAll,
 .Wetter,
 .WetterCtrl,
-.Clock,
-.ClockCtrl,
+.Uhr,
+.UhrCtrl,
 .HeizungWZ,
 .HeizungCtrlWZ,
 .HeizungKZ,
@@ -200,7 +200,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .CEOLServerCtrl::-webkit-scrollbar,
 .UpnpServerCtrl::-webkit-scrollbar,
 .Wetter::-webkit-scrollbar,
-.Clock::-webkit-scrollbar,
+.Uhr::-webkit-scrollbar,
 .ScrollReihe::-webkit-scrollbar,
 .TimePicker::-webkit-scrollbar,
 .TimePickerX::-webkit-scrollbar,
@@ -461,7 +461,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
 	background: hsl(38, 100%, 10%);
 }
 
-.Clock{
+.Uhr{
 	position:absolute;
 	top: 5vh;
 	width: 0px;
@@ -471,7 +471,7 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
     background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
     background-size: 100%; 
 }
-.ClockCtrl{
+.UhrCtrl{
 	position:absolute;
 	top: 5vh;
 	width: 0px;
