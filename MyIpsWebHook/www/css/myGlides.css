@@ -3028,8 +3028,19 @@ img.highlight { border: 5px solid blue; }
 		padding:20px;
                 background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
   }
-
-  [v-cloak] {
+  button {
+		padding:20px;
+                background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
+  }
+  button2 {
+		padding:20px;
+                background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
+  }
+  button3 {
+		padding:20px;
+                background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
+  }
+  [v-cl1oak] {
 		opacity:0;
   }
 
