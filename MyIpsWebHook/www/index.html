@@ -14,7 +14,7 @@
         <script src="js/myLib.js"></script>
         <script src="js/data.js"></script>
         
-		<link rel="stylesheet" href="css/flipclock.css">
+		<link rel="stylesheet" type="text/css" href="css/flipclock.css">
 		<script src="js/flipclock.min.js"></script>
                 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -1154,11 +1154,11 @@
             <button class="start">Start Clock</button>
         </Ctrl>
      <script>
-		var clockA;
+		var clock;
 		
 		$(document).ready(function() {
 			
-			clockA = $('.clock').FlipClock(10, {
+			clock = $('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
@@ -1171,7 +1171,7 @@
 
 		    $('.start').click(function(e) {
 
-		    	clockA.start();
+		    	clock.start();
 		    });
 
 		});
