@@ -3009,15 +3009,10 @@ img.highlight { border: 5px solid blue; }
 		text-align: center;
   }
 
-  body {
-		font-family: sans-serif;
-		padding: 0;
-		margin: 0;
-  }
+
   #app {
 		padding: 10px;
-		margin: 0 auto;
-		max-width: 1000px;
+
   }
 
   input[type=number] {
