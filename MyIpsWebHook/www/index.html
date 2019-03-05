@@ -1177,9 +1177,9 @@
                         <div v-else>
                                 <timer :time="prettyTime"></timer>
                                 <div>
-                                         <button v-if="!isRunning" @click="start">Start</button>
-                                         <button v-if="isRunning" @click="stop">Stop</button>
-                                         <button @click="reset">Reset</button>
+                                         <button1 v-if="!isRunning" @click="start">Start</button>
+                                         <button2 v-if="isRunning" @click="stop">Stop</button>
+                                         <button3 @click="reset">Reset</button>
                                 </div>
                        </div>       
                </div>
