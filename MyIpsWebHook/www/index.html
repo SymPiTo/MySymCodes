@@ -1174,17 +1174,17 @@
 	<!--  ************************          ClockCtrl     ************************      -->   
         <!-- ***********************************************************************************      -->
         <Ctrl id ="MainClockCtrl" class="UhrCtrl">
-	<div class="clock" style="margin:2em;"></div>
-	<div class="message"></div>
+            <div class="clock" style="margin:2em;"></div>
+            <div class="message"></div>
 
-	<button class="start">Start Clock</button>
+            <button class="start">Start Clock</button>
         </Ctrl>
      <script>
-		var clock1;
+		var clockA;
 		
 		$(document).ready(function() {
 			
-			clock1 = $('.clock').FlipClock(10, {
+			clockA = $('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
@@ -1197,7 +1197,7 @@
 
 		    $('.start').click(function(e) {
 
-		    	clock1.start();
+		    	clockA.start();
 		    });
 
 		});
