@@ -3012,7 +3012,8 @@ img.highlight { border: 5px solid blue; }
 
   #app {
 		padding: 10px;
-
+		margin: 0 auto;
+		max-width: 1000px;
   }
 
   input[type=number] {
@@ -3033,7 +3034,7 @@ img.highlight { border: 5px solid blue; }
   }
 
   label {
-		width:20%;
+		width:40%;
 		padding:10px 0;
 		display:inline-block;
   }
