@@ -3031,7 +3031,7 @@ img.highlight { border: 5px solid blue; }
                 top:200px;
                 left:100px;
   }
-  button {
+  button1 {
 		padding:20px;
                 background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
   }
