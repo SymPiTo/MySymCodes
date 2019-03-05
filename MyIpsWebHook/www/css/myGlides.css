@@ -3018,10 +3018,10 @@ img.highlight { border: 5px solid blue; }
 
   input[type=number] {
 		padding: 10px;
-		font-size: 40px;
+		font-size: 30px;
                 color:white;
                 background-color: transparent;
-		width:100px;
+		width:50px;
   }
 
   button {
