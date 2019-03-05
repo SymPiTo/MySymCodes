@@ -3021,12 +3021,15 @@ img.highlight { border: 5px solid blue; }
 		font-size: 40px;
                 color:white;
                 background-color: transparent;
-		width:150px;
+		width:100px;
   }
 
   button {
 		padding:20px;
                 background: -webkit-linear-gradient(hsl(205, 10%, 45%), hsl(205, 10%, 75%), hsl(205, 10%, 45%));
+                position:absolute;
+                top:200px;
+                left: 100px;
   }
 
   [v-cloak] {
