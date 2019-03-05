@@ -3021,7 +3021,7 @@ img.highlight { border: 5px solid blue; }
 		font-size: 30px;
                 color:white;
                 background-color: transparent;
-		width:50px;
+		width:100%;
   }
 
   button {
