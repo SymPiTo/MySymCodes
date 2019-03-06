@@ -2519,13 +2519,11 @@ trait SamsungUPNP {
 
     try{
 
-      $client     = new SoapClient(null, array( "location"   => "https://"."192.168.178.135:52235".$path,
+      $client     = new SoapClient(null, array( "location"   => "http://"."192.168.178.135:52235".$path,
 
                                                "uri"        => $uri,
 
-                                               "trace"      => true,
-                                                "login" => "",
-                                                "password" => ""
+                                               "trace"      => true 
           ));
 
 
