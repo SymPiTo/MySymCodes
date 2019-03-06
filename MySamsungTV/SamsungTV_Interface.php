@@ -2525,7 +2525,7 @@ trait SamsungUPNP {
 
                                                "trace"      => true,
                                                 "login" => "My IPS Raspi",
-                                                "password" => "081260"
+                                                "password" => ""
           ));
 
 
