@@ -2523,7 +2523,9 @@ trait SamsungUPNP {
 
                                                "uri"        => $uri,
 
-                                               "trace"      => true
+                                               "trace"      => true,
+                                                "login" => "",
+                                                "password" => ""
           ));
 
 
