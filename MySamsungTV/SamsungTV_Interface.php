@@ -2524,8 +2524,8 @@ trait SamsungUPNP {
                                                "uri"        => $uri,
 
                                                "trace"      => true,
-                                                "login" => "",
-                                                "password" => ""
+                                                "login" => "My IPS Raspi",
+                                                "password" => "081260"
           ));
 
 
