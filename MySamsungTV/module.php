@@ -312,6 +312,53 @@ class MySamsungTV extends IPSModule
         
         return  $chList[$key]['$chName'];
     }   
+  
+    
+     //*****************************************************************************
+    /* Function: T_setChannelbyName(string $ChName) 
+    ...............................................................................
+     * schaltet auf den übergebenen SenderNamen um
+     * mit TELNET Befehl 
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     * $chName (string)
+    --------------------------------------------------------------------------------
+    Status:   
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function T_setChannelbyName(string $ChName) {
+        $chListSer = $this->readChannelFile();
+        setValue($this->GetIDForIdent("TVchList"), $chListSer);
+        $chList = unserialize($chListSer); 
+        
+        $searchvalue = $ChName;
+        $key = "ChannelName";
+        $array = $chList;
+        $this->SendDebug("setChannelbyName ", "Suchwert: ". $searchvalue, 0);
+        
+        $result = $this->searcharray($searchvalue, $key, $array);
+        if($result){
+           $ch =  $chList[(int)$result];
+           $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
+           $ChType     = $ch['ChType'];
+           $MajorCh    = $ch['MAJORCH'];        
+           $MinorCh    = $ch['MINORCH'];       
+           $PTC        = $ch['PTC'];  
+           $ProgNum    = $ch['PROGNUM'];      
+           $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
+           $this->SendDebug("setChannelbyName ", $channel, 0);
+            
+           $this->sendKey("KEY_".$MajorCh);
+            
+        }
+        else {
+           $this->SendDebug("setChannelbyName ",  $searchvalue." not found", 0);  
+        }
+        
+    }    
+    
+    
     
      //*****************************************************************************
     /* Function: setChannelbyName(string $ChName) 

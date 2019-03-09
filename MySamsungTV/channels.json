@@ -62,15 +62,7 @@
         "PROGNUM":      "12102",
         "ICONURL":      "images/Sender/sat1.png"
     },
-    {
-        "NAME":         "3SAT HD",
-        "ChType":       "CDTV",
-        "MAJORCH":      "9",
-        "MINORCH":      "65534",
-        "PTC":          "36",
-        "PROGNUM":      "41101",
-        "ICONURL":      "images/Sender/3sat.png"
-    },
+ 
     {
         "NAME":         "VOX",
         "ChType":       "CDTV",
@@ -80,6 +72,92 @@
         "PROGNUM":      "12104",
         "ICONURL":      "images/Sender/vox.png"
     },
+    
+    
+    {
+        "NAME":         "3sat",
+        "ChType":       "CDTV",
+        "MAJORCH":      "309",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/3sat.png"
+    },
+    {
+        "NAME":         "arte",
+        "ChType":       "CDTV",
+        "MAJORCH":      "310",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/arte.png"
+    },
+    {
+        "NAME":         "Servus TV",
+        "ChType":       "CDTV",
+        "MAJORCH":      "311",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/servus tv.png"
+    },
+    {
+        "NAME":         "ZDF Info",
+        "ChType":       "CDTV",
+        "MAJORCH":      "421",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/zdf info.png"
+    },
+    {
+        "NAME":         "Kabel 1 Doku",
+        "ChType":       "CDTV",
+        "MAJORCH":      "423",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/kabel eins.png"
+    },
+     {
+        "NAME":         "N24 Doku",
+        "ChType":       "CDTV",
+        "MAJORCH":      "424",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/n24.png"
+    },
+     {
+        "NAME":         "Super RTL",
+        "ChType":       "CDTV",
+        "MAJORCH":      "480",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/super rtl.png"
+    },
+     {
+        "NAME":         "ZDF NEO",
+        "ChType":       "CDTV",
+        "MAJORCH":      "500",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/zdf neo hd.png"
+    },
+     {
+        "NAME":         "Nitro",
+        "ChType":       "CDTV",
+        "MAJORCH":      "501",
+        "MINORCH":      "65534",
+        "PTC":          "1",
+        "PROGNUM":      "12104",
+        "ICONURL":      "images/Sender/rtl nitro.png"
+    },
+    
+    
+    
     {
         "NAME":         "TELE5",
         "ChType":       "CDTV",
@@ -182,7 +260,7 @@
     {
         "NAME":         "WDR Köln HD",
         "ChType":       "CDTV",
-        "MAJORCH":      "20",
+        "MAJORCH":      "320",
         "MINORCH":      "65534",
         "PTC":          "2",
         "PROGNUM":      "11155",
@@ -233,15 +311,7 @@
         "PROGNUM":      "35631",
         "ICONURL":      "images/Sender/rhein%20neckar%20fernsehen.png"
     }, 
-    {
-        "NAME":         "KIKA HD",
-        "ChType":       "CDTV",
-        "MAJORCH":      "181",
-        "MINORCH":      "65534",
-        "PTC":          "2",
-        "PROGNUM":      "11153",
-        "ICONURL":      "images/Sender/kika%20hd.png"
-    }, 
+
     {
         "NAME":         "ZEEOne",
         "ChType":       "CDTV",
@@ -267,7 +337,7 @@
         "MINORCH":      "65534",
         "PTC":          "20",
         "PROGNUM":      "41104",
-        "ICONURL":      "images/Sender/BBC%20%20HD.png"
+        "ICONURL":      "images/Sender/sport1.png"
     }
 ] 
  
