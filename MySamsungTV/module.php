@@ -347,10 +347,10 @@ class MySamsungTV extends IPSModule
            $PTC        = $ch['PTC'];  
            $ProgNum    = $ch['PROGNUM'];      
            $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
-           $this->SendDebug("setChannelbyName ", $channel, 0);
+          
             
            $this->sendKey("KEY_".$MajorCh);
-            
+           $this->SendDebug("send Telenet Command ", "KEY_".$MajorCh, 0);
         }
         else {
            $this->SendDebug("setChannelbyName ",  $searchvalue." not found", 0);  
