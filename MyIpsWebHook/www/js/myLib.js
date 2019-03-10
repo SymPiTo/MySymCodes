@@ -2227,12 +2227,12 @@ class CtrlStatButton {
         create(ParentID, posTop, posLeft, sizeH, sizeW, source){
             
             var ifrm = document.createElement("iframe");
-            ifrm.setAttribute("src", source);
+            //ifrm.setAttribute("src", source);
             ifrm.style.width = sizeW;
             ifrm.style.height = sizeH;
             ifrm.style.position = "relative";
             ifrm.style.left = "50%x";
-            
+            ifrm.srcdoc = "<p>Some new content inside the iframe!</p>";
             this.ID = ifrm; 
             
            document.getElementById(ParentID).appendChild(ifrm);
