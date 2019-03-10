@@ -32,7 +32,7 @@
                 {  No: 23, selected: false,   Sender: "NDR HD",         icon: "NDR Niedersachsen HD.png" }, 
                 {  No: 24, selected: false,   Sender: "SWR BW HD",      icon: "SWR BW HD.png" },  
                 {  No: 25, selected: false,   Sender: "RNF HD",         icon: "rhein%20neckar%20fernsehen.png" },  
-                {  No: 26, selected: false,   Sender: "PHOENIX",        icon: "phoenix.png" },  
+                {  No: 26, selected: false,   Sender: "PHOENIX HD",        icon: "phoenix.png" },  
                 {  No: 27, selected: false,   Sender: "ZEEOne",         icon: "ZEE.ONE.png" }, 
                 {  No: 28, selected: false,   Sender: "SPORT1",         icon: "sport1.png" },  
                 {  No: 29, selected: false,   Sender: "BBC HD",         icon: "BBC HD.png" },
@@ -40,8 +40,8 @@
                 {  No: 32, selected: false,   Sender: "Kabel 1 Doku",   icon: "kabel eins.png" },  
                 {  No: 33, selected: false,   Sender: "N24 Doku",       icon: "n24.png" },  
                 {  No: 34, selected: false,   Sender: "Super RTL",      icon: "super rtl.png" },  
-                {  No: 35, selected: false,   Sender: "Nitro",          icon: "rtl nitro.png" }, 
-                {  No: 36, selected: false,   Sender: "SPORT1",         icon: "sport1.png" } 
+                {  No: 35, selected: false,   Sender: "Nitro",          icon: "rtl nitro.png" } 
+                
                 
                 
             ) 
