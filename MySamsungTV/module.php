@@ -884,7 +884,7 @@ class MySamsungTV extends IPSModule
         
         public function readChannelFile() {
             // Read JSON file
-            $dataPath = IPS_GetKernelDir() . '/modules/MySymCodes/MySamsungTV';
+            $dataPath = IPS_GetKernelDir() . '/modules/MySymCodes/MySamsungTV/';
             $json = file_get_contents($dataPath.'channels.json');
             //Decode JSON
             // true = json als array ausgeben
