@@ -716,7 +716,94 @@ class MySamsungTV extends IPSModule
     
     
     
+     //*****************************************************************************
+    /* Function: getChExtTVlist(string $ChName) 
+    ...............................................................................
+     *  
+     *  
+    ...............................................................................
+    Parameters: none
+    --------------------------------------------------------------------------------
+    Returns:  
+     * $chName (string)
+    --------------------------------------------------------------------------------
+    Status:   
+    //////////////////////////////////////////////////////////////////////////////*/  
+    public function getChExtTVlist(string $ChName) {
+ 
+
+        // TV Spielfilm 
+        $url = 'http://www.tvspielfilm.de/tv-programm/rss/jetzt.xml';      // TV Programm JETZT 
+        //$url = 'http://www.tvspielfilm.de/tv-programm/rss/heute2015.xml';  // TV Programm 20.15 Uhr 
+        //$url = 'http://www.tvspielfilm.de/tv-programm/rss/heute2200.xml';  // TV Programm 22.00 Uhr 
+        //$url = 'http://www.tvspielfilm.de/tv-programm/rss/filme.xml';      // TV Programm SPIELFILME 
+        //$url = 'http://www.tvspielfilm.de/news/rss.xml';                   // TV News 
+
+
+
+// AB HIER NICHTS MEHR ÄNDERN 
+//////IPS_SetScriptTimer($_IPS['SELF'], $refreshtime); 
+        $simpleXMLElement = simplexml_load_file($url, 'SimpleXMLElement', LIBXML_NOCDATA); 
+        $str =  "<table width='auto'>"; 
+
+    // Datenausgabe 
+ 
+    $item = $simpleXMLElement->channel->item; 
+    $item = xmlToArray($item[$i]); 
+    foreach ($array as $item) {
+        if (is_string($item['title']))  { 
+        } 
+        else  { 
+          continue; 
+        } 
+        $titel = "<b style=color:#C00000;>".$item['title']."</b>"; 
+
+        if (is_string($item['description']))  { 
+            $beschreibung = "<small>".$item['description']."</small>"; 
+        } 
+        else  { 
+          $beschreibung = "<small></small>"; 
+        } 
+
+        $text = $titel."<br>".$beschreibung."<br>"; 
+        //$text = utf8_decode($text); 
+        $searchArray = $item; 
+
+        // IF-Abfrage, wenn Array zu Ende, dann abbrechen 
+        //if(isset($searchArray['enclosure']) != true)  { 
+        //   break; 
+        //} 
+        if(array_key_exists('enclosure', $searchArray)) 
+        { 
+            $image = $item['enclosure']['@attributes']['url']; 
+           $str .= "<tr>"; 
+           $str .= "<td width='auto'height='80px'><div><img src=$image alt='not Found'></div></td>"; 
+           $str .= "<td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div>"; 
+           $str .= "</td></tr>\n"; 
+        } 
+        else 
+        { 
+           $str .= "<tr>"; 
+           $str .= "<td></td><td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div></td>"; 
+           $str .= "</tr>\n"; 
+        } 
+
+    }
     
+        $str .= "</table>\n"; 
+
+        return $str; 
+
+
+        function xmlToArray($data) 
+        { 
+            if(is_object($data)) 
+            { 
+                $data = get_object_vars($data); 
+            } 
+              return (is_array($data)) ? array_map(__FUNCTION__,$data) : $data; 
+        } 
+    }
     
     
     
