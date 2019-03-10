@@ -757,44 +757,45 @@ class MySamsungTV extends IPSModule
     $array = json_decode($json,TRUE);
  
     foreach ($array[item]  as $item) {
-         $this->SendDebug("TVProg ", $item, 0);
-        if (is_string($item['title']))  { 
-        } 
-        else  { 
-          continue; 
-        } 
-        $titel = "<b style=color:#C00000;>".$item['title']."</b>"; 
+        //$this->SendDebug("TVProg ", $item, 0);
+        if($item['title']=== $ChName){
+            if (is_string($item['title']))  { 
+            } 
+            else  { 
+              continue; 
+            } 
+            $titel = "<b style=color:#C00000;>".$item['title']."</b>"; 
 
-        if (is_string($item['description']))  { 
-            $beschreibung = "<small>".$item['description']."</small>"; 
-        } 
-        else  { 
-          $beschreibung = "<small></small>"; 
-        } 
+            if (is_string($item['description']))  { 
+                $beschreibung = "<small>".$item['description']."</small>"; 
+            } 
+            else  { 
+              $beschreibung = "<small></small>"; 
+            } 
 
-        $text = $titel."<br>".$beschreibung."<br>"; 
-        //$text = utf8_decode($text); 
-        $searchArray = $item; 
+            $text = $titel."<br>".$beschreibung."<br>"; 
+            //$text = utf8_decode($text); 
+            $searchArray = $item; 
 
-        // IF-Abfrage, wenn Array zu Ende, dann abbrechen 
-        //if(isset($searchArray['enclosure']) != true)  { 
-        //   break; 
-        //} 
-        if(array_key_exists('enclosure', $searchArray)) 
-        { 
-            $image = $item['enclosure']['@attributes']['url']; 
-           $str .= "<tr>"; 
-           $str .= "<td width='auto'height='80px'><div><img src=$image alt='not Found'></div></td>"; 
-           $str .= "<td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div>"; 
-           $str .= "</td></tr>\n"; 
-        } 
-        else 
-        { 
-           $str .= "<tr>"; 
-           $str .= "<td></td><td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div></td>"; 
-           $str .= "</tr>\n"; 
-        } 
-
+            // IF-Abfrage, wenn Array zu Ende, dann abbrechen 
+            //if(isset($searchArray['enclosure']) != true)  { 
+            //   break; 
+            //} 
+            if(array_key_exists('enclosure', $searchArray)) 
+            { 
+                $image = $item['enclosure']['@attributes']['url']; 
+               $str .= "<tr>"; 
+               $str .= "<td width='auto'height='80px'><div><img src=$image alt='not Found'></div></td>"; 
+               $str .= "<td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div>"; 
+               $str .= "</td></tr>\n"; 
+            } 
+            else 
+            { 
+               $str .= "<tr>"; 
+               $str .= "<td></td><td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div></td>"; 
+               $str .= "</tr>\n"; 
+            } 
+        }
     }
     
         $str .= "</table>\n"; 
