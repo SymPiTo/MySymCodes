@@ -743,14 +743,19 @@ class MySamsungTV extends IPSModule
 
 // AB HIER NICHTS MEHR ÄNDERN 
 //////IPS_SetScriptTimer($_IPS['SELF'], $refreshtime); 
-        $simpleXMLElement = simplexml_load_file($url, 'SimpleXMLElement', LIBXML_NOCDATA); 
+        $xmlstring = simplexml_load_file($url, 'SimpleXMLElement', LIBXML_NOCDATA); 
         $str =  "<table width='auto'>"; 
 
     // Datenausgabe 
  
-    $xml = $simpleXMLElement->channel; 
-    $array = $this->xmlToArray($xml); 
-    foreach ($array as $item) {
+   // $xmlstring = $simpleXMLElement->channel; 
+    
+    $xml = simplexml_load_string($xmlstring);
+    $json = json_encode($xml);
+    $array = json_decode($json,TRUE);
+    
+   
+    foreach ($array["channel"] as $item) {
          $this->SendDebug("TVProg ", $item, 0);
         if (is_string($item['title']))  { 
         } 
@@ -799,15 +804,7 @@ class MySamsungTV extends IPSModule
 
     }
     
-    
-        Protected function xmlToArray($data) 
-        { 
-            if(is_object($data)) 
-            { 
-                $data = get_object_vars($data); 
-            } 
-              return (is_array($data)) ? array_map(__FUNCTION__,$data) : $data; 
-        } 
+ 
     
     
     
