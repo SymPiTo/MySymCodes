@@ -759,9 +759,9 @@ class MySamsungTV extends IPSModule
  
     foreach ($array["item"]  as $item) {
         
-         $this->SendDebug("TVProg ", $item, 0);
-         $teile = explode(" | ", $item['title']);
          
+         $teile = explode(" | ", $item['title']);
+         $this->SendDebug("TVProg ", $teile, 0);
         if($teile[3]=== $ChName){
             if (is_string($item['title']))  { 
             } 
