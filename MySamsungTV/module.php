@@ -749,7 +749,7 @@ class MySamsungTV extends IPSModule
     // Datenausgabe 
  
     $item = $simpleXMLElement->channel->item; 
-    $item = xmlToArray($item[$i]); 
+    $item = $this->xmlToArray($item[$i]); 
     foreach ($array as $item) {
         if (is_string($item['title']))  { 
         } 
