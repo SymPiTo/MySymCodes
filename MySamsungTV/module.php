@@ -750,7 +750,7 @@ class MySamsungTV extends IPSModule
  
    $xmlstring = $xml->channel; 
     
-   10.03.2019, 19:38:06 |        TVProg :title | 18:00 | 3sat | Sinuhe, der Ägypter
+   
 
 
      
