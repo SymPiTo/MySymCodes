@@ -331,9 +331,9 @@ class MySamsungTV extends IPSModule
     Status:   
     //////////////////////////////////////////////////////////////////////////////*/  
     public function T_setChannelbyName(string $ChName) {
-        $chListSer = $this->readChannelFile();
-        setValue($this->GetIDForIdent("TVchList"), $chListSer);
-        $chList = unserialize($chListSer); 
+        $chList = $this->readChannelFile();
+        //setValue($this->GetIDForIdent("TVchList"), $chListSer);
+        //$chList = unserialize($chListSer); 
         $this->SendDebug("Such Array ",   $chList, 0);
         $searchvalue = $ChName;
         $key = "ChannelName";
