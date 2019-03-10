@@ -762,7 +762,7 @@ class MySamsungTV extends IPSModule
          
          $teile = explode(" | ", $item['title']);
          $this->SendDebug("TVProg ", $teile, 0);
-        if($teile[3]=== $ChName){
+        if($teile[1]=== $ChName){
             if (is_string($item['title']))  { 
             } 
             else  { 
