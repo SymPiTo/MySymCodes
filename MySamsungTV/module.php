@@ -338,10 +338,10 @@ class MySamsungTV extends IPSModule
         $searchvalue = $ChName;
         $key = "NAME";
         $array = $chList;
-        $this->SendDebug("setChannelbyName ", "Suchwert: ". $searchvalue, 0);
+        //$this->SendDebug("setChannelbyName ", "Suchwert: ". $searchvalue, 0);
         
         $result = $this->searcharray($searchvalue, $key, $array);
-        
+        setValue($this->GetIDForIdent("TVChannel"), $result);
         if($result){
            $ch =  $chList[(int)$result];
            $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
@@ -352,7 +352,7 @@ class MySamsungTV extends IPSModule
            $ProgNum    = $ch['PROGNUM'];      
            $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
           
-           $this->SendDebug("send Telenet Command ", "KEY_".$MajorCh, 0); 
+           //$this->SendDebug("send Telenet Command ", "KEY_".$MajorCh, 0); 
            
             if(intval($MajorCh)<10){
                 $key = 'KEY_'.$MajorCh; 
@@ -378,11 +378,6 @@ class MySamsungTV extends IPSModule
                 $key = 'KEY_ENTER';
                 $result =   $this->sendKey($key);   
             }
-           
-           
-           
-           
-           
         }
         else {
            $this->SendDebug("setChannelbyName ",  $searchvalue." not found", 0);  
@@ -878,7 +873,7 @@ class MySamsungTV extends IPSModule
         }        
 
        
-        public function searcharray($value, $key, $array) {
+        Protected function searcharray($value, $key, $array) {
            foreach ($array as $k => $val) {
                 $this->SendDebug("searcharray vergleiche: ", $val[$key]." mit ".  $value  , 0);
                if ($val[$key] == $value) {
@@ -893,7 +888,7 @@ class MySamsungTV extends IPSModule
         
         
         
-        public function searchForValue($value, $prop, $array) {
+        Protected function searchForValue($value, $prop, $array) {
            $this->SendDebug("searchForValue ", $value." in Prop ".$prop, 0);
            if ($prop=="ChannelName"){
                // $this->SendDebug("searchForValue ", $array, 0);
@@ -912,7 +907,7 @@ class MySamsungTV extends IPSModule
         }
         
         
-        public function readChannelFile() {
+        Protected function readChannelFile() {
             // Read JSON file
             $dataPath = IPS_GetKernelDir() . '/modules/MySymCodes/MySamsungTV/';
             $json = file_get_contents($dataPath.'channels.json');
