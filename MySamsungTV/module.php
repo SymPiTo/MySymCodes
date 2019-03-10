@@ -757,7 +757,7 @@ class MySamsungTV extends IPSModule
     $array = json_decode($json,TRUE);
  
     foreach ($array["item"]  as $item) {
-        //$this->SendDebug("TVProg ", $item, 0);
+         $this->SendDebug("TVProg ", $item, 0);
         if($item['title']=== $ChName){
             if (is_string($item['title']))  { 
             } 
