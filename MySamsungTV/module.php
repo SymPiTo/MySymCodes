@@ -743,17 +743,17 @@ class MySamsungTV extends IPSModule
 
 // AB HIER NICHTS MEHR ÄNDERN 
 //////IPS_SetScriptTimer($_IPS['SELF'], $refreshtime); 
-        $xmlstring = simplexml_load_file($url, 'SimpleXMLElement', LIBXML_NOCDATA); 
+        $xml = simplexml_load_file($url, 'SimpleXMLElement', LIBXML_NOCDATA); 
         $str =  "<table width='auto'>"; 
 
     // Datenausgabe 
  
-   $xmlstring = $xmlstring->channel->item; 
+   $xmlstring = $xml->channel->item; 
     
    
 
-    $xml = simplexml_load_string($xmlstring);
-    $json = json_encode($xml);
+     
+    $json = json_encode($xmlstring);
     $array = json_decode($json,TRUE);
     
    /*   
