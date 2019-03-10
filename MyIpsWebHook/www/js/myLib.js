@@ -2228,8 +2228,8 @@ class CtrlStatButton {
             
             var ifrm = document.createElement("iframe");
             ifrm.setAttribute("src", "http://google.com/");
-            ifrm.style.width = "640px";
-            ifrm.style.height = "480px";
+            ifrm.style.width = sizeW;
+            ifrm.style.height = sizeH;
             ifrm.style.position = "relative";
             ifrm.style.left = "50%x";
             
