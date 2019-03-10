@@ -795,7 +795,11 @@ class MySamsungTV extends IPSModule
         return $str; 
 
 
-        function xmlToArray($data) 
+
+    }
+    
+    
+        Protected function xmlToArray($data) 
         { 
             if(is_object($data)) 
             { 
@@ -803,10 +807,6 @@ class MySamsungTV extends IPSModule
             } 
               return (is_array($data)) ? array_map(__FUNCTION__,$data) : $data; 
         } 
-    }
-    
-    
-    
     
     
     
