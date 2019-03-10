@@ -341,7 +341,7 @@ class MySamsungTV extends IPSModule
         $this->SendDebug("setChannelbyName ", "Suchwert: ". $searchvalue, 0);
         
         $result = $this->searcharray($searchvalue, $key, $array);
-        $this->SendDebug("Suchergebnis ", $result, 0);
+        
         if($result){
            $ch =  $chList[(int)$result];
            $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
@@ -852,8 +852,9 @@ class MySamsungTV extends IPSModule
        
         protected function searcharray($value, $key, $array) {
            foreach ($array as $k => $val) {
-               //$this->SendDebug("searcharray vergleiche: ", $val[$key]." mit ".  $value  , 0);
+                $this->SendDebug("searcharray vergleiche: ", $val[$key]." mit ".  $value  , 0);
                if ($val[$key] == $value) {
+                   $this->SendDebug("Suchergebnis ", $key, 0);
                    return $k;
                }
            }
