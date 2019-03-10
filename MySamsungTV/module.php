@@ -751,6 +751,7 @@ class MySamsungTV extends IPSModule
     $xml = $simpleXMLElement->channel; 
     $array = $this->xmlToArray($xml); 
     foreach ($array as $item) {
+         $this->SendDebug("TVProg ", $item, 0);
         if (is_string($item['title']))  { 
         } 
         else  { 
