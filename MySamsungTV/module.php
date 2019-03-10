@@ -750,6 +750,8 @@ class MySamsungTV extends IPSModule
  
    $xmlstring = $xmlstring->channel; 
     
+   
+   /*
     $xml = simplexml_load_string($xmlstring);
     $json = json_encode($xml);
     $array = json_decode($json,TRUE);
@@ -797,8 +799,8 @@ class MySamsungTV extends IPSModule
     }
     
         $str .= "</table>\n"; 
-
-        return $str; 
+*/
+        return $xmlstring; 
 
 
 
