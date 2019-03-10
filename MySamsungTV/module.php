@@ -341,7 +341,7 @@ class MySamsungTV extends IPSModule
         //$this->SendDebug("setChannelbyName ", "Suchwert: ". $searchvalue, 0);
         
         $result = $this->searcharray($searchvalue, $key, $array);
-        setValue($this->GetIDForIdent("TVChannel"), $result);
+        
         if($result){
            $ch =  $chList[(int)$result];
            $this->SendDebug("setChannelbyName ", "found: ".$ChName." in".$result, 0);
@@ -351,7 +351,7 @@ class MySamsungTV extends IPSModule
            $PTC        = $ch['PTC'];  
            $ProgNum    = $ch['PROGNUM'];      
            $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
-          
+           setValue($this->GetIDForIdent("TVChannel"), $MajorCh);
            //$this->SendDebug("send Telenet Command ", "KEY_".$MajorCh, 0); 
            
             if(intval($MajorCh)<10){
