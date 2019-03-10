@@ -850,7 +850,7 @@ class MySamsungTV extends IPSModule
         }        
 
        
-        protected function searcharray($value, $key, $array) {
+        public function searcharray($value, $key, $array) {
            foreach ($array as $k => $val) {
                 $this->SendDebug("searcharray vergleiche: ", $val[$key]." mit ".  $value  , 0);
                if ($val[$key] == $value) {
@@ -865,7 +865,7 @@ class MySamsungTV extends IPSModule
         
         
         
-        protected function searchForValue($value, $prop, $array) {
+        public function searchForValue($value, $prop, $array) {
            $this->SendDebug("searchForValue ", $value." in Prop ".$prop, 0);
            if ($prop=="ChannelName"){
                // $this->SendDebug("searchForValue ", $array, 0);
