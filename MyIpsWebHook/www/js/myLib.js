@@ -2225,7 +2225,7 @@ class CtrlStatButton {
         }
 
         create(ParentID, posTop, posLeft, sizeH, sizeW, source){
-            
+            var source = "<p>Some new content inside the iframe!</p>";
             var ifrm = document.createElement("iframe");
             ifrm.setAttribute("src", "");
             ifrm.style.width = sizeW;
@@ -2233,7 +2233,7 @@ class CtrlStatButton {
             ifrm.style.position = "relative";
             ifrm.style.top = posTop;
             ifrm.style.left = posLeft;
-            ifrm.srcdoc = "<p>Some new content inside the iframe!</p>";
+            ifrm.srcdoc = source;
             this.ID = ifrm; 
             
            document.getElementById(ParentID).appendChild(ifrm);
