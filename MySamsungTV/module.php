@@ -750,15 +750,19 @@ class MySamsungTV extends IPSModule
  
    $xmlstring = $xml->channel; 
     
-   
+   10.03.2019, 19:38:06 |        TVProg :title | 18:00 | 3sat | Sinuhe, der Ägypter
+
 
      
     $json = json_encode($xmlstring);
     $array = json_decode($json,TRUE);
  
     foreach ($array["item"]  as $item) {
+        
          $this->SendDebug("TVProg ", $item, 0);
-        if($item['title']=== $ChName){
+         $teile = explode(" | ", $item['title']);
+         
+        if($teile[3]=== $ChName){
             if (is_string($item['title']))  { 
             } 
             else  { 
