@@ -9,6 +9,15 @@
         "ICONURL":      "images/Sender/ard%20das%20erste%20hd.png"
     },
     {
+        "NAME":         "ARD HD",
+        "ChType":       "CDTV",
+        "MAJORCH":      "1",
+        "MINORCH":      "65534",
+        "PTC":          "28",
+        "PROGNUM":      "11100",
+        "ICONURL":      "images/Sender/ard%20das%20erste%20hd.png"
+    },
+    {
         "NAME":         "ZDF HD",
         "ChType":       "CDTV",
         "MAJORCH":      "2",
