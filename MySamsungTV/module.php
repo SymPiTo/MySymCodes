@@ -755,9 +755,8 @@ class MySamsungTV extends IPSModule
      
     $json = json_encode($xmlstring);
     $array = json_decode($json,TRUE);
-    
-   /*   
-    foreach ($array  as $item) {
+ 
+    foreach ($array[item]  as $item) {
          $this->SendDebug("TVProg ", $item, 0);
         if (is_string($item['title']))  { 
         } 
@@ -799,8 +798,8 @@ class MySamsungTV extends IPSModule
     }
     
         $str .= "</table>\n"; 
-*/
-        return $array; 
+ 
+        return $str; 
 
 
 
