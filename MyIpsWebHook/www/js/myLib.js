@@ -2216,3 +2216,35 @@ class CtrlStatButton {
             this.id3.innerHTML = valueRight;
         }
     }
+    
+      /* --------------------- Klasse SetIframe ---------------------------------------- */
+    class SetIframe { 
+        constructor() {
+            this.ID = "";
+    
+        }
+
+        create(ParentID, posTop, posLeft, sizeH, sizeW, source){
+            
+            var ifrm = document.createElement("iframe");
+            ifrm.setAttribute("src", "http://google.com/");
+            ifrm.style.width = "640px";
+            ifrm.style.height = "480px";
+            ifrm.style.position = "relative";
+            ifrm.style.left = "50%x";
+            
+            this.ID = ifrm; 
+            
+           document.getElementById(ParentID).appendChild(ifrm);
+        }
+        
+        update(){
+               
+         
+
+        
+ 
+        }
+    }
+    
+    
