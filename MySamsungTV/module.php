@@ -751,12 +751,12 @@ class MySamsungTV extends IPSModule
    $xmlstring = $xmlstring->channel->item; 
     
    
-   /*
+
     $xml = simplexml_load_string($xmlstring);
     $json = json_encode($xml);
     $array = json_decode($json,TRUE);
     
-   
+   /*   
     foreach ($array  as $item) {
          $this->SendDebug("TVProg ", $item, 0);
         if (is_string($item['title']))  { 
@@ -800,7 +800,7 @@ class MySamsungTV extends IPSModule
     
         $str .= "</table>\n"; 
 */
-        return $xmlstring; 
+        return $array; 
 
 
 
