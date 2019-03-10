@@ -748,7 +748,7 @@ class MySamsungTV extends IPSModule
 
     // Datenausgabe 
  
-   $xmlstring = $simpleXMLElement->channel; 
+   $xmlstring = $xmlstring->channel; 
     
     $xml = simplexml_load_string($xmlstring);
     $json = json_encode($xml);
