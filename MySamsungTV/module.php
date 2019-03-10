@@ -353,7 +353,35 @@ class MySamsungTV extends IPSModule
            $channel = "<Channel><ChType>".$ChType."</ChType><MajorCh>".$MajorCh."</MajorCh><MinorCh>".$MinorCh."</MinorCh><PTC>".$PTC."</PTC><ProgNum>".$ProgNum."</ProgNum></Channel>" ;
           
            $this->SendDebug("send Telenet Command ", "KEY_".$MajorCh, 0); 
-           $this->sendKey("KEY_".$MajorCh);
+           
+            if(intval($MajorCh)<10){
+                $key = 'KEY_'.$MajorCh; 
+                $this->sendKey($key);
+                $key = 'KEY_ENTER';
+                $result =   $this->sendKey($key);   
+            }
+            elseif(intval($MajorCh)<100){
+                $key = 'KEY_'.substr($MajorCh,0,1); 
+                $this->sendKey($key);
+                $key = 'KEY_'.substr($MajorCh,1,1); 
+                $this->sendKey($key);
+                $key = 'KEY_ENTER';
+                $result =   $this->sendKey($key);   
+            }
+            else {
+                $key = 'KEY_'.substr($MajorCh,0,1); 
+                $this->sendKey($key);
+                $key = 'KEY_'.substr($MajorCh,1,1); 
+                $this->sendKey($key);
+                $key = 'KEY_'.substr($MajorCh,2,1); 
+                $this->sendKey($key);
+                $key = 'KEY_ENTER';
+                $result =   $this->sendKey($key);   
+            }
+           
+           
+           
+           
            
         }
         else {
