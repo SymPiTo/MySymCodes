@@ -6,7 +6,7 @@
         
         getTVchannels(){
             var TVchannels = new Array (
-                {  No: 0,  selected: false,   Sender: "ARD",            icon: "Das Erste HD.png" },
+                {  No: 0,  selected: false,   Sender: "ARD HD",            icon: "Das Erste HD.png" },
                 {  No: 1,  selected: false,   Sender: "ZDF HD",         icon: "zdf hd.png" }, 
                 {  No: 2,  selected: false,   Sender: "RTL",            icon: "RTL Television.png" },
                 {  No: 3,  selected: false,   Sender: "PRO7",           icon: "ProSieben.png" },  
