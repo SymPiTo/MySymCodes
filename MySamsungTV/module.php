@@ -41,7 +41,9 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableString("TVSourceList", "SourceList");
         $this->RegisterVariableString("TVChIcon", "ChannelIcon");
         $this->RegisterVariableBoolean("TVPower", "Power");
-
+        $this->RegisterVariableString("TVchProgList", "ChannelList");
+        $this->RegisterVariableString("TVProgList", "ChannelList");
+        
         //Switch Profil zuordnen 
         IPS_SetVariableCustomProfile($this->GetIDForIdent("TVPower"), "~Switch");
       
@@ -730,8 +732,6 @@ class MySamsungTV extends IPSModule
     Status:   
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getChExtTVlist(string $ChName) {
- 
-
         // TV Spielfilm 
         $url = 'http://www.tvspielfilm.de/tv-programm/rss/jetzt.xml';      // TV Programm JETZT 
         //$url = 'http://www.tvspielfilm.de/tv-programm/rss/heute2015.xml';  // TV Programm 20.15 Uhr 
@@ -750,16 +750,10 @@ class MySamsungTV extends IPSModule
  
    $xmlstring = $xml->channel; 
     
-   
-
-
-     
     $json = json_encode($xmlstring);
     $array = json_decode($json,TRUE);
  
     foreach ($array["item"]  as $item) {
-        
-         
          $teile = explode(" | ", $item['title']);
          $this->SendDebug("TVProg ", $teile, 0);
         if($teile[1]=== $ChName){
