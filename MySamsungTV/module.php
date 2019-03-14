@@ -821,7 +821,7 @@ class MySamsungTV extends IPSModule
             { 
                 $imageA = $item['enclosure']['@attributes']['url']; 
                $strA .= "<tr>"; 
-               $strA .= "<td width='auto'height='80px'><div><img src=$image alt='not Found'></div></td>"; 
+               $strA .= "<td width='auto'height='80px'><div><img src=$imageA alt='not Found'></div></td>"; 
                $strA .= "<td width='980px'><div style='text-align:left; margin-left:10px;'>$textA</div>"; 
                $strA .= "</td></tr>\n"; 
             } 
