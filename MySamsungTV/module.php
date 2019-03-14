@@ -793,12 +793,54 @@ class MySamsungTV extends IPSModule
                $str .= "<td></td><td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div></td>"; 
                $str .= "</tr>\n"; 
             } 
+            //alle Sender sammeln
+            if (is_string($item['title']))  { 
+            } 
+            else  { 
+              continue; 
+            } 
+            $titelA = "<b style=color:#C00000;>".$item['title']."</b>"; 
+
+            if (is_string($item['description']))  { 
+                $beschreibungA = "<small>".$item['description']."</small>"; 
+            } 
+            else  { 
+              $beschreibungA = "<small></small>"; 
+            } 
+
+            $text = $titelA."<br>".$beschreibungA."<br>"; 
+            //$text = utf8_decode($text); 
+            $searchArray = $item; 
+
+            // IF-Abfrage, wenn Array zu Ende, dann abbrechen 
+            //if(isset($searchArray['enclosure']) != true)  { 
+            //   break; 
+            //} 
+            if(array_key_exists('enclosure', $searchArray)) 
+            { 
+                $imageA = $item['enclosure']['@attributes']['url']; 
+               $strA .= "<tr>"; 
+               $strA .= "<td width='auto'height='80px'><div><img src=$image alt='not Found'></div></td>"; 
+               $strA .= "<td width='980px'><div style='text-align:left; margin-left:10px;'>$textA</div>"; 
+               $strA .= "</td></tr>\n"; 
+            } 
+            else 
+            { 
+               $strA .= "<tr>"; 
+               $strA .= "<td></td><td width='980px'><div style='text-align:left; margin-left:10px;'>$textA</div></td>"; 
+               $strA .= "</tr>\n"; 
+            } 
+            
         }
+        
     }
     
         $str .= "</table>\n"; 
- 
-        return $str; 
+        setvalue($this->GetIDForIdent("TVchProgList"),$str);
+        $strA .= "</table>\n"; 
+        setvalue($this->GetIDForIdent("TVProgList"),$strA);
+        
+        return $strA; 
 
 
 
