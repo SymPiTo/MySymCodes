@@ -41,8 +41,8 @@ class MySamsungTV extends IPSModule
         $this->RegisterVariableString("TVSourceList", "SourceList");
         $this->RegisterVariableString("TVChIcon", "ChannelIcon");
         $this->RegisterVariableBoolean("TVPower", "Power");
-        $this->RegisterVariableString("TVchProgList", "ChannelList");
-        $this->RegisterVariableString("TVProgList", "ChannelList");
+        $this->RegisterVariableString("TVchProgList", "ChannelProgList");
+        $this->RegisterVariableString("TVProgList", "ProgList");
         
         //Switch Profil zuordnen 
         IPS_SetVariableCustomProfile($this->GetIDForIdent("TVPower"), "~Switch");
