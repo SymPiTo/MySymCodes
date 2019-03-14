@@ -808,7 +808,7 @@ class MySamsungTV extends IPSModule
               $beschreibungA = "<small></small>"; 
             } 
 
-            $text = $titelA."<br>".$beschreibungA."<br>"; 
+            $textA = $titelA."<br>".$beschreibungA."<br>"; 
             //$text = utf8_decode($text); 
             $searchArray = $item; 
 
