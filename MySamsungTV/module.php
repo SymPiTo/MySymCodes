@@ -793,6 +793,7 @@ class MySamsungTV extends IPSModule
                $str .= "<td></td><td width='980px'><div style='text-align:left; margin-left:10px;'>$text</div></td>"; 
                $str .= "</tr>\n"; 
             } 
+        }
             //alle Sender sammeln
             if (is_string($item['title']))  { 
             } 
@@ -831,7 +832,7 @@ class MySamsungTV extends IPSModule
                $strA .= "</tr>\n"; 
             } 
             
-        }
+
         
     }
     
