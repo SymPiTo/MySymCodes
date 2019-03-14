@@ -30,7 +30,6 @@ class MySamsungTV extends IPSModule
         $this->RegisterPropertyInteger("updateInterval", 10000);	
         $this->RegisterPropertyInteger("devicetype", 1);
         
-        
         //Variable anlegen.
         $this->RegisterVariableString("TVchList", "ChannelList");
         $this->RegisterVariableInteger("TVVolume", "Volume", "");
