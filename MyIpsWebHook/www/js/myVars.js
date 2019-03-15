@@ -182,7 +182,7 @@
             check(ips[0].ID41307,87);  //TV Channel Name
             // check(ips[0].ID41307,89);  //TV Channel Name
             //check(ips[0].ID25544,90);  //TV Guide
-            check(ips[0].ID24408,91);  //TV SourceList
+            check(ips[0].ID45960,91);  //TV SourceList
             
             check(ips[0].ID10567,92);  //SZ Lampe
             
@@ -557,7 +557,7 @@
  
             var sourceList = new Array(); 
         try{
-            sourceList = JSON.parse(ips[0].ID48854);
+            sourceList = JSON.parse(ips[0].ID45960);
             sourceList.forEach(function(item) { 
                 stat1 = item.CONNECTED;
                 stat2 = item.active;
