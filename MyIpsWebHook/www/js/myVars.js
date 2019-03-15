@@ -177,11 +177,11 @@
             check(ips[0].ID17453,82);  //Wasser Sensor Bad Feuchte
             check(ips[0].ID36414,83);  //Wasser Sensor Bad Wasserstand
             check(ips[0].ID44956,84);  //TV Volume
-            check(ips[0].ID32548,85);  //TV Power
+            check(ips[0].ID23548,85);  //TV Power
             check(ips[0].ID15810,86);  //TV Channel
             check(ips[0].ID41307,87);  //TV Channel Name
             // check(ips[0].ID41307,89);  //TV Channel Name
-            check(ips[0].ID25544,90);  //TV Guide
+            //check(ips[0].ID25544,90);  //TV Guide
             check(ips[0].ID24408,91);  //TV SourceList
             
             check(ips[0].ID10567,92);  //SZ Lampe
