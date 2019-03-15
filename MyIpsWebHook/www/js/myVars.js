@@ -522,7 +522,9 @@
     
     
     function updateValues(ips){
-        TVframe.update(ips[0].ID31510)
+        //<!-- ******************** Samsung TV **************************  -->
+        TVframe.update(ips[0].ID31510);
+        TVGuideframe.update(ips[0].ID49099);
         
         iDisArtistSsz.update(ips[0].ID35731, ips[0].ID38320, ips[0].ID32160, ips[0].ID23875);
         transVarVolSsz.update(ips[0].ID36157,"");
