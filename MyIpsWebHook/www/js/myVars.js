@@ -607,7 +607,7 @@
             console.log("Array Variable ist leer.");
         }
             
-            ProgGuide.update(ips[0].ID25544);
+            
             
             transVarPower.update(ips[0].ID49306,"state");
             transVarVol.update(ips[0].ID37104,"");
