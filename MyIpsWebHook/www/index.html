@@ -1878,8 +1878,14 @@
         <Ctrl  id="MainTVGuideCtrl" class = "TVGuide"> </Ctrl>
 
         <script> 
+            
+            var TVGuideframe = new SetIframe();
+            TVGuideframe.create("MainTVGuideCtrl", "2vh" , "2%", "630px", "200px", "");
+            
+            /*
              var ProgGuide = new TVguide();
-            ProgGuide.create("MainTVGuideCtrl");    
+            ProgGuide.create("MainTVGuideCtrl"); 
+            */
         </script>
      
         <!-- ************************** TV Source  **************************  -->
