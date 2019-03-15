@@ -2221,12 +2221,12 @@ class CtrlStatButton {
     class SetIframe { 
         constructor() {
             this.ID = "";
-    
+             
         }
 
         create(ParentID, posTop, posLeft, sizeH, sizeW, source){
             //var source = "<p>Some new content inside the iframe!</p>";
-            var source = "<table width='auto'><tr><td width='auto'height='80px'><div><img src=https://a2.tvspielfilm.de/itv_sofa/2019-03-10/5c6affc281896536498e11b9_149.jpg alt='not Found'></div></td><td width='980px'><div style='text-align:left; margin-left:10px;'><b style=color:#C00000;>19:05 | RTL | Vermisst</b><br><small>Rund um den Globus sucht Sandra Eckardt nach verschollenen Personen. Nicht immer gibt’s ein Happy End.  Sechs neue Folgen, so. </small><br></div></td></tr></table>";
+            //var source = "<table width='auto'><tr><td width='auto'height='80px'><div><img src=https://a2.tvspielfilm.de/itv_sofa/2019-03-10/5c6affc281896536498e11b9_149.jpg alt='not Found'></div></td><td width='980px'><div style='text-align:left; margin-left:10px;'><b style=color:#C00000;>19:05 | RTL | Vermisst</b><br><small>Rund um den Globus sucht Sandra Eckardt nach verschollenen Personen. Nicht immer gibt’s ein Happy End.  Sechs neue Folgen, so. </small><br></div></td></tr></table>";
             var ifrm = document.createElement("iframe");
             ifrm.setAttribute("src", "");
             ifrm.style.width = sizeW;
@@ -2234,18 +2234,14 @@ class CtrlStatButton {
             ifrm.style.position = "relative";
             ifrm.style.top = posTop;
             ifrm.style.left = posLeft;
-            ifrm.srcdoc = source;
+            ifrm.srcdoc = "";
             this.ID = ifrm; 
             
            document.getElementById(ParentID).appendChild(ifrm);
         }
         
-        update(){
-               
-         
-
-        
- 
+        update(urlstring){
+            this.ID.srcdoc = urlstring;
         }
     }
     
