@@ -206,10 +206,13 @@ class MySamsungTV extends IPSModule
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
-            
-            $chName = getvalue($this->GetIDForIdent("TVchLName"));
-            $this->getChExtTVlist($chName);
-            
+            //timer * 20
+            $n = $n+1;
+            if ($n === 20){
+                $chName = getvalue($this->GetIDForIdent("TVchLName"));
+                $this->getChExtTVlist($chName);
+                $n= 0;
+            }
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
