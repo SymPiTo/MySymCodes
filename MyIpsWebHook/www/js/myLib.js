@@ -2221,7 +2221,7 @@ class CtrlStatButton {
     class SetIframe { 
         constructor() {
             this.ID = "";
-             
+            this.startDate = new Date();
         }
 
         create(ParentID, posTop, posLeft, sizeH, sizeW, source){
@@ -2241,7 +2241,12 @@ class CtrlStatButton {
         }
         
         update(urlstring){
-            this.ID.srcdoc = urlstring;
+            
+            endDate   = new Date(),
+            differenz = (endDate.getTime() - this.tartDate.getTime());
+            if (differenz > 10000){
+                this.ID.srcdoc = urlstring;
+            }
         }
     }
     
