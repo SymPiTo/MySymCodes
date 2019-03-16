@@ -2247,6 +2247,7 @@ class CtrlStatButton {
             this.differenz = (endDate.getTime() - this.startDate.getTime());
             if (this.differenz > 10000){
                 this.ID.srcdoc = urlstring;
+                this.startDate = endDate;
             }
         }
     }
