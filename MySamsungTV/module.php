@@ -208,7 +208,7 @@ class MySamsungTV extends IPSModule
         public function update() {
             //timer * 20
             $n = $n+1;
-            if ($n === 20){
+            if ($n > 20){
                 $chName = getvalue($this->GetIDForIdent("TVchLName"));
                 $this->getChExtTVlist($chName);
                 $n= 0;
