@@ -726,8 +726,28 @@ class MySamsungTV extends IPSModule
      //*****************************************************************************
     /* Function: getChExtTVlist(string $ChName) 
     ...............................................................................
-     *  
-     *  
+     *  COMEDY CENTRAL
+     *  ProSieben MAXX
+     *  Das Erste
+     *  ZDF 
+     *  RTL
+     *  SAT.1
+     *  ProSieben 
+     *  kabel eins
+     *  RTL II
+     *  VOX
+     *  TELE 5
+     *  3sat
+     *  ARTE
+     *  ZDFneo
+     *  ONE
+     *  ServusTV Deutschland
+     *  NITRO
+     *  DMAX
+     *  sixx
+     *  SAT.1 Gold
+     * 
+     *
     ...............................................................................
     Parameters: none
     --------------------------------------------------------------------------------
@@ -744,7 +764,70 @@ class MySamsungTV extends IPSModule
         //$url = 'http://www.tvspielfilm.de/tv-programm/rss/filme.xml';      // TV Programm SPIELFILME 
         //$url = 'http://www.tvspielfilm.de/news/rss.xml';                   // TV News 
 
-
+        switch ($ChName) {
+            case "COMEDY CENTRAL":
+                $ChName = "COMEDY CENTRAL";
+                break;
+            case "PRO7MAXX":
+                $ChName = "ProSieben MAXX";
+                break;
+            case "ARD HD":
+                $ChName = "Das Erste";
+                break;
+            case "ZDF HD":
+                $ChName = "ZDF";
+                break;
+            case "RTL":
+                $ChName = "RTL";
+                break;
+            case "SAT1":
+                $ChName = "SAT.1";
+                break;
+            case "PRO7":
+                $ChName = "ProSieben";
+                break;
+            case "KABEL1":
+                $ChName = "kabel eins";
+                break;
+            case "RTL2":
+                $ChName = "RTL II";
+                break;
+            case "VOX":
+                $ChName = "VOX";
+                break;
+            case "TELE5":
+                $ChName = "TELE 5";
+                break;
+            case "3sat":
+                $ChName = "3sat";
+                break;
+            case "ARTE HD":
+                $ChName = "ARTE";
+                break;
+            case "ZDF neo HD":
+                $ChName = "ZDFneo";
+                break;
+            case "ONE HD":
+                $ChName = "ONE";
+                break;
+            case "Servus TV":
+                $ChName = "ServusTV Deutschland";
+                break;
+            case "Nitro":
+                $ChName = "NITRO";
+                break;
+            case "DMAX":
+                $ChName = "DMAX";
+                break;
+            case "SIXX":
+                $ChName = "sixx";
+                break;
+            case "SAT1GOLD":
+                $ChName = "SAT.1 Gold";
+                break;
+            default:
+                break;
+        }
 
 // AB HIER NICHTS MEHR ÄNDERN 
 //////IPS_SetScriptTimer($_IPS['SELF'], $refreshtime); 
