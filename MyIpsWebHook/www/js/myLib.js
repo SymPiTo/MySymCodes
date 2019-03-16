@@ -2222,6 +2222,7 @@ class CtrlStatButton {
         constructor() {
             this.ID = "";
             this.startDate = new Date();
+            this.differenz = 0;
         }
 
         create(ParentID, posTop, posLeft, sizeH, sizeW, source){
@@ -2243,7 +2244,7 @@ class CtrlStatButton {
         update(urlstring){
             
             var endDate   = new Date();
-            var differenz = (endDate.getTime() - this.startDate.getTime());
+            this.differenz = (endDate.getTime() - this.startDate.getTime());
             if (differenz > 10000){
                 this.ID.srcdoc = urlstring;
             }
