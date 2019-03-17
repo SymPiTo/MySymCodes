@@ -255,14 +255,12 @@ class MySamsungTV extends IPSModule
     Returns:  
      * $volume (integer)
     --------------------------------------------------------------------------------
-    Status:  17.07.2018 - OK  - (NOK)
+    Status:  17.07.2018 - OK  - (TelNet = OK)
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getVolume() {
-         $vol = $this->GetVolume_RC('Master');
-        //$vol = $this->GetVolume_MTVA();
+         $vol = $this->GetVolume_RC($channel = 'Master');
         SetValue($this->GetIDForIdent("TVVolume"), (int)$vol['Volume']);  
         return (int)$vol['Volume'];
-       
     }   
   
    
