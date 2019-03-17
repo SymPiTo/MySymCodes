@@ -215,10 +215,10 @@ class MySamsungTV extends IPSModule
             $alive = Sys_Ping($ip, 1000);
             if ($alive){
                 setvalue($this->GetIDForIdent("TVPower"), true);
-                
+                $vol = $this->getVolume();  
 
                 /*
-                $vol = $this->getVolume();    
+                  
                 $channel = $this->getChannel();                 
                 $chName = $this->getCurrentChannelName();
                 $source = $this->getCurrentSource();
