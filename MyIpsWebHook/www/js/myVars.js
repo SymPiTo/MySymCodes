@@ -518,15 +518,13 @@
         $('tempkinderzimmer4').innerHTML =  'Kinderzimmer ' + ips[0].ID37045 + '°C';        
     }
     
-
-    
-    
+   
     function updateValues(ips){
         //<!-- ******************** Samsung TV **************************  -->
         TVframe.update(ips[0].ID31510, 10000);
         TVGuideframe.update(ips[0].ID49099, 10000);
         transVarPower.update(ips[0].ID23548,"state");
-        tansVarVol.update(ips[0].ID44956);
+        transVarVol.update(ips[0].ID44956);
         transVarCh.update(ips[0].ID15810);
         LedDisplayTV.update(ips[0].ID41307);
         transVarSource.update(ips[0].ID24408);
