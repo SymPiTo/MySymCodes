@@ -2241,11 +2241,11 @@ class CtrlStatButton {
            document.getElementById(ParentID).appendChild(ifrm);
         }
         
-        update(urlstring){
+        update(urlstring, interval){
             
             var endDate   = new Date();
             this.differenz = (endDate.getTime() - this.startDate.getTime());
-            if (this.differenz > 100000){
+            if (this.differenz > interval){
                 this.ID.srcdoc = urlstring;
                 this.startDate = endDate;
             }

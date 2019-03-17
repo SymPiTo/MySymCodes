@@ -180,7 +180,7 @@
             check(ips[0].ID23548,85);  //TV Power
             check(ips[0].ID15810,86);  //TV Channel
             check(ips[0].ID41307,87);  //TV Channel Name
-            // check(ips[0].ID41307,89);  //TV Channel Name
+            check(ips[0].ID24408,88);  //TV Source
             //check(ips[0].ID25544,90);  //TV Guide
             check(ips[0].ID45960,91);  //TV SourceList
             
@@ -523,9 +523,14 @@
     
     function updateValues(ips){
         //<!-- ******************** Samsung TV **************************  -->
-        TVframe.update(ips[0].ID31510);
-        TVGuideframe.update(ips[0].ID49099);
-        
+        TVframe.update(ips[0].ID31510, 10000);
+        TVGuideframe.update(ips[0].ID49099, 10000);
+        transVarPower.update(ips[0].ID23548,"state");
+        tansVarVol.update(ips[0].ID44956);
+        transVarCh.update(ips[0].ID15810);
+        LedDisplayTV.update(ips[0].ID41307);
+        transVarSource.update(ips[0].ID24408);
+            
         iDisArtistSsz.update(ips[0].ID35731, ips[0].ID38320, ips[0].ID32160, ips[0].ID23875);
         transVarVolSsz.update(ips[0].ID36157,"");
         var bassCalc = Math.round(5*(ips[0].ID55859 +10));
@@ -609,11 +614,7 @@
             
             
             
-            transVarPower.update(ips[0].ID49306,"state");
-            transVarVol.update(ips[0].ID37104,"");
-            transVarCh.update(ips[0].ID37005,"");
-            LedDisplayTV.update(ips[0].ID43536);
-            transVarSource.update(ips[0].ID44004);
+
             
             
             iBat01.update(ips[0].ID30280);
