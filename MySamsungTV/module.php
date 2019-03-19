@@ -183,6 +183,8 @@ class MySamsungTV extends IPSModule
         public function watchdog() {
             $ip = $this->ReadPropertyString('ip');
             $alive = Sys_Ping($ip, 1000);
+                $chName = getvalue($this->GetIDForIdent("TVchLName"));
+                $this->getChExtTVlist($chName);
            if ($alive){
                $this->SetTimerInterval("update", $this->ReadPropertyInteger("updateInterval"));
            }
@@ -194,7 +196,7 @@ class MySamsungTV extends IPSModule
 	/*//////////////////////////////////////////////////////////////////////////////
 	Function:  update()
 	...............................................................................
-	Funktion wird über Timer alle x Sekunden gestartet
+	Funktion wird über Timer alle x Sekunden gestartet, wenn TV über ping erreichbar = eingeschaltet
          *  call SubFunctions:   
 	...............................................................................
 	Parameter:  none
@@ -207,8 +209,7 @@ class MySamsungTV extends IPSModule
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
                 $this->SendDebug("TVProg ", "Update gestartet", 0);
-                $chName = getvalue($this->GetIDForIdent("TVchLName"));
-                $this->getChExtTVlist($chName);
+
              
        
             $ip = $this->ReadPropertyString('ip');
