@@ -206,7 +206,7 @@ class MySamsungTV extends IPSModule
 	Status: checked 2018-06-03
 	//////////////////////////////////////////////////////////////////////////////*/       
         public function update() {
-
+                $this->SendDebug("TVProg ", "Update gestartet", 0);
                 $chName = getvalue($this->GetIDForIdent("TVchLName"));
                 $this->getChExtTVlist($chName);
              
@@ -757,6 +757,7 @@ class MySamsungTV extends IPSModule
     Status:   
     //////////////////////////////////////////////////////////////////////////////*/  
     public function getChExtTVlist(string $ChName) {
+        $this->SendDebug("TVProg ", "Lese Programmliste", 0);
         // TV Spielfilm 
         $url = 'http://www.tvspielfilm.de/tv-programm/rss/jetzt.xml';      // TV Programm JETZT 
         //$url = 'http://www.tvspielfilm.de/tv-programm/rss/heute2015.xml';  // TV Programm 20.15 Uhr 
@@ -843,11 +844,13 @@ class MySamsungTV extends IPSModule
  
     foreach ($array["item"]  as $item) {
          $teile = explode(" | ", $item['title']);
-         $this->SendDebug("TVProg ", $teile, 0);
+         //$this->SendDebug("TVProg ", $teile, 0);
         if($teile[1]=== $ChName){
             if (is_string($item['title']))  { 
+                 $this->SendDebug("TVProg ", "Programm gefunden", 0);
             } 
             else  { 
+                 $this->SendDebug("TVProg ", "Programm not founde", 0);
               continue; 
             } 
             $titel = "<b style=color:#C00000;>".$item['title']."</b>"; 
@@ -925,6 +928,7 @@ class MySamsungTV extends IPSModule
     }
     
         $str .= "</table>\n"; 
+        $this->SendDebug("TVProg ", "Schreibe Prog in Variable".$str, 0);
         setvalue($this->GetIDForIdent("TVchProgList"),$str);
         $strA .= "</table>\n"; 
         setvalue($this->GetIDForIdent("TVProgList"),$strA);
