@@ -162,7 +162,7 @@ class MyKochbuch extends IPSModule
         $i = 0;    
         foreach ($CookBook as $rezept) {
             //$Kochbuch[$key] = $rezept[0]['items'][0]['mainEntity'];
-            $Kochbuch[$i] = $rezept[0] ;
+            $Kochbuch[$i] = $rezept[$i] ;
             $i = $i + 1;
         }
         return $Kochbuch;
