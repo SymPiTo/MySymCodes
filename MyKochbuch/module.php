@@ -1,4 +1,8 @@
 <?php
+//zugehoerige TRAIT-Klassen    TEST xxxy
+require_once(__DIR__ . "/../libs/NetworkTraits.php");
+
+
 /** 
  * Title: Repte aus Chefkoch.de Kochbch
   *
@@ -11,6 +15,11 @@
 //Class: MyKochbuch
 class MyKochbuch extends IPSModule
 {
+    
+    //externe Klasse einbinden - ueberlagern mit TRAIT.
+    use MyDebugHelper;
+    
+    
     /* 
     _______________________________________________________________________ 
      Section: Internal Modul Funtions
@@ -266,6 +275,7 @@ class MyKochbuch extends IPSModule
         //Decode JSON
         // true = json als array ausgeben
         $json_data = json_decode($json,true);
+        $this->SendDebug("readJsonFile:",  $json_data, 0);
         return $json_data;
     }    
 
