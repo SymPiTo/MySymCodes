@@ -1,12 +1,12 @@
-<?
-/**
- * Title: FS20 RSU Shutter Control
+<?php
+/** 
+ * Title: Repte aus Chefkoch.de Kochbch
   *
  * author PiTo
  * 
- * GITHUB = <https://github.com/SymPiTo/MySymCodes/tree/master/MyFS20_SC>
+ * GITHUB = <https://github.com/SymPiTo/MySymCodes/tree/master/MyKochbuch>
  * 
- * Version:1.0.2018.08.21
+ * Version:1.0.2019.03.22
  */
 //Class: MyKochbuch
 class MyKochbuch extends IPSModule
@@ -39,39 +39,38 @@ class MyKochbuch extends IPSModule
         parent::Create();
  
          // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-         // Aufruf dieser Form Variable mit  §this->ReadPropertyFloat(-IDENTNAME-)
-        //$this->RegisterPropertyInteger(!IDENTNAME!, 0);
-        //$this->RegisterPropertyFloat(!IDENTNAME!, 0.5);
-        //$this->RegisterPropertyBoolean(!IDENTNAME!, false);
+         // Aufruf dieser Form Variable mit  §this->ReadPropertyFloat('IDENTNAME')
+        //$this->RegisterPropertyInteger('IDENTNAME', 0);
+        //$this->RegisterPropertyFloat('IDENTNAME', 0.5);
+        //$this->RegisterPropertyBoolean('IDENTNAME', false);
         
        
         
         //Integer Variable anlegen
-        //integer RegisterVariableInteger ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-        //$this->RegisterVariableInteger(!FSSC_Position!, !Position!, !Rollo.Position!);
+        //integer RegisterVariableInteger (string $Ident, string $Name, string $Profil, integer $Position )
+        // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
+        //$this->RegisterVariableInteger('FSSC_Position', 'Position', 'Rollo.Position);
       
         //Boolean Variable anlegen
-        //integer RegisterVariableBoolean ( string §Ident, string §Name, string §Profil, integer §Position )
-        // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-        //$this->RegisterVariableBoolean(!FSSC_Mode!, !Mode!);
+        //integer RegisterVariableBoolean (string 'Ident', string $Name, string $Profil, integer $Position )
+        // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
+        //$this->RegisterVariableBoolean('FSSC_Mode', 'Mode');
         
         //String Variable anlegen
-        //RegisterVariableString (  §Ident,  §Name, §Profil, §Position )
-         // Aufruf dieser Variable mit §this->GetIDForIdent(!IDENTNAME!)
-         //$this->RegisterVariableString("SZ_MoFr", "SchaltZeiten Mo-Fr");
+        //RegisterVariableString ( $Ident,  $Name, $Profil, $Position )
+        // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
+        $this->RegisterVariableString("Rezept", "Akt_Rezept");
  
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
-        
-        §this->EnableAction(-IDENTNAME-);
-        IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
+        //$this->EnableAction('IDENTNAME');
+        //IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
         
         //anlegen eines Timers
-        $this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
+        //$this->RegisterTimer(!TimerName!, 0, !FSSC_reset(\§_IPS[!TARGET!>]);!);
             
 
 
-    .}
+    }
    /* ------------------------------------------------------------ 
      Function: ApplyChanges 
       ApplyChanges() Wird ausgeführt, wenn auf der Konfigurationsseite "Übernehmen" gedrückt wird 
@@ -136,7 +135,7 @@ class MyKochbuch extends IPSModule
      FSSC_XYFunktion($Instance_id, ... );
      ________________________________________________________________________________________________________________________ */
     //-----------------------------------------------------------------------------
-    /* Function: xxxx
+    /* Function: readKochbuch
     ...............................................................................
     Beschreibung
     ...............................................................................
@@ -146,8 +145,11 @@ class MyKochbuch extends IPSModule
     Returns:    
         none
     ------------------------------------------------------------------------------  */
-    public function xxxx(){
-       
+    public function readKochbuch(){
+        //Einlesen der Kochbuch json Datei
+        $ModulPath = "MyKochbuch";
+        $JsonFileName = "Rezepte.json";
+        $CookBook = readJsonFile($ModulPath, $JsonFileName);
     }  
 
 
@@ -158,12 +160,6 @@ class MyKochbuch extends IPSModule
     * _______________________________________________________________________
     */  
 
-    protected function SendToSplitter(string $payload)
-		{						
-			//an Splitter schicken
-			$result = $this->SendDataToParent(json_encode(Array("DataID" => "{94B020A0-6D27-573E-5624-735295370610}", "Buffer" => $payload))); // Interface GUI
-			return $result;
-		}
 		
         /* ----------------------------------------------------------------------------
          Function: GetIPSVersion
@@ -225,7 +221,7 @@ class MyKochbuch extends IPSModule
             $eid = @$this->GetIDForIdent($Ident);
             if($eid === false) {
                     $eid = 0;
-            } elseif(IPS_GetEvent($eid)[!EventType!] <> $Typ) {
+            } elseif(IPS_GetEvent($eid)["EventType"] <> $Typ) {
                     IPS_DeleteEvent($eid);
                     $eid = 0;
             }
@@ -263,7 +259,15 @@ class MyKochbuch extends IPSModule
             IPS_SetEventScheduleAction($EventID, $ActionID, $Name, $Color, $Script);
     }
 
-
+    private function readJsonFile($ModulPath, $JsonFileName) {
+        // Read JSON file
+        $dataPath = IPS_GetKernelDir() . '/modules/MySymCodes/'.$ModulPath.'/';
+        $json = file_get_contents($dataPath.$JsonFileName);
+        //Decode JSON
+        // true = json als array ausgeben
+        $json_data = json_decode($json,true);
+        return $json_data;
+    }    
 
 		
 }
