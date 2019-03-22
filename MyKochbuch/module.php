@@ -274,9 +274,9 @@ class MyKochbuch extends IPSModule
         $json = file_get_contents($dataPath.$JsonFileName);
         //Decode JSON
         // true = json als array ausgeben
-        $json_data = json_decode($json,true);
-         $json_output = json_decode($json, JSON_PRETTY_PRINT);
-        return $json_output;
+        $json_data = json_decode($json);
+         
+        return $json_data;
     }    
 
 		
