@@ -159,6 +159,12 @@ class MyKochbuch extends IPSModule
         $ModulPath = "MyKochbuch";
         $JsonFileName = "Rezepte.json";
         $CookBook = $this->readJsonFile($ModulPath, $JsonFileName);
+            
+        foreach ($CookBook as $key => $rezept) {
+            $Kochbuch[$key] = $rezept['items'][0]['mainEntity'];
+            
+        }
+        return $Kochbuch;
     }  
 
 
@@ -274,7 +280,7 @@ class MyKochbuch extends IPSModule
         $json = file_get_contents($dataPath.$JsonFileName);
         //Decode JSON
         // true = json als array ausgeben
-        $json_data = json_decode($json);
+        $json_data = json_decode($json,true);
          
         return $json_data;
     }    
