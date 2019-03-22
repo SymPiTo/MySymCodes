@@ -149,7 +149,7 @@ class MyKochbuch extends IPSModule
         //Einlesen der Kochbuch json Datei
         $ModulPath = "MyKochbuch";
         $JsonFileName = "Rezepte.json";
-        $CookBook = readJsonFile($ModulPath, $JsonFileName);
+        $CookBook = $this->readJsonFile($ModulPath, $JsonFileName);
     }  
 
 
