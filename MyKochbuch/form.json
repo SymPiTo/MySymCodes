@@ -1,0 +1,37 @@
+{
+	"elements":
+	[
+ 
+                
+	],
+	"actions":
+	[
+
+        ],
+        
+	"status" : 
+        [
+            {
+                    "code" : 101,
+                    "icon" : "inactive",
+                    "caption" : "Creating instance."
+            },
+            {
+                    "code" : 102,
+                    "icon" : "active",
+                    "caption" : "Device created."
+            },
+            {
+                    "code" : 104,
+                    "icon" : "inactive",
+                    "caption" : "interface closed."
+            },
+            {
+                    "code" : 201,
+                    "icon" : "error",
+                    "caption" : "special errorcode"
+            }
+	]
+        
+        
+}
