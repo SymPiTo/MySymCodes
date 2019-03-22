@@ -1236,6 +1236,12 @@
         </Main>
              
         <script> 
+            var FontBtnRL = new FontButtonNew();
+            FontBtnRL.create("MainRezepte", "purple", "mid", "83vh", "22%", "fa fa-play", "send('command(TV,key,KEY_PLAY)')");
+            var CtrlBtnRezeptList = new CtrlButton();
+            CtrlBtnRezeptList.create("MainRezepte", "63vh", "2%",  "normal", "purple", "Channel", "ctrlWindow", "TVChannel");
+            var FontBtnRR = new FontButtonNew();
+            FontBtnRR.create("MainRezepte", "purple", "mid", "83vh", "62%", "fa fa-play", "send('command(TV,key,KEY_PLAY)')");
         </script>
         <!-- ***********************************************************************************   -->
 	<!--  ************************          Main - Rezepte    ************************      -->   
@@ -1269,7 +1275,7 @@
             NavPadSecKey.create("MainTV", "NavPad", "purple", "10vh" , "30%", ["fa fa-square","fa fa-caret-up","fa fa-square","fa fa-caret-left","fa fa-thumbs-up","fa fa-caret-right","fa fa-square","fa fa-caret-down","fa fa-square"] ); 
              */
             var TVframe = new SetIframe();
-            TVframe.create("MainTV", "12vh" , "2%", "130px", "400px", "");
+            TVframe.create("MainTV", "12vh" , "2%", "160px", "400px", "");
  
             
             
