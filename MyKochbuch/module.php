@@ -59,7 +59,9 @@ class MyKochbuch extends IPSModule
         //integer RegisterVariableInteger (string $Ident, string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
         //$this->RegisterVariableInteger('FSSC_Position', 'Position', 'Rollo.Position);
-      
+        $this->RegisterVariableInteger('ID_No', 'Number', '');
+        $this->SetValue("ID_No", 1);
+        
         //Boolean Variable anlegen
         //integer RegisterVariableBoolean (string 'Ident', string $Name, string $Profil, integer $Position )
         // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
@@ -68,8 +70,12 @@ class MyKochbuch extends IPSModule
         //String Variable anlegen
         //RegisterVariableString ( $Ident,  $Name, $Profil, $Position )
         // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
-        $this->RegisterVariableString("Rezept", "Akt_Rezept");
- 
+        $this->RegisterVariableString("ID_Rezept", "Rezept");
+        $this->RegisterVariableString("ID_Bild", "Image","~HTMLBox");
+        $this->RegisterVariableString("ID_Zutaten", "Zutaten");
+        $this->RegisterVariableString("ID_Kochbuch", "Kochbuch");
+        
+         
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction('IDENTNAME');
         //IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
@@ -96,7 +102,9 @@ class MyKochbuch extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-       
+            
+        //init
+        $this->readKochbuch(0);
     }
     
    /* ------------------------------------------------------------ 
@@ -154,7 +162,7 @@ class MyKochbuch extends IPSModule
     Returns:    
         none
     ------------------------------------------------------------------------------  */
-    public function readKochbuch(){
+    public function readKochbuch($No){
         //Einlesen der Kochbuch json Datei
         $ModulPath = "MyKochbuch";
         $JsonFileName = "Rezepte.json";
@@ -166,8 +174,12 @@ class MyKochbuch extends IPSModule
             $Kochbuch[$key]['recipeIngredient'] = $rezept['items'][0]['mainEntity'][1]['recipeIngredient'];
             $Kochbuch[$key]['image'] = $rezept['items'][0]['mainEntity'][1]['image'];
             $Kochbuch[$key]['recipeInstructions'] = $rezept['items'][0]['mainEntity'][1]['recipeInstructions'];
-             
+            $KochbuchIndex[$key] = $rezept['items'][0]['mainEntity'][1]['name'];
         }
+        setvalue($this->GetIDForIdent('ID_Kochbuch'),serialize($KochbuchIndex));
+        setvalue($this->GetIDForIdent('ID_Rezept'), $Kochbuch[$No]['recipeInstructions']);
+        setvalue($this->GetIDForIdent('ID_Bild'), $Kochbuch[$No]['image']);
+        setvalue($this->GetIDForIdent('ID_Zutaten'), $Kochbuch[$No]['recipeIngredient']);
         return $Kochbuch;
     }  
 
