@@ -179,7 +179,7 @@ class MyKochbuch extends IPSModule
         setvalue($this->GetIDForIdent('ID_Kochbuch'),serialize($KochbuchIndex));
         setvalue($this->GetIDForIdent('ID_Rezept'), $Kochbuch[$No]['recipeInstructions']);
         setvalue($this->GetIDForIdent('ID_Bild'), $Kochbuch[$No]['image']);
-        setvalue($this->GetIDForIdent('ID_Zutaten'), $Kochbuch[$No]['recipeIngredient']);
+        setvalue($this->GetIDForIdent('ID_Zutaten'),  implode("/r/n,", $Kochbuch[$No]['recipeIngredient']));
         return $Kochbuch;
     }  
 
