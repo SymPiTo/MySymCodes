@@ -384,7 +384,7 @@ class MyKochbuch extends IPSModule
                 // Anlegen einer neuen Kategorie mit dem Namen $catName
                 $CatID = IPS_CreateCategory();       // Kategorie anlegen
                 IPS_SetName($CatID, $catName); // Kategorie benennen
-                IPS_SetParent($CatID, $this->ParentCatID); // Kategorie einsortieren unterhalb der der Instanz
+                IPS_SetParent($CatID, $this->$KategorieID); // Kategorie einsortieren unterhalb der der Instanz
             }   
         }    
         return true;
