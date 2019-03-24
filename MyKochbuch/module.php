@@ -113,9 +113,12 @@ class MyKochbuch extends IPSModule
             $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox");
             $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten");
         }else{
+            /*
            $this->UnregisterVariable("ID_WFRezept"); 
            $this->UnregisterVariable("ID_WFBild");
            $this->UnregisterVariable("ID_WFZutaten");
+             
+             */
         }
 
         
