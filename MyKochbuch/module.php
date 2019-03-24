@@ -180,15 +180,15 @@ class MyKochbuch extends IPSModule
         
             
             $ZutatenHTML = '
-                "<table width=\"100%\">
+                <table width="100%">
                     <tr>
                         <td>
-                            <div style=\"text-align: left;\">'
+                            <div style="text-align: left;">'
                                 .$Kochbuch[1]['recipeIngredient'][1].
                             '</div>
                         </td>";
-                    "</tr>
-                 </table>"
+                    </tr>
+                 </table>
             ';
 
             
