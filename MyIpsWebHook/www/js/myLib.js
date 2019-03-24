@@ -2258,7 +2258,7 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, posTop, posLeft, sizeH, sizeW, dynamicUrl){
+        create(ParentID, posTop, posLeft, sizeH, sizeW, SourceUrl){
             var img = document.createElement("img");
             img.src = dynamicUrl;
             img.style.width = sizeW;
@@ -2270,7 +2270,43 @@ class CtrlStatButton {
            document.getElementById(ParentID).appendChild(img);
         }
         
-        update(dynamicUrl){
-            this.ID.src = dynamicUrl;
+        update(SourceUrl){
+            this.ID.src = SourceUrl;
         }
     } 
+    
+     /* --------------------- Klasse ArrayListBox ---------------------------------------- */
+    class ArrayListBox { 
+        constructor() {
+            this.ID = "";
+        }
+
+        create(ParentID, posTop, posLeft, sizeH, sizeW, array){
+            var arrBox = document.createElement("table");
+            arrBox.width = sizeW;
+            arrBox.style.position = "relative";
+            arrBox.style.top = posTop;
+            arrBox.style.left = posLeft;
+            this.ID = arrBox; 
+            
+            var elem1  = document.createElement("tr");  
+            arrBox.append(elem1);
+    
+            var elem2  = document.createElement("td");  
+            elem1.append(elem2);
+            
+            var elem3  = document.createElement("div");
+            elem3.style.textAlign = "left";
+            elem3.innerHTML = "kochen";
+            elem2.append(elem3);
+            
+            
+           document.getElementById(ParentID).appendChild(arrBox);
+        }
+        
+        update(value){
+             
+        }
+    } 
+    
+ 
