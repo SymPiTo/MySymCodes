@@ -223,12 +223,16 @@ class MyKochbuch extends IPSModule
         $str     =  $Kochbuch[$No]['recipeInstructions'];
         $replace = '.<br>';
         $NewRezept = str_replace($suchMuster, $replace, $str);
-
+        if($this->ReadPropertyBoolean('ID_WF')){
+            setvalue($this->GetIDForIdent('ID_WFRezept'), $NewRezept);
+            setvalue($this->GetIDForIdent('ID_WFBild'), $imageHTML);
+            setvalue($this->GetIDForIdent('ID_WFZutaten'), $ZutatenHTML);            
+        }
         setvalue($this->GetIDForIdent('ID_Kochbuch'),serialize($KochbuchIndex));
-        setvalue($this->GetIDForIdent('ID_Rezept'), $NewRezept);
-        setvalue($this->GetIDForIdent('ID_Bild'), $imageHTML);
-        //setvalue($this->GetIDForIdent('ID_Zutaten'),  implode("/r/n,", $Kochbuch[$No]['recipeIngredient']));
-        setvalue($this->GetIDForIdent('ID_Zutaten'), $ZutatenHTML);
+        setvalue($this->GetIDForIdent('ID_Rezept'), $Kochbuch[$No]['recipeInstructions']);
+        setvalue($this->GetIDForIdent('ID_Bild'), $Kochbuch[$No]['image']);
+        setvalue($this->GetIDForIdent('ID_Zutaten'),  implode("/r/n,", $Kochbuch[$No]['recipeIngredient']));
+            
         return $Kochbuch;
     }  
 
