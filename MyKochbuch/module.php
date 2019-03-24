@@ -74,11 +74,11 @@ class MyKochbuch extends IPSModule
         $this->RegisterVariableString("ID_Bild", "Image","",1);
         $this->RegisterVariableString("ID_Zutaten", "Zutaten","",2);
         $this->RegisterVariableString("ID_Kochbuch", "Kochbuch","",3);
-        
+        $this->RegisterVariableString("ID_Titel", "Titel","",4);
             
-        $this->RegisterVariableString("ID_WFRezept", "WF_Rezept","",4);
-        $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox",5);
-        $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten","",6);
+        $this->RegisterVariableString("ID_WFRezept", "WF_Rezept","",5);
+        $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox",6);
+        $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten","",7);
             
         
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
@@ -232,7 +232,7 @@ class MyKochbuch extends IPSModule
         setvalue($this->GetIDForIdent('ID_Rezept'), $Kochbuch[$No]['recipeInstructions']);
         setvalue($this->GetIDForIdent('ID_Bild'), $Kochbuch[$No]['image']);
         setvalue($this->GetIDForIdent('ID_Zutaten'),  implode("/r/n,", $Kochbuch[$No]['recipeIngredient']));
-            
+        setvalue($this->GetIDForIdent('ID_Titel'), $Kochbuch[$No]['name']);    
         return $Kochbuch;
     }  
 
