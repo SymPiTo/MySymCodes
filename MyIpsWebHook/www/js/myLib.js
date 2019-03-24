@@ -2304,7 +2304,8 @@ class CtrlStatButton {
            document.getElementById(ParentID).appendChild(arrBox);
         }
         
-        update(value){
+        update(jsonarray){
+             array = JSON.parse(jsonarray); 
             // As long as <ul> has a child node, remove it
             while (this.ID.hasChildNodes()) {   
                 this.ID.removeChild(this.ID.firstChild);
@@ -2317,7 +2318,7 @@ class CtrlStatButton {
             
             var elem3  = document.createElement("div");
             elem3.style.textAlign = "left";
-            elem3.innerHTML = "scheissen";
+            elem3.innerHTML = array[0];
             elem2.append(elem3);
             
             this.ID.appende(elem1);
