@@ -2321,7 +2321,7 @@ class CtrlStatButton {
             elem3.innerHTML = array[0];
             elem2.append(elem3);
             
-            this.ID.appende(elem1);
+            this.ID.append(elem1);
         
         }
     } 
