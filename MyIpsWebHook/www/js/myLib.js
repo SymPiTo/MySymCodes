@@ -2260,7 +2260,7 @@ class CtrlStatButton {
 
         create(ParentID, posTop, posLeft, sizeH, sizeW, SourceUrl){
             var img = document.createElement("img");
-            img.src = dynamicUrl;
+            img.src = SourceUrl;
             img.style.width = sizeW;
             img.style.height = sizeH;
             img.style.position = "relative";
