@@ -2310,9 +2310,10 @@ class CtrlStatButton {
             while (this.ID.hasChildNodes()) {   
                 this.ID.removeChild(this.ID.firstChild);
             }  
+            var a = this.ID;
             array.forEach(function(value) {
                 var elem1  = document.createElement("tr");  
-                this.ID.append(elem1);
+                a.append(elem1);
 
                 var elem2  = document.createElement("td");  
                 elem1.append(elem2);
@@ -2322,7 +2323,7 @@ class CtrlStatButton {
                 elem3.innerHTML = value;
                 elem2.append(elem3);
 
-                this.ID.append(elem1);
+                a.append(elem1);
              });       
         }
     } 
