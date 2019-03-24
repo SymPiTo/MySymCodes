@@ -2281,7 +2281,7 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, posTop, posLeft, sizeH, sizeW, array){
+        create(ParentID, posTop, posLeft){
             var arrBox = document.createElement("table");
             arrBox.width = sizeW;
             arrBox.style.position = "relative";
