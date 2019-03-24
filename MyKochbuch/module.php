@@ -70,15 +70,15 @@ class MyKochbuch extends IPSModule
         //String Variable anlegen
         //RegisterVariableString ( $Ident,  $Name, $Profil, $Position )
         // Aufruf dieser Variable mit $this->GetIDForIdent('IDENTNAME')
-        $this->RegisterVariableString("ID_Rezept", "Rezept");
-        $this->RegisterVariableString("ID_Bild", "Image","~HTMLBox");
-        $this->RegisterVariableString("ID_Zutaten", "Zutaten");
-        $this->RegisterVariableString("ID_Kochbuch", "Kochbuch");
+        $this->RegisterVariableString("ID_Rezept", "Rezept","",0);
+        $this->RegisterVariableString("ID_Bild", "Image","",1);
+        $this->RegisterVariableString("ID_Zutaten", "Zutaten","",2);
+        $this->RegisterVariableString("ID_Kochbuch", "Kochbuch","",3);
         
             
-        $this->RegisterVariableString("ID_WFRezept", "WF_Rezept");
-        $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox");
-        $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten");
+        $this->RegisterVariableString("ID_WFRezept", "WF_Rezept","",4);
+        $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox",5);
+        $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten","",6);
             
         
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
