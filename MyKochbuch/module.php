@@ -108,7 +108,7 @@ class MyKochbuch extends IPSModule
 	//Never delete this line!
         parent::ApplyChanges();
         
-        if($this->ReadPropertyFloat('ID_WF')){
+        if($this->ReadPropertyBoolean('ID_WF')){
             $this->RegisterVariableString("ID_WFRezept", "WF_Rezept");
             $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox");
             $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten");
