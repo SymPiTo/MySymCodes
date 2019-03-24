@@ -2353,6 +2353,6 @@ class CtrlStatButton {
         }
         
         update(text){
-            this.ID.txt = text;
+            this.ID.innerHTML = text;
         }
     } 
