@@ -203,7 +203,9 @@ class MyKochbuch extends IPSModule
 
             if(strlen($Kochbuch[$No]['image']) > 0) {
                 $imageHTML =  '
-                    <img src='.@$Kochbuch[$No]['image'].'\" style=\"width: 50px; height: 50px">
+                    <div style=\"width: 70px; height: 70px; \">
+                        <img src='.@$Kochbuch[$No]['image'].'\" style=\"width: 50px; height: 50px">
+                    </div>
                    ';
               
             }       
