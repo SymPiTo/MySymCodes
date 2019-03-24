@@ -193,11 +193,11 @@ class MyKochbuch extends IPSModule
 */
             
             if(strlen($Kochbuch[$No]['image']) > 0) {
-                $imageHTML .= "<td width=\"170px\" valign=\"top\">
-                  <div style=\"width: 170px; height: 170px; perspective: 170px; right: 0px; margin-bottom: 10px;\">
-                    <img src=\"".@$Kochbuch[$No]['image']."\" style=\"max-width: 170px; max-height: 170px; -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.88, transparent), to(rgba(255, 255, 255, 0.5))); transform: rotateY(-10deg) translateZ(-35px);\">
+                $imageHTML = '
+                  <div style=\"width: 3000px; height: 300px; perspective: 170px; right: 0px; margin-bottom: 1px;\">
+                    <img src=\"'.@$Kochbuch[$No]['image'].'\" style=\"max-width: 170px; max-height: 170px; -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.88, transparent), to(rgba(255, 255, 255, 0.5))); transform: rotateY(-10deg) translateZ(-35px);\">
                   </div>
-                </td>";
+                ';
             }
 
 
