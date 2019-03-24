@@ -2252,4 +2252,25 @@ class CtrlStatButton {
         }
     }
     
-    
+         /* --------------------- Klasse ShowUrlImage ---------------------------------------- */
+    class ShowUrlImage { 
+        constructor() {
+            this.ID = "";
+        }
+
+        create(ParentID, posTop, posLeft, sizeH, sizeW, dynamicUrl){
+            var img = document.createElement("img");
+            img.src = dynamicUrl;
+            img.style.width = sizeW;
+            img.style.height = sizeH;
+            img.style.position = "relative";
+            img.style.top = posTop;
+            img.style.left = posLeft;
+            this.ID = img; 
+           document.getElementById(ParentID).appendChild(img);
+        }
+        
+        update(dynamicUrl){
+            this.ID.src = dynamicUrl;
+        }
+    } 
