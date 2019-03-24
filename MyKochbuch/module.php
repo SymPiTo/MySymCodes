@@ -203,7 +203,7 @@ class MyKochbuch extends IPSModule
 
             if(strlen($Kochbuch[$No]['image']) > 0) {
                 $imageHTML =  '
-                    <img src='.@$Kochbuch[$No]['image'].'\" style=\"max-width: 170px; max-height: 170px; -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.88, transparent), to(rgba(255, 255, 255, 0.5))); transform: rotateY(-10deg) translateZ(-35px);\">
+                    <img src='.@$Kochbuch[$No]['image'].'\" style=\"max-width: 170px; max-height: 170px">
                    ';
               
             }       
