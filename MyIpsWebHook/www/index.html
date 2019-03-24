@@ -71,6 +71,14 @@
                                                                             var text = jsontext.substr(6,jsontext.length-6) ;
                                                                             showAList(text);
                                                                         }
+                                                                        else if(jsontext.substring(0, 9)  == "IPSValue:"){
+                                                                            //Antwort auf eine Anfrage - nur bestimmte Variable updaten
+                                                                            var ipsID = "ID" + jsontext.substring(10, 5);
+                                                                            var len = jsontext.length - 14;
+                                                                            var ipsJsonValue = jsontext.substring(16, len);
+                                                                            var IPSValue = JSON.parse(ipsJsonValue); 
+                                                                            updateIPSValue(ipsID, IPSValue);
+                                                                        }
                                                                         else{
                                                                             
                                                                             ips = JSON.parse(jsontext); 

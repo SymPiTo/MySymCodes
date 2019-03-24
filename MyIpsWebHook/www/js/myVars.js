@@ -518,6 +518,20 @@
         $('tempkinderzimmer4').innerHTML =  'Kinderzimmer ' + ips[0].ID37045 + '°C';        
     }
     
+   //<!-- ************************ Übergabe nur eine Variable von IPS ************************  -->
+   function updateIPSValue(ipsID, IPSValue){
+        switch(ipsID) {
+            case x:
+              // code block
+              break;
+            case y:
+              // code block
+              break;
+            default:
+              // code block
+        }
+   }
+   
    
     function updateValues(ips){
         //<!-- ******************** Kochbuch   **************************  -->
