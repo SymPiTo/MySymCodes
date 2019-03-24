@@ -184,7 +184,7 @@ class MyKochbuch extends IPSModule
                     <tr>
                         <td>
                             <div style=\"text-align: left;\">'
-                                .$Kochbuch[0]['recipeIngredient'].
+                                .$Kochbuch[1]['recipeIngredient'].
                             '</div>
                         </td>";
                     "</tr>
