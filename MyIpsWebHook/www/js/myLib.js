@@ -2328,4 +2328,31 @@ class CtrlStatButton {
         }
     } 
     
+          /* --------------------- Klasse TextBox ---------------------------------------- */
+    class TextBox { 
+        constructor() {
+            this.ID = "";
+        }
+
+        create(ParentID, posTop, posLeft, sizeH, sizeW){
+            
+            var elem1 = document.createElement("div");
+            var txt = document.createElement("textarea");
+             
+            txt.style.width = sizeW;
+            txt.style.height = sizeH;
+            txt.style.position = "relative";
+            txt.style.top = posTop;
+            txt.style.left = posLeft;
+            txt.innerHTML = "hdfjklhajlkhslkgslkdfhgjklhfdlghsdklfh hldahslskj ";
+            this.ID = txt; 
+            elem1.append(txt);
+            
  
+           document.getElementById(ParentID).appendChild(elem1);
+        }
+        
+        update(text){
+            this.ID.src = text;
+        }
+    } 

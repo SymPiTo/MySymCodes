@@ -1231,11 +1231,12 @@
 	<!--  ************************          Main - Rezepte    ************************      -->   
         <!-- ***********************************************************************************   -->
 		 
-        <Main id="MainRezepte" class="Rezepte">  
-            <img src="images/Rezepte/Bauerntopf_mit_Hackfeisch.png" alt="Bauerntopf">
-        </Main>
+        <Main id="MainRezepte" class="Rezepte">  </Main>
              
         <script> 
+            var txtBox = new TextBox();
+            txtBox.create("MainRezepte", "10px", "10px","300px", "400px");
+            
             var FontBtnRL = new FontButtonNew();
             FontBtnRL.create("MainRezepte", "purple", "mid", "83vh", "22%", "fa fa-play", "send('command(TV,key,KEY_PLAY)')");
             var CtrlBtnRezeptList = new CtrlButton();
