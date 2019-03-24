@@ -2305,7 +2305,7 @@ class CtrlStatButton {
         }
         
         update(jsonarray){
-             array = JSON.parse(jsonarray); 
+            var array = JSON.parse(jsonarray); 
             // As long as <ul> has a child node, remove it
             while (this.ID.hasChildNodes()) {   
                 this.ID.removeChild(this.ID.firstChild);
