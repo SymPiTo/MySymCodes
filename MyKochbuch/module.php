@@ -205,7 +205,7 @@ class MyKochbuch extends IPSModule
         $suchMuster = "\n\n";
         $str     =  $Kochbuch[$No]['recipeInstructions'];
             
-        $replace = '<br />';
+        $replace = '<br>';
             
         $NewRezept = str_replace($suchMuster, $replace, $str);
 
