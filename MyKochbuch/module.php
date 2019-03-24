@@ -112,13 +112,17 @@ class MyKochbuch extends IPSModule
             $this->RegisterVariableString("ID_WFRezept", "WF_Rezept");
             $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox");
             $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten");
+            $this->RegisterCategory("WebFront","");
+            $this->RegisterCategory("Image","WebFront");
+            $this->RegisterCategory("Rezept","WebFront");
+            $this->RegisterCategory("Zutaten","WebFront");
         }else{
-            /*
-           $this->UnregisterVariable("ID_WFRezept"); 
-           $this->UnregisterVariable("ID_WFBild");
-           $this->UnregisterVariable("ID_WFZutaten");
+            
+            $this->UnregisterVariable("ID_WFRezept"); 
+            $this->UnregisterVariable("ID_WFBild");
+            $this->UnregisterVariable("ID_WFZutaten");
              
-             */
+           
         }
 
         
@@ -351,5 +355,59 @@ class MyKochbuch extends IPSModule
         return $json_data;
     }    
 
-		
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: RegisterCategory
+    ...............................................................................
+     *  Legt ein Unterverzeichnis an
+     * Beispiel:
+     *  
+    ...............................................................................
+    Parameters: 
+ 
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
+    private function RegisterCategory($catName, $ParentCatName ) {
+        if($ParentCatName === ""){
+            $KategorieID = @IPS_GetCategoryIDByName($catName, $this->InstanceID);
+            if ($KategorieID === false){
+                // Anlegen einer neuen Kategorie mit dem Namen $catName
+                $CatID = IPS_CreateCategory();       // Kategorie anlegen
+                IPS_SetName($CatID, $catName); // Kategorie benennen
+                IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unterhalb der der Instanz
+            }
+        }else{
+            $ParentCatID = @IPS_GetCategoryIDByName($ParentCatName, $this->InstanceID);
+            $KategorieID = @IPS_GetCategoryIDByName($catName, $ParentCatID);
+            if ($KategorieID === false){
+                // Anlegen einer neuen Kategorie mit dem Namen $catName
+                $CatID = IPS_CreateCategory();       // Kategorie anlegen
+                IPS_SetName($CatID, $catName); // Kategorie benennen
+                IPS_SetParent($CatID, $this->ParentCatID); // Kategorie einsortieren unterhalb der der Instanz
+            }   
+        }    
+        return true;
+    }	
+    /* ----------------------------------------------------------------------------------------------------- 
+    Function: UnRegisterCategory
+    ...............................................................................
+     *  Legt ein Unterverzeichnis an
+     * Beispiel:
+     *  
+    ...............................................................................
+    Parameters: 
+ 
+    .......................................................................................................
+    Returns:    
+        none
+    -------------------------------------------------------------------------------------------------------- */
+    private function UnRegisterCategory($catName ) {
+        $KategorieID = @IPS_GetCategoryIDByName($catName, $this->InstanceID);
+        if ($KategorieID === true){
+            // Löschen einer neuen Kategorie mit dem Namen $catName
+            IPS_DeleteCategory($KategorieID);
+        }
+        return $KategorieID;
+    }
 }
