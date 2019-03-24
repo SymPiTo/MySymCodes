@@ -180,20 +180,20 @@ class MyKochbuch extends IPSModule
         
             
             $ZutatenHTML = '
-                <table width="100%">
+                <table width="100%">';
+            foreach ($Kochbuch[$No]['recipeIngredient'] as $key => $value) {
+                $ZutatenHTML .= '
                     <tr>
                         <td>
-                            <div style="text-align: left;">'
-                                .$Kochbuch[1]['recipeIngredient'][1].
+                            <div style="text-align: left;">' 
+                                .$Kochbuch[$No]['recipeIngredient'][$key]. 
                             '</div>
                         </td>
                     </tr>
-                 </table>
-            ';
+                ';
+             }
+            $ZutatenHTML .= '</table>';
 
-            
-            
-            
 
             if(strlen($Kochbuch[$No]['image']) > 0) {
                 $imageHTML =  '
