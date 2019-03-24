@@ -2311,7 +2311,7 @@ class CtrlStatButton {
                 this.ID.removeChild(this.ID.firstChild);
             }  
             var elem1  = document.createElement("tr");  
-            arrBox.append(elem1);
+            this.ID.append(elem1);
     
             var elem2  = document.createElement("td");  
             elem1.append(elem2);
