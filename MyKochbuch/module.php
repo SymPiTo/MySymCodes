@@ -200,13 +200,9 @@ class MyKochbuch extends IPSModule
                     <img src="'.@$Kochbuch[$No]['image'].'" style="width: auto; height: 200px">
                 ';             
             }       
-        
-        
-        $suchMuster = ".";
+        $suchMuster = ". ";
         $str     =  $Kochbuch[$No]['recipeInstructions'];
-            
-        $replace = '<br>';
-            
+        $replace = '.<br>';
         $NewRezept = str_replace($suchMuster, $replace, $str);
 
         setvalue($this->GetIDForIdent('ID_Kochbuch'),serialize($KochbuchIndex));
