@@ -3,7 +3,7 @@
 	[
             { "name": "ID_Active",          "type": "CheckBox",             "caption": "active" },
             {                               "type" : "Label",               "label" : "WebFront verwenden."},
-            { "name": "WF_ID",              "type": "CheckBox",             "caption": "Webfront" }   
+            { "name": "ID_WF",              "type": "CheckBox",             "caption": "Webfront" }   
 	],
 	"actions":
 	[
