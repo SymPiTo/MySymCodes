@@ -1,8 +1,9 @@
 {
 	"elements":
 	[
- 
-                
+            { "name": "active",         "type": "CheckBox",             "caption": "active" },
+            {                           "type" : "Label",               "label" : "WebFromt verwenden."},
+            { "name": "WebFront",	"type": "CheckBox",             "caption": "Webfront" }   
 	],
 	"actions":
 	[
