@@ -48,12 +48,12 @@ class MyKochbuch extends IPSModule
         parent::Create();
  
          // Variable aus dem Instanz Formular registrieren (zugänglich zu machen)
-         // Aufruf dieser Form Variable mit  §this->ReadPropertyFloat('IDENTNAME')
+         // Aufruf dieser Form Variable mit  $this->ReadPropertyFloat('IDENTNAME')
         //$this->RegisterPropertyInteger('IDENTNAME', 0);
         //$this->RegisterPropertyFloat('IDENTNAME', 0.5);
         //$this->RegisterPropertyBoolean('IDENTNAME', false);
-        
-       
+        $this->RegisterPropertyBoolean('ID_Active', false);
+        $this->RegisterPropertyBoolean('ID_WF', false);    
         
         //Integer Variable anlegen
         //integer RegisterVariableInteger (string $Ident, string $Name, string $Profil, integer $Position )
@@ -75,7 +75,12 @@ class MyKochbuch extends IPSModule
         $this->RegisterVariableString("ID_Zutaten", "Zutaten");
         $this->RegisterVariableString("ID_Kochbuch", "Kochbuch");
         
-         
+            
+        $this->RegisterVariableString("ID_WFRezept", "WF_Rezept");
+        $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox");
+        $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten");
+            
+        
         // Aktiviert die Standardaktion der Statusvariable zur Bedienbarkeit im Webfront
         //$this->EnableAction('IDENTNAME');
         //IPS_SetVariableCustomProfile(§this->GetIDForIdent(!Mode!), !Rollo.Mode!);
@@ -102,7 +107,19 @@ class MyKochbuch extends IPSModule
     {
 	//Never delete this line!
         parent::ApplyChanges();
-            
+        
+        if($this->ReadPropertyFloat('ID_WF')){
+            $this->RegisterVariableString("ID_WFRezept", "WF_Rezept");
+            $this->RegisterVariableString("ID_WFBild", "WF_Image","~HTMLBox");
+            $this->RegisterVariableString("ID_WFZutaten", "WF_Zutaten");
+        }else{
+           $this->UnregisterVariable(ID_WFRezept); 
+           $this->UnregisterVariable(ID_WFBild);
+           $this->UnregisterVariable(ID_WFZutaten);
+        }
+
+        
+        
         //init
         $this->readKochbuch(0);
     }
