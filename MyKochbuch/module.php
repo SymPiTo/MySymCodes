@@ -368,7 +368,7 @@ class MyKochbuch extends IPSModule
         none
     -------------------------------------------------------------------------------------------------------- */
     private function RegisterCategory($catName) {
-        if($ParentCatName === ""){
+        
             $KategorieID = @IPS_GetCategoryIDByName($catName, $this->InstanceID);
             if ($KategorieID === false){
                 // Anlegen einer neuen Kategorie mit dem Namen $catName
@@ -376,9 +376,6 @@ class MyKochbuch extends IPSModule
                 IPS_SetName($CatID, $catName); // Kategorie benennen
                 IPS_SetParent($CatID, $this->InstanceID); // Kategorie einsortieren unterhalb der der Instanz
             }
-        }else{
-            
-        }    
         return true;
     }	
     /* ----------------------------------------------------------------------------------------------------- 
