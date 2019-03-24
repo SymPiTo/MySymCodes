@@ -520,6 +520,8 @@
     
    
     function updateValues(ips){
+        //<!-- ******************** Kochbuch   **************************  -->
+        RezeptImg.update(ips[0].ID34839);
         //<!-- ******************** Samsung TV **************************  -->
         TVframe.update(ips[0].ID31510, 10000);
         TVGuideframe.update(ips[0].ID49099, 10000);
