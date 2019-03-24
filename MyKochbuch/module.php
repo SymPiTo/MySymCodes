@@ -176,9 +176,39 @@ class MyKochbuch extends IPSModule
             $Kochbuch[$key]['recipeInstructions'] = $rezept['items'][0]['mainEntity'][1]['recipeInstructions'];
             $KochbuchIndex[$key] = $rezept['items'][0]['mainEntity'][1]['name'];
         }
+        
+        
+        /*
+            $detailHTML =   "<table width=\"100%\">
+                          <tr>
+                            <td>
+                              <div style=\"text-align: right;\">
+                                <div><b>".$positionInfo['streamContent']."</b></div>
+                                <div>&nbsp;</div>
+                                <div>".$mediaInfo['title']."</div>
+                              </div>
+                            </td>";
+                     $detailHTML .= "</tr>
+                        </table>";
+*/
+            
+            if(strlen($image) > 0) {
+                $imageHTML .= "<td width=\"170px\" valign=\"top\">
+                  <div style=\"width: 170px; height: 170px; perspective: 170px; right: 0px; margin-bottom: 10px;\">
+                    <img src=\"".@$Kochbuch[$No]['image']."\" style=\"max-width: 170px; max-height: 170px; -webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.88, transparent), to(rgba(255, 255, 255, 0.5))); transform: rotateY(-10deg) translateZ(-35px);\">
+                  </div>
+                </td>";
+            }
+
+
+        
+        
+        
+        
+        
         setvalue($this->GetIDForIdent('ID_Kochbuch'),serialize($KochbuchIndex));
         setvalue($this->GetIDForIdent('ID_Rezept'), $Kochbuch[$No]['recipeInstructions']);
-        setvalue($this->GetIDForIdent('ID_Bild'), $Kochbuch[$No]['image']);
+        setvalue($this->GetIDForIdent('ID_Bild'), $imageHTML);
         setvalue($this->GetIDForIdent('ID_Zutaten'),  implode("/r/n,", $Kochbuch[$No]['recipeIngredient']));
         return $Kochbuch;
     }  
