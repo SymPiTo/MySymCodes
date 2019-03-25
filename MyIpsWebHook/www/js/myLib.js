@@ -2334,17 +2334,18 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, posTop, posLeft, sizeH, sizeW){
+        create(ParentID, posTop, posLeft, sizeH, sizeW, txtColor, bgColor){
             
             var elem1 = document.createElement("div");
             var txt = document.createElement("textarea");
-             
+            txt.style.color = txtColor; 
+            txt.style.backgroundColor = bgColor;
             txt.style.width = sizeW;
             txt.style.height = sizeH;
             txt.style.position = "relative";
             txt.style.top = posTop;
             txt.style.left = posLeft;
-            txt.innerHTML = "hdfjklhajlkhslkgslkdfhgjklhfdlghsdklfh hldahslskj ";
+            txt.innerHTML = "";
             this.ID = txt; 
             elem1.append(txt);
             
