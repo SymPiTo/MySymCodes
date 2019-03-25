@@ -2281,12 +2281,13 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, posTop, posLeft){
+        create(ParentID, posTop, posLeft, txtColor){
             var arrBox = document.createElement("table");
             arrBox.width = "100%";
             arrBox.style.position = "relative";
             arrBox.style.top = posTop;
             arrBox.style.left = posLeft;
+            arrBox.style.color = txtColor;
             this.ID = arrBox; 
             
             var elem1  = document.createElement("tr");  
