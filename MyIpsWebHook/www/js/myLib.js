@@ -2363,8 +2363,9 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, headline){
+        create(ParentID, bgcolor, headline){
             var elem1 = document.createElement("header");
+            elem1.style.backgroundColor = bgcolor;
             var elem2 = document.createElement("h1");
             elem2.innerHTML = headline;
             elem1.append(elem2); 

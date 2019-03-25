@@ -2976,7 +2976,7 @@ img.highlight { border: 5px solid blue; }
 
 /* *********************  HeadLine  ********************************** */
 header {
-  background: green;
+  /* background: green;  */
   display: flex;
   color: white;
 }
