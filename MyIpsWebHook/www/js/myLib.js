@@ -2356,3 +2356,25 @@ class CtrlStatButton {
             this.ID.innerHTML = text;
         }
     } 
+    
+              /* --------------------- Klasse HeadLine ---------------------------------------- */
+    class HeadLine { 
+        constructor() {
+            this.ID = "";
+        }
+
+        create(ParentID, headline){
+            var elem1 = document.createElement("header");
+            var elem2 = document.createElement("h1");
+            elem2.innerHTML = headline;
+            elem1.append(elem2); 
+            this.ID = elem2; 
+           document.getElementById(ParentID).appendChild(elem1);
+        }
+        
+        update(headline){
+            this.ID.innerHTML = headline;
+        }
+    } 
+    
+ 

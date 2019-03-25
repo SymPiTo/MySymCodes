@@ -390,7 +390,7 @@
             var SubMenuRolloK = new GlideButton();
             SubMenuRolloK.create("SubMenuK","SubMenuRolloK", "midgreen", "Rolladen Kueche", "_Rolladen_BW_web.png", "MainRolloK","", "SM" ); 
             var SubMenuRezepte = new GlideButton();
-            SubMenuRezepte.create("SubMenuK","SubMenuRezepte", "midgreen", "Rezeptee", "_Rolladen_BW.png", "MainRezepte","", "SM" ); 
+            SubMenuRezepte.create("SubMenuK","SubMenuRezepte", "midgreen", "Rezepte", "cook_web.png", "MainRezepte","", "SM" ); 
         </script> 
         
 	<!-- ************************ Menu Balkon  ************************  -->
@@ -1242,8 +1242,11 @@
         <Main id="MainRezepte" class="Rezepte">  </Main>
              
         <script> 
+            var RezeptName = new HeadLine();
+            RezeptName.create(MainRezepte, "Spargel Soße");
+            
             var txtBox = new TextBox();
-            txtBox.create("MainRezepte", "10px", "10px","300px", "400px");
+            txtBox.create("MainRezepte", "10px", "10px","400px", "500px");
             
             var FontBtnRL = new FontButtonNew();
             FontBtnRL.create("MainRezepte", "purple", "mid", "83vh", "22%", "fa fa-play", "send('command(TV,key,KEY_PLAY)')");
