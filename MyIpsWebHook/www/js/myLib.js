@@ -2334,11 +2334,12 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, posTop, posLeft, sizeH, sizeW, txtColor, bgColor){
+        create(ParentID, posTop, posLeft, sizeH, sizeW, txtColor, txtSize, bgColor){
             
             var elem1 = document.createElement("div");
             var txt = document.createElement("textarea");
             txt.style.color = txtColor; 
+            txt.style.fontSize = txtSize;
             txt.style.backgroundColor = bgColor;
             txt.style.width = sizeW;
             txt.style.height = sizeH;
