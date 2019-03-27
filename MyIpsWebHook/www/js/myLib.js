@@ -1533,6 +1533,7 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                    elem1.className = symbol; 
                    elem1.style.fontSize = "30px";
                    elem1.style.padding = "5px";
+                   elem1.style.color = "white";
             
                    
                    elem.append(elem1);

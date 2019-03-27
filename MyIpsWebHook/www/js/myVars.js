@@ -535,6 +535,7 @@
    
     function updateValues(ips){
         //<!-- ******************** Kochbuch   **************************  -->
+        RezeptName.update(ips[0].ID54563);
         RezeptImg.update(ips[0].ID18416);
         IncredBox.update(ips[0].ID29246);
         txtBox.update(ips[0].ID59260);
