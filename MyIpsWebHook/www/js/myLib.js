@@ -2384,7 +2384,7 @@ class CtrlStatButton {
                 this.ID.innerHTML = headline;
             }
             else {
-                $('fehler').innerHTML =  "Variable wrong ID:" + this.ID.value;
+                $('fehler').innerHTML =  "Variable wrong or missing:";
             }
             
         }
