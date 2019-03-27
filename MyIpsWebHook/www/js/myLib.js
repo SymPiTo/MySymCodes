@@ -2379,7 +2379,14 @@ class CtrlStatButton {
         }
         
         update(headline){
-            this.ID.innerHTML = headline;
+            if (typeof(headline) != 'undefined' && headline != null)
+            {
+                this.ID.innerHTML = headline;
+            }
+            else {
+                $('fehler').innerHTML =  "Variable wrong ID:" + this.ID.value;
+            }
+            
         }
     } 
     
