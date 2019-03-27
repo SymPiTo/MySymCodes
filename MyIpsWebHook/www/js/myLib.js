@@ -1528,13 +1528,13 @@ function addFontButton(ParentID, color, size, posTop, posLeft, symbol, cmd){
                    elem.style.position = "absolute";
                    elem.style.left = posLeft;
                    elem.style.top = posTop;
-                   elem.style.color = "white";
+                   
                    elem.setAttribute("onclick", cmd);
                    var elem1 = document.createElement("span");
                    elem1.className = symbol; 
                    elem1.style.fontSize = "30px";
                    elem1.style.padding = "5px";
-                   
+                   elem1.style.color = "white";
             
                    
                    elem.append(elem1);
