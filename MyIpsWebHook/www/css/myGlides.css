@@ -147,6 +147,7 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .BatAlarmCtrl,
 .Rezepte,
 .RezepteCtrl,
+.RezepteCtrlList,
 .IRadio,
 .WSS,
 .TV
@@ -500,7 +501,14 @@ background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152
         left:74vw;
         background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
 }
-
+.RezepteCtrlList{
+	position:absolute;
+	top: 5vh;
+	width: 0px;
+	height: 95vh;
+        left:74vw;
+        background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
+}
 .TimePicker {
 	position:relative;
 	top: 5vh;
