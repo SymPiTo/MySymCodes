@@ -2373,6 +2373,7 @@ class CtrlStatButton {
             elem1.style.backgroundColor = bgcolor;
             var elem2 = document.createElement("h1");
             elem2.innerHTML = headline;
+            elem2.style.fontSize = "18px";
             elem1.append(elem2); 
             this.ID = elem2; 
            document.getElementById(ParentID).appendChild(elem1);
