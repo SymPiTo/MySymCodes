@@ -2033,6 +2033,14 @@ width:40%;
         margin-bottom: 2px;
 	padding-top: 10px;
 }
+.ctrlbutton.big {
+	height: 60px;
+	width: 175px;
+	font-size: 20px;
+        margin-bottom: 2px;
+	padding-top: 10px;
+}
+
 .ctrlbutton.smallwide {
 	height: 40px;
 	width: 225px;
