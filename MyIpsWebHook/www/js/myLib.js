@@ -2338,6 +2338,8 @@ class CtrlStatButton {
 
         create(ParentID, posTop, posLeft, txtColor){
             var arrBox = document.createElement("table");
+            arrBox.cellPadding = "10px";
+            arrBox.cellSpacing = "10px";
             arrBox.width = "100%";
             arrBox.style.position = "relative";
             arrBox.style.top = posTop;
@@ -2349,7 +2351,7 @@ class CtrlStatButton {
             arrBox.append(elem1);
     
             var elem2  = document.createElement("td");  
-            elem2.style.paddingTop = "10px";
+             
             elem1.append(elem2);
             
             var elem3  = document.createElement("div");
