@@ -2349,11 +2349,12 @@ class CtrlStatButton {
             arrBox.append(elem1);
     
             var elem2  = document.createElement("td");  
+            elem2.style.paddingTop = "10px";
             elem1.append(elem2);
             
             var elem3  = document.createElement("div");
             elem3.style.textAlign = "left";
-            elem3.style.marginTop = "3px";
+            
             elem3.innerHTML = "";
             elem2.append(elem3);
             
