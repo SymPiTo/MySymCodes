@@ -3052,11 +3052,11 @@ h1:after {
 }
 
 .midgreen {
-    background: -webkit-linear-gradient(hsl(152, 70%, 35%), hsl(152,70%,55%), hsl(152, 70%, 35%));  
+    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%), hsl(152, 70%, 25%)); /* CHROME */ 
 }
 .midgreen:hover {
-    background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,35%),hsl(152, 70%, 15%)); 
+    background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,25%),hsl(152, 70%, 15%)); /* CHROME */
 } 
 .midgreen:active {
-     background: -webkit-linear-gradient(hsl(152, 70%, 5%), hsl(152,70%,15%), hsl(152, 70%, 5%));  
+    background: -webkit-linear-gradient(hsl(152, 70%, 5%), hsl(152,70%,15%),hsl(152, 70%, 5%)); /* CHROME */
 } 
