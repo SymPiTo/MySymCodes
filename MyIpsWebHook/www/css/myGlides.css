@@ -2081,9 +2081,7 @@ width:40%;
 	background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%), hsl(200, 100%, 25%));
 }
 */
-.ctrlbutton.midgreen {
-    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
-} 
+ 
 
 .ctrlbutton:hover {
  
@@ -2116,9 +2114,7 @@ width:40%;
 	background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%));
 }
 */
-.ctrlbutton.midgreen:active {
-    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
-} 
+ 
 
 .ctrlbutton.cyanA {
 	background: -webkit-linear-gradient(hsl(174, 100%, 5%), hsl(174, 100%, 15%));
