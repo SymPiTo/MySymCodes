@@ -2368,7 +2368,7 @@ class CtrlStatButton {
                 this.ID.removeChild(this.ID.firstChild);
             }  
             var a = this.ID;
-            array.forEach(function(value) {
+            array.forEach(function(value, i) {
                 var elem1  = document.createElement("tr");  
                 a.append(elem1);
 
@@ -2379,7 +2379,7 @@ class CtrlStatButton {
                 elem3.style.textAlign = "left";
                 elem3.innerHTML = value;
                 elem3.onclick = function() {
-                    var index =  item.selected  ;
+                    var index =  i  ;
                   }
                 elem2.append(elem3);
 
