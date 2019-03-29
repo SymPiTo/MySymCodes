@@ -2353,6 +2353,7 @@ class CtrlStatButton {
             
             var elem3  = document.createElement("div");
             elem3.style.textAlign = "left";
+            elem3.style.paddingTop = "3px";
             elem3.innerHTML = "";
             elem2.append(elem3);
             
@@ -2377,6 +2378,9 @@ class CtrlStatButton {
                 var elem3  = document.createElement("div");
                 elem3.style.textAlign = "left";
                 elem3.innerHTML = value;
+                elem3.onclick = function() {
+                    var index =  item.selected  ;
+                  }
                 elem2.append(elem3);
 
                 a.append(elem1);
