@@ -2379,7 +2379,8 @@ class CtrlStatButton {
                 elem3.style.textAlign = "left";
                 elem3.innerHTML = value;
                 elem3.onclick = function() {
-                    var index =  i  ;
+                    var index =  i;
+                    send('command(Cook,key,i)');
                   }
                 elem2.append(elem3);
 
