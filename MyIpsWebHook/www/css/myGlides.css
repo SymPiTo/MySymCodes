@@ -1956,9 +1956,7 @@ width:40%;
     background: -webkit-linear-gradient(hsl(200, 0%, 25%), hsl(200, 0%, 45%),hsl(200, 0%, 25%));
 }
 
-.fontbutton.midgreen {
-    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
-}   
+  
 .fontbutton:hover {
 }
 .fontbutton.cyan:active {
@@ -1981,9 +1979,7 @@ width:40%;
 .fontbutton.grey:active {
     background: -webkit-linear-gradient(hsl(200, 0%, 5%), hsl(200, 0%, 15%), hsl(200, 0%, 5%));
 }
-.fontbutton.midgreen:active {
-    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); /* CHROME */
-} 
+
 .ctrlbutton{
 	border: thin #000000 solid;
 	height: 80px;
@@ -3059,8 +3055,8 @@ h1:after {
     background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%), hsl(152, 70%, 25%));  
 }
 .midgreen:hover {
-    background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%),hsl(152, 70%, 25%)); 
+    background: -webkit-linear-gradient(hsl(152, 70%, 15%), hsl(152,70%,45%),hsl(152, 70%, 15%)); 
 } 
 .midgreen:active {
-     background: -webkit-linear-gradient(hsl(152, 70%, 25%), hsl(152,70%,45%), hsl(152, 70%, 25%));  
+     background: -webkit-linear-gradient(hsl(152, 70%, 5%), hsl(152,70%,45%), hsl(152, 70%, 5%));  
 } 
