@@ -2380,7 +2380,7 @@ class CtrlStatButton {
                 elem3.innerHTML = value;
                 elem3.onclick = function() {
                     var index =  i;
-                    send('command(Cook,key,i)');
+                    send('command(Cook,selected,'+i+')');
                   }
                 elem2.append(elem3);
 
