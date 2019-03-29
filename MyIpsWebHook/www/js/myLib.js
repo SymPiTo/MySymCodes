@@ -2300,7 +2300,60 @@ class CtrlStatButton {
             
             var elem3  = document.createElement("div");
             elem3.style.textAlign = "left";
-            elem3.innerHTML = "kochen";
+            elem3.innerHTML = "";
+            elem2.append(elem3);
+            
+            
+           document.getElementById(ParentID).appendChild(arrBox);
+        }
+        
+        update(jsonarray){
+            var array = JSON.parse(jsonarray); 
+            // As long as <ul> has a child node, remove it
+            while (this.ID.hasChildNodes()) {   
+                this.ID.removeChild(this.ID.firstChild);
+            }  
+            var a = this.ID;
+            array.forEach(function(value) {
+                var elem1  = document.createElement("tr");  
+                a.append(elem1);
+
+                var elem2  = document.createElement("td");  
+                elem1.append(elem2);
+
+                var elem3  = document.createElement("div");
+                elem3.style.textAlign = "left";
+                elem3.innerHTML = value;
+                elem2.append(elem3);
+
+                a.append(elem1);
+             });       
+        }
+    } 
+      /* --------------------- Klasse ArraySelectListBox ---------------------------------------- */
+    class ArraySelectListBox { 
+        constructor() {
+            this.ID = "";
+        }
+
+        create(ParentID, posTop, posLeft, txtColor){
+            var arrBox = document.createElement("table");
+            arrBox.width = "100%";
+            arrBox.style.position = "relative";
+            arrBox.style.top = posTop;
+            arrBox.style.left = posLeft;
+            arrBox.style.color = txtColor;
+            this.ID = arrBox; 
+            
+            var elem1  = document.createElement("tr");  
+            arrBox.append(elem1);
+    
+            var elem2  = document.createElement("td");  
+            elem1.append(elem2);
+            
+            var elem3  = document.createElement("div");
+            elem3.style.textAlign = "left";
+            elem3.innerHTML = "";
             elem2.append(elem3);
             
             

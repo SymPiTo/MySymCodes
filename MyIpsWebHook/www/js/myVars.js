@@ -539,6 +539,7 @@
         RezeptImg.update(ips[0].ID18416);
         IncredBox.update(ips[0].ID29246);
         txtBox.update(ips[0].ID59260);
+        RezepteBox.update(ips[0].ID16493);
         //<!-- ******************** Samsung TV **************************  -->
         TVframe.update(ips[0].ID31510, 10000);
         TVGuideframe.update(ips[0].ID49099, 10000);
