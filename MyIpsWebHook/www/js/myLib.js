@@ -654,7 +654,7 @@ class StateDisplay {
         this.unit = einheit, 
         this.bgColor = color;
         if(color === ""){
-            this.color = "black";
+            this.bgColor = "black";
         }
         this.state0 = zus0;
         this.state1 = zus1;
