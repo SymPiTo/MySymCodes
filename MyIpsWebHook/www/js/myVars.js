@@ -578,8 +578,12 @@
               }
         transVarPlayModeSsz.update(PM, "");
         
-         LightSZ.update(ips[0].ID10567, "", ""); 
+        //<!-- ******************** Schlafzimmer Licht **************************  -->
+         LightSZ.update(ips[0].ID19506, "", ""); 
  
+ 
+ 
+        //<!-- ********************   **************************  -->
             var sourceList = new Array(); 
         try{
             sourceList = JSON.parse(ips[0].ID45960);
