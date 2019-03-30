@@ -924,14 +924,12 @@
  		<!-- ************************ Light Ctrl  Schlafzimmer ************************ -->
 		<Ctrl id="MainLightSZCtrl"  class="LightSZCtrl"></Ctrl>
     <script> 
-        DisLightCurrentSZCtrl = Object.create(Display);
-        DisLightCurrentSZCtrl.create("MainLightSZCtrl", "LightCurrentSZCtrl", "", "A", "50px", "30px", "Strom", "Number", "", "", "", "");  
-        DisLightPowerSZCtrl = Object.create(Display);
-        DisLightPowerSZCtrl.create("MainLightSZCtrl", "LightPowerSZCtrl", "", "W", "150px", "30px", "Power", "Number", "", "", "", "");  
-        DisLightEnergySZCtrl = Object.create(Display);
-        DisLightEnergySZCtrl.create("MainLightSZCtrl", "LightEnergySZCtrl", "", "kWh", "250px", "30px", "Energy", "Number", "", "", "", "");  
-        
-    
+        var DisLightCurrentSZCtrl = new StateDisplay();
+        DisLightCurrentSZCtrl.create("MainLightSZCtrl", "cyan", "A", "5px", "20px",  "normal", "20px", "Strom", "Number", ""); 
+        var DisLightPowerSZCtrl = new StateDisplay();
+        DisLightPowerSZCtrl.create("MainLightSZCtrl", "cyan", "W", "150px", "20px",  "normal", "20px", "Power", "Number", "");
+        var DisLightEnergySZCtrl = new StateDisplay();
+        DisLightEnergySZCtrl.create("MainLightSZCtrl", "cyan", "kWh", "250px", "20px",  "normal", "20px", "Energy", "Number", "");
     </script> 
 
  		<!-- ************************ Sonos  Schlafzimmer ************************ -->
