@@ -3055,4 +3055,8 @@ h1:after {
 } 
 .midgreen:active {
     background: -webkit-linear-gradient(hsl(152, 70%, 5%), hsl(152,70%,15%),hsl(152, 70%, 5%)); /* CHROME */
-} 
+}
+
+.black {
+    background: black;
+}
