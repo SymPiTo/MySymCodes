@@ -650,9 +650,12 @@ class StateDisplay {
         this.bgColor = "black";
     }
  
-    create(ParentID, color="black", einheit,  posTop, posLeft, size, SchriftGr, titel, zus0, zus1, zus2, zus3, command){
+    create(ParentID, color, einheit,  posTop, posLeft, size, SchriftGr, titel, zus0, zus1, zus2, zus3, command){
         this.unit = einheit, 
-        this.bgColor = color;        
+        this.bgColor = color;
+        if(color === ""){
+            this.color = "black";
+        }
         this.state0 = zus0;
         this.state1 = zus1;
         this.state2 = zus2;
