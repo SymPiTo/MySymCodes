@@ -923,8 +923,14 @@
     </script>
  		<!-- ************************ Light Ctrl  Schlafzimmer ************************ -->
 		<Ctrl id="MainLightSZCtrl"  class="LightSZCtrl"></Ctrl>
-    <script>  
-   </script> 
+    <script> 
+        DisLightCurrentSZCtrl = Object.create(Display);
+        DisLightCurrentSZCtrl.create("MainLightSZCtrl", "LightCurrentSZCtrl", "sandy", "", "50px", "30px", "Strom", ",", ",", ",", ",", "");  
+        DisLightPowerSZCtrl = Object.create(Display);
+        DisLightPowerSZCtrl.create("MainLightSZCtrl", "LightPowerSZCtrl", "sandy", "", "150px", "30px", "Power", ",", ",", ",", ",", "");  
+        DisLightEnergySZCtrl = Object.create(Display);
+        DisLightEnergySZCtrl.create("MainLightSZCtrl", "LightEnergySZCtrl", "sandy", "", "250px", "30px", "Energy", ",", ",", ",", ",", "");  
+    </script> 
 
  		<!-- ************************ Sonos  Schlafzimmer ************************ -->
 		<Main id="MainSonosSZ"  class="SonosSZ"></Main>
