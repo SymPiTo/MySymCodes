@@ -582,7 +582,7 @@
          LightSZ.update(ips[0].ID19506, "", ""); 
         DisLightCurrentSZCtrl.update(ips[0].ID35590);
         DisLightPowerSZCtrl.update(ips[0].ID43083);
-        DisLightEnergySZCtrl.update(ips[0].ID12561);
+        DisLightEnergySZCtrl.update(ips[0].ID12561, 2);
  
         //<!-- ********************   **************************  -->
             var sourceList = new Array(); 
