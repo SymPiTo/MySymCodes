@@ -647,18 +647,19 @@ class StateDisplay {
         this.state1 = "";
         this.state2 = "";
         this.state3 = "";
+        this.bgColor = "black";
     }
  
     create(ParentID, color="black", einheit,  posTop, posLeft, size, SchriftGr, titel, zus0, zus1, zus2, zus3, command){
         this.unit = einheit, 
-   
+        this.bgColor = color;        
         this.state0 = zus0;
         this.state1 = zus1;
         this.state2 = zus2;
         this.state3 = zus3;
         var elem1 = document.createElement("div");
         elem1.className = "anzeige";  
-        elem1.classList.add(color, size);
+        elem1.classList.add( this.bgColor, size);
         elem1.style.color = "lime";
         elem1.style.position = "absolute";
         elem1.style.left = posLeft;
