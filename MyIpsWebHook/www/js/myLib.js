@@ -2444,6 +2444,7 @@ class CtrlStatButton {
         constructor() {
             this.ID = "";
             this.klasse = "";
+            this.clock = "";
         }
 
         create(ParentID){
@@ -2461,7 +2462,7 @@ class CtrlStatButton {
         }
         
         countdown(){
-		var clock = $(this.klasse).flipclock({
+		var clock = $(this.klasse).FlipClock({
 		        clockFace: 'HourlyCounter'
 		    });
 		
