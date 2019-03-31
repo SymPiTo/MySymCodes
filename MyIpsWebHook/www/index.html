@@ -15,10 +15,9 @@
         <script src="js/data.js"></script>
          
 
-        <!--<script src="js/flipclock.js"></script> -->
+        <script src="js/flipclock.js"></script> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>        
         
-    
 		
 	<link rel="stylesheet" type="text/css" href="css/myGlides.css">	
         <link rel="stylesheet"  href="css/flipclock.css">
@@ -316,8 +315,7 @@
 	<subMenu id="SubMenuStart" class="MenuStart"></subMenu>
  		
         <script>    
-            var SubMenuClock = new GlideButton();
-            SubMenuClock.create("SubMenuStart","SubMenuSClock", "grey", "Clock", "Uhr_BW_web.png", "MainClock","", "SM" ); 
+
             var SubMenuWetter = new GlideButton();
             SubMenuWetter.create("SubMenuStart","SubMenuWetter", "grey", "Wetter", "Wetter_BW_web.png", "MainWetter","", "SM" ); 
             var SubMenuShort = new GlideButton();
@@ -391,6 +389,8 @@
             SubMenuRolloK.create("SubMenuK","SubMenuRolloK", "midgreen", "Rolladen Kueche", "_Rolladen_BW_web.png", "MainRolloK","", "SM" ); 
             var SubMenuRezepte = new GlideButton();
             SubMenuRezepte.create("SubMenuK","SubMenuRezepte", "midgreen", "Rezepte", "cook_web.png", "MainRezepte","", "SM" ); 
+            var SubMenuClock = new GlideButton();
+            SubMenuClock.create("SubMenuK","SubMenuSClock", "grey", "Clock", "Uhr_BW_web.png", "MainClock","", "SM" ); 
         </script> 
         
 	<!-- ************************ Menu Balkon  ************************  -->
@@ -1158,33 +1158,29 @@
         <Main id ="MainClock" class="Uhr">
             <div class="clock" style="margin:2em;"></div>
             <div class="message"></div>
-
-            <button class="start">Start Clock</button>
         </Main>
+        
         <script>
-            /*
 		var clock;
 		
 		$(document).ready(function() {
-			
-			clock = $('.clock').FlipClock(10, {
-		        clockFace: 'MinuteCounter',
-		        countdown: true,
+			var clock;
+
+			clock = $('.clock').FlipClock({
+		        clockFace: 'DailyCounter',
 		        autoStart: false,
 		        callbacks: {
-		        	start: function() {
-		        		$('.message').html('The clock has started!');
+		        	stop: function() {
+		        		$('.message').html('The clock has stopped!')
 		        	}
 		        }
 		    });
-
-		    $('.start').click(function(e) {
-
-		    	clock.start();
-		    });
+				    
+		    clock.setTime(220880);
+		    clock.setCountdown(true);
+		    clock.start();
 
 		});
-    */
         </script>
      
         <!-- ***********************************************************************************      -->
