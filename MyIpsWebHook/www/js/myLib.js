@@ -2446,7 +2446,12 @@ class CtrlStatButton {
         }
 
         create(ParentID){
+            var elem = document.createElement("div");
+            elem.className = "clock";
+            elem.style.margin = "2em";
             
+            document.getElementById(ParentID).appendChild(elem);
+ 
         }
         
         update(){
@@ -2455,7 +2460,14 @@ class CtrlStatButton {
         }
         
         countdown(){
-
+		var clock;
+		
+		$(document).ready(function() {
+			
+			clock = $('.clock').FlipClock({
+		        clockFace: 'HourlyCounter'
+		    });
+		});
         }
     }
  
