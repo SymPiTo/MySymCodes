@@ -2455,21 +2455,50 @@ class CtrlStatButton {
         }
         
         countdown(){
- 			var clock;
+            countdown = init_countdown = () ->
+                countdown = new FlipClock $('.countdown'),
+                clockFace: 'MinuteCounter',
+                language: 'en',
+                autoStart: false,
+                countdown: true,
+                showSeconds: true
+                callbacks:
+                  start: () ->
+                    console.log 'The clock has started!'
+                  stop: () ->
+                    console.log 'The clock has stopped!'
+                  interval: () ->
+                    time = this.factory.getTime().time
+                    if time 
+                      console.log 'Clock interval', time
 
-			clock = $('.clock').FlipClock({
-		        clockFace: 'DailyCounter',
-		        autoStart: false,
-		        callbacks: {
-		        	stop: function() {
-		        		$('.message').html('The clock has stopped!')
-		        	}
-		        }
-		    });
-				    
-		    clock.setTime(220880);
-		    clock.setCountdown(true);
-		    clock.start();   
+                return countdown
+
+
+            set_countdown = (minutes, start) ->
+
+                if countdown.running
+                  return
+
+                seconds = minutes * 60
+
+                now = new Date
+                start = new Date start
+                end = start.getTime() + seconds * 1000
+
+                left_secs = Math.round (end - now.getTime()) / 1000
+
+                elapsed = false
+                if left_secs < 0
+                  left_secs *= -1
+                  elapsed = true
+
+                countdown.setTime(left_secs)
+                countdown.start()
+
+            init_countdown()
+            set_countdown(1, new Date())
+  
         }
     }
  
