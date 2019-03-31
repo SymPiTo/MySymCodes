@@ -454,7 +454,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
 /* --------------------- class Dynamic Icon ---------------------------------------- */
  class DynIcon {
     constructor(IBaseName,type,revers) {
-        this.Ident = "";
+        this.ID = "";
         this.ImageBaseName = IBaseName;
         this.typ = type;
         this.revers = revers;
@@ -480,10 +480,10 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     
     create(ParentID, posTop, posLeft, size){
         var elem = document.createElement("img");
+        this.ID = elem.id;
         elem.className = "icon";
         elem.classList.add(size);
         elem.src = "images/" + this.ImageBaseName +"0.png";
-        this.Ident = elem.id; 
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
@@ -494,40 +494,40 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     update(value){
         if(this.typ === "ana"){
             if(value === 0){
-                this.Ident.src = "images/" + this.ImageBaseName +"0.png";
+                this.ID.src = "images/" + this.ImageBaseName +"0.png";
             }
             else if(value === 1){
-                this.Ident.src = "images/" + this.ImageBaseName +"1.png";
+                this.ID.src = "images/" + this.ImageBaseName +"1.png";
             }
             else if(value > 1 && value < 11){
-                this.Ident.src = "images/" + this.ImageBaseName +"10.png";
+                this.ID.src = "images/" + this.ImageBaseName +"10.png";
             }
             else if(value > 10 && value < 21){
-                this.Ident.src = "images/" + this.ImageBaseName +"20.png";
+                this.ID.src = "images/" + this.ImageBaseName +"20.png";
             }
             else if(value > 20 && value < 31){
-                this.Ident.src = "images/" + this.ImageBaseName +"30.png";
+                this.ID.src = "images/" + this.ImageBaseName +"30.png";
             }
             else if(value > 30 && value < 41){
-                this.Ident.src = "images/" + this.ImageBaseName +"40.png";
+                this.ID.src = "images/" + this.ImageBaseName +"40.png";
             }
             else if(value > 40 && value < 51){
-                this.Ident.src = "images/" + this.ImageBaseName +"50.png";
+                this.ID.src = "images/" + this.ImageBaseName +"50.png";
             }
             else if(value > 50 && value < 61){
-                this.Ident.src = "images/" + this.ImageBaseName +"60.png";
+                this.ID.src = "images/" + this.ImageBaseName +"60.png";
             }
             else if(value > 60 && value < 71){
-                this.Ident.src = "images/" + this.ImageBaseName +"70.png";
+                this.ID.src = "images/" + this.ImageBaseName +"70.png";
             }
             else if(value > 70 && value < 81){
-                this.Ident.src = "images/" + this.ImageBaseName +"80.png";
+                this.ID.src = "images/" + this.ImageBaseName +"80.png";
             }
             else if(value > 80 && value < 91){
-                this.Ident.src = "images/" + this.ImageBaseName +"90.png";
+                this.ID.src = "images/" + this.ImageBaseName +"90.png";
             }
             else if(value > 90 && value < 101){
-                this.Ident.src = "images/" + this.ImageBaseName +"100.png";
+                this.ID.src = "images/" + this.ImageBaseName +"100.png";
             }
             else{}
         }
@@ -535,18 +535,18 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
             value = value + 0;
             if (this.revers){
                 if(value === 0){
-                    this.Ident.src = "images/" + this.ImageBaseName +"1.png";
+                    this.ID.src = "images/" + this.ImageBaseName +"1.png";
                 }
                 else {
-                    this.Ident.src = "images/" + this.ImageBaseName +"0.png";
+                    this.ID.src = "images/" + this.ImageBaseName +"0.png";
                 }   
             }
             else {
                 if(value === 0){
-                    this.Ident.src = "images/" + this.ImageBaseName +"0.png";
+                    this.ID.src = "images/" + this.ImageBaseName +"0.png";
                 }
                 else {
-                    this.Ident.src = "images/" + this.ImageBaseName +"1.png";
+                    this.ID.src = "images/" + this.ImageBaseName +"1.png";
                 }    
             }
 
