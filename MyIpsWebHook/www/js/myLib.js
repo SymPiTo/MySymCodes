@@ -2440,7 +2440,7 @@ class CtrlStatButton {
     
  
                /* --------------------- Klasse Clock ---------------------------------------- */
-    class clock { 
+    class EierUhr { 
         constructor() {
             this.ID = "";
         }
