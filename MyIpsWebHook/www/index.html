@@ -1156,33 +1156,35 @@
 	<!--  ************************          Clock     ************************      -->   
         <!-- ***********************************************************************************      -->
         <Main id ="MainClock" class="Uhr">
-            <div class="clock" style="margin:2em;"></div>
-            <div class="message"></div>
- 
 
-        <script>
-                var clock = new FlipClock($('.clock'), 100, {
-
-                        // Create a minute counter
-                        clockFace: 'MinuteCounter',
-
-                        // The onStart callback
-                        onStart: function() {
-                                // Do something
-                        },
-
-                        // The onStop callback
-                        onStop: function() {
-                                // Do something
-                        },
-
-                        // The onReset callback
-                        onReset: function() {
-                                // Do something
-                        }
-                });
-        </script>
             </Main>
+        
+	<div class="clock" style="margin:2em;"></div>
+	<div class="message"></div>
+
+	<script type="text/javascript">
+		var clock;
+		
+		$(document).ready(function() {
+			var clock;
+
+			clock = $('.clock').FlipClock({
+		        clockFace: 'DailyCounter',
+		        autoStart: false,
+		        callbacks: {
+		        	stop: function() {
+		        		$('.message').html('The clock has stopped!')
+		        	}
+		        }
+		    });
+				    
+		    clock.setTime(220880);
+		    clock.setCountdown(true);
+		    clock.start();
+
+		});
+	</script>
+        
         <!-- ***********************************************************************************      -->
 	<!--  ************************          ClockCtrl     ************************      -->   
         <!-- ***********************************************************************************      -->
