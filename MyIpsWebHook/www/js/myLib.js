@@ -2461,7 +2461,7 @@ class CtrlStatButton {
         }
         
         countdown(){
-		var clock = $(this.klasse).FlipClock({
+		var clock = $(this.klasse).flipclock({
 		        clockFace: 'HourlyCounter'
 		    });
 		
