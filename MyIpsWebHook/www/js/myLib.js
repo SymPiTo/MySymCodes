@@ -2445,11 +2445,11 @@ class CtrlStatButton {
             this.ID = "";
         }
 
-        create(ParentID, bgcolor, headline){
- 
+        create(ParentID){
+            
         }
         
-        update(headline){
+        update(){
  
             
         }
