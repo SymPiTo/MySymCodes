@@ -15,7 +15,7 @@
         <script src="js/data.js"></script>
          
 
-
+        <script src="js/flipclock.js"></script> 
       
         
 		
@@ -1159,30 +1159,28 @@
             <div class="clock" style="margin:2em;"></div>
             <div class="message"></div>
         </Main>
-                <script src="js/flipclock.js"></script> 
+
         <script>
-	 
-		
-		var clock;
-		
-		$(document).ready(function() {
-			var clock;
+                var clock = new FlipClock($('.clock'), 100, {
 
-			clock = $('.clock').FlipClock({
-		        clockFace: 'DailyCounter',
-		        autoStart: false,
-		        callbacks: {
-		        	stop: function() {
-		        		$('.message').html('The clock has stopped!')
-		        	}
-		        }
-		    });
-				    
-		    clock.setTime(220880);
-		    clock.setCountdown(true);
-		    clock.start();
+                        // Create a minute counter
+                        clockFace: 'MinuteCounter',
 
-		});
+                        // The onStart callback
+                        onStart: function() {
+                                // Do something
+                        },
+
+                        // The onStop callback
+                        onStop: function() {
+                                // Do something
+                        },
+
+                        // The onReset callback
+                        onReset: function() {
+                                // Do something
+                        }
+                });
         </script>
      
         <!-- ***********************************************************************************      -->
