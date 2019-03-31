@@ -462,7 +462,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     
     create(ParentID, posTop, posLeft, size){
         var elem = document.createElement("img");
-        this.ID = elem.id;
+        this.ID = elem;
         elem.className = "icon";
         elem.classList.add(size);
         elem.src = "images/" + this.ImageBaseName +"0.png";
