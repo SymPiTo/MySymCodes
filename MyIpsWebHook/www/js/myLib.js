@@ -264,7 +264,7 @@ var ToggleCtrlBtn = {
 };
 
 
-/* --------------------- Pclass ToggelButton ---------------------------------------- */
+/* --------------------- class ToggelButton ---------------------------------------- */
  class ToggleBtn {
     
     
@@ -451,8 +451,8 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     }
 }
 
-/* --------------------- class Dynamic Image ---------------------------------------- */
- class Image {
+/* --------------------- class Dynamic Icon ---------------------------------------- */
+ class DynIcon {
     constructor(ID, IBaseName,type,revers) {
         this.Ident = ID;
         this.ImageBaseName = IBaseName;
@@ -2143,7 +2143,7 @@ class CtrlStatButton {
             this.ID = elem; 
             
             var Bild = document.createElement("IMG");
-            Bild.src = "images/" + this.icon + "Off" + ".png";
+            Bild.src = "images/" + this.icon + "0" + ".png";
             Bild.style.width = "100px";
             Bild.style.height = "100px";
             Bild.style.position = "relative";
@@ -2209,12 +2209,12 @@ class CtrlStatButton {
         update(value, valueLeft, valueRight){
             
             if(value === true){ 
-                this.id1.src = "images/" + this.icon + "On" + ".png";   
+                this.id1.src = "images/" + this.icon + "1" + ".png";   
                 this.id4.style.color = "white";
                 this.id5.style.color = "lime"
             }
             else {
-                this.id1.src = "images/" + this.icon + "Off" + ".png";
+                this.id1.src = "images/" + this.icon + "0" + ".png";
                 this.id4.style.color = "lime";
                 this.id5.style.color = "white"
             }
