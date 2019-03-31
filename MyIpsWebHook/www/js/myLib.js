@@ -2449,7 +2449,7 @@ class CtrlStatButton {
 
         create(ParentID){
             var elem = document.createElement("div");
-            elem.className = "clock";
+            elem.className = this.clock;
             elem.style.margin = "2em";
             this.klasse = elem.className;
             document.getElementById(ParentID).appendChild(elem);
@@ -2462,7 +2462,7 @@ class CtrlStatButton {
         }
         
         countdown(){
-		var clock = $(this.klasse).FlipClock({
+		this.clock = new FlipClock({
 		        clockFace: 'HourlyCounter'
 		    });
 		
