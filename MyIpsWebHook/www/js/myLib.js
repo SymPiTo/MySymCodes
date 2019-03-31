@@ -494,40 +494,40 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
     update(value){
         if(this.typ === "ana"){
             if(value === 0){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"0.png";
             }
             else if(value === 1){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"1.png";
             }
             else if(value > 1 && value < 11){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"10.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"10.png";
             }
             else if(value > 10 && value < 21){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"20.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"20.png";
             }
             else if(value > 20 && value < 31){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"30.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"30.png";
             }
             else if(value > 30 && value < 41){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"40.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"40.png";
             }
             else if(value > 40 && value < 51){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"50.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"50.png";
             }
             else if(value > 50 && value < 61){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"60.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"60.png";
             }
             else if(value > 60 && value < 71){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"70.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"70.png";
             }
             else if(value > 70 && value < 81){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"80.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"80.png";
             }
             else if(value > 80 && value < 91){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"90.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"90.png";
             }
             else if(value > 90 && value < 101){
-                document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"100.png";
+                this.Ident.src = "images/" + this.ImageBaseName +"100.png";
             }
             else{}
         }
@@ -535,18 +535,18 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
             value = value + 0;
             if (this.revers){
                 if(value === 0){
-                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
+                    this.Ident.src = "images/" + this.ImageBaseName +"1.png";
                 }
                 else {
-                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
+                    this.Ident.src = "images/" + this.ImageBaseName +"0.png";
                 }   
             }
             else {
                 if(value === 0){
-                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"0.png";
+                    this.Ident.src = "images/" + this.ImageBaseName +"0.png";
                 }
                 else {
-                    document.getElementById(this.Ident).src = "images/" + this.ImageBaseName +"1.png";
+                    this.Ident.src = "images/" + this.ImageBaseName +"1.png";
                 }    
             }
 
