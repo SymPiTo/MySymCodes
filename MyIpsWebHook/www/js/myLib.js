@@ -459,24 +459,6 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         this.typ = type;
         this.revers = revers;
     }
-    get Ident(){
-        return this._Ident;
-    }    
-    set Ident(Ident){
-        this._Ident = Ident;
-    }
-    get ImageBaseName(){
-        return this._ImageBaseName;
-    }    
-    set ImageBaseName(ImageBaseName){
-        this._ImageBaseName = ImageBaseName;
-    }
-    get typ(){
-        return this._typ;
-    }    
-    set typ(typ){
-        this._typ = typ;
-    }
     
     create(ParentID, posTop, posLeft, size){
         var elem = document.createElement("img");
