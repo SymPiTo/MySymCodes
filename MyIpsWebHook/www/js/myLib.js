@@ -2462,7 +2462,7 @@ class CtrlStatButton {
         }
         
         countdown(){
-		this.clock = new FlipClock({
+		this.clock = FlipClock({
 		        clockFace: 'HourlyCounter'
 		    });
 		
