@@ -453,8 +453,8 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
 
 /* --------------------- class Dynamic Icon ---------------------------------------- */
  class DynIcon {
-    constructor(ID, IBaseName,type,revers) {
-        this.Ident = ID;
+    constructor(IBaseName,type,revers) {
+        this.Ident = "";
         this.ImageBaseName = IBaseName;
         this.typ = type;
         this.revers = revers;
@@ -483,7 +483,7 @@ function addTitle(TitleID, posTop, posLeft, fontsize, fontcolor, text){
         elem.className = "icon";
         elem.classList.add(size);
         elem.src = "images/" + this.ImageBaseName +"0.png";
-        elem.id = this.Ident; 
+        this.Ident = elem.id; 
         elem.style.position = "absolute";
         elem.style.left = posLeft;
         elem.style.top = posTop;
