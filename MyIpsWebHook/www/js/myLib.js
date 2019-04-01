@@ -2453,10 +2453,9 @@ class CtrlStatButton {
             elem.style.margin = "2em";
             this.klasse = elem.className;
             document.getElementById(ParentID).appendChild(elem);
- 
             var elemStart = document.createElement("button");
             elemStart.className = "start";
-
+ 
         }
         
         update(){
@@ -2467,13 +2466,13 @@ class CtrlStatButton {
         countdown(){
  		 
 			
-			var clock = $('.clock').FlipClock(10, {
+			var clock = jQuery('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
 		        callbacks: {
 		        	start: function() {
-		        		 
+		        		$('.message').html('The clock has started!');
 		        	}
 		        }
 		    });
@@ -2483,8 +2482,7 @@ class CtrlStatButton {
 		    	clock.start();
 		    });
 
-		 
-		 
+		
 		
         }
     }
