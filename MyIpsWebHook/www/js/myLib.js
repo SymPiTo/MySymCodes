@@ -2464,7 +2464,7 @@ class CtrlStatButton {
         }
         
         countdown(){
- 		 
+ 	
 			
 			var clock = jQuery('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
