@@ -2468,7 +2468,7 @@ class CtrlStatButton {
         countdown(){
  		 
 			
-			clock = $('.clock').FlipClock(10, {
+			clock = jquery('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
@@ -2479,7 +2479,7 @@ class CtrlStatButton {
 		        }
 		    });
 
-		    $('.start').click(function(e) {
+		    jquery('.start').click(function(e) {
 
 		    	clock.start();
 		    });
