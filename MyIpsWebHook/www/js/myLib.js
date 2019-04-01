@@ -2452,10 +2452,12 @@ class CtrlStatButton {
             elem.className = "clock";
             elem.style.margin = "2em";
             this.klasse = elem.className;
-            document.getElementById(ParentID).appendChild(elem);
+            
             var elemStart = document.createElement("button");
             elemStart.className = "start";
- 
+            elem.append(elemStart); 
+            
+            document.getElementById(ParentID).appendChild(elem);
         }
         
         update(){
