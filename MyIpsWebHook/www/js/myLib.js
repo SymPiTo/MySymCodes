@@ -2448,16 +2448,18 @@ class CtrlStatButton {
         }
 
         create(ParentID){
+            var container = document.createElement("div");
             var elem = document.createElement("div");
             elem.className = "clock";
             elem.style.margin = "2em";
             this.klasse = elem.className;
+            container.append(elem); 
             
             var elemStart = document.createElement("button");
             elemStart.className = "start";
-            elem.append(elemStart); 
+            container.append(elemStart); 
             
-            document.getElementById(ParentID).appendChild(elem);
+            document.getElementById(ParentID).appendChild(container);
         }
         
         update(){
