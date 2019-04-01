@@ -2444,12 +2444,12 @@ class CtrlStatButton {
         constructor() {
             this.ID = "";
             this.klasse = "";
-            this.clock = "";
+             
         }
 
         create(ParentID){
             var elem = document.createElement("div");
-            elem.className = this.clock;
+            elem.className = "clock";
             elem.style.margin = "2em";
             this.klasse = elem.className;
             document.getElementById(ParentID).appendChild(elem);
