@@ -2457,6 +2457,8 @@ class CtrlStatButton {
             
             var elemStart = document.createElement("button");
             elemStart.className = "start";
+            elemStart.style.width = "50px";
+            elemStart.style.height = "20px";
             container.append(elemStart); 
             
             document.getElementById(ParentID).appendChild(container);
