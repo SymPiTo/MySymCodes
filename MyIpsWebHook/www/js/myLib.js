@@ -2456,8 +2456,7 @@ class CtrlStatButton {
  
             var elemStart = document.createElement("button");
             elemStart.className = "start";
-            var elemStop = document.createElement("button");
-            elemStart.className = "stop";
+
         }
         
         update(){
@@ -2468,7 +2467,7 @@ class CtrlStatButton {
         countdown(){
  		 
 			
-			clock = jquery('.clock').FlipClock(10, {
+			var clock = jquery('.clock').FlipClock(10, {
 		        clockFace: 'MinuteCounter',
 		        countdown: true,
 		        autoStart: false,
