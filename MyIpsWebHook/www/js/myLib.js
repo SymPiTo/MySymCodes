@@ -2472,12 +2472,12 @@ class CtrlStatButton {
 		        autoStart: false,
 		        callbacks: {
 		        	start: function() {
-		        		$('.message').html('The clock has started!');
+		        		
 		        	}
 		        }
 		    });
 
-		    $('.start').click(function(e) {
+		    jQuery('.start').click(function(e) {
 
 		    	clock.start();
 		    });
