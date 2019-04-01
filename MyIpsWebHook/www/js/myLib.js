@@ -2462,11 +2462,9 @@ class CtrlStatButton {
         }
         
         countdown(){
- 		var clock;
-		
-		 
+ 		 
 			
-			clock = $('.clock').FlipClock({
+			var clock = $('.clock').FlipClock({
 		        clockFace: 'HourlyCounter'
 		    });
 		 
