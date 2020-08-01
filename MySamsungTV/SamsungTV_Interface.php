@@ -576,7 +576,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SendKeyCode_RCR(integer $KeyCode, string $KeyDescription){
+    public function SendKeyCode_RCR(int $KeyCode, string $KeyDescription){
             
         $this->processSoapCall("/RCR/control/TestRCRService",
 
@@ -610,7 +610,7 @@ trait SamsungUPNP {
    --------------------------------------------------------------------------------
     Status:  18.07.2018 - OK
     //////////////////////////////////////////////////////////////////////////////*/
-    public function SetSharpness_RC(integer $Sharpness){
+    public function SetSharpness_RC(int $Sharpness){
 
         $this->processSoapCall("/upnp/control/RenderingControl1",
 
@@ -764,7 +764,7 @@ trait SamsungUPNP {
    --------------------------------------------------------------------------------
     Status:  
     //////////////////////////////////////////////////////////////////////////////*/    
-    public function SetVolume_MTVA(integer $volume){
+    public function SetVolume_MTVA(int $volume){
 
         $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 
@@ -798,7 +798,7 @@ trait SamsungUPNP {
     --------------------------------------------------------------------------------
     Status:  17.7.2018 - OK  RASPI - geht nicht
     //////////////////////////////////////////////////////////////////////////////*/   
-  public function SetMainTVChannel_MTVA(string $Channel, $AntennaMode = 2, $ChannelListType = '0x01',  $SatelliteID = 0) {
+  public function SetMainTVChannel_MTVA(string $Channel, int $AntennaMode = 2, $ChannelListType = '0x01',  int $SatelliteID = 0) {
 
         $this->processSoapCall("/MainTVServer2/control/MainTVAgent2",
 

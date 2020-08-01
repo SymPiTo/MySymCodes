@@ -1154,7 +1154,7 @@ o                    http://192.168.2.99/img/album%20art_S.png
 	--------------------------------------------------------------------------------
 	Status:   checked 5.7.2018  nur für TV und MusikPal CEOL funktiniert nicht
         //////////////////////////////////////////////////////////////////////////////*/
-	public function seekPos(integer $Seek){	
+	public function seekPos($Seek){	
             $GetPositionInfo = $this->GetPositionInfo_AV();
             $Duration = $GetPositionInfo['TrackDuration'];
             $duration = explode(":", $Duration);

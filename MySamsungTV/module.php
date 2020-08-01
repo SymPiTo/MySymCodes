@@ -118,7 +118,7 @@ class MySamsungTV extends IPSModule
 	}
 
 	//Profile
-	protected function RegisterProfile($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits, $Vartype)
+	protected function RegisterProfile(string $Name, string $Icon, string $Prefix, string $Suffix, float $MinValue, float $MaxValue, float $StepSize, $Digits, $Vartype)
 	{
 
 		if (!IPS_VariableProfileExists($Name)) {
@@ -691,7 +691,7 @@ class MySamsungTV extends IPSModule
     --------------------------------------------------------------------------------
     Status:      
     //////////////////////////////////////////////////////////////////////////////*/  
-    public function setSource($source) { 
+    public function setSource(string $source) { 
         // read sourcelist, if available as variable otherwise read from TV
         
         $SourceList = json_decode(getvalue($this->GetIDForIdent("TVSourceList")), true);
